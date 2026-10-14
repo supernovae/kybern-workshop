@@ -255,7 +255,7 @@ or corrupt evidence. Verified completion returns before dispatch. Compare full n
 attempts, receipts, Controller and evaluation records before/after, using newly
 returned report identities. No continuous tracing or pre-existing COMPLETE fixture
 is required: the first approved genuine run supplies evidence. See AUTHORING.md
-for the preflight API and remaining bounded helper mapping. The absence of
+for the implemented tools/replay_ready.py preflight and bounded helper mapping. The absence of
 --execute-runs alone is not a no-dispatch guarantee for incomplete state.
 
 Run the native-verifying selected-snapshot checker as well:
@@ -297,4 +297,4 @@ in `tools/author_inputs.py`, their exact approval/identity inputs, and the eight
 per-root helper slots they close. The helper does not launch or approve native
 work. End-to-end acceptance remains unexecuted. The first approved genuine run
 supplies evidence for the cold verified-completion replay gate; no pre-existing
-COMPLETE fixture is required. See AUTHORING.md for sequencing and remaining mapping.
+COMPLETE fixture is required. See AUTHORING.md for the implemented gate and sequencing.

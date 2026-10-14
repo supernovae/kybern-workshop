@@ -97,9 +97,21 @@ Pin verified state/receipt bytes in the replay job and keep the trusted single-w
 boundary. Re-select returned native identities for post-replay reports. Any failed
 check stops acceptance without retry.
 
-That read-only helper mapping still needs a concrete bounded command before session
-activation; this metadata-authoring PR does not implement it. A fenced regression
+The command is tools/replay_ready.py, using the qualified Python and exact
+--source Rflow/workflow.json --bindings W/workflow-bindings.json --work-dir W
+--admission W/workflow-admission.json. It prints a readiness envelope containing
+the verified native projection, and exits nonzero on incomplete/corrupt evidence.
+It neither writes work files nor calls apply, resume, dispatch, tick or run_suite.
+The session declares one 60-second readiness slot per root, before inventory-before
+and single-attempt-before, all inside the existing 3600-second clock. The gate and
+its author_inputs.py import must be pinned in the job. A fenced regression
 may derive from the first genuine COMPLETE evidence inside declared bounded helpers.
 Existing native fixture setup prepares/trains workloads, so no completed-nine-stage
 regression was run or claimed in this change. It is additional qualification, not
 a circular prerequisite for the first run. No run approval has been recorded.
+
+Gate unit qualification uses an explicitly mocked inspector boundary. It covers
+each incomplete stage, missing/duplicate/unknown stage IDs, bad next actions,
+propagated native-corruption refusal with no readiness output, unchanged fixture
+files and the exact cold-next API call. It is not faithful completed native
+execution and does not claim real payloads were cold-verified during tests.

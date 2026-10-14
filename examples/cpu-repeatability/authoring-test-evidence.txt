@@ -31,8 +31,13 @@ test_nine_stage_terminal_evidence_and_workload (test_recipe.Recipe.test_nine_sta
 test_no_historical_or_fabricated_prepared_identities (test_recipe.Recipe.test_no_historical_or_fabricated_prepared_identities) ... ok
 test_preparation_and_workflow_inventory_bytes (test_recipe.Recipe.test_preparation_and_workflow_inventory_bytes) ... ok
 test_preserved_science_bytes (test_recipe.Recipe.test_preserved_science_bytes) ... ok
+test_each_incomplete_stage_and_bad_next_action_refuse (test_replay_ready.ReplayReady.test_each_incomplete_stage_and_bad_next_action_refuse) ... ok
+test_missing_duplicate_unknown_or_malformed_stages_refuse (test_replay_ready.ReplayReady.test_missing_duplicate_unknown_or_malformed_stages_refuse) ... ok
+test_mocked_complete_projection_passes_without_writes (test_replay_ready.ReplayReady.test_mocked_complete_projection_passes_without_writes) ... ok
+test_native_boundary_requests_only_cold_next_inspection (test_replay_ready.ReplayReady.test_native_boundary_requests_only_cold_next_inspection) ... ok
+test_native_corruption_refuses_cli_without_ready_output (test_replay_ready.ReplayReady.test_native_corruption_refuses_cli_without_ready_output) ... ok
 
 ----------------------------------------------------------------------
-Ran 33 tests in 1.578s
+Ran 38 tests in 2.090s
 
 OK

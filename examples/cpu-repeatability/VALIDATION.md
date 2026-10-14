@@ -82,7 +82,7 @@ runtime at that pin; the command above does not install or qualify one.
 
 ## Metadata authoring follow-up, 2026-10-14
 
-The full suite now passes **33 tests in 1.578s** under the existing qualified
+The full suite now passes **38 tests in 2.090s** under the existing qualified
 Python 3.14.4 CPU venv. See [authoring-test-evidence.txt](authoring-test-evidence.txt).
 Eight added tests cover exclusive local checkout and base preservation; wrong
 commit/dirty source/missing authority; real native preparation metadata and exact
@@ -104,5 +104,12 @@ and staging and validates the exact staged set.
 No completed-nine-stage regression is claimed, but a pre-existing fixture is not
 a run prerequisite. The first approved genuine run supplies evidence; cold verified
 completion gates replay with full native records compared before/after. See
-AUTHORING.md for the remaining pre-replay helper mapping. No acceptance execution,
+AUTHORING.md for the implemented bounded pre-replay helper. No acceptance execution,
 actual run approval or model gate approval occurred.
+
+Five read-only replay-gate test methods cover the explicitly mocked inspector
+boundary: complete projection pass/no writes, every incomplete stage/bad next
+action, malformed/missing/duplicate/unknown stages, propagated native corruption,
+and exact WorkflowExecution.engine(cold_verify=True).inspect("next") selection.
+These tests do not run a completed native workflow or stub cold verification while
+claiming scientific evidence. Actual first-run evidence supplies that verification.
