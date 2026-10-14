@@ -148,6 +148,7 @@ def author_workflow(args):
 def commit_workflow(args):
     base = checkout(args.base, args.commit)
     dest = checkout(args.destination, args.commit, clean=False)
+    require(not git(dest,'diff','--cached','--name-only'), 'index must be clean before authoring commit')
     authority(args.authorization, args.commit)
     require(base != dest and not dest.is_relative_to(base) and not base.is_relative_to(dest), 'disjoint checkout required')
     allowed = {str(REL/'campaign.json'), str(REL/'workflow.json')}
@@ -175,7 +176,9 @@ def commit_workflow(args):
     # No other source changes or ignored files are admitted to the commit.
     require(not git(dest,'ls-files','--others','--ignored','--exclude-standard'), 'unexpected ignored files')
     require(set(git(dest,'diff','HEAD','--name-only').splitlines()) == allowed, 'checkout changed during verification')
+    require(not git(dest,'diff','--cached','--name-only'), 'index changed during verification')
     git(dest,'add','--',*sorted(allowed))
+    require(set(git(dest,'diff','--cached','--name-only').splitlines()) == allowed, 'unexpected staged files')
     git(dest,'-c',f'user.name={args.author_name}','-c',f'user.email={args.author_email}',
         'commit','-qm','Bind fresh COMPLETE preparation identities for review')
     commit = git(dest,'rev-parse','HEAD')

@@ -164,6 +164,26 @@ class Authoring(unittest.TestCase):
             a.admit(args,'workflow')
         self.assertEqual(a.read(Path(args.output))['limits'],a.FLOW_LIMITS)
 
+    def test_commit_refuses_staged_worktree_divergence_before_any_effect(self):
+        args=self.sealed();dest=Path(args.destination)
+        unrelated=dest/a.REL/'run.json'
+        original=unrelated.read_bytes()
+        unrelated.write_bytes(original+b'\n')
+        a.git(dest,'add',str(a.REL/'run.json'))
+        unrelated.write_bytes(original)
+        self.assertEqual(set(a.git(dest,'diff','HEAD','--name-only').splitlines()),
+                         {str(a.REL/'campaign.json'),str(a.REL/'workflow.json')})
+        index_before=a.git(dest,'diff','--cached','--binary')
+        status_before=a.git(dest,'status','--porcelain')
+        files_before=sorted(str(p.relative_to(self.work)) for p in self.work.rglob('*'))
+        with self.assertRaisesRegex(ValueError,'index must be clean'):
+            a.commit_workflow(args)
+        self.assertEqual(a.git(dest,'rev-parse','HEAD'),self.commit)
+        self.assertEqual(a.git(dest,'diff','--cached','--binary'),index_before)
+        self.assertEqual(a.git(dest,'status','--porcelain'),status_before)
+        self.assertEqual(unrelated.read_bytes(),original)
+        self.assertEqual(sorted(str(p.relative_to(self.work)) for p in self.work.rglob('*')),files_before)
+
     def test_symlink_destination_and_duplicate_authorization_refuse(self):
         link=self.work/'link';link.symlink_to(self.base,target_is_directory=True)
         with self.assertRaisesRegex(ValueError,'symlink'): a.author_workflow(self.args(destination=str(link)))

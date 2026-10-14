@@ -248,10 +248,15 @@ The after output and all later check outputs still count toward retained limits.
 Operational state churn can conservatively refuse this strict check; stop for
 native interpretation, never broaden exclusions just to get a pass.
 
-The full inventory check proves unchanged persisted state only. Continuous process
-and probe observations must separately establish zero transient execution during
-replay and cleanup. The generic session observation/supervision gap above still
-blocks a complete no-new-work acceptance claim.
+The inventory check proves unchanged persisted state. Combine it with the reviewed
+pinned Lab code path: cold-project the actual portable workflow context before
+replay, require all nine stages COMPLETE and next_action none, and stop on incomplete
+or corrupt evidence. Verified completion returns before dispatch. Compare full native
+attempts, receipts, Controller and evaluation records before/after, using newly
+returned report identities. No continuous tracing or pre-existing COMPLETE fixture
+is required: the first approved genuine run supplies evidence. See AUTHORING.md
+for the preflight API and remaining bounded helper mapping. The absence of
+--execute-runs alone is not a no-dispatch guarantee for incomplete state.
 
 Run the native-verifying selected-snapshot checker as well:
 
@@ -290,5 +295,6 @@ The held TinyStories draft and every historical result remain unchanged.
 [AUTHORING.md](AUTHORING.md) documents the four recipe-specific metadata operations
 in `tools/author_inputs.py`, their exact approval/identity inputs, and the eight
 per-root helper slots they close. The helper does not launch or approve native
-work. End-to-end acceptance remains unexecuted; a faithful completed-nine-stage
-no-dispatch regression still needs a reviewed native fixture, as documented there.
+work. End-to-end acceptance remains unexecuted. The first approved genuine run
+supplies evidence for the cold verified-completion replay gate; no pre-existing
+COMPLETE fixture is required. See AUTHORING.md for sequencing and remaining mapping.

@@ -39,7 +39,7 @@ After `author-workflow`, invoke the existing `scripts/seal-inputs.py` with the f
 COMPLETE preparation receipt. Then `commit-workflow` allows changes only to
 campaign.json and workflow.json, reproduces expected bytes through that same
 sealer, checks the full supplied artifact identities, generated inventory/bindings
-and file modes, and rejects unrelated/untracked/ignored files. This is authoring
+and file modes, and rejects unrelated/untracked/ignored files. The index must be clean before verification and before staging; the staged set must contain exactly the two verified files. Staged/worktree divergence refuses before any commit or index/worktree modification. This is authoring
 validation against the supplied receipt, not a replacement for native cold artifact
 verification. The commit preserves science/config files and reports
 `review_required: true`, `gate_approved: false`. No push or gate approval occurs.
@@ -73,29 +73,33 @@ operations for roots A and B. Activate those argv only after this helper's exact
 commit is reviewed, the helper/code/authorization bytes are pinned, and all dynamic
 native inputs exist. No acceptance run has occurred.
 
-## Replay regression remains blocked on a faithful fixture
+## Genuine-run evidence gates bounded replay
 
-The required criterion remains: all nine stages verified COMPLETE, a reviewed
-no-dispatch test, and unchanged native receipts/attempts/Controller/evaluation
-records. It is a pinned-code-path argument, not continuous tracing or RSS sampling.
+The first explicitly approved run supplies genuine COMPLETE evidence. A pre-existing
+COMPLETE fixture is not a prerequisite for that first run. Before replay, cold-verify
+the exact nine stages and actual identities, require all COMPLETE and next_action
+none, then compare full native attempts, receipts, Controller and evaluation records
+before/after. Incomplete or corrupt evidence must stop replay.
 
-At Lab d96b0aaf, CampaignEngine._project_once cold-verifies COMPLETE rows and leaves
-next_action=none; apply returns before dispatch. Invalid completed evidence raises.
-But --execute-runs absent alone is insufficient: a submitted incomplete run can
-reach Controller.tick and a ready evaluation can call run_suite.
+At pinned Lab d96b0aaf, projection cold-verifies COMPLETE rows; apply returns before
+dispatch when next_action is none. The flag --execute-runs absent alone is insufficient:
+submitted incomplete runs may reach Controller.tick and ready evaluations may call
+run_suite. This is a reviewed code-path argument, not RSS sampling or continuous
+tracing. No mocked cold verification is evidence for this guarantee.
 
-No faithful completed-nine-stage regression was added or claimed in this change.
-The existing tests/test_workflow_recipe.py native_workflow fixture calls
-train_tokenizer and prepare_data. The complete publication fixture in
-tests/test_publication_report.py calls trainer.train. Existing static contract
-JSONs are not a complete authenticated nine-stage Campaign/checkpoint/evaluation
-snapshot. Reusing those setup routines would exceed the no-workload test scope;
-stubbing cold verification would not establish the requested guarantee.
+The read-only preflight must use WorkflowExecution with the exact source, bindings,
+work root and admission, then its cold-verifying engine.inspect("next"). Plain
+Campaign CLI inspection lacks portable workflow context; inspect("status") can
+return persisted state and is not a substitute. Assert the exact nine stage IDs,
+all COMPLETE and next_action.action == "none", without calling apply or adapters.
+Place this preflight, inventory-before and single-attempt-before ahead of replay.
+Pin verified state/receipt bytes in the replay job and keep the trusted single-writer
+boundary. Re-select returned native identities for post-replay reports. Any failed
+check stops acceptance without retry.
 
-Minimal next step: the Lab owner supplies a reviewed, tiny self-contained COMPLETE
-fixture that cold-verifies without workload setup (or separately authorizes its
-creation). A fixture test can then call the actual pinned apply(resume=True,
-execute_runs=False) with dispatch, Controller submit/tick and run_suite fenced to
-fail, assert next_action=none and unchanged records, and corrupt completed evidence
-to assert refusal with zero dispatch. Until that is reviewed, end-to-end acceptance
-remains unexecuted and the no-dispatch-regression prerequisite remains open.
+That read-only helper mapping still needs a concrete bounded command before session
+activation; this metadata-authoring PR does not implement it. A fenced regression
+may derive from the first genuine COMPLETE evidence inside declared bounded helpers.
+Existing native fixture setup prepares/trains workloads, so no completed-nine-stage
+regression was run or claimed in this change. It is additional qualification, not
+a circular prerequisite for the first run. No run approval has been recorded.

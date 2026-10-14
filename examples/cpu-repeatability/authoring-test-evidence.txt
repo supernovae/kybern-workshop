@@ -2,6 +2,7 @@ test_admission_changed_inspection_limits_and_bindings_refuse (test_author_inputs
 test_author_workflow_is_local_exclusive_and_preserves_base (test_author_inputs.Authoring.test_author_workflow_is_local_exclusive_and_preserves_base) ... ok
 test_checkout_bad_commit_dirty_and_missing_authority_refuse (test_author_inputs.Authoring.test_checkout_bad_commit_dirty_and_missing_authority_refuse) ... ok
 test_commit_exact_seal_requires_later_review (test_author_inputs.Authoring.test_commit_exact_seal_requires_later_review) ... ok
+test_commit_refuses_staged_worktree_divergence_before_any_effect (test_author_inputs.Authoring.test_commit_refuses_staged_worktree_divergence_before_any_effect) ... ok
 test_commit_refuses_unrelated_changes_and_identity_drift (test_author_inputs.Authoring.test_commit_refuses_unrelated_changes_and_identity_drift) ... ok
 test_preparation_admission_uses_real_native_metadata_and_exact_limits (test_author_inputs.Authoring.test_preparation_admission_uses_real_native_metadata_and_exact_limits) ... ok
 test_symlink_destination_and_duplicate_authorization_refuse (test_author_inputs.Authoring.test_symlink_destination_and_duplicate_authorization_refuse) ... ok
@@ -32,6 +33,6 @@ test_preparation_and_workflow_inventory_bytes (test_recipe.Recipe.test_preparati
 test_preserved_science_bytes (test_recipe.Recipe.test_preserved_science_bytes) ... ok
 
 ----------------------------------------------------------------------
-Ran 32 tests in 1.747s
+Ran 33 tests in 1.578s
 
 OK

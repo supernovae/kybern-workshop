@@ -82,7 +82,7 @@ runtime at that pin; the command above does not install or qualify one.
 
 ## Metadata authoring follow-up, 2026-10-14
 
-The full suite now passes **32 tests in 1.747s** under the existing qualified
+The full suite now passes **33 tests in 1.578s** under the existing qualified
 Python 3.14.4 CPU venv. See [authoring-test-evidence.txt](authoring-test-evidence.txt).
 Eight added tests cover exclusive local checkout and base preservation; wrong
 commit/dirty source/missing authority; real native preparation metadata and exact
@@ -96,6 +96,13 @@ Preparation admission tests use the pinned native metadata API without calling a
 CLI handler, tokenizer fitting, preparation, training, probes or evaluation.
 The existing checker mutation suite is also retained. No dependencies were added.
 
-No completed-nine-stage replay regression is claimed. Existing native fixture setup
-requires prohibited workload operations; see AUTHORING.md for the exact blocker
-and proposed faithful test. No acceptance execution or model gate approval occurred.
+The staged/worktree-divergence regression stages an unrelated tracked change and
+restores its worktree bytes to HEAD. Refusal preserves HEAD, the index, worktree
+bytes and file inventory. The helper requires a clean index before verification
+and staging and validates the exact staged set.
+
+No completed-nine-stage regression is claimed, but a pre-existing fixture is not
+a run prerequisite. The first approved genuine run supplies evidence; cold verified
+completion gates replay with full native records compared before/after. See
+AUTHORING.md for the remaining pre-replay helper mapping. No acceptance execution,
+actual run approval or model gate approval occurred.
