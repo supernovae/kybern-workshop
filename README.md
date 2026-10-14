@@ -107,7 +107,10 @@ A's full Git SHA as `reviewed_commit`, the inspection's exact `recipe_sha256` an
 of committed bytes; it does not replace native verification.
 
 ```sh
-"$CPU_PYTHON" -m sparselab monitor --policy "$POLICY" \
+"$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor-baseline "$WORK" \
+  --output "$WORK/preparation-baseline.json" --json
+"$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor --policy "$POLICY" \
+  --baseline "$WORK/preparation-baseline.json" \
   --log-dir "$WORK/monitor/preparation-1" --workspace "$WORK" -- \
   "$CPU_PYTHON" -m sparselab experiment recipe preparation apply "$PREP" \
   --bindings "$WORK/preparation-bindings.json" \
