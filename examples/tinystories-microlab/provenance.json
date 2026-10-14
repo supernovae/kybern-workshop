@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "purpose": "Additive packaging of the existing native TinyStories CPU microlab; not execution evidence.",
+  "upstream": {
+    "repository": "https://github.com/supernovae/tiny-sparse-lab",
+    "commit": "b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc",
+    "source_identity": {
+      "algorithm": "package-path-sha256-v2",
+      "sha256": "1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26"
+    },
+    "lockfile_sha256": "2058fe5c126df074879648018c36288386190446b94b147b811671185958ac86"
+  },
+  "assets": [
+    {
+      "workshop_path": "examples/tinystories-microlab/source.yaml",
+      "upstream_path": "experiments/samples/tinystories-microlab/source.yaml",
+      "sha256": "cfa167f57a5f3ad2c878cedcc44b8ae2e9e5b22fb86ac5f89be49d7d2359a590",
+      "relationship": "byte-identical copy"
+    },
+    {
+      "workshop_path": "examples/tinystories-microlab/tokenizer.yaml",
+      "upstream_path": "experiments/samples/tinystories-microlab/tokenizer.yaml",
+      "sha256": "4db89027e8d1ff99033fd26b1432160a28c1b0e8a1f8c3bf17cf99d1a3b751ba",
+      "relationship": "byte-identical copy"
+    },
+    {
+      "workshop_path": "examples/tinystories-microlab/run.yaml",
+      "upstream_path": "experiments/samples/tinystories-microlab/run.yaml",
+      "sha256": "e6ed168e9aa4403b837a12db939b0561180ed8eef3848275c4d9a0290501d8f0",
+      "relationship": "byte-identical copy"
+    }
+  ],
+  "delta": {
+    "path": "examples/tinystories-microlab/wider-ffn.yaml",
+    "derived_from": "docs/tinystories-microlab.md",
+    "settings": {
+      "model.ffn_dim": 384
+    }
+  },
+  "dependencies": {
+    "runtime": "Existing pinned lab CPU installation; no Workshop package or scheduler.",
+    "observed_static_validation_runtime": {
+      "python": "3.14.8",
+      "torch": "2.14.0+cpu",
+      "tokenizers": "0.22.2",
+      "numpy": "2.5.3",
+      "datasets": "4.8.5",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "PyYAML": "6.0.3",
+      "huggingface-hub": "0.36.2",
+      "psutil": "7.2.2"
+    },
+    "dataset": {
+      "repository": "roneneldan/TinyStories",
+      "revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+      "license": "CDLA-Sharing-1.0",
+      "downloaded_for_this_package": false
+    },
+    "model_download_required": false
+  },
+  "execution_status": "not run; static validation only",
+  "scientific_changes_to_baseline": [],
+  "related_upstream_assets": {
+    "walkthrough": "docs/tinystories-microlab.md",
+    "advanced_cpu": "experiments/samples/tinystories-microlab",
+    "historical_cpu_acceptance": "experiments/samples/tinystories-microlab/acceptance.md",
+    "hosted_cuda_t4": "experiments/samples/hosted-tinystories",
+    "historical_30m": "experiments/research/history/tinystories-dense-30m-data-rich-v1"
+  },
+  "upstream_test_dependencies": [
+    "tests/test_dataset_cli.py",
+    "tests/test_experiment_comparison_phases.py"
+  ],
+  "portable_workflow_boundary": [
+    "src/sparselab/preparation_execution.py",
+    "src/sparselab/workflow_execution.py"
+  ]
+}
