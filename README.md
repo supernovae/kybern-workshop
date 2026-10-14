@@ -6,6 +6,9 @@ The [synthetic CPU example](examples/synthetic-cpu) exercises native preparation
 an explicit approval gate, one training attempt, held-out evaluation and verified
 reporting. It demonstrates wiring, not model quality. Workflow artifact identities come from successful native preparation receipts.
 
+The completed [2026-10-14 measured result](results/2026-10-14-synthetic-cpu/README.md)
+includes failed invocations, verified reporting and no-new-attempt replay.
+
 ## Pins and setup
 
 Use Tiny Sparse Lab commit `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc`
@@ -20,6 +23,27 @@ Pydantic 2.13.5, PyYAML 6.0.3, huggingface-hub 0.36.2 and psutil 7.2.2.
 All dependency pins are in the lab lock. Tiny Sparse Lab is MIT licensed; see
 its pinned LICENSE. The example uses generated synthetic text, with no corpus
 or model downloads. Workshop's new declarations are independently authored.
+
+An ordinary clone and pinned checkout is sufficient; no remote-fetch framework is
+needed. From a writable parent directory, preserve separate A and B worktrees:
+
+```sh
+git clone https://github.com/supernovae/kybern-workshop.git workshop
+cd workshop
+git checkout --detach e8250556412bc8535c029d80af3fa735b82c1ffa
+git worktree add --detach ../workshop-preparation-a 28a01d69442c8b08e5ba78e4561ff4f69443e1e5
+# B is the absolute workshop path; A is the absolute preparation worktree path.
+# Do not advance either checkout while its admission is in use.
+cd ..
+git clone https://github.com/supernovae/tiny-sparse-lab.git lab
+git -C lab checkout --detach b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc
+# LAB is the absolute lab path. Read this updated guide from the results revision.
+```
+
+The historical workflow references locally retained prepared inputs; cloning does
+not download those payloads or create admission. A fresh reproduction must prepare
+its own inputs, author/commit their identities, inspect and obtain approval for its
+own exact workflow commit. Do not borrow this run's admission or claim its receipts.
 
 Provisioning requires authorization and precedes measurement:
 
@@ -181,6 +205,22 @@ Replace all placeholders with the reviewed commit, native inspection digests
 and exact running interpreter. Keep this document outside Git. Review these
 fields and the preparation identities before starting the following steps.
 
+Before workflow commands, select a writable local lease namespace for this CPU
+session. Use the same namespace consistently across all commands; do not create
+isolated namespaces to bypass another worker's lease. This example owns one CPU
+worker and allocates no accelerators. This is a per-session environment variable,
+not a change to the scientific declaration or global machine configuration:
+
+```sh
+export SPARSELAB_WORKER_LEASE_DIR="$WORK/worker-leases"
+```
+
+Use the ordinary native monitor without `strace`; tracing caused worker transport
+timeouts in the recorded attempt. Passive process observation may corroborate
+probe counts but must disclose sampling gaps and distinguish observed lifetimes
+from exact timings. Preserve failures, diagnose before continuing the same attempt,
+and never submit a replacement merely because transport or ingestion is pending.
+
 For each runtime command below, use a unique `STEP`, capture a fresh baseline
 and wrap the command with the native monitor. Do not reuse a log directory:
 
@@ -257,7 +297,8 @@ growth baseline; no native failed preparation attempt was overwritten or retried
 The environment also briefly disconnected while editing the guide, before any
 experiment was running; runtime metadata and remote refs were rechecked.
 
-Workflow model execution, evaluation, final reporting and completed workflow
-replay have not yet been measured. They await review of B's exact admission.
+Workflow execution, ingestion, diagnostic evaluation, verified reporting and
+completed replay are now measured. See the [complete result](results/2026-10-14-synthetic-cpu/README.md),
+including both failed invocations and their cleanup evidence.
 
 Preparation replay completed in 6.452063 seconds, with 430,981,120 bytes peak tree RSS and 23,824 bytes final added workspace. Both stage receipts, artifact identities and one-attempt histories were unchanged. Its owned-process receipt also reported zero living descendants.

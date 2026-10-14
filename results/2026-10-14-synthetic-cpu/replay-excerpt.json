@@ -1,0 +1,38 @@
+{
+  "attempt_rows_equal": true,
+  "campaign_receipt_bytes_equal": true,
+  "attempt_count_before": 1,
+  "attempt_count_after": 1,
+  "attempts": [
+    {
+      "attempt_id": "00b3938a-611f-4af8-bb4b-411e1b44e9d6",
+      "experiment_id": "b99ec6df-3ff9-46cc-bd77-33924da59338",
+      "run_id": "1632259c-9aa4-45bc-965f-de87d7fadb2c",
+      "status": "COMPLETE",
+      "ingestion_status": "COMPLETE"
+    }
+  ],
+  "unchanged_receipt_byte_sha256": {
+    "receipts/accept-cpu/e922e2e4054e0623bd9fdfa13c04b3c39898b5c6867b1d40617a1f08319180ad.json": "e4d4fdd891fd9ae41cc08c589debd5ac2e8cc76cac3aec5872b682de2e445790",
+    "receipts/train-once/2a7f38bf3424648581c501a947116ec7383e1d1247e841841bf1d06952796f22.json": "39719cff902a54724507a30858e59a9ab1d65368d27c6b86862c6713a1d2b251",
+    "receipts/approve-model/37dd5e01304c4ddb10730920315fd0da92cc6acd64801c3d988223edffbb60ce.json": "b8f7819f8a6dfbc78e373bc4fd694302df1e4adf7d592570241374c921dad513",
+    "receipts/packed/d93bf88b2c9cb9a5a7a05b592111e6e0c6a3b2393d20dedfcc7a46ebab334fc6.json": "ec3e8c1cd0a8009ed2f9bd106c88e5f20fc170e5538c9564630240b13678e585",
+    "receipts/collect-run/20b55ced81a5832c7d7000768fa2c6432fd66260c796fefab1689ddb41d7f79f.json": "8c2f6a1167d1c30fa0e4e384a3c8b829732d780439b5c807ba6b73d18b03b5d5",
+    "receipts/evaluate-heldout/e2ef0c3e79b5ed514921c28ec3b0e75ceefa457aa3b90e3a570f1be3a976bcf5.json": "f4102c125867b73e5262ed78f51d72f296bff9a11b62d55f685745e76b3a0900",
+    "receipts/token/658afd77ec8d230f86cc38db03fc57d0364f77ee88764acb27eab299916a8fac.json": "9c0002f696ce6f6a6eb16c16a987984d53701709798ed0e9fe293a02ee577595",
+    "receipts/lock-plan/aae7697e525649b6fe4f40af53733ef9473e1ff47944c506b1aa1d5e533ee21f.json": "da84f652e4e5ba1276f0dafe5c90ab9ad18615659edf4c8458c899d9a239ed80"
+  },
+  "replayed_stage_states": {
+    "token": "COMPLETE",
+    "packed": "COMPLETE",
+    "lock-plan": "COMPLETE",
+    "accept-cpu": "COMPLETE",
+    "approve-model": "COMPLETE",
+    "train-once": "COMPLETE",
+    "collect-run": "COMPLETE",
+    "evaluate-heldout": "COMPLETE"
+  },
+  "sampled_probe_count": 0,
+  "original_before_snapshot_byte_sha256": "ec2d7b1d76db75a8c3005d00786bce7dc7d053b96c638352f4278a6653eea400",
+  "original_replay_stdout_byte_sha256": "48862a720241cc10c179f54c796b8a1ba29db3707a1cf417378c450b73dc5ea5"
+}

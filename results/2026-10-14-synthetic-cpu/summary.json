@@ -1,0 +1,865 @@
+{
+  "status": "COMPLETE_SINGLE_ATTEMPT_VERIFIED_REPORT_AND_NO_ATTEMPT_REPLAY",
+  "pins": {
+    "lab_commit": "b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc",
+    "lab_source_sha256": "1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26",
+    "workshop_b": "e8250556412bc8535c029d80af3fa735b82c1ffa",
+    "preparation_a": "28a01d69442c8b08e5ba78e4561ff4f69443e1e5",
+    "git_status": "all three clean; empty porcelain output",
+    "python": "3.14.8",
+    "torch": "2.14.0+cpu",
+    "workshop_merge": "e4d0fb16cde8c00a719fdee21e51ddd148f64991"
+  },
+  "attempt": {
+    "attempt_id": "00b3938a-611f-4af8-bb4b-411e1b44e9d6",
+    "checkpoints": [
+      {
+        "digest": "094083d19cb886ebaacb7973b15e351acf09bcb5477825c44b2d2c4a16f72fae",
+        "step": 0,
+        "tokens_seen": 0,
+        "validation_loss": 5.4460978507995605,
+        "verification_scope": "weights_only"
+      },
+      {
+        "digest": "010d3d137dd6943b2dc7317223d36fffd60ca1a3ded0680e86a62bf8f76ec81f",
+        "step": 1,
+        "tokens_seen": 16,
+        "validation_loss": 5.441391468048096,
+        "verification_scope": "weights_only"
+      }
+    ],
+    "diagnostic_omitted": false,
+    "evidence_level": "checkpointed_held_out",
+    "execution_binding_sha256": null,
+    "experiment_id": "b99ec6df-3ff9-46cc-bd77-33924da59338",
+    "ingestion_status": "COMPLETE",
+    "manifest_sha256": "c454c62fa7e2799305ebdcfd0731abcd300926b9fd7363ed4f02ca82c4e99b04",
+    "missing_report_count": 0,
+    "parent_checkpoint_sha256": null,
+    "quality_observations": [
+      {
+        "batch_size": 1,
+        "batches": 1,
+        "checkpoint_sha256": "094083d19cb886ebaacb7973b15e351acf09bcb5477825c44b2d2c4a16f72fae",
+        "identities": {
+          "data/validation.npy": "0f350e831e188fe6522234902396e77c02af3203d42deb2d5935d17def2e568c",
+          "protocol": "next-token-cross-entropy-v1",
+          "source_identity_sha256": "1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26",
+          "tokenizer.json": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a"
+        },
+        "kind": "held_out_validation_v2",
+        "loss": 5.4460978507995605,
+        "max_batches": 1,
+        "perplexity": 231.8516785912872,
+        "seq_len": 16,
+        "step": 0,
+        "tokens_seen": 0,
+        "valid_targets": 16
+      },
+      {
+        "batch_size": 1,
+        "batches": 1,
+        "checkpoint_sha256": "010d3d137dd6943b2dc7317223d36fffd60ca1a3ded0680e86a62bf8f76ec81f",
+        "identities": {
+          "data/validation.npy": "0f350e831e188fe6522234902396e77c02af3203d42deb2d5935d17def2e568c",
+          "protocol": "next-token-cross-entropy-v1",
+          "source_identity_sha256": "1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26",
+          "tokenizer.json": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a"
+        },
+        "kind": "held_out_validation_v2",
+        "loss": 5.441391468048096,
+        "max_batches": 1,
+        "perplexity": 230.76305958852774,
+        "seq_len": 16,
+        "step": 1,
+        "tokens_seen": 16,
+        "valid_targets": 16
+      }
+    ],
+    "queue_status": "COMPLETE",
+    "receipt_sha256": "1aeee4aaa985e214817819e339ab3a6b69d40e6ec133db7ac01962aa46d02d7f",
+    "receipt_state": "COMPLETE",
+    "rejected_report_count": 0,
+    "run_id": "1632259c-9aa4-45bc-965f-de87d7fadb2c",
+    "runtime_binding_sha256": null,
+    "spec_sha256": "6cf287b3a5aab9775c763ecf4a342cbb62fc66ebadb6785dd5827d7556f2d800",
+    "status": "complete"
+  },
+  "report_sha256": "95fb40744a653b3bde13af9dd078239ddb9b7d4357be0ac1fdc4e0f6aef2a4c8",
+  "report_readiness": {
+    "decision": "no_automatic_promotion",
+    "engineering_smoke": "not_assessed",
+    "evidence_integrity": "verified_snapshot",
+    "execution_coverage": "complete",
+    "scientific_result": "not_assessed",
+    "unassessed_gate_count": 0
+  },
+  "report_provenance": {
+    "evidence_index_sha256": "68a13e4526d842148a00374318982896185b0d2063da3787d55cd534ac9d1888",
+    "identity_policy": "original_hashes_allowlisted_projection",
+    "plan_id": "workshop-synthetic-cpu",
+    "plan_sha256": "9b460b8eed339211362fb6fbdfd795e4c43d93af4c173f76b49a9149ffb7c240",
+    "scientific_sha256": "57d2b0b2b341d0b981223f5f3ca993475b3dd32062321087eb8e7db545edac7b",
+    "source_identity_sha256": "1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26"
+  },
+  "report_limitations": [
+    "This is a draft, not an external publication or promotion decision.",
+    "Coverage refers to the explicitly selected snapshot, not a live or latest experiment state.",
+    "Execution completeness and verified evidence integrity do not establish scientific effectiveness.",
+    "A comparison marked available means both executions completed; it does not establish scientific comparability or a winner.",
+    "Validation observations do not prove untouched held-out separation or general model quality. Single-seed noise is not across-seed uncertainty.",
+    "Checkpoint verification_scope is preserved; weights verification does not establish full-state resume availability.",
+    "Licensing, access rights, redistributability and distributed weights/resume availability are unknown in this evidence contract.",
+    "Local paths, arbitrary source metadata, free-form diagnostics and comparison difference values are omitted. Original identity hashes are unchanged; this projection is not the original evidence.",
+    "No training, evaluation, acquisition, controller mutation or missing-work execution is performed by rendering."
+  ],
+  "replay": {
+    "all_stages_complete": true,
+    "attempt_count": 1,
+    "attempt_rows_unchanged": true,
+    "receipt_bytes_unchanged": true,
+    "new_model_attempts": 0,
+    "sampled_runtime_probes": 0
+  },
+  "commands": {
+    "preparation-1": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "elapsed_seconds": 9.587893548000011,
+      "peak_tree_rss_bytes": 437280768,
+      "peak_added_workspace_bytes": 73736,
+      "final_added_workspace_bytes": 73736,
+      "sample_count": 10,
+      "violations": [],
+      "living_descendants": 0,
+      "command": [
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "preparation",
+        "apply",
+        "<A>/examples/synthetic-cpu/preparation.json",
+        "--bindings",
+        "<WORK>/preparation-bindings.json",
+        "--admission",
+        "<WORK>/preparation-admission-a.json",
+        "--work-dir",
+        "<WORK>",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "e263e053b7bee7bcd445665631d9ea1bfd8c15222bbbf849b252b9bc93f28f18",
+      "cli_exit": 0
+    },
+    "preparation-replay": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "elapsed_seconds": 6.4520633979998365,
+      "peak_tree_rss_bytes": 430981120,
+      "peak_added_workspace_bytes": 23824,
+      "final_added_workspace_bytes": 23824,
+      "sample_count": 7,
+      "violations": [],
+      "living_descendants": 0,
+      "command": [
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "preparation",
+        "resume",
+        "<A>/examples/synthetic-cpu/preparation.json",
+        "--bindings",
+        "<WORK>/preparation-bindings.json",
+        "--admission",
+        "<WORK>/preparation-admission-a.json",
+        "--work-dir",
+        "<WORK>",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "99ccbbfba2e71d6bbcdc91a255db63506080ae3ebad9f6102563b838cc99fc59",
+      "cli_exit": 0
+    },
+    "workflow-resolve": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "elapsed_seconds": 6.515828335000151,
+      "peak_tree_rss_bytes": 430206976,
+      "peak_added_workspace_bytes": 11540,
+      "final_added_workspace_bytes": 11540,
+      "sample_count": 7,
+      "violations": [],
+      "living_descendants": 0,
+      "command": [
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "workflow",
+        "resolve",
+        "<B>/examples/synthetic-cpu/workflow.json",
+        "--bindings",
+        "<WORK>/workflow-bindings.json",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "68e9e2c973d9a8b1a5ac1aa09bdd2fed0f382c843a65f5044723296c43b5d603",
+      "cli_exit": 0
+    },
+    "workflow-plan": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "elapsed_seconds": 14.27305966699987,
+      "peak_tree_rss_bytes": 445087744,
+      "peak_added_workspace_bytes": 127667,
+      "final_added_workspace_bytes": 127667,
+      "sample_count": 13,
+      "violations": [],
+      "living_descendants": 0,
+      "command": [
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "workflow",
+        "apply",
+        "<B>/examples/synthetic-cpu/workflow.json",
+        "--bindings",
+        "<WORK>/workflow-bindings.json",
+        "--admission",
+        "<WORK>/workflow-admission.json",
+        "--work-dir",
+        "<WORK>",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "11900bef75556edf6e8e72f874f7344ac5aeaeabe5e91a62e4c69790582cabe7",
+      "cli_exit": 0
+    },
+    "workflow-approve": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "elapsed_seconds": 8.426039046999904,
+      "peak_tree_rss_bytes": 436744192,
+      "peak_added_workspace_bytes": 47329,
+      "final_added_workspace_bytes": 47329,
+      "sample_count": 9,
+      "violations": [],
+      "living_descendants": 0,
+      "command": [
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "workflow",
+        "approve",
+        "<B>/examples/synthetic-cpu/workflow.json",
+        "approve-model",
+        "--bindings",
+        "<WORK>/workflow-bindings.json",
+        "--admission",
+        "<WORK>/workflow-admission.json",
+        "--work-dir",
+        "<WORK>",
+        "--note",
+        "Owner approved one bounded synthetic CPU attempt at reviewed B e8250556412bc8535c029d80af3fa735b82c1ffa",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "5d437ff0e4e7b1bb6b38044fafb6e3cfa49dc6d259e0546f89c70bed7ea23829",
+      "cli_exit": 0
+    },
+    "workflow-run": {
+      "status": "MONITOR_ERROR",
+      "returncode": 254,
+      "elapsed_seconds": 140.83452262599985,
+      "peak_tree_rss_bytes": 1090207744,
+      "peak_added_workspace_bytes": 1015803,
+      "final_added_workspace_bytes": 1015803,
+      "sample_count": 138,
+      "violations": [
+        "owned shutdown unverified: invalid owned shutdown receipt"
+      ],
+      "living_descendants": 0,
+      "command": [
+        "strace",
+        "-f",
+        "-ttt",
+        "-s",
+        "300",
+        "-e",
+        "trace=process",
+        "-o",
+        "<WORK>/workflow-run-process.trace",
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "workflow",
+        "apply",
+        "<B>/examples/synthetic-cpu/workflow.json",
+        "--bindings",
+        "<WORK>/workflow-bindings.json",
+        "--admission",
+        "<WORK>/workflow-admission.json",
+        "--work-dir",
+        "<WORK>",
+        "--execute-runs",
+        "--max-wait-seconds",
+        "540",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "7c04e6d03505cb1b0753e93580a9ecfbf3e47c6eff1673333fc8451d2cd19f89",
+      "cli_exit": 1
+    },
+    "workflow-run-resume": {
+      "status": "MONITOR_ERROR",
+      "returncode": 254,
+      "elapsed_seconds": 121.0382616449997,
+      "peak_tree_rss_bytes": 1172439040,
+      "peak_added_workspace_bytes": 655900,
+      "final_added_workspace_bytes": 655900,
+      "sample_count": 115,
+      "violations": [
+        "owned shutdown unverified: invalid owned shutdown receipt"
+      ],
+      "living_descendants": 0,
+      "command": [
+        "strace",
+        "-f",
+        "-ttt",
+        "-s",
+        "300",
+        "-e",
+        "trace=process",
+        "-o",
+        "<WORK>/workflow-run-resume-process.trace",
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "workflow",
+        "resume",
+        "<B>/examples/synthetic-cpu/workflow.json",
+        "--bindings",
+        "<WORK>/workflow-bindings.json",
+        "--admission",
+        "<WORK>/workflow-admission.json",
+        "--work-dir",
+        "<WORK>",
+        "--execute-runs",
+        "--max-wait-seconds",
+        "420",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "81bf4907b9a45a51dde7b9eea22f998d776a626adf828a76921da17bf316c0ab",
+      "cli_exit": 1
+    },
+    "workflow-run-untraced": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "elapsed_seconds": 291.32070309599976,
+      "peak_tree_rss_bytes": 1984081920,
+      "peak_added_workspace_bytes": 3213741,
+      "final_added_workspace_bytes": 3213741,
+      "sample_count": 275,
+      "violations": [],
+      "living_descendants": 0,
+      "command": [
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "workflow",
+        "resume",
+        "<B>/examples/synthetic-cpu/workflow.json",
+        "--bindings",
+        "<WORK>/workflow-bindings.json",
+        "--admission",
+        "<WORK>/workflow-admission.json",
+        "--work-dir",
+        "<WORK>",
+        "--execute-runs",
+        "--max-wait-seconds",
+        "300",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 328.0
+      },
+      "baseline_sha256": "4942e2eea8bb5ebe9b61db9a182f991bb344e9d1c264cc46e6f76d605a647177",
+      "cli_exit": 0
+    },
+    "workflow-report": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "elapsed_seconds": 9.558889370000088,
+      "peak_tree_rss_bytes": 440287232,
+      "peak_added_workspace_bytes": 21702,
+      "final_added_workspace_bytes": 21702,
+      "sample_count": 10,
+      "violations": [],
+      "living_descendants": 0,
+      "command": [
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "workflow",
+        "report",
+        "<WORK>/campaigns/workshop-synthetic-cpu/ac2b8dcf392783f4013ee32314b4d3d1aac8fa34a0159135ba91f180d72ae6fe/experiments/lock-plan-workshop-synthetic-cpu/locks/9b460b8eed339211362fb6fbdfd795e4c43d93af4c173f76b49a9149ffb7c240.json",
+        "--workspace",
+        "<WORK>/campaigns/workshop-synthetic-cpu/ac2b8dcf392783f4013ee32314b4d3d1aac8fa34a0159135ba91f180d72ae6fe/experiments/lock-plan-workshop-synthetic-cpu",
+        "--index",
+        "<WORK>/campaigns/workshop-synthetic-cpu/ac2b8dcf392783f4013ee32314b4d3d1aac8fa34a0159135ba91f180d72ae6fe/experiments/lock-plan-workshop-synthetic-cpu/evidence/68a13e4526d842148a00374318982896185b0d2063da3787d55cd534ac9d1888.json",
+        "--output",
+        "<WORK>/report.json",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "d9d87bcee62b91575a94d6c94b712578a2713a5f61faecdc98adb89dea94633a",
+      "cli_exit": 0
+    },
+    "workflow-completed-replay": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "elapsed_seconds": 8.947402553000302,
+      "peak_tree_rss_bytes": 444030976,
+      "peak_added_workspace_bytes": 56586,
+      "final_added_workspace_bytes": 56586,
+      "sample_count": 9,
+      "violations": [],
+      "living_descendants": 0,
+      "command": [
+        "<CPU_PYTHON>",
+        "-m",
+        "sparselab",
+        "experiment",
+        "recipe",
+        "workflow",
+        "resume",
+        "<B>/examples/synthetic-cpu/workflow.json",
+        "--bindings",
+        "<WORK>/workflow-bindings.json",
+        "--admission",
+        "<WORK>/workflow-admission.json",
+        "--work-dir",
+        "<WORK>",
+        "--json"
+      ],
+      "policy": {
+        "monitor_policy_version": 1,
+        "max_tree_rss_bytes": 4294967296,
+        "max_tree_swap_bytes": null,
+        "min_host_available_ram_bytes": null,
+        "min_host_free_swap_bytes": null,
+        "min_disk_free_bytes": null,
+        "min_disk_free_inodes": null,
+        "min_projected_disk_free_bytes": null,
+        "min_projected_disk_free_inodes": null,
+        "interval_seconds": 1.0,
+        "termination_grace_seconds": 5.0,
+        "max_added_workspace_bytes": 1073741824,
+        "max_wall_seconds": 600.0
+      },
+      "baseline_sha256": "a7d340fae658ebac250400356f62408b517e1970e6de1dbe051856d939052919",
+      "cli_exit": 0
+    }
+  },
+  "stages": {
+    "accept-cpu": {
+      "state": "COMPLETE",
+      "receipt_sha256": "3ff464d495250944eb19f183ca88f28787e62bdefd91613dcb03469ce3f9318e",
+      "stage_input_sha256": "e922e2e4054e0623bd9fdfa13c04b3c39898b5c6867b1d40617a1f08319180ad",
+      "outputs": [
+        {
+          "identifier": "accept-cpu",
+          "kind": "runtime_acceptance",
+          "sha256": "0b754e2dfd0342c74d1324b1c8e36b56f22b308a4ffb2b3560a14789c63aecb5"
+        }
+      ],
+      "verified_at": "2026-10-14T03:20:28.882366Z"
+    },
+    "train-once": {
+      "state": "COMPLETE",
+      "receipt_sha256": "780a5677ee3b66b4c0bf63d7a72165987d0401aae3b556923a556d59e6389e31",
+      "stage_input_sha256": "2a7f38bf3424648581c501a947116ec7383e1d1247e841841bf1d06952796f22",
+      "outputs": [
+        {
+          "identifier": "1632259c-9aa4-45bc-965f-de87d7fadb2c",
+          "kind": "experiment_run",
+          "sha256": "89f17bf453108f0c84550b53b1ec45c1c87a92bb74c33574d49cab358bfccb67"
+        }
+      ],
+      "verified_at": "2026-10-14T03:33:08.628780Z"
+    },
+    "approve-model": {
+      "state": "COMPLETE",
+      "receipt_sha256": "dbebb65a76a2b7635d723e45a35b81b74018c6ff633f86e3a1bd5f198282eb2c",
+      "stage_input_sha256": "37dd5e01304c4ddb10730920315fd0da92cc6acd64801c3d988223edffbb60ce",
+      "outputs": [
+        {
+          "identifier": "approve-model",
+          "kind": "approval",
+          "sha256": "63b4e7a47ddba2c4b3cb3525b8c95c4623e889964e4a372f295382704431383d"
+        }
+      ],
+      "verified_at": "2026-10-14T03:21:18.025661Z"
+    },
+    "packed": {
+      "state": "COMPLETE",
+      "receipt_sha256": "35b07651e8ce21d735eb7d6dff1cae33b88c17d36f011ef803bf2f003e167b2c",
+      "stage_input_sha256": "d93bf88b2c9cb9a5a7a05b592111e6e0c6a3b2393d20dedfcc7a46ebab334fc6",
+      "outputs": [
+        {
+          "identifier": "6cc6aae8bcf8f21d5e831579f438167e4a6916b1eaac897e1f9bc53360f3ff98",
+          "kind": "prepared_data",
+          "sha256": "c0a3656d35b83d93d27ab44e4a06103c89a05d111ba6e3e2b8e3f9d6b0a5be90"
+        }
+      ],
+      "verified_at": "2026-10-14T03:20:27.411564Z"
+    },
+    "collect-run": {
+      "state": "COMPLETE",
+      "receipt_sha256": "35982e6d61cc301ed61113c5bb6319e6c4b87cbe2217650929ac53cc90e91da4",
+      "stage_input_sha256": "20b55ced81a5832c7d7000768fa2c6432fd66260c796fefab1689ddb41d7f79f",
+      "outputs": [
+        {
+          "identifier": "collect-run",
+          "kind": "experiment_collect",
+          "sha256": "68a13e4526d842148a00374318982896185b0d2063da3787d55cd534ac9d1888"
+        }
+      ],
+      "verified_at": "2026-10-14T03:33:10.110647Z"
+    },
+    "evaluate-heldout": {
+      "state": "COMPLETE",
+      "receipt_sha256": "6d65cbbad41dfdf78a757dd1a95283e19dc70b733974b2f06c643b9cb2f1d65f",
+      "stage_input_sha256": "e2ef0c3e79b5ed514921c28ec3b0e75ceefa457aa3b90e3a570f1be3a976bcf5",
+      "outputs": [
+        {
+          "identifier": "evaluate-heldout",
+          "kind": "evaluation",
+          "sha256": "658de3edf804b4ab227c25df8a0692163006d15388db4003c25d5d0aefcd1a0c"
+        }
+      ],
+      "verified_at": "2026-10-14T03:33:12.468746Z"
+    },
+    "token": {
+      "state": "COMPLETE",
+      "receipt_sha256": "7060a9bf47ddcde706d10f272ea54c60cd0b4f3534349b26072cfe95c503b912",
+      "stage_input_sha256": "658afd77ec8d230f86cc38db03fc57d0364f77ee88764acb27eab299916a8fac",
+      "outputs": [
+        {
+          "identifier": "tokenizer",
+          "kind": "tokenizer",
+          "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a"
+        }
+      ],
+      "verified_at": "2026-10-14T03:20:26.992259Z"
+    },
+    "lock-plan": {
+      "state": "COMPLETE",
+      "receipt_sha256": "cbd8b51eaa4e0afd212fa1ffdc553573859a0fd1b2afe0454a6c5c4d8515edae",
+      "stage_input_sha256": "aae7697e525649b6fe4f40af53733ef9473e1ff47944c506b1aa1d5e533ee21f",
+      "outputs": [
+        {
+          "identifier": "workshop-synthetic-cpu",
+          "kind": "experiment_plan",
+          "sha256": "9b460b8eed339211362fb6fbdfd795e4c43d93af4c173f76b49a9149ffb7c240"
+        }
+      ],
+      "verified_at": "2026-10-14T03:20:28.211973Z"
+    }
+  },
+  "probe_observations": {
+    "method": "passive 100ms descendant sampling; durations are observed lifetimes, not exact process start-to-exit or optimizer timing",
+    "max_sampling_gap_seconds": 0.542650237000089,
+    "probes": [
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "peak_rss_bytes": 251740160,
+        "samples": 24,
+        "observed_seconds": 2.356641146000129
+      },
+      {
+        "module": "sparselab.runtime_probe",
+        "peak_rss_bytes": 351203328,
+        "samples": 40,
+        "observed_seconds": 3.984423364000122
+      },
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "peak_rss_bytes": 251846656,
+        "samples": 56,
+        "observed_seconds": 5.855402171999685
+      },
+      {
+        "module": "sparselab.runtime_probe",
+        "peak_rss_bytes": 351293440,
+        "samples": 78,
+        "observed_seconds": 8.187437917999887
+      },
+      {
+        "module": "sparselab.runtime_probe",
+        "peak_rss_bytes": 351203328,
+        "samples": 60,
+        "observed_seconds": 6.06419486599998
+      },
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "peak_rss_bytes": 251355136,
+        "samples": 34,
+        "observed_seconds": 3.38474730300004
+      },
+      {
+        "module": "sparselab.runtime_probe",
+        "peak_rss_bytes": 351293440,
+        "samples": 54,
+        "observed_seconds": 5.488799063999977
+      },
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "peak_rss_bytes": 251465728,
+        "samples": 49,
+        "observed_seconds": 4.888289904999965
+      },
+      {
+        "module": "sparselab.runtime_probe",
+        "peak_rss_bytes": 351522816,
+        "samples": 115,
+        "observed_seconds": 12.720444149999821
+      },
+      {
+        "module": "sparselab.runtime_probe",
+        "peak_rss_bytes": 351592448,
+        "samples": 59,
+        "observed_seconds": 5.968236958000034
+      }
+    ]
+  },
+  "totals": {
+    "all_measured_commands_seconds": 616.9546632849995,
+    "workflow_commands_seconds": 594.3988780039995,
+    "attempt_command_seconds_including_two_stops": 553.1934873669993,
+    "max_tree_rss_bytes": 1984081920,
+    "samples": 593,
+    "summed_per_command_added_bytes": 5247828,
+    "final_apparent_workspace_bytes_before_this_summary_update": 5567159,
+    "net_growth_since_preparation_baseline_before_this_summary_update": 5400089,
+    "net_growth_method": "Read-only file-size scan with hardlink deduplication; includes inter-command evidence and logs, excludes environment provisioning outside WORK."
+  },
+  "pilots": {
+    "smoke": {
+      "status": "complete",
+      "step": 2,
+      "tokens_seen": 32,
+      "timed_updates": 2,
+      "update_seconds": 0.40223884899978657,
+      "sha256": "67788e04a0b60369077bbe190ce06863cdc1e9fa6958fc62bea5dcd0662a024e",
+      "checkpoint_sha256": "ea6378fa161d8f905f1ba1eb9b59d09109da5de435cb0130d6d0bb29a82a2a8e"
+    },
+    "warmup": {
+      "status": "complete",
+      "step": 5,
+      "tokens_seen": 80,
+      "timed_updates": 5,
+      "update_seconds": 0.08814062100009323,
+      "sha256": "1f406a50645e8da0ea8b0077c5e985363e3266c7f9aeafad0a99487639a37481",
+      "checkpoint_sha256": "2c25c0e4f1e39c432630a0afec5b6ed6e103e9352b1cc37855182b059e01a9bb"
+    }
+  },
+  "main_update_metrics": [
+    {
+      "step": 1,
+      "tokens_seen": 16,
+      "name": "performance/step_seconds",
+      "value": 0.04726823900000454
+    }
+  ],
+  "interrupted_probe_traces": {
+    "workflow-run": [
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "termination": "exited with 0",
+        "elapsed_seconds": 7.740032911300659
+      },
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "termination": "exited with 0",
+        "elapsed_seconds": 7.497345924377441
+      },
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "termination": "exited with 0",
+        "elapsed_seconds": 4.91853404045105
+      }
+    ],
+    "workflow-run-resume": [
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "termination": "exited with 0",
+        "elapsed_seconds": 5.9247589111328125
+      },
+      {
+        "module": "sparselab.runtime_probe",
+        "termination": "exited with 120",
+        "elapsed_seconds": 17.960875988006592
+      },
+      {
+        "module": "sparselab.runtime_identity_probe",
+        "termination": "exited with 0",
+        "elapsed_seconds": 6.772373914718628
+      },
+      {
+        "module": "sparselab.runtime_probe",
+        "termination": "exited with 120",
+        "elapsed_seconds": 22.81260085105896
+      }
+    ]
+  },
+  "operational_corrections": [
+    "Per-command SPARSELAB_WORKER_LEASE_DIR=<WORK>/worker-leases after read-only default lease path blocked queue.",
+    "Removed strace after traced worker transport timeout; two precision probes exited 120 with broken pipes and have no successful native qualification. Their optimizer completion cannot be certified.",
+    "Stopped commands retained as MONITOR_ERROR because traced SIGINT exit mapping disagreed; owned receipts reported zero descendants, independently checked no recorded processes alive.",
+    "Successful continuation used narrowed 328-second monitor ceiling and 300-second Controller wait. No admission, binding, source, or scientific config changed."
+  ],
+  "publication_note": "Sanitized evidence projection, not original receipt bytes. Original-byte hashes identify retained private records; sanitized file hashes are separately inventoried. No checkpoint/payload distribution or independent payload verification is claimed."
+}

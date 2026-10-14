@@ -1,0 +1,38 @@
+{
+  "format": "workshop-public-evidence-index-v1",
+  "hash_policy": "sanitized_file_sha256 hashes distributed bytes; original_byte_sha256 hashes retained unsanitized source bytes; native receipt/index/checkpoint digests retain their native semantics and are not file-byte hashes",
+  "files": {
+    "report.json": {
+      "sanitized_file_sha256": "95fb40744a653b3bde13af9dd078239ddb9b7d4357be0ac1fdc4e0f6aef2a4c8",
+      "original_file": "report.json",
+      "original_byte_sha256": "95fb40744a653b3bde13af9dd078239ddb9b7d4357be0ac1fdc4e0f6aef2a4c8",
+      "transformation": "none; native public projection copied byte-for-byte"
+    },
+    "summary.json": {
+      "sanitized_file_sha256": "131a2098ae464adff18f5abe61c60ecb09802556545ba7e0762e0d8dc2554c79",
+      "original_file": "completed-proof-summary.json",
+      "original_byte_sha256": "25d9a580016ab8b4c41bf23fd529bc41e14143356352afded97cbdd096ee5914",
+      "transformation": "sanitized projection; merge pin and publication note added"
+    },
+    "monitor-excerpts.json": {
+      "sanitized_file_sha256": "3f1af790fe5ac39ebf5179307c94c76146c9f2e00490fa0e88009cc320e01773",
+      "transformation": "allowlisted monitor/owned-completion fields; per-record original-byte hashes embedded"
+    },
+    "receipt-excerpts.json": {
+      "sanitized_file_sha256": "131853abdb65a527bc6b6a66974f3ae27df2b74da5e2c58e3e5d266169b3edd7",
+      "transformation": "allowlisted native stage receipt fields; original-byte hashes embedded"
+    },
+    "evaluation-excerpt.json": {
+      "sanitized_file_sha256": "b5ae406f429b9c165583827ee391b795a7ab53092a4ce6f4a6f7a0e4a4cde915",
+      "transformation": "allowlisted native evaluation index fields; original-byte hash embedded"
+    },
+    "replay-excerpt.json": {
+      "sanitized_file_sha256": "116e1f427d0c317d5ee2ce2bfade0b739759e01220792d9eaa92aeaf803b4233",
+      "transformation": "read-only equality checks and allowlisted state; original-byte hashes embedded"
+    },
+    "cleanup-excerpt.json": {
+      "sanitized_file_sha256": "e6ec25796e396a5a39d9e072134ee3b6055931147c7d8ed949166b19e2bf5f5a",
+      "transformation": "sanitized native cleanup and independent-check description; original-byte hash embedded"
+    }
+  }
+}

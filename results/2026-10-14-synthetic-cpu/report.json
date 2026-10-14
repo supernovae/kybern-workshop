@@ -1,0 +1,156 @@
+{
+  "availability": {
+    "dataset_access": "unknown",
+    "dataset_license": "unknown",
+    "full_state_resume": "unknown",
+    "redistributability": "unknown",
+    "weights_distribution": "unknown",
+    "weights_license": "unknown"
+  },
+  "cells": [
+    {
+      "attempts": [
+        {
+          "attempt_id": "00b3938a-611f-4af8-bb4b-411e1b44e9d6",
+          "checkpoints": [
+            {
+              "digest": "094083d19cb886ebaacb7973b15e351acf09bcb5477825c44b2d2c4a16f72fae",
+              "step": 0,
+              "tokens_seen": 0,
+              "validation_loss": 5.4460978507995605,
+              "verification_scope": "weights_only"
+            },
+            {
+              "digest": "010d3d137dd6943b2dc7317223d36fffd60ca1a3ded0680e86a62bf8f76ec81f",
+              "step": 1,
+              "tokens_seen": 16,
+              "validation_loss": 5.441391468048096,
+              "verification_scope": "weights_only"
+            }
+          ],
+          "diagnostic_omitted": false,
+          "evidence_level": "checkpointed_held_out",
+          "execution_binding_sha256": null,
+          "experiment_id": "b99ec6df-3ff9-46cc-bd77-33924da59338",
+          "ingestion_status": "COMPLETE",
+          "manifest_sha256": "c454c62fa7e2799305ebdcfd0731abcd300926b9fd7363ed4f02ca82c4e99b04",
+          "missing_report_count": 0,
+          "parent_checkpoint_sha256": null,
+          "quality_observations": [
+            {
+              "batch_size": 1,
+              "batches": 1,
+              "checkpoint_sha256": "094083d19cb886ebaacb7973b15e351acf09bcb5477825c44b2d2c4a16f72fae",
+              "identities": {
+                "data/validation.npy": "0f350e831e188fe6522234902396e77c02af3203d42deb2d5935d17def2e568c",
+                "protocol": "next-token-cross-entropy-v1",
+                "source_identity_sha256": "1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26",
+                "tokenizer.json": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a"
+              },
+              "kind": "held_out_validation_v2",
+              "loss": 5.4460978507995605,
+              "max_batches": 1,
+              "perplexity": 231.8516785912872,
+              "seq_len": 16,
+              "step": 0,
+              "tokens_seen": 0,
+              "valid_targets": 16
+            },
+            {
+              "batch_size": 1,
+              "batches": 1,
+              "checkpoint_sha256": "010d3d137dd6943b2dc7317223d36fffd60ca1a3ded0680e86a62bf8f76ec81f",
+              "identities": {
+                "data/validation.npy": "0f350e831e188fe6522234902396e77c02af3203d42deb2d5935d17def2e568c",
+                "protocol": "next-token-cross-entropy-v1",
+                "source_identity_sha256": "1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26",
+                "tokenizer.json": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a"
+              },
+              "kind": "held_out_validation_v2",
+              "loss": 5.441391468048096,
+              "max_batches": 1,
+              "perplexity": 230.76305958852774,
+              "seq_len": 16,
+              "step": 1,
+              "tokens_seen": 16,
+              "valid_targets": 16
+            }
+          ],
+          "queue_status": "COMPLETE",
+          "receipt_sha256": "1aeee4aaa985e214817819e339ab3a6b69d40e6ec133db7ac01962aa46d02d7f",
+          "receipt_state": "COMPLETE",
+          "rejected_report_count": 0,
+          "run_id": "1632259c-9aa4-45bc-965f-de87d7fadb2c",
+          "runtime_binding_sha256": null,
+          "spec_sha256": "6cf287b3a5aab9775c763ecf4a342cbb62fc66ebadb6785dd5827d7556f2d800",
+          "status": "complete"
+        }
+      ],
+      "cell_id": "main:single",
+      "config_sha256": "80fd3f517609cf5ccdb35f5e2f009afa69d3783adf430c6bdd1ca9e8e8bfd3b1",
+      "inputs": [
+        {
+          "kind": "prepared_data",
+          "sha256": "c0a3656d35b83d93d27ab44e4a06103c89a05d111ba6e3e2b8e3f9d6b0a5be90",
+          "version": 1
+        },
+        {
+          "kind": "tokenizer",
+          "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a",
+          "version": 1
+        }
+      ],
+      "lineage": {
+        "at_step": null,
+        "observed_parent_checkpoint_sha256": null,
+        "parent_cell_id": null,
+        "selector": null,
+        "transition": "fresh"
+      },
+      "phase": "main",
+      "planned_budget": {
+        "gradient_accumulation": 1,
+        "max_steps": 1,
+        "max_tokens": 16,
+        "micro_batch_size": 1,
+        "seq_len": 16
+      },
+      "planned_evaluation": {
+        "max_batches": 1
+      },
+      "seed": 7,
+      "selected_run_id": "1632259c-9aa4-45bc-965f-de87d7fadb2c",
+      "status": "complete"
+    }
+  ],
+  "comparisons": [],
+  "format": "sparselab-publication-report-v1",
+  "limitations": [
+    "This is a draft, not an external publication or promotion decision.",
+    "Coverage refers to the explicitly selected snapshot, not a live or latest experiment state.",
+    "Execution completeness and verified evidence integrity do not establish scientific effectiveness.",
+    "A comparison marked available means both executions completed; it does not establish scientific comparability or a winner.",
+    "Validation observations do not prove untouched held-out separation or general model quality. Single-seed noise is not across-seed uncertainty.",
+    "Checkpoint verification_scope is preserved; weights verification does not establish full-state resume availability.",
+    "Licensing, access rights, redistributability and distributed weights/resume availability are unknown in this evidence contract.",
+    "Local paths, arbitrary source metadata, free-form diagnostics and comparison difference values are omitted. Original identity hashes are unchanged; this projection is not the original evidence.",
+    "No training, evaluation, acquisition, controller mutation or missing-work execution is performed by rendering."
+  ],
+  "provenance": {
+    "evidence_index_sha256": "68a13e4526d842148a00374318982896185b0d2063da3787d55cd534ac9d1888",
+    "identity_policy": "original_hashes_allowlisted_projection",
+    "plan_id": "workshop-synthetic-cpu",
+    "plan_sha256": "9b460b8eed339211362fb6fbdfd795e4c43d93af4c173f76b49a9149ffb7c240",
+    "scientific_sha256": "57d2b0b2b341d0b981223f5f3ca993475b3dd32062321087eb8e7db545edac7b",
+    "source_identity_sha256": "1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26"
+  },
+  "readiness": {
+    "decision": "no_automatic_promotion",
+    "engineering_smoke": "not_assessed",
+    "evidence_integrity": "verified_snapshot",
+    "execution_coverage": "complete",
+    "scientific_result": "not_assessed",
+    "unassessed_gate_count": 0
+  },
+  "scope": "collected"
+}
