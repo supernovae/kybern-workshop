@@ -79,3 +79,79 @@ PYTHONPATH="$LAB/src" "$P" examples/cpu-repeatability/tests/check_native_metadat
 
 This is metadata validation only. The actual run must use a qualified installed
 runtime at that pin; the command above does not install or qualify one.
+
+## Metadata authoring follow-up, 2026-10-14
+
+The full suite now passes **47 tests in 2.881s** under the existing qualified
+Python 3.14.4 CPU venv. See [authoring-test-evidence.txt](authoring-test-evidence.txt).
+Eight added tests cover exclusive local checkout and base preservation; wrong
+commit/dirty source/missing authority; real native preparation metadata and exact
+limits; changed inspection/bindings; exact sealed commit and later-review status;
+unrelated changes, identity/binding drift and incomplete receipts; workflow
+inspection/resolution matching; and symlink/duplicate-JSON refusal.
+
+Workflow admission unit fixtures stub only the metadata resolver boundary and use
+explicit synthetic identities; they do not claim actual payload authentication.
+Preparation admission tests use the pinned native metadata API without calling a
+CLI handler, tokenizer fitting, preparation, training, probes or evaluation.
+The existing checker mutation suite is also retained. No dependencies were added.
+
+The staged/worktree-divergence regression stages an unrelated tracked change and
+restores its worktree bytes to HEAD. Refusal preserves HEAD, the index, worktree
+bytes and file inventory. The helper requires a clean index before verification
+and staging and validates the exact staged set.
+
+No completed-nine-stage regression is claimed, but a pre-existing fixture is not
+a run prerequisite. The first approved genuine run supplies evidence; cold verified
+completion gates replay with full native records compared before/after. See
+AUTHORING.md for the implemented bounded pre-replay helper. No acceptance execution,
+or model gate approval occurred in this change. Owner run approval is conditional
+on external review and owner-controlled Workshop merge; it does not activate work here.
+
+Five read-only replay-gate test methods cover the explicitly mocked inspector
+boundary: complete projection pass/no writes, every incomplete stage/bad next
+action, malformed/missing/duplicate/unknown stages, propagated native corruption,
+and exact WorkflowExecution.engine(cold_verify=True).inspect("next") selection.
+These tests do not run a completed native workflow or stub cold verification while
+claiming scientific evidence. Actual first-run evidence supplies that verification.
+
+
+## Review regression coverage
+
+Review 5524037413 targeted older head 104ebb3. Its six material test gaps are
+now independently covered: sealed-file modes (both files), ignored files with a
+committed ignore rule, missing/invalid commit authority, admission output inside
+the checkout, authoring destination inside the base, and base-as-commit-destination.
+Each asserts the specific refusal, avoiding an earlier guard masking the result.
+Commit refusal tests also preserve HEAD and the index; ignored evidence is retained.
+
+Independent authority tests cover extra keys, a mismatched approval pin, blank
+owner/reference, non-object limits, and boolean limits. Small input tests cover
+size, absolute/non-parent paths, full SHA, repository root and submodules.
+The existing index-divergence and cold replay gate regressions remain intact.
+
+The native workflow inspection test calls actual pinned inspect_workflow on
+synthetically sealed declarations, checks one cell and explicitly unverified
+artifact identities, unknown runtime capability, non-executable status and no new
+files. It does not call resolve_workflow: real resolution authenticates payloads
+which these synthetic identities cannot provide. The admission resolver-boundary
+test remains explicitly mocked. Genuine artifact verification comes from the
+first approved run, without making a pre-existing COMPLETE fixture a prerequisite.
+
+Run the focused mutation qualification with the same existing interpreter:
+
+```sh
+"$P" -B examples/cpu-repeatability/tests/mutation_authoring.py
+```
+
+All **16/16 targeted guard mutations** were killed by assertion failures in
+disposable temporary copies. See authoring-guard-mutation-evidence.txt. The runner
+rejects import/fixture errors as evidence and limits each mutant to 15 seconds.
+These are distinct from the existing 26/26 checker mutations, whose evidence is
+retained. No production helper changed in this review follow-up.
+
+Concurrent replacement and post-operation race injection remain deferred defense
+in depth: exclusive open/mkdir, checkout rechecks and the sanitized Git environment
+remain in place, but these tests do not claim adversarial race coverage. The
+trusted single-writer boundary remains required. Additional redundant guard
+mutations are not a substitute for the isolated material refusal tests above.
