@@ -11,7 +11,10 @@ recipes and results; Lab provides preparation, execution, evaluation and reporti
 | --- | --- | --- | --- |
 | Synthetic CPU | Prepare synthetic text and a tokenizer, approve one tiny training attempt, evaluate it and verify a report. No corpus or model download. | Measured end to end at its recorded pins, including replay with no new attempt. Demonstrates workflow wiring, not model quality. | [Run guide](examples/synthetic-cpu/README.md) · [Recorded result](results/2026-10-14-synthetic-cpu/README.md) |
 
-The synthetic CPU project is currently the only project on main. The
+The synthetic CPU project is currently the only executed project here.
+The [CPU repeatability recipe](examples/cpu-repeatability/README.md) targets the
+merged current Lab contract. It is an unexecuted scaffold with unit-tested checks;
+runtime qualification and whole-session supervision still block launch. The
 [TinyStories migration draft](https://github.com/supernovae/kybern-workshop/pull/3)
 is unfinished scaffolding, not a runnable or execution-validated Workshop project.
 It still needs alignment with generic Lab interfaces and an end-to-end Workshop proof.

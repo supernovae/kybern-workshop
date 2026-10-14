@@ -1,0 +1,38 @@
+{
+  "portable_workflow_version": 1,
+  "id": "workshop-synthetic-cpu",
+  "entrypoint": "plan.json",
+  "campaign": "campaign.json",
+  "contracts": {
+    "experiment_plan": 1,
+    "run_config": 2
+  },
+  "files": [
+    {
+      "path": "campaign.json",
+      "role": "metadata",
+      "sha256": "f841baea31bb6fb91f70c2ea9063e3254aab8ef06f210db83b1709fc64017ca7"
+    },
+    {
+      "path": "monitor.json",
+      "role": "metadata",
+      "sha256": "5d5ee027260228c4f176a73ca1d346b340a5d67114e023a0b2bb4dd95bcfd751"
+    },
+    {
+      "path": "plan.json",
+      "role": "experiment_plan",
+      "sha256": "3e76561a225117879c71bb49c158bfbe2bd7936ac6888fec65e2e16924f0b102"
+    },
+    {
+      "path": "run.json",
+      "role": "run_config",
+      "sha256": "f91515509c99017eaa47bb2ad61cc89c956a5047094617dba661183a8ab872bf"
+    },
+    {
+      "path": "suite.json",
+      "role": "metadata",
+      "sha256": "182ca41c7c9bb2eae7a2916fb1c744b864ac448943f9c626d060bcde82eeeb25"
+    }
+  ],
+  "artifacts": {}
+}

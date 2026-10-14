@@ -1,0 +1,25 @@
+{
+  "status": "UNEXECUTED_RECIPE_RUNTIME_AND_ENVELOPE_APPROVAL_PENDING",
+  "lab_execution_commit": "d96b0aafda56c3a263a3be83d88e07839e17c3e6",
+  "lab_inspected_candidate": "596c0f6eff803b9022f127ec59f45d99104d6cf2",
+  "proposal_source_commit": "4f703c7a8c8b4eefc5fe8f56cfb7f0f20a8edd99",
+  "review": "https://github.com/supernovae/tiny-sparse-lab/pull/133#pullrequestreview-5521617890",
+  "workshop_base": "a0f6f95ba67a1127d0d5404aba5113233e0c1fd5",
+  "native_source_identity": null,
+  "runtime_lock_sha256": "2058fe5c126df074879648018c36288386190446b94b147b811671185958ac86",
+  "runtime_versions": null,
+  "native_input_identities": null,
+  "notes": "Merged source pin verified. Existing installed environment still targets historical Lab; no reinstall performed. Native installed-source identity, runtime verification and fresh payload identities remain unassigned. Original science bytes retained; no old receipts or admissions reused.",
+  "lab_reviewed_head": "8ce8f04a02bd8a5e687bb661c07efa4e05bc1fb2",
+  "lab_merged_pr": 133,
+  "declaration_file_sha256": {
+    "run.json": "f91515509c99017eaa47bb2ad61cc89c956a5047094617dba661183a8ab872bf",
+    "tokenizer-config.json": "4bded6a3a4817d6429dc008cb8246652bd3467b7d3df65f611494c1d4ffe9953",
+    "plan.json": "3e76561a225117879c71bb49c158bfbe2bd7936ac6888fec65e2e16924f0b102",
+    "suite.json": "182ca41c7c9bb2eae7a2916fb1c744b864ac448943f9c626d060bcde82eeeb25",
+    "preparation.json": "23d063aa9d8c5f3f02d616ab7ef50ff813a0ec0253d59447e66d9b28ee8751aa",
+    "preparation-campaign.json": "3b9465b77e30339dc3f2ba9cc31a68c40bbab5c838d498f62106b8c1a2574d43",
+    "campaign.json": "f841baea31bb6fb91f70c2ea9063e3254aab8ef06f210db83b1709fc64017ca7",
+    "monitor.json": "5d5ee027260228c4f176a73ca1d346b340a5d67114e023a0b2bb4dd95bcfd751"
+  }
+}

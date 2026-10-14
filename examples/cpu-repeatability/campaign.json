@@ -1,0 +1,103 @@
+{
+  "campaign_version": 1,
+  "id": "workshop-synthetic-cpu",
+  "stages": [
+    {
+      "id": "token",
+      "kind": "artifact_reference",
+      "scope": "tokenizer",
+      "artifact": null
+    },
+    {
+      "id": "packed",
+      "kind": "artifact_reference",
+      "scope": "model",
+      "artifact": null
+    },
+    {
+      "id": "lock-plan",
+      "kind": "experiment_plan",
+      "scope": "model",
+      "requires": [
+        "token",
+        "packed"
+      ],
+      "source": "plan.json",
+      "mode": "lock",
+      "tokenizer": "token",
+      "prepared": "packed"
+    },
+    {
+      "id": "accept-cpu",
+      "kind": "runtime_acceptance",
+      "scope": "runtime",
+      "requires": [
+        "lock-plan"
+      ],
+      "plan": "lock-plan"
+    },
+    {
+      "id": "approve-model",
+      "kind": "approval",
+      "scope": "model",
+      "requires": [
+        "lock-plan",
+        "accept-cpu"
+      ],
+      "bind": [
+        "lock-plan",
+        "accept-cpu"
+      ]
+    },
+    {
+      "id": "train-once",
+      "kind": "experiment_run",
+      "scope": "model",
+      "requires": [
+        "lock-plan",
+        "accept-cpu",
+        "approve-model"
+      ],
+      "plan": "lock-plan",
+      "runtime": "accept-cpu",
+      "cell": "main:single"
+    },
+    {
+      "id": "collect-run",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "requires": [
+        "lock-plan",
+        "train-once"
+      ],
+      "plan": "lock-plan",
+      "run": "train-once"
+    },
+    {
+      "id": "evaluate-heldout",
+      "kind": "evaluation",
+      "scope": "evaluation",
+      "requires": [
+        "collect-run"
+      ],
+      "collect": "collect-run",
+      "suite": "suite.json",
+      "backend": "cpu"
+    },
+    {
+      "id": "final-evidence",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "plan": "lock-plan",
+      "run": "train-once",
+      "evaluations": [
+        "evaluate-heldout"
+      ],
+      "requires": [
+        "lock-plan",
+        "train-once",
+        "evaluate-heldout"
+      ]
+    }
+  ]
+}
