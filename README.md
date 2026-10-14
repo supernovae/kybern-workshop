@@ -9,7 +9,11 @@ reporting. It demonstrates wiring, not model quality. Workflow artifact identiti
 The completed [2026-10-14 measured result](results/2026-10-14-synthetic-cpu/README.md)
 includes failed invocations, verified reporting and no-new-attempt replay.
 
-## Pins and setup
+The [TinyStories microlab](examples/tinystories-microlab/README.md) packages the existing
+native CPU comparison lesson. It is statically validated and has not been run in
+Workshop; dataset acquisition and training require a separately approved budget.
+
+## Synthetic CPU pins and setup
 
 Use Tiny Sparse Lab commit `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc`
 (PR128; reviewed head `45230f446bde5d88b26857630c9b7a53eaaf602e`). Its native
@@ -22,7 +26,8 @@ tokenizers 0.22.2, NumPy 2.5.3, datasets 4.8.5, PyArrow 25.0.1,
 Pydantic 2.13.5, PyYAML 6.0.3, huggingface-hub 0.36.2 and psutil 7.2.2.
 All dependency pins are in the lab lock. Tiny Sparse Lab is MIT licensed; see
 its pinned LICENSE. The example uses generated synthetic text, with no corpus
-or model downloads. Workshop's new declarations are independently authored.
+or model downloads. Workshop's synthetic declarations are independently authored. TinyStories declarations
+retain their upstream attribution and provenance.
 
 An ordinary clone and pinned checkout is sufficient; no remote-fetch framework is
 needed. From a writable parent directory, preserve separate A and B worktrees:
