@@ -4,8 +4,7 @@ Self-contained examples for learning with [Tiny Sparse Lab](https://github.com/s
 
 The [synthetic CPU example](examples/synthetic-cpu) exercises native preparation,
 an explicit approval gate, one training attempt, held-out evaluation and verified
-reporting. It demonstrates wiring, not model quality. This preparation commit
-precedes the workflow: artifact identities must come from successful native receipts.
+reporting. It demonstrates wiring, not model quality. Workflow artifact identities come from successful native preparation receipts.
 
 ## Pins and setup
 
@@ -140,3 +139,125 @@ ingested native attempt, checkpoint-bound evaluation, verified report, then
 completed replay with no new attempt. Report executed/skipped stages, update and
 probe counts, time, RSS, workspace growth and cleanup separately. Successful
 rendering does not establish scientific effectiveness.
+
+## Author and admit workflow B
+
+The [stdlib helper](scripts/seal-inputs.py) only copies the two COMPLETE native
+preparation outputs into the authored Campaign ports and workflow descriptor,
+then hashes member bytes for the inventory. It writes local bindings separately.
+It is not a verifier: use native `resolve` to cold-verify the payloads. Preserve
+old declarations/receipts before authoring a new identity.
+
+```sh
+RECIPE="$B/examples/synthetic-cpu"
+"$CPU_PYTHON" "$B/scripts/seal-inputs.py" \
+  --receipt "$WORK/monitor/preparation-1/command.stdout.log" \
+  --recipe "$RECIPE" --bindings "$WORK/workflow-bindings.json" \
+  --logging-root "$WORK/workflow-runs"
+# Commit the authored declarations at B before inspection/admission.
+"$CPU_PYTHON" -m sparselab experiment recipe workflow inspect "$RECIPE/workflow.json" \
+  --bindings "$WORK/workflow-bindings.json" --json > "$WORK/workflow-inspect.json"
+"$CPU_PYTHON" -m sparselab experiment recipe workflow resolve "$RECIPE/workflow.json" \
+  --bindings "$WORK/workflow-bindings.json" --json > "$WORK/workflow-resolve.json"
+```
+
+For this already authored example, do not rerun the helper against an existing
+bindings output; it refuses that overwrite. A fresh reproduction must prepare its
+own inputs and commit the resulting declarations before admitting them.
+
+Create `$WORK/workflow-admission.json` with exactly:
+
+```json
+{
+  "workflow_admission_version": 1,
+  "reviewed_commit": "FULL_B_COMMIT",
+  "recipe_sha256": "FROM_WORKFLOW_INSPECT",
+  "binding_sha256": "FROM_WORKFLOW_INSPECT",
+  "cpu_python": "/absolute/cpu/environment/bin/python"
+}
+```
+
+Replace all placeholders with the reviewed commit, native inspection digests
+and exact running interpreter. Keep this document outside Git. Review these
+fields and the preparation identities before starting the following steps.
+
+For each runtime command below, use a unique `STEP`, capture a fresh baseline
+and wrap the command with the native monitor. Do not reuse a log directory:
+
+```sh
+# Set STEP to workflow-plan, workflow-approve, workflow-run or workflow-replay.
+"$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor-baseline "$WORK" \
+  --output "$WORK/$STEP-baseline.json" --json
+"$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor \
+  --policy "$RECIPE/monitor.json" --baseline "$WORK/$STEP-baseline.json" \
+  --log-dir "$WORK/monitor/$STEP" --workspace "$WORK" -- \
+  "$CPU_PYTHON" -m sparselab experiment recipe workflow apply "$RECIPE/workflow.json" \
+  --bindings "$WORK/workflow-bindings.json" --admission "$WORK/workflow-admission.json" \
+  --work-dir "$WORK" --json > "$WORK/$STEP-monitor.json"
+```
+
+1. `workflow-plan`: use the command above unchanged. Require `approve-model` to
+   be AWAITING_APPROVAL and no model attempt.
+2. `workflow-approve`: replace `apply "$RECIPE/workflow.json"` with
+   `approve "$RECIPE/workflow.json" approve-model`, adding
+   `--note "Owner approved one bounded synthetic CPU attempt"`. This is the
+   explicit native approval; no helper implicitly approves.
+3. `workflow-run`: use `apply`, adding `--execute-runs --max-wait-seconds 540`.
+   Require every stage COMPLETE and exactly one COMPLETE/ingested attempt.
+4. `workflow-replay`: replace `apply` with `resume`, without `--execute-runs`.
+   Require every stage COMPLETE and unchanged attempt/receipt identities.
+
+The selected no-profile CPU acceptance stage checks storage/runtime declarations;
+its source does not itself call a runtime probe. Execution is expected to perform
+six one-update precision probes: Controller candidate validation, worker dispatch
+validation, staging validation, and each of smoke, warmup and main trainer
+initialization. Each dense FP32 probe updates a 4-by-4 parameter once; these are
+not 16-target training updates. The source paths are `workers/controller.py`,
+`workers/execution.py`, `staging.py`, `training/trainer.py`, `engines/pytorch.py`
+and `runtime_probe.py`. Verify observed counts/timings from execution evidence;
+this is a source-derived expectation, not a measured result. PyTorch held-out
+inference loads the verified checkpoint directly and does not call that optimizer
+probe. Continue monitoring every apply/approval/replay because command flags alone
+do not establish that no runtime work occurs.
+
+## Verified report
+
+From the COMPLETE `lock-plan` stage take `availability.path` as `LOCK` and
+`availability.workspace` as `EXPERIMENT_WORKSPACE`. From `collect-run` take
+`availability.path` as `INDEX`. Preserve the separate `evaluate-heldout` index.
+
+```sh
+"$CPU_PYTHON" -m sparselab experiment recipe workflow report "$LOCK" \
+  --workspace "$EXPERIMENT_WORKSPACE" --index "$INDEX" \
+  --output "$WORK/report.json" --json
+"$CPU_PYTHON" -m sparselab experiment recipe workflow report "$LOCK" \
+  --workspace "$EXPERIMENT_WORKSPACE" --index "$INDEX" \
+  --output "$WORK/report.md" --format markdown
+```
+
+Reporting verifies the selected snapshot; it neither recollects nor silently
+chooses a newer evaluation. The Campaign collects before evaluation, so retain
+both the report and evaluation evidence rather than implying the earlier index
+contains the later evaluation. Report files are exclusively created; identical
+replay is allowed. Changed evidence needs an explicitly selected new snapshot.
+
+## Measured preparation status
+
+Preparation A is `28a01d69442c8b08e5ba78e4561ff4f69443e1e5`. Both native stages
+completed on 2026-10-14 with one preparation attempt each. The monitored command
+measured 9.587894 seconds, 437,280,768 bytes peak process-tree RSS and 73,736 bytes
+peak/final added workspace. Ten samples reported no violations; the owned-process
+receipt reported zero living descendants. Preparation ran no model updates or
+runtime optimizer probes. Full machine-local records remain outside Git.
+
+The first monitor launch failed before spawning preparation because its default
+work directory was read-only. That failed launch record and empty stdout were
+preserved. The corrected command specifies global `--work-dir` and a persisted
+growth baseline; no native failed preparation attempt was overwritten or retried.
+The environment also briefly disconnected while editing the guide, before any
+experiment was running; runtime metadata and remote refs were rechecked.
+
+Workflow model execution, evaluation, final reporting and completed workflow
+replay have not yet been measured. They await review of B's exact admission.
+
+Preparation replay completed in 6.452063 seconds, with 430,981,120 bytes peak tree RSS and 23,824 bytes final added workspace. Both stage receipts, artifact identities and one-attempt histories were unchanged. Its owned-process receipt also reported zero living descendants.

@@ -1,0 +1,13 @@
+{
+  "plan_version": 1,
+  "id": "workshop-synthetic-cpu",
+  "base_run": "run.json",
+  "inputs": {
+    "tokenizer": "token",
+    "prepared_data": "packed"
+  },
+  "evaluation_suite": "suite.json",
+  "execution": {
+    "backend": "cpu"
+  }
+}
