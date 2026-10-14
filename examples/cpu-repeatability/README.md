@@ -284,3 +284,11 @@ Still outstanding even after a successful synthetic repeat: controlled snapshot
 pairs; acquisition/reuse/cancellation; interrupted continuation lineage/accounting;
 real TinyStories CPU/GPU portability; staged retirement of old references/tests.
 The held TinyStories draft and every historical result remain unchanged.
+
+## External harness metadata authoring follow-up
+
+[AUTHORING.md](AUTHORING.md) documents the four recipe-specific metadata operations
+in `tools/author_inputs.py`, their exact approval/identity inputs, and the eight
+per-root helper slots they close. The helper does not launch or approve native
+work. End-to-end acceptance remains unexecuted; a faithful completed-nine-stage
+no-dispatch regression still needs a reviewed native fixture, as documented there.

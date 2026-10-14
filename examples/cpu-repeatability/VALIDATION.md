@@ -79,3 +79,23 @@ PYTHONPATH="$LAB/src" "$P" examples/cpu-repeatability/tests/check_native_metadat
 
 This is metadata validation only. The actual run must use a qualified installed
 runtime at that pin; the command above does not install or qualify one.
+
+## Metadata authoring follow-up, 2026-10-14
+
+The full suite now passes **32 tests in 1.747s** under the existing qualified
+Python 3.14.4 CPU venv. See [authoring-test-evidence.txt](authoring-test-evidence.txt).
+Eight added tests cover exclusive local checkout and base preservation; wrong
+commit/dirty source/missing authority; real native preparation metadata and exact
+limits; changed inspection/bindings; exact sealed commit and later-review status;
+unrelated changes, identity/binding drift and incomplete receipts; workflow
+inspection/resolution matching; and symlink/duplicate-JSON refusal.
+
+Workflow admission unit fixtures stub only the metadata resolver boundary and use
+explicit synthetic identities; they do not claim actual payload authentication.
+Preparation admission tests use the pinned native metadata API without calling a
+CLI handler, tokenizer fitting, preparation, training, probes or evaluation.
+The existing checker mutation suite is also retained. No dependencies were added.
+
+No completed-nine-stage replay regression is claimed. Existing native fixture setup
+requires prohibited workload operations; see AUTHORING.md for the exact blocker
+and proposed faithful test. No acceptance execution or model gate approval occurred.
