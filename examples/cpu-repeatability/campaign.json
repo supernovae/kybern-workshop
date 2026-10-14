@@ -6,13 +6,25 @@
       "id": "token",
       "kind": "artifact_reference",
       "scope": "tokenizer",
-      "artifact": null
+      "artifact": {
+        "identifier": "tokenizer",
+        "kind": "tokenizer",
+        "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a",
+        "version": 1,
+        "producer": "sparselab tokenizer train"
+      }
     },
     {
       "id": "packed",
       "kind": "artifact_reference",
       "scope": "model",
-      "artifact": null
+      "artifact": {
+        "identifier": "84dc512215e55da4ecdeb1a398327bdb9fd95f9fd8a14685fb40bba39faf8af2",
+        "kind": "prepared_data",
+        "sha256": "77a85df1282e2ed9e2026b642e922972b711e81545bfc9b894487f229578ac6c",
+        "version": 1,
+        "producer": "sparselab data prepare"
+      }
     },
     {
       "id": "lock-plan",

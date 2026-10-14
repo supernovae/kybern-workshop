@@ -11,7 +11,7 @@
     {
       "path": "campaign.json",
       "role": "metadata",
-      "sha256": "f841baea31bb6fb91f70c2ea9063e3254aab8ef06f210db83b1709fc64017ca7"
+      "sha256": "25708f289428d53b5fb2ff8407ce6e7f6559e048b89fa6e2ef077e532eddb69a"
     },
     {
       "path": "monitor.json",
@@ -34,5 +34,20 @@
       "sha256": "182ca41c7c9bb2eae7a2916fb1c744b864ac448943f9c626d060bcde82eeeb25"
     }
   ],
-  "artifacts": {}
+  "artifacts": {
+    "token": {
+      "identifier": "tokenizer",
+      "kind": "tokenizer",
+      "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a",
+      "version": 1,
+      "producer": "sparselab tokenizer train"
+    },
+    "packed": {
+      "identifier": "84dc512215e55da4ecdeb1a398327bdb9fd95f9fd8a14685fb40bba39faf8af2",
+      "kind": "prepared_data",
+      "sha256": "77a85df1282e2ed9e2026b642e922972b711e81545bfc9b894487f229578ac6c",
+      "version": 1,
+      "producer": "sparselab data prepare"
+    }
+  }
 }
