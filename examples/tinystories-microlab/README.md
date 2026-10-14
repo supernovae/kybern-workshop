@@ -1,5 +1,10 @@
 # TinyStories CPU microlab
 
+**Paused scaffolding:** this legacy native-path package is not completion of the
+Workshop migration. Further work must align with generic Lab dataset preparation,
+comparison and evaluation/report interfaces, then demonstrate a measured end-to-end
+Workshop execution before staged retirement of old references.
+
 Prepare story inputs, change FFN width, and inspect a paired comparison using the
 existing public lab CLI. This additive package preserves the upstream CPU lesson:
 `source.yaml`, `tokenizer.yaml` and `run.yaml` are byte-identical copies at lab

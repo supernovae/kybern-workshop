@@ -73,7 +73,7 @@
     "tests/test_experiment_comparison_phases.py"
   ],
   "portable_workflow_boundary": [
-    "src/sparselab/preparation_execution.py",
-    "src/sparselab/workflow_execution.py"
+    "src/sparselab/experiments/preparation_execution.py",
+    "src/sparselab/experiments/workflow_execution.py"
   ]
 }
