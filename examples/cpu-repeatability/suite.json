@@ -1,0 +1,11 @@
+{
+  "evaluation_suite_version": 1,
+  "id": "workshop-heldout-diagnostic",
+  "evaluations": [
+    {
+      "id": "heldout",
+      "kind": "heldout_lm",
+      "role": "diagnostic"
+    }
+  ]
+}
