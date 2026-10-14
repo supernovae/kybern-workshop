@@ -184,6 +184,112 @@ class Authoring(unittest.TestCase):
         self.assertEqual(unrelated.read_bytes(),original)
         self.assertEqual(sorted(str(p.relative_to(self.work)) for p in self.work.rglob('*')),files_before)
 
+    def test_commit_refuses_sealed_mode_changes(self):
+        args=self.sealed(); dest=Path(args.destination)
+        for name in ('campaign.json','workflow.json'):
+            with self.subTest(name=name):
+                file=dest/a.REL/name; mode=file.stat().st_mode & 0o777
+                file.chmod(0o755)
+                with self.assertRaisesRegex(ValueError,'sealed file mode differs'):
+                    a.commit_workflow(args)
+                self.assertEqual(a.git(dest,'rev-parse','HEAD'),self.commit)
+                self.assertEqual(a.git(dest,'diff','--cached','--name-only'),'')
+                file.chmod(mode)
+
+    def test_commit_refuses_ignored_files(self):
+        # Commit the ignore rule in the fixture base, leaving only the expected
+        # sealed changes in the destination. An untracked-file guard cannot win.
+        (self.base/'.gitignore').write_text('ignored-fixture\n')
+        a.git(self.base,'add','.gitignore')
+        a.git(self.base,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','ignore fixture')
+        self.commit=a.git(self.base,'rev-parse','HEAD'); self.authority()
+        args=self.sealed(); dest=Path(args.destination)
+        ignored=dest/'ignored-fixture'; ignored.write_text('retained')
+        self.assertEqual(a.git(dest,'ls-files','--others','--exclude-standard'),'')
+        with self.assertRaisesRegex(ValueError,'unexpected ignored files'): a.commit_workflow(args)
+        self.assertEqual(ignored.read_text(),'retained')
+        self.assertEqual(a.git(dest,'rev-parse','HEAD'),self.commit)
+        self.assertEqual(a.git(dest,'diff','--cached','--name-only'),'')
+
+    def test_commit_requires_authority_before_effects(self):
+        args=self.sealed(); dest=Path(args.destination)
+        for damage in ('missing','invalid'):
+            with self.subTest(damage=damage):
+                if damage == 'missing': self.auth.unlink()
+                else: self.write(self.auth,{'owner':'fixture'})
+                before=a.git(dest,'status','--porcelain')
+                with self.assertRaisesRegex(ValueError,'missing input|explicit authoring provenance'):
+                    a.commit_workflow(args)
+                self.assertEqual(a.git(dest,'rev-parse','HEAD'),self.commit)
+                self.assertEqual(a.git(dest,'status','--porcelain'),before)
+                self.authority()
+
+    def test_admission_refuses_output_inside_checkout(self):
+        self.authority(a.PREP_LIMITS)
+        inspection,_=a.native_inputs('preparation',self.base/a.REL,self.bindings)
+        report=self.work/'inspect.json'; self.write(report,inspection)
+        output=self.base/'admission.json'
+        with self.assertRaisesRegex(ValueError,'admission must be outside checkout'):
+            a.admit(self.args(bindings=str(self.bindings),inspection=str(report),output=str(output)),'preparation')
+        self.assertFalse(output.exists())
+        self.assertEqual(a.git(self.base,'status','--porcelain'),'')
+
+    def test_author_workflow_refuses_destination_inside_base(self):
+        dest=self.base/'nested'
+        with self.assertRaisesRegex(ValueError,'disjoint checkout required'):
+            a.author_workflow(self.args(destination=str(dest)))
+        self.assertFalse(dest.exists())
+
+    def test_commit_workflow_refuses_base_as_destination(self):
+        # A clean base passes checkout/index/authority checks; isolation must
+        # refuse before examining sealed changes or any absent receipt fields.
+        with self.assertRaisesRegex(ValueError,'disjoint checkout required'):
+            a.commit_workflow(self.args(destination=str(self.base)))
+        self.assertEqual(a.git(self.base,'rev-parse','HEAD'),self.commit)
+        self.assertEqual(a.git(self.base,'status','--porcelain'),'')
+
+    def test_authority_fields_are_independently_required(self):
+        valid=a.read(self.auth)
+        for change,message in (({'extra':1},'explicit authoring'),
+                               ({'source_commit':'0'*40},'approval source commit differs'),
+                               ({'owner':''},'missing owner'),({'reference':' '},'missing owner'),
+                               ({'limits':[]},'limits object required')):
+            with self.subTest(change=change):
+                self.write(self.auth,{**valid,**change})
+                with self.assertRaisesRegex(ValueError,message): a.authority(self.auth,self.commit)
+        self.authority({**a.FLOW_LIMITS,'max_eval_batches':True})
+        with self.assertRaisesRegex(ValueError,'approved limits'):
+            a.authority(self.auth,self.commit,a.FLOW_LIMITS)
+
+    def test_small_input_guards(self):
+        for value in ('relative',str(self.work/'..'/'escape')):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError,'absolute path without'):
+                a.path(value,exists=False)
+        oversized=self.work/'oversized.json'
+        with oversized.open('wb') as stream: stream.truncate(8*1024*1024+1)
+        with self.assertRaisesRegex(ValueError,'input exceeds'): a.read(oversized)
+        with self.assertRaisesRegex(ValueError,'full commit required'): a.checkout(self.base,self.commit[:12])
+        with self.assertRaisesRegex(ValueError,'repository root required'): a.checkout(self.base/a.REL,self.commit)
+        # clean=False isolates the submodule guard from the dirty-tree guard.
+        (self.base/'.gitmodules').write_text('')
+        with self.assertRaisesRegex(ValueError,'submodules unsupported'):
+            a.checkout(self.base,self.commit,clean=False)
+
+    def test_native_workflow_inspection_is_metadata_only(self):
+        from sparselab.experiments.workflow_recipe import inspect_workflow
+        args=self.sealed(); dest=Path(args.destination)
+        before=sorted(str(p.relative_to(self.work)) for p in self.work.rglob('*'))
+        inspection=inspect_workflow(dest/a.REL/'workflow.json',Path(args.bindings),max_runs=1)
+        self.assertEqual(inspection['format'],'sparselab-workflow-inspection-v1')
+        self.assertEqual(inspection['cells'],1)
+        self.assertFalse(inspection['executable'])
+        self.assertEqual(inspection['runtime_capability'],'unknown')
+        self.assertTrue(inspection['artifacts'])
+        self.assertTrue(all(row['status']=='unverified' for row in inspection['artifacts'].values()))
+        self.assertEqual(sorted(str(p.relative_to(self.work)) for p in self.work.rglob('*')),before)
+        # Resolution authenticates payloads; synthetic identities cannot supply
+        # that evidence. No preparation/training is run to manufacture a fixture.
+
     def test_symlink_destination_and_duplicate_authorization_refuse(self):
         link=self.work/'link';link.symlink_to(self.base,target_is_directory=True)
         with self.assertRaisesRegex(ValueError,'symlink'): a.author_workflow(self.args(destination=str(link)))

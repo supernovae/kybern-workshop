@@ -108,7 +108,8 @@ its author_inputs.py import must be pinned in the job. A fenced regression
 may derive from the first genuine COMPLETE evidence inside declared bounded helpers.
 Existing native fixture setup prepares/trains workloads, so no completed-nine-stage
 regression was run or claimed in this change. It is additional qualification, not
-a circular prerequisite for the first run. No run approval has been recorded.
+a circular prerequisite for the first run. No workload is activated by this change; any owner approval remains subject to
+its review and owner-controlled merge conditions.
 
 Gate unit qualification uses an explicitly mocked inspector boundary. It covers
 each incomplete stage, missing/duplicate/unknown stage IDs, bad next actions,

@@ -1,10 +1,19 @@
 test_admission_changed_inspection_limits_and_bindings_refuse (test_author_inputs.Authoring.test_admission_changed_inspection_limits_and_bindings_refuse) ... ok
+test_admission_refuses_output_inside_checkout (test_author_inputs.Authoring.test_admission_refuses_output_inside_checkout) ... ok
 test_author_workflow_is_local_exclusive_and_preserves_base (test_author_inputs.Authoring.test_author_workflow_is_local_exclusive_and_preserves_base) ... ok
+test_author_workflow_refuses_destination_inside_base (test_author_inputs.Authoring.test_author_workflow_refuses_destination_inside_base) ... ok
+test_authority_fields_are_independently_required (test_author_inputs.Authoring.test_authority_fields_are_independently_required) ... ok
 test_checkout_bad_commit_dirty_and_missing_authority_refuse (test_author_inputs.Authoring.test_checkout_bad_commit_dirty_and_missing_authority_refuse) ... ok
 test_commit_exact_seal_requires_later_review (test_author_inputs.Authoring.test_commit_exact_seal_requires_later_review) ... ok
+test_commit_refuses_ignored_files (test_author_inputs.Authoring.test_commit_refuses_ignored_files) ... ok
+test_commit_refuses_sealed_mode_changes (test_author_inputs.Authoring.test_commit_refuses_sealed_mode_changes) ... ok
 test_commit_refuses_staged_worktree_divergence_before_any_effect (test_author_inputs.Authoring.test_commit_refuses_staged_worktree_divergence_before_any_effect) ... ok
 test_commit_refuses_unrelated_changes_and_identity_drift (test_author_inputs.Authoring.test_commit_refuses_unrelated_changes_and_identity_drift) ... ok
+test_commit_requires_authority_before_effects (test_author_inputs.Authoring.test_commit_requires_authority_before_effects) ... ok
+test_commit_workflow_refuses_base_as_destination (test_author_inputs.Authoring.test_commit_workflow_refuses_base_as_destination) ... ok
+test_native_workflow_inspection_is_metadata_only (test_author_inputs.Authoring.test_native_workflow_inspection_is_metadata_only) ... ok
 test_preparation_admission_uses_real_native_metadata_and_exact_limits (test_author_inputs.Authoring.test_preparation_admission_uses_real_native_metadata_and_exact_limits) ... ok
+test_small_input_guards (test_author_inputs.Authoring.test_small_input_guards) ... ok
 test_symlink_destination_and_duplicate_authorization_refuse (test_author_inputs.Authoring.test_symlink_destination_and_duplicate_authorization_refuse) ... ok
 test_workflow_admission_checks_both_native_outputs (test_author_inputs.Authoring.test_workflow_admission_checks_both_native_outputs) ... ok
 test_cli_native_verifier_refusal_and_no_writes (test_check_repeat.Checks.test_cli_native_verifier_refusal_and_no_writes) ... ok
@@ -38,6 +47,6 @@ test_native_boundary_requests_only_cold_next_inspection (test_replay_ready.Repla
 test_native_corruption_refuses_cli_without_ready_output (test_replay_ready.ReplayReady.test_native_corruption_refuses_cli_without_ready_output) ... ok
 
 ----------------------------------------------------------------------
-Ran 38 tests in 2.090s
+Ran 47 tests in 2.881s
 
 OK
