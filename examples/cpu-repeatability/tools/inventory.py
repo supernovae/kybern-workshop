@@ -74,10 +74,12 @@ def capture(root):
 
 
 def compare_replay(before, after, *, new_audit_files=()):
-    """Fail closed on ANY stored-state change. Explicit new audit files only.
+    """Fail closed on ANY stored-state change. Explicit new audit entries only.
 
-    No globs or directory exclusions. An audit path must start with audit/ or
-    logs/replay/; it must be absent before replay. Existing file changes, raw
+    No globs or recursive directory exclusions. Each audit entry must start with
+    audit/ or logs/replay/, or be the exact new logs/replay directory itself;
+    every descendant still needs its own explicit allowance. Entries must be
+    absent before replay and be captured regular files or directories. Existing file changes, raw
     database changes, extra run/pilot/receipt files and all table changes refuse.
     Operational churn may conservatively refuse; it is never silently ignored.
     """
@@ -90,9 +92,14 @@ def compare_replay(before, after, *, new_audit_files=()):
     for name in allowed:
         path = Path(name)
         if (path.is_absolute() or '..' in path.parts or path.as_posix() != name or
-            not (name.startswith('audit/') or name.startswith('logs/replay/')) or
+            not (name.startswith('audit/') or name.startswith('logs/replay/') or name == 'logs/replay') or
             name in before['files'] or name not in after['files']):
             raise ValueError('invalid new audit path')
+        entry = after['files'][name]
+        if not isinstance(entry, dict): raise ValueError('invalid new audit entry kind')
+        kind = entry.get('kind')
+        if kind not in ('file', 'directory') or (name == 'logs/replay' and kind != 'directory'):
+            raise ValueError('invalid new audit entry kind')
     a = {k: v for k, v in after['files'].items() if k not in allowed}
     if before['files'] != a: raise ValueError('replay changed full file inventory')
     return {'status': 'UNCHANGED_PERSISTED_STATE', 'scope': 'whole_root',
