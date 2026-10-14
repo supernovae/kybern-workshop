@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "vocab_size": 260,
+  "min_frequency": 2,
+  "max_documents": 8,
+  "output_dir": "payload/tokenizer",
+  "dataset": {
+    "source": "synthetic",
+    "synthetic_seed": 7,
+    "cache_dir": "payload/cache",
+    "train_max_documents": 8,
+    "validation_max_documents": 4,
+    "train_max_tokens": 256,
+    "validation_max_tokens": 128
+  }
+}
