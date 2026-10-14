@@ -188,7 +188,7 @@ probe samples, pilot identities, main metrics and preserved failure explanations
 [Executed commands](commands.md) reconstruct the outer monitor/baseline commands
 with symbolic paths and retain all historical invocations, including the failures.
 
-Use the root [reproduction guide](../../README.md) with ordinary Git clone and
+Use the project [reproduction guide](../../examples/synthetic-cpu/README.md) with ordinary Git clone and
 pinned checkouts. Use the writable lease directory and native monitor, not strace.
 Fresh bindings/admissions and payloads belong outside Git; a fresh preparation
 requires its own committed workflow identities and review. This published result

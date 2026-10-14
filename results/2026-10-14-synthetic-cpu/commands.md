@@ -4,7 +4,7 @@ These are historical commands reconstructed from retained native monitor launch 
 `CPU_PYTHON`, `A`, `B` and `WORK` substitute the original absolute local paths.
 They are audit records, not a script to rerun against an existing store.
 Provisioning, baseline capture and analysis overhead are excluded from child-command monitor timings.
-The root guide recommends native monitoring without strace; failed traced commands remain visible here.
+The [project guide](../../examples/synthetic-cpu/README.md) recommends native monitoring without strace; failed traced commands remain visible here.
 
 All monitor policies use the committed 600-second / 4-GiB / 1-GiB limits except
 `remaining-attempt-monitor.json`, a local copy with `max_wall_seconds: 328`.
