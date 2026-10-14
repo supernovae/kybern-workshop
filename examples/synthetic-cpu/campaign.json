@@ -1,0 +1,100 @@
+{
+  "campaign_version": 1,
+  "id": "workshop-synthetic-cpu",
+  "stages": [
+    {
+      "id": "token",
+      "kind": "artifact_reference",
+      "scope": "tokenizer",
+      "artifact": {
+        "identifier": "tokenizer",
+        "kind": "tokenizer",
+        "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a",
+        "version": 1,
+        "producer": "sparselab tokenizer train"
+      }
+    },
+    {
+      "id": "packed",
+      "kind": "artifact_reference",
+      "scope": "model",
+      "artifact": {
+        "identifier": "6cc6aae8bcf8f21d5e831579f438167e4a6916b1eaac897e1f9bc53360f3ff98",
+        "kind": "prepared_data",
+        "sha256": "c0a3656d35b83d93d27ab44e4a06103c89a05d111ba6e3e2b8e3f9d6b0a5be90",
+        "version": 1,
+        "producer": "sparselab data prepare"
+      }
+    },
+    {
+      "id": "lock-plan",
+      "kind": "experiment_plan",
+      "scope": "model",
+      "requires": [
+        "token",
+        "packed"
+      ],
+      "source": "plan.json",
+      "mode": "lock",
+      "tokenizer": "token",
+      "prepared": "packed"
+    },
+    {
+      "id": "accept-cpu",
+      "kind": "runtime_acceptance",
+      "scope": "runtime",
+      "requires": [
+        "lock-plan"
+      ],
+      "plan": "lock-plan"
+    },
+    {
+      "id": "approve-model",
+      "kind": "approval",
+      "scope": "model",
+      "requires": [
+        "lock-plan",
+        "accept-cpu"
+      ],
+      "bind": [
+        "lock-plan",
+        "accept-cpu"
+      ]
+    },
+    {
+      "id": "train-once",
+      "kind": "experiment_run",
+      "scope": "model",
+      "requires": [
+        "lock-plan",
+        "accept-cpu",
+        "approve-model"
+      ],
+      "plan": "lock-plan",
+      "runtime": "accept-cpu",
+      "cell": "main:single"
+    },
+    {
+      "id": "collect-run",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "requires": [
+        "lock-plan",
+        "train-once"
+      ],
+      "plan": "lock-plan",
+      "run": "train-once"
+    },
+    {
+      "id": "evaluate-heldout",
+      "kind": "evaluation",
+      "scope": "evaluation",
+      "requires": [
+        "collect-run"
+      ],
+      "collect": "collect-run",
+      "suite": "suite.json",
+      "backend": "cpu"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "name": "workshop-synthetic-cpu",
+  "seed": 7,
+  "runtime": {
+    "engine": "pytorch",
+    "backend": "cpu",
+    "precision": "fp32"
+  },
+  "model": {
+    "vocab_size": 260,
+    "hidden_dim": 16,
+    "ffn_dim": 32,
+    "num_layers": 1,
+    "num_heads": 2,
+    "max_seq_len": 32,
+    "ffn": "dense",
+    "memory": "none"
+  },
+  "tokenizer": {
+    "path": "payload/tokenizer/tokenizer.json"
+  },
+  "dataset": {
+    "source": "synthetic",
+    "synthetic_seed": 7,
+    "cache_dir": "payload/cache",
+    "train_max_documents": 8,
+    "validation_max_documents": 4,
+    "train_max_tokens": 256,
+    "validation_max_tokens": 128
+  },
+  "training": {
+    "micro_batch_size": 1,
+    "gradient_accumulation": 1,
+    "seq_len": 16,
+    "max_steps": 1,
+    "max_tokens": 16,
+    "deterministic": true
+  },
+  "optimizer": {
+    "name": "adamw",
+    "peak": 0.0003,
+    "floor": 3e-05,
+    "warmup_steps": 0
+  },
+  "attention": {
+    "kind": "dense"
+  },
+  "evaluation": {
+    "every_steps": 1,
+    "max_batches": 1
+  },
+  "checkpoint": {
+    "every_steps": 1
+  },
+  "staging": {
+    "smoke_steps": 2,
+    "warmup_steps": 5
+  },
+  "logging": {
+    "root_dir": "payload/runs",
+    "every_steps": 1
+  }
+}

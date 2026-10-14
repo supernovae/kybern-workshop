@@ -1,0 +1,53 @@
+{
+  "portable_workflow_version": 1,
+  "id": "workshop-synthetic-cpu",
+  "entrypoint": "plan.json",
+  "campaign": "campaign.json",
+  "contracts": {
+    "experiment_plan": 1,
+    "run_config": 2
+  },
+  "files": [
+    {
+      "path": "campaign.json",
+      "role": "metadata",
+      "sha256": "81eeadaea7567fa76bd9f786ad9725d1c784017166f6993038d10b35e49ac5c7"
+    },
+    {
+      "path": "monitor.json",
+      "role": "metadata",
+      "sha256": "5d5ee027260228c4f176a73ca1d346b340a5d67114e023a0b2bb4dd95bcfd751"
+    },
+    {
+      "path": "plan.json",
+      "role": "experiment_plan",
+      "sha256": "3e76561a225117879c71bb49c158bfbe2bd7936ac6888fec65e2e16924f0b102"
+    },
+    {
+      "path": "run.json",
+      "role": "run_config",
+      "sha256": "f91515509c99017eaa47bb2ad61cc89c956a5047094617dba661183a8ab872bf"
+    },
+    {
+      "path": "suite.json",
+      "role": "metadata",
+      "sha256": "182ca41c7c9bb2eae7a2916fb1c744b864ac448943f9c626d060bcde82eeeb25"
+    }
+  ],
+  "artifacts": {
+    "token": {
+      "identifier": "tokenizer",
+      "kind": "tokenizer",
+      "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a",
+      "version": 1,
+      "producer": "sparselab tokenizer train"
+    },
+    "packed": {
+      "identifier": "6cc6aae8bcf8f21d5e831579f438167e4a6916b1eaac897e1f9bc53360f3ff98",
+      "kind": "prepared_data",
+      "sha256": "c0a3656d35b83d93d27ab44e4a06103c89a05d111ba6e3e2b8e3f9d6b0a5be90",
+      "version": 1,
+      "producer": "sparselab data prepare"
+    }
+  }
+}
