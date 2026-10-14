@@ -130,3 +130,31 @@ class Inventory(unittest.TestCase):
             after['files']['logs/replay/link']={'kind':'symlink'}
             with self.assertRaisesRegex(ValueError,'entry kind'):
                 i.compare_replay(before,after,new_audit_files=['logs/replay','logs/replay/link'])
+
+    def test_after_only_lookalike_directories_refuse(self):
+        for name in ['logs/replay-other','logs']:
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                root=Path(tmp)
+                if name!='logs': (root/'logs').mkdir()
+                before=i.capture(root); (root/name).mkdir(); after=i.capture(root)
+                self.assertNotIn(name,before['files']); self.assertIn(name,after['files'])
+                with self.assertRaisesRegex(ValueError,'invalid new audit path'):
+                    i.compare_replay(before,after,new_audit_files=[name])
+
+    def test_crafted_present_unsafe_paths_refuse(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            before=i.capture(Path(tmp))
+            for name in ['logs/replay/../escape','logs/replay//extra','logs/replay/./extra',
+                         '/logs/replay']:
+                after=copy.deepcopy(before); after['files'][name]={'kind':'directory'}
+                with self.subTest(name=name), self.assertRaisesRegex(ValueError,'invalid new audit path'):
+                    i.compare_replay(before,after,new_audit_files=[name])
+
+    def test_crafted_nonobject_audit_entries_refuse_cleanly(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            before=i.capture(Path(tmp))
+            for name in ['logs/replay','audit/report.json']:
+                for entry in [None,[],7,'directory']:
+                    after=copy.deepcopy(before); after['files'][name]=entry
+                    with self.subTest(name=name,entry=entry), self.assertRaisesRegex(ValueError,'entry kind'):
+                        i.compare_replay(before,after,new_audit_files=[name])

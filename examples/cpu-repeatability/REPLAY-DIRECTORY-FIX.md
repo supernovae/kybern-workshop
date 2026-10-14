@@ -22,3 +22,24 @@ entries. Existing files and database rows are identical. All 509 retained file
 hashes matched before and after validation. This post-stop check does not rewrite
 the failed session outcome, prove absence of transient work, or establish B repeat
 success. A fresh authorized iteration remains gated on external review and merge.
+
+## Review follow-up
+
+Review 5526075626 identified that the original lookalike probes were rejected by
+presence checks rather than directory exactness. New filesystem cases create
+after-only `logs/replay-other` and `logs` (with no logs directory before), name
+each explicitly, and require `invalid new audit path`.
+
+The suite now passes 53 tests in 1.704 seconds (10 inventory tests). Disposable-copy
+mutations broadening to the replay prefix or adding the parent logs directory both
+fail assertion checks. Crafted present-after traversal and noncanonical keys
+independently kill removal of those guards. Absolute-path removal still survives:
+the allowed relative prefixes already refuse absolute names on this platform.
+The absolute refusal is tested, but no independent mutation coverage is claimed.
+Non-dictionary audit entries now refuse cleanly with ValueError.
+
+Reproduce using the existing interpreter with
+`python -B examples/cpu-repeatability/tests/mutation_replay_directory.py`.
+It mutates disposable copies only, caps each mutant at 15 seconds and the full
+suite at 60 seconds, and refreshes the two test/mutation evidence files. No Lab
+workload, native verification or retained attempt evidence access is performed.

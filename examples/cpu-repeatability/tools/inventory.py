@@ -95,7 +95,9 @@ def compare_replay(before, after, *, new_audit_files=()):
             not (name.startswith('audit/') or name.startswith('logs/replay/') or name == 'logs/replay') or
             name in before['files'] or name not in after['files']):
             raise ValueError('invalid new audit path')
-        kind = after['files'][name].get('kind')
+        entry = after['files'][name]
+        if not isinstance(entry, dict): raise ValueError('invalid new audit entry kind')
+        kind = entry.get('kind')
         if kind not in ('file', 'directory') or (name == 'logs/replay' and kind != 'directory'):
             raise ValueError('invalid new audit entry kind')
     a = {k: v for k, v in after['files'].items() if k not in allowed}

@@ -32,8 +32,11 @@ test_documented_sparselab_commands_use_both_root_selectors (test_commands.Comman
 test_every_cli_initialization_and_inner_command_has_explicit_roots (test_commands.Commands.test_every_cli_initialization_and_inner_command_has_explicit_roots) ... ok
 test_five_monitors_unique_logs_and_replay_never_executes (test_commands.Commands.test_five_monitors_unique_logs_and_replay_never_executes) ... ok
 test_fresh_root_and_after_report_bindings_are_reselected (test_commands.Commands.test_fresh_root_and_after_report_bindings_are_reselected) ... ok
+test_after_only_lookalike_directories_refuse (test_inventory.Inventory.test_after_only_lookalike_directories_refuse) ... ok
 test_all_attempt_rows_receipts_and_read_only (test_inventory.Inventory.test_all_attempt_rows_receipts_and_read_only) ... ok
 test_all_controller_tables_bind_one_completed_attempt (test_inventory.Inventory.test_all_controller_tables_bind_one_completed_attempt) ... ok
+test_crafted_nonobject_audit_entries_refuse_cleanly (test_inventory.Inventory.test_crafted_nonobject_audit_entries_refuse_cleanly) ... ok
+test_crafted_present_unsafe_paths_refuse (test_inventory.Inventory.test_crafted_present_unsafe_paths_refuse) ... ok
 test_exact_new_audit_allowlist_no_old_file_changes (test_inventory.Inventory.test_exact_new_audit_allowlist_no_old_file_changes) ... ok
 test_new_replay_directory_requires_each_exact_entry (test_inventory.Inventory.test_new_replay_directory_requires_each_exact_entry) ... ok
 test_refuse_wal_symlink_and_missing (test_inventory.Inventory.test_refuse_wal_symlink_and_missing) ... ok
@@ -50,6 +53,6 @@ test_native_boundary_requests_only_cold_next_inspection (test_replay_ready.Repla
 test_native_corruption_refuses_cli_without_ready_output (test_replay_ready.ReplayReady.test_native_corruption_refuses_cli_without_ready_output) ... ok
 
 ----------------------------------------------------------------------
-Ran 50 tests in 1.951s
+Ran 53 tests in 1.704s
 
 OK
