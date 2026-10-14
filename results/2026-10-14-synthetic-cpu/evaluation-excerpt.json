@@ -1,0 +1,26 @@
+{
+  "format": "evaluation-index-v1",
+  "checkpoint": "checkpoints/step_00000001_gen_000002",
+  "checkpoint_sha256": "010d3d137dd6943b2dc7317223d36fffd60ca1a3ded0680e86a62bf8f76ec81f",
+  "index_sha256": "658de3edf804b4ab227c25df8a0692163006d15388db4003c25d5d0aefcd1a0c",
+  "record_sha256": "6c45c7abb729c2386455e2ffcdbe98d466724677402ac62f5e014ae85548212c",
+  "suite_sha256": "182ca41c7c9bb2eae7a2916fb1c744b864ac448943f9c626d060bcde82eeeb25",
+  "original_byte_sha256": "bbb0c930e70f04207c851ae0463e74e4f06a018b2bbc929018a0b74e381643b8",
+  "evaluations": [
+    {
+      "id": "heldout",
+      "kind": "heldout_lm",
+      "role": "diagnostic",
+      "status": "COMPLETED",
+      "sha256": "5eabd09ec684ed0272f63ca6ccb09b1dc0c64f5b91d465a892c29a56eb5c34e2",
+      "elapsed_seconds": 0.029110563999893202,
+      "result": {
+        "batches": 1,
+        "loss": 5.441391468048096,
+        "perplexity": 230.76305958852774,
+        "perplexity_unavailable_reason": null,
+        "valid_targets": 16
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "failed_invocations": [
+    "workflow-run",
+    "workflow-run-resume"
+  ],
+  "native_owned_completion_living_descendants": [
+    0,
+    0
+  ],
+  "native_monitor_status": "MONITOR_ERROR; exit mapping disagreement is retained, not relabeled as success",
+  "independent_checks": [
+    "After each stop, every recorded PID was checked with psutil; no non-zombie survivors.",
+    "Both trace-identified orphan precision probe PIDs were checked individually with psutil.Process and raised NoSuchProcess.",
+    "Final lab-process scan found no running lab processes."
+  ],
+  "original_specific_probe_check_byte_sha256": "d11f44caa4d1532bd3734fb1c0076ddf418f35b42ee1096bac1f628d611d274a",
+  "limitations": "Process IDs and machine details omitted. Public excerpt records checks; it cannot itself independently inspect the historical host."
+}

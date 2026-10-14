@@ -1,0 +1,202 @@
+{
+  "preparation/pack-data": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "pack-data",
+    "kind": "data_prepare",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "2bec7cd240c24333391e8a2299be672984f61c93e476ac2d726fe059b01b1321",
+    "receipt_sha256": "39d6d016dd0675a687df1706e190f373ada8011c8db9a0eb8cae46486171ae9c",
+    "outputs": [
+      {
+        "identifier": "6cc6aae8bcf8f21d5e831579f438167e4a6916b1eaac897e1f9bc53360f3ff98",
+        "kind": "prepared_data",
+        "sha256": "c0a3656d35b83d93d27ab44e4a06103c89a05d111ba6e3e2b8e3f9d6b0a5be90"
+      }
+    ],
+    "verified_at": "2026-10-14T03:07:45.472912Z",
+    "original_byte_sha256": "4e7ab70f55618d84a815f951118a99781bc699cf15716d96b0d3186ca2cbfc3d"
+  },
+  "preparation/train-tokenizer": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "train-tokenizer",
+    "kind": "tokenizer_train",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "1e3e4e0757acf3e5a92eda09a188e2a4b0de8c3d695051ef95cbaf7366dc1d03",
+    "receipt_sha256": "ae0b9d2b498c8611c710b156d3a01387d8375796e697f837965ea995442fbc86",
+    "outputs": [
+      {
+        "identifier": "tokenizer",
+        "kind": "tokenizer",
+        "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a"
+      }
+    ],
+    "verified_at": "2026-10-14T03:07:44.605082Z",
+    "original_byte_sha256": "60c52bd80c843c0b3218d978d30f79301f3274edd4c922683557c2898211aac8"
+  },
+  "workflow/accept-cpu": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "accept-cpu",
+    "kind": "runtime_acceptance",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "e922e2e4054e0623bd9fdfa13c04b3c39898b5c6867b1d40617a1f08319180ad",
+    "receipt_sha256": "3ff464d495250944eb19f183ca88f28787e62bdefd91613dcb03469ce3f9318e",
+    "outputs": [
+      {
+        "identifier": "accept-cpu",
+        "kind": "runtime_acceptance",
+        "sha256": "0b754e2dfd0342c74d1324b1c8e36b56f22b308a4ffb2b3560a14789c63aecb5"
+      }
+    ],
+    "verified_at": "2026-10-14T03:20:28.882366Z",
+    "original_byte_sha256": "e4d4fdd891fd9ae41cc08c589debd5ac2e8cc76cac3aec5872b682de2e445790"
+  },
+  "workflow/approve-model": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "approve-model",
+    "kind": "approval",
+    "state": "COMPLETE",
+    "reason": "approval approve",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "37dd5e01304c4ddb10730920315fd0da92cc6acd64801c3d988223edffbb60ce",
+    "receipt_sha256": "dbebb65a76a2b7635d723e45a35b81b74018c6ff633f86e3a1bd5f198282eb2c",
+    "outputs": [
+      {
+        "identifier": "approve-model",
+        "kind": "approval",
+        "sha256": "63b4e7a47ddba2c4b3cb3525b8c95c4623e889964e4a372f295382704431383d"
+      }
+    ],
+    "verified_at": "2026-10-14T03:21:18.025661Z",
+    "original_byte_sha256": "b8f7819f8a6dfbc78e373bc4fd694302df1e4adf7d592570241374c921dad513"
+  },
+  "workflow/collect-run": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "collect-run",
+    "kind": "experiment_collect",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "20b55ced81a5832c7d7000768fa2c6432fd66260c796fefab1689ddb41d7f79f",
+    "receipt_sha256": "35982e6d61cc301ed61113c5bb6319e6c4b87cbe2217650929ac53cc90e91da4",
+    "outputs": [
+      {
+        "identifier": "collect-run",
+        "kind": "experiment_collect",
+        "sha256": "68a13e4526d842148a00374318982896185b0d2063da3787d55cd534ac9d1888"
+      }
+    ],
+    "verified_at": "2026-10-14T03:33:10.110647Z",
+    "original_byte_sha256": "8c2f6a1167d1c30fa0e4e384a3c8b829732d780439b5c807ba6b73d18b03b5d5"
+  },
+  "workflow/evaluate-heldout": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "evaluate-heldout",
+    "kind": "evaluation",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "e2ef0c3e79b5ed514921c28ec3b0e75ceefa457aa3b90e3a570f1be3a976bcf5",
+    "receipt_sha256": "6d65cbbad41dfdf78a757dd1a95283e19dc70b733974b2f06c643b9cb2f1d65f",
+    "outputs": [
+      {
+        "identifier": "evaluate-heldout",
+        "kind": "evaluation",
+        "sha256": "658de3edf804b4ab227c25df8a0692163006d15388db4003c25d5d0aefcd1a0c"
+      }
+    ],
+    "verified_at": "2026-10-14T03:33:12.468746Z",
+    "original_byte_sha256": "f4102c125867b73e5262ed78f51d72f296bff9a11b62d55f685745e76b3a0900"
+  },
+  "workflow/lock-plan": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "lock-plan",
+    "kind": "experiment_plan",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "aae7697e525649b6fe4f40af53733ef9473e1ff47944c506b1aa1d5e533ee21f",
+    "receipt_sha256": "cbd8b51eaa4e0afd212fa1ffdc553573859a0fd1b2afe0454a6c5c4d8515edae",
+    "outputs": [
+      {
+        "identifier": "workshop-synthetic-cpu",
+        "kind": "experiment_plan",
+        "sha256": "9b460b8eed339211362fb6fbdfd795e4c43d93af4c173f76b49a9149ffb7c240"
+      }
+    ],
+    "verified_at": "2026-10-14T03:20:28.211973Z",
+    "original_byte_sha256": "da84f652e4e5ba1276f0dafe5c90ab9ad18615659edf4c8458c899d9a239ed80"
+  },
+  "workflow/packed": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "packed",
+    "kind": "artifact_reference",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "d93bf88b2c9cb9a5a7a05b592111e6e0c6a3b2393d20dedfcc7a46ebab334fc6",
+    "receipt_sha256": "35b07651e8ce21d735eb7d6dff1cae33b88c17d36f011ef803bf2f003e167b2c",
+    "outputs": [
+      {
+        "identifier": "6cc6aae8bcf8f21d5e831579f438167e4a6916b1eaac897e1f9bc53360f3ff98",
+        "kind": "prepared_data",
+        "sha256": "c0a3656d35b83d93d27ab44e4a06103c89a05d111ba6e3e2b8e3f9d6b0a5be90"
+      }
+    ],
+    "verified_at": "2026-10-14T03:20:27.411564Z",
+    "original_byte_sha256": "ec3e8c1cd0a8009ed2f9bd106c88e5f20fc170e5538c9564630240b13678e585"
+  },
+  "workflow/token": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "token",
+    "kind": "artifact_reference",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "658afd77ec8d230f86cc38db03fc57d0364f77ee88764acb27eab299916a8fac",
+    "receipt_sha256": "7060a9bf47ddcde706d10f272ea54c60cd0b4f3534349b26072cfe95c503b912",
+    "outputs": [
+      {
+        "identifier": "tokenizer",
+        "kind": "tokenizer",
+        "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a"
+      }
+    ],
+    "verified_at": "2026-10-14T03:20:26.992259Z",
+    "original_byte_sha256": "9c0002f696ce6f6a6eb16c16a987984d53701709798ed0e9fe293a02ee577595"
+  },
+  "workflow/train-once": {
+    "format": "campaign-stage-receipt-v1",
+    "id": "train-once",
+    "kind": "experiment_run",
+    "state": "COMPLETE",
+    "reason": "verified",
+    "outcome": "READY_FOR_NEXT_STAGE",
+    "deficits": [],
+    "stage_input_sha256": "2a7f38bf3424648581c501a947116ec7383e1d1247e841841bf1d06952796f22",
+    "receipt_sha256": "780a5677ee3b66b4c0bf63d7a72165987d0401aae3b556923a556d59e6389e31",
+    "outputs": [
+      {
+        "identifier": "1632259c-9aa4-45bc-965f-de87d7fadb2c",
+        "kind": "experiment_run",
+        "sha256": "89f17bf453108f0c84550b53b1ec45c1c87a92bb74c33574d49cab358bfccb67"
+      }
+    ],
+    "verified_at": "2026-10-14T03:33:08.628780Z",
+    "original_byte_sha256": "39719cff902a54724507a30858e59a9ab1d65368d27c6b86862c6713a1d2b251"
+  }
+}
