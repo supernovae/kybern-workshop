@@ -1,0 +1,58 @@
+{
+  "portable_workflow_version": 1,
+  "id": "tinystories-worker-pair",
+  "entrypoint": "plan.json",
+  "campaign": "campaign.json",
+  "contracts": {
+    "experiment_plan": 1,
+    "run_config": 2
+  },
+  "files": [
+    {
+      "path": "campaign.json",
+      "role": "metadata",
+      "sha256": "941a142eb46520c01ded1b719930e0a451787e3b532e8f6e731de055a711e21c"
+    },
+    {
+      "path": "first-files.json",
+      "role": "metadata",
+      "sha256": "5f68305d0d239d46fc282a5d98d4728e20bb6451924608823cd5d40ffe239d65"
+    },
+    {
+      "path": "monitor.json",
+      "role": "metadata",
+      "sha256": "81e3edd1097c6cc4eb5dc2b56f4701cfa80a68e4edc8c489aa68b0afb9cde0fc"
+    },
+    {
+      "path": "plan.json",
+      "role": "experiment_plan",
+      "sha256": "afc6efffac54209e424d808fe5127675f5a07f84cb061f298888036ffc52b451"
+    },
+    {
+      "path": "run.json",
+      "role": "run_config",
+      "sha256": "460c0f480a9e2528a4f98981b9f298ce88a14451980a1aa1b50ca661091930de"
+    },
+    {
+      "path": "suite.json",
+      "role": "metadata",
+      "sha256": "182ca41c7c9bb2eae7a2916fb1c744b864ac448943f9c626d060bcde82eeeb25"
+    }
+  ],
+  "artifacts": {
+    "token": {
+      "identifier": "tokenizer",
+      "kind": "tokenizer",
+      "sha256": "7090a3b4075e47cf56aec6f741a475b80f407053e0e6a998eeda276b7e435cf3",
+      "version": 1,
+      "producer": "sparselab tokenizer train"
+    },
+    "packed": {
+      "identifier": "b7af269e44c026cd6f7c0f0c0c9a1ab5334344d1e4c50b51327b10d70131636c",
+      "kind": "prepared_data",
+      "sha256": "dfc008bd34c09fabf8ebc204f300277080735a49d5bedff7d0f8a99eb394d458",
+      "version": 1,
+      "producer": "sparselab data prepare"
+    }
+  }
+}
