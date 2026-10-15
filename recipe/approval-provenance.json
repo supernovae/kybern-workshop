@@ -1,0 +1,26 @@
+{
+  "reference": "Sentinel:2b90fc486d3081918878ba99285a8a14",
+  "quote": "i approve, run that on the lab-cpu-worker",
+  "worker": "lab-cpu-worker",
+  "meaning": "Provenance only; chief must confirm fresh assignment and preserve existing holds and claims.",
+  "lab_commit": "d96b0aafda56c3a263a3be83d88e07839e17c3e6",
+  "harness_commit": "ac45e7aea69169cc6854bc14745ac57ffeca1391",
+  "limits": {
+    "source_body_bytes": 314572800,
+    "cache_bytes": 314572800,
+    "transfers": 2,
+    "cache_files": 2,
+    "shard_retries": 0,
+    "train_stories": 64,
+    "validation_stories": 16,
+    "cpu_configurations": 2,
+    "total_wall_seconds": 3600,
+    "training_updates": 16,
+    "evaluation_batches": 24,
+    "observed_ram_bytes": 4294967296,
+    "retained_output_bytes": 2147483648
+  },
+  "card_id": "LAB-80",
+  "card_url": "https://app.notion.com/p/3fa3b68cca2281e79802ed28e5e7ea64",
+  "status": "unexecuted; external review and compatible worker supervisor required"
+}

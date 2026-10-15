@@ -1,0 +1,42 @@
+{
+  "portable_preparation_version": 1,
+  "id": "tinystories-worker-preparation",
+  "entrypoint": "preparation-campaign.json",
+  "contracts": {
+    "campaign": 1,
+    "run_config": 2,
+    "tokenizer_config": 1
+  },
+  "files": [
+    {
+      "path": "first-files.json",
+      "role": "metadata",
+      "sha256": "5f68305d0d239d46fc282a5d98d4728e20bb6451924608823cd5d40ffe239d65"
+    },
+    {
+      "path": "monitor.json",
+      "role": "metadata",
+      "sha256": "81e3edd1097c6cc4eb5dc2b56f4701cfa80a68e4edc8c489aa68b0afb9cde0fc"
+    },
+    {
+      "path": "preparation-campaign.json",
+      "role": "campaign",
+      "sha256": "c5aa4b6af40bdfc391082d064e0bd9fbb3fa8e1f0c053242b752fc8040be2708"
+    },
+    {
+      "path": "run.json",
+      "role": "run_config",
+      "sha256": "460c0f480a9e2528a4f98981b9f298ce88a14451980a1aa1b50ca661091930de"
+    },
+    {
+      "path": "source.lock.json",
+      "role": "source_lock",
+      "sha256": "8eaac24cdb842f29093198d4be314e7b4d9c6db0a14a1da0c56a00dc18c3848d"
+    },
+    {
+      "path": "tokenizer-config.json",
+      "role": "tokenizer_config",
+      "sha256": "2548f419740162b49f85aad05b7c8a2357566083701033766215610f417fed33"
+    }
+  ]
+}

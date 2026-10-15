@@ -1,0 +1,144 @@
+{
+  "campaign_version": 1,
+  "id": "tinystories-worker-pair",
+  "stages": [
+    {
+      "id": "token",
+      "kind": "artifact_reference",
+      "scope": "tokenizer",
+      "artifact": null
+    },
+    {
+      "id": "packed",
+      "kind": "artifact_reference",
+      "scope": "model",
+      "artifact": null
+    },
+    {
+      "id": "lock-plan",
+      "kind": "experiment_plan",
+      "scope": "model",
+      "requires": [
+        "token",
+        "packed"
+      ],
+      "source": "plan.json",
+      "mode": "lock",
+      "tokenizer": "token",
+      "prepared": "packed"
+    },
+    {
+      "id": "accept-cpu",
+      "kind": "runtime_acceptance",
+      "scope": "runtime",
+      "requires": [
+        "lock-plan"
+      ],
+      "plan": "lock-plan"
+    },
+    {
+      "id": "approve-model",
+      "kind": "approval",
+      "scope": "model",
+      "requires": [
+        "lock-plan",
+        "accept-cpu"
+      ],
+      "bind": [
+        "lock-plan",
+        "accept-cpu"
+      ]
+    },
+    {
+      "id": "run-baseline",
+      "kind": "experiment_run",
+      "scope": "model",
+      "plan": "lock-plan",
+      "runtime": "accept-cpu",
+      "cell": "main:arm=baseline",
+      "requires": [
+        "lock-plan",
+        "accept-cpu",
+        "approve-model"
+      ]
+    },
+    {
+      "id": "collect-baseline",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "plan": "lock-plan",
+      "run": "run-baseline",
+      "requires": [
+        "lock-plan",
+        "run-baseline",
+        "run-candidate"
+      ]
+    },
+    {
+      "id": "eval-baseline",
+      "kind": "evaluation",
+      "scope": "evaluation",
+      "collect": "collect-baseline",
+      "suite": "suite.json",
+      "backend": "cpu",
+      "requires": [
+        "collect-baseline"
+      ]
+    },
+    {
+      "id": "run-candidate",
+      "kind": "experiment_run",
+      "scope": "model",
+      "plan": "lock-plan",
+      "runtime": "accept-cpu",
+      "cell": "main:arm=candidate",
+      "requires": [
+        "lock-plan",
+        "accept-cpu",
+        "approve-model",
+        "run-baseline"
+      ]
+    },
+    {
+      "id": "collect-candidate",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "plan": "lock-plan",
+      "run": "run-candidate",
+      "requires": [
+        "lock-plan",
+        "run-baseline",
+        "run-candidate"
+      ]
+    },
+    {
+      "id": "eval-candidate",
+      "kind": "evaluation",
+      "scope": "evaluation",
+      "collect": "collect-candidate",
+      "suite": "suite.json",
+      "backend": "cpu",
+      "requires": [
+        "collect-candidate"
+      ]
+    },
+    {
+      "id": "final-evidence",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "plan": "lock-plan",
+      "run": "run-baseline",
+      "evaluations": [
+        "eval-baseline",
+        "eval-candidate"
+      ],
+      "requires": [
+        "lock-plan",
+        "run-baseline",
+        "run-candidate",
+        "eval-baseline",
+        "eval-candidate"
+      ]
+    }
+  ]
+}
