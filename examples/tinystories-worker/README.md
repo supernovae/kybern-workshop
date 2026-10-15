@@ -1,15 +1,18 @@
-# LAB-80: TinyStories CPU worker handoff
+# TinyStories CPU workflow reference
 
-**Unexecuted; review and runner qualification required.** This is the small real-data
-integration pair for [LAB-80](https://app.notion.com/p/3fa3b68cca2281e79802ed28e5e7ea64).
-Execution belongs to **lab-cpu-worker**, routed through chief. The owner reference
-is `Sentinel:2b90fc486d3081918878ba99285a8a14`: “i approve, run that on the
-lab-cpu-worker”. The checked-in reference records provenance; it does not grant
-authority, clear a hold, acquire a claim, or approve a native gate.
+For the question, GPU setup, local experiment and interpretation, start with
+[the TinyStories experiment guide](../tinystories/README.md). This page preserves
+the advanced CPU Campaign/handoff contract and its original authoring context.
+It is not the GPU execution interface.
 
-The recipe targets Lab `d96b0aafda56c3a263a3be83d88e07839e17c3e6` and was authored
-from Workshop `2dd43432b83157d01b0c5897305b42f4a89ee942`. Use the externally reviewed
-commit of this PR, then separately reviewed generated preparation/workflow commits.
+The [first CPU container smoke](../../results/2026-10-15-tinystories-smoke/README.md)
+completed on 2026-10-15 at Lab `66ff9d71423e961ee15aed2267902164f04514c6` with
+fresh writable prepared-cache reuse. These checked-in templates were originally
+authored against Lab `d96b0aafda56c3a263a3be83d88e07839e17c3e6`; the measured run used
+separately committed preparation/workflow declarations linked in that result.
+The original owner reference `Sentinel:2b90fc486d3081918878ba99285a8a14` is historical
+provenance for LAB-80, not authorization for a reader's new execution.
+
 The dataset is `roneneldan/TinyStories` at
 `f54c09fd23315a6f9c86f9dc80f725de7d8f9c64`. No model download is needed.
 
@@ -36,18 +39,20 @@ The 24-batch total follows this exact graph and pilot schedule. Do not add `try`
 extra probes, evaluations, repeatability arms, or retries. This is an integration
 diagnostic, not a quality comparison with useful statistical power.
 
-## Runner readiness is still blocked
+## Original supervisor requirements (historical)
 
-The reviewed harness `ac45e7aea69169cc6854bc14745ac57ffeca1391` has a session
+At initial authoring, harness `ac45e7aea69169cc6854bc14745ac57ffeca1391` had a session
 validator that requires 26 ordered slots for two separate repeatability roots.
 Its Workshop adapter accepts the older offline `python -m sparselab` argv shape.
-It cannot directly consume this single-preparation, two-cell acquisition handoff.
+That version cannot directly consume this single-preparation, two-cell acquisition handoff.
+The later CPU result used a later supervisor; the constraints below
+explain the original handoff rather than a current blanket launch blocker.
 Do not pad it with a second experiment or bypass it with independent per-command
 timeouts. `monitor.json` alone also does not enforce one clock across commands
 and operator waits.
 
-Before launch, chief must qualify an existing compatible reviewed supervisor on
-lab-cpu-worker (or arrange a separately reviewed harness change). It must retain
+For a new managed execution, qualify an existing compatible reviewed supervisor on
+the selected CPU worker. It must retain
 the same origin/deadline, observe all roots/caches/receipts and helper processes,
 preserve real exit/signal/partial evidence, and verify descendant cleanup. It must
 honor the fresh native lease/claim and existing holds. No runtime installation,
