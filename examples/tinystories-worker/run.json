@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "name": "workshop-tinystories-worker",
+  "seed": 7,
+  "runtime": {
+    "engine": "pytorch",
+    "backend": "cpu",
+    "precision": "fp32"
+  },
+  "model": {
+    "vocab_size": 512,
+    "hidden_dim": 32,
+    "ffn_dim": 64,
+    "num_layers": 1,
+    "num_heads": 2,
+    "max_seq_len": 32,
+    "ffn": "dense",
+    "memory": "none"
+  },
+  "tokenizer": {
+    "path": "payload/tokenizer/tokenizer.json"
+  },
+  "dataset": {
+    "source": "snapshot",
+    "revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+    "license": "CDLA-Sharing-1.0",
+    "dataset_config": "default",
+    "cache_dir": "payload/cache",
+    "train_path": "snapshot/train.jsonl",
+    "validation_path": "snapshot/validation.jsonl",
+    "source_manifest_path": "snapshot/manifest.json",
+    "train_max_documents": 64,
+    "validation_max_documents": 16,
+    "train_max_tokens": 262144,
+    "validation_max_tokens": 65536
+  },
+  "training": {
+    "micro_batch_size": 1,
+    "gradient_accumulation": 1,
+    "seq_len": 32,
+    "max_steps": 1,
+    "max_tokens": 32,
+    "deterministic": true
+  },
+  "optimizer": {
+    "name": "adamw",
+    "peak": 0.0003,
+    "floor": 3e-05,
+    "warmup_steps": 0
+  },
+  "attention": {
+    "kind": "dense"
+  },
+  "evaluation": {
+    "every_steps": 1,
+    "max_batches": 1
+  },
+  "checkpoint": {
+    "every_steps": 1
+  },
+  "staging": {
+    "smoke_steps": 2,
+    "warmup_steps": 5
+  },
+  "logging": {
+    "root_dir": "payload/runs",
+    "every_steps": 1
+  }
+}

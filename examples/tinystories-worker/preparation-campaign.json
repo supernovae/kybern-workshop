@@ -1,0 +1,36 @@
+{
+  "campaign_version": 1,
+  "id": "tinystories-worker-preparation",
+  "stages": [
+    {
+      "id": "snapshot",
+      "kind": "dataset_snapshot",
+      "scope": "corpus",
+      "lock": "source.lock.json",
+      "output": "snapshot",
+      "cache_dir": "acquisition-cache"
+    },
+    {
+      "id": "train-tokenizer",
+      "kind": "tokenizer_train",
+      "scope": "tokenizer",
+      "config": "tokenizer-config.json",
+      "snapshot": "snapshot",
+      "requires": [
+        "snapshot"
+      ]
+    },
+    {
+      "id": "pack-data",
+      "kind": "data_prepare",
+      "scope": "model",
+      "requires": [
+        "train-tokenizer",
+        "snapshot"
+      ],
+      "config": "run.json",
+      "tokenizer": "train-tokenizer",
+      "snapshot": "snapshot"
+    }
+  ]
+}

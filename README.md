@@ -11,6 +11,11 @@ recipes and results; Lab provides preparation, execution, evaluation and reporti
 | --- | --- | --- | --- |
 | Synthetic CPU | Prepare synthetic text and a tokenizer, approve one tiny training attempt, evaluate it and verify a report. No corpus or model download. | Measured end to end at its recorded pins, including replay with no new attempt. Demonstrates workflow wiring, not model quality. | [Run guide](examples/synthetic-cpu/README.md) · [Recorded result](results/2026-10-14-synthetic-cpu/README.md) |
 
+The [LAB-80 TinyStories worker handoff](examples/tinystories-worker/README.md)
+contains current native declarations and a metadata-only command renderer for
+lab-cpu-worker. It is unexecuted and blocked on review and compatible whole-job
+supervision; see its exact limits and staged handoff.
+
 The synthetic CPU project is currently the only executed project here.
 The [CPU repeatability recipe](examples/cpu-repeatability/README.md) targets the
 merged current Lab contract. It is an unexecuted scaffold with unit-tested checks;
