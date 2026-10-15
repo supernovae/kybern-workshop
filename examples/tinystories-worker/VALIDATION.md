@@ -36,3 +36,25 @@ The existing supervisor's fixed 26-slot requirement was verified in
 particularly the minimum slot count and exact ordered A/B step validation.
 The adapter's fixed argv/offline requirements were inspected in
 `workshop_argv.py`. This PR makes no supervisor change or execution-clearance claim.
+
+## External review follow-up
+
+Addressed review 5526656709 at head faca271: exact acquisition/admission/outer and
+story ceilings now have independent assertions; every CPU/offline rendering flag
+is checked. Added primary metadata first-file path/size/LFS SHA256 pins and refusal
+cases for each component. Tests isolate receipt stage/count/kind/state/location,
+output cardinality/kind/receipt guards and no-clobber entry points. The workflow
+admission helper now checks the two resolved cells' aggregate 24-batch projection
+without inventing a native aggregate-limit field. All one-hour allowances remain
+subordinate to the single supervisor clock, including acquisition, helpers,
+external-review waits and cleanup.
+
+Primary file metadata was supplied by the coordinator from the pinned Hub tree
+endpoint documented in README; no dataset bodies were fetched here.
+
+Final follow-up verification: **16 tests passed in 2.796 seconds**. A separate
+bounded mutation pass killed **23/23 targeted mutants**, covering individual
+acquisition/admission/story/outer limits, provenance, first-file size, omission of
+the admission budget check, offline/CPU flags, and overwrite mode. Exact outcomes
+are retained in `review-mutation-results.json`. No real payload or scientific work
+ran in either pass.

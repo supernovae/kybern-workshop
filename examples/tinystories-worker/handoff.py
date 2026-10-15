@@ -57,7 +57,7 @@ def copy_recipe(source, destination):
     require(not destination.exists(), 'fresh recipe destination required')
     destination.mkdir()
     for name in ('source.json', 'run.json', 'tokenizer-config.json', 'preparation-campaign.json',
-                 'campaign.json', 'plan.json', 'suite.json', 'monitor.json', 'approval-provenance.json'):
+                 'campaign.json', 'plan.json', 'suite.json', 'monitor.json', 'approval-provenance.json', 'first-files.json'):
         member = path(source/name)
         require(member.is_file(), 'missing recipe member')
         shutil.copyfile(member, destination/name)
@@ -86,6 +86,9 @@ def check_lock(lock, source):
             and len(files['train']) >= 1, 'first-file-only boundary cannot be established')
     require(sum(files[s][0]['size'] for s in files) <= 314572800, 'first files exceed 300 MiB')
     require(all(files[s][0].get('lfs_sha256') for s in files), 'content SHA256 identities required')
+    pins = read(Path(__file__).resolve().parent/'first-files.json')
+    require(all(all(files[split][0].get(key) == value for key,value in pin.items())
+                for split,pin in pins.items()), 'approved first-file identity differs')
 
 
 def snapshot_paths(work):
@@ -106,7 +109,7 @@ def bind_preparation(args):
     shutil.copyfile(path(args.source_lock), root/'source.lock.json')
     roles = {'preparation-campaign.json':'campaign', 'run.json':'run_config',
              'tokenizer-config.json':'tokenizer_config', 'source.lock.json':'source_lock',
-             'monitor.json':'metadata'}
+             'monitor.json':'metadata', 'first-files.json':'metadata'}
     save(root/'preparation.json', dict(portable_preparation_version=1, id='tinystories-worker-preparation',
          entrypoint='preparation-campaign.json', contracts={'campaign':1,'run_config':2,'tokenizer_config':1},
          files=inventory(root,roles)))
@@ -130,13 +133,15 @@ def seal_workflow(args):
             'preparation stage kinds differ')
     require(path(rows['snapshot']['availability']['path']) == path(args.work)/'snapshot/manifest.json',
             'snapshot location differs from worker binding')
+    for stage,kind in [('snapshot','dataset_snapshot'),('train-tokenizer','tokenizer'),('pack-data','prepared_data')]:
+        row = rows[stage]
+        require(len(row['outputs']) == 1 and row.get('receipt'), 'native output receipt missing')
+        require(row['outputs'][0]['kind'] == kind, 'artifact kind differs')
     artifacts, locations = {}, {}
     for name, stage, kind, producer in [('token','train-tokenizer','tokenizer','sparselab tokenizer train'),
                                       ('packed','pack-data','prepared_data','sparselab data prepare')]:
         row = rows[stage]
-        require(len(row['outputs']) == 1 and row.get('receipt'), 'native output receipt missing')
         output = row['outputs'][0]
-        require(output['kind'] == kind, 'artifact kind differs')
         artifacts[name] = {**output, 'version':1, 'producer':producer}
         locations[name] = str(path(row['availability']['path']))
     require(not path(args.bindings).exists(), 'bindings already exist')
@@ -148,13 +153,38 @@ def seal_workflow(args):
     # Only the newly allocated copy is edited; original receipts remain immutable.
     (root/'campaign.json').write_text(json.dumps(campaign, indent=2)+'\n')
     roles = {'run.json':'run_config','plan.json':'experiment_plan','campaign.json':'metadata',
-             'suite.json':'metadata','monitor.json':'metadata'}
+             'suite.json':'metadata','monitor.json':'metadata', 'first-files.json':'metadata'}
     save(root/'workflow.json', dict(portable_workflow_version=1,id='tinystories-worker-pair',
          entrypoint='plan.json',campaign='campaign.json',contracts={'experiment_plan':1,'run_config':2},
          files=inventory(root,roles),artifacts=artifacts))
     save(args.bindings, dict(workflow_bindings_version=1,artifacts=locations,
          logging_root=str(path(args.work)/'payload/runs'),config_paths=snapshot_paths(path(args.work))))
     return {'review_required':True, 'recipe':str(root), 'card':CARD}
+
+
+
+def check_pair_budget(resolved):
+    """Bind the aggregate projection to this pinned native pilot/evaluation graph.
+
+    Native max_eval_batches remains per pass. This is a recipe admission check,
+    not an invented native aggregate counter or a measurement of an actual run.
+    """
+    require(len(resolved.cells) == 2, 'exactly two cells required')
+    batches = updates = positions = 0
+    for cell in resolved.cells:
+        cfg = cell.config
+        require((cfg.staging.smoke_steps, cfg.staging.warmup_steps, cfg.training.max_steps) == (2,5,1),
+                'pinned pilot/main schedule differs')
+        require(cfg.evaluation.every_steps == 1 and cfg.evaluation.max_batches == 1,
+                'pinned per-pass evaluation schedule differs')
+        require((cfg.training.seq_len, cfg.training.micro_batch_size, cfg.training.gradient_accumulation) == (32,1,1),
+                'target-position schedule differs')
+        count = cfg.staging.smoke_steps + cfg.staging.warmup_steps + cfg.training.max_steps
+        updates += count
+        positions += count * cfg.training.seq_len
+        batches += count + 3 + 1  # Initial evaluation of each of three runs, then heldout.
+    require((updates, positions, batches) == (16,512,24), 'approved aggregate projection differs')
+    return {'training_updates':updates,'target_positions':positions,'evaluation_batches':batches}
 
 
 def admission(args):
@@ -177,7 +207,7 @@ def admission(args):
         from sparselab.experiments.workflow_execution import WorkflowAdmission
         native = inspect_workflow(root/'workflow.json',bindings,max_runs=2)
         resolved = resolve_workflow(root/'workflow.json',bindings,max_runs=2)
-        require(len(resolved.cells) == 2, 'exactly two cells required')
+        check_pair_budget(resolved)
         extra, model = {'limits':FLOW}, WorkflowAdmission
     value = model.model_validate(dict(reviewed_commit=args.reviewed_commit,
         recipe_sha256=native['recipe_sha256'],binding_sha256=native['binding_sha256'],

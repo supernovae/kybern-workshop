@@ -69,6 +69,10 @@ directories, copies native identities, authors admissions, or prints exact argv
 arrays. It neither implements Lab's engine nor posts to any external service.
 Keep all runtime bindings, admissions and payloads outside source checkouts. Only
 the generated recipe declarations/identities belong in their review branches.
+Place each generated recipe in its own review checkout beneath the charged work
+root (for example `work/preparation-review/recipe`); keep the work root itself
+outside Git. The upcoming LAB-80 harness profile supplies the bounded commit helper
+and one-clock binding procedure. This does not release launch before its review.
 Any failed authoring leaves its partial output for inspection; choose a new path.
 
 The following are argument arrays, not shell scripts. Replace the illustrative
@@ -92,7 +96,7 @@ specs. All subsequent work and review waits count against that same deadline.
 which discovers metadata without dataset bodies. Use its real `source.lock.json`:
 
 ```json
-["/worker/venv/bin/python", "-B", "/worker/reviewed/examples/tinystories-worker/handoff.py", "bind-preparation", "--recipe", "/worker/reviewed/examples/tinystories-worker", "--source-lock", "/worker/lab80/source.lock.json", "--destination", "/worker/preparation-review/recipe", "--work", "/worker/lab80", "--bindings", "/worker/lab80/preparation-bindings.json"]
+["/worker/venv/bin/python", "-B", "/worker/reviewed/examples/tinystories-worker/handoff.py", "bind-preparation", "--recipe", "/worker/reviewed/examples/tinystories-worker", "--source-lock", "/worker/lab80/source.lock.json", "--destination", "/worker/lab80/preparation-review/recipe", "--work", "/worker/lab80", "--bindings", "/worker/lab80/preparation-bindings.json"]
 ```
 
 The helper verifies the native lock, the exact source declaration, first-file size
@@ -100,15 +104,17 @@ sum, content digests, and **exactly one validation file**. Native traversal visi
 validation first. With one validation file and two total transfers/cache files,
 only the first training file can then be fetched; a second training file refuses.
 If this proof does not hold for the actual lock, stop. Never edit or trim the native
-inventory to make it pass. Lock availability and first-file sizes have not been
-verified against the real Hub by this PR.
+inventory to make it pass. `first-files.json` pins both exact paths, sizes and LFS SHA256 values from the
+[primary Hub metadata](https://huggingface.co/api/datasets/roneneldan/TinyStories/tree/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/data?recursive=false&expand=false)
+relayed by the owner coordinator. Their total is 258720238 bytes. No payload was
+downloaded; the worker must verify the actual native lock against these pins.
 
 3. Commit the generated preparation recipe on a normal review branch and obtain
-external review. Re-render with `--recipe /worker/preparation-review/recipe`.
+external review. Re-render with `--recipe /worker/lab80/preparation-review/recipe`.
 Run `preparation-inspect`. Author its admission using the **actual reviewed SHA**:
 
 ```json
-["/worker/venv/bin/python", "-B", "/worker/reviewed/examples/tinystories-worker/handoff.py", "admission", "--phase", "preparation", "--recipe", "/worker/preparation-review/recipe", "--reviewed-commit", "REPLACE_WITH_EXTERNALLY_REVIEWED_40_HEX_COMMIT", "--bindings", "/worker/lab80/preparation-bindings.json", "--output", "/worker/lab80/preparation-admission.json"]
+["/worker/venv/bin/python", "-B", "/worker/reviewed/examples/tinystories-worker/handoff.py", "admission", "--phase", "preparation", "--recipe", "/worker/lab80/preparation-review/recipe", "--reviewed-commit", "REPLACE_WITH_EXTERNALLY_REVIEWED_40_HEX_COMMIT", "--bindings", "/worker/lab80/preparation-bindings.json", "--output", "/worker/lab80/preparation-admission.json"]
 ```
 
 The helper requires a clean checkout at that SHA and uses native inspection hashes
@@ -123,14 +129,19 @@ and actual file identities. Do not submit preparation `resume` after a failure.
 Author the paired workflow in another fresh review location:
 
 ```json
-["/worker/venv/bin/python", "-B", "/worker/reviewed/examples/tinystories-worker/handoff.py", "seal-workflow", "--recipe", "/worker/preparation-review/recipe", "--receipt", "/worker/lab80/preparation-result.json", "--destination", "/worker/workflow-review/recipe", "--work", "/worker/lab80", "--bindings", "/worker/lab80/workflow-bindings.json"]
+["/worker/venv/bin/python", "-B", "/worker/reviewed/examples/tinystories-worker/handoff.py", "seal-workflow", "--recipe", "/worker/lab80/preparation-review/recipe", "--receipt", "/worker/lab80/preparation-result.json", "--destination", "/worker/lab80/workflow-review/recipe", "--work", "/worker/lab80", "--bindings", "/worker/lab80/workflow-bindings.json"]
 ```
 
 Commit and externally review the generated recipe with native artifact identities.
-Re-render against `/worker/workflow-review/recipe`; submit `workflow-inspect` and
+Re-render against `/worker/lab80/workflow-review/recipe`; submit `workflow-inspect` and
 `workflow-resolve`. Author `admission --phase workflow` using that reviewed SHA,
 the workflow bindings and `/worker/lab80/workflow-admission.json`. Native resolution
 cold-verifies prepared artifacts; no placeholder digest is admission evidence.
+The helper checks both resolved cells' exact smoke/warmup/main and per-pass
+evaluation schedule and refuses any projection other than 16 updates, 512 training
+targets and 24 evaluation batches. Native admission still uses its real per-pass
+limit of one batch. There is no native aggregate-evaluation counter; retain actual
+runtime counts and fail the acceptance audit if they exceed the approved total.
 
 5. Submit `workflow-apply`; inspect the exact native pending gate and plan. Only
 with chief's confirmed assignment/approval submit `workflow-approve`, then
@@ -150,7 +161,7 @@ preserve partial evidence. No automatic replay, resubmission or external posting
 ## Local verification
 
 Tested with the already installed Lab d96 runtime, Python 3.14.4 on Ubuntu 26.04
-WSL2. Ten tests cover native JSON/config/CLI inspection, serial pair metadata,
+WSL2. Sixteen tests cover native JSON/config/CLI inspection, serial pair metadata,
 lock/budget refusals, reviewed-pin mismatch, incomplete receipts, path refusal,
 no-clobber, unsupported hard limits and literal argument bytes/exit status in tiny
 fake children. Tests mock source metadata and do not import Lab test helpers.

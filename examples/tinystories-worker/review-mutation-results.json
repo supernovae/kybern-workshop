@@ -1,0 +1,94 @@
+[
+  {
+    "mutation": "max_transfers",
+    "killed": true
+  },
+  {
+    "mutation": "max_cache_files",
+    "killed": true
+  },
+  {
+    "mutation": "max_source_body_bytes",
+    "killed": true
+  },
+  {
+    "mutation": "max_cache_bytes",
+    "killed": true
+  },
+  {
+    "mutation": "max_wall_seconds",
+    "killed": true
+  },
+  {
+    "mutation": "max_observed_owned_bytes",
+    "killed": true
+  },
+  {
+    "mutation": "max_requests",
+    "killed": true
+  },
+  {
+    "mutation": "max_training_updates",
+    "killed": true
+  },
+  {
+    "mutation": "max_target_positions",
+    "killed": true
+  },
+  {
+    "mutation": "max_eval_batches",
+    "killed": true
+  },
+  {
+    "mutation": "max_documents",
+    "killed": true
+  },
+  {
+    "mutation": "source.json:selection.documents.train",
+    "killed": true
+  },
+  {
+    "mutation": "source.json:selection.documents.validation",
+    "killed": true
+  },
+  {
+    "mutation": "run.json:dataset.train_max_documents",
+    "killed": true
+  },
+  {
+    "mutation": "monitor.json:max_tree_rss_bytes",
+    "killed": true
+  },
+  {
+    "mutation": "monitor.json:max_added_workspace_bytes",
+    "killed": true
+  },
+  {
+    "mutation": "monitor.json:max_wall_seconds",
+    "killed": true
+  },
+  {
+    "mutation": "approval-provenance.json:limits.transfers",
+    "killed": true
+  },
+  {
+    "mutation": "first-files.json:train.size",
+    "killed": true
+  },
+  {
+    "mutation": "omit-budget-check",
+    "killed": true
+  },
+  {
+    "mutation": "omit-offline-flag",
+    "killed": true
+  },
+  {
+    "mutation": "omit-cpu-flag",
+    "killed": true
+  },
+  {
+    "mutation": "overwrite-output",
+    "killed": true
+  }
+]
