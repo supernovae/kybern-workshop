@@ -9,34 +9,32 @@ recipes and results; Lab provides preparation, execution, evaluation and reporti
 
 | Project | What you'll learn | Readiness | Start here |
 | --- | --- | --- | --- |
+| TinyStories FFN width | Compare width 64 versus 96 on the same story inputs and training budget; extend with longer runs and paired seeds. | CPU container workflow completed; GPU walkthrough unexecuted. | [Run on your GPU](examples/tinystories/README.md) · [CPU smoke evidence](results/2026-10-15-tinystories-smoke/README.md) |
 | Synthetic CPU | Prepare synthetic text and a tokenizer, approve one tiny training attempt, evaluate it and verify a report. No corpus or model download. | Measured end to end at its recorded pins, including replay with no new attempt. Demonstrates workflow wiring, not model quality. | [Run guide](examples/synthetic-cpu/README.md) · [Recorded result](results/2026-10-14-synthetic-cpu/README.md) |
 
-The [LAB-80 TinyStories worker handoff](examples/tinystories-worker/README.md)
-contains current native declarations and a metadata-only command renderer for
-lab-cpu-worker. It is unexecuted and blocked on review and compatible whole-job
-supervision; see its exact limits and staged handoff.
+Start with the [TinyStories FFN experiment](examples/tinystories/README.md):
+run a baseline/candidate pair on an existing CUDA or ROCm GPU runtime, inspect its
+records, and build the next controlled comparison. Its CPU container workflow
+has completed end to end; actual GPU execution remains unverified. The CPU result
+establishes execution, not an architecture winner.
 
-The synthetic CPU project is currently the only executed project here.
-The [CPU repeatability recipe](examples/cpu-repeatability/README.md) targets the
-merged current Lab contract. It is an unexecuted scaffold with unit-tested checks;
-runtime qualification and whole-session supervision still block launch. The
-[TinyStories migration draft](https://github.com/supernovae/kybern-workshop/pull/3)
-is unfinished scaffolding, not a runnable or execution-validated Workshop project.
-It still needs alignment with generic Lab interfaces and an end-to-end Workshop proof.
+The [CPU repeatability recipe](examples/cpu-repeatability/README.md) remains an
+unexecuted scaffold. The older [TinyStories migration draft](https://github.com/supernovae/kybern-workshop/pull/3)
+is not the current run guide.
 
 ## Before you run
 
-- Have Git, a writable external work directory and the project's pinned Lab CPU
-  environment. The synthetic guide records Python 3.14.8, PyTorch 2.14.0+cpu,
+- Have Git, a writable external work directory and the project's pinned Lab
+  environment and matching backend image. The synthetic guide records Python 3.14.8, PyTorch 2.14.0+cpu,
   exact Lab/Workshop revisions and dependency setup.
 - Read the project's workload, resource limits and approval steps before executing
   commands. Preparation, runtime probes and evaluation can do work beyond the main
   training budget; provision a runtime only when authorized.
 - Keep generated data, checkpoints, bindings, admissions and local execution
-  records outside Git. Fresh runs need their own prepared inputs and reviewed
-  identities; cloning a recipe does not supply those payloads or approval.
+  records outside Git. Reuse verified prepared inputs through writable copies when starting a fresh
+  experiment; cloning a recipe does not include dataset payloads or checkpoints.
 
-Start with the [synthetic CPU setup](examples/synthetic-cpu/README.md#pins-and-setup),
+For a no-download introduction, use the [synthetic CPU setup](examples/synthetic-cpu/README.md#pins-and-setup),
 then follow its preparation, approval, execution and reporting steps in order.
 The example remains pinned to Lab `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc`;
 its recorded validation does not establish compatibility with newer Lab contracts.
