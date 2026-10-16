@@ -1,0 +1,98 @@
+{
+  "schema": 3,
+  "session_id": "UNEXECUTED",
+  "card_id": "UNEXECUTED",
+  "approval": {
+    "owner": "REQUIRED",
+    "reference": "REQUIRED"
+  },
+  "python": "REQUIRED",
+  "boot_id": "REQUIRED",
+  "runtime_sha256": "REQUIRED",
+  "source_paths": [],
+  "roots": {
+    "A": "/REQUIRED"
+  },
+  "receipt_root": "/REQUIRED",
+  "limits": {
+    "wall_seconds": 1800,
+    "shutdown_reserve_seconds": 20,
+    "rss": {
+      "mode": "observe_rss",
+      "max_bytes": 4294967296
+    },
+    "storage": {
+      "mode": "observe_retained",
+      "root_bytes": {
+        "A": 2143289344
+      },
+      "aggregate_bytes": 2147483648,
+      "shared_overhead_bytes": 4194304
+    },
+    "scan_entries": 20000,
+    "scan_seconds": 2,
+    "capture_bytes": 1048576
+  },
+  "slots": [
+    {
+      "id": "copy-inputs",
+      "root": "A",
+      "step": "copy-inputs",
+      "allowance_seconds": 30,
+      "retained_allowance_bytes": 16777216,
+      "captures": []
+    },
+    {
+      "id": "validate",
+      "root": "A",
+      "step": "validate",
+      "allowance_seconds": 10,
+      "retained_allowance_bytes": 16777216,
+      "captures": []
+    },
+    {
+      "id": "apply",
+      "root": "A",
+      "step": "apply",
+      "allowance_seconds": 30,
+      "retained_allowance_bytes": 16777216,
+      "captures": []
+    },
+    {
+      "id": "approve",
+      "root": "A",
+      "step": "approve",
+      "allowance_seconds": 10,
+      "retained_allowance_bytes": 16777216,
+      "captures": []
+    },
+    {
+      "id": "run",
+      "root": "A",
+      "step": "run",
+      "allowance_seconds": 1640,
+      "retained_allowance_bytes": 16777216,
+      "captures": []
+    },
+    {
+      "id": "status",
+      "root": "A",
+      "step": "status",
+      "allowance_seconds": 10,
+      "retained_allowance_bytes": 16777216,
+      "captures": []
+    },
+    {
+      "id": "report",
+      "root": "A",
+      "step": "report",
+      "allowance_seconds": 10,
+      "retained_allowance_bytes": 16777216,
+      "captures": [
+        "audit/report.json"
+      ]
+    }
+  ],
+  "command_policy": "observe_stages",
+  "memory_policy": "container_12g_observe_rss"
+}

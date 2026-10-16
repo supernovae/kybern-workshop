@@ -248,7 +248,7 @@ def report(state, lock, workspace, index):
             "--index",
             str(index),
             "--output",
-            "/state/audit/report.json",
+            str(state / "audit/report.json"),
             "--json",
         ],
     )
