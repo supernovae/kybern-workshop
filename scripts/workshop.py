@@ -4,6 +4,7 @@ import argparse
 import copy
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -100,8 +101,10 @@ def bind(args):
     require(set(template["roots"]) == {"A"}, "one-root template required")
     require(job_template.get("wrap") is None, "wrapping unsupported")
     limits = copy.deepcopy(template["limits"])
-    require(0 < limits["shutdown_reserve_seconds"] < limits["wall_seconds"] <= 1800,
-            "existing Campaign deadline must be <=1800 seconds")
+    require(all(type(limits[k]) in (int, float) and math.isfinite(limits[k])
+                for k in ("wall_seconds", "shutdown_reserve_seconds")) and
+            0 < limits["shutdown_reserve_seconds"] < limits["wall_seconds"],
+            "finite Campaign deadline and smaller cleanup reserve required")
     declarations = read(campaign)
     approvals = [s for s in declarations["stages"] if s["kind"] == "approval"]
     require(len(approvals) == 1 and approvals[0]["id"] == args.approval_stage,

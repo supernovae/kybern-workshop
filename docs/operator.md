@@ -11,8 +11,12 @@ This is the existing Linux/WSL local Docker schema-3 path: one root, seven outer
 steps, one explicitly selected approval gate, one experiment plan and one terminal
 collection. Native Campaign owns all scientific dependencies inside those steps.
 The Docker supervisor still supports its existing pinned ROCm image, CPU quota of
-2, PID limit of 256 and maximum 1800-second overall deadline. This does not add
-portable GPU admission, another backend, arbitrary durations or automatic preparation.
+2 and PID limit of 256. The template defaults to an 1800-second overall deadline.
+With the companion Harness finite-deadline change, an explicitly approved longer
+`limits.wall_seconds` is passed through unchanged, including the cleanup reserve.
+Older Harness revisions refuse extended durations; use the reviewed compatible
+Harness revision for longer runs. This does not add
+portable GPU admission, another backend, unbounded durations or automatic preparation.
 The existing local CLI guides and TinyStories-specific binder remain available.
 
 ## Author and bind

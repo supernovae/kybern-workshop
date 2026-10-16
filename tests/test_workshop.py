@@ -93,10 +93,18 @@ class WorkshopTests(unittest.TestCase):
         with self.assertRaises(ValueError): self.bind()
         self.assertFalse(self.state.exists())
 
-    def test_unsupported_deadline_refuses(self):
-        t = template(); t["limits"]["wall_seconds"] = 1801
+    def test_invalid_reserve_refuses(self):
+        t = template(); t["limits"]["shutdown_reserve_seconds"] = 21
         put(Path(self.args.session_template), t)
         with self.assertRaises(ValueError): self.bind()
+
+    def test_explicit_long_budget_is_passed_through(self):
+        t = template(); t["limits"]["wall_seconds"] = 86400
+        put(Path(self.args.session_template), t)
+        self.bind()
+        self.assertEqual(w.read(self.state / "session.json")["limits"]["wall_seconds"], 86400)
+        argv = w.read(self.state / "run.json")["argv"]
+        self.assertEqual(argv[argv.index("--max-wait-seconds") + 1], "86400")
 
     def test_report_uses_declared_root_and_no_clobber(self):
         self.bind()
