@@ -98,7 +98,7 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(profile["engine"], "docker")
         self.assertEqual(profile["image"], h.PINS["image"])
         self.assertEqual(profile["endpoint"], "unix:///var/run/docker.sock")
-        self.assertEqual([profile[k] for k in ("memory_bytes", "swap_bytes", "cpus", "pids", "uid", "gid")], [4294967296, 0, 2, 256, 1000, 1000])
+        self.assertEqual([profile[k] for k in ("memory_bytes", "swap_bytes", "cpus", "pids", "uid", "gid")], [12884901888, 0, 2, 256, 1000, 1000])
         for step in result["steps"]:
             self.assertEqual(step["argv"][0], "/opt/venv/bin/python")
             self.assertNotIn("podman", step["argv"])

@@ -295,7 +295,7 @@ def render(
             "engine": "docker",
             "endpoint": "unix:///var/run/docker.sock",
             "image": PINS["image"],
-            "memory_bytes": 4294967296,
+            "memory_bytes": 12884901888,
             "swap_bytes": 0,
             "cpus": 2,
             "pids": 256,

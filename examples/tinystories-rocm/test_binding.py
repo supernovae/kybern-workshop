@@ -64,6 +64,8 @@ class BindingTests(unittest.TestCase):
             )
             self.assertEqual(session["limits"]["wall_seconds"], 1800)
             self.assertEqual(session["command_policy"], "observe_stages")
+            self.assertEqual(session["memory_policy"], "container_12g_observe_rss")
+            self.assertNotIn("max_tree_rss_bytes", json.loads((b.h.ROOT / "monitor.json").read_text()))
             for step in ("apply", "run"):
                 argv = json.loads((state / (step + ".json")).read_text())["argv"]
                 self.assertEqual(argv[argv.index("--max-wait-seconds") + 1], "1800")
