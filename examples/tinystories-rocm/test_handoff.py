@@ -53,6 +53,10 @@ class HandoffTests(unittest.TestCase):
                 "--user=1000:1000",
                 "--device=/dev/dxg",
                 "CUDA_VISIBLE_DEVICES=0",
+                "HF_HUB_OFFLINE=1",
+                "HF_DATASETS_OFFLINE=1",
+                "TRANSFORMERS_OFFLINE=1",
+                "UV_OFFLINE=1",
             ):
                 self.assertIn(flag, argv)
             self.assertNotIn("CUDA_VISIBLE_DEVICES=", argv)
@@ -135,6 +139,7 @@ class HandoffTests(unittest.TestCase):
             ("uid", 0),
             ("state", "/tmp/../escape"),
             ("inputs", "/tmp/input,ro"),
+            ("inputs", "/tmp/input:ro"),
             ("inputs", "/tmp/a\nb"),
         ):
             with self.subTest(key=key, value=value), self.assertRaises(ValueError):
@@ -144,6 +149,55 @@ class HandoffTests(unittest.TestCase):
         self.args()["state"].mkdir()
         with self.assertRaisesRegex(ValueError, "fresh output"):
             h.render(**self.args())
+
+    def test_byte_cap_refuses_before_copy_or_hashing(self):
+        source = self.root / "oversized"
+        source.mkdir()
+        member = source / "sparse.bin"
+        with member.open("wb") as stream:
+            stream.truncate(314572800)
+        self.assertEqual(h.bounded_files(source), [member])
+        with member.open("ab") as stream:
+            stream.write(b"x")
+        destination = self.root / "copy"
+        with self.assertRaisesRegex(ValueError, "byte limit"):
+            h.copy_packed(source, destination)
+        self.assertFalse(destination.exists())
+        output = self.root / "manifest.json"
+        with (
+            patch.object(h, "hash_file", side_effect=AssertionError("must not hash")),
+            self.assertRaisesRegex(ValueError, "byte limit"),
+        ):
+            h.transfer_manifest(source, output)
+        self.assertFalse(output.exists())
+
+    def test_symlink_parent_refused_by_public_helpers(self):
+        real = self.root / "real"
+        real.mkdir()
+        link = self.root / "linked"
+        link.symlink_to(real, target_is_directory=True)
+        nested = link / "nested"
+        for value in (link, nested):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(ValueError, "symlink path"):
+                    h.path(value)
+                with self.assertRaisesRegex(ValueError, "symlink path"):
+                    h.render(**{**self.args(), "inputs": value})
+                with self.assertRaisesRegex(ValueError, "symlink path"):
+                    h.transfer_manifest(value, self.root / "manifest.json")
+
+    def test_relative_paths_refused_by_public_helpers(self):
+        for value in ("relative", ".", "nested/input"):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(ValueError, "absolute"):
+                    h.path(value)
+                for field in ("checkout", "inputs", "state"):
+                    with self.assertRaisesRegex(ValueError, "absolute"):
+                        h.render(**{**self.args(), field: value})
+                with self.assertRaisesRegex(ValueError, "absolute"):
+                    h.transfer_manifest(value, self.root / "manifest.json")
+                with self.assertRaisesRegex(ValueError, "absolute"):
+                    h.transfer_manifest(self.root, value)
 
     def test_independent_writable_copy_preserves_retained_input(self):
         source = self.root / "old"
