@@ -14,8 +14,9 @@ The Docker supervisor still supports its existing pinned ROCm image, CPU quota o
 2 and PID limit of 256. The template defaults to an 1800-second overall deadline.
 With the companion Harness finite-deadline change, an explicitly approved longer
 `limits.wall_seconds` is passed through unchanged, including the cleanup reserve.
-Older Harness revisions refuse extended durations; use the reviewed compatible
-Harness revision for longer runs. This does not add
+Older Harness revisions refuse extended durations; the companion
+[Harness PR19](https://github.com/supernovae/lab-harness/pull/19) supplies this
+capability. Use its reviewed final revision for longer runs. This does not add
 portable GPU admission, another backend, unbounded durations or automatic preparation.
 The existing local CLI guides and TinyStories-specific binder remain available.
 
@@ -87,8 +88,11 @@ wrapper and drives copy, validate, apply, the selected approval, resume, status,
 report and finish on that same live deadline. It approves only the declared gate
 when native apply reports `AWAITING_APPROVAL`, using the supplied actual owner
 reference. Exit zero with incomplete native stages stops the sequence. There is no
-retry or fresh deadline. Native errors and interruption stop the wrapper, whose
-existing cleanup and evidence retention remain authoritative.
+retry or fresh deadline. Native errors and interruption request stop, then terminate a stuck wrapper.
+A wrapper that still ignores shutdown is killed and reaped; the result explicitly
+marks container cleanup unverified in that exceptional case. Inspect host/receipts
+before further work; no claim is stolen or automatically retried. The wrapper
+normally owns container cleanup and its retained evidence remains authoritative.
 
 The report lock/workspace/index come from the actual complete native status,
 not guessed filenames. The adapter writes and commits `report.json` in the state
@@ -105,7 +109,10 @@ python3 -B scripts/workshop.py results --state /absolute/attempt/state
 
 Both are read-only JSON views over existing files. They expose the experiment and
 attempt IDs, individual exit/signal outcomes, native completion, session evidence
-limitations, report path/hash and the report's scientific assessment. The native
+limitations, verified captured-report path/hash and the report's scientific assessment.
+Science is shown only after a successful report slot and matching capture bytes,
+size and SHA256; a file left in the live work root is not trusted as final output.
+Native completion is labeled native-reported, separate from supervisor outcomes. The native
 `sparselab-publication-report` and evidence indexes
 remain authoritative formats; no parallel result database is introduced.
 An unassessed, negative or inconclusive scientific result never blocks final report

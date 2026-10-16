@@ -1,5 +1,7 @@
 import argparse
 import copy
+import hashlib
+import io
 import json
 from pathlib import Path
 import sys
@@ -132,9 +134,10 @@ class WorkshopTests(unittest.TestCase):
         put(self.state / "audit/report.json", {"readiness": {"scientific_result": "not_assessed", "decision": "no_automatic_promotion"}})
         before = (self.state / "audit/report.json").read_bytes()
         result = w.results(self.state)
-        self.assertTrue(result["execution"]["native_complete"])
+        self.assertTrue(result["execution"]["native_reported_complete"])
         self.assertFalse(result["evidence"]["session"]["evidence_complete"])
         self.assertEqual(result["science"]["scientific_result"], "not_assessed")
+        self.assertIsNone(result["evidence"]["report_path"])
         self.assertEqual(before, (self.state / "audit/report.json").read_bytes())
 
     def test_partial_json_remains_inspectable(self):
@@ -142,7 +145,7 @@ class WorkshopTests(unittest.TestCase):
         p = Path(self.args.receipts) / self.args.attempt / "A/status/stdout.log"
         p.parent.mkdir(parents=True); p.write_text('{"partial":')
         result = w.results(self.state)
-        self.assertFalse(result["execution"]["native_complete"])
+        self.assertFalse(result["execution"]["native_reported_complete"])
         self.assertEqual(len(result["evidence"]["read_errors"]), 1)
 
     def test_exact_pin_and_clean_checkout_required(self):
@@ -164,29 +167,14 @@ class WorkshopTests(unittest.TestCase):
         with self.assertRaises(ValueError): handoff.stage(source, self.state)
         self.assertFalse((self.state / "inputs").exists())
 
-    def fake_driver(self, fail=None, incomplete=False):
+    def fake_driver(self, fail=None, incomplete=False, gate=None, report_count=7):
         self.bind()
         n = native(self.state, not incomplete)
         fake = self.root / "fake.py"
-        fake.write_text("""import json,sys
-from pathlib import Path
-s=Path(sys.argv[1]); spec=json.loads((s/'session.json').read_text()); r=Path(spec['receipt_root'])/spec['session_id']/'A'
-print(json.dumps({'ready':'fixture'}),flush=True)
-i=0
-for line in sys.stdin:
- q=json.loads(line)
- if 'finish' in q or 'stop' in q: break
- name=q['slot']; d=r/name; d.mkdir(parents=True)
- code=1 if name==sys.argv[2] else 0
- (d/'report.json').write_text(json.dumps({'process_success':code==0,'returncode':code,'evidence_complete':True}))
- out=json.loads((s/'native-fixture.json').read_text())
- if name=='apply': out={'stages':[{'id':'accept','kind':'approval','state':'AWAITING_APPROVAL'}]}
- (d/'stdout.log').write_text(json.dumps(out))
- if name=='report': (s/'audit/report.json').write_text(json.dumps({'readiness':{'scientific_result':'not_assessed'}}))
- i+=1;print(json.dumps({'completed':i,'reason':'job_failed' if code else None}),flush=True)
- if code: sys.exit(1)
-""")
+        fake.write_text("import json,sys,hashlib\nfrom pathlib import Path\ns=Path(sys.argv[1]); spec=json.loads((s/'session.json').read_text()); r=Path(spec['receipt_root'])/spec['session_id']/'A'\nprint(json.dumps({'ready':'fixture'}),flush=True)\ni=0\nfor line in sys.stdin:\n q=json.loads(line)\n with (s/'sent.jsonl').open('a') as log: log.write(json.dumps(q)+'\\n')\n if 'finish' in q or 'stop' in q: break\n name=q['slot']; d=r/name; d.mkdir(parents=True)\n code=1 if name==sys.argv[2] else 0\n (d/'report.json').write_text(json.dumps({'process_success':code==0,'returncode':code,'evidence_complete':True}))\n out=json.loads((s/'native-fixture.json').read_text())\n if name=='apply': out={'stages':json.loads((s/'gate-fixture.json').read_text())}\n (d/'stdout.log').write_text(json.dumps(out))\n if name=='report':\n  payload=json.dumps({'format':'sparselab-publication-report','readiness':{'scientific_result':'not_assessed'}}).encode()\n  (d/'capture-0.bin').write_bytes(payload)\n  (d/'captures.json').write_text(json.dumps([{'complete':True,'root':'A','path':'audit/report.json','copy':'capture-0.bin','bytes':len(payload),'sha256':hashlib.sha256(payload).hexdigest()}]))\n i+=1\n if name=='report': i=json.loads((s/'report-count.json').read_text())\n print(json.dumps({'completed':i,'reason':'job_failed' if code else None}),flush=True)\n if code: sys.exit(1)\n")
         put(self.state / "native-fixture.json", n)
+        put(self.state / "gate-fixture.json", gate if gate is not None else [{"id":"accept","kind":"approval","state":"AWAITING_APPROVAL"}])
+        put(self.state / "report-count.json", report_count)
         with patch.object(w, "commit_files"):
             result = w.drive(self.state, [sys.executable, str(fake), str(self.state), fail or "none"])
         return result
@@ -228,6 +216,214 @@ for line in sys.stdin:
         result = self.fake_driver(incomplete=True)
         self.assertIn("incomplete", result["driver_error"])
         self.assertFalse((self.state / "report.json").exists())
+
+    def assert_no_approval(self, gate):
+        result = self.fake_driver(gate=gate)
+        self.assertIn("approval gate", result["driver_error"])
+        sent = [json.loads(x) for x in (self.state / "sent.jsonl").read_text().splitlines()]
+        self.assertNotIn("approve", [x.get("slot") for x in sent])
+        self.assertIn({"stop": True}, sent)
+
+    def test_missing_gate_sends_no_approval(self): self.assert_no_approval([])
+
+    def test_wrong_gate_sends_no_approval(self):
+        self.assert_no_approval([{"id":"other", "kind":"approval", "state":"AWAITING_APPROVAL"}])
+
+    def test_nonawaiting_gate_sends_no_approval(self):
+        self.assert_no_approval([{"id":"accept", "kind":"approval", "state":"COMPLETE"}])
+
+    def test_binding_wrong_gate_refuses(self):
+        self.args.approval_stage = "other"
+        with self.assertRaisesRegex(ValueError, "selected approval"): self.bind()
+        self.assertFalse(self.state.exists())
+
+    def test_missing_report_file_and_bound_digests(self):
+        self.bind(); n = native(self.state)
+        (self.state / "lock.json").unlink()
+        with self.assertRaisesRegex(ValueError, "missing native"): w.bind_report(self.state, n)
+        n = native(self.state)
+        job = w.read(w.bind_report(self.state, n)["job"])
+        for name in ("lock.json", "index.json"):
+            self.assertEqual(job["required_files"][str(self.state / name)], w.digest(self.state / name))
+
+    def test_report_completion_frame_required(self):
+        result = self.fake_driver(report_count=6)
+        self.assertIn("report slot incomplete", result["driver_error"])
+        sent = [json.loads(x) for x in (self.state / "sent.jsonl").read_text().splitlines()]
+        self.assertNotIn({"finish": True}, sent)
+
+    def test_tampered_capture_is_not_science(self):
+        result = self.fake_driver()
+        path = Path(result["evidence"]["report_path"])
+        path.write_bytes(path.read_bytes().replace(b"not_assessed", b"bad_assessed"))
+        result = w.results(self.state)
+        self.assertIsNone(result["evidence"]["report_path"])
+        self.assertEqual(result["science"]["scientific_result"], "not_assessed")
+        self.assertTrue(result["evidence"]["read_errors"])
+
+    def test_unsuccessful_report_slot_cannot_supply_science(self):
+        result = self.fake_driver()
+        slot = Path(self.args.receipts) / self.args.attempt / "A/report/report.json"
+        put(slot, {"process_success": False})
+        self.assertIsNone(w.results(self.state)["evidence"]["report_path"])
+
+    def run_preflight(self, changed=None, validation_fails=False):
+        def git(root, *args):
+            name = args[-1].split(":")[-1]
+            if name == changed: return "uncommitted bytes"
+            return (self.state / name).read_text().strip()
+        def validate(*args, **kwargs):
+            if validation_fails and kwargs.get("check"):
+                raise subprocess.CalledProcessError(1, args[0])
+            return subprocess.CompletedProcess(args[0], 1 if validation_fails else 0)
+        argv = ["run", "--state", str(self.state), "--harness", self.args.harness,
+                "--harness-commit", self.args.harness_commit, "--inputs", self.args.inputs, "--image", "fixture"]
+        with patch.object(w, "clean_pin"), patch.object(w, "git", side_effect=git), \
+             patch.object(w.subprocess, "run", side_effect=validate), \
+             patch.object(w, "drive", return_value={}) as drive, patch("sys.stdout", new=io.StringIO()):
+            try:
+                return w.main(argv)
+            finally:
+                self.last_drive_calls = drive.call_count
+
+    def test_run_preflight_accepts_committed_specs(self):
+        self.bind(); self.assertEqual(self.run_preflight(), 0)
+        self.assertEqual(self.last_drive_calls, 1)
+
+    def test_uncommitted_session_refuses_before_drive(self):
+        self.bind()
+        with self.assertRaisesRegex(ValueError, "commit generated"): self.run_preflight(changed="session.json")
+        self.assertEqual(self.last_drive_calls, 0)
+
+    def test_modified_job_refuses_before_drive(self):
+        self.bind()
+        with self.assertRaisesRegex(ValueError, "commit all"): self.run_preflight(changed="run.json")
+        self.assertEqual(self.last_drive_calls, 0)
+
+    def test_job_outside_state_refuses_before_drive(self):
+        self.bind(); requests = w.read(self.state / "requests.json")
+        outside = self.root / "run.json"; outside.write_bytes((self.state / "run.json").read_bytes())
+        requests[-2]["job"] = str(outside); put(self.state / "requests.json", requests)
+        with self.assertRaisesRegex(ValueError, "job outside"): self.run_preflight()
+        self.assertEqual(self.last_drive_calls, 0)
+
+    def test_native_session_validator_failure_blocks_drive(self):
+        self.bind()
+        with self.assertRaises(subprocess.CalledProcessError): self.run_preflight(validation_fails=True)
+        self.assertEqual(self.last_drive_calls, 0)
+
+    def test_disjoint_roots(self):
+        self.args.inputs = self.args.checkout
+        with self.assertRaisesRegex(ValueError, "disjoint"): self.bind()
+
+    def test_safe_refuses_symlink_parent(self):
+        link = self.root / "link"; link.symlink_to(self.root / "checkout", target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, "symlink"): w.safe(link / "campaign.json")
+
+    def test_recipe_must_be_inside_checkout(self):
+        outside = self.root / "campaign.json"; outside.write_bytes(Path(self.args.campaign).read_bytes())
+        self.args.campaign = str(outside)
+        with self.assertRaisesRegex(ValueError, "pinned checkout"): self.bind()
+
+    def test_seven_slots(self):
+        t = template(); t["slots"].pop(); put(Path(self.args.session_template), t)
+        with self.assertRaisesRegex(ValueError, "seven-slot"): self.bind()
+
+    def test_canonical_slot_id(self):
+        t = template(); t["slots"][0]["id"] = "other"; put(Path(self.args.session_template), t)
+        with self.assertRaisesRegex(ValueError, "canonical slot"): self.bind()
+
+    def test_capture_only_final_report(self):
+        t = template(); t["slots"][0]["captures"] = ["other"]; put(Path(self.args.session_template), t)
+        with self.assertRaisesRegex(ValueError, "only final"): self.bind()
+
+    def test_runtime_invocation_must_match(self):
+        r = w.read(self.args.runtime); r["venv"] = {"invocation":"/different"}; put(Path(self.args.runtime), r)
+        with self.assertRaisesRegex(ValueError, "invocation"): self.bind()
+
+    def test_driver_sequence_guard(self):
+        self.bind(); requests = w.read(self.state / "requests.json"); requests.reverse(); put(self.state / "requests.json", requests)
+        with patch.object(w.subprocess, "Popen") as launch:
+            with self.assertRaisesRegex(ValueError, "sequence"): w.drive(self.state, [])
+            launch.assert_not_called()
+
+    def test_driver_provenance_guard(self):
+        self.bind(); p = self.state / "run.json"; job = w.read(p); job["card_id"] = "other"; put(p, job)
+        with patch.object(w.subprocess, "Popen") as launch:
+            with self.assertRaisesRegex(ValueError, "provenance"): w.drive(self.state, [])
+            launch.assert_not_called()
+
+    def test_stage_entry_budget(self):
+        self.bind(); session = w.read(self.state / "session.json"); session["limits"]["scan_entries"] = 1; put(self.state / "session.json", session)
+        source = Path(self.args.inputs)
+        (source / "one").touch(); (source / "two").touch()
+        with self.assertRaisesRegex(ValueError, "entry budget"): handoff.stage(source, self.state)
+        self.assertFalse((self.state / "inputs").exists())
+
+    def test_empty_staging_is_exclusive(self):
+        self.bind(); handoff.stage(Path(self.args.inputs), self.state)
+        with self.assertRaises(FileExistsError): handoff.stage(Path(self.args.inputs), self.state)
+
+    def test_stage_growth_budget(self):
+        self.bind(); source = Path(self.args.inputs); item = source / "data"; item.write_bytes(b"x")
+        session = w.read(self.state / "session.json"); session["limits"]["storage"]["root_bytes"]["A"] = 5; put(self.state / "session.json", session)
+        def walk(*args, **kwargs):
+            yield str(source), [], ["data"]
+            item.write_bytes(b"xxxxxx")
+        with patch.object(handoff.os, "walk", walk):
+            with self.assertRaisesRegex(ValueError, "grew"): handoff.stage(source, self.state)
+
+    def test_stubborn_supervisor_is_killed_and_reaped(self):
+        code = "import signal,time; signal.signal(signal.SIGTERM,signal.SIG_IGN); print('ready',flush=True); time.sleep(10)"
+        child = subprocess.Popen([sys.executable, "-c", code], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        child.stdout.readline()
+        protocol = w.Protocol(child, time.monotonic() + 2)
+        try:
+            forced = w.stop_supervisor(child, protocol, .02)
+            self.assertTrue(forced)
+            self.assertEqual(child.returncode, -9)
+        finally:
+            if child.poll() is None: child.kill(); child.wait()
+            child.stdin.close(); child.stdout.close()
+
+    def test_second_interrupt_still_kills_and_reaps(self):
+        from unittest.mock import Mock
+        child, protocol = Mock(), Mock()
+        child.poll.return_value = None
+        child.wait.side_effect = [subprocess.TimeoutExpired("fixture", .2), KeyboardInterrupt(), 0]
+        self.assertTrue(w.stop_supervisor(child, protocol, .02))
+        protocol.send.assert_called_once_with({"stop": True})
+        child.terminate.assert_called_once(); child.kill.assert_called_once()
+        self.assertEqual(child.wait.call_count, 3)
+
+    def test_stop_ignoring_child_is_terminated(self):
+        code = "import json,sys,time; print('ready',flush=True); q=json.loads(sys.stdin.readline()); print(q.get('stop'),flush=True); time.sleep(10)"
+        child = subprocess.Popen([sys.executable, "-c", code], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        child.stdout.readline()
+        try:
+            self.assertFalse(w.stop_supervisor(child, w.Protocol(child, time.monotonic()+2), .1))
+            self.assertEqual(child.stdout.readline().strip(), b"True")
+            self.assertEqual(child.returncode, -15)
+        finally:
+            if child.poll() is None: child.kill(); child.wait()
+            child.stdin.close(); child.stdout.close()
+
+    def test_forced_shutdown_returns_driver_result(self):
+        self.bind()
+        real_popen, real_stop = subprocess.Popen, w.stop_supervisor
+        code = "import signal,time; signal.signal(signal.SIGTERM,signal.SIG_IGN); print('ready',flush=True); time.sleep(10)"
+        def launch(*args, **kwargs):
+            child = real_popen([sys.executable, "-c", code], **kwargs)
+            child.stdout.readline()
+            return child
+        with patch.object(w.subprocess, "Popen", side_effect=launch), \
+             patch.object(w.Protocol, "wait", side_effect=KeyboardInterrupt), \
+             patch.object(w, "stop_supervisor", side_effect=lambda child, protocol, grace: real_stop(child, protocol, .02)):
+            result = w.drive(self.state, ["fixture"])
+        self.assertEqual(result["driver_error"], "interrupted")
+        self.assertEqual(result["supervisor_exit"], -9)
+        self.assertTrue(result["forced_supervisor_kill"])
+        self.assertIn("unverified", result["cleanup_note"])
 
 
 if __name__ == "__main__": unittest.main()

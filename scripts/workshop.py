@@ -218,13 +218,31 @@ def results(state):
     native_path = directory / "A/status/stdout.log"
     native = observed(native_path)
     stages = native.get("stages", [])
-    report_path = state / "audit/report.json"
-    report = observed(report_path)
+    report_path, report = None, {}
+    if records.get("report", {}).get("process_success") is True:
+        capture_file = directory / "A/report/captures.json"
+        try:
+            captures = read(safe(capture_file))
+            require(len(captures) == 1, "one final report capture required")
+            capture = captures[0]
+            require(capture.get("complete") is True and capture.get("root") == "A" and
+                    capture.get("path") == "audit/report.json", "final report capture incomplete")
+            name = capture["copy"]
+            require(Path(name).name == name and name not in ("", ".", ".."), "unsafe capture name")
+            candidate = safe(capture_file.parent / name)
+            require(candidate.is_file() and candidate.stat().st_size == capture["bytes"] and
+                    digest(candidate) == capture["sha256"], "captured report digest/size mismatch")
+            report = read(candidate)
+            require(report.get("format") == "sparselab-publication-report", "native report format required")
+            report_path = candidate
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            read_errors.append({"path": str(capture_file), "error": str(exc)})
+            report = {}
     shared = directory / "shared/report.json"
     evidence = observed(shared)
     return {"experiment_id": session["card_id"], "attempt_id": session["session_id"],
-            "execution": {"commands": records, "native_complete": bool(stages) and all(s.get("state") == "COMPLETE" for s in stages)},
-            "evidence": {"read_errors": read_errors, "session": evidence, "report_path": str(report_path) if report_path.is_file() else None,
+            "execution": {"commands": records, "native_reported_complete": bool(stages) and all(s.get("state") == "COMPLETE" for s in stages)},
+            "evidence": {"read_errors": read_errors, "session": evidence, "report_path": str(report_path) if report_path else None,
                          "report_sha256": digest(report_path) if report else None},
             "science": report.get("readiness", {"scientific_result": "not_assessed"})}
 
@@ -258,6 +276,33 @@ class Protocol:
         self.process.stdin.flush()
 
 
+def stop_supervisor(child, protocol, grace):
+    """Request owned cleanup, then bound a stuck supervisor's termination/reaping."""
+    forced = False
+    try:
+        protocol.send({"stop": True})
+    except (OSError, ValueError, KeyboardInterrupt):
+        pass
+    try:
+        child.wait(timeout=.2)  # Allow a responsive supervisor to consume stop.
+    except (subprocess.TimeoutExpired, KeyboardInterrupt):
+        if child.poll() is None:
+            child.terminate()
+        try:
+            child.wait(timeout=grace)
+        except (subprocess.TimeoutExpired, KeyboardInterrupt):
+            forced = True
+            child.kill()
+            # A second interruption must not skip reaping our direct child.
+            while True:
+                try:
+                    child.wait()
+                    break
+                except KeyboardInterrupt:
+                    continue
+    return forced
+
+
 def drive(state, argv):
     """One existing supervisor, no retry, no separate native subprocesses."""
     session = read(state / "session.json")
@@ -269,7 +314,7 @@ def drive(state, argv):
     deadline = time.monotonic() + session["limits"]["wall_seconds"] + 10
     child = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     protocol = Protocol(child, deadline)
-    failure = None
+    failure, forced = None, False
     try:
         protocol.wait("ready")
         for n, request in enumerate(requests):
@@ -301,21 +346,20 @@ def drive(state, argv):
         require(child.poll() is not None, "supervisor did not finish by deadline")
     except (Exception, KeyboardInterrupt) as exc:
         failure = str(exc) or "interrupted"
-        try:
-            protocol.send({"stop": True})
-        except (OSError, ValueError):
-            pass
-        if child.poll() is None:
-            child.terminate()  # Wrapper handles owned-container cleanup and receipts.
-        child.wait(timeout=max(1, deadline - time.monotonic()))
+        forced = stop_supervisor(child, protocol,
+                                 min(session["limits"]["shutdown_reserve_seconds"] + 2,
+                                     max(1, deadline - time.monotonic())))
     finally:
         child.stdout.close()
         if not child.stdin.closed:
             child.stdin.close()
-    return {"driver_error": failure, "supervisor_exit": child.returncode, **results(state)}
+    return {"driver_error": failure, "supervisor_exit": child.returncode,
+            "forced_supervisor_kill": forced,
+            "cleanup_note": "Forced supervisor kill; container cleanup unverified, inspect receipts/host" if forced else None,
+            **results(state)}
 
 
-def main():
+def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="operation", required=True)
     b = sub.add_parser("bind")
@@ -329,7 +373,7 @@ def main():
     for name in ("state", "harness", "harness-commit", "inputs", "image"):
         r.add_argument("--" + name, required=True)
     r.add_argument("--gpu", action="store_true")
-    args = p.parse_args()
+    args = p.parse_args(argv)
     if args.operation == "bind":
         result = bind(args)
     elif args.operation in ("status", "results"):
