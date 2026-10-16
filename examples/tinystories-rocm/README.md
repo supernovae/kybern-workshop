@@ -214,6 +214,12 @@ The binder selects `memory_policy: "container_12g_observe_rss"`. Admission requi
 The 12 GiB allocation is below half the observed 31.3 GiB WSL RAM; GPU capacity
 is not counted as host RAM. The native monitor omits its duplicate tree-RSS stop.
 Actual OOM/nonzero/signal outcomes and the original 1800-second deadline remain
-fatal. Runtime readiness also requires Lab's native host-RAM detector to respect
-cgroup total/headroom; the existing pinned image alone does not establish that
-correction. Do not launch until the coordinated runtime is reviewed and pinned.
+fatal. Reuse the existing pinned image and corrected cache for this fixed recipe;
+a Lab detector change or image/cache rebuild is not required. Native host-RAM
+telemetry remains host-wide and is not container headroom. It influences bounded
+worker planning (tokenizer at most four workers; hashing defaults to one), but does
+not resize the fixed model, batches, sequences or update count. Activation offload
+is disabled and ROCm fit estimates use device memory. Harness cgroup measurements
+and enforcement govern RAM containment. Completion within 12 GiB remains unproven;
+actual OOM stays a failed attempt. Launch still requires the reviewed Harness and
+Workshop changes and a fresh authorized attempt, not a new Lab prerequisite.
