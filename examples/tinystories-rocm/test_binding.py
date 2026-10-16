@@ -8,10 +8,18 @@ from unittest.mock import patch
 import bind_session as b
 
 
+def prepared_fixture(root):
+    target = root / "inputs" / "packed" / b.h.PACKED
+    target.mkdir(parents=True)
+    (target / "manifest.json").write_bytes(
+        (Path(__file__).parent / "cache-rebuild/manifest.json").read_bytes())
+
+
 class BindingTests(unittest.TestCase):
     def test_bind_and_actual_report_no_clobber(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
+            prepared_fixture(root)
             checkout = root / "checkout"
             recipe = checkout / "examples/tinystories-rocm"
             recipe.mkdir(parents=True)
@@ -77,6 +85,7 @@ class AdmissionTests(unittest.TestCase):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         self.root = Path(tmp.name)
+        prepared_fixture(self.root)
         self.checkout = self.root / "checkout"
         self.recipe = self.checkout / "examples/tinystories-rocm"
         self.recipe.mkdir(parents=True)
@@ -116,6 +125,24 @@ class AdmissionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, message):
             b.bind(**self.args)
         self.assertFalse((self.args["state"] / "session.json").exists())
+
+    def test_directory_manifest_refuses_before_state_or_receipts(self):
+        manifest = self.args["inputs"] / "packed" / b.h.PACKED / "manifest.json"
+        manifest.unlink()
+        manifest.mkdir()
+        self.refuse("bounded regular prepared manifest required")
+        self.assertFalse(self.args["state"].exists())
+        self.assertFalse(self.args["receipts"].exists())
+
+    def test_stale_prepared_source_refuses_before_state_or_receipts(self):
+        manifest = self.args["inputs"] / "packed" / b.h.PACKED / "manifest.json"
+        doc = json.loads(manifest.read_text())
+        doc["cache_identity"]["source_identity_sha256"] = "8d125d1207f2885e19efab0621e57db4cf75f7419eadfad92e5256b65fe6836b"
+        manifest.write_text(json.dumps(doc))
+        with patch.dict(b.h.PINS, packed_manifest_byte_sha256=b.h.hash_file(manifest)):
+            self.refuse("prepared cache source")
+        self.assertFalse(self.args["state"].exists())
+        self.assertFalse(self.args["receipts"].exists())
 
     def test_wrong_workshop_head(self):
         self.git_values[(self.checkout, ("rev-parse", "HEAD"))] = "c" * 40

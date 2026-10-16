@@ -1,0 +1,176 @@
+{
+  "approval_reference": "Sentinel_dfc2aceff5bc8191ba8b042102ca9d81",
+  "scope": "CPU-only offline preparation and verification; zero GPU devices, training or evaluations",
+  "image": "ghcr.io/supernovae/tiny-sparse-lab@sha256:0842874b5eea67c0766b48f052335570e725145915d05df2ac568ed5365d70a5",
+  "native_argv": [
+    "/opt/venv/bin/python",
+    "-B",
+    "-m",
+    "sparselab",
+    "data",
+    "prepare",
+    "<PINNED_PREPARATION_CONFIG>",
+    "--cold-verify"
+  ],
+  "source_harness_commit": "76404ba718e038861a44f187ef73b0802e1932f0",
+  "bounds": {
+    "preparation_outer_seconds": 300,
+    "cleanup_reserve_seconds": 30,
+    "native_prepare_seconds": 220,
+    "verification_outer_seconds": 120,
+    "native_verify_seconds": 35,
+    "container_memory_and_swap_bytes": 4294967296,
+    "container_cpus": 2,
+    "container_pids": 256,
+    "sampled_retained_output_stop_bytes": 67108864,
+    "job_log_bytes": 1048576,
+    "job_artifact_bytes": 16777216,
+    "job_artifact_entries": 512
+  },
+  "prepare": {
+    "exit": 0,
+    "seconds": 6.88649755998631,
+    "peak_sampled_rss": 854302720,
+    "artifact_evidence_complete": true,
+    "tokenizer_threads_observed": 4
+  },
+  "initial_controller": {
+    "approval": {
+      "owner": "supernovae",
+      "reference": "Sentinel_dfc2aceff5bc8191ba8b042102ca9d81; rebuild small cache offline only; no GPU or training"
+    },
+    "image": "ghcr.io/supernovae/tiny-sparse-lab@sha256:0842874b5eea67c0766b48f052335570e725145915d05df2ac568ed5365d70a5",
+    "gpu_devices": false,
+    "training": false,
+    "cleanup_verified": true,
+    "container_id": "71bb74b12a73671e356cd38055446289cd74b46a61088fa872d866ad870c85df",
+    "attach_exit": 1,
+    "exit_code": 1,
+    "oom_killed": false,
+    "error": "preparation failed; no retry",
+    "elapsed_seconds": 8.31646148301661
+  },
+  "initial_verifier_failure": "Missing required Artifact.producer in helper; cache preparation itself exit 0. Failure preserved; no re-preparation.",
+  "corrected_verification": {
+    "approval": {
+      "owner": "supernovae",
+      "reference": "Sentinel_dfc2aceff5bc8191ba8b042102ca9d81; rebuild small cache offline only; no GPU or training"
+    },
+    "image": "ghcr.io/supernovae/tiny-sparse-lab@sha256:0842874b5eea67c0766b48f052335570e725145915d05df2ac568ed5365d70a5",
+    "gpu_devices": false,
+    "training": false,
+    "cleanup_verified": true,
+    "container_id": "0f57623f226bad2d9717a20d6441560f5f699af2afba219dcb01f9cb8c9bc8ac",
+    "attach_exit": 0,
+    "exit_code": 0,
+    "oom_killed": false,
+    "verification": {
+      "package_source_sha256": "2c7310e954805c2c8411cae0ec880fb4243cee4b27103512e3f4319559cb8197",
+      "python_source_sha256": "04b5777c4ca090bd506e71752cfc843bfbf96b62eecb9251d02ded85f659974e",
+      "packed_directory": "b0892750f1d1206c",
+      "packed_identifier": "b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb",
+      "manifest_sha256": "d5835f06065fe52c4ac41531357a8227f726ef9e40b334db57d81e59ade2af8e",
+      "manifest_byte_sha256": "a65b8f1c8ca29027aa9ffc4be980cf965e3820ebdf50f1ccf8b4601a274cfa7d",
+      "native_lock_input_check": "passed",
+      "artifacts": {
+        "token": {
+          "kind": "tokenizer",
+          "version": 1,
+          "identifier": "tokenizer",
+          "sha256": "7090a3b4075e47cf56aec6f741a475b80f407053e0e6a998eeda276b7e435cf3",
+          "path": "/inputs/tokenizer/tokenizer.json"
+        },
+        "packed": {
+          "kind": "prepared_data",
+          "version": 1,
+          "identifier": "b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb",
+          "sha256": "d5835f06065fe52c4ac41531357a8227f726ef9e40b334db57d81e59ade2af8e",
+          "path": "<LOCAL_RUNNER_ROOT>/preparations/tinystories-cache-20261016a/receipts/prepare/artifacts/cache/b0892750f1d1206c"
+        }
+      },
+      "training_updates": 0,
+      "evaluations": 0
+    },
+    "elapsed_seconds": 5.071790149988374
+  },
+  "staging_and_lock_input_verification": {
+    "approval": {
+      "owner": "supernovae",
+      "reference": "Sentinel_dfc2aceff5bc8191ba8b042102ca9d81; rebuild small cache offline only; no GPU or training"
+    },
+    "image": "ghcr.io/supernovae/tiny-sparse-lab@sha256:0842874b5eea67c0766b48f052335570e725145915d05df2ac568ed5365d70a5",
+    "gpu_devices": false,
+    "training": false,
+    "cleanup_verified": true,
+    "container_id": "bf76c57be6d1c195743bf3b33b51e8dfec05cf251e273ea757fe7ea453d10203",
+    "attach_exit": 0,
+    "exit_code": 0,
+    "oom_killed": false,
+    "verification": {
+      "package_source_sha256": "2c7310e954805c2c8411cae0ec880fb4243cee4b27103512e3f4319559cb8197",
+      "python_source_sha256": "04b5777c4ca090bd506e71752cfc843bfbf96b62eecb9251d02ded85f659974e",
+      "packed_directory": "b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb",
+      "packed_identifier": "b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb",
+      "manifest_sha256": "d5835f06065fe52c4ac41531357a8227f726ef9e40b334db57d81e59ade2af8e",
+      "manifest_byte_sha256": "a65b8f1c8ca29027aa9ffc4be980cf965e3820ebdf50f1ccf8b4601a274cfa7d",
+      "native_lock_input_check": "passed",
+      "artifacts": {
+        "token": {
+          "kind": "tokenizer",
+          "version": 1,
+          "identifier": "tokenizer",
+          "sha256": "7090a3b4075e47cf56aec6f741a475b80f407053e0e6a998eeda276b7e435cf3",
+          "path": "/inputs/tokenizer/tokenizer.json"
+        },
+        "packed": {
+          "kind": "prepared_data",
+          "version": 1,
+          "identifier": "b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb",
+          "sha256": "d5835f06065fe52c4ac41531357a8227f726ef9e40b334db57d81e59ade2af8e",
+          "path": "/state/cache/b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb"
+        }
+      },
+      "training_updates": 0,
+      "evaluations": 0
+    },
+    "elapsed_seconds": 6.91894625700661
+  },
+  "input_bundle": {
+    "files": 13,
+    "bytes": 258978149,
+    "transfer_manifest_sha256": "e829c425dff3ae5afef1981a487a546d0e920e7607a76f99d913c1b9844cb4f1",
+    "original_14_input_files_rehashed_unchanged": true
+  },
+  "tests": {
+    "stdlib_fixtures": 27,
+    "result": "passed",
+    "guard_mutations": [
+      {
+        "mutation": "binder-check",
+        "regression_rejected": true
+      },
+      {
+        "mutation": "stage-check",
+        "regression_rejected": true
+      },
+      {
+        "mutation": "installed-source-comparison",
+        "regression_rejected": true
+      },
+      {
+        "mutation": "manifest-byte-pin",
+        "regression_rejected": true
+      },
+      {
+        "mutation": "regular-file-check",
+        "regression_rejected": true,
+        "fixture": "directory at manifest.json; safe even if guard is removed",
+        "control_exit": 0,
+        "mutant_exit": 1,
+        "subprocess_timeout_seconds": 5,
+        "mutant_result": "IsADirectoryError instead of required bounded-regular ValueError"
+      }
+    ]
+  },
+  "unperformed": "No native campaign apply/resume, training, evaluation, GPU attempt, downloads, host changes or source-guard bypass."
+}

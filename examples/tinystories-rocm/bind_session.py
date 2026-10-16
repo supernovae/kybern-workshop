@@ -80,6 +80,7 @@ def bind(
         == [{"model.ffn_dim": 64}, {"model.ffn_dim": 96}],
         "two-arm evaluation ceiling required",
     )
+    h.prepared_source_preflight(inputs)  # Refuse before writing state or claiming a GPU attempt.
     state.mkdir()
     receipts.mkdir()
     (state / "worker-leases").mkdir()

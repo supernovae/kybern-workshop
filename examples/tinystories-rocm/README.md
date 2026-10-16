@@ -16,9 +16,10 @@ Provisioning or pulling an image requires separate authority.
 The portable `experiment recipe workflow apply/resume` admission is CPU-only at
 this pin. This separate recipe uses public native `campaign` commands, an explicit
 ROCm runtime-acceptance profile, and runtime-bound ROCm evaluation. It does not
-change Lab or the existing CPU recipe. The plan and Campaign both carry the exact
-artifact identities from reviewed CPU workflow commit
-`3659786f9506c25d4d13088d0726cd990be7f0cc`, used by `LAB80-cpu-20261015f`.
+change Lab or the existing CPU recipe. The snapshot and tokenizer retain the CPUf identities from workflow commit
+`3659786f9506c25d4d13088d0726cd990be7f0cc`. The packed cache was rebuilt offline
+using this exact image after RUN15 exposed a source-identity mismatch; the plan
+and Campaign bind the new identity recorded in `cache-rebuild/validation.json`.
 
 ## Aggregate limits
 
@@ -42,8 +43,8 @@ it is not permission to start a new 30-minute clock at each command.
 
 ## Retained inputs and writable cache
 
-Chief must arrange an approved transfer of the following retained CPUf artifacts
-into one immutable input directory. Keep the transfer manifest and source/destination verification receipts outside
+Chief must bind the following retained inputs, including the newly prepared
+source-compatible packed cache, in one immutable input directory. Keep the transfer manifest and source/destination verification receipts outside
 the input root; chief binds the actual CPUf source root.
 
 ```text
@@ -53,14 +54,27 @@ inputs/
   parquet/validation-00000-of-00001-869c898b519ad725.parquet
   snapshot/{manifest.json,train.jsonl,validation.jsonl}
   tokenizer/{tokenizer.json,tokenizer_manifest.json}
-  packed/b7af269e44c026cd6f7c0f0c0c9a1ab5334344d1e4c50b51327b10d70131636c/...
+  packed/b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb/...
 ```
 
 The Parquet files total 258720238 bytes; their exact sizes/SHA256 values are in
-`first-files.json`. This path reuses the already prepared CPU snapshot/tokenizer
-and packed artifact, rather than repeating source preparation. Both raw cached
+`first-files.json`. This path reuses the CPU snapshot/tokenizer and the separately rebuilt packed
+artifact. It does not repeat source acquisition or tokenizer training. Both raw cached
 files are authenticated as provenance. Do not fetch replacements if any retained
 input is missing or invalid. Preserve native manifests; never repair their hashes.
+
+Before binding or claiming a future GPU attempt, run the read-only check:
+
+```sh
+python3 examples/tinystories-rocm/handoff.py preflight --inputs /absolute/retained-inputs
+```
+
+The binder also runs this check before creating state/receipts. It authenticates
+the bounded manifest bytes and both source identity fields against reviewed pins;
+it does not replace cold native artifact verification. Staging additionally
+compares the actual installed package identity before copying the cache. The
+package-path-sha256-v2 identity is distinct from the Python-only runtime probe hash.
+Neither a cache relabel nor an unauthenticated compatibility mapping is accepted.
 
 Before transfer, chief produces the exact byte manifest outside the staged input root:
 
@@ -161,3 +175,23 @@ validates actual native schemas, exact two-arm budgets, evaluation authorization
 all five public CLI argument arrays; it never calls a parsed handler or probes GPUs.
 RuntimeProfile validation substitutes the existing local Python path only for that
 metadata fixture. GPU execution remains unrun; transfer and daemon qualification evidence is recorded separately by the runner.
+
+## RUN15 cache correction
+
+The native lock-input guard correctly rejected the CPUf packed cache because its
+source identity differed from the execution image. Dataset, tokenizer and packing
+settings matched. The approved remedy rebuilt only the small packed cache with
+`sparselab data prepare` in the cached image, without GPU devices, training,
+downloads or installations. Array bytes remained identical; source-bound cache
+and manifest identities changed. Original caches, failed attempts and claims were
+preserved. See `cache-rebuild/validation.json` for exact identities and outcomes.
+
+Preparation used a 300-second outer ceiling (30 seconds reserved for cleanup),
+hard container limits of 4 GiB memory including swap, 2 CPUs and 256 PIDs, and
+network-none/read-only/nonroot execution. Retained-output observation was bounded
+at 64 MiB (sampled, not a disk quota); harness logs/artifacts had finite limits.
+Telemetry reported four tokenizer threads under the hard two-CPU quota. The first
+read-only verification helper omitted required artifact metadata and failed after
+preparation succeeded; that failure is retained. Corrected read-only verification
+and staging checks passed without rebuilding or training. No new GPU attempt is
+authorized by preparation, these checks, a PR or a merge.
