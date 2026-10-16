@@ -31,8 +31,8 @@ and Campaign bind the new identity recorded in `cache-rebuild/validation.json`.
 | Training | each arm smoke 2 + warmup 5 + main 1; **16 aggregate updates**, 512 target positions |
 | Evaluation | one batch per pass; conservative **24 aggregate batch ceiling**, 768 targets |
 | Whole job | **1800 seconds**, including copying, checks, operator waits, commands, reporting and cleanup |
-| Container resources | 4 GiB memory; memory+swap total 4 GiB; 2 CPUs; 256 PIDs |
-| Observation | 4 GiB tree RSS; 2 GiB added state; optional qualified 8 GiB whole-device VRAM stop threshold |
+| Container resources | 12 GiB memory; zero swap; 2 CPUs; 256 PIDs |
+| Observation | Tree RSS recorded without a kill threshold; 2 GiB added state; VRAM remains separate and unqualified |
 | Downloads/retries | no fresh corpus or model downloads; no automatic retries |
 
 The 24 evaluation batches are an upper bound from the pinned schedule, not a
@@ -208,3 +208,12 @@ whole-job deadline still stop the session. The final native report capture is
 mandatory and must be complete. Older Harness versions refuse this explicit
 policy field; unrelated recipes and standalone jobs retain strict limits.
 No retry or new run is authorized by rendering or binding these specs.
+
+The binder selects `memory_policy: "container_12g_observe_rss"`. Admission requires
+24 GiB effective host RAM and 20 GiB available, leaving at least 8 GiB headroom.
+The 12 GiB allocation is below half the observed 31.3 GiB WSL RAM; GPU capacity
+is not counted as host RAM. The native monitor omits its duplicate tree-RSS stop.
+Actual OOM/nonzero/signal outcomes and the original 1800-second deadline remain
+fatal. Runtime readiness also requires Lab's native host-RAM detector to respect
+cgroup total/headroom; the existing pinned image alone does not establish that
+correction. Do not launch until the coordinated runtime is reviewed and pinned.
