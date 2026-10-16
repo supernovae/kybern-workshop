@@ -24,7 +24,7 @@ def commit(root):
 
 
 @unittest.skipUnless(os.environ.get("WORKSHOP_HARNESS_CHECKOUT"),
-                     "set WORKSHOP_HARNESS_CHECKOUT to exact companion pin; required in CI")
+                     "set WORKSHOP_HARNESS_CHECKOUT to an existing exact companion checkout")
 class HarnessContractTests(unittest.TestCase):
     def test_bound_long_session_and_jobs_pass_real_companion(self):
         harness = Path(os.environ["WORKSHOP_HARNESS_CHECKOUT"]).resolve()

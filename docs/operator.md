@@ -29,7 +29,17 @@ capability. The tested companion contract is
 the approval metadata. Use the reviewed compatible revision for longer runs.
 The integration fixture binds and commits a real session and all seven jobs,
 validates them with that exact Harness, then runs only a tiny fake Python child
-and checks approval metadata in its receipt. CI checks out this immutable pin. This does not add
+and checks approval metadata in its receipt. Run it against an existing clean
+checkout at this pin:
+
+```sh
+WORKSHOP_HARNESS_CHECKOUT=/absolute/harness python3 -B -m unittest discover -s tests -v
+```
+
+Hosted CI runs the offline adapter fixtures and explicitly skips this integration
+fixture: its repository-scoped token cannot access the private Harness repository.
+The integration result is local evidence, not hosted-CI coverage. No additional
+credential setup or copied Harness engine is included. This does not add
 portable GPU admission, another backend, unbounded durations or automatic preparation.
 The existing local CLI guides and TinyStories-specific binder remain available.
 
