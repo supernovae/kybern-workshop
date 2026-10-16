@@ -12,9 +12,17 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v7
+      - name: Checkout exact companion Harness contract
+        uses: actions/checkout@v7
+        with:
+          repository: supernovae/lab-harness
+          ref: 595dc829bf86a0e72175e8d0728d6dec117abb74
+          path: harness-contract
+          persist-credentials: false
       - name: Offline stdlib fixtures (no dependencies, containers or workloads)
         env:
           PYTHONDONTWRITEBYTECODE: '1'
+          WORKSHOP_HARNESS_CHECKOUT: ${{ github.workspace }}/harness-contract
         run: |
           python3 -m unittest discover -s tests -v
           python3 -m unittest discover -s examples/tinystories-rocm -p "test_*.py" -v

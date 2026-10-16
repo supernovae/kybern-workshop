@@ -24,7 +24,12 @@ increments across the cleanup reserve, matching Harness numerical validation;
 absurd unrepresentable values refuse. There is no new product-policy run-length
 ceiling. Older Harness revisions refuse extended approval metadata; the companion
 [Harness PR19](https://github.com/supernovae/lab-harness/pull/19) supplies this
-capability. Use its reviewed final revision for longer runs. This does not add
+capability. The tested companion contract is
+`595dc829bf86a0e72175e8d0728d6dec117abb74`; older `4d17c5a6` does not accept
+the approval metadata. Use the reviewed compatible revision for longer runs.
+The integration fixture binds and commits a real session and all seven jobs,
+validates them with that exact Harness, then runs only a tiny fake Python child
+and checks approval metadata in its receipt. CI checks out this immutable pin. This does not add
 portable GPU admission, another backend, unbounded durations or automatic preparation.
 The existing local CLI guides and TinyStories-specific binder remain available.
 
