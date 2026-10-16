@@ -107,6 +107,30 @@ def transfer_manifest(inputs, output):
     }
 
 
+def prepared_source_preflight(inputs, execution_source=None):
+    """Read-only pin check before binding; native verification still follows."""
+    manifest = path(path(inputs) / "packed" / PACKED / "manifest.json")
+    require(manifest.exists(), "reviewed prepared cache manifest missing")
+    require(stat.S_ISREG(manifest.stat().st_mode) and manifest.stat().st_size <= 65536,
+            "bounded regular prepared manifest required")
+    with manifest.open("rb") as stream:
+        raw = stream.read(65537)
+    require(len(raw) <= 65536, "prepared manifest byte limit")
+    require(hashlib.sha256(raw).hexdigest() == PINS["packed_manifest_byte_sha256"],
+            "prepared manifest bytes differ from reviewed pin")
+    document = json.loads(raw)
+    expected = PINS["prepared_source_identity_sha256"]
+    require(document["settings_sha256"] == PACKED,
+            "prepared cache identifier differs from reviewed pin")
+    require(document["cache_identity"]["source_identity_sha256"] == expected
+            and document["source_identity_sha256"] == expected,
+            "prepared cache source differs from pinned execution source")
+    require(execution_source is None or execution_source == expected,
+            "installed package source differs from prepared cache source")
+    return {"prepared_source_identity_sha256": expected, "packed_identifier": PACKED,
+            "native_verification_required": True}
+
+
 def stage(inputs=Path("/inputs"), state=Path("/state")):
     import sys
     from importlib.metadata import version
@@ -116,6 +140,7 @@ def stage(inputs=Path("/inputs"), state=Path("/state")):
     from sparselab.experiments.artifacts import verify_artifact
     from sparselab.experiments.plan import Artifact
     from sparselab.runtime_identity_probe import source_identity
+    from sparselab.training.manifest import source_identity as package_identity
 
     inputs, state = path(inputs), path(state)
     require(
@@ -124,6 +149,7 @@ def stage(inputs=Path("/inputs"), state=Path("/state")):
         and source_identity()["source_sha256"] == PINS["installed_source_sha256"],
         "runtime/source pin mismatch",
     )
+    prepared_source_preflight(inputs, package_identity()["sha256"])
     bounded_files(inputs)
     lock = verify_lock(inputs / "source.lock.json")
     require(
@@ -299,6 +325,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="operation", required=True)
     sub.add_parser("stage")
+    preflight = sub.add_parser("preflight")
+    preflight.add_argument("--inputs", required=True)
     manifest = sub.add_parser("transfer-manifest")
     manifest.add_argument("--inputs", required=True)
     manifest.add_argument("--output", required=True)
@@ -316,6 +344,9 @@ def main():
     p.add_argument("--gid", type=int, default=os.getgid())
     args = vars(parser.parse_args())
     operation = args.pop("operation")
+    if operation == "preflight":
+        print(json.dumps(prepared_source_preflight(**args), indent=2))
+        return
     result = (
         stage()
         if operation == "stage"

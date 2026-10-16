@@ -9,7 +9,7 @@
   "cpu_attempt": "LAB80-cpu-20261015f",
   "cpu_workflow_commit": "3659786f9506c25d4d13088d0726cd990be7f0cc",
   "snapshot_manifest_sha256": "efd5e6924cb04e0bad0d2bad50b1863f1630b5bb6d3c58eb93879d8c20003239",
-  "packed_identifier": "b7af269e44c026cd6f7c0f0c0c9a1ab5334344d1e4c50b51327b10d70131636c",
+  "packed_identifier": "b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb",
   "budgets": {
     "train_stories": 64,
     "validation_stories": 16,
@@ -25,5 +25,8 @@
     "source_file_bytes": 258720238,
     "fresh_corpus_or_model_downloads": 0
   },
-  "authority": "Owner GPU TinyStories request relayed by parent; provenance only. Chief must bind a fresh job/claim and actual approval reference. This repository change does not launch or schedule work."
+  "authority": "Owner GPU TinyStories request relayed by parent; provenance only. Chief must bind a fresh job/claim and actual approval reference. This repository change does not launch or schedule work.",
+  "prepared_source_identity_sha256": "2c7310e954805c2c8411cae0ec880fb4243cee4b27103512e3f4319559cb8197",
+  "packed_manifest_byte_sha256": "a65b8f1c8ca29027aa9ffc4be980cf965e3820ebdf50f1ccf8b4601a274cfa7d",
+  "preparation_approval": "Sentinel_dfc2aceff5bc8191ba8b042102ca9d81"
 }

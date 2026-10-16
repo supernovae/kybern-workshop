@@ -2,6 +2,8 @@ import importlib.util
 import json
 import os
 import stat
+import sys
+import types
 import tempfile
 import unittest
 from pathlib import Path
@@ -30,6 +32,59 @@ class HandoffTests(unittest.TestCase):
             "uid": 1000,
             "gid": 1000,
         }
+
+    def test_stage_rechecks_installed_source_before_copy_or_native_artifacts(self):
+        folder = self.root / "inputs" / "packed" / h.PACKED
+        folder.mkdir(parents=True)
+        (folder / "manifest.json").write_bytes((ROOT / "cache-rebuild/manifest.json").read_bytes())
+        def forbidden(*args, **kwargs):
+            self.fail("source mismatch must refuse before native verification or copy")
+        modules = {}
+        for name, members in {
+            "sparselab.config.models": {"RunConfig": None},
+            "sparselab.data.sources": {"verify_lock": forbidden, "verify_snapshot": forbidden},
+            "sparselab.experiments.artifacts": {"verify_artifact": forbidden},
+            "sparselab.experiments.plan": {"Artifact": None},
+            "sparselab.runtime_identity_probe": {"source_identity": lambda: {"source_sha256": h.PINS["installed_source_sha256"]}},
+            "sparselab.training.manifest": {"source_identity": lambda: {"sha256": "0" * 64}},
+        }.items():
+            module = types.ModuleType(name)
+            module.__dict__.update(members)
+            modules[name] = module
+        with (patch.dict(sys.modules, modules),
+              patch.dict(h.PINS, python_version=sys.version.split()[0]),
+              patch("importlib.metadata.version", return_value=h.PINS["torch_version"]),
+              patch.object(h, "copy_packed", forbidden),
+              self.assertRaisesRegex(ValueError, "installed package source")):
+            h.stage(self.root / "inputs", self.root / "state")
+        self.assertFalse((self.root / "state").exists())
+
+    def test_prepared_source_pins_and_installed_source_refuse_drift(self):
+        folder = self.root / "packed" / h.PACKED
+        folder.mkdir(parents=True)
+        manifest = folder / "manifest.json"
+        original = (ROOT / "cache-rebuild/manifest.json").read_bytes()
+        manifest.write_bytes(original)
+        expected = h.PINS["prepared_source_identity_sha256"]
+        self.assertEqual(h.prepared_source_preflight(self.root, expected)["packed_identifier"], h.PACKED)
+        with self.assertRaisesRegex(ValueError, "installed package source"):
+            h.prepared_source_preflight(self.root, "0" * 64)
+        manifest.write_bytes(original + b" ")
+        with self.assertRaisesRegex(ValueError, "manifest bytes"):
+            h.prepared_source_preflight(self.root)
+        for field in ("settings_sha256", "source_identity_sha256", "cache_identity"):
+            doc = json.loads(original)
+            if field == "cache_identity":
+                doc[field]["source_identity_sha256"] = "0" * 64
+            else:
+                doc[field] = "0" * 64
+            manifest.write_text(json.dumps(doc))
+            with patch.dict(h.PINS, packed_manifest_byte_sha256=h.hash_file(manifest)), self.assertRaises(ValueError):
+                h.prepared_source_preflight(self.root)
+        manifest.unlink()
+        manifest.symlink_to(ROOT / "cache-rebuild/manifest.json")
+        with self.assertRaisesRegex(ValueError, "symlink"):
+            h.prepared_source_preflight(self.root)
 
     def test_exact_pins_gpu_authorization_and_argv_boundaries(self):
         result = h.render(**self.args())

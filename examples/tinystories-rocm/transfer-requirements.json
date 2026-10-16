@@ -8,5 +8,7 @@
   "byte_manifest_command": "handoff.py transfer-manifest --inputs ABSOLUTE_STAGED_INPUTS --output FRESH_EXTERNAL_MANIFEST",
   "destination_paths": "unchanged relative paths from generated files[].path; GPU mount /inputs read-only",
   "preservation": "independent file copies only; never move originals, alter manifests, copy controller/claim state, or download missing inputs",
-  "native_verification": "handoff.py stage plus native Campaign verification; required after byte-copy verification"
+  "native_verification": "handoff.py stage plus native Campaign verification; required after byte-copy verification",
+  "prepared_cache": "Use the new pins.json packed_identifier and prepared_source_identity_sha256; original CPUf packed cache is historical and intentionally rejected.",
+  "preflight": "handoff.py preflight --inputs ABSOLUTE_STAGED_INPUTS before any future GPU claim; binder also checks before writing"
 }
