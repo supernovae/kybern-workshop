@@ -101,6 +101,7 @@ def bind(
     }
     session = {
         "schema": 3,
+        "command_policy": "observe_stages",
         "session_id": job_id,
         "card_id": job_id,
         "approval": approval,

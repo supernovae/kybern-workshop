@@ -38,7 +38,10 @@ and Campaign bind the new identity recorded in `cache-rebuild/validation.json`.
 The 24 evaluation batches are an upper bound from the pinned schedule, not a
 measurement or a native aggregate counter. CPUf directly evidenced six batches.
 Retain and audit actual counts; do not add `try`, probes, extra evaluations or arms.
-The native run wait of 1740 seconds is subordinate to the original whole-job clock;
+The explicit schema-3 `command_policy: "observe_stages"` makes per-stage
+`allowance_seconds`/job `wall_seconds` timing estimates observational. An overrun
+is recorded in each job receipt and does not stop a healthy stage. Apply and
+resume use a native wait of 1800 seconds, subordinate to the original whole-job clock;
 it is not permission to start a new 30-minute clock at each command.
 
 ## Retained inputs and writable cache
@@ -195,3 +198,13 @@ read-only verification helper omitted required artifact metadata and failed afte
 preparation succeeded; that failure is retained. Corrected read-only verification
 and staging checks passed without rebuilding or training. No new GPU attempt is
 authorized by preparation, these checks, a PR or a merge.
+
+Diagnostic stdout/stderr retention and artifact hashing stay bounded. In this
+profile, exhausting their byte/entry/time budgets records incomplete evidence
+without converting a successful process into an execution failure. Retained cache
+files remain charged to the aggregate storage ledger, even if not fully hashed.
+Unsafe paths, read/integrity errors, native nonzero exits, cancellation and the
+whole-job deadline still stop the session. The final native report capture is
+mandatory and must be complete. Older Harness versions refuse this explicit
+policy field; unrelated recipes and standalone jobs retain strict limits.
+No retry or new run is authorized by rendering or binding these specs.

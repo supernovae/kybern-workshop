@@ -105,7 +105,7 @@ class HandoffTests(unittest.TestCase):
         run = result["steps"][4]["argv"]
         self.assertIn("--execute-runs", run)
         self.assertIn("--runtime-profile", run)
-        self.assertEqual(run[run.index("--max-wait-seconds") + 1], "1740")
+        self.assertEqual(run[run.index("--max-wait-seconds") + 1], "1800")
         approve = result["steps"][3]["argv"]
         self.assertEqual(
             approve[approve.index("--note") + 1], self.args()["approval_reference"]
