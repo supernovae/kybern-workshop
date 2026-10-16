@@ -105,6 +105,15 @@ def bind(args):
                 for k in ("wall_seconds", "shutdown_reserve_seconds")) and
             0 < limits["shutdown_reserve_seconds"] < limits["wall_seconds"],
             "finite Campaign deadline and smaller cleanup reserve required")
+    wall, reserve = limits["wall_seconds"], limits["shutdown_reserve_seconds"]
+    end = time.monotonic() + wall
+    require(math.isfinite(end) and time.monotonic() < end - reserve < end and
+            math.ulp(end) <= min(.001, reserve / 16),
+            "deadline cannot represent cleanup reserve at millisecond resolution")
+    approved_wall = getattr(args, "approved_wall_seconds", None)
+    if wall > 1800 or approved_wall is not None:
+        require(type(approved_wall) in (int, float) and math.isfinite(approved_wall) and
+                approved_wall == wall, "explicit approved wall must match template wall_seconds")
     declarations = read(campaign)
     approvals = [s for s in declarations["stages"] if s["kind"] == "approval"]
     require(len(approvals) == 1 and approvals[0]["id"] == args.approval_stage,
@@ -113,6 +122,8 @@ def bind(args):
     require(script.is_file(), "Workshop staging adapter missing from checkout")
     required = {str(p): digest(p) for p in (campaign, profile, script, checkout / "scripts/workshop.py")}
     approval = {"owner": args.owner, "reference": args.approval}
+    if approved_wall is not None:
+        approval["approved_wall_seconds"] = approved_wall
     session = {"schema": 3, "session_id": args.attempt, "card_id": args.experiment,
                "approval": approval, "python": runtime["python"],
                "runtime_sha256": runtime["executable_sha256"],
@@ -367,6 +378,7 @@ def main(argv=None):
                  "campaign", "profile", "runtime", "python", "session-template", "job-template",
                  "experiment", "attempt", "owner", "approval", "approval-stage"):
         b.add_argument("--" + name, required=True)
+    b.add_argument("--approved-wall-seconds", type=float, help="Explicitly approved total duration; required above 1800")
     for name in ("status", "results"):
         sub.add_parser(name).add_argument("--state", required=True)
     r = sub.add_parser("run")

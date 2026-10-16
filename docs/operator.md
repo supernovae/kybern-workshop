@@ -14,7 +14,15 @@ The Docker supervisor still supports its existing pinned ROCm image, CPU quota o
 2 and PID limit of 256. The template defaults to an 1800-second overall deadline.
 With the companion Harness finite-deadline change, an explicitly approved longer
 `limits.wall_seconds` is passed through unchanged, including the cleanup reserve.
-Older Harness revisions refuse extended durations; the companion
+For budgets above 1800 seconds, binding requires the explicit operator argument
+`--approved-wall-seconds N` equal to the template value. It is stored as
+`approval.approved_wall_seconds` in every generated job/session and retained in
+receipts. It records an operator assertion tied to the approval reference, not
+independent authentication of that approval. Missing/mismatched values refuse.
+Deadlines must preserve millisecond clock resolution and at least 16 timer
+increments across the cleanup reserve, matching Harness numerical validation;
+absurd unrepresentable values refuse. There is no new product-policy run-length
+ceiling. Older Harness revisions refuse extended approval metadata; the companion
 [Harness PR19](https://github.com/supernovae/lab-harness/pull/19) supplies this
 capability. Use its reviewed final revision for longer runs. This does not add
 portable GPU admission, another backend, unbounded durations or automatic preparation.

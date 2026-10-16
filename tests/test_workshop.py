@@ -101,10 +101,13 @@ class WorkshopTests(unittest.TestCase):
         with self.assertRaises(ValueError): self.bind()
 
     def test_explicit_long_budget_is_passed_through(self):
+        self.args.approved_wall_seconds = 86400
         t = template(); t["limits"]["wall_seconds"] = 86400
         put(Path(self.args.session_template), t)
         self.bind()
         self.assertEqual(w.read(self.state / "session.json")["limits"]["wall_seconds"], 86400)
+        self.assertEqual(w.read(self.state / "session.json")["approval"]["approved_wall_seconds"], 86400)
+        self.assertEqual(w.read(self.state / "run.json")["approval"]["approved_wall_seconds"], 86400)
         argv = w.read(self.state / "run.json")["argv"]
         self.assertEqual(argv[argv.index("--max-wait-seconds") + 1], "86400")
 
@@ -424,6 +427,55 @@ class WorkshopTests(unittest.TestCase):
         self.assertEqual(result["supervisor_exit"], -9)
         self.assertTrue(result["forced_supervisor_kill"])
         self.assertIn("unverified", result["cleanup_note"])
+
+    def test_invalid_wall_values_refuse_before_binding(self):
+        for wall in (float("inf"), float("nan"), True, "3600", -1, 1e300, 1e17):
+            with self.subTest(wall=wall):
+                t = template(); t["limits"]["wall_seconds"] = wall
+                put(Path(self.args.session_template), t)
+                self.args.approved_wall_seconds = wall
+                with self.assertRaises(ValueError): self.bind()
+                self.assertFalse(self.state.exists())
+
+    def test_long_wall_requires_explicit_matching_operator_argument(self):
+        t = template(); t["limits"]["wall_seconds"] = 86400
+        put(Path(self.args.session_template), t)
+        for approved in (None, 7200, True):
+            with self.subTest(approved=approved):
+                self.args.approved_wall_seconds = approved
+                with self.assertRaisesRegex(ValueError, "approved wall"): self.bind()
+                self.assertFalse(self.state.exists())
+
+    def test_existing_native_paths_outside_state_refuse(self):
+        self.bind(); original = native(self.state)
+        outside = self.root / "outside.json"; put(outside, {})
+        for row, key, value in ((0,"path",outside),(0,"workspace",self.root),(1,"path",outside)):
+            with self.subTest(key=key, row=row):
+                n = copy.deepcopy(original); n["stages"][row]["availability"][key] = str(value)
+                with self.assertRaisesRegex(ValueError, "outside state"): w.bind_report(self.state, n)
+                self.assertFalse((self.state / "report.json").exists())
+
+    def test_capture_metadata_binds_exact_final_report(self):
+        self.fake_driver()
+        directory = Path(self.args.receipts) / self.args.attempt / "A/report"
+        path = directory / "captures.json"; original = w.read(path)
+        variants = []
+        for key, value in (("complete",False),("root","B"),("path","other.json"),("copy","../capture-0.bin")):
+            c = copy.deepcopy(original); c[0][key] = value; variants.append(c)
+        variants.append(original + original)
+        for captures in variants:
+            with self.subTest(captures=captures):
+                put(path, captures)
+                result = w.results(self.state)
+                self.assertIsNone(result["evidence"]["report_path"])
+                self.assertEqual(result["science"]["scientific_result"], "not_assessed")
+        put(path, original)
+        payload = {"format":"wrong-format", "readiness":{"scientific_result":"fabricated"}}
+        copy_path = directory / original[0]["copy"]; put(copy_path, payload)
+        original[0].update(bytes=copy_path.stat().st_size, sha256=w.digest(copy_path)); put(path, original)
+        result = w.results(self.state)
+        self.assertIsNone(result["evidence"]["report_path"])
+        self.assertEqual(result["science"]["scientific_result"], "not_assessed")
 
 
 if __name__ == "__main__": unittest.main()
