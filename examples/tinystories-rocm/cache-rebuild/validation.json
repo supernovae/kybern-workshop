@@ -142,7 +142,7 @@
     "original_14_input_files_rehashed_unchanged": true
   },
   "tests": {
-    "stdlib_fixtures": 26,
+    "stdlib_fixtures": 27,
     "result": "passed",
     "guard_mutations": [
       {
@@ -160,6 +160,15 @@
       {
         "mutation": "manifest-byte-pin",
         "regression_rejected": true
+      },
+      {
+        "mutation": "regular-file-check",
+        "regression_rejected": true,
+        "fixture": "directory at manifest.json; safe even if guard is removed",
+        "control_exit": 0,
+        "mutant_exit": 1,
+        "subprocess_timeout_seconds": 5,
+        "mutant_result": "IsADirectoryError instead of required bounded-regular ValueError"
       }
     ]
   },

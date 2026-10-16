@@ -126,6 +126,14 @@ class AdmissionTests(unittest.TestCase):
             b.bind(**self.args)
         self.assertFalse((self.args["state"] / "session.json").exists())
 
+    def test_directory_manifest_refuses_before_state_or_receipts(self):
+        manifest = self.args["inputs"] / "packed" / b.h.PACKED / "manifest.json"
+        manifest.unlink()
+        manifest.mkdir()
+        self.refuse("bounded regular prepared manifest required")
+        self.assertFalse(self.args["state"].exists())
+        self.assertFalse(self.args["receipts"].exists())
+
     def test_stale_prepared_source_refuses_before_state_or_receipts(self):
         manifest = self.args["inputs"] / "packed" / b.h.PACKED / "manifest.json"
         doc = json.loads(manifest.read_text())
