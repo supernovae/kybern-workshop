@@ -1,0 +1,70 @@
+{
+  "plan_version": 1,
+  "id": "tinystories-rocm-tiny",
+  "base_run": "run.json",
+  "inputs": {
+    "tokenizer": "token",
+    "prepared_data": "packed"
+  },
+  "evaluation_suite": "suite.json",
+  "execution": {
+    "backend": "rocm"
+  },
+  "axes": [
+    {
+      "name": "arm",
+      "choices": [
+        {
+          "label": "baseline",
+          "set": {
+            "model.ffn_dim": 64
+          }
+        },
+        {
+          "label": "candidate",
+          "set": {
+            "model.ffn_dim": 96
+          }
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "ffn-width",
+      "baseline": {
+        "arm": "baseline"
+      },
+      "variant": {
+        "arm": "candidate"
+      },
+      "mode": "controlled",
+      "interventions": [
+        "model.ffn_dim"
+      ],
+      "invariants": [
+        "seed",
+        "training.max_steps",
+        "evaluation.max_batches"
+      ]
+    }
+  ],
+  "artifacts": {
+    "token": {
+      "identifier": "tokenizer",
+      "kind": "tokenizer",
+      "sha256": "7090a3b4075e47cf56aec6f741a475b80f407053e0e6a998eeda276b7e435cf3",
+      "version": 1,
+      "producer": "sparselab tokenizer train",
+      "path": "/inputs/tokenizer/tokenizer.json"
+    },
+    "packed": {
+      "identifier": "b7af269e44c026cd6f7c0f0c0c9a1ab5334344d1e4c50b51327b10d70131636c",
+      "kind": "prepared_data",
+      "sha256": "dfc008bd34c09fabf8ebc204f300277080735a49d5bedff7d0f8a99eb394d458",
+      "version": 1,
+      "producer": "sparselab data prepare",
+      "path": "/state/cache/b7af269e44c026cd6f7c0f0c0c9a1ab5334344d1e4c50b51327b10d70131636c"
+    }
+  }
+}

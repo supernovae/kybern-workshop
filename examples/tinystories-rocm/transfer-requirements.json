@@ -1,0 +1,12 @@
+{
+  "owner_approval": "Sentinel_cf76ba978d588191bac9548724438197; 2026-10-16T00:14:42Z",
+  "source_attempt": "LAB80-cpu-20261015f",
+  "source_root": "chief must bind actual retained CPUf root; not available locally",
+  "raw_file_pins": "first-files.json",
+  "native_artifact_pins": "campaign.json stages token and packed",
+  "snapshot_pin": "pins.json snapshot_manifest_sha256",
+  "byte_manifest_command": "handoff.py transfer-manifest --inputs ABSOLUTE_STAGED_INPUTS --output FRESH_EXTERNAL_MANIFEST",
+  "destination_paths": "unchanged relative paths from generated files[].path; GPU mount /inputs read-only",
+  "preservation": "independent file copies only; never move originals, alter manifests, copy controller/claim state, or download missing inputs",
+  "native_verification": "handoff.py stage plus native Campaign verification; required after byte-copy verification"
+}

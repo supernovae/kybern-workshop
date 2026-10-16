@@ -1,0 +1,18 @@
+name: TinyStories ROCm recipe fixtures
+on:
+  pull_request:
+    paths: ['examples/tinystories-rocm/**', '.github/workflows/tinystories-rocm.yml']
+  push:
+    paths: ['examples/tinystories-rocm/**', '.github/workflows/tinystories-rocm.yml']
+permissions:
+  contents: read
+jobs:
+  recipe-fixtures:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v7
+      - name: Offline stdlib fixtures (no dependencies, containers or workloads)
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python3 -m unittest discover -s examples/tinystories-rocm -p "test_*.py" -v
