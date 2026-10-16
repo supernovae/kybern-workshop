@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "job_id": "UNEXECUTED",
+  "card_id": "UNEXECUTED",
+  "approval": {
+    "owner": "REQUIRED",
+    "reference": "REQUIRED"
+  },
+  "source": {
+    "path": "/REQUIRED",
+    "commit": "REQUIRED"
+  },
+  "cwd": "/REQUIRED",
+  "output_root": "/REQUIRED",
+  "argv": [],
+  "environment": {},
+  "runtime": {},
+  "required_files": {},
+  "wrap": null,
+  "limits": {
+    "wall_seconds": 10,
+    "log_bytes": 1048576,
+    "artifact_bytes": 1048576,
+    "artifact_entries": 1000,
+    "memory": {
+      "mode": "observe_rss",
+      "max_bytes": 4294967296
+    }
+  }
+}

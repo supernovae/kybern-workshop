@@ -145,7 +145,7 @@ All three native paths must exist within the selected state root. This writes an
 exclusive report.json job using the same pins/environment and hashes lock/index;
 commit it, submit the returned report request, inspect the result, then submit
 `{"finish":true}`. The public report command is `experiment recipe workflow report`,
-with output `/state/audit/report.json`, captured by the session. No fresh container,
+with output `<state>/audit/report.json` using the declared root path, captured by the session. No fresh container,
 deadline or retry is created. Outputs, failures, immutable inputs and claims stay
 local. Timeout/interruption stops the job and records partial evidence.
 

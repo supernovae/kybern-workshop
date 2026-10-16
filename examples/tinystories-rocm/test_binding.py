@@ -80,6 +80,7 @@ class BindingTests(unittest.TestCase):
                 job["argv"][4:8], ["experiment", "recipe", "workflow", "report"]
             )
             self.assertIn(str(state / "lock"), job["required_files"])
+            self.assertEqual(job["argv"][job["argv"].index("--output") + 1], str(state / "audit/report.json"))
             with self.assertRaises(FileExistsError):
                 b.report(state, state / "lock", state / "workspace", state / "index")
             with self.assertRaises(ValueError):
