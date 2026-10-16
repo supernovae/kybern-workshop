@@ -63,6 +63,10 @@ class BindingTests(unittest.TestCase):
                 ],
             )
             self.assertEqual(session["limits"]["wall_seconds"], 1800)
+            self.assertEqual(session["command_policy"], "observe_stages")
+            for step in ("apply", "run"):
+                argv = json.loads((state / (step + ".json")).read_text())["argv"]
+                self.assertEqual(argv[argv.index("--max-wait-seconds") + 1], "1800")
             for name in ("lock", "index"):
                 (state / name).write_text("{}")
             (state / "workspace").mkdir()
