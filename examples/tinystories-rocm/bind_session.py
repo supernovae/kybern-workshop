@@ -27,6 +27,7 @@ def bind(
     owner,
     approval_reference,
     boot_id,
+    gpu=False,
 ):
     checkout, harness, inputs, state, receipts = map(
         h.path, (checkout, harness, inputs, state, receipts)
@@ -209,7 +210,7 @@ def bind(
             str(inputs),
             "--recipe",
             str(checkout),
-            "--gpu",
+            *(["--gpu"] if gpu else []),
         ],
         "required_next_action": "Commit generated session/jobs in the fresh state repository. Start wrapper once; submit steps individually only after inspecting native gates. Report job and finish use the same live deadline. No automatic approvals/retries.",
     }
@@ -272,6 +273,11 @@ if __name__ == "__main__":
         "boot-id",
     ):
         b.add_argument("--" + name, required=True)
+    b.add_argument(
+        "--gpu",
+        action="store_true",
+        help="Include device mapping only for a separately approved GPU job",
+    )
     r = sub.add_parser("report")
     for name in ("state", "lock", "workspace", "index"):
         r.add_argument("--" + name, required=True)

@@ -101,6 +101,11 @@ Run `bind_session.py bind --help` for required concrete inputs: clean reviewed
 Workshop and harness checkouts, immutable inputs, fresh state and receipt roots,
 the image's observed Python runtime identity JSON, boot ID, fresh job ID and real
 owner approval provenance. The helper must run from the selected Workshop checkout.
+Device mapping is opt-in via `bind --gpu`; omit it for GPU-free qualification.
+The rendered `container_profile` is documentary: the harness fixes and verifies
+its cgroup controls, including zero additional swap. The exact harness commit is
+pinned at binding time and must be separately reviewed; PR #15 supplies this
+implementation until merged.
 It emits unexecuted schema-3 session/jobs and host wrapper argv with an exact
 harness commit pin. Commit the generated files in the fresh state repository
 before invoking the wrapper. Do not run the native argv independently.
@@ -149,7 +154,7 @@ unenforced. No cgroup, driver, permission or security settings are changed here.
 
 ## Validation
 
-`python3 -m unittest discover -s examples/tinystories-rocm -p test_handoff.py -v`
+`python3 -m unittest discover -s examples/tinystories-rocm -p 'test_*.py' -v`
 uses only tiny filesystem fixtures and argument rendering. `check_native.py`, run
 with the existing Lab environment and `PYTHONPATH` pointing to source `2d5ba0f`,
 validates actual native schemas, exact two-arm budgets, evaluation authorization and
