@@ -213,50 +213,6 @@ def render(
         "nonroot Linux UID/GID required",
     )
     recipe = "/reviewed/examples/tinystories-rocm"
-    prefix = [
-        "podman",
-        "run",
-        "--pull=never",
-        "--network=none",
-        "--memory=4g",
-        "--memory-swap=4g",
-        "--cpus=2",
-        "--pids-limit=256",
-        "--userns=keep-id",
-        f"--user={uid}:{gid}",
-        "--device=/dev/dxg",
-        "--mount",
-        "type=bind,src=/usr/lib/wsl/lib/libdxcore.so,dst=/usr/lib/libdxcore.so,ro",
-        "--mount",
-        f"type=bind,src={checkout},dst=/reviewed,ro",
-        "--mount",
-        f"type=bind,src={inputs},dst=/inputs,ro",
-        "--mount",
-        f"type=bind,src={state},dst=/state",
-    ]
-    env = {
-        "HOME": "/state/home",
-        "TMPDIR": "/state/tmp",
-        "SPARSELAB_WORK_DIR": "/state/work",
-        "SPARSELAB_WORKER_LEASE_DIR": "/state/worker-leases",
-        "HF_HOME": "/state/hf",
-        "HF_HUB_CACHE": "/state/hf/hub",
-        "HF_DATASETS_CACHE": "/state/hf/datasets",
-        "XDG_CACHE_HOME": "/state/xdg",
-        "OMP_NUM_THREADS": "1",
-        "MKL_NUM_THREADS": "1",
-        "OPENBLAS_NUM_THREADS": "1",
-        "HF_HUB_OFFLINE": "1",
-        "HF_DATASETS_OFFLINE": "1",
-        "TRANSFORMERS_OFFLINE": "1",
-        "UV_OFFLINE": "1",
-        "CUDA_VISIBLE_DEVICES": "0",
-        "HIP_VISIBLE_DEVICES": "0",
-        "ROCR_VISIBLE_DEVICES": "0",
-        "PYTHONDONTWRITEBYTECODE": "1",
-    }
-    for k, v in env.items():
-        prefix += ["--env", f"{k}={v}"]
     campaign = recipe + "/campaign.json"
     profile = ["--runtime-profile", recipe + "/runtime.json"]
     commands = [
@@ -309,15 +265,30 @@ def render(
     ]
     return {
         "execution_enabled": False,
+        "container_profile": {
+            "engine": "docker",
+            "endpoint": "unix:///var/run/docker.sock",
+            "image": PINS["image"],
+            "memory_bytes": 4294967296,
+            "swap_bytes": 0,
+            "cpus": 2,
+            "pids": 256,
+            "uid": uid,
+            "gid": gid,
+        },
         "job_id": job_id,
         "reviewed_workshop_commit": reviewed_commit,
         "approval_reference": approval_reference,
         "pins": PINS,
-        "requires": "Chief-bound fresh claim, clean standalone reviewed checkout, approved staged CPUf inputs, one qualified 1800-second whole-job supervisor including cleanup; never reset between steps.",
+        "requires": "Chief-bound fresh claim, clean standalone reviewed checkout, approved staged CPUf inputs, reviewed lab-harness docker_session.py with schema-3 fixed campaign and one 1800-second whole-job clock including cleanup; never launch these native argv independently.",
         "steps": [
             {
                 "step": name,
-                "argv": prefix + ["--name", job_id + "-" + name, PINS["image"], *argv],
+                "argv": (
+                    ["/opt/venv/bin/python", "-B", "-m", "sparselab", *argv[1:]]
+                    if argv[0] == "sparselab"
+                    else argv
+                ),
             }
             for name, argv in commands
         ],

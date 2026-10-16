@@ -83,8 +83,8 @@ with tempfile.TemporaryDirectory() as tmp:
     parser = build_parser(work_dir=t / "work")
     for step in doc["steps"][1:]:
         argv = step["argv"]
-        argv = argv[argv.index(module.PINS["image"]) + 1 :]
-        assert argv.pop(0) == "sparselab"
+        assert argv[:4] == ["/opt/venv/bin/python", "-B", "-m", "sparselab"]
+        argv = argv[4:]
         parser.parse_args(
             argv
         )  # Only parsing; no native handler or model function called.

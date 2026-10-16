@@ -39,29 +39,14 @@ class HandoffTests(unittest.TestCase):
             [s["step"] for s in result["steps"]],
             ["copy-inputs", "validate", "apply", "approve", "run", "status"],
         )
+        profile = result["container_profile"]
+        self.assertEqual(profile["engine"], "docker")
+        self.assertEqual(profile["image"], h.PINS["image"])
+        self.assertEqual(profile["endpoint"], "unix:///var/run/docker.sock")
+        self.assertEqual([profile[k] for k in ("memory_bytes", "swap_bytes", "cpus", "pids", "uid", "gid")], [4294967296, 0, 2, 256, 1000, 1000])
         for step in result["steps"]:
-            argv = step["argv"]
-            self.assertIn(h.PINS["image"], argv)
-            for flag in (
-                "--network=none",
-                "--pull=never",
-                "--memory=4g",
-                "--memory-swap=4g",
-                "--cpus=2",
-                "--pids-limit=256",
-                "--userns=keep-id",
-                "--user=1000:1000",
-                "--device=/dev/dxg",
-                "CUDA_VISIBLE_DEVICES=0",
-                "HF_HUB_OFFLINE=1",
-                "HF_DATASETS_OFFLINE=1",
-                "TRANSFORMERS_OFFLINE=1",
-                "UV_OFFLINE=1",
-            ):
-                self.assertIn(flag, argv)
-            self.assertNotIn("CUDA_VISIBLE_DEVICES=", argv)
-            self.assertFalse(any("/opt/rocm" in arg for arg in argv))
-            self.assertIn(f"type=bind,src={self.args()['inputs']},dst=/inputs,ro", argv)
+            self.assertEqual(step["argv"][0], "/opt/venv/bin/python")
+            self.assertNotIn("podman", step["argv"])
         run = result["steps"][4]["argv"]
         self.assertIn("--execute-runs", run)
         self.assertIn("--runtime-profile", run)

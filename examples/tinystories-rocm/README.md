@@ -10,8 +10,8 @@ This is the small two-arm validation requested for chief/Grok's runner. The late
 
 `pins.json` binds Lab `2d5ba0fd66b6087101ad152fdbfe17b44ce194a5`, the already-cached
 ROCm image digest `0842874b5eea67c0766b48f052335570e725145915d05df2ac568ed5365d70a5`,
-Python 3.14.4 and Torch 2.14.0+rocm10.1.0 (HIP 7.16.26385). The image label and
-RUN-13 source fingerprint were inspected; no image/model/corpus was downloaded.
+Python 3.14.4 and Torch 2.14.0+rocm10.1.0 (HIP 7.16.26385). The image label and RUN-13 source fingerprint bind the installed source.
+Provisioning or pulling an image requires separate authority.
 
 The portable `experiment recipe workflow apply/resume` admission is CPU-only at
 this pin. This separate recipe uses public native `campaign` commands, an explicit
@@ -43,8 +43,8 @@ it is not permission to start a new 30-minute clock at each command.
 ## Retained inputs and writable cache
 
 Chief must arrange an approved transfer of the following retained CPUf artifacts
-into one immutable input directory. They were not accessible in this workspace;
-The owner explicitly approved copying these retained inputs in Sentinel_cf76ba978d588191bac9548724438197 at 2026-10-16T00:14:42Z. No transfer or data acquisition was performed here; chief resolves the actual CPUf source root.
+into one immutable input directory. Keep the transfer manifest and source/destination verification receipts outside
+the input root; chief binds the actual CPUf source root.
 
 ```text
 inputs/
@@ -88,69 +88,52 @@ permissions/ownership are not changed. Snapshot and tokenizer remain read-only.
 The cache parent must stay writable for `.cleanup.lock` and preparation receipts.
 No old admissions, Campaign state, claims or attempt ledgers are copied.
 
-## WSL invocation and current qualification blocker
+## Docker supervision and binding
 
-The rendered argv retains RUN-13's `/dev/dxg` and read-only
-`/usr/lib/wsl/lib/libdxcore.so` to `/usr/lib/libdxcore.so` mapping. It does not mount
-host ROCm libraries, `/dev/kfd`, `/dev/dri`, or add privileged/security overrides.
-It uses `--pull=never`, `--network=none`, and explicit device visibility `0`.
+Use the reviewed lab-harness `docker_session.py` on an existing local Linux Docker
+daemon with cgroup v2. It checks hard container limits, runs as the invoking
+nonroot UID/GID and verifies owned-container cleanup. No user namespace, settings,
+permission, service or security changes are needed. The offline image must already
+be cached; there is no implicit pull. WSL GPU mapping is explicit `/dev/dxg` plus
+read-only libdxcore, and remains blocked until separate real-job approval.
 
-The image defaults to UID 10001. The candidate writable mapping uses rootless
-`--userns=keep-id --user=<host-uid>:<host-gid>`, without host permission changes.
-**This mapping is not qualified:** one bounded, GPU-free stdlib file-write fixture
-on the cached image timed out during Podman startup before a container ID existed.
-A follow-up query reported no such container and an incomplete storage layer;
-further `podman info` stalled. Saved `argv.json` shows a direct Python subprocess argument array (`shell=False`), and binary resolution is `/usr/bin/podman`; a separate metadata-only query also stalled. Evidence points to Podman startup/storage handling, not command quoting or shell interception. The exact storage cause remains unconfirmed. Only this task's identified diagnostic processes
-were stopped. No GPU devices were exposed, and no container-write success or
-verified full storage cleanup is claimed. No further container probes were run.
-Chief must resolve/qualify this through the existing runner before launch; do not
-change device permissions, security policy, or WSL settings to bypass the blocker.
+Run `bind_session.py bind --help` for required concrete inputs: clean reviewed
+Workshop and harness checkouts, immutable inputs, fresh state and receipt roots,
+the image's observed Python runtime identity JSON, boot ID, fresh job ID and real
+owner approval provenance. The helper must run from the selected Workshop checkout.
+It emits unexecuted schema-3 session/jobs and host wrapper argv with an exact
+harness commit pin. Commit the generated files in the fresh state repository
+before invoking the wrapper. Do not run the native argv independently.
 
-The repository mount must be a **clean standalone checkout** of the externally
-reviewed Workshop commit, with its own `.git` directory and no external Git
-alternates. Mounting a linked worktree alone breaks native declaration provenance.
-Use an existing qualified whole-job supervisor, not independent per-step timeouts.
-It must own a fresh job/claim and output directory, preserve holds and history,
-retain stdout/stderr/real outcomes, inspect each owned container and verify cleanup.
-`handoff.py` is a renderer/copy helper, not an executor, scheduler or claim manager.
+The seven ordered slots share one 1800-second clock, including preflight and
+operator waits. Submit copy-inputs, validate, apply, approve, run and status
+individually using requests.json after inspecting each native result. Approve
+only the actual pending gate under owner authority; a saved approval string is
+not new authority. Require all 12 native stages COMPLETE after resume.
 
-## Render and execute only after qualification
-
-Run the renderer with the real reviewed SHA and actual approval reference:
+Bind report paths from actual native receipts during that same live session:
 
 ```sh
-python3 examples/tinystories-rocm/handoff.py render \
-  --checkout /absolute/standalone-reviewed-workshop \
-  --inputs /absolute/approved-retained-cpuf-inputs \
-  --state /absolute/fresh-job-output --job-id fresh-chief-assigned-id \
-  --reviewed-commit ACTUAL_REVIEWED_40_HEX_SHA \
-  --approval-reference ACTUAL_OWNER_APPROVAL_REFERENCE
+python3 examples/tinystories-rocm/bind_session.py report \
+  --state /absolute/fresh-state --lock /actual/state/lock.json \
+  --workspace /actual/state/workspace --index /actual/state/index.json
 ```
 
-It returns exact argument arrays with `execution_enabled: false`; never join them
-into shell text. The supervisor checks checkout/image/source pins and existing
-claims, creates the fresh state root after admission, and keeps one origin/deadline.
-The sequence is copy-inputs, Campaign validate, apply (without execution), approve
-`approve-model`, resume with `--execute-runs`, then status. Approve only the actual
-pending gate with the owner-approved assignment. Every native state must be checked,
-not just the process exit. After resume require all 12 stages COMPLETE. Any failure,
-interruption, timeout or still-running state stops the job; no automatic resume/retry.
+All three native paths must exist within the selected state root. This writes an
+exclusive report.json job using the same pins/environment and hashes lock/index;
+commit it, submit the returned report request, inspect the result, then submit
+`{"finish":true}`. The public report command is `experiment recipe workflow report`,
+with output `/state/audit/report.json`, captured by the session. No fresh container,
+deadline or retry is created. Outputs, failures, immutable inputs and claims stay
+local. Timeout/interruption stops the job and records partial evidence.
 
-After the final collection, use the real lock/workspace/index from native receipts
-with the same supervised container prefix and a fresh owned `JOB-report` name:
-
-```json
-["sparselab", "experiment", "recipe", "workflow", "report", "LOCK_FROM_RECEIPT", "--workspace", "WORKSPACE_FROM_RECEIPT", "--index", "INDEX_FROM_RECEIPT", "--output", "/state/report.json", "--json"]
-```
-
-This report command is read-only native evidence handling and does not use CPU-only
-execution admission. Report paths cannot be known before their native receipts.
-Keep reports, both arm outcomes, actual budgets and supervisor evidence locally;
-this recipe posts nothing to GitHub/Notion and does not schedule the larger run.
+Before actual TinyStories execution, qualify tiny success, cancellation and
+deadline fixtures on each intended host using the cached image, no GPU devices,
+and the reviewed wrapper. A fake-engine unit test is not daemon qualification.
 
 ## Memory semantics and VRAM qualification
 
-Podman cgroup memory/swap/CPU/PID settings apply to the container; external runner
+Docker cgroup memory/swap/CPU/PID settings apply to the container; external runner
 helpers still need the supervisor's own resource accounting. Inspect actual applied
 limits and OOM state. `monitor.json` is a native observation policy, not an OS quota
 or a multi-command supervisor. RSS/storage sampling can overshoot between samples.
@@ -172,4 +155,4 @@ with the existing Lab environment and `PYTHONPATH` pointing to source `2d5ba0f`,
 validates actual native schemas, exact two-arm budgets, evaluation authorization and
 all five public CLI argument arrays; it never calls a parsed handler or probes GPUs.
 RuntimeProfile validation substitutes the existing local Python path only for that
-metadata fixture. Real CPUf payload verification and GPU execution remain unrun.
+metadata fixture. GPU execution remains unrun; transfer and daemon qualification evidence is recorded separately by the runner.
