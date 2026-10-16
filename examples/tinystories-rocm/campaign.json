@@ -1,0 +1,163 @@
+{
+  "campaign_version": 1,
+  "id": "tinystories-rocm-tiny",
+  "stages": [
+    {
+      "id": "token",
+      "kind": "artifact_reference",
+      "scope": "tokenizer",
+      "artifact": {
+        "identifier": "tokenizer",
+        "kind": "tokenizer",
+        "sha256": "7090a3b4075e47cf56aec6f741a475b80f407053e0e6a998eeda276b7e435cf3",
+        "version": 1,
+        "producer": "sparselab tokenizer train",
+        "path": "/inputs/tokenizer/tokenizer.json"
+      }
+    },
+    {
+      "id": "packed",
+      "kind": "artifact_reference",
+      "scope": "model",
+      "artifact": {
+        "identifier": "b7af269e44c026cd6f7c0f0c0c9a1ab5334344d1e4c50b51327b10d70131636c",
+        "kind": "prepared_data",
+        "sha256": "dfc008bd34c09fabf8ebc204f300277080735a49d5bedff7d0f8a99eb394d458",
+        "version": 1,
+        "producer": "sparselab data prepare",
+        "path": "/state/cache/b7af269e44c026cd6f7c0f0c0c9a1ab5334344d1e4c50b51327b10d70131636c"
+      }
+    },
+    {
+      "id": "lock-plan",
+      "kind": "experiment_plan",
+      "scope": "model",
+      "requires": [
+        "token",
+        "packed"
+      ],
+      "source": "plan.json",
+      "mode": "lock",
+      "tokenizer": "token",
+      "prepared": "packed"
+    },
+    {
+      "id": "accept-rocm",
+      "kind": "runtime_acceptance",
+      "scope": "runtime",
+      "requires": [
+        "lock-plan"
+      ],
+      "plan": "lock-plan",
+      "profile_id": "tinystories-rocm-wsl"
+    },
+    {
+      "id": "approve-model",
+      "kind": "approval",
+      "scope": "model",
+      "requires": [
+        "lock-plan",
+        "accept-rocm"
+      ],
+      "bind": [
+        "lock-plan",
+        "accept-rocm"
+      ]
+    },
+    {
+      "id": "run-baseline",
+      "kind": "experiment_run",
+      "scope": "model",
+      "plan": "lock-plan",
+      "runtime": "accept-rocm",
+      "cell": "main:arm=baseline",
+      "requires": [
+        "lock-plan",
+        "accept-rocm",
+        "approve-model"
+      ]
+    },
+    {
+      "id": "collect-baseline",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "plan": "lock-plan",
+      "run": "run-baseline",
+      "requires": [
+        "lock-plan",
+        "run-baseline",
+        "run-candidate"
+      ]
+    },
+    {
+      "id": "eval-baseline",
+      "kind": "evaluation",
+      "scope": "evaluation",
+      "collect": "collect-baseline",
+      "suite": "suite.json",
+      "backend": "rocm",
+      "requires": [
+        "collect-baseline",
+        "accept-rocm"
+      ],
+      "runtime": "accept-rocm"
+    },
+    {
+      "id": "run-candidate",
+      "kind": "experiment_run",
+      "scope": "model",
+      "plan": "lock-plan",
+      "runtime": "accept-rocm",
+      "cell": "main:arm=candidate",
+      "requires": [
+        "lock-plan",
+        "accept-rocm",
+        "approve-model",
+        "run-baseline"
+      ]
+    },
+    {
+      "id": "collect-candidate",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "plan": "lock-plan",
+      "run": "run-candidate",
+      "requires": [
+        "lock-plan",
+        "run-baseline",
+        "run-candidate"
+      ]
+    },
+    {
+      "id": "eval-candidate",
+      "kind": "evaluation",
+      "scope": "evaluation",
+      "collect": "collect-candidate",
+      "suite": "suite.json",
+      "backend": "rocm",
+      "requires": [
+        "collect-candidate",
+        "accept-rocm"
+      ],
+      "runtime": "accept-rocm"
+    },
+    {
+      "id": "final-evidence",
+      "kind": "experiment_collect",
+      "scope": "evaluation",
+      "plan": "lock-plan",
+      "run": "run-baseline",
+      "evaluations": [
+        "eval-baseline",
+        "eval-candidate"
+      ],
+      "requires": [
+        "lock-plan",
+        "run-baseline",
+        "run-candidate",
+        "eval-baseline",
+        "eval-candidate"
+      ]
+    }
+  ]
+}

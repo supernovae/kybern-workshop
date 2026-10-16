@@ -1,0 +1,29 @@
+{
+  "image": "ghcr.io/supernovae/tiny-sparse-lab@sha256:0842874b5eea67c0766b48f052335570e725145915d05df2ac568ed5365d70a5",
+  "lab_commit": "2d5ba0fd66b6087101ad152fdbfe17b44ce194a5",
+  "installed_source_sha256": "04b5777c4ca090bd506e71752cfc843bfbf96b62eecb9251d02ded85f659974e",
+  "python_version": "3.14.4",
+  "torch_version": "2.14.0+rocm10.1.0",
+  "torch_hip": "7.16.26385",
+  "dataset_revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+  "cpu_attempt": "LAB80-cpu-20261015f",
+  "cpu_workflow_commit": "3659786f9506c25d4d13088d0726cd990be7f0cc",
+  "snapshot_manifest_sha256": "efd5e6924cb04e0bad0d2bad50b1863f1630b5bb6d3c58eb93879d8c20003239",
+  "packed_identifier": "b7af269e44c026cd6f7c0f0c0c9a1ab5334344d1e4c50b51327b10d70131636c",
+  "budgets": {
+    "train_stories": 64,
+    "validation_stories": 16,
+    "training_updates": 16,
+    "training_target_positions": 512,
+    "evaluation_batch_ceiling": 24,
+    "whole_job_seconds": 1800,
+    "host_memory_bytes": 4294967296,
+    "memory_swap_total_bytes": 4294967296,
+    "cpus": 2,
+    "pids": 256,
+    "observed_vram_stop_bytes_if_qualified": 8589934592,
+    "source_file_bytes": 258720238,
+    "fresh_corpus_or_model_downloads": 0
+  },
+  "authority": "Owner GPU TinyStories request relayed by parent; provenance only. Chief must bind a fresh job/claim and actual approval reference. This repository change does not launch or schedule work."
+}

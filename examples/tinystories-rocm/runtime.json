@@ -1,0 +1,12 @@
+{
+  "runtime_profile_version": 1,
+  "id": "tinystories-rocm-wsl",
+  "python": "/opt/venv/bin/python",
+  "engine": "pytorch",
+  "backend": "rocm",
+  "device_index": 0,
+  "requirements": {
+    "torch_hip": true,
+    "device_name_regex": "^AMD Radeon RX 7900 XTX$"
+  }
+}
