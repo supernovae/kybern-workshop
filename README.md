@@ -27,6 +27,13 @@ The [CPU repeatability recipe](examples/cpu-repeatability/README.md) remains an
 unexecuted scaffold. The older [TinyStories migration draft](https://github.com/supernovae/kybern-workshop/pull/3)
 is not the current run guide.
 
+## Authored experiments
+
+[DevMind — DevMind 340M Base](experiments/devmind/README.md)
+relocates the exact preparation declarations and records proposed model/training
+science. It is not execution-ready: generated inputs, scientific review, native
+portable bindings and runtime budgets remain outstanding. No weights are supplied.
+
 ## Before you run
 
 - Have Git, a writable external work directory and the project's pinned Lab
