@@ -59,3 +59,7 @@ inspect the [historical command record](results/2026-10-14-synthetic-cpu/command
 The project run guide retains setup details, monitoring instructions and failure
 notes. Preserve earlier evidence when changing a recipe, and distinguish a
 proposed configuration from a measured result.
+
+## Active research portfolio
+
+Browse the [experiment catalog](catalog/README.md) for preserved prior experiments, original evidence, and explicit resume/rebuild prerequisites. Active research intent is separate from historical execution and current runtime readiness.
