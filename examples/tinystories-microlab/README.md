@@ -1,6 +1,6 @@
 # TinyStories microlab: learn a controlled FFN-width comparison
 
-This runnable **native Lab recipe** selects 2,000 training and 100 validation
+This **native Lab recipe is runnable by design but unexecuted**. It selects 2,000 training and 100 validation
 stories, fits a train-only 2,048-token BPE, and compares FFN width 256 with 384.
 Both arms use seed 42, two layers, hidden width 128, four attention heads,
 64-token training sequences and at most 40 main updates / 10,240 targets.

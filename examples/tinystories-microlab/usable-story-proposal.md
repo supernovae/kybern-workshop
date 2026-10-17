@@ -11,7 +11,7 @@ Historical source: Lab `eab014ef7ca92de89d37b47c30df2ebf021d9473`,
 See the [pinned result](https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/experiments/research/history/tinystories-dense-30m-data-rich-v1/results.md)
 and [endpoint receipt](https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/experiments/research/history/tinystories-dense-30m-data-rich-v1/endpoint-receipt.json).
 
-- Run `tinystories-dense-30m-data-rich-v1-seed 42`.
+- Run `tinystories-dense-30m-data-rich-v1-seed42`.
 - Generation `step_00024576_gen_000014`.
 - Checkpoint digest `1f090d8aaa2afc9ac38282917fdd8454fbf2682abca3aaa4ee9ab7e0e3abcdb1`.
 - Tokenizer SHA256 `4c351be179075c1d4884bf043303e113dd905edaaf398ac4d7842068496c3ac3`.
@@ -46,7 +46,7 @@ A direct native command for a single selected prompt is:
 ```sh
 sparselab checkpoint inspect "$CHECKPOINT_DIRECTORY" --json
 sparselab checkpoint verify "$CHECKPOINT_DIRECTORY" --json
-sparselab generate tinystories-dense-30m-data-rich-v1-seed 42   --runs-dir "$RUNS_DIRECTORY" --checkpoint step_00024576_gen_000014   --backend cpu --prompt "$FIXED_PROMPT" --max-new-tokens 192   --context-length 512 --strict-context --temperature 0.8 --top-k 40   --seed 42 --json
+sparselab generate tinystories-dense-30m-data-rich-v1-seed42   --runs-dir "$RUNS_DIRECTORY" --checkpoint step_00024576_gen_000014   --backend cpu --prompt "$FIXED_PROMPT" --max-new-tokens 192   --context-length 512 --strict-context --temperature 0.8 --top-k 40   --seed 42 --json
 ```
 
 For the greedy declaration use temperature 0 and top-k 0. Check actual prompt
