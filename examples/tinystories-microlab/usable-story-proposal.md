@@ -13,11 +13,23 @@ and [endpoint receipt](https://github.com/supernovae/tiny-sparse-lab/blob/eab014
 
 - Run `tinystories-dense-30m-data-rich-v1-seed42`.
 - Generation `step_00024576_gen_000014`.
-- Checkpoint digest `1f090d8aaa2afc9ac38282917fdd8454fbf2682abca3aaa4ee9ab7e0e3abcdb1`.
+- Generation manifest SHA256 (`generation_manifest_sha256`) `1f090d8aaa2afc9ac38282917fdd8454fbf2682abca3aaa4ee9ab7e0e3abcdb1`.
+- Separate checkpoint manifest SHA256 (`checkpoint_manifest_sha256`) `b02fe9910963677c606940af23367d0cdf83eaf95ccf58f1b78714a6eb797361`.
 - Tokenizer SHA256 `4c351be179075c1d4884bf043303e113dd905edaaf398ac4d7842068496c3ac3`.
 - 29,893,120 parameters, 512-token context, 100,663,296 training targets.
 
-Availability, reuse permission and publication rights are unverified. This was
+These labels follow the preserved [triage integrity fields](../../provenance/lab/experiments/research/history/tinystories-dense-30m-data-rich-v1/evidence.json)
+and [endpoint receipt](../../provenance/lab/experiments/research/history/tinystories-dense-30m-data-rich-v1/endpoint-receipt.json).
+The historical receipt also calls the generation-manifest value `checkpoint_digest`;
+that label does not identify a verified weight file. Neither digest above is a
+weight-file SHA256. Actual weight bytes and their authenticated member hashes must
+be located and verified before inference; the preserved historical verification
+claim is not a fresh availability or integrity check.
+
+Actual weights are absent on the chief VM as reported in the current handoff;
+availability on the CPU and ROCm hosts remains unknown. No model execution or
+availability is established by this proposal. Reuse permission and publication
+rights remain unverified. This was
 an **unpromoted decoder-sensitive finding**, including repetitions and color
 contradictions. Its held-out loss is not proof of usable stories. Preserve the
 opened historical tests and failures; do not rebrand them as fresh evaluation.
