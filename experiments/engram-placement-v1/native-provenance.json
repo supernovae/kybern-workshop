@@ -48,8 +48,8 @@
       "archive_path": "provenance/lab/src/sparselab/research/resources/lifecycle.json",
       "source_sha256": "e23734fa46739ba87e0d1ee5f258e43646f41a8360e991273350dc419a80346e",
       "destination": "experiments/engram-placement-v1/native/lifecycle.json",
-      "destination_sha256": "e23734fa46739ba87e0d1ee5f258e43646f41a8360e991273350dc419a80346e",
-      "changes": "Byte-identical resource copy."
+      "destination_sha256": "552e4532666839c2c9a76020fbcce1a0a2e0c2c6aed5dcf01ae4458d5dd6171c",
+      "changes": "Fresh empty current-schema registry. No historical evidence, baselines, entries, findings or promotions imported; original registry remains unchanged in archive."
     }
   ]
 }

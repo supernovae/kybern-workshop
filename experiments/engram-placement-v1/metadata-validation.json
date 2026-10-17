@@ -1,8 +1,8 @@
 {
   "validation_kind": "native_metadata_only",
-  "lab_commit": "3dc40ab91afce4004b273b42e9a6ff349eeaf8a4",
+  "lab_commit": "514dab0e710cb869fffbcfd8627528ac8380977a",
   "lab_pr": 164,
-  "dependency_status_at_validation": "unmerged_review_pending",
+  "dependency_status_at_validation": "merged",
   "platform": "WSL Ubuntu-26.04, existing Python3.14.4 environment",
   "invocation": {
     "argv": [
@@ -10,7 +10,7 @@
       "-m",
       "sparselab",
       "--work-dir",
-      "/tmp/workshop-placement-bound-nw4313ex/state",
+      "/tmp/workshop-placement-current-xafagh3v/state",
       "research",
       "scaffold",
       "engram-placement-v1",
@@ -23,12 +23,12 @@
       "--backend",
       "cpu",
       "--output",
-      "/tmp/workshop-placement-bound-nw4313ex/study"
+      "/tmp/workshop-placement-current-xafagh3v/study"
     ],
-    "cwd": "/tmp/workshop-placement-bound-nw4313ex",
+    "cwd": "/tmp/workshop-placement-current-xafagh3v",
     "returncode": 0
   },
-  "stdout": "/tmp/workshop-placement-bound-nw4313ex/study\n",
+  "stdout": "/tmp/workshop-placement-current-xafagh3v/study\n",
   "stderr": "",
   "research_sha256": "febc32a2be193383afa77e64ed5959f868bcdd8af104ee6dba15b2c56720466e",
   "selection": {
@@ -140,9 +140,9 @@
   ],
   "pair_count": 9,
   "bindings": {
-    "tokenizer": "/tmp/workshop-placement-bound-nw4313ex/study/artifacts/tokenizer/tokenizer.json",
-    "data_cache": "/tmp/workshop-placement-bound-nw4313ex/study/artifacts/data",
-    "runs": "/tmp/workshop-placement-bound-nw4313ex/state/experiments/engram-placement-v1/runs"
+    "tokenizer": "/tmp/workshop-placement-current-xafagh3v/study/artifacts/tokenizer/tokenizer.json",
+    "data_cache": "/tmp/workshop-placement-current-xafagh3v/study/artifacts/data",
+    "runs": "/tmp/workshop-placement-current-xafagh3v/state/experiments/engram-placement-v1/runs"
   },
   "no_payload_artifacts_created": true,
   "no_run_workspace_created": true,
@@ -156,5 +156,6 @@
     "tiny"
   ],
   "lifecycle_evidence_closure_verified": false,
-  "first_inspection": "An earlier metadata-only call without --work-dir resolved the native default user state root. Public command now explicitly binds --work-dir; no runtime occurred in either call."
+  "registry_scope": "Fresh empty current-schema registry; no evidence or promotions; not lifecycle clearance",
+  "scientific_config_hashes_match_prior_metadata_validation": true
 }

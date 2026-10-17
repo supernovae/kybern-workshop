@@ -4,7 +4,7 @@ This port preserves the original educational comparison: no lexical memory, fina
 
 ## Author metadata only
 
-The six-file resource closure lives in `native/`. It uses Lab's existing ResearchEntry, ResearchRecipe, RunConfig, profile, dataset and lifecycle schemas. The recipe makes the old scaffold's three implicit seeds explicit; the dataset catalog exposes only the unchanged offline profile. All four scale declarations remain because the existing schema requires them. Only smoke is intended for validation here; nano, micro and tiny are not validated or approved.
+The six-file resource closure lives in `native/`. It uses Lab's existing ResearchEntry, ResearchRecipe, RunConfig, profile, dataset and lifecycle schemas. The recipe makes the old scaffold's three implicit seeds explicit; the dataset catalog exposes only the unchanged offline profile. The preserved card still describes TinyStories applicability, but this port intentionally offers only offline data. All four scale declarations remain because the existing schema requires them. Only smoke is intended for validation here; nano, micro and tiny are not validated or approved.
 
 Use the exact Lab interface revision recorded in VALIDATION.md. With that installed existing environment, choose a fresh absolute output path and an external working directory, then run:
 
@@ -27,7 +27,7 @@ The offline chat_recall curriculum has dataset seed 42, finite cyclic training t
 
 ## Evidence and bindings
 
-The copied historical lifecycle registry is for native diagnostic parsing only. Its referenced reports and paths have not been revalidated as a complete external evidence root. No lifecycle promotion, prior finding authorization or resumable artifact closure is claimed. Actual evidence views require separately verified files and explicit `--evidence-root` bindings.
+The current native lifecycle registry is intentionally empty. It claims no historical evidence, baselines, entries, findings or promotions. No lifecycle promotion, prior finding authorization or resumable artifact closure is claimed. Actual evidence views require separately verified files and explicit `--evidence-root` bindings.
 
 Historical absolute host paths in preserved documents, manifests or registries are provenance, not portable destinations or current access grants. New execution requires explicit local bindings and verified tokenizer, data, run and checkpoint identities. Never edit archived bytes to make a path appear current. [The adaptation map](native-provenance.json) records original and adapted hashes; [the archive](../../provenance/lab/src/sparselab/research/resources/) remains unchanged.
 

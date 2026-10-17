@@ -794,7 +794,7 @@
         "candidate": "devmind-340m-base",
         "note": "Not selected, built, or training authority; applicability and scientific controls require review."
       },
-      "native_recipe_gap": "Offline/smoke native authoring validated at the exact development pin; runtime artifacts, lifecycle evidence closure, reviewed dependency and execution approval remain missing.",
+      "native_recipe_gap": "Offline/smoke native authoring validated on merged Lab with a fresh empty lifecycle registry. Generated runtime inputs, new experiment/artifact identities, full resource accounting and execution approval remain missing.",
       "availability": "available",
       "landing_path": "experiments/engram-placement-v1/README.md",
       "native_resource_root": "experiments/engram-placement-v1/native",
@@ -803,7 +803,7 @@
         "status": "metadata_validated",
         "path": "experiments/engram-placement-v1/metadata-validation.json",
         "scope": "offline/smoke nine configurations and nine pairs only; runtime not executed",
-        "lab_commit": "3dc40ab91afce4004b273b42e9a6ff349eeaf8a4"
+        "lab_commit": "514dab0e710cb869fffbcfd8627528ac8380977a"
       }
     },
     {
