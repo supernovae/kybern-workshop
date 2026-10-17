@@ -19,3 +19,5 @@ Original bytes are immutable evidence. Relative links inside historical files ma
 The corpus fixture `checks.py` is archived as `checks.py.txt`, with exactly the same bytes. Historical HTML/SVG reports are retained source artifacts; this PR does not render or execute embedded content. No new executable Python or notebooks are added. Existing Workshop helpers and tests are unchanged; their native replacements and eventual retirement need a separate capability audit.
 
 Stage one does not claim the entire Lab migration is complete. Mixed acceptance/configs/docs/samples/examples are awaiting selective mapping. Execution, useful-story validation, and native recipe adaptation are separate deliverables.
+
+The key `devmind-340m-base` is a catalog discovery key only, not an immutable model or artifact identity. [Stage two](STAGE2.md) preserves additional configs, acceptance evidence, examples, samples and research documentation.

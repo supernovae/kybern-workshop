@@ -1,0 +1,1623 @@
+{
+  "manifest_version": 1,
+  "source_repository": "https://github.com/supernovae/tiny-sparse-lab",
+  "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+  "scope": "Stage 2 originals only; no source deletion or portable execution claim.",
+  "counts": {
+    "authored_configs": 73,
+    "personal_acceptance": 60,
+    "authored_examples": 28,
+    "selected_samples": 14,
+    "research_docs": 26
+  },
+  "files": [
+    {
+      "source": "configs/capability_recall_dense_cpu.yaml",
+      "destination": "provenance/lab/configs/capability_recall_dense_cpu.yaml",
+      "git_blob": "1bde30031016a58e1036941a92a9652c71c466a8",
+      "size_bytes": 1303,
+      "sha256": "29522928b4b5d91b411133eebe78e9655b3934612160ae6c6fcb642bef30c890",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/capability_recall_ngram_cpu.yaml",
+      "destination": "provenance/lab/configs/capability_recall_ngram_cpu.yaml",
+      "git_blob": "04e45156b6c61a9bcb3ad0e8667f7ec18ff7abcc",
+      "size_bytes": 1384,
+      "sha256": "3b349ef5a06a49ccd9fb9bc7ab1be78501c810077f381becb0dd36d868b09aa6",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/chat_recall_dense_cpu.yaml",
+      "destination": "provenance/lab/configs/chat_recall_dense_cpu.yaml",
+      "git_blob": "28efa6c2dd4943b616f82ec84047819354581b6a",
+      "size_bytes": 1322,
+      "sha256": "daea3bd002699a354716c4588b94852ed50979a4156a6fa01e22305ef8acd09d",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/chat_recall_engram_cpu.yaml",
+      "destination": "provenance/lab/configs/chat_recall_engram_cpu.yaml",
+      "git_blob": "fbe3b8a89282854525a52a9890f35ba07214c3d9",
+      "size_bytes": 1390,
+      "sha256": "cbc0506c43aaf3f6e05ef40c04699df7585158e694673f8f67cea56e3102d204",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_s17_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_s17_b24k.yaml",
+      "git_blob": "2bea2a9e21245d20b9e4b94913ee38439437ed52",
+      "size_bytes": 1572,
+      "sha256": "ff34f4e7c438492f6052632d772c9ae8faaea5aa4c794a0f8d271fee60c33038",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_s17_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_s17_b48k.yaml",
+      "git_blob": "264b50de665bf3c5225f83f805ac01b443c5ed29",
+      "size_bytes": 1572,
+      "sha256": "e529d337ec256e98e2d075a30714f4d9ae8931cc585a5879002227951b47055c",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_s41_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_s41_b24k.yaml",
+      "git_blob": "382af33e9630d39be1f7e0bec555b330a93b32e8",
+      "size_bytes": 1572,
+      "sha256": "e6da20c6c56101aa5df2faf3fe273828d0cad9c3ee025276ace9bc6ec931f8d2",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_s41_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_s41_b48k.yaml",
+      "git_blob": "3128713edecabda557a6cc15a11b77808ab30e1c",
+      "size_bytes": 1572,
+      "sha256": "6cf0b9779b8604ba994fc2b0ffb06f4ae511fb67290ac712d4d2157d84adf643",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_s73_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_s73_b24k.yaml",
+      "git_blob": "7b414de3a893c6cc4a9b196272af9ba360b3e11b",
+      "size_bytes": 1572,
+      "sha256": "41a44073674c242e9eae176c7120cd98185e68851dafcf910139b6fb525414b1",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_s73_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_s73_b48k.yaml",
+      "git_blob": "80991266a9166feebaf79be3aeadad089c213f41",
+      "size_bytes": 1572,
+      "sha256": "f87ecc685fbcd89100e4b60999dd23d1608581d935ac9670cfb463525ef29e8b",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_total_s17_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_total_s17_b24k.yaml",
+      "git_blob": "12683e799ad9a1fa09aaf94b104a64257c32f1cd",
+      "size_bytes": 1578,
+      "sha256": "b892565bbea1ca06ab88fe219e135f07141886dfbc731b4c4b8571a29c784952",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_total_s17_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_total_s17_b48k.yaml",
+      "git_blob": "78e4fd2b2c52169338d1fe25947b6ed4cb579d4f",
+      "size_bytes": 1578,
+      "sha256": "a04ae993c6ff2c48afc2d6aecee1bda08083af51986a2a2319f5417d7c273dd6",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_total_s41_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_total_s41_b24k.yaml",
+      "git_blob": "315a09c9896feb270384803f3068d48f24d9b0cc",
+      "size_bytes": 1578,
+      "sha256": "5148f57b943a1cac292d4b26b7696410a474a35a5603c218b960b58a90b530cf",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_total_s41_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_total_s41_b48k.yaml",
+      "git_blob": "521edd74ada45983ca5a832e4f8189a9f9b111f6",
+      "size_bytes": 1578,
+      "sha256": "e638803892d8c58a0f1a5eea1cc78c2cc09d12a27b6d7a5fdad9318650c892cf",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_total_s73_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_total_s73_b24k.yaml",
+      "git_blob": "56fd438a0cd85a7250e870e397636339d994ec93",
+      "size_bytes": 1578,
+      "sha256": "3aa4164eb88bd878241b65e45ec8b3a2c1a4edc12df82f02c52d8a66a6b6de9e",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_dense_total_s73_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_dense_total_s73_b48k.yaml",
+      "git_blob": "dffb6b5d26015d969249181aeb32265721ddb272",
+      "size_bytes": 1578,
+      "sha256": "2f515c4f0d16eda2ba52d52f93235310312b641791d7aa1a182bbaa3418ff737",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_collision127_s17_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_collision127_s17_b48k.yaml",
+      "git_blob": "9c6e6372a2c429dca3d521c52c1923adca8b0159",
+      "size_bytes": 1667,
+      "sha256": "1beb1e100c7044c0dd24ccc356a542b9168d22e5a6cc0bcc05dbd5100080cf90",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_collision127_s41_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_collision127_s41_b48k.yaml",
+      "git_blob": "407c135b7fab5dfb36f16ecc25a3e0b371630c51",
+      "size_bytes": 1667,
+      "sha256": "a2b7eddaa16127b00be55f4a1e5ef67c272c96f618f46b23ad728fb8ca091c09",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_collision127_s73_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_collision127_s73_b48k.yaml",
+      "git_blob": "64d7c550f7b358bb41cc32ef5a4f87479838d4f0",
+      "size_bytes": 1667,
+      "sha256": "0100107fb0853eddfb3dc1b4ae5190bb4ea4a32739c29b39fdfafd494ba2fa81",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_orders23_s17_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_orders23_s17_b48k.yaml",
+      "git_blob": "38338a4a500cf8da0a85846518a4d4a633b0fdaf",
+      "size_bytes": 1694,
+      "sha256": "53fbab08966d1e744da24a75788a5e7ac2b61832f318d1438c7219ae45fe975c",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_orders23_s41_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_orders23_s41_b48k.yaml",
+      "git_blob": "5bbd808e4dee4a7d61d6d031e068c72f3d83db9e",
+      "size_bytes": 1694,
+      "sha256": "70a84c83e1716182b798052dc4615895999e4740ec86602d1f2e33149cb2c21b",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_orders23_s73_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_orders23_s73_b48k.yaml",
+      "git_blob": "2274c60af051dc3deff8f1c5b958661feae8f70e",
+      "size_bytes": 1694,
+      "sha256": "3b7a02f34cf86d64e7cfe08c31a0c7cee7ae9c40cbf3b787fd2deb2637da2c5a",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_s17_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_s17_b24k.yaml",
+      "git_blob": "a84268767e8228eef99370a4e97318742bd27ace",
+      "size_bytes": 1655,
+      "sha256": "1c901f40a08931cb21870e875bba3ec910cf46bd213fdd8e04dc0a8a427e618d",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_s17_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_s17_b48k.yaml",
+      "git_blob": "9afe2006b8eed7a2b3a9a82e62d6455f8a65c085",
+      "size_bytes": 1655,
+      "sha256": "6ee7601d30da7a6559266e2f6f80d5154a4727cde03d151ff23b066f7bad5620",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_s41_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_s41_b24k.yaml",
+      "git_blob": "b06f84a085384f332826ad50e9ae1efc956382c7",
+      "size_bytes": 1655,
+      "sha256": "0b5c7e0c0aeb3644806faeba0cdf0ce2154bb384640f85f656e471b77fd90616",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_s41_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_s41_b48k.yaml",
+      "git_blob": "782d950f950bbc1e4644bb913f623c69ecea54d7",
+      "size_bytes": 1655,
+      "sha256": "f2b72caa1c3ccb825843d5acf5c2b521cde70028127720d205a05f8335956e51",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_s73_b24k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_s73_b24k.yaml",
+      "git_blob": "9767de592acc4e555f1f955a133c7c7acb3ade17",
+      "size_bytes": 1655,
+      "sha256": "a2458c3121b284fde32374dd0fff64e942aee6e5f7a7969fd6d7ec41a9e6caac",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_engram_s73_b48k.yaml",
+      "destination": "provenance/lab/configs/context_study_engram_s73_b48k.yaml",
+      "git_blob": "0bc3b1e7900fce151e1e9f8bd66d3c47f2cf4aea",
+      "size_bytes": 1655,
+      "sha256": "66308d603e3bac995801fb92edb41d39753329f16e151fad115150f36ba119bc",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/context_study_tokenizer.yaml",
+      "destination": "provenance/lab/configs/context_study_tokenizer.yaml",
+      "git_blob": "19ac17893d674d9520374c16fb0de668c6e5b626",
+      "size_bytes": 540,
+      "sha256": "34880716b1d22d089c8a1009daa46a5a3b4dc2d3b897a533bd9095102365ef1c",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_10m.yaml",
+      "destination": "provenance/lab/configs/dense_10m.yaml",
+      "git_blob": "36731a666f1542d6e023de2480ef3b012f7c9cbd",
+      "size_bytes": 1246,
+      "sha256": "154e73cd68561e2d8ae917effa8a4d7ed2ab95f530bc3477c5865a5cdf723f00",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_25m.yaml",
+      "destination": "provenance/lab/configs/dense_25m.yaml",
+      "git_blob": "b17bd14d27eb93e947bca09c23bc943d38c0b677",
+      "size_bytes": 1247,
+      "sha256": "16af807a8714c79106c6fd27b2277220ca9ad5fa1b608aa6b8a2895faeeefa5a",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_50m.yaml",
+      "destination": "provenance/lab/configs/dense_50m.yaml",
+      "git_blob": "8022eada1b8fb3b251bd1c41beef343fb5131a8d",
+      "size_bytes": 1248,
+      "sha256": "298b3bdcd5c7a25ddb2c19a2c79ea428db6bab54d47fbbad1c60e09af3b48aa0",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_7m.yaml",
+      "destination": "provenance/lab/configs/dense_7m.yaml",
+      "git_blob": "fc49601d0467056b8212b0179eaf1a74034521c5",
+      "size_bytes": 1245,
+      "sha256": "5cfade5702c3c78fe62a6f52c01fcf235a6ceee6080c6f2d957102b5bbe84d7c",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_scale_v1_seed17.yaml",
+      "destination": "provenance/lab/configs/dense_lm_scale_v1_seed17.yaml",
+      "git_blob": "de4ac567a53541fea1b31b0d32a5496485687a4d",
+      "size_bytes": 1535,
+      "sha256": "eed534179a1c38698885a9784347d3305ac81a8cf5dbbf23e8aed517a155a742",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_scale_v1_seed42.yaml",
+      "destination": "provenance/lab/configs/dense_lm_scale_v1_seed42.yaml",
+      "git_blob": "a6ac26bb790d1cb21a970f008a4a782d7aff3087",
+      "size_bytes": 1535,
+      "sha256": "64a6b82f7e82521f1ceb577b1f7a5d7fee5b6aad32f224bec046e9a171433713",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_scale_v1_seed73.yaml",
+      "destination": "provenance/lab/configs/dense_lm_scale_v1_seed73.yaml",
+      "git_blob": "fcc66d2c32d8963fe3b00ce26f3b8691819e5179",
+      "size_bytes": 1535,
+      "sha256": "f90fe0a082e4bd3900973a87f959c1818c335225f979abdfb361a227997338d9",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_token_budget_v1_seed17.yaml",
+      "destination": "provenance/lab/configs/dense_lm_token_budget_v1_seed17.yaml",
+      "git_blob": "9ce3fcc2a326e43596efde1121a39a0ee1c374be",
+      "size_bytes": 1511,
+      "sha256": "19d242150edcee119ed0d82e8a9398b07b92a72a7c30ccb7c2b3951ff2c4126d",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_token_budget_v1_seed42.yaml",
+      "destination": "provenance/lab/configs/dense_lm_token_budget_v1_seed42.yaml",
+      "git_blob": "93626d35ccc25ccc6f8341d7731027533b61d0d3",
+      "size_bytes": 1511,
+      "sha256": "6f04259e478eba90f7dc71e54102555a81b59094d543f3e6de1ab06a464c8828",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_token_budget_v1_seed73.yaml",
+      "destination": "provenance/lab/configs/dense_lm_token_budget_v1_seed73.yaml",
+      "git_blob": "758b4fb460e663d319f81c4b0710941754b7a6de",
+      "size_bytes": 1511,
+      "sha256": "573072284cdcf6a7ff060a999c7e58d790319f791052b28e240eb19547ee0c35",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_v1.yaml",
+      "destination": "provenance/lab/configs/dense_lm_v1.yaml",
+      "git_blob": "30276e48641c55cb573df0dbfccb468afe795e82",
+      "size_bytes": 1467,
+      "sha256": "354a2c5d55d74ccf6c0b27c50bfe8c6d98ff0cfc53bfcc4ec2c26e64c564643f",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_v1_lifecycle.json",
+      "destination": "provenance/lab/configs/dense_lm_v1_lifecycle.json",
+      "git_blob": "1d2335645e44d72501c66ca3eca285a57cbc9000",
+      "size_bytes": 29484,
+      "sha256": "d61ac25f9c214f3e219c3e169cdf4d0264a12f6f70fc665cea4dd1369a2daf66",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_v1_pilot50.yaml",
+      "destination": "provenance/lab/configs/dense_lm_v1_pilot50.yaml",
+      "git_blob": "665b9b3a4c2b349f658b3e85bb1fea4bda16cff4",
+      "size_bytes": 1415,
+      "sha256": "98dbcd8151b8a80d8923d4e8d78c87e5412bcab9e16ada3b1ec18249463f8e51",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_v1_seed17.yaml",
+      "destination": "provenance/lab/configs/dense_lm_v1_seed17.yaml",
+      "git_blob": "2f8b0838e8623d78d0882e110ac40d3d662ac060",
+      "size_bytes": 1467,
+      "sha256": "88bf0e3f2e2e93121bf576e8e9a7a5a1725d05f91880d64d1ab6cd30afd0410c",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/dense_lm_v1_seed73.yaml",
+      "destination": "provenance/lab/configs/dense_lm_v1_seed73.yaml",
+      "git_blob": "e74cfd09f8388e5d2754fd07999859a7c718fa61",
+      "size_bytes": 1467,
+      "sha256": "fe8c058b700fa33134c41851b1d7b44a1d32fdad6bccaf3b01acfc4fb789ed3f",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/first_model_20m_cpu.yaml",
+      "destination": "provenance/lab/configs/first_model_20m_cpu.yaml",
+      "git_blob": "bd56ddd668920acebb377be2391eeb223306760e",
+      "size_bytes": 1966,
+      "sha256": "09a184fe1c6586dbafd9a280a5eab057a12896418ac0c30b908eb42b6af0b03e",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/first_model_20m_cuda.yaml",
+      "destination": "provenance/lab/configs/first_model_20m_cuda.yaml",
+      "git_blob": "a845c71130abfafc9546997dd761b7b4a38654d9",
+      "size_bytes": 1828,
+      "sha256": "e8054bf78b2e47fc111dfde6a1f4e415ca7b7ba558bd14aea2a7fd80b3645429",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/instruction_100m.yaml",
+      "destination": "provenance/lab/configs/instruction_100m.yaml",
+      "git_blob": "45fc8f25db01f7ee28f473498f23250d11dd1c48",
+      "size_bytes": 1349,
+      "sha256": "ff769817458615f8f9730f5ee8e226c4b5646a55ecc67ad3f81f8abcb52ea1d0",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/instruction_starter.yaml",
+      "destination": "provenance/lab/configs/instruction_starter.yaml",
+      "git_blob": "1118b68d2707c4d43bad272d4fa37e549c0da5a7",
+      "size_bytes": 822,
+      "sha256": "8e7d2c2a72ad13cc0ca99dcd9ea9897b701d11816b5309aa3db546a05e1f737e",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/memory_injection_v1.matrix.yaml",
+      "destination": "provenance/lab/configs/memory_injection_v1.matrix.yaml",
+      "git_blob": "59e6b16a5f345a799909cdedc7f5c43705d2757d",
+      "size_bytes": 695,
+      "sha256": "51daba8623daf3d6fed5cc36cb08eec8f6d383bcc10cdfea9f4f368e0154917a",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/memory_injection_v1.study.yaml",
+      "destination": "provenance/lab/configs/memory_injection_v1.study.yaml",
+      "git_blob": "7b727e64bf9e23f412a25bdabda4d16c1778ac74",
+      "size_bytes": 776,
+      "sha256": "11bb18dde7aed805529bd704b1d27b6455a70f25fc81f3ac0f559338387f680e",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/path_domain_adapt_seed17.yaml",
+      "destination": "provenance/lab/configs/path_domain_adapt_seed17.yaml",
+      "git_blob": "ef9bde4f7abc7c0148bfc8efcde73386c4fdccd0",
+      "size_bytes": 1962,
+      "sha256": "e5e6a0e37e222be23c1b7d810646ea744fc8e6773be2d7d57fca39ab3d3a8ab3",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/path_domain_adapt_seed41.yaml",
+      "destination": "provenance/lab/configs/path_domain_adapt_seed41.yaml",
+      "git_blob": "c0c2dd3d466e23b79c1428ba92dbbb34f576f97a",
+      "size_bytes": 1962,
+      "sha256": "3293567afb632a30000c963522df2d39fba4fb0a27844183056fd9c8cd6e4e8b",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/path_domain_adapt_seed73.yaml",
+      "destination": "provenance/lab/configs/path_domain_adapt_seed73.yaml",
+      "git_blob": "070a5449e4a871b4a3e0c174b7240214286457a5",
+      "size_bytes": 1962,
+      "sha256": "86c99dc26581bd2ae1896e22b145827190f64e82245f5429baf9d4ae2cf4cc6f",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/path_domain_pretrain_seed17.yaml",
+      "destination": "provenance/lab/configs/path_domain_pretrain_seed17.yaml",
+      "git_blob": "095c2ac613722db0a175f011ce5fdba481ff5931",
+      "size_bytes": 1758,
+      "sha256": "a2ae540715efbcfbafa8485003e4092a051c3947000a999fcaf75b0328ad7e11",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/path_domain_pretrain_seed41.yaml",
+      "destination": "provenance/lab/configs/path_domain_pretrain_seed41.yaml",
+      "git_blob": "961f5a88da1a47237f7d2ce7d225e7632228c98f",
+      "size_bytes": 1758,
+      "sha256": "2035624ba0ff5c9312651112a5d0c1ed2552a7ac53810575fe141b47fea44c7d",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/path_domain_pretrain_seed73.yaml",
+      "destination": "provenance/lab/configs/path_domain_pretrain_seed73.yaml",
+      "git_blob": "46334a32614066b22c429c4bae9b9335be9b5c84",
+      "size_bytes": 1758,
+      "sha256": "b8f3b9bdd2f67bd15a6ef08e964cae0caf7da58e9fdd041674d455ca2a47ebd0",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/path_domain_tokenizer_cpu.yaml",
+      "destination": "provenance/lab/configs/path_domain_tokenizer_cpu.yaml",
+      "git_blob": "e7d3496b8f8ddaf65e10589b879f0b02df6b3499",
+      "size_bytes": 526,
+      "sha256": "b48ccff9272eab6c81041e9141c0d92366e64bf9868e2a969e269af281c51adf",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/references/dense-lm-v1/matrix.yaml",
+      "destination": "provenance/lab/configs/references/dense-lm-v1/matrix.yaml",
+      "git_blob": "50a14b58097b009b7d52287014758735878da65c",
+      "size_bytes": 389,
+      "sha256": "88dcec155b9561ca6ec9180b0cda726e50bc2bd1055d3889cc9ff66ca9f8c235",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/references/dense-lm-v1/study.yaml",
+      "destination": "provenance/lab/configs/references/dense-lm-v1/study.yaml",
+      "git_blob": "449aeb10c29e89a735aa38aab68f2b88f720182d",
+      "size_bytes": 179,
+      "sha256": "17dfe5d60b7605130f623ca7bdcb26d9cfd05bc1ba39bb440df9897f4a08c5ab",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/references/dense-small-v1/matrix.yaml",
+      "destination": "provenance/lab/configs/references/dense-small-v1/matrix.yaml",
+      "git_blob": "ecf3e8766de776015d17091133a9e3fb81ba7c6c",
+      "size_bytes": 117,
+      "sha256": "55b04633f6361bae2274898d17c1becadff4916bf66c76fe00000c7c3154ba90",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/references/dense-small-v1/study.yaml",
+      "destination": "provenance/lab/configs/references/dense-small-v1/study.yaml",
+      "git_blob": "4b5310358f690387aaa59a1707eb5c39c8a93721",
+      "size_bytes": 163,
+      "sha256": "d6c7a64adfc2f1f55b6119cf0665630ac45ff27d164fc5734851e89b64d73a58",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/scale_dense_160m_cuda.yaml",
+      "destination": "provenance/lab/configs/scale_dense_160m_cuda.yaml",
+      "git_blob": "b10cba5e2c2b031dcf29f635df5a7b4de943b495",
+      "size_bytes": 1485,
+      "sha256": "19159419e1043e73e7656b2356130d1e50f4d06fb4e49638e4b72c0e46a85ed5",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/scale_dense_1b_cuda.yaml",
+      "destination": "provenance/lab/configs/scale_dense_1b_cuda.yaml",
+      "git_blob": "5a9a0c1509598f5470bf4d08b6be59a831857723",
+      "size_bytes": 1487,
+      "sha256": "34b3b43b24ea3edc1ec5335190306ed1dc7bd0492833268c13e6c6f30347be83",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/tinystories_dense_30m_data_rich_v1.yaml",
+      "destination": "provenance/lab/configs/tinystories_dense_30m_data_rich_v1.yaml",
+      "git_blob": "2fe558595d4eed686e6cfa0a05c4444ad0a8953f",
+      "size_bytes": 2077,
+      "sha256": "c8e3144cbee3a245ccf0737e7f1c5a13b2839c0cadaa0a303ec16f284d8e16f8",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/tokenizer_8k.yaml",
+      "destination": "provenance/lab/configs/tokenizer_8k.yaml",
+      "git_blob": "b9f051e8fe1f5a57ba7d9a78b1cfc2f999d2c4c5",
+      "size_bytes": 346,
+      "sha256": "81812810b964ad33db2d13b2951fa497bc66c8318825fc55449b24d1a8defed7",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/tokenizer_chat_recall.yaml",
+      "destination": "provenance/lab/configs/tokenizer_chat_recall.yaml",
+      "git_blob": "1e43dcaf09cd05a10691f2d6df48a4a0fcc5763d",
+      "size_bytes": 329,
+      "sha256": "78f09c9543818aefed018000f777c71df7edcb5191e8dac062ccd5ec99936be0",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/tokenizer_dense_lm_v1.yaml",
+      "destination": "provenance/lab/configs/tokenizer_dense_lm_v1.yaml",
+      "git_blob": "44526822ebb9932597b97083f698df260eb2efcc",
+      "size_bytes": 355,
+      "sha256": "301dab69b01c8a2c4cb57a8dfca78963ef2bc661425178c15e20c43fa58780d8",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/tokenizer_fineweb_scale_8k.yaml",
+      "destination": "provenance/lab/configs/tokenizer_fineweb_scale_8k.yaml",
+      "git_blob": "e7c054d547e698dea494b90552de810c6ffd5193",
+      "size_bytes": 452,
+      "sha256": "decef2b7d3f3254be81abb41ffbe06990cc5a3b97aaa4f9e399af0f8077b7cb2",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/tokenizer_instruction_8k.yaml",
+      "destination": "provenance/lab/configs/tokenizer_instruction_8k.yaml",
+      "git_blob": "ae288aa51ff6c0f3dc090ac08a6e559ebad42997",
+      "size_bytes": 339,
+      "sha256": "6aeac2abee1e0872e4c33c5a193fdb750877f82a8eb2717e0fc96a0ba7b732d4",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/tokenizer_withheld_bpe.yaml",
+      "destination": "provenance/lab/configs/tokenizer_withheld_bpe.yaml",
+      "git_blob": "68aac001c17a06e313e4a7a0b26ab8e70bdbd38a",
+      "size_bytes": 309,
+      "sha256": "fda484a983c3ceb769a3e4b1b0ddaf96048b066f94882f4916f7c04e0d2baad9",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/tokenizer_withheld_bytes.yaml",
+      "destination": "provenance/lab/configs/tokenizer_withheld_bytes.yaml",
+      "git_blob": "821c53167e4d6085cac79800521bf140233e7b5b",
+      "size_bytes": 311,
+      "sha256": "10a8b93e856452bdf0071475f849ac5abc72c3637c17f1658fd71457258601d6",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/withheld_bpe_cpu.yaml",
+      "destination": "provenance/lab/configs/withheld_bpe_cpu.yaml",
+      "git_blob": "58cc1c96c9e21afc6c07970ed952ac14ad19c82f",
+      "size_bytes": 1371,
+      "sha256": "0764cafbc5d211ee46938aa6b0544e499c207bfc0c5617cdb7ec51ef5f81e75a",
+      "group": "authored_configs"
+    },
+    {
+      "source": "configs/withheld_bytes_cpu.yaml",
+      "destination": "provenance/lab/configs/withheld_bytes_cpu.yaml",
+      "git_blob": "c067b374ec360a53afecec4cd2f4934fcd0ae6bc",
+      "size_bytes": 1375,
+      "sha256": "b676e85c978c1fee2feafcbf985a817d0f59998625571e64c4c61f480bce99b7",
+      "group": "authored_configs"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_token_budget_v1.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_token_budget_v1.json",
+      "git_blob": "e8e106b218a5430e5aa99d5814e30b31367111cd",
+      "size_bytes": 87198,
+      "sha256": "41ddc5be2290bbd568419adc9786bb1b00483623598c2926e130f4919593e51b",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1.json",
+      "git_blob": "7473bfbc39e4d2ae6c5ac9d1ce2c652a477f606a",
+      "size_bytes": 31285,
+      "sha256": "f59fd9e3a068202c6690ea0a5357887f251d8ed84cc37871023f4632fbcb0dfa",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00000000/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00000000/manifest.json",
+      "git_blob": "1fd4c3d17c642c29dc71d07b76436a44965516d4",
+      "size_bytes": 9921,
+      "sha256": "d75862c9a7d2b92436e91dea6e4cdb47713fe87db215ad265eaffd040d6856b1",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00000200/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00000200/manifest.json",
+      "git_blob": "a327a7ad44ab7625d98fff16eb594725460dd176",
+      "size_bytes": 10087,
+      "sha256": "931c92b3c2f33343504668651bdc02e0bd0be8c0246099bcd382efb09e3a0044",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00000400/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00000400/manifest.json",
+      "git_blob": "7bdad6b584a97be8f4b7d7d72f6c1d88ac1b06a5",
+      "size_bytes": 10153,
+      "sha256": "864c94020e19d70ba0eb1dac0f8be09d70389dcaa7fe846b92298481a7b014d8",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00001024/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00001024/manifest.json",
+      "git_blob": "31c425fd145f7f924ce4b738470c71fdd5f4d053",
+      "size_bytes": 10164,
+      "sha256": "e81b35de5338cd452bcedb1764dcdd9b0e4c727ba6d8f5783ea859e82b78a598",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00002048/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00002048/manifest.json",
+      "git_blob": "ca0534da0ec4ff1b03ae82be470ffd86d9e531df",
+      "size_bytes": 10165,
+      "sha256": "372fe798f4a6385df61679b6684ae6aed8603555d0cc549d24490c2425c1bb5b",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00003072/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00003072/manifest.json",
+      "git_blob": "7979b3c84a3c107d98f5c34c06331921b076efa6",
+      "size_bytes": 10166,
+      "sha256": "975b517cddab7f1e91f832ce7a0162e2cf305563d753ef552483e1a2fb99c81a",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00004096/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/checkpoints/step-00004096/manifest.json",
+      "git_blob": "87cd6abb1486d4d554f7f4bca67fdfb33246b634",
+      "size_bytes": 10164,
+      "sha256": "781f2a2da6b4c82a7974b69b326c2d66830bc2a385fdffd60e16440bced0c0e3",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/generation.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/generation.json",
+      "git_blob": "3ccaff9dd1364669fb37755e0b5c5f8ada7355d2",
+      "size_bytes": 1938,
+      "sha256": "12ef56c58450019984f9aa141f070b6fbd0de060b8b988509d72597cebfa7ab7",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/observations/step-00000000.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/observations/step-00000000.json",
+      "git_blob": "c28859f5d843549afef437da33d50c050167e399",
+      "size_bytes": 30979,
+      "sha256": "691cc0afe4c65166eba88497187e00bcb80737ffa4299b8faf5c786a6d03f070",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/observations/step-00000200.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/observations/step-00000200.json",
+      "git_blob": "c2d48604ec9a4fa0289b40010ef01c76eee7e6a8",
+      "size_bytes": 29250,
+      "sha256": "782d27a2d132e66c5c25207184620c54dc7c9e684caa52fec581ef82dcd4f103",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/observations/step-00000400.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/observations/step-00000400.json",
+      "git_blob": "46e6c2788c1a208882ee53db540bf11a130b45d1",
+      "size_bytes": 28783,
+      "sha256": "e24dbc0469673fa183731d6dc004159a405ae3d40a48d14501d131c45e528a29",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/observations/step-00001024.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/observations/step-00001024.json",
+      "git_blob": "5a1a77d5928e712ecd3bafbfb47b6b33e4ef6c4b",
+      "size_bytes": 28684,
+      "sha256": "08eac4369ccfd94f7f7ab3b796bae4a08d3110d690907580d97e24de2559c75b",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/observations/step-00002048.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/observations/step-00002048.json",
+      "git_blob": "249b96f23fc289664e4417242990062019544ff3",
+      "size_bytes": 29071,
+      "sha256": "88fb787b7e933edad5a1b0c874f50440678f05b919f32236f35a7d426b35a49a",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/observations/step-00003072.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/observations/step-00003072.json",
+      "git_blob": "39b454c508fc8d32efd1545870f345d4c1201511",
+      "size_bytes": 28694,
+      "sha256": "b90efaa205259441f128ef7242653daeea42cf2a45984833fe7404eb69f3dd35",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/observations/step-00004096.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/observations/step-00004096.json",
+      "git_blob": "0cdae95d82aab863d5a61db2c75c1b545bebd413",
+      "size_bytes": 28789,
+      "sha256": "4ad600478d5762f657f8819b061eaab67da7ef915a110dc330da9b41679bfb9d",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/progress.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/progress.json",
+      "git_blob": "7871500d4c9657b32eced7d3c917f6a3a52e44cf",
+      "size_bytes": 6261,
+      "sha256": "c5730561d18a834bf8772727f4cf02917bef0be15965f3b488b4b8e3e49d039a",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/run-manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/run-manifest.json",
+      "git_blob": "c5e1d747ea3786629c5416054595f053e0b629c1",
+      "size_bytes": 32180,
+      "sha256": "1b5f45cf994e346ee1dd67d47ffa232785bc283685820168420d69263be63375",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/runtime-telemetry.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/runtime-telemetry.json",
+      "git_blob": "598d170018b9a91790bbf9398c14b9b8aca02df9",
+      "size_bytes": 580,
+      "sha256": "e9a6f5e54312666791e0c3576edbaee4fe02ad5dfb8f0f04e74a2468ae8458e9",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed17/stage-evidence.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed17/stage-evidence.json",
+      "git_blob": "c2e9ddb6deb80af631556c283b6f59c10a054e8b",
+      "size_bytes": 10637,
+      "sha256": "f506500fe615b6e60f4738e545b1c4025f3f60154258ca468e2cee5a537a62e8",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00000000/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00000000/manifest.json",
+      "git_blob": "dd82ad30d4188930d11733b59766524ed003c9c0",
+      "size_bytes": 9922,
+      "sha256": "0c78570ee0cc755496ff1d9595f50f3830cbff529b8dc7afe0095f23d155a3fe",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00000200/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00000200/manifest.json",
+      "git_blob": "e7486b8f0789a387ea8bb9fbabaf58a64b1ee10e",
+      "size_bytes": 10088,
+      "sha256": "ee33dbbf4ea2d75b36e5da5163a1074719be000702ad066f99ea452606e93882",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00000400/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00000400/manifest.json",
+      "git_blob": "9ad7d1ffe00828b230225fecd9fba710f4767fcb",
+      "size_bytes": 10152,
+      "sha256": "822886f40110a6794fc48e6b907d48c211747c1e0fa235f0263190aecc07a093",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00001024/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00001024/manifest.json",
+      "git_blob": "38f913d5e20f411eccf971515f1cd2a35f8df82b",
+      "size_bytes": 10164,
+      "sha256": "3838815794f8bb4c59a9b84269974ef503a067bbff98381e24ea6cc918536ee9",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00002048/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00002048/manifest.json",
+      "git_blob": "215366b0591e1b0b06cf5abd17e85716f85b0947",
+      "size_bytes": 10164,
+      "sha256": "8f1233849d9b0898fc374158bb8efa041951867ab911ef2b2837faec47042442",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00003072/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00003072/manifest.json",
+      "git_blob": "97161134fee1b91ac448d1cb9c24c88f2d09a420",
+      "size_bytes": 10164,
+      "sha256": "2ea1bb86fb3031f93640359c4e194533e799875f82ac0dfbae6f610435e98de8",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00004096/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/checkpoints/step-00004096/manifest.json",
+      "git_blob": "8adf2044d1c22d60e45010652392dbd5555d4026",
+      "size_bytes": 10166,
+      "sha256": "53376abc14382e38b72a3f41efa2cf3aaacbbd1f6e3b67cf91499ad87d5bf816",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/generation.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/generation.json",
+      "git_blob": "751def410e60f636b730543bcd763720ba7d16b3",
+      "size_bytes": 2051,
+      "sha256": "ec8b0abd894d7f0ebdfe0927e8475f680681357909dd4a6520e3d9c69c0fba2b",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/observations/step-00000000.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/observations/step-00000000.json",
+      "git_blob": "72f3f6f72c05b5fdaff0daa6c71e7bfa5a04632e",
+      "size_bytes": 29127,
+      "sha256": "4309de46b1f53e2963c5e630c90a8cc18a8b16aea0009fe4895d7dbf8abb1d97",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/observations/step-00000200.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/observations/step-00000200.json",
+      "git_blob": "cf23e87628f4a909eb3250ebc03cbd3108aab2b4",
+      "size_bytes": 28831,
+      "sha256": "031bef74aff382971d1b5a70219e28cc60fe9137c1de46889cf9357a000a0797",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/observations/step-00000400.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/observations/step-00000400.json",
+      "git_blob": "d5addfce14619d4b91c435f5545926da86c2e874",
+      "size_bytes": 28868,
+      "sha256": "9351e57b970c5c69f346d08bfeb604581faac4f76c48852e06f2fe651957d217",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/observations/step-00001024.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/observations/step-00001024.json",
+      "git_blob": "0c98533aee888252d8b92a8990b204cd4e68d5db",
+      "size_bytes": 28873,
+      "sha256": "c51bb34b768954059c59f435dc1848b848d9fb2bf7974eccae33f3bd35c0d1e3",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/observations/step-00002048.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/observations/step-00002048.json",
+      "git_blob": "a74387705b2e2a6107b6ac8a7b152c06682208ea",
+      "size_bytes": 28950,
+      "sha256": "9e8fff541919903a739f92f4120986f5c5e77a6ef06930206c9aab123aa2cc6d",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/observations/step-00003072.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/observations/step-00003072.json",
+      "git_blob": "925c6ae96f7a32595eaeec643867a901b8b64aaf",
+      "size_bytes": 28841,
+      "sha256": "92c1e4053a5d9a080e3787e94bd7f648557e336322b2ff1c14d1603e453cbc14",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/observations/step-00004096.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/observations/step-00004096.json",
+      "git_blob": "47c8c21b9f222cd0ee726fc969fdc465b9ceb6d0",
+      "size_bytes": 28858,
+      "sha256": "cd351c5657a308df3e96b0598d2e7eabdea539072771ed6b265fb113f6be84e1",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/progress.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/progress.json",
+      "git_blob": "111ae239436870227b6febd31b3c52fd9826916e",
+      "size_bytes": 6265,
+      "sha256": "38e05a37c5d66f0f47152fc87573dba445996746891e11affc9fc762c6b18ca6",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/run-manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/run-manifest.json",
+      "git_blob": "a68d9cd7165f1be0f40eac7555545ef29e881225",
+      "size_bytes": 32213,
+      "sha256": "3294db7b828c972d52cf6de611ab68391ed12c1cf22597952b19d8afe3bebbf2",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/runtime-telemetry.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/runtime-telemetry.json",
+      "git_blob": "258c1b95ffe4428e98385ce45d87d183a0ecc950",
+      "size_bytes": 581,
+      "sha256": "4b5df9443e36f24b92c7097556023172cb9be8782d0457f25d68d6a95e7cb921",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed42/stage-evidence.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed42/stage-evidence.json",
+      "git_blob": "5e3c688cf12af6c48a9ac9bc50fbb193fef76957",
+      "size_bytes": 10670,
+      "sha256": "3152ab17821272d426f5c56f4d7f8729d987a12bbbe8401618d5f48176704913",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00000000/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00000000/manifest.json",
+      "git_blob": "33807ec3f1fe73e5d1d27d54472d6edbdf1fda9a",
+      "size_bytes": 9922,
+      "sha256": "69c94cae10e8f22960aefc32310915a7ecbb9a742e5c6932094422c70572f2d8",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00000200/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00000200/manifest.json",
+      "git_blob": "e62287abb69e77c3cdbf694c22e0cfaa976a5b92",
+      "size_bytes": 10088,
+      "sha256": "0f31f1dd351ace9e5e6d860bb0d8e33c5b604770943f9a876a7f9a5967da611f",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00000400/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00000400/manifest.json",
+      "git_blob": "268422f84fc2566ea8112f5e89f682555e0dbc2a",
+      "size_bytes": 10153,
+      "sha256": "ca785fb5bc1f53769870bd3fd336026b4f5e28c1bdb3480bfef923d5e3199f22",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00001024/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00001024/manifest.json",
+      "git_blob": "561e3d623f050e18fb5c349cca433f5e7727a367",
+      "size_bytes": 10165,
+      "sha256": "483898b65580bc65298154751b3020b8c62a2baaa3565556e5c2fad377879b7b",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00002048/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00002048/manifest.json",
+      "git_blob": "625b1c80334b30537dd5299f03e3f640a9d2c31e",
+      "size_bytes": 10166,
+      "sha256": "37a216ccc42507bc729da4dd88611471179f1ec80082025245a719145479c399",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00003072/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00003072/manifest.json",
+      "git_blob": "5388f5af0e97f250171b671be511c798ca16c2f0",
+      "size_bytes": 10165,
+      "sha256": "829a12b1612ee85fc572de9439028d96c77428564b10416067c6b0c0da1e1255",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00004096/manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/checkpoints/step-00004096/manifest.json",
+      "git_blob": "c97a699b9803d9b3f782c6a7e087720bc462328c",
+      "size_bytes": 10164,
+      "sha256": "cd248c47746f928bd11c6e5588e4f46449d292e63e79bd59c06fb7ddb7ab9013",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/generation.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/generation.json",
+      "git_blob": "02d17e76d15e21d8edbe7b859838363696e79eb7",
+      "size_bytes": 2016,
+      "sha256": "6f99db21c32e22c74b04be31b5f8ecbe191a46dbdb0ebc875f10cc5c70639a8a",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/observations/step-00000000.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/observations/step-00000000.json",
+      "git_blob": "8520ca6e339381f39364d56f669f2491bff933b9",
+      "size_bytes": 30133,
+      "sha256": "64c36e1bb32ed7c8a2501bf094debab1d39f7d0f2e35455eaccaf1ead95cb4a8",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/observations/step-00000200.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/observations/step-00000200.json",
+      "git_blob": "eb042fbb23375f1279c278715645c5d0b575a686",
+      "size_bytes": 28669,
+      "sha256": "c910c18b3277e68ad4b3da6ef7a3bc5c35996f9fed4ced0cccb419199890e8a8",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/observations/step-00000400.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/observations/step-00000400.json",
+      "git_blob": "e6cfe1f40f85313367f7cddea2c25034b036ef87",
+      "size_bytes": 28984,
+      "sha256": "d3c8dcc15c521c1d42958f4b22e3d7c893aa4e76b76342ec1e372f142a5613db",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/observations/step-00001024.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/observations/step-00001024.json",
+      "git_blob": "d61e88da96659b8bff39d8a0e01d7aa0a334d03a",
+      "size_bytes": 28811,
+      "sha256": "baa646ac7b96cce26930a40025951506ce75e7673a75ddb68cf5297a3c520735",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/observations/step-00002048.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/observations/step-00002048.json",
+      "git_blob": "aaae6bb61bf9dc6bbd560f2166481d8a94b4f94e",
+      "size_bytes": 28828,
+      "sha256": "4e636598f7e5fe45cd7a099bc78262e266a7f88f92b54028eae5540fc83c3236",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/observations/step-00003072.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/observations/step-00003072.json",
+      "git_blob": "298987d3aef52661d569d2e18ee8720b767cfeda",
+      "size_bytes": 28858,
+      "sha256": "a2bf24ffda5f81b0ec6fb6319f87b509606e14d836b00af62670691030bc7ee4",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/observations/step-00004096.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/observations/step-00004096.json",
+      "git_blob": "6aac9dddf2e296a5c59f448293a2dfbf655ea146",
+      "size_bytes": 28893,
+      "sha256": "a51fcec2a585deff23634f98581e691fd14d62543c5d132b8ae7dc070ae02b83",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/progress.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/progress.json",
+      "git_blob": "24b196d8039580e2334899dc94b706978e763b6f",
+      "size_bytes": 6261,
+      "sha256": "d418e825067f69477544df2ec649362ec80c0907a349a09efdd3d111472c5ea3",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/run-manifest.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/run-manifest.json",
+      "git_blob": "cad4cd92d0b4f7913daa9e7fdc1a61edb3307a31",
+      "size_bytes": 32180,
+      "sha256": "9d1d5ade36aa6d7e30a3a56673b245a27480506b76861a68e2a6b80e349380a5",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/runtime-telemetry.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/runtime-telemetry.json",
+      "git_blob": "9319d9505ef4bc1dee132b251e572866eb860bb6",
+      "size_bytes": 581,
+      "sha256": "9c7f3f3f96065f39205b5862db5b9f58c1fc76883eeec4b88a237d7c008f3dbc",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/dense_lm_v1/seed73/stage-evidence.json",
+      "destination": "provenance/lab/artifacts/acceptance/dense_lm_v1/seed73/stage-evidence.json",
+      "git_blob": "e79cf7b4170c694ff177e1a5f3c50c9f3e7a7119",
+      "size_bytes": 10637,
+      "sha256": "3fd5624c21a2764bb9ea2223efda33a731efcb5e4b14f041ad8a5f16d7e3d15b",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "artifacts/acceptance/scientific_studies_2026_09_22.json",
+      "destination": "provenance/lab/artifacts/acceptance/scientific_studies_2026_09_22.json",
+      "git_blob": "53ad1505be9d47e28240b6a6bcc85a7884ebb918",
+      "size_bytes": 57057,
+      "sha256": "29b1fffd5a0987adce54f7af8c1de1293d4a079f11ab2adde2dad1c95d567e69",
+      "group": "personal_acceptance"
+    },
+    {
+      "source": "examples/lab-job-try/README.md",
+      "destination": "provenance/lab/examples/lab-job-try/README.md",
+      "git_blob": "74d43c9d5d0f700e3cc55ff85d62f61ac99770a0",
+      "size_bytes": 1126,
+      "sha256": "7594abb5b945c7867bd75ab7907f0cb38d9a6d6626f254d5a681fa628bf41678",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/lab-job-try/baseline.yaml",
+      "destination": "provenance/lab/examples/lab-job-try/baseline.yaml",
+      "git_blob": "d58038747a5b8f10935a3198f4c95b36bdccfb50",
+      "size_bytes": 1387,
+      "sha256": "e81ff823edf74f9a76e900dc13bce4aedf2de7a35eefe5cb8042e67d66f0ed8d",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/lab-job-try/bounds.yaml",
+      "destination": "provenance/lab/examples/lab-job-try/bounds.yaml",
+      "git_blob": "6a820ae1993b38b6600f438419511d72ee832054",
+      "size_bytes": 137,
+      "sha256": "3f9617f12cbf4c5ae5dbf4fc4c96b0ad37842033a45b6fe77586294fa90f4f56",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/lab-job-try/delta.yaml",
+      "destination": "provenance/lab/examples/lab-job-try/delta.yaml",
+      "git_blob": "fcf8f5247dc140c902d3b844512450c5db785727",
+      "size_bytes": 108,
+      "sha256": "5d571ea36534f805f5338dbc0de1847483090c7fd94c42ad46b7058ab04f5cf8",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/lab-job-try/tokenizer.yaml",
+      "destination": "provenance/lab/examples/lab-job-try/tokenizer.yaml",
+      "git_blob": "beb50f8f28112404824b4b75d55228cd384f9f35",
+      "size_bytes": 401,
+      "sha256": "4cb7a0b8b993532843151c7ffb6471ff3045a901e39a468e918157b27d444477",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/lab-job-try/train.jsonl",
+      "destination": "provenance/lab/examples/lab-job-try/train.jsonl",
+      "git_blob": "97e8bbc075337ebdb59e3c010da530d1b233a6ac",
+      "size_bytes": 5910,
+      "sha256": "d4f730e305e488d22803f8990404cd0f3ed7e7ca959f5969a1a9f1b9ccd86cc7",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/lab-job-try/try.yaml",
+      "destination": "provenance/lab/examples/lab-job-try/try.yaml",
+      "git_blob": "f1144e38f9535483b7d9780fadeb3654e245c6b6",
+      "size_bytes": 122,
+      "sha256": "bd086be09b34eb80d2f27a0c42520d73a5e9d9e99c83b023fb186a83757b654c",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/lab-job-try/validation.jsonl",
+      "destination": "provenance/lab/examples/lab-job-try/validation.jsonl",
+      "git_blob": "8e9c2c3bfbbdb55076c3f1042974c93ffb3c1152",
+      "size_bytes": 6390,
+      "sha256": "0ab76327458b9a1105ac9236374bd282b3c112e448a691bfe434987656ba49d7",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign.yaml",
+      "destination": "provenance/lab/examples/tiny-campaign.yaml",
+      "git_blob": "54a10e1494d4013ed5537485ffba07d7778f0ce0",
+      "size_bytes": 559,
+      "sha256": "e5fed78f772b097e2c08bee2b49406127152c170b6949b53d8379d72ccfdcb3f",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/corpus.yaml",
+      "destination": "provenance/lab/examples/tiny-campaign/corpus.yaml",
+      "git_blob": "d9b6cc9d84cd021b554033360bce3041c5159606",
+      "size_bytes": 200,
+      "sha256": "ec98ec2a90174af495c4979c5e6de65269aa13774c3518baa953701435cefd27",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/release.yaml",
+      "destination": "provenance/lab/examples/tiny-campaign/release.yaml",
+      "git_blob": "33550be9a66f491bd6820002d3c07d7d5a4dd439",
+      "size_bytes": 282,
+      "sha256": "07276bec9a3299e9df0af293a34bb959f8c916899323cb28935c6bce3e4453a7",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/sources/tiny_developer.yaml",
+      "destination": "provenance/lab/examples/tiny-campaign/sources/tiny_developer.yaml",
+      "git_blob": "b9e94da712116e53c4cf0b2b10fe852efc58c1db",
+      "size_bytes": 663,
+      "sha256": "c15932d77fe531e3ed8463b3f9b05e1b843b33ada0add466876b80223efae2a2",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/sources/tiny_docs.yaml",
+      "destination": "provenance/lab/examples/tiny-campaign/sources/tiny_docs.yaml",
+      "git_blob": "520543fe95a25c4af5117ca82c95fbcbff33d972",
+      "size_bytes": 603,
+      "sha256": "0a028bbee14c2490b0c5a775458d7abbfcf130bdd466125b05a632cfad3ca93d",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/sources/tiny_test.yaml",
+      "destination": "provenance/lab/examples/tiny-campaign/sources/tiny_test.yaml",
+      "git_blob": "ad6ac4cb1fc3069c24cec42bec3c0b40320ce4da",
+      "size_bytes": 429,
+      "sha256": "6de876bd10029d495da5a9819a8b30c1c770d5cb1a8885543fdfc4eae0efe4ad",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/splits.yaml",
+      "destination": "provenance/lab/examples/tiny-campaign/splits.yaml",
+      "git_blob": "e3e7c4a7a910e5ef37faf154533302edd352d757",
+      "size_bytes": 168,
+      "sha256": "de42e5dbbf6074ffa714e0e73706444d42aef242c710f83d57bc18430cc41424",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_developer-0.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_developer-0.txt",
+      "git_blob": "2d5737855f32c3728b8edefcff2b897deb546b33",
+      "size_bytes": 126,
+      "sha256": "b84acdfab29011b882a327a26762bb063fe7bb49ae678a878e75c33f0bd3510a",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_developer-1.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_developer-1.txt",
+      "git_blob": "e93c73962833f84625f7c2e594172f01cc696781",
+      "size_bytes": 126,
+      "sha256": "bf4fddb4674672df4aec9da669e8bc24ddf0439d9c64352d0b40acc9b01878e7",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_developer-2.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_developer-2.txt",
+      "git_blob": "b56e26f679dd8b34c88690fad74a0a4b4f4865dc",
+      "size_bytes": 126,
+      "sha256": "79b8b6b423bcb0f96daed4663fe2ef7a65d11b71a924493473f6bf1f7d328864",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_developer-3.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_developer-3.txt",
+      "git_blob": "65c196acf41d402a42a14c5ae574d61a16544987",
+      "size_bytes": 126,
+      "sha256": "c5b22fe57c24fd3abab97b32c31967826caef5a8457490f0bbe41bbe42e77828",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_developer-4.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_developer-4.txt",
+      "git_blob": "d3278b0ac0f1eb683725113c659c1825660eb336",
+      "size_bytes": 126,
+      "sha256": "20eaa165b9380aa9ea161171299db90b3b6cfd51e6dc55651ff81a64ce969fe7",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_docs-0.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_docs-0.txt",
+      "git_blob": "4fcb6a1b0db5062c47a83a418673324a5bc2fc7f",
+      "size_bytes": 125,
+      "sha256": "9fac6ad1438a9ca87c87d060c561ccbf2609fb8e9739864c16c875690b1e28b9",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_docs-1.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_docs-1.txt",
+      "git_blob": "5d56d7ce9c2e9aae5b25347146719402aa3cff71",
+      "size_bytes": 125,
+      "sha256": "7d4ebecf2e64d671c4d4822a1bff1c792b1a2d84e3d303951f5e2077277750aa",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_docs-2.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_docs-2.txt",
+      "git_blob": "4405833689c450c292a419f70b7c538b7ef174c6",
+      "size_bytes": 125,
+      "sha256": "12812ff6e7c93e3f84a59acc3a97f0a95b25dc5e024d6bcc30a1ec2bd42ef46d",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_docs-3.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_docs-3.txt",
+      "git_blob": "11f22dd6d5e8333ae09b34b02ca497429a42c228",
+      "size_bytes": 125,
+      "sha256": "514e883c46b19df02d7d43a5009ade18d9e8b848492e5490ad2315a3e85b0c42",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_docs-4.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_docs-4.txt",
+      "git_blob": "47c2e452f65b30df546708d72368d44809a46af3",
+      "size_bytes": 125,
+      "sha256": "ef72539e17d1b33d6d90c60c70fbb34baed21f1deb313c5c765244f84007a130",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_test-0.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_test-0.txt",
+      "git_blob": "0a945c3cdf65d01b5abf5e801489cb1698cc5ad4",
+      "size_bytes": 117,
+      "sha256": "1a75f54dc2170acea1a0c8ab4233f4f6d5b1c8353691e787ad8170ce10a42989",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/texts/tiny_test-1.txt",
+      "destination": "provenance/lab/examples/tiny-campaign/texts/tiny_test-1.txt",
+      "git_blob": "e3570526399147ffae629ed3b8e8d0aa61a9c1f3",
+      "size_bytes": 117,
+      "sha256": "81229dfd194ded51f94f4f24816c7657cc807f0210ed7d4a67b1fb2f3b318688",
+      "group": "authored_examples"
+    },
+    {
+      "source": "examples/tiny-campaign/transforms/lm.yaml",
+      "destination": "provenance/lab/examples/tiny-campaign/transforms/lm.yaml",
+      "git_blob": "e53cf230bd3a46b651dd7fbfa823799288bd9993",
+      "size_bytes": 103,
+      "sha256": "776fc1505451ecfbf01bc2da8868fadec9568f4c15dd3f1bf28ee4653b7cff34",
+      "group": "authored_examples"
+    },
+    {
+      "source": "experiments/samples/corpus-shape-fraction.yaml",
+      "destination": "provenance/lab/experiments/samples/corpus-shape-fraction.yaml",
+      "git_blob": "e08db330d92b189c9d733f3a5622b2e5ee72b874",
+      "size_bytes": 2738,
+      "sha256": "376d407bca40088b8c489c7c2b235762a31ec49df1d60675b5efc9af4eb737c4",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/heldout-suite.yaml",
+      "destination": "provenance/lab/experiments/samples/heldout-suite.yaml",
+      "git_blob": "4077036f5f9453dec2e072e4b3c7aed126984aaf",
+      "size_bytes": 174,
+      "sha256": "60ffeffebbeebccb59e4d7afd0c1f8cf70a8df45c09ff785ac431c718078abcc",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/README.md",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/README.md",
+      "git_blob": "97e3770204724c37f419f8afeeac6acf3bbe3744",
+      "size_bytes": 2987,
+      "sha256": "8975d83392568fa890d66644262d47eb281af0e8c080ba7605c9ae87ee3eeb05",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/attention-matrix.yaml",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/attention-matrix.yaml",
+      "git_blob": "f8a3463890c20c0ede13b4cc9e0c4ebee38ba973",
+      "size_bytes": 187,
+      "sha256": "69c145407c5e8cdc5946016872e7468fe8cbf6aaabdde1e9662eaa6bd9fdc1b4",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/batch-matrix.yaml",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/batch-matrix.yaml",
+      "git_blob": "0c04d6e285996c7e96737ce31e338ade9ef608eb",
+      "size_bytes": 254,
+      "sha256": "86a59e8fce24a1d93f4edfb62fd9b481259086fcfb9d8f11c28078145e389f59",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/colab-fallback.ipynb",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/colab-fallback.ipynb.txt",
+      "git_blob": "5f74653913616b82b7c98ed8641a8381128e7a19",
+      "size_bytes": 1504,
+      "sha256": "4efb2a865911c241a7adbb2987f698ec84e4ddfb431fed1e8ee01f4fac5d78bd",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/relay-drive.example.yaml",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/relay-drive.example.yaml",
+      "git_blob": "08254ca43678c84e3ef867ce417804dab4229beb",
+      "size_bytes": 415,
+      "sha256": "d0bb597993bda8c93187f3098e2bd30fe189f08993ba963d0281800954581853",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/relay-s3.example.yaml",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/relay-s3.example.yaml",
+      "git_blob": "2bf5c20cf3d65514c5a92e005815dacfc2253574",
+      "size_bytes": 431,
+      "sha256": "ac5cceaacfa56bbf86057b0d0be4067f8b9cc0b1a97e862e026fb917e3c8505d",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/run-t4.yaml",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/run-t4.yaml",
+      "git_blob": "106832162a78a7d478f00104a244aa792ecdaa8a",
+      "size_bytes": 1101,
+      "sha256": "0b0d53286eae56268243e41423b5bfbd1ed6a5bcbfd0350c9a4c0fff13a65316",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/source.yaml",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/source.yaml",
+      "git_blob": "dfba99d1e965651013f4f8a212feca0bbdbf7090",
+      "size_bytes": 696,
+      "sha256": "cfa167f57a5f3ad2c878cedcc44b8ae2e9e5b22fb86ac5f89be49d7d2359a590",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/hosted-tinystories/tokenizer.yaml",
+      "destination": "provenance/lab/experiments/samples/hosted-tinystories/tokenizer.yaml",
+      "git_blob": "7fd98ce27405bf0a7bb6839177bc232af8a42077",
+      "size_bytes": 482,
+      "sha256": "4db89027e8d1ff99033fd26b1432160a28c1b0e8a1f8c3bf17cf99d1a3b751ba",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/training-program/offline-chain.yaml",
+      "destination": "provenance/lab/experiments/samples/training-program/offline-chain.yaml",
+      "git_blob": "ccb3655ec3a3505dc52ce61d06a3765f95a7df91",
+      "size_bytes": 404,
+      "sha256": "ace108aceab1b3f07b060060b6516972ffc57ba583a118bf1b1b1e6e66edff46",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/training-program/run.yaml",
+      "destination": "provenance/lab/experiments/samples/training-program/run.yaml",
+      "git_blob": "9ac3bf83d5c0a6411da37d4b1b3722860448c16d",
+      "size_bytes": 1266,
+      "sha256": "ec35126a62cc07840f8c79298b554f019478016b833ad957f0183f035ad742ff",
+      "group": "selected_samples"
+    },
+    {
+      "source": "experiments/samples/training-program/tokenizer.yaml",
+      "destination": "provenance/lab/experiments/samples/training-program/tokenizer.yaml",
+      "git_blob": "2a92f248092f190eb0e22b26a6b43749a3da3d56",
+      "size_bytes": 411,
+      "sha256": "15746b897fa235c5c1e348e0eaf28e5a0f85cdcd5cee62433fca2561323a18b0",
+      "group": "selected_samples"
+    },
+    {
+      "source": "docs/context-engram-study.md",
+      "destination": "provenance/lab/docs/context-engram-study.md",
+      "git_blob": "0bbe51ab702a1f1f76493266838051165ea0e73e",
+      "size_bytes": 20363,
+      "sha256": "1511ed7ea65d14d82c25c31d64606f68791682ba7ca22fa778d77c0aac992733",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/dense-lm-v1-workspace-audit.md",
+      "destination": "provenance/lab/docs/dense-lm-v1-workspace-audit.md",
+      "git_blob": "39ef3039c2a8c3727f157eae458cfc519cc32149",
+      "size_bytes": 9092,
+      "sha256": "85c3f98fd961d473b64c332e80534e9b7831aedae5a711eca7e42543dba0d1ae",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/first-model.md",
+      "destination": "provenance/lab/docs/first-model.md",
+      "git_blob": "ca29088f24d835aff2f85035374965cf2b379011",
+      "size_bytes": 13243,
+      "sha256": "150584d6e009a17116a05ee9f1cb51ba719c56e874e9104c6d6add695dad8e83",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/from-toy-to-useful.md",
+      "destination": "provenance/lab/docs/from-toy-to-useful.md",
+      "git_blob": "a82cf24db0918c9a1c166986aae4bcf7c739d4b0",
+      "size_bytes": 33395,
+      "sha256": "ff17ae8dd84ee197108426c99e6c69d1a2bfc83c65147f0f8b5b1ed6be13d57a",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/instruction-training.md",
+      "destination": "provenance/lab/docs/instruction-training.md",
+      "git_blob": "9f59dff588a86072ab7a091dd428ef3f46500a5d",
+      "size_bytes": 7842,
+      "sha256": "67acaffaee2e4edc10d628c1f3f911c75bd05389dd88db67586c083ba87c6203",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/model-0.md",
+      "destination": "provenance/lab/docs/model-0.md",
+      "git_blob": "38fe5b19043f727df1c4596c5f77f7517b7bae5f",
+      "size_bytes": 5384,
+      "sha256": "424c5f75d8426aebdf7d65b552e394a08035ad9bfacfe8bfd40ad0b4bb65e1dc",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/path-domain-corpus.md",
+      "destination": "provenance/lab/docs/path-domain-corpus.md",
+      "git_blob": "ae37db92cd9a764349b0ea03effd5966451080a8",
+      "size_bytes": 16204,
+      "sha256": "842caf734a628a9d7597dd10eaed2468adf9601719e6d7cbe62b2a4115bd6641",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/100m-readiness.md",
+      "destination": "provenance/lab/docs/research/100m-readiness.md",
+      "git_blob": "71ff31c9a60ef358be6840070ed4eff2cb1d846d",
+      "size_bytes": 9517,
+      "sha256": "a012f85ec2c75c47579a7348196ed42bd897674a66ef12c2a259fb22551598ec",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/compiled-engram-initialization-v1.md",
+      "destination": "provenance/lab/docs/research/compiled-engram-initialization-v1.md",
+      "git_blob": "b77968ac0a94197db5568b0bee6ead853898ab40",
+      "size_bytes": 2012,
+      "sha256": "28b987249446d75cea1f04dc0622a51e8a63389129934fca5a8497efdea63666",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/compiled-knowledge-engram-v1.md",
+      "destination": "provenance/lab/docs/research/compiled-knowledge-engram-v1.md",
+      "git_blob": "2ca4e797bb2f01c4a9a2df0cb03a2b2cccd395db",
+      "size_bytes": 4087,
+      "sha256": "c47742383278e78947ab8500a7666eec1a3b3f6191f4a82185216e1e6d6f5f14",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/dense-lm-token-budget-review.md",
+      "destination": "provenance/lab/docs/research/dense-lm-token-budget-review.md",
+      "git_blob": "7137bacdc166b110b4a5c1e0bdf60aabdaff33fe",
+      "size_bytes": 4845,
+      "sha256": "c693f83b8c7606aede2b2175cb2664232125fa183953ad160a6aca006f8e9856",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/dense-lm-v1-preprocessing.md",
+      "destination": "provenance/lab/docs/research/dense-lm-v1-preprocessing.md",
+      "git_blob": "f8152736a4a585515150cef29857a43efab78739",
+      "size_bytes": 4604,
+      "sha256": "79eb1e104c29baebff630109fd6102719e66be4a009d4866f9588c7190ac0d28",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/dense-lm-v1.md",
+      "destination": "provenance/lab/docs/research/dense-lm-v1.md",
+      "git_blob": "aebf06a1ef26883c6d6a281df3ea2c21478bac00",
+      "size_bytes": 22087,
+      "sha256": "59cd26d37828e63b89170754c7dbe217fae567da93bf8f7f8b1830acabedbb10",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/development-evidence.md",
+      "destination": "provenance/lab/docs/research/development-evidence.md",
+      "git_blob": "e8ea732508d59620cc6ec657260da87ec4c6181f",
+      "size_bytes": 48426,
+      "sha256": "2213fda52d91c8cac1f9e9530c254f2bc205f772a7eba2243f32783c0adb569e",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/engram-ffn-substitution.md",
+      "destination": "provenance/lab/docs/research/engram-ffn-substitution.md",
+      "git_blob": "9328b532fdf8bf72053664c29f76b6f3b6834ad4",
+      "size_bytes": 1640,
+      "sha256": "82b5f18170df944bc36c6f6a81f77219b61dcae284594e66f1e4fe7efe491ace",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/engram-mla-compression.md",
+      "destination": "provenance/lab/docs/research/engram-mla-compression.md",
+      "git_blob": "62f2c97ac0b1fadf5e70f2b6d3b80b77cd286525",
+      "size_bytes": 1391,
+      "sha256": "855662b8ec27fb7aa0a60bc0c3dcfb4d93510f4d0ae4c5e6bf7bccee10bf92e8",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/engram-moe-capacity.md",
+      "destination": "provenance/lab/docs/research/engram-moe-capacity.md",
+      "git_blob": "11c37408c3cbffeae7e8e82b129ffca6fec749a7",
+      "size_bytes": 1437,
+      "sha256": "659c1318de89b7d01d27753a93a17fbf9a39ff9fb3ae4e8b98504df59ea78997",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/engram-placement.md",
+      "destination": "provenance/lab/docs/research/engram-placement.md",
+      "git_blob": "18b31bb9935bd8c57b2780d351fb65c0f4ec9237",
+      "size_bytes": 1875,
+      "sha256": "e017b475e01c944252250091a67a551cea37efb420fffcd179b5d7c31e5167ef",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/engram-portability.md",
+      "destination": "provenance/lab/docs/research/engram-portability.md",
+      "git_blob": "6608823a7e108a80efad3d7a45902d3ea76facf9",
+      "size_bytes": 10094,
+      "sha256": "8b071602a8fed0ecbfc4db2a6864fbda3ff8f4198968973102d354af95ffb139",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/engram-sparse-budget.md",
+      "destination": "provenance/lab/docs/research/engram-sparse-budget.md",
+      "git_blob": "5a805b4f6fe163685357f45985c2e418ca54411a",
+      "size_bytes": 1533,
+      "sha256": "8fd1a3e8ed18b2df061b52a28b881284d5019d3c498bd0e0aae66d85168b1eb8",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/experiment-dsl-retrospectives.md",
+      "destination": "provenance/lab/docs/research/experiment-dsl-retrospectives.md",
+      "git_blob": "3afa5c2064879ae10b8960a6167046bd021d0189",
+      "size_bytes": 6758,
+      "sha256": "d4f7d2393dd9de772290c051e6236cd7865047b3be8079a76bf9afc2ec077cb1",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/experiment-ledger.md",
+      "destination": "provenance/lab/docs/research/experiment-ledger.md",
+      "git_blob": "09acbbbce4a3ab54247be44f6729505fd2b75ac6",
+      "size_bytes": 7150,
+      "sha256": "5a2c060f419a7e76db5a147e00c2cae130aa20aedd039bb109193e61fcf07879",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/learned-engram-portability.md",
+      "destination": "provenance/lab/docs/research/learned-engram-portability.md",
+      "git_blob": "fde799e183e119138f32139443b914248f5a8aa3",
+      "size_bytes": 18630,
+      "sha256": "1b9080de8c55d41a492d3ef03679d04fe2c1076236d42309207cd73eea1373f1",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/lexical-memory-heavy.md",
+      "destination": "provenance/lab/docs/research/lexical-memory-heavy.md",
+      "git_blob": "8efaedb53b1581dcef230f478ebc9ce49a061583",
+      "size_bytes": 1629,
+      "sha256": "d5b117277e4f50e3c2227497b59c7a8cc24f7599887abf9567ef1c86da9b09c5",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/research/sample-report.md",
+      "destination": "provenance/lab/docs/research/sample-report.md",
+      "git_blob": "7756e52760688986eb67bccfd25330d91b7aaeb8",
+      "size_bytes": 12070,
+      "sha256": "846a79f7ffac145be161895541c62abf71bea9c26c09995521f2af1c85fa5626",
+      "group": "research_docs"
+    },
+    {
+      "source": "docs/tinytext-model-guide.md",
+      "destination": "provenance/lab/docs/tinytext-model-guide.md",
+      "git_blob": "b82e6fa2a1b2e29b49c169a9bfa6ca82fc3e109d",
+      "size_bytes": 12420,
+      "sha256": "756cb3c95609de3d9453c124b838278ace8f1e2a9c40dc3e2917b8dbf993901d",
+      "group": "research_docs"
+    }
+  ]
+}
