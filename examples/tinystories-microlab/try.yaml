@@ -1,0 +1,5 @@
+try_config_version: 1
+seed: 42
+probe_tier: none
+fresh_baseline: false
+lab_dir: lab

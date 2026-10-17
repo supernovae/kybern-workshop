@@ -1,0 +1,19 @@
+{
+  "generation_panel_version": 1,
+  "id": "tinystories-website-baseline",
+  "role": "descriptive_not_quality_gate",
+  "prompts": [
+    "Lily put her red ball in a blue box. Later, she opened the box and",
+    "Sam saw a small bird stuck in a puddle. He found a dry stick and",
+    "Mia wanted to share her last apple with Ben. She cut it in two and"
+  ],
+  "decoder": {
+    "temperature": 0,
+    "top_k": 0,
+    "max_new_tokens": 48,
+    "seed": 42,
+    "use_cache": true,
+    "strict_context": true
+  },
+  "checkpoint_selection": "step_00024576_gen_000014"
+}

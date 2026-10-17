@@ -1,0 +1,22 @@
+{
+  "generation_panel_version": 1,
+  "id": "tinystories-demo-sampled",
+  "role": "descriptive_not_quality_gate",
+  "prompts": [
+    "Lily put her red ball in a blue box. Later, she opened the box and",
+    "Sam saw a small bird stuck in a puddle. He found a dry stick and",
+    "Mia wanted to share her last apple with Ben. She cut it in two and",
+    "Eli broke his favorite cup. He decided to tell the truth about what happened.",
+    "Ada planted a seed in a small pot. Every day she carefully looked after it.",
+    "Two friends both wanted the same toy. They tried to find a fair way to share."
+  ],
+  "decoder": {
+    "temperature": 0.8,
+    "top_k": 40,
+    "max_new_tokens": 192,
+    "seed": 42,
+    "use_cache": true,
+    "strict_context": true
+  },
+  "checkpoint_selection": "step_00024576_gen_000014"
+}
