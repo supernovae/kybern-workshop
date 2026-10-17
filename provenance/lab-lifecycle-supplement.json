@@ -1,0 +1,57 @@
+{
+  "manifest_version": 1,
+  "source_repository": "https://github.com/supernovae/tiny-sparse-lab",
+  "source_commit": "9e7024f152328938438cea63fffbdbf1831d8254",
+  "scope": "Single historical guide preservation and explicit missing lifecycle references; no current runtime guarantee or recovery work.",
+  "files": [
+    {
+      "source": "docs/portable-engram.md",
+      "destination": "provenance/lab/docs/portable-engram.md",
+      "git_blob": "a3d47d065888b1398dff474434647523a68b37cd",
+      "size_bytes": 5957,
+      "sha256": "b121d78ad3db4e15d94371f0e252985b1a9253aeacfdea0a68277b38b2210747"
+    }
+  ],
+  "unavailable_references": [
+    {
+      "source": "artifacts/acceptance/dense_small_v1_2026_09_26.json",
+      "status": "unavailable_in_pinned_tracked_trees",
+      "lab_source_commit": "9e7024f152328938438cea63fffbdbf1831d8254",
+      "workshop_checked_commit": "78ac2a46aeb57dd3e6432706e25e08c9d9bcef4f",
+      "workshop_checked_path": "provenance/lab/artifacts/acceptance/dense_small_v1_2026_09_26.json",
+      "scope": "Absent at these tracked paths; not recovered, hash-verified, runnable or a global host-storage inventory."
+    },
+    {
+      "source": "artifacts/acceptance/dense_small_v1_2026_09_26/acquisition-chat.json",
+      "status": "unavailable_in_pinned_tracked_trees",
+      "lab_source_commit": "9e7024f152328938438cea63fffbdbf1831d8254",
+      "workshop_checked_commit": "78ac2a46aeb57dd3e6432706e25e08c9d9bcef4f",
+      "workshop_checked_path": "provenance/lab/artifacts/acceptance/dense_small_v1_2026_09_26/acquisition-chat.json",
+      "scope": "Absent at these tracked paths; not recovered, hash-verified, runnable or a global host-storage inventory."
+    },
+    {
+      "source": "artifacts/acceptance/dense_small_v1_run_manifest_20260926.json",
+      "status": "unavailable_in_pinned_tracked_trees",
+      "lab_source_commit": "9e7024f152328938438cea63fffbdbf1831d8254",
+      "workshop_checked_commit": "78ac2a46aeb57dd3e6432706e25e08c9d9bcef4f",
+      "workshop_checked_path": "provenance/lab/artifacts/acceptance/dense_small_v1_run_manifest_20260926.json",
+      "scope": "Absent at these tracked paths; not recovered, hash-verified, runnable or a global host-storage inventory."
+    },
+    {
+      "source": "artifacts/research-reports/1d471241a17eca7b6d9680cfc3f595a921ab0aabe4f8b2e54a60835a6e95bb00/manifest.json",
+      "status": "unavailable_in_pinned_tracked_trees",
+      "lab_source_commit": "9e7024f152328938438cea63fffbdbf1831d8254",
+      "workshop_checked_commit": "78ac2a46aeb57dd3e6432706e25e08c9d9bcef4f",
+      "workshop_checked_path": "provenance/lab/artifacts/research-reports/1d471241a17eca7b6d9680cfc3f595a921ab0aabe4f8b2e54a60835a6e95bb00/manifest.json",
+      "scope": "Absent at these tracked paths; not recovered, hash-verified, runnable or a global host-storage inventory."
+    },
+    {
+      "source": "artifacts/research-reports/b094e9791fe9c0eb0a635388e52d00782c7317abadad33f9e6b9c4f3e3670bed/manifest.json",
+      "status": "unavailable_in_pinned_tracked_trees",
+      "lab_source_commit": "9e7024f152328938438cea63fffbdbf1831d8254",
+      "workshop_checked_commit": "78ac2a46aeb57dd3e6432706e25e08c9d9bcef4f",
+      "workshop_checked_path": "provenance/lab/artifacts/research-reports/b094e9791fe9c0eb0a635388e52d00782c7317abadad33f9e6b9c4f3e3670bed/manifest.json",
+      "scope": "Absent at these tracked paths; not recovered, hash-verified, runnable or a global host-storage inventory."
+    }
+  ]
+}
