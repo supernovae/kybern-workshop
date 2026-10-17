@@ -1,0 +1,55 @@
+{
+  "source_repository": "https://github.com/supernovae/tiny-sparse-lab",
+  "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+  "seed_source": "src/sparselab/research/scaffold.py:_SEEDS=(17,41,73)",
+  "files": [
+    {
+      "source": "src/sparselab/research/resources/catalog/engram-placement-v1.json",
+      "archive_path": "provenance/lab/src/sparselab/research/resources/catalog/engram-placement-v1.json",
+      "source_sha256": "a3b2c3cfc41d1f6d76d1b69147572c7ddc2a218b312bcfeef0f6bdac5f998e36",
+      "destination": "experiments/engram-placement-v1/native/catalog/engram-placement-v1.json",
+      "destination_sha256": "a3b2c3cfc41d1f6d76d1b69147572c7ddc2a218b312bcfeef0f6bdac5f998e36",
+      "changes": "Byte-identical resource copy."
+    },
+    {
+      "source": "src/sparselab/research/resources/recipes/engram-placement-v1.json",
+      "archive_path": "provenance/lab/src/sparselab/research/resources/recipes/engram-placement-v1.json",
+      "source_sha256": "c1628deec93b8c906856a7016300305ea6bb60bc200c36fc2d1883941f4d435e",
+      "destination": "experiments/engram-placement-v1/native/recipes/engram-placement-v1.json",
+      "destination_sha256": "46f296f9060f308c57fd0e57de1d9c93823bdc3b7b327579b4f2b17119f3e5c9",
+      "changes": "Explicit original scaffold seeds 17,41,73 in each scale."
+    },
+    {
+      "source": "src/sparselab/research/resources/base.yaml",
+      "archive_path": "provenance/lab/src/sparselab/research/resources/base.yaml",
+      "source_sha256": "9845529ff613f4bea5c27cd515db31b7801c757fdad5db1c7658f7f4f2857cdd",
+      "destination": "experiments/engram-placement-v1/native/base.yaml",
+      "destination_sha256": "9845529ff613f4bea5c27cd515db31b7801c757fdad5db1c7658f7f4f2857cdd",
+      "changes": "Byte-identical resource copy."
+    },
+    {
+      "source": "src/sparselab/research/resources/profiles.json",
+      "archive_path": "provenance/lab/src/sparselab/research/resources/profiles.json",
+      "source_sha256": "39ea4c2af85866a923d5b99268c70a895f88756fb419f2117867524c268066a2",
+      "destination": "experiments/engram-placement-v1/native/profiles.json",
+      "destination_sha256": "39ea4c2af85866a923d5b99268c70a895f88756fb419f2117867524c268066a2",
+      "changes": "Byte-identical resource copy."
+    },
+    {
+      "source": "src/sparselab/research/resources/datasets.json",
+      "archive_path": "provenance/lab/src/sparselab/research/resources/datasets.json",
+      "source_sha256": "0a526767bee878abd0b5530abaaaf802fac04f5a75b0d02ce3afbe83235cc9a1",
+      "destination": "experiments/engram-placement-v1/native/datasets.json",
+      "destination_sha256": "0c2196a8e2b000c74a39aabd98fe15f6028d84fb8f910dbe14f0fe78187a4585",
+      "changes": "Restrict selectable dataset to original offline profile; no profile value changes."
+    },
+    {
+      "source": "src/sparselab/research/resources/lifecycle.json",
+      "archive_path": "provenance/lab/src/sparselab/research/resources/lifecycle.json",
+      "source_sha256": "e23734fa46739ba87e0d1ee5f258e43646f41a8360e991273350dc419a80346e",
+      "destination": "experiments/engram-placement-v1/native/lifecycle.json",
+      "destination_sha256": "e23734fa46739ba87e0d1ee5f258e43646f41a8360e991273350dc419a80346e",
+      "changes": "Byte-identical resource copy."
+    }
+  ]
+}

@@ -758,7 +758,7 @@
         "provenance/lab/src/sparselab/research/resources/catalog/engram-placement-v1.json",
         "provenance/lab/docs/research/engram-placement.md"
       ],
-      "native_recipe_path": null,
+      "native_recipe_path": "experiments/engram-placement-v1/native/catalog/engram-placement-v1.json",
       "title": "Computation after lookup: does placement change learned behavior?",
       "historical_native_card_path": "provenance/lab/src/sparselab/research/resources/catalog/engram-placement-v1.json",
       "portfolio_intent": {
@@ -794,9 +794,17 @@
         "candidate": "devmind-340m-base",
         "note": "Not selected, built, or training authority; applicability and scientific controls require review."
       },
-      "native_recipe_gap": "Preserved provenance is not an admitted portable recipe; native adaptation and explicit local resource-root support are a separate stage.",
+      "native_recipe_gap": "Offline/smoke native authoring validated at the exact development pin; runtime artifacts, lifecycle evidence closure, reviewed dependency and execution approval remain missing.",
       "availability": "available",
-      "landing_path": "experiments/engram-placement-v1/README.md"
+      "landing_path": "experiments/engram-placement-v1/README.md",
+      "native_resource_root": "experiments/engram-placement-v1/native",
+      "native_guide_path": "experiments/engram-placement-v1/NATIVE.md",
+      "native_metadata_validation": {
+        "status": "metadata_validated",
+        "path": "experiments/engram-placement-v1/metadata-validation.json",
+        "scope": "offline/smoke nine configurations and nine pairs only; runtime not executed",
+        "lab_commit": "3dc40ab91afce4004b273b42e9a6ff349eeaf8a4"
+      }
     },
     {
       "id": "engram-portability-v1",

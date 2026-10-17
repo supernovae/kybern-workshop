@@ -7,3 +7,5 @@ Original sources:
 - [Preserved src/sparselab/research/resources/catalog/engram-placement-v1.json](../../provenance/lab/src/sparselab/research/resources/catalog/engram-placement-v1.json)
 
 Resume and rebuild are blocked pending verified artifact closure, supported native bindings, scientific choices where unresolved, and execution approval. See the [catalog](../../catalog/experiments.json) for the explicit prerequisites and [preservation policy](../../catalog/README.md). No current execution or useful-model claim is made.
+
+[Native offline/smoke authoring guide](NATIVE.md): original nine architecture/seed cells, with explicit resource closure. Runtime readiness remains blocked; see the guide and validation record for the precise checked boundary.
