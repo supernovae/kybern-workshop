@@ -1,4 +1,6 @@
-# Scientific protocol — proposed, awaiting review and measured inputs
+# DevMind340MBase scientific protocol
+
+Proposed, awaiting review and measured inputs.
 
 Sources: [EXP-1 science card](https://app.notion.com/p/3f63b68cca2281cc8659d12bd8aa9d2c)
 and its [design revision](https://app.notion.com/p/3fb3b68cca2281ca8275d2733b1aaa65),

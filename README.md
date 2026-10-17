@@ -29,7 +29,7 @@ is not the current run guide.
 
 ## Authored experiments
 
-[EXP-1: approximately 340M dense baseline](experiments/exp1-340m/README.md)
+[DevMind — DevMind340MBase](experiments/devmind/README.md)
 relocates the exact preparation declarations and records proposed model/training
 science. It is not execution-ready: generated inputs, scientific review, native
 portable bindings and runtime budgets remain outstanding. No weights are supplied.

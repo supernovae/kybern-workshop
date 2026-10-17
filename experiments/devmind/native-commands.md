@@ -74,3 +74,18 @@ not activate a run pin. At the earlier inspected Lab revision, the existing nati
 `model.inspection.named_tensor_inventory` also returned 341885952 parameters,
 219 tensor specifications and one tied alias without model/tensor allocation.
 Native optimizer source grouping was inspected; no optimizer state was allocated.
+
+## Public naming and relocation recheck
+
+The public project is DevMind and the recipe is DevMind340MBase (DevMind 340M
+Base). The directory is `experiments/devmind/`. Historical EXP-1/LAB86 identifiers
+and all 148 imported preparation files are unchanged. This is fresh preparation,
+not reuse of the older DevMind corpus/tokenizer/model.
+
+After relocation, native CLI checks at Lab
+`570c182b458146fe9158f338380a8cfe5429466c` again passed both model/optimizer section
+validation with identical input hashes and `executable: false`. `transport-init`
+compiled the relocated acquisition-project path; `pack` still refused its two
+missing generated bindings. No attempt directory was created. Relative project
+source declarations remain beside the project, and the four authored public
+document links resolve at their renamed location.
