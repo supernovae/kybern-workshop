@@ -12,7 +12,7 @@ required. Keep generated data, native stores and approvals outside this recipe.
 | Rights and splits | `corpus admission-draft`, `inspect-admission`, `split-inventory`, `freeze-splits` | Real retained inputs, reviewed admission and family clusters |
 | Release and tokenizer | `corpus build`, `freeze`, `audit`, `export`; `tokenizer train` | Valid frozen release, export configuration and fresh fit/audit evidence |
 | Unique targets and packing | `corpus measure-tokens`, `materialize-mixture`, `verify-mixture`; `data prepared-inputs publish/verify` | Real token counts, complete RunConfig and envelope |
-| Shape and configuration | Pure `config validate` interface tracked by Lab #158 | Native model/optimizer section validation; full run bindings still missing |
+| Shape and configuration | `config validate SOURCE --kind model/optimizer/run --json` (Lab PR162) | Native model/optimizer section validation; full run bindings still missing |
 | Train/recover | `train CONFIG`, `train CONFIG --resume RUN_ID`; native Campaign operations | Full reviewed RunConfig, prepared inputs, admission, finite training budget and supported runtime |
 | Inspect/verify checkpoint | `checkpoint inspect`, `checkpoint verify` | Actual native checkpoint/store identities |
 | Evaluate retained base | `eval RUN_ID --checkpoint CHECKPOINT --panel PANEL --output OUTPUT`; `model exercise RUN_ID --checkpoint CHECKPOINT --prompt-panel PANEL` | Real matching checkpoint, frozen panel, local native run store, separately authorized evaluation |
@@ -55,5 +55,22 @@ required artifact closure in `base-artifact.md`, without claiming it exists.
 These checks establish relocation of the inspected declaration and an honest
 missing-input refusal. They do not establish complete-plan execution, 340M
 training, usable-token yield, resource capacity, model quality or published
-weights. No new Workshop Python test suite was added. Pure native config
-validation evidence will be added when the Lab #158 interface is available.
+weights. No new Workshop Python test suite was added. Pure native configuration validation was then repeated at Lab PR162 head
+`92e8e428a1df3f06d1b0fb451a824fb38f14fda9` using:
+
+```sh
+sparselab config validate model.json --kind model --json
+sparselab config validate optimizer.json --kind optimizer --json
+```
+
+Both exit 0 with `schema_valid: true`, `executable: false`. Input SHA256:
+
+- model: `47fe3e80dbe99abd53d083f8e0e558e691f102e7be64f247573a89aa61e42107`
+- optimizer: `5608094732838fa17570f9adab6786e2e2edaca42d2eb0d0f57a6e3ae6d64a0e`
+
+This verifies each native section, not cross-section RunConfig compatibility or
+artifact contents. PR162 remains subject to independent review/merge; this does
+not activate a run pin. At the earlier inspected Lab revision, the existing native
+`model.inspection.named_tensor_inventory` also returned 341885952 parameters,
+219 tensor specifications and one tied alias without model/tensor allocation.
+Native optimizer source grouping was inspected; no optimizer state was allocated.

@@ -13,8 +13,8 @@ SwiGLU intermediate width 2816, RMSNorm, RoPE, vocabulary 32768 with tied
 embeddings, dense causal attention and context 2048. No lexical memory or MoE.
 The bias-free native tensor inventory convention counts shared embeddings once:
 33,554,432 embeddings + 100,663,296 attention + 207,618,048 FFN + 50,176 norms
-= **341,885,952 parameters**. This is arithmetic from the proposed shapes;
-native dry-run confirmation is recorded separately, never a model allocation.
+= **341,885,952 parameters**. This matches the existing native shape-only `named_tensor_inventory` result
+(219 tensor specifications, one tied alias); no model or tensor was allocated.
 Tied output-head aliases must not be counted twice.
 
 ## Fresh preparation
@@ -38,8 +38,10 @@ is not publication permission.
 Seed 42, BF16 on a separately qualified supported runtime; FP32 optimizer state,
 transformer-block activation checkpointing, no offload initially. AdamW parameters
 are in `optimizer.json`: peak 0.0006, floor 0.00006, betas 0.9/0.95, epsilon 1e-8,
-weight decay 0.1; gradient clip 1.0; dropout zero. Norm exclusion from weight decay
-and exact native parameter grouping must be checked and frozen before approval.
+weight decay 0.1; gradient clip 1.0; dropout zero. The inspected native `training.optimizer.make_optimizer` excludes nontrainable
+and duplicate parameter identities, applies decay to tensors with rank at least
+two, and zero decay to lower ranks (including RMSNorm). Pin that implementation
+with the eventual reviewed runtime.
 Nominal microbatch 2, accumulation 32, context 2048 gives 131072 targets/update
 only when masks/packing actually produce all targets. Preserve effective batch
 if changing microbatch for fit. Warm up for 1000 updates, then native cosine to
@@ -103,6 +105,6 @@ included. Optional SFT is a separate later recipe with base-retention evaluation
 
 Scientific approval of proposals; measured source/English/token supply; immutable
 release, tokenizer and packed input receipts; evaluation datasets/prompts/rights;
-exact update and scheduler horizon; native parameter-group verification; finite
+exact update and scheduler horizon; finite
 runtime and retention budget from actual capacity; explicit execution approval.
 These are concrete missing decisions/artifacts, not evidence of failed science.
