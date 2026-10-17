@@ -138,7 +138,18 @@
       },
       "native_recipe_gap": "Preserved provenance is not an admitted portable recipe; native adaptation and explicit local resource-root support are a separate stage.",
       "availability": "available",
-      "landing_path": "experiments/dense-lm-scale-v1/README.md"
+      "landing_path": "experiments/dense-lm-scale-v1/README.md",
+      "pending_evidence_sources": [
+        {
+          "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+          "source_path": "docs/decisions/0014-scale-experiments.md",
+          "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/docs/decisions/0014-scale-experiments.md",
+          "availability": "source_only",
+          "disposition": "classification_pending",
+          "role": "Shared engineering protocol context, not experiment execution evidence; no experiment-specific authorship inferred.",
+          "workshop_destination": null
+        }
+      ]
     },
     {
       "id": "dense-lm-token-budget-v1",
@@ -185,7 +196,18 @@
       },
       "native_recipe_gap": "Preserved provenance is not an admitted portable recipe; native adaptation and explicit local resource-root support are a separate stage.",
       "availability": "available",
-      "landing_path": "experiments/dense-lm-token-budget-v1/README.md"
+      "landing_path": "experiments/dense-lm-token-budget-v1/README.md",
+      "pending_evidence_sources": [
+        {
+          "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+          "source_path": "docs/decisions/0014-scale-experiments.md",
+          "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/docs/decisions/0014-scale-experiments.md",
+          "availability": "source_only",
+          "disposition": "classification_pending",
+          "role": "Shared engineering protocol context, not experiment execution evidence; no experiment-specific authorship inferred.",
+          "workshop_destination": null
+        }
+      ]
     },
     {
       "id": "dense-lm-v1",
@@ -242,6 +264,17 @@
           "path": "provenance/lab/artifacts/research-reports/3f6deec6c11b70750f92219e23fb37c017922017c4730b775b245f27be82c3f0",
           "association_source": "provenance/lab/artifacts/research-reports/3f6deec6c11b70750f92219e23fb37c017922017c4730b775b245f27be82c3f0/inputs/study.yaml",
           "scope": "Historical report association only; no current reproduction claim."
+        }
+      ],
+      "pending_evidence_sources": [
+        {
+          "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+          "source_path": "docs/decisions/0014-scale-experiments.md",
+          "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/docs/decisions/0014-scale-experiments.md",
+          "availability": "source_only",
+          "disposition": "classification_pending",
+          "role": "Shared engineering protocol context, not experiment execution evidence; no experiment-specific authorship inferred.",
+          "workshop_destination": null
         }
       ]
     },
@@ -547,7 +580,18 @@
       },
       "native_recipe_gap": "Preserved provenance is not an admitted portable recipe; native adaptation and explicit local resource-root support are a separate stage.",
       "availability": "available",
-      "landing_path": "experiments/devmind-pretrain-v5/README.md"
+      "landing_path": "experiments/devmind-pretrain-v5/README.md",
+      "pending_evidence_sources": [
+        {
+          "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+          "source_path": "artifacts/benchmarks/pre-model1-hash.json",
+          "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/artifacts/benchmarks/pre-model1-hash.json",
+          "availability": "source_only",
+          "disposition": "classification_pending",
+          "role": "Operational hash benchmark referencing read-only model0 input; not scientific performance or quality evidence.",
+          "workshop_destination": null
+        }
+      ]
     },
     {
       "id": "engram-ffn-substitution-v1",
@@ -1475,5 +1519,61 @@
   ],
   "additional_source_manifests": [
     "provenance/lab-stage2-manifest.json"
+  ],
+  "pending_shared_evidence_sources": [
+    {
+      "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+      "source_path": "artifacts/acceptance/campaign_generation_panel_v1.json",
+      "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/artifacts/acceptance/campaign_generation_panel_v1.json",
+      "availability": "source_only",
+      "disposition": "classification_pending",
+      "role": "Software acceptance of generation-panel implementation; not proof of any catalog experiment execution.",
+      "workshop_destination": null
+    },
+    {
+      "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+      "source_path": "docs/decisions/0018-chat-native-experiments.md",
+      "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/docs/decisions/0018-chat-native-experiments.md",
+      "availability": "source_only",
+      "disposition": "classification_pending",
+      "role": "Shared engineering design context; no unique experiment association inferred.",
+      "workshop_destination": null
+    },
+    {
+      "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+      "source_path": "artifacts/benchmarks/capacity-aware-execution-v1-baseline.json",
+      "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/artifacts/benchmarks/capacity-aware-execution-v1-baseline.json",
+      "availability": "source_only",
+      "disposition": "classification_pending",
+      "role": "Historical software benchmark; scientific association unassigned.",
+      "workshop_destination": null
+    },
+    {
+      "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+      "source_path": "artifacts/benchmarks/capacity-aware-execution-v1-before.json",
+      "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/artifacts/benchmarks/capacity-aware-execution-v1-before.json",
+      "availability": "source_only",
+      "disposition": "classification_pending",
+      "role": "Historical software benchmark; scientific association unassigned.",
+      "workshop_destination": null
+    },
+    {
+      "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+      "source_path": "artifacts/benchmarks/capacity-aware-execution-v1-results.json",
+      "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/artifacts/benchmarks/capacity-aware-execution-v1-results.json",
+      "availability": "source_only",
+      "disposition": "classification_pending",
+      "role": "Historical software benchmark; scientific association unassigned.",
+      "workshop_destination": null
+    },
+    {
+      "source_commit": "eab014ef7ca92de89d37b47c30df2ebf021d9473",
+      "source_path": "artifacts/benchmarks/runtime-prep-v1.json",
+      "source_url": "https://github.com/supernovae/tiny-sparse-lab/blob/eab014ef7ca92de89d37b47c30df2ebf021d9473/artifacts/benchmarks/runtime-prep-v1.json",
+      "availability": "source_only",
+      "disposition": "classification_pending",
+      "role": "Historical software benchmark; scientific association unassigned.",
+      "workshop_destination": null
+    }
   ]
 }
