@@ -14,14 +14,14 @@ Notion owns scheduling; this entrypoint does not poll or queue work.
 
 | Project | What you'll learn | Readiness | Start here |
 | --- | --- | --- | --- |
-| TinyStories FFN width | Compare width 64 versus 96 on the same story inputs and training budget; extend with longer runs and paired seeds. | CPU container workflow completed; GPU walkthrough unexecuted. | [Run on your GPU](examples/tinystories/README.md) · [CPU smoke evidence](results/2026-10-15-tinystories-smoke/README.md) |
+| TinyStories microlab | Compare FFN width 256 versus 384 using native Lab commands; inspect a separate usable-story validation proposal. | Declarations and metadata checks complete; this recipe and its story-quality proposal are unexecuted. | [Native run guide](examples/tinystories-microlab/README.md) · [Historical smaller CPU smoke](results/2026-10-15-tinystories-smoke/README.md) |
 | Synthetic CPU | Prepare synthetic text and a tokenizer, approve one tiny training attempt, evaluate it and verify a report. No corpus or model download. | Measured end to end at its recorded pins, including replay with no new attempt. Demonstrates workflow wiring, not model quality. | [Run guide](examples/synthetic-cpu/README.md) · [Recorded result](results/2026-10-14-synthetic-cpu/README.md) |
 
-Start with the [TinyStories FFN experiment](examples/tinystories/README.md):
-run a baseline/candidate pair on an existing CUDA or ROCm GPU runtime, inspect its
-records, and build the next controlled comparison. Its CPU container workflow
-has completed end to end; actual GPU execution remains unverified. The CPU result
-establishes execution, not an architecture winner.
+Start with the [native TinyStories microlab](examples/tinystories-microlab/README.md).
+Its 40-update teaching comparison is distinct from the measured width-32 CPU smoke.
+The [usable-story proposal](examples/tinystories-microlab/usable-story-proposal.md)
+requires verified retained model artifacts and fresh CPU quality evidence; neither
+metadata checks nor a successful tiny run establish useful story generation.
 
 The [CPU repeatability recipe](examples/cpu-repeatability/README.md) remains an
 unexecuted scaffold. The older [TinyStories migration draft](https://github.com/supernovae/kybern-workshop/pull/3)
