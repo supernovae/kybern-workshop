@@ -1,6 +1,6 @@
 # DevMind
 
-Recipe: **DevMind340MBase** (DevMind 340M Base) — approximately 340M dense base model.
+Recipe: **DevMind 340M Base** — approximately 340M dense base model.
 
 EXP-1 and LAB86 remain historical planning/attempt identifiers and provenance
 aliases. This is the fresh 340M recipe: the public DevMind name does not imply

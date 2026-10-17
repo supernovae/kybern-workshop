@@ -77,8 +77,7 @@ Native optimizer source grouping was inspected; no optimizer state was allocated
 
 ## Public naming and relocation recheck
 
-The public project is DevMind and the recipe is DevMind340MBase (DevMind 340M
-Base). The directory is `experiments/devmind/`. Historical EXP-1/LAB86 identifiers
+The public project is DevMind and the recipe is DevMind 340M Base. The directory is `experiments/devmind/`. Historical EXP-1/LAB86 identifiers
 and all 148 imported preparation files are unchanged. This is fresh preparation,
 not reuse of the older DevMind corpus/tokenizer/model.
 

@@ -1,4 +1,4 @@
-# DevMind340MBase scientific protocol
+# DevMind 340M Base scientific protocol
 
 Proposed, awaiting review and measured inputs.
 
