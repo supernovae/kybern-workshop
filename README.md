@@ -63,3 +63,7 @@ proposed configuration from a measured result.
 ## Active research portfolio
 
 Browse the [experiment catalog](catalog/README.md) for preserved prior experiments, original evidence, and explicit resume/rebuild prerequisites. Active research intent is separate from historical execution and current runtime readiness.
+
+## Contributing
+
+Read the [current-interface contribution policy](CONTRIBUTING.md) before adapting or reproducing an experiment. Historical evidence remains preserved; new reproductions use current interfaces and new identities.
