@@ -1,10 +1,17 @@
-# Useful story demo: proposed CPU validation, not executed
+# Useful story demo: current-interface reproduction backlog
 
-The website needs meaningful continuations, not merely a compiled recipe. The
-40-update microlab is not evidence of that quality. Prefer an already trained,
-permitted native artifact before proposing fresh CPU training.
+Owner direction on 2026-10-17 is to reproduce or regenerate experiments using
+current native interfaces. The old records below are scientific evidence only.
+Do not build candidate-recovery tooling, backward v2/v3/v4 adapters, or a legacy
+checkpoint compatibility path. This backlog does not authorize training,
+acquisition, model generation, downloads or publication.
 
-## Candidate retained artifact
+The website needs meaningful continuations. The 40-update microlab validates a
+small workflow design; it is not evidence of useful story quality. A fresh
+reproduction must specify its scientific configuration and current artifact
+contracts before a separately approved run.
+
+## Historical reference only
 
 Historical source: Lab `eab014ef7ca92de89d37b47c30df2ebf021d9473`,
 `experiments/research/history/tinystories-dense-30m-data-rich-v1/`.
@@ -22,95 +29,90 @@ These labels follow the preserved [triage integrity fields](../../provenance/lab
 and [endpoint receipt](../../provenance/lab/experiments/research/history/tinystories-dense-30m-data-rich-v1/endpoint-receipt.json).
 The historical receipt also calls the generation-manifest value `checkpoint_digest`;
 that label does not identify a verified weight file. Neither digest above is a
-weight-file SHA256. Actual weight bytes and their authenticated member hashes must
-be located and verified before inference; the preserved historical verification
-claim is not a fresh availability or integrity check.
+weight-file SHA256. The preserved historical verification claim is not a fresh availability or
+integrity check. These identities are comparison evidence only, not instructions
+to locate or restore the old weights.
 
-Actual weights are absent on the chief VM as reported in the current handoff;
-availability on the CPU and ROCm hosts remains unknown. No model execution or
-availability is established by this proposal. Reuse permission and publication
-rights remain unverified. This was
+The 2026-10-17 handoff reported weights absent on the chief VM and availability on
+CPU/ROCm hosts unknown. This records a historical observation, not a recovery task
+or current inventory guarantee. Reuse permission and publication rights remain
+unverified. This was
 an **unpromoted decoder-sensitive finding**, including repetitions and color
 contradictions. Its held-out loss is not proof of usable stories. Preserve the
 opened historical tests and failures; do not rebrand them as fresh evaluation.
 The external TinyStories-33M model card describes GPT-Neo/MIT, but that model is
 not a drop-in native DenseLM checkpoint. No model download is included here.
 
-Native inference requires the authenticated run config/manifest/checkpoint,
-tokenizer and `data/manifest.json`, `data/train.npy`, `data/validation.npy` (plus
-any declared sidecars). Bare weights are insufficient. The chief must locate and
-verify the complete retained closure and approved CPU runtime, without rewriting
-its identities or repairing missing evidence. No new runtime/image pin is selected.
+## Fresh reproduction backlog
 
-## Proposed bounded verification and generation
+1. Select reviewed current Lab and Workshop revisions and author a native
+   preparation/training/evaluation recipe. Preserve the historical study's
+   scientific settings where reproducible, and record every deliberate change
+   instead of silently inheriting old runtime paths or formats.
+2. Bind the currently supported source, tokenizer, prepared-data and checkpoint
+   contracts. Record exact source revisions, licenses, train/validation selection,
+   tokenizer fitting boundaries and generated artifact identities. No fabricated
+   weights, hashes or model IDs may stand in for missing outputs.
+3. Review a complete resource proposal for acquisition, preparation, training,
+   checkpointing and evaluation. The old ROCm runtime is not a CPU estimate.
+   No fresh training budget or execution permission is granted here.
+4. After an approved fresh run produces verified artifacts, assess all frozen
+   prompts below through current native generation/evaluation interfaces. Retain
+   every output and failure with the new run/config/tokenizer/checkpoint identities.
+   Do not point future commands at the historical run ID merely to complete a demo.
 
-First retain native `checkpoint inspect --json` and `checkpoint verify --json`
-for the selected checkpoint directory.
-Then generate six fixed prompts using the two declarations `story-greedy.json`
-and `story-sampled.json`: twelve outputs, at most 192 new tokens each. The native
-GenerationPanel schema is descriptive only; it does not automatically judge
-quality. Native Campaign generation_panel stages can persist panel evidence when
-bound to a real evaluation index. The portable workflow profile does not yet
-include those stages. Do not substitute Workshop Python to run them.
+The historical 30M configuration is a reproduction starting point: eight layers,
+hidden width 512, FFN 1408, vocabulary 8192, context 512, and
+24,576 updates/100,663,296 targets. These settings are evidence from the old
+experiment, not an approved fresh workload. Source availability, scientific
+comparability, runtime compatibility, CPU capacity, disk, time and quality criteria
+must be resolved in the new recipe. If a required current interface is missing,
+record that gap; do not solve it with a legacy adapter or Workshop Python runner.
 
-A direct native command for a single selected prompt is:
+## Proposed evaluation after an approved reproduction
 
-```sh
-sparselab checkpoint inspect "$CHECKPOINT_DIRECTORY" --json
-sparselab checkpoint verify "$CHECKPOINT_DIRECTORY" --json
-sparselab generate tinystories-dense-30m-data-rich-v1-seed42   --runs-dir "$RUNS_DIRECTORY" --checkpoint step_00024576_gen_000014   --backend cpu --prompt "$FIXED_PROMPT" --max-new-tokens 192   --context-length 512 --strict-context --temperature 0.8 --top-k 40   --seed 42 --json
-```
+`story-greedy.json` and `story-sampled.json` preserve six fixed development prompts
+and decoder settings: twelve continuations, at most 192 new tokens each. Their
+historical `checkpoint_selection` is provenance from the original proposal and
+must be explicitly rebound in a new reviewed declaration to the fresh artifact;
+it is not a recovery target or executable binding for this backlog.
 
-For the greedy declaration use temperature 0 and top-k 0. Check actual prompt
-lengths against the 512-token total; strict-context refusal must stay visible.
-`generate --json` returns `{format: "raw", prompt, response, identity, generation,
-prompt_tokens}` plus native fields. It does not itself persist panel timing or
-supervisor resource evidence. Retain raw stdout/stderr, every selected and
-unselected candidate continuation, failures, identities, elapsed time and memory
-observations. A website may display authenticated captured JSON; do not fabricate
-outputs or expose a private loopback server as a public endpoint. Native serve
-has no general cross-origin public-site contract.
+Native GenerationPanel is descriptive and does not judge quality automatically.
+The currently inspected Campaign generation_panel route requires an authenticated
+evaluation index and runtime/checkpoint bindings; the portable workflow profile
+does not include those stages. Verify these public interfaces against the selected
+current Lab revision when authoring the new recipe. No custom runner is proposed.
 
-Proposed budget for review: four CPU threads, 30-minute whole-job deadline,
-4 GiB observed RSS stop target with verified headroom, at most 64 MiB new output.
-These are proposals, not measurements, approved limits or hard enforcement claims.
-Measure closure bytes before any copy. Recorded arrays contain 222,549,446 IDs,
-about 890 MB at int32; FP32 parameters alone are about 120 MB. Full optimizer
-state, verification, temporary files and copies add storage. CPU latency remains
-unknown; the first generation measures it inside the same bounded job. Historical
-ROCm training time is not a CPU forecast. No automatic retries or extra ladders.
+For a fresh artifact, retain native checkpoint inspect/verify JSON and raw generation
+JSON (`format`, `prompt`, `response`, `identity`, `generation`, `prompt_tokens`, plus
+all native fields). Keep strict context refusal visible within the 512-token total.
+Retain stdout/stderr, selected and unselected continuations, failures, timing and
+memory observations. A website may display authenticated captured JSON; do not
+fabricate outputs or expose a private loopback server as a public endpoint.
 
-Runtime acceptance: exact authenticated identity, successful native execution,
-complete evidence and owned cleanup. Proposed human demo-quality gate: at least
-10/12 outputs are relevant, understandable continuations with a consistent
-character/event sequence; score repetition, contradictions and ending separately.
-Review/freeze this rubric before results. It is not a statistical general-quality
-claim. These fresh authored prompts are development material, not claimed
-train-disjoint final holdout. Preserve all failures and never cherry-pick a single
-nice story as the only result.
+The earlier inference-only proposal was four CPU threads, a 30-minute whole-job
+deadline, a 4 GiB observed RSS stop target with headroom, and at most 64 MiB new
+output. These remain unapproved proposals, not measured performance, hard memory
+enforcement or a fresh training envelope. Storage estimates from the old record
+(222,549,446 int32 IDs, about 890 MB; FP32 parameters about 120 MB) exclude optimizer
+state, copies and temporary storage. Measure actual current artifacts before a
+future approved job. There are no automatic retries.
 
-## If the closure is unavailable
+Proposed human demo-quality gate: at least 10/12 longer outputs are relevant and
+understandable, with consistent characters and event sequences; score repetition,
+contradictions and endings separately. Freeze the rubric before results. This is
+not a statistical general-quality claim. Prompts are development material, not
+claimed train-disjoint holdout. Preserve failures and do not cherry-pick outputs.
 
-Stop and report which native artifact is missing. Do not silently download a
-replacement or rerun training. The historical 30M configuration provides a
-concrete longer-training starting proposal (8 layers, hidden512, FFN1408,
-vocabulary8192, context512, 24,576 updates/100,663,296 targets), but CPU capacity,
-time, source availability and meaningful quality criteria need a separately
-approved plan. Hosted/GPU work and publication remain separate. This document
-neither approves retraining nor guarantees that the old endpoint passes the rubric.
-
-The first three prompts match the website draft exactly at kybern
+The first three prompts match website draft kybern
 `69139e888c0b9ece8a890dfcabc95f2c89077859`,
-`assets/js/tinystories-story.mjs`; the other three remain additional unselected
-development prompts. The website command currently requests 48 tokens, while
-this separate model-quality proposal allows 192: do not equate those budgets or
-claim the longer proposal has validated the shorter UI setting. Captured native
-JSON preserves the actual budget. No website change is made by this recipe.
-
-`story-website-baseline.json` separately preserves the exact three website prompts
-with 48 new tokens, greedy decoding and seed 42. If both scopes are approved, the
-proposal is **15 outputs total**: three website-baseline outputs plus twelve
-longer outputs. The proposed 10/12 quality rubric applies only to the latter.
-Retain all 15 with the actual budget and decoder in each JSON record; the website
-viewer accepts raw native JSON up to 1 MiB. Use `--show-prompt` for the baseline to
-retain prompt diagnostics on stderr. These authored prompts are not outputs.
+`assets/js/tinystories-story.mjs`. `story-website-baseline.json` preserves those
+three prompts at 48 new tokens, greedy decoding and seed 42; its historical
+checkpoint selection likewise requires fresh explicit rebinding. The other three
+prompts remain additional development inputs. If both evaluation scopes are later
+approved, retain all 15 outputs: three 48-token website baselines plus twelve
+192-token outputs. The proposed 10/12 rubric applies only to the longer panel.
+Do not equate the two budgets or claim one validates the other. The website viewer
+accepts raw native JSON up to 1 MiB; preserve the actual decoder and budget.
+These declarations contain prompts, not generated outputs. No website change is
+made here.
