@@ -1,0 +1,33 @@
+{
+  "format": "sparselab-research-datasets",
+  "version": 1,
+  "datasets": {
+    "offline": {
+      "source": "chat_recall",
+      "revision": null,
+      "dataset_config": null,
+      "dataset_seed": 42,
+      "train_max_documents": 768,
+      "validation_max_documents": 12,
+      "train_max_tokens": 131072,
+      "validation_max_tokens": 4096,
+      "vocab_size": 512,
+      "min_frequency": 1,
+      "tokenizer_max_documents": 384,
+      "tokenizer_train_max_tokens": 65536,
+      "tokenizer_validation_max_documents": 12,
+      "tokenizer_validation_max_tokens": 4096,
+      "license": "Synthetic fixture; finite training transcripts cycle and are not an unlimited diverse corpus.",
+      "source_url": "https://github.com/",
+      "notes": [
+        "Offline built-in chat_recall curriculum; training is finite and cyclic.",
+        "Tokenizer fitting consumes training documents only; validation and capability cards are excluded."
+      ],
+      "card_applicability": {
+        "chat-alias-retention-v1": "same-domain training-format acquisition check",
+        "chat-alias-recall-v1": "held-out wording, not unseen facts",
+        "chat-context-override-v1": "instruction/context stress"
+      }
+    }
+  }
+}

@@ -21,3 +21,5 @@ The corpus fixture `checks.py` is archived as `checks.py.txt`, with exactly the 
 Stage one does not claim the entire Lab migration is complete. Mixed acceptance/configs/docs/samples/examples are awaiting selective mapping. Execution, useful-story validation, and native recipe adaptation are separate deliverables.
 
 The key `devmind-340m-base` is a catalog discovery key only, not an immutable model or artifact identity. [Stage two](STAGE2.md) preserves additional configs, acceptance evidence, examples, samples and research documentation.
+
+Historical absolute host paths in archived evidence are provenance only. They require new explicit local bindings and verified artifact identities before use; they are not current execution locations or access authority.
