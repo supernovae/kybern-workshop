@@ -95,11 +95,17 @@ preparation commit. Never advance A to workflow commit B: any HEAD change
 invalidates A's admission. The descriptor directory is the recipe root; inventory
 hashes cover exact member bytes without replacing native scientific hashes.
 
+Binding guidance corrected 2026-10-18: current Lab uses only `artifacts` and
+`config_paths` below. It rejects the obsolete `preparation_bindings_version`
+field shown in this guide at Workshop `0f1bbaec53540c7d2b6ed23d7306d352ad83a7c4`.
+The historical runtime pins and measured results remain unchanged evidence; this
+metadata correction does not qualify them for current execution. For current
+non-executing authoring/inspection, see [the native guide](../../docs/native-workflow.md).
+
 Create `$WORK/preparation-bindings.json`, replacing `/absolute/work` with `WORK`:
 
 ```json
 {
-  "preparation_bindings_version": 1,
   "artifacts": {},
   "config_paths": {
     "tokenizer-config.json": {
