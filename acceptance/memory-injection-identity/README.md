@@ -13,14 +13,35 @@ expectation remains `legacy_default_fields`.
 
 ## Merge order and merged-source acceptance
 
-Merge [Lab #185](https://github.com/supernovae/tiny-sparse-lab/pull/185) first.
-Then run the native metadata acceptance below against the exact merged Lab SHA,
-using that clean source checkout and passing its full SHA as `--candidate-commit`.
-Retain a separate result and bundle inventory for the merged SHA, and have that
-acceptance reviewed before merging Workshop #36. The existing branch-candidate
-records do not establish acceptance of a different merge commit, even if its
-package bytes match. Preserve them as historical evidence; do not rewrite them
-with the merged SHA. Parent coordination owns review and both merges.
+[Lab #185](https://github.com/supernovae/tiny-sparse-lab/pull/185) is merged at
+`d7228be7e8365815e6f45da88cd6f4328e2525a5`. The separate
+[merged-source acceptance](candidate-d7228be.json) passed at that exact SHA from
+a clean checkout, using the unchanged archive and fixed expectations. Reversed
+config order refused before output; native bundle verification passed. All nine
+input-map rows matched their preserved byte sizes, SHA256 and Git blobs.
+
+The merged-source acceptance step is complete. External review of this evidence
+and guarantee mapping remains pending before Workshop #36 can merge. Parent
+coordination owns review and merge. Branch-candidate records below remain
+historical evidence; none was relabeled with the merged SHA. Earlier references
+to a future merged-SHA gate describe the status at those candidates; this section
+records its current status. No Lab assets or historical assertions are retired.
+
+### Guarantee mapping for review
+
+| Guarantee | Evidence or retained boundary |
+| --- | --- |
+| Original matrix/study identities, historical selection mode, nine ordered config digests | Fixed `expected.json` matched by merged Lab native report acceptance. |
+| Exact archived reader inputs and collected receipts | Nine rows in `inputs.json` verified byte-for-byte; seven planning inputs retain relative layout. |
+| Verifier source bound to the claimed candidate | Full native inventory clean and committed at merged SHA; package hash recorded in the new result. |
+| Refusal on changed config order | Separate negative control refused for identity mismatch without output. |
+| Generic reader/provenance regressions | Merged Lab neutral tests remain offline and independent of Workshop. This explicit personal acceptance is not perpetual regression coverage. |
+| Future retirement of personal inputs or reader behavior | Requires a separate reviewed replacement-guarantee mapping and coordinated coverage; this PR authorizes no retirement. |
+
+The new record inventories the actual local bundle and logs. These remain in
+host-local `/tmp`, are not remotely accessible through their recorded paths, and
+are not guaranteed durable across cleanup. Hashes permit comparison where bytes
+are available; they do not recover missing artifacts or establish model quality.
 
 ## Explicit candidate acceptance
 
@@ -54,8 +75,8 @@ and logs remain in local `/tmp`, are not uploaded, and may be lost on host clean
 the inventory does not make those bytes remotely available. No acceptance was
 regenerated for this inventory.
 
-This depends on the candidate Lab report expectation extension; it is not yet a
-claim about merged Lab main. Existing `study report` already verifies the archived
+Those original records predate the merged-source acceptance above. Existing
+`study report` already verifies the archived
 report, but previously had no fixed mode/ordered-digest expectation option or
 candidate-bound acceptance output.
 
