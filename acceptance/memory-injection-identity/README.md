@@ -94,6 +94,16 @@ not by themselves establish upstream origin; compare the package source hash.
 Native bundle verification passed, and reversed config order refused before
 output. The merged-SHA acceptance gate and local-artifact limitations still apply.
 
+## Candidate with specific refusal assertions
+
+[Candidate b28f69c evidence](candidate-b28f69c.json) records separate acceptance
+at `b28f69c41b84b9b6ea86f2df1776c0c853800839` after tightening drift tests to
+require their intended identity or schema errors. Six committed mutation controls
+were caught for those reasons. Production package bytes are unchanged from
+eadb19e. Native bundle verification passed; reversed order refused with the
+identity-mismatch message before output. Earlier records remain unchanged, and
+acceptance at the future merged Lab SHA is still required.
+
 ## Digest and location semantics
 
 For these version-1 native bundles, manifest `report_sha256` (recorded as
