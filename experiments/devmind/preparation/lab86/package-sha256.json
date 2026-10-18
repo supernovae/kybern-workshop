@@ -1,5 +1,5 @@
 {
-  "PILOT.md": "8e87cecda18484575b076dbb4aecce7526b67dcd433056cb1577ee8db2e48616",
+  "PILOT.md": "bdadb459a3e8372a89e5dcf94f213a63ba18a703d2a526fa72ddfc40ec15d3e2",
   "POLICY.md": "d3e0c858553d70d6acb39afd9ec5da58bc57ae7438d6aa441ab0821764d76cb4",
   "README.md": "33fe205c2f0bde306f3142dcf869b51fecfe3d2d8e1b4fa32f9f68a2d9b64675",
   "application-policy.json": "451d6f38f26a5342c8b0e833389f31981d7f4b1013be13e7b37fd752b6c3fce5",
@@ -46,7 +46,7 @@
   "pilot-jobs/pilot-acquire.template.json": "3a2b4e104b02189959fafcd6c085714ecbf07d93ca897fd9dbb13578b9a7a91e",
   "pilot-jobs/pilot-budget-status.template.json": "06aec25df7517a69e30c1ad1a5868848fa10a6e4f6bc6305a3d5dc75c6489441",
   "pilot-jobs/transport-init.template.json": "a91ade5632ebaa6af49a0255cb7aec8e49914ec67783a1282bea547ad5e706d3",
-  "pilot-session.template.json": "d080f36c78174ca634b2577b98afd452bf83f207bace428aa2c9bf784e97d08d",
+  "pilot-session.template.json": "5758e2b73dbbd435cca7d9f34e8e6477b09c550a5156aa0ef9ee8d05f0457eec",
   "project-acquire.yaml": "c1e7e031aa9ed81a8304c7fc1e77afdd89ae4ed4dd8eb3c3b18400725d235ba8",
   "project-build.template.yaml": "db2c9e406a6e9e593147966952a3b45c4f13f848fb3c14e2cd33a01947c38de7",
   "project-pilot-reuse.template.yaml": "fda763e868a65b6a4c78d12ec4b7e0d6c3d954a5f664a75aaeaba56e30522131",
