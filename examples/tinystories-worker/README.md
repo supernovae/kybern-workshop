@@ -1,7 +1,7 @@
 # TinyStories CPU workflow reference
 
 For the question, GPU setup, local experiment and interpretation, start with
-[the TinyStories experiment guide](../tinystories/README.md). This page preserves
+[the TinyStories experiment guide](../tinystories-microlab/README.md). This page preserves
 the advanced CPU Campaign/handoff contract and its original authoring context.
 It is not the GPU execution interface.
 

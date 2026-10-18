@@ -15,7 +15,9 @@ process supervision belongs in Harness. Do not add Workshop Python engines,
 launchers or per-recipe test frameworks. Existing procedural helpers remain
 migration inventory, not a precedent for new engines.
 
-Preserve archived original bytes, hashes and historical IDs. Historical claims
+The active showcase is basic synthetic CPU, TinyStories and DevMind. Retired
+families remain in immutable Git history, not an active compatibility backlog.
+Preserve original historical bytes, hashes and IDs when citing that history. Historical claims
 in Workshop describe their original evidence and conditions; they are not current
 Lab guarantees. Reading, interpreting and hash-verifying old evidence is allowed
 without recreating its runtime or changing the archive to fit new interfaces.

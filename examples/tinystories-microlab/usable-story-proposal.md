@@ -25,8 +25,8 @@ and [endpoint receipt](https://github.com/supernovae/tiny-sparse-lab/blob/eab014
 - Tokenizer SHA256 `4c351be179075c1d4884bf043303e113dd905edaaf398ac4d7842068496c3ac3`.
 - 29,893,120 parameters, 512-token context, 100,663,296 training targets.
 
-These labels follow the preserved [triage integrity fields](../../provenance/lab/experiments/research/history/tinystories-dense-30m-data-rich-v1/evidence.json)
-and [endpoint receipt](../../provenance/lab/experiments/research/history/tinystories-dense-30m-data-rich-v1/endpoint-receipt.json).
+These labels follow the preserved [triage integrity fields](https://github.com/supernovae/kybern-workshop/tree/fd259e2cad4e9856d6d659e8df34728a98b32502/provenance/lab/experiments/research/history/tinystories-dense-30m-data-rich-v1/evidence.json)
+and [endpoint receipt](https://github.com/supernovae/kybern-workshop/tree/fd259e2cad4e9856d6d659e8df34728a98b32502/provenance/lab/experiments/research/history/tinystories-dense-30m-data-rich-v1/endpoint-receipt.json).
 The historical receipt also calls the generation-manifest value `checkpoint_digest`;
 that label does not identify a verified weight file. Neither digest above is a
 weight-file SHA256. The preserved historical verification claim is not a fresh availability or
