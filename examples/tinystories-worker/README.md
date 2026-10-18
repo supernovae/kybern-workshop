@@ -1,7 +1,7 @@
 # TinyStories CPU workflow reference
 
 For the question, GPU setup, local experiment and interpretation, start with
-[the TinyStories experiment guide](../tinystories/README.md). This page preserves
+[the TinyStories experiment guide](https://github.com/supernovae/kybern-workshop/tree/fd259e2cad4e9856d6d659e8df34728a98b32502/examples/tinystories/README.md). This page preserves
 the advanced CPU Campaign/handoff contract and its original authoring context.
 It is not the GPU execution interface.
 

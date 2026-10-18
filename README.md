@@ -18,15 +18,12 @@ runner integration; its helpers are tracked in the [ownership audit](docs/owners
 | TinyStories microlab | Compare FFN width 256 versus 384 using native Lab commands; inspect a separate usable-story validation proposal. | Declarations and metadata checks complete; this recipe and its story-quality proposal are unexecuted. | [Native run guide](examples/tinystories-microlab/README.md) · [Historical smaller CPU smoke](results/2026-10-15-tinystories-smoke/README.md) |
 | Synthetic CPU | Prepare synthetic text and a tokenizer, approve one tiny training attempt, evaluate it and verify a report. No corpus or model download. | Measured end to end at its recorded pins, including replay with no new attempt. Demonstrates workflow wiring, not model quality. | [Run guide](examples/synthetic-cpu/README.md) · [Recorded result](results/2026-10-14-synthetic-cpu/README.md) |
 
-Start with the [native TinyStories microlab](examples/tinystories-microlab/README.md).
+For a basic CPU introduction, start with [synthetic CPU](examples/synthetic-cpu/README.md)
+and its [current metadata route](docs/native-workflow.md). For stories, use the [native TinyStories microlab](examples/tinystories-microlab/README.md).
 Its 40-update teaching comparison is distinct from the measured width-32 CPU smoke.
 The [usable-story proposal](examples/tinystories-microlab/usable-story-proposal.md)
 requires verified retained model artifacts and fresh CPU quality evidence; neither
 metadata checks nor a successful tiny run establish useful story generation.
-
-The [CPU repeatability recipe](examples/cpu-repeatability/README.md) remains an
-unexecuted scaffold. The older [TinyStories migration draft](https://github.com/supernovae/kybern-workshop/pull/3)
-is not the current run guide.
 
 ## Authored experiments
 
@@ -61,9 +58,13 @@ The project run guide retains setup details, monitoring instructions and failure
 notes. Preserve earlier evidence when changing a recipe, and distinguish a
 proposed configuration from a measured result.
 
-## Active research portfolio
+## Scope and historical research
 
-Browse the [experiment catalog](catalog/README.md) for preserved prior experiments, original evidence, and explicit resume/rebuild prerequisites. Active research intent is separate from historical execution and current runtime readiness.
+The active showcase contains three families: basic synthetic CPU, TinyStories,
+and DevMind. Other experiments and imported old-run archives have been retired
+from this tree. Their original bytes remain in Git history; see the
+[retirement map](docs/retired-research.md). Future research ideas belong to the
+coordinated Notion backlog as new experiments, not promises to resume old runs.
 
 ## Contributing
 
