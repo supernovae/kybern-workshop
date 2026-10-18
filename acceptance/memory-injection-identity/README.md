@@ -20,12 +20,30 @@ a clean checkout, using the unchanged archive and fixed expectations. Reversed
 config order refused before output; native bundle verification passed. All nine
 input-map rows matched their preserved byte sizes, SHA256 and Git blobs.
 
-The merged-source acceptance step is complete. External review of this evidence
-and guarantee mapping remains pending before Workshop #36 can merge. Parent
-coordination owns review and merge. Branch-candidate records below remain
-historical evidence; none was relabeled with the merged SHA. Earlier references
-to a future merged-SHA gate describe the status at those candidates; this section
-records its current status. No Lab assets or historical assertions are retired.
+Workshop #36 subsequently merged at
+`acf5f61fe4b80f31ba4b2e1db4f37a0f25b0f426` after external review of that
+merged-source acceptance and guarantee mapping. Earlier branch-candidate records
+remain historical evidence and were not relabeled. References below to a future
+merged-SHA gate describe the status at those earlier candidates.
+
+### Proposed active-copy retirement
+
+[Lab #186](https://github.com/supernovae/tiny-sparse-lab/pull/186) proposes removing
+eight memory-injection assets and four shared context inputs from active Lab.
+[Candidate 0acb08e](candidate-0acb08e.json) separately verifies exact candidate
+`0acb08e5667d0c90c63ca2bfe4109dd465794631` against the unchanged archive and fixed
+expectations. Native bundle verification passed, and reversed config order
+refused for identity mismatch before output. Its production package hash is
+unchanged from merged Lab d7228be; the new candidate commit and bundle are
+nevertheless recorded separately.
+
+The proposal transfers the exact personal identity assertion to this explicit
+acceptance procedure, retaining Lab's generic historical reader and neutral tests.
+It does not make a single acceptance perpetual coverage: future accepted candidates
+still need their own acceptance against unchanged expectations. External review
+of this evidence and the retirement mapping remains pending; neither this record
+nor a local test pass clears the retirement for merge. No archive bytes or earlier
+candidate records change. Parent coordination owns review and merge.
 
 ### Guarantee mapping for review
 
@@ -144,6 +162,8 @@ ordered config identities likewise describe the unchanged inputs rather than
 their checkout location.
 
 The emitted report retains reproduction commands containing input locations.
+`index.html` and `inputs/cards/*.json` also embed the absolute archive root;
+relocation can change those bytes without changing the underlying card identities.
 Changing the absolute archive root can therefore change serialized `report.json`
 and rendered file hashes, the manifest bytes and the full `bundle_sha256`, while
 the native collected-report identity remains unchanged. Compare each file digest
@@ -167,8 +187,8 @@ not fetch Workshop or silently skip this personal guarantee. Future candidates
 require an explicit new acceptance run against the unchanged expectations and
 review of its result. No scheduler or recurring infrastructure is introduced.
 
-All twelve pending Lab assets and the original historical assertion remain in
-place. Retirement must wait for replacement acceptance and external review of the
-guarantee mapping. Historical data/tokenizer paths and scientific results are
+All twelve assets and the original historical assertion remain in merged Lab
+until the proposed retirement is reviewed and merged. Candidate acceptance here
+is evidence for that decision, not automatic retirement authority. Historical data/tokenizer paths and scientific results are
 not made executable or qualified by this metadata check. Missing prepared payloads
 remain unavailable. No historical hashes, results, budgets or approvals are edited.
