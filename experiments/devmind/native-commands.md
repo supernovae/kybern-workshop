@@ -71,8 +71,8 @@ Both exit 0 with `schema_valid: true`, `executable: false`. Input SHA256:
 - optimizer: `5608094732838fa17570f9adab6786e2e2edaca42d2eb0d0f57a6e3ae6d64a0e`
 
 This verifies each native section, not cross-section RunConfig compatibility or
-artifact contents. At the time of that historical check PR162 awaited review/merge; it has since
-merged. Neither the historical nor current metadata check activates a run pin. At the earlier inspected Lab revision, the existing native
+artifact contents. PR162 remains subject to independent review/merge; this does
+not activate a run pin. At the earlier inspected Lab revision, the existing native
 `model.inspection.named_tensor_inventory` also returned 341885952 parameters,
 219 tensor specifications and one tied alias without model/tensor allocation.
 Native optimizer source grouping was inspected; no optimizer state was allocated.
@@ -90,3 +90,10 @@ compiled the relocated acquisition-project path; `pack` still refused its two
 missing generated bindings. No attempt directory was created. Relative project
 source declarations remain beside the project, and the four authored public
 document links resolve at their renamed location.
+
+## Status correction — 2026-10-18
+
+Lab PR162 merged on 2026-10-17 at
+`faf415e3754f4018674a734547c66df7ddca8333`. The validation paragraph above
+retains the status recorded at the time of that check. This correction does not
+activate a run pin, qualify an execution runtime or authorize a workload.

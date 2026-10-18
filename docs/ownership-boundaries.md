@@ -33,3 +33,17 @@ Existing scripts are migration inventory, not a promise of current compatibility
 New reproduction uses current native interfaces and new identities. Updating
 public guidance does not authorize deleting these helpers, choosing budgets,
 activating a runtime or executing a new experiment.
+
+## Retirement ownership and order
+
+Lab #157 owns the retirement, preservation decisions and documentation. Lab #158
+owns demonstrated gaps in generic native authoring and verification, with neutral
+regression coverage. Harness #21 owns reusable internal policy, deadline and
+process-cleanup guarantees. These assignments do not establish a second supported
+Workshop execution workflow or promise a compatibility adapter.
+
+Before removing a helper, map each existing guarantee to retained coverage, close
+any demonstrated generic gap in its owning repository, and preserve the original
+evidence. Retire the helper and its active callers and documentation together
+through review, with the parent coordinating review and merge order. This work
+does not promise a new workload; actual execution still requires separate approval.

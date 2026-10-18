@@ -29,12 +29,17 @@ its declared preparation argv without claiming the whole experiment is ready.
 ## Author and inspect without execution
 
 From any working directory, let `INPUT` be the absolute directory containing the
-existing synthetic example’s declarations and `DEST` an unused absolute directory
-whose parent already exists:
+`examples/synthetic-cpu` declarations in your Workshop checkout (or a byte-identical
+copy), and `DEST` an unused absolute directory whose parent already exists:
 
 ```sh
-sparselab experiment recipe create "$INPUT" --profile preparation   --id workshop-synthetic-cpu-preparation --entrypoint preparation-campaign.json   --file campaign:preparation-campaign.json --file run_config:run.json   --file tokenizer_config:tokenizer-config.json --file metadata:monitor.json   --output "$DEST"
-sparselab experiment recipe preparation inspect "$DEST/recipe.json"   --bindings /absolute/local-bindings.json --json
+sparselab experiment recipe create "$INPUT" --profile preparation \
+  --id workshop-synthetic-cpu-preparation --entrypoint preparation-campaign.json \
+  --file campaign:preparation-campaign.json --file run_config:run.json \
+  --file tokenizer_config:tokenizer-config.json --file metadata:monitor.json \
+  --output "$DEST"
+sparselab experiment recipe preparation inspect "$DEST/recipe.json" \
+  --bindings /absolute/local-bindings.json --json
 ```
 
 The current local bindings use native field names, without an obsolete bindings
