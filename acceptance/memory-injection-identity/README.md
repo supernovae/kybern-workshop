@@ -37,6 +37,18 @@ refused for identity mismatch before output. Its production package hash is
 unchanged from merged Lab d7228be; the new candidate commit and bundle are
 nevertheless recorded separately.
 
+[Documentation follow-up candidate 9819b97](candidate-9819b97.json) retains a
+separate pass at `9819b97f55354984a4c20efc2501717d4effffb9` after documenting the
+obligation to rerun native Workshop acceptance before merging changes to historical
+identity normalization or default-field handling. Native bundle verification and
+reversed-order refusal passed. Earlier candidate evidence remains unchanged.
+
+Merge Lab #186 first. Then retain and externally review native acceptance at its
+exact merged SHA before merging Workshop #37. A branch-candidate record satisfies
+that SHA requirement only if Lab lands that exact commit unchanged (fast-forward);
+otherwise retain a separate merged-candidate record. Workshop itself authorizes no
+retirement: the retirement decision belongs to Lab #186 and its review/merge gate.
+
 The proposal transfers the exact personal identity assertion to this explicit
 acceptance procedure, retaining Lab's generic historical reader and neutral tests.
 It does not make a single acceptance perpetual coverage: future accepted candidates
@@ -54,7 +66,7 @@ candidate records change. Parent coordination owns review and merge.
 | Verifier source bound to the claimed candidate | Full native inventory clean and committed at merged SHA; package hash recorded in the new result. |
 | Refusal on changed config order | Separate negative control refused for identity mismatch without output. |
 | Generic reader/provenance regressions | Merged Lab neutral tests remain offline and independent of Workshop. This explicit personal acceptance is not perpetual regression coverage. |
-| Future retirement of personal inputs or reader behavior | Requires a separate reviewed replacement-guarantee mapping and coordinated coverage; this PR authorizes no retirement. |
+| Future retirement of personal inputs or reader behavior | Requires a separate reviewed replacement-guarantee mapping and coordinated coverage. Workshop authorizes no retirement; Lab #186 owns the current retirement decision. |
 
 The new record inventories the actual local bundle and logs. These remain in
 host-local `/tmp`, are not remotely accessible through their recorded paths, and
@@ -189,6 +201,6 @@ review of its result. No scheduler or recurring infrastructure is introduced.
 
 All twelve assets and the original historical assertion remain in merged Lab
 until the proposed retirement is reviewed and merged. Candidate acceptance here
-is evidence for that decision, not automatic retirement authority. Historical data/tokenizer paths and scientific results are
-not made executable or qualified by this metadata check. Missing prepared payloads
-remain unavailable. No historical hashes, results, budgets or approvals are edited.
+is evidence for that decision, not automatic retirement authority. Historical
+data/tokenizer paths and scientific results are not made executable or qualified
+by this metadata check. Missing prepared payloads remain unavailable. No historical hashes, results, budgets or approvals are edited.
