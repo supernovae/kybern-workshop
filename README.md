@@ -5,10 +5,11 @@ Choose a project, inspect its configuration, run it with the pinned Lab runtime,
 and use its evidence to understand what happened. Workshop holds the project
 recipes and results; Lab provides preparation, execution, evaluation and reporting.
 
-Use the [Workshop operator entrypoint](docs/operator.md) to bind an approved native
-Campaign to a stable Notion experiment ID and a fresh attempt, drive the existing
-Harness session, and inspect execution, evidence and scientific assessment separately.
-Notion owns scheduling; this entrypoint does not poll or queue work.
+Use the [native Lab workflow](docs/native-workflow.md) to author and inspect declarations
+in any local directory or repository, then follow the selected recipe’s native
+preparation and execution guide. Workshop, Harness and Notion are not runtime
+requirements. The [internal operator reference](docs/operator.md) preserves an older
+runner integration; its helpers are tracked in the [ownership audit](docs/ownership-boundaries.md).
 
 ## Projects
 

@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "workshop_commit": "0f1bbaec53540c7d2b6ed23d7306d352ad83a7c4",
+  "lab_commit": "7e306a96bcc617468d2a06493dab4562bff6beb0",
+  "harness_commit": "b1c2efbd256eceeebdef7cf42b34165d01b8ccb6",
+  "scope": "Tracked Python ownership audit; no files removed or relocated. Candidate coverage is not equivalence proof.",
+  "files": [
+    {
+      "path": "examples/cpu-repeatability/tests/check_native_metadata.py",
+      "group": "repeatability",
+      "sha256": "d6823554e57f5a672ba7e04d15c51e4760872ba48a4e421aef1d9bb8eae750fb",
+      "size_bytes": 2771,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/mutation_authoring.py",
+      "group": "repeatability",
+      "sha256": "20feae0c04c37ecb4e090e0544648a07f5f708d34f61c385628d63c521878cbb",
+      "size_bytes": 3758,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/mutation_check.py",
+      "group": "repeatability",
+      "sha256": "99642cd7ad96c4f8b19baa2326934aee0741ab05f4a747946dad50303b19aad1",
+      "size_bytes": 1410,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/mutation_replay_directory.py",
+      "group": "repeatability",
+      "sha256": "c1703b9b70023ebb41c6b46786c7965c94b1f5bdd4040baf6f48c7ca1df5d373",
+      "size_bytes": 1923,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/test_author_inputs.py",
+      "group": "repeatability",
+      "sha256": "73dfc0a0fd645f304992c8579f6e53e799429bcbea5140e8796af503f881a44b",
+      "size_bytes": 17629,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/test_check_repeat.py",
+      "group": "repeatability",
+      "sha256": "68aa21506aff9a0c527be157675d8ef0d751fab0b0ab8acb0986b65a2cc23be2",
+      "size_bytes": 11749,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/test_commands.py",
+      "group": "repeatability",
+      "sha256": "c84a5189b254d46ce7570f3e1d5499356a26126216bbdc2a2d4c34a03075e55e",
+      "size_bytes": 3675,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/test_inventory.py",
+      "group": "repeatability",
+      "sha256": "80d97ce0659e1d4f40f6b25d47cd0092edca4b43de4ba969eb3eeb2bd5825056",
+      "size_bytes": 10581,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/test_recipe.py",
+      "group": "repeatability",
+      "sha256": "c1011010c1afacd3522f97c89fad8643051ab74c7339ff4b026eaa8c8ffd2621",
+      "size_bytes": 3117,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tests/test_replay_ready.py",
+      "group": "repeatability",
+      "sha256": "43c3765e1dd8a9d98c7bfc71aace853008428b311ad778c47fd3af09dd6caa28",
+      "size_bytes": 4579,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tools/author_inputs.py",
+      "group": "repeatability",
+      "sha256": "4b2a51c7830ba7a62497ecc9d378cffe990308461d4cb52f7f2fff60be130785",
+      "size_bytes": 10959,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tools/check_repeat.py",
+      "group": "repeatability",
+      "sha256": "b4b8ba28b9926af5cebdca80f135ad46470071a62fe7461eb29294975e7375c8",
+      "size_bytes": 6972,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tools/commands.py",
+      "group": "repeatability",
+      "sha256": "a445b8f1b4b8d25bf9205f11b2fc012498eaac2e5782cf31906b12d656ebdf29",
+      "size_bytes": 3582,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tools/inventory.py",
+      "group": "repeatability",
+      "sha256": "f9ee56adaeb419c0733909428921b75641c0768782089815cdc1194b21ed1414",
+      "size_bytes": 7636,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/cpu-repeatability/tools/replay_ready.py",
+      "group": "repeatability",
+      "sha256": "07e64c13ec3bcd320a55965040172e16e610bed2dde5e7e400f934fa98b700de",
+      "size_bytes": 2393,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/tinystories-rocm/bind_session.py",
+      "group": "rocm",
+      "sha256": "748b45c9e4ca8a07bb7a83d20c00a9d1cd950f33dcb1cc4254d6135d6c4ad178",
+      "size_bytes": 9723,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/tinystories-rocm/check_native.py",
+      "group": "rocm",
+      "sha256": "4e3db6604315e2a5fdaf3a7b7e8ecdf99d1289035a3092224e29bc5f6dec67e1",
+      "size_bytes": 2916,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/tinystories-rocm/handoff.py",
+      "group": "rocm",
+      "sha256": "6e95fb5934955dc2df094c1c971f9a10152304b0ab6f695169f07b51de5dd8d5",
+      "size_bytes": 12640,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/tinystories-rocm/test_binding.py",
+      "group": "rocm",
+      "sha256": "c1eba30c7aa6bf2501596b79e32bfb296b39e132870c7debcba8fbf721362fc0",
+      "size_bytes": 11685,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/tinystories-rocm/test_handoff.py",
+      "group": "rocm",
+      "sha256": "556e3adb38ff2ea56f70af2325012d7d0abca3784492d1e62492070a387759d8",
+      "size_bytes": 14500,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/tinystories-worker/handoff.py",
+      "group": "worker",
+      "sha256": "8a1cff13205d264cfbcd1c3d6766ec6a48544c8e9d1619be13f0ca7f2d7a6f5a",
+      "size_bytes": 15883,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "examples/tinystories-worker/test_handoff.py",
+      "group": "worker",
+      "sha256": "f377f60a6a43bd8c6ce41c800a7f2406ac5beabe1fa4e20ab6e1762427fbe244",
+      "size_bytes": 18657,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "scripts/handoff.py",
+      "group": "internal-operator",
+      "sha256": "c81f99aefece510428ff41f4218f4faf15b4950f6ab4b285772afb291b5a631e",
+      "size_bytes": 1902,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "scripts/seal-inputs.py",
+      "group": "internal-operator",
+      "sha256": "5a76846170332fc75ba61a59694181726711894bf4bed1a4fde6e836bd05d1ce",
+      "size_bytes": 3806,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "scripts/workshop.py",
+      "group": "internal-operator",
+      "sha256": "106ba5e09e7827c044d25e6dbb7d0b37103f3829ae5f89e41780faa389433cca",
+      "size_bytes": 21842,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "tests/test_harness_contract.py",
+      "group": "internal-operator",
+      "sha256": "f146d106b96b43e15ce9bc4e81ff739f85fc0656318bc2a33f3f3bdaa421ee70",
+      "size_bytes": 4923,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    },
+    {
+      "path": "tests/test_workshop.py",
+      "group": "internal-operator",
+      "sha256": "d96a7dbacc3242b767d727f0f3c7e264e63c010b072bfe6dae47574f3c3ab482",
+      "size_bytes": 26981,
+      "disposition": "retained_pending_guarantee_mapping_and_native_replacement"
+    }
+  ]
+}

@@ -11,6 +11,25 @@ reporting. It demonstrates wiring, not model quality. Workflow artifact identiti
 The completed [2026-10-14 measured result](../../results/2026-10-14-synthetic-cpu/README.md)
 includes failed invocations, verified reporting and no-new-attempt replay.
 
+## Historical procedure; current metadata entrypoint
+
+This guide preserves the historical Lab `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc`
+procedure and its measured evidence. Its setup, bindings and admissions below
+belong to that revision; they are not current execution instructions or fresh
+runtime qualification.
+
+Current Lab rejects `preparation_bindings_version`,
+`preparation_admission_version` and `workflow_admission_version`. Current workflow
+admission also requires explicit `limits` with `max_training_updates`,
+`max_target_positions` and `max_eval_batches`. Those values require the actual
+reviewed run declaration; this guide does not supply current budgets or admission.
+Do not partially modernize the historical procedure by removing individual fields.
+
+For current non-executing authoring and inspection, use
+[the native workflow guide](../../docs/native-workflow.md). New execution needs
+separate source/runtime selection and approval; the historical results below do
+not authorize it. Historical procedure restored and scope clarified 2026-10-18.
+
 ## Pins and setup
 
 Use Tiny Sparse Lab commit `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc`

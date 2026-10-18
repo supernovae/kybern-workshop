@@ -12,7 +12,7 @@ required. Keep generated data, native stores and approvals outside this recipe.
 | Rights and splits | `corpus admission-draft`, `inspect-admission`, `split-inventory`, `freeze-splits` | Real retained inputs, reviewed admission and family clusters |
 | Release and tokenizer | `corpus build`, `freeze`, `audit`, `export`; `tokenizer train` | Valid frozen release, export configuration and fresh fit/audit evidence |
 | Unique targets and packing | `corpus measure-tokens`, `materialize-mixture`, `verify-mixture`; `data prepared-inputs publish/verify` | Real token counts, complete RunConfig and envelope |
-| Shape and configuration | `config validate SOURCE --kind model/optimizer/run --json` (Lab PR162) | Native model/optimizer section validation; full run bindings still missing |
+| Shape and configuration | `config validate SOURCE --kind model/optimizer/run --json` | Native model/optimizer section validation; full run bindings still missing |
 | Train/recover | `train CONFIG`, `train CONFIG --resume RUN_ID`; native Campaign operations | Full reviewed RunConfig, prepared inputs, admission, finite training budget and supported runtime |
 | Inspect/verify checkpoint | `checkpoint inspect`, `checkpoint verify` | Actual native checkpoint/store identities |
 | Evaluate retained base | `eval RUN_ID --checkpoint CHECKPOINT --panel PANEL --output OUTPUT`; `model exercise RUN_ID --checkpoint CHECKPOINT --prompt-panel PANEL` | Real matching checkpoint, frozen panel, local native run store, separately authorized evaluation |
@@ -29,8 +29,10 @@ artifact identities. Do not invent release/checkpoint hashes to make a descripto
 parse. The current portable workflow execution contract is CPU-bounded and excludes
 continuation/expanded evaluation; native training/evaluation capabilities already
 exist but still need portable composition appropriate to this recipe. Lab #158
-owns demonstrated generic interface gaps, including generation in arbitrary local
-directories. No Workshop-only descriptor, launcher or scheduler fills those gaps.
+owns demonstrated generic interface gaps. Section validation and
+`experiment recipe create/export` now support arbitrary local directories;
+[the current acceptance record](../../docs/native-acceptance-2026-10-18.md) exercises
+these shipped paths. Full portable continuation/evaluation is still limited. No Workshop-only descriptor, launcher or scheduler fills those gaps.
 
 Public derivative `eval` currently consumes a native run store as well as its
 checkpoint. A generic independently retrieved base-artifact admission path must be
@@ -88,3 +90,10 @@ compiled the relocated acquisition-project path; `pack` still refused its two
 missing generated bindings. No attempt directory was created. Relative project
 source declarations remain beside the project, and the four authored public
 document links resolve at their renamed location.
+
+## Status correction — 2026-10-18
+
+Lab PR162 merged on 2026-10-17 at
+`faf415e3754f4018674a734547c66df7ddca8333`. The validation paragraph above
+retains the status recorded at the time of that check. This correction does not
+activate a run pin, qualify an execution runtime or authorize a workload.

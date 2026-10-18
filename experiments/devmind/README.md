@@ -43,8 +43,9 @@ Do not treat their old Python-test claims as Workshop validation or use their
 old command-rendering snippets as a new Workshop implementation. Native Lab is
 responsible for validation, rendering and execution.
 
-The migration must retire the corresponding active Lab paths after the mapped
-copy is accepted; this is not permission to maintain two active recipe owners.
+The matching active EXP1/LAB86 paths were retired by merged Lab PR161 after
+preservation verification. The imported originals remain evidence, not a second
+current Lab recipe owner.
 The original source commit retains the historical evidence and Python tests.
 
 ## Pins and scope
@@ -52,9 +53,10 @@ The original source commit retains the historical evidence and Python tests.
 The imported source declarations pin upstream datasets and shard hashes. The
 reference Lab revision above includes the reusable Parquet timestamp support;
 its main CI had an independently diagnosed archive inventory race, so it is a
-provenance reference, not a cleared execution/runtime recommendation. Bind the
-reviewed replacement Lab revision and its dependency lock when native portable
-interfaces and the CI fix are accepted. No image digest is activated here.
+provenance reference, not a cleared execution/runtime recommendation. The archive-race correction and native section/recipe authoring interfaces are
+now merged. [Current metadata acceptance](../../docs/native-acceptance-2026-10-18.md)
+uses Lab `7e306a96bcc617468d2a06493dab4562bff6beb0`. This establishes no execution
+runtime pin: select the reviewed source/runtime and dependency lock separately. No image digest is activated here.
 
 Python/runtime dependencies follow that Lab revision's lock and supported
 platform contract. Runtime fit is unmeasured. The old local preparation envelope
