@@ -48,6 +48,18 @@ claim about merged Lab main. Existing `study report` already verifies the archiv
 report, but previously had no fixed mode/ordered-digest expectation option or
 candidate-bound acceptance output.
 
+## Candidate after provenance fix
+
+[Candidate 1329c52 evidence](candidate-1329c52.json) records a separate explicit
+acceptance at `1329c520de0609817af1feae51555b8ad9e77e30`, including its actual
+retained bundle identities, file hashes, invocation and reversed-order refusal.
+This candidate requires every file in the native package source inventory to be
+clean and committed at the claimed revision. Its native bundle loader passed.
+The original 3fa477a evidence and bundle inventory remain unchanged as historical
+records; that candidate's incomplete provenance check cannot establish acceptance
+of this fixed candidate. The new bundle has the same host-local `/tmp` availability
+limitations. Neither acceptance is scientific qualification or review clearance.
+
 ## Coverage boundary
 
 This pass is one candidate's evidence, not perpetual regression coverage.
