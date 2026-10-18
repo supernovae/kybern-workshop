@@ -26,10 +26,12 @@ merged-source acceptance and guarantee mapping. Earlier branch-candidate records
 remain historical evidence and were not relabeled. References below to a future
 merged-SHA gate describe the status at those earlier candidates.
 
-### Proposed active-copy retirement
+### Merged active-copy retirement
 
-[Lab #186](https://github.com/supernovae/tiny-sparse-lab/pull/186) proposes removing
-eight memory-injection assets and four shared context inputs from active Lab.
+[Lab #186](https://github.com/supernovae/tiny-sparse-lab/pull/186) merged at
+`0af1683188edacecf0856baa3520354363358f0d`, retiring eight memory-injection assets
+and four shared context inputs from active Lab. Original bytes remain preserved
+in Workshop; the earlier branch-candidate records below remain unchanged.
 [Candidate 0acb08e](candidate-0acb08e.json) separately verifies exact candidate
 `0acb08e5667d0c90c63ca2bfe4109dd465794631` against the unchanged archive and fixed
 expectations. Native bundle verification passed, and reversed config order
@@ -43,19 +45,24 @@ obligation to rerun native Workshop acceptance before merging changes to histori
 identity normalization or default-field handling. Native bundle verification and
 reversed-order refusal passed. Earlier candidate evidence remains unchanged.
 
-Merge Lab #186 first. Then retain and externally review native acceptance at its
-exact merged SHA before merging Workshop #37. A branch-candidate record satisfies
-that SHA requirement only if Lab lands that exact commit unchanged (fast-forward);
-otherwise retain a separate merged-candidate record. Workshop itself authorizes no
-retirement: the retirement decision belongs to Lab #186 and its review/merge gate.
+The merge-order gate has completed its first two steps: Lab #186 merged, and
+[separate exact merged-source acceptance](candidate-0af1683.json) is retained at
+`0af1683188edacecf0856baa3520354363358f0d`. Native bundle verification passed.
+Reversed config order and the pre-merge candidate SHA both refused with their
+specific errors before output creation. All twelve archived destinations matched
+their original byte identities; their active Lab paths are absent.
 
-The proposal transfers the exact personal identity assertion to this explicit
+External review of this merged-SHA acceptance remains pending before Workshop #37
+can merge. A reviewed branch-candidate record does not substitute for that step.
+Workshop itself authorizes no retirement: Lab #186's separate review/merge gate
+made the retirement decision. Parent coordination owns the remaining review and
+Workshop merge.
+
+The landed change transfers the exact personal identity assertion to this explicit
 acceptance procedure, retaining Lab's generic historical reader and neutral tests.
-It does not make a single acceptance perpetual coverage: future accepted candidates
-still need their own acceptance against unchanged expectations. External review
-of this evidence and the retirement mapping remains pending; neither this record
-nor a local test pass clears the retirement for merge. No archive bytes or earlier
-candidate records change. Parent coordination owns review and merge.
+One acceptance is not perpetual coverage: future accepted candidates still need
+acceptance against unchanged expectations, and historical normalization/default
+changes require it before merge. No archive bytes or earlier records change.
 
 ### Guarantee mapping for review
 
@@ -199,8 +206,8 @@ not fetch Workshop or silently skip this personal guarantee. Future candidates
 require an explicit new acceptance run against the unchanged expectations and
 review of its result. No scheduler or recurring infrastructure is introduced.
 
-All twelve assets and the original historical assertion remain in merged Lab
-until the proposed retirement is reviewed and merged. Candidate acceptance here
-is evidence for that decision, not automatic retirement authority. Historical
-data/tokenizer paths and scientific results are not made executable or qualified
-by this metadata check. Missing prepared payloads remain unavailable. No historical hashes, results, budgets or approvals are edited.
+All twelve active copies and the personal historical assertion are retired in
+merged Lab #186; Workshop retains original bytes and explicit identity acceptance.
+This does not make historical data/tokenizer paths or scientific results executable
+or qualified. Missing prepared payloads remain unavailable. No historical hashes,
+results, budgets or approvals are edited.
