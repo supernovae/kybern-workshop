@@ -7,9 +7,10 @@ future dataset receipts. The chief owns binding and launch; none occurred here.
 
 1. Use the qualified Linux amd64 Docker path and existing lease/hold namespace.
    Bind the reviewed Lab commit containing timestamp serialization, a smoke-tested
-   immutable image containing that commit, and a reviewed Harness pin allowing
-   that digest. The previous cached image cannot execute the corrected path.
-   Do not work around the image allowlist, overlay installed code, or install packages.
+   immutable image containing that commit, and a reviewed Harness pin accepting
+   the explicit execution policy. The previous cached image cannot execute the
+   corrected path. Do not bypass image/revision checks, overlay installed code,
+   or install packages.
 2. Bind actual runtime/version/executable SHA (and optional venv object consistently
    in session and jobs), boot ID, owner approval reference, source roots and fresh
    work/receipt roots. Measure actual capacity under the existing profile: 24 GiB
@@ -82,3 +83,57 @@ Populate the runtime object's native venv block when the actual interpreter uses
 one, and copy that same block to `session.runtime_venv` before final serialization.
 The measured runtime JSON and input map are host facts, not future dataset evidence.
 No subprocess, shell, evaluation, automatic approval or workload launch is involved.
+
+## Current supervisor contract and candidate pins
+
+The four-slot pilot session targets Harness
+`b1c2efbd256eceeebdef7cf42b34165d01b8ccb6`. Schema 4 requires
+`execution_policy.version: 1` and each slot's exact sanitized `environment`,
+identical to its corresponding pilot job. The template retains eight CPUs,
+bridge networking, 24 GiB total/initially available effective RAM and a 4 GiB
+available-memory stop floor; 310/10 GiB admission/stop disk floors and
+100000/10000 admission/stop inode floors. These are requirements to verify,
+not observations about any host. RSS and retained storage remain sampled stop
+policies, not hard quotas. Bridge networking remains available throughout the
+session; offline application flags do not provide network isolation.
+
+Candidate Lab source: `0af1683188edacecf0856baa3520354363358f0d`.
+Candidate image:
+`ghcr.io/supernovae/tiny-sparse-lab@sha256:b56dc5b447503fd6f7e4aff7a208e8b225f102000da1b180d2586a732deffcd2`.
+[CI smoke and exact-image publication](https://github.com/supernovae/tiny-sparse-lab/actions/runs/39145378379)
+succeeded for that source, which contains the timestamp fix. These are review
+candidates, not activated host bindings or workload approval. The coordinator
+must select `HOST_REVIEWED_IMAGE` and `HOST_REVIEWED_LAB_COMMIT`, verify the cached
+digest and OCI revision label, and separately bind the actual runtime identity.
+No image pull, replacement pin or host qualification is authorized by this file.
+
+Keep all other `HOST_*` values as unresolved host bindings until measured or
+approved: approval owner/reference, Python path/version/SHA256, boot ID, source
+roots, work/receipt roots, existing lease namespace, baseline/contract hashes,
+and runtime/required-file object paths. The existing namespace must equal
+`HOST_WORK_ROOT/worker-leases` under the current supervisor; select a work root
+compatible with the existing namespace, never relocate or reset a hold to make
+it fit. Optional venv identity must match across jobs and session.
+
+Only this initial pilot template is migrated here. The broader
+`session.template.json` is not a current-Harness continuation declaration;
+it requires separate review and binding before use. This pilot still ends after
+budget status at the existing 4 GiB gate, without a continuation or gate release.
+
+## Metadata validation of this declaration
+
+Validated on 2026-10-18 with the exact candidate Lab/Harness source pins above
+and existing Python 3.14.4. Lab's native `render_declaration` rendered temporary
+fixture bindings; Harness's native `session.read_spec` accepted the resulting
+committed session. No `Session.start`, resource admission, Docker operation or
+native phase was invoked. Fixture runtime/boot/hash values were not written into
+this package and are not activated host bindings.
+
+All four slot argv/environment/time/RSS bindings match their unchanged jobs;
+removing only the new execution policy and slot environments reproduces the
+previous session exactly. All 145 package manifest entries match their files.
+The native session parser explicitly refused four separately committed negatives:
+missing execution policy, missing slot environment, acquisition with network
+`none`, and hard RSS. This is metadata compatibility evidence, not workload,
+image-cache, host-capacity or scientific acceptance. Generic regression coverage
+remains in Harness; Workshop adds no Python validator or execution adapter.
