@@ -11,6 +11,17 @@ The expected matrix/study hashes and nine ordered config hashes are copied from
 the original receipt, never regenerated from a candidate. The receipt-selection
 expectation remains `legacy_default_fields`.
 
+## Merge order and merged-source acceptance
+
+Merge [Lab #185](https://github.com/supernovae/tiny-sparse-lab/pull/185) first.
+Then run the native metadata acceptance below against the exact merged Lab SHA,
+using that clean source checkout and passing its full SHA as `--candidate-commit`.
+Retain a separate result and bundle inventory for the merged SHA, and have that
+acceptance reviewed before merging Workshop #36. The existing branch-candidate
+records do not establish acceptance of a different merge commit, even if its
+package bytes match. Preserve them as historical evidence; do not rewrite them
+with the merged SHA. Parent coordination owns review and both merges.
+
 ## Explicit candidate acceptance
 
 Use the reviewed candidate Lab source/interpreter. Set `ARCHIVE` to this
@@ -59,6 +70,31 @@ The original 3fa477a evidence and bundle inventory remain unchanged as historica
 records; that candidate's incomplete provenance check cannot establish acceptance
 of this fixed candidate. The new bundle has the same host-local `/tmp` availability
 limitations. Neither acceptance is scientific qualification or review clearance.
+
+## Digest and location semantics
+
+For these version-1 native bundles, manifest `report_sha256` (recorded as
+`native_report_sha256` or inside `native_identities`) identifies the verified
+collected report. It is independent of the archive's filesystem root; it is not
+the byte hash of the newly emitted `report.json`. The fixed study, matrix and
+ordered config identities likewise describe the unchanged inputs rather than
+their checkout location.
+
+The emitted report retains reproduction commands containing input locations.
+Changing the absolute archive root can therefore change serialized `report.json`
+and rendered file hashes, the manifest bytes and the full `bundle_sha256`, while
+the native collected-report identity remains unchanged. Compare each file digest
+against its own retained bundle, and compare the native identities and fixed
+expectations when assessing relocated inputs. Do not expect full bundle digests
+to match across different archive roots or candidate commits.
+
+Recorded host paths document where the historical invocation read inputs and
+wrote evidence. They are not portable invocation defaults, remotely accessible
+artifact links, or a durability guarantee. Use the variable-based command above
+with locally resolved paths for a new acceptance. The recorded local inventories
+permit byte verification only where those original files are still available;
+missing local files remain unavailable evidence, not permission to substitute
+new output under an old record.
 
 ## Coverage boundary
 
