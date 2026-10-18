@@ -104,6 +104,15 @@ eadb19e. Native bundle verification passed; reversed order refused with the
 identity-mismatch message before output. Earlier records remain unchanged, and
 acceptance at the future merged Lab SHA is still required.
 
+## Candidate with digest-pattern coverage
+
+[Candidate c45aaf4 evidence](candidate-c45aaf4.json) records separate acceptance
+at `c45aaf46552cabe08b8ca0903c9aaa8b41a70f9e` after adding matrix/study
+hex-pattern schema refusal tests and reflowing documentation. Both committed
+pattern-removal controls failed before report work as intended. Production
+package bytes are unchanged. Native bundle verification and reversed-order
+refusal passed; earlier evidence and the merged-SHA acceptance gate remain intact.
+
 ## Digest and location semantics
 
 For these version-1 native bundles, manifest `report_sha256` (recorded as
