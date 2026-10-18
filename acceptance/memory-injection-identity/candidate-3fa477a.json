@@ -1,0 +1,35 @@
+{
+  "candidate_lab_commit": "3fa477a71c97820f15bc3e9edb7550cc099cceba",
+  "workshop_archive_commit": "b74dff53259343aafd336cd00e3480246d70133b",
+  "expectations_sha256": "202d563da5ccef7d94123f4ca2accfa27f523cc267dc552b9e111132a65d1844",
+  "identity_acceptance": {
+    "candidate_commit": "3fa477a71c97820f15bc3e9edb7550cc099cceba",
+    "candidate_package_algorithm": "package-path-sha256-v2",
+    "candidate_package_sha256": "846f5e3e3fd338ad31e2dda45372e89c46303060fc5abc9bb31ea81da386361f",
+    "expectations_sha256": "202d563da5ccef7d94123f4ca2accfa27f523cc267dc552b9e111132a65d1844",
+    "expected": {
+      "config_identity_mode": "legacy_default_fields",
+      "config_sha256": [
+        "204fc93286d05b3dd5e073698491494659d6c71072d5f93556ffb8f2d61cbfdb",
+        "6e5a8a87f08f0999375ec7f1ca0754061caf4a1a6438bb1785e9d598c0113e09",
+        "91dfe4eb255a5d0297e8a7592435bb0c2cf857299e3e5a163965387dd27af8a9",
+        "64c3af86fa655a9b51c76261e48856f2e3b6c4b30a3e132af8aa69f2d73e71da",
+        "50af37bfa0bcc013689bc72fa0fabcb581c8a609fd2136c0fa4e318cefbea2fb",
+        "190a6eab4de2141586c799f28273e3602362cfb19657b822a681f72908f2a096",
+        "224b84a5517cff47f7e8a38b9009c4c8d9ac3ad1760faaf8cc276a35d49be20e",
+        "da68f679fadc7d224534b75d948467818094adb65597c042fcf8e8759d11ddf1",
+        "18261fccafca3a990cc96c56e893be7186e1bfba13d4704c5e09380f87317526"
+      ],
+      "format": "sparselab-study-identity-expectations-v1",
+      "matrix_sha256": "77582b627384f5fcf998721393868e0e35cf004693f5ec3bca91109908277a0b",
+      "study_sha256": "eb7b57eb358bf243657ce6f929e5bc2c028f4f10cddac33add495d1ff11d03e5"
+    },
+    "scope": "Fixed metadata identities only; no payload or scientific qualification. Package hash identifies actual loaded-source bytes; Git commit alone does not assert a clean package or installed-runtime equivalence.",
+    "verified": true,
+    "verifier_file_status": "CLEAN_AND_COMMITTED"
+  },
+  "result": "passed",
+  "negative_control": "Reversed ordered config digests refused before output creation.",
+  "scope": "One explicit read-only metadata acceptance on this candidate; not perpetual regression coverage, payload validation, execution or science quality.",
+  "command": "sparselab study report \"$ARCHIVE/configs/memory_injection_v1.study.yaml\" \"$ARCHIVE/artifacts/studies/memory_injection_v1/receipt.json\" --evidence \"$ARCHIVE/artifacts/studies/memory_injection_v1/study-report.json\" --output \"$NEW_OUTPUT\" --identity-expectations \"$EXPECTED\" --candidate-commit \"3fa477a71c97820f15bc3e9edb7550cc099cceba\""
+}
