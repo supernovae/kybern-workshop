@@ -67,6 +67,17 @@ stderr and real exit codes for every command in unique files; `set -C` prevents
 shell redirection clobber. Do not pipe failures into commands that hide status.
 All commands below are future work except the recorded metadata checks.
 
+Before any child launch, propose these library settings in the selected Linux CPU
+runtime (they do not enforce a CPU quota or process-wide thread cap):
+
+```sh
+export OMP_NUM_THREADS=8
+export MKL_NUM_THREADS=8
+export OPENBLAS_NUM_THREADS=8
+export NUMEXPR_NUM_THREADS=8
+export TOKENIZERS_PARALLELISM=false
+```
+
 ### 1. Select and authenticate data
 
 ```sh
@@ -152,17 +163,6 @@ pass. A throughput forecast that cannot complete within the remaining allowance
 is a stop/review result, not permission to change model, budget or hardware.
 
 ### Development review and explicit continuation
-
-Before any child launch, propose these library settings in the selected Linux CPU
-runtime (they do not enforce a CPU quota or process-wide thread cap):
-
-```sh
-export OMP_NUM_THREADS=8
-export MKL_NUM_THREADS=8
-export OPENBLAS_NUM_THREADS=8
-export NUMEXPR_NUM_THREADS=8
-export TOKENIZERS_PARALLELISM=false
-```
 
 The first training invocation stops at update 1,024 / 4,194,304 targets while the
 configured scheduler horizon remains 8,192. Native source confirms 256 updates of
