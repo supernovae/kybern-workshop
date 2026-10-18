@@ -20,12 +20,49 @@ a clean checkout, using the unchanged archive and fixed expectations. Reversed
 config order refused before output; native bundle verification passed. All nine
 input-map rows matched their preserved byte sizes, SHA256 and Git blobs.
 
-The merged-source acceptance step is complete. External review of this evidence
-and guarantee mapping remains pending before Workshop #36 can merge. Parent
-coordination owns review and merge. Branch-candidate records below remain
-historical evidence; none was relabeled with the merged SHA. Earlier references
-to a future merged-SHA gate describe the status at those candidates; this section
-records its current status. No Lab assets or historical assertions are retired.
+Workshop #36 subsequently merged at
+`acf5f61fe4b80f31ba4b2e1db4f37a0f25b0f426` after external review of that
+merged-source acceptance and guarantee mapping. Earlier branch-candidate records
+remain historical evidence and were not relabeled. References below to a future
+merged-SHA gate describe the status at those earlier candidates.
+
+### Merged active-copy retirement
+
+[Lab #186](https://github.com/supernovae/tiny-sparse-lab/pull/186) merged at
+`0af1683188edacecf0856baa3520354363358f0d`, retiring eight memory-injection assets
+and four shared context inputs from active Lab. Original bytes remain preserved
+in Workshop; the earlier branch-candidate records below remain unchanged.
+[Candidate 0acb08e](candidate-0acb08e.json) separately verifies exact candidate
+`0acb08e5667d0c90c63ca2bfe4109dd465794631` against the unchanged archive and fixed
+expectations. Native bundle verification passed, and reversed config order
+refused for identity mismatch before output. Its production package hash is
+unchanged from merged Lab d7228be; the new candidate commit and bundle are
+nevertheless recorded separately.
+
+[Documentation follow-up candidate 9819b97](candidate-9819b97.json) retains a
+separate pass at `9819b97f55354984a4c20efc2501717d4effffb9` after documenting the
+obligation to rerun native Workshop acceptance before merging changes to historical
+identity normalization or default-field handling. Native bundle verification and
+reversed-order refusal passed. Earlier candidate evidence remains unchanged.
+
+The merge-order gate has completed its first two steps: Lab #186 merged, and
+[separate exact merged-source acceptance](candidate-0af1683.json) is retained at
+`0af1683188edacecf0856baa3520354363358f0d`. Native bundle verification passed.
+Reversed config order and the pre-merge candidate SHA both refused with their
+specific errors before output creation. All twelve archived destinations matched
+their original byte identities; their active Lab paths are absent.
+
+External review of this merged-SHA acceptance remains pending before Workshop #37
+can merge. A reviewed branch-candidate record does not substitute for that step.
+Workshop itself authorizes no retirement: Lab #186's separate review/merge gate
+made the retirement decision. Parent coordination owns the remaining review and
+Workshop merge.
+
+The landed change transfers the exact personal identity assertion to this explicit
+acceptance procedure, retaining Lab's generic historical reader and neutral tests.
+One acceptance is not perpetual coverage: future accepted candidates still need
+acceptance against unchanged expectations, and historical normalization/default
+changes require it before merge. No archive bytes or earlier records change.
 
 ### Guarantee mapping for review
 
@@ -36,7 +73,7 @@ records its current status. No Lab assets or historical assertions are retired.
 | Verifier source bound to the claimed candidate | Full native inventory clean and committed at merged SHA; package hash recorded in the new result. |
 | Refusal on changed config order | Separate negative control refused for identity mismatch without output. |
 | Generic reader/provenance regressions | Merged Lab neutral tests remain offline and independent of Workshop. This explicit personal acceptance is not perpetual regression coverage. |
-| Future retirement of personal inputs or reader behavior | Requires a separate reviewed replacement-guarantee mapping and coordinated coverage; this PR authorizes no retirement. |
+| Future retirement of personal inputs or reader behavior | Requires a separate reviewed replacement-guarantee mapping and coordinated coverage. Workshop authorizes no retirement; Lab #186 owns the current retirement decision. |
 
 The new record inventories the actual local bundle and logs. These remain in
 host-local `/tmp`, are not remotely accessible through their recorded paths, and
@@ -144,6 +181,8 @@ ordered config identities likewise describe the unchanged inputs rather than
 their checkout location.
 
 The emitted report retains reproduction commands containing input locations.
+`index.html` and `inputs/cards/*.json` also embed the absolute archive root;
+relocation can change those bytes without changing the underlying card identities.
 Changing the absolute archive root can therefore change serialized `report.json`
 and rendered file hashes, the manifest bytes and the full `bundle_sha256`, while
 the native collected-report identity remains unchanged. Compare each file digest
@@ -167,8 +206,8 @@ not fetch Workshop or silently skip this personal guarantee. Future candidates
 require an explicit new acceptance run against the unchanged expectations and
 review of its result. No scheduler or recurring infrastructure is introduced.
 
-All twelve pending Lab assets and the original historical assertion remain in
-place. Retirement must wait for replacement acceptance and external review of the
-guarantee mapping. Historical data/tokenizer paths and scientific results are
-not made executable or qualified by this metadata check. Missing prepared payloads
-remain unavailable. No historical hashes, results, budgets or approvals are edited.
+All twelve active copies and the personal historical assertion are retired in
+merged Lab #186; Workshop retains original bytes and explicit identity acceptance.
+This does not make historical data/tokenizer paths or scientific results executable
+or qualified. Missing prepared payloads remain unavailable. No historical hashes,
+results, budgets or approvals are edited.
