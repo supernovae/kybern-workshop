@@ -68,7 +68,24 @@
         "${HOST_WORK_ROOT}/baseline.json",
         "--workspace",
         "${HOST_WORK_ROOT}"
-      ]
+      ],
+      "environment": {
+        "SPARSELAB_WORK_DIR": "${HOST_WORK_ROOT}",
+        "SPARSELAB_WORKER_LEASE_DIR": "${HOST_EXISTING_LEASE_NAMESPACE}",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "HF_DATASETS_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "UV_OFFLINE": "1",
+        "HF_HOME": "${HOST_WORK_ROOT}/hf_home",
+        "HF_HUB_CACHE": "${HOST_WORK_ROOT}/hf_hub_cache",
+        "HF_DATASETS_CACHE": "${HOST_WORK_ROOT}/hf_datasets_cache",
+        "TMPDIR": "${HOST_WORK_ROOT}/tmpdir",
+        "XDG_CACHE_HOME": "${HOST_WORK_ROOT}/xdg_cache_home"
+      }
     },
     {
       "id": "transport-init",
@@ -107,7 +124,24 @@
         "${HOST_WORK_ROOT}/baseline.json",
         "--content-identity-sha256",
         "800d0ab6c5189008e7ff4441055c3ab368cdad896b173a83b0615227865302a0"
-      ]
+      ],
+      "environment": {
+        "SPARSELAB_WORK_DIR": "${HOST_WORK_ROOT}",
+        "SPARSELAB_WORKER_LEASE_DIR": "${HOST_EXISTING_LEASE_NAMESPACE}",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "HF_DATASETS_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "UV_OFFLINE": "1",
+        "HF_HOME": "${HOST_WORK_ROOT}/hf_home",
+        "HF_HUB_CACHE": "${HOST_WORK_ROOT}/hf_hub_cache",
+        "HF_DATASETS_CACHE": "${HOST_WORK_ROOT}/hf_datasets_cache",
+        "TMPDIR": "${HOST_WORK_ROOT}/tmpdir",
+        "XDG_CACHE_HOME": "${HOST_WORK_ROOT}/xdg_cache_home"
+      }
     },
     {
       "id": "pilot-acquire",
@@ -146,7 +180,24 @@
         "${HOST_WORK_ROOT}/baseline.json",
         "--content-identity-sha256",
         "800d0ab6c5189008e7ff4441055c3ab368cdad896b173a83b0615227865302a0"
-      ]
+      ],
+      "environment": {
+        "SPARSELAB_WORK_DIR": "${HOST_WORK_ROOT}",
+        "SPARSELAB_WORKER_LEASE_DIR": "${HOST_EXISTING_LEASE_NAMESPACE}",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "0",
+        "HF_DATASETS_OFFLINE": "0",
+        "TRANSFORMERS_OFFLINE": "1",
+        "UV_OFFLINE": "1",
+        "HF_HOME": "${HOST_WORK_ROOT}/hf_home",
+        "HF_HUB_CACHE": "${HOST_WORK_ROOT}/hf_hub_cache",
+        "HF_DATASETS_CACHE": "${HOST_WORK_ROOT}/hf_datasets_cache",
+        "TMPDIR": "${HOST_WORK_ROOT}/tmpdir",
+        "XDG_CACHE_HOME": "${HOST_WORK_ROOT}/xdg_cache_home"
+      }
     },
     {
       "id": "pilot-budget-status",
@@ -185,7 +236,40 @@
         "${HOST_WORK_ROOT}/baseline.json",
         "--content-identity-sha256",
         "800d0ab6c5189008e7ff4441055c3ab368cdad896b173a83b0615227865302a0"
-      ]
+      ],
+      "environment": {
+        "SPARSELAB_WORK_DIR": "${HOST_WORK_ROOT}",
+        "SPARSELAB_WORKER_LEASE_DIR": "${HOST_EXISTING_LEASE_NAMESPACE}",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "HF_DATASETS_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "UV_OFFLINE": "1",
+        "HF_HOME": "${HOST_WORK_ROOT}/hf_home",
+        "HF_HUB_CACHE": "${HOST_WORK_ROOT}/hf_hub_cache",
+        "HF_DATASETS_CACHE": "${HOST_WORK_ROOT}/hf_datasets_cache",
+        "TMPDIR": "${HOST_WORK_ROOT}/tmpdir",
+        "XDG_CACHE_HOME": "${HOST_WORK_ROOT}/xdg_cache_home"
+      }
     }
-  ]
+  ],
+  "execution_policy": {
+    "version": 1,
+    "image": "${HOST_REVIEWED_IMAGE}",
+    "image_source_commit": "${HOST_REVIEWED_LAB_COMMIT}",
+    "cpus": 8,
+    "network": "bridge",
+    "headroom": {
+      "total_memory_bytes": 25769803776,
+      "admission_memory_bytes": 25769803776,
+      "stop_memory_bytes": 4294967296,
+      "admission_disk_bytes": 332859965440,
+      "stop_disk_bytes": 10737418240,
+      "admission_inodes": 100000,
+      "stop_inodes": 10000
+    }
+  }
 }
