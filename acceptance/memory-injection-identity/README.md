@@ -82,6 +82,18 @@ config order refused before output. Production source bytes are unchanged from
 separately. Earlier records remain unchanged. This branch-candidate acceptance
 does not replace the required acceptance at the future merged Lab SHA.
 
+## Candidate with hermetic provenance tests
+
+[Candidate eadb19e evidence](candidate-eadb19e.json) records separate acceptance
+at `eadb19e22ff6cc9a8bf52737c65ca85a0820a847` after isolating the public-command
+tests in temporary committed package copies and covering the inventory/provenance
+hash-mismatch refusal. The emitted status is now `candidate_package_status`, with
+no compatibility alias; older records retain their original field unchanged.
+Candidate commits belong to the repository containing the loaded package and do
+not by themselves establish upstream origin; compare the package source hash.
+Native bundle verification passed, and reversed config order refused before
+output. The merged-SHA acceptance gate and local-artifact limitations still apply.
+
 ## Digest and location semantics
 
 For these version-1 native bundles, manifest `report_sha256` (recorded as
