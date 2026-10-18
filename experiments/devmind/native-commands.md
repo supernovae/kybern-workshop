@@ -12,7 +12,7 @@ required. Keep generated data, native stores and approvals outside this recipe.
 | Rights and splits | `corpus admission-draft`, `inspect-admission`, `split-inventory`, `freeze-splits` | Real retained inputs, reviewed admission and family clusters |
 | Release and tokenizer | `corpus build`, `freeze`, `audit`, `export`; `tokenizer train` | Valid frozen release, export configuration and fresh fit/audit evidence |
 | Unique targets and packing | `corpus measure-tokens`, `materialize-mixture`, `verify-mixture`; `data prepared-inputs publish/verify` | Real token counts, complete RunConfig and envelope |
-| Shape and configuration | `config validate SOURCE --kind model/optimizer/run --json` (Lab PR162) | Native model/optimizer section validation; full run bindings still missing |
+| Shape and configuration | `config validate SOURCE --kind model/optimizer/run --json` | Native model/optimizer section validation; full run bindings still missing |
 | Train/recover | `train CONFIG`, `train CONFIG --resume RUN_ID`; native Campaign operations | Full reviewed RunConfig, prepared inputs, admission, finite training budget and supported runtime |
 | Inspect/verify checkpoint | `checkpoint inspect`, `checkpoint verify` | Actual native checkpoint/store identities |
 | Evaluate retained base | `eval RUN_ID --checkpoint CHECKPOINT --panel PANEL --output OUTPUT`; `model exercise RUN_ID --checkpoint CHECKPOINT --prompt-panel PANEL` | Real matching checkpoint, frozen panel, local native run store, separately authorized evaluation |
@@ -29,8 +29,10 @@ artifact identities. Do not invent release/checkpoint hashes to make a descripto
 parse. The current portable workflow execution contract is CPU-bounded and excludes
 continuation/expanded evaluation; native training/evaluation capabilities already
 exist but still need portable composition appropriate to this recipe. Lab #158
-owns demonstrated generic interface gaps, including generation in arbitrary local
-directories. No Workshop-only descriptor, launcher or scheduler fills those gaps.
+owns demonstrated generic interface gaps. Section validation and
+`experiment recipe create/export` now support arbitrary local directories;
+[the current acceptance record](../../docs/native-acceptance-2026-10-18.md) exercises
+these shipped paths. Full portable continuation/evaluation is still limited. No Workshop-only descriptor, launcher or scheduler fills those gaps.
 
 Public derivative `eval` currently consumes a native run store as well as its
 checkpoint. A generic independently retrieved base-artifact admission path must be
@@ -69,8 +71,8 @@ Both exit 0 with `schema_valid: true`, `executable: false`. Input SHA256:
 - optimizer: `5608094732838fa17570f9adab6786e2e2edaca42d2eb0d0f57a6e3ae6d64a0e`
 
 This verifies each native section, not cross-section RunConfig compatibility or
-artifact contents. PR162 remains subject to independent review/merge; this does
-not activate a run pin. At the earlier inspected Lab revision, the existing native
+artifact contents. At the time of that historical check PR162 awaited review/merge; it has since
+merged. Neither the historical nor current metadata check activates a run pin. At the earlier inspected Lab revision, the existing native
 `model.inspection.named_tensor_inventory` also returned 341885952 parameters,
 219 tensor specifications and one tied alias without model/tensor allocation.
 Native optimizer source grouping was inspected; no optimizer state was allocated.

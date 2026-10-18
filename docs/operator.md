@@ -1,6 +1,13 @@
-# Run an approved Workshop experiment
+# Internal operator reference — migration pending
 
-Notion owns experiment planning, ordering and assignment. Workshop owns the
+For public reproduction, start with [native Lab commands](native-workflow.md).
+This page retains the existing internal adapter contract and its historical pins.
+It does not establish compatibility with current Lab or make Harness/Notion
+prerequisites. Existing helpers remain migration inventory; see the
+[ownership audit](ownership-boundaries.md). No adapter or approval behavior changes
+in this documentation update.
+
+In that internal deployment, Notion owns experiment planning, ordering and assignment. Workshop owns the
 committed scientific recipe, runtime configuration, operator commands and output
 links. Installed Lab supplies Campaign execution, scientific components and native
 evidence/report verification. Harness supervises the single bounded process tree.

@@ -18,10 +18,11 @@ run merely because its commands succeed.
 Use an existing installed Lab environment compatible with the recorded source
 revision. The exact imported declarations come from Lab
 `eab014ef7ca92de89d37b47c30df2ebf021d9473`; [migration.json](migration.json)
-records all 11 source/destination hashes. Metadata validation uses Lab PR162
-`408835184bf7020c10bdd2e8b7115e196322cf2b`; it is an unmerged interface dependency,
-not permission to activate that revision on a runner. Bind the reviewed merged
-revision and its dependency lock before execution. No install or image pull is
+records all 11 source/destination hashes. The original metadata validation used Lab PR162
+`408835184bf7020c10bdd2e8b7115e196322cf2b`; that interface is now merged.
+[Current metadata acceptance](../../docs/native-acceptance-2026-10-18.md) uses Lab
+`7e306a96bcc617468d2a06493dab4562bff6beb0` without executing the recipe. Bind the
+separately reviewed source/runtime and dependency lock before execution. No install or image pull is
 part of these instructions. Existing CPU support is the reference; GPU changes
 need separate runtime qualification and budget.
 
