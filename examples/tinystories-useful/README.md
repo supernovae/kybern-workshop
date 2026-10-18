@@ -68,13 +68,13 @@ shell redirection clobber. Do not pipe failures into commands that hide status.
 All commands below are future work except the recorded metadata checks.
 
 Before any child launch, propose these library settings in the selected Linux CPU
-runtime (they do not enforce a CPU quota or process-wide thread cap):
+runtime (they do not enforce a CPU quota or process-wide thread cap). The optional
+NUMEXPR setting is omitted for compatibility with the existing supervisor:
 
 ```sh
 export OMP_NUM_THREADS=8
 export MKL_NUM_THREADS=8
 export OPENBLAS_NUM_THREADS=8
-export NUMEXPR_NUM_THREADS=8
 export TOKENIZERS_PARALLELISM=false
 ```
 
