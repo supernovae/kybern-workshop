@@ -1,0 +1,8 @@
+{
+  "monitor_policy_version": 1,
+  "max_wall_seconds": 7200,
+  "max_tree_rss_bytes": 17179869184,
+  "max_added_workspace_bytes": 21474836480,
+  "interval_seconds": 1,
+  "termination_grace_seconds": 30
+}

@@ -13,6 +13,11 @@ Workshop Python, Harness, bot, Notion account or website is required. The
 for the website's meaningful model requirement; do not promote this teaching
 run merely because its commands succeed.
 
+The [LAB91 useful-story build proposal](../tinystories-useful/README.md) is now
+queued separately. It uses public Lab commands throughout, with explicit pending
+input/runtime approval and a frozen story-quality gate. Neither this teaching
+recipe nor website CI substitutes for that actual model evidence.
+
 ## Runtime and provenance
 
 Use an existing installed Lab environment compatible with the recorded source

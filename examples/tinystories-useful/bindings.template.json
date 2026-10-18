@@ -1,0 +1,26 @@
+{
+  "artifacts": {},
+  "acquisitions": {
+    "snapshot": {
+      "output": "${WORK}/snapshot",
+      "cache_dir": "${WORK}/acquisition-cache"
+    }
+  },
+  "config_paths": {
+    "tokenizer.json": {
+      "output_dir": "${WORK}/tokenizer",
+      "dataset.cache_dir": "${WORK}/data",
+      "dataset.train_path": "${WORK}/snapshot/train.jsonl",
+      "dataset.validation_path": "${WORK}/snapshot/validation.jsonl",
+      "dataset.source_manifest_path": "${WORK}/snapshot/manifest.json"
+    },
+    "run.json": {
+      "tokenizer.path": "${WORK}/tokenizer/tokenizer.json",
+      "dataset.cache_dir": "${WORK}/data",
+      "dataset.train_path": "${WORK}/snapshot/train.jsonl",
+      "dataset.validation_path": "${WORK}/snapshot/validation.jsonl",
+      "dataset.source_manifest_path": "${WORK}/snapshot/manifest.json",
+      "logging.root_dir": "${WORK}/runs"
+    }
+  }
+}

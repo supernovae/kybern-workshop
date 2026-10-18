@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "vocab_size": 4096,
+  "min_frequency": 2,
+  "max_documents": 50000,
+  "output_dir": "tokenizer",
+  "dataset": {
+    "source": "snapshot",
+    "revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+    "dataset_config": "default",
+    "cache_dir": "data",
+    "train_path": "snapshot/train.jsonl",
+    "validation_path": "snapshot/validation.jsonl",
+    "source_manifest_path": "snapshot/manifest.json",
+    "license": "CDLA-Sharing-1.0",
+    "train_max_documents": 50000,
+    "validation_max_documents": 512,
+    "train_max_tokens": 16000000,
+    "validation_max_tokens": 131072
+  }
+}
