@@ -71,6 +71,17 @@ records; that candidate's incomplete provenance check cannot establish acceptanc
 of this fixed candidate. The new bundle has the same host-local `/tmp` availability
 limitations. Neither acceptance is scientific qualification or review clearance.
 
+## Candidate after main integration
+
+[Candidate a3ccbe8 evidence](candidate-a3ccbe8.json) records a separate native
+metadata acceptance at `a3ccbe8ad0377d02ce6b37a97ea4aaad32d5e710`, after an
+ordinary merge of main `48ef4d47673d5f21c15dfcac8f272337e6514e79` and extraction
+of shared neutral test vectors. Native bundle verification passed and reversed
+config order refused before output. Production source bytes are unchanged from
+1329c52; the candidate commit and retained bundle are nevertheless recorded
+separately. Earlier records remain unchanged. This branch-candidate acceptance
+does not replace the required acceptance at the future merged Lab SHA.
+
 ## Digest and location semantics
 
 For these version-1 native bundles, manifest `report_sha256` (recorded as
