@@ -1,5 +1,10 @@
 # LAB86 concrete preparation package — unexecuted
 
+Use [PILOT.md](PILOT.md) and `pilot-session.template.json` for the supported
+four-slot initial path through the 4 GiB gate. The broader `session.template.json`
+is not ready for current Harness and needs separate review; it is not a
+continuation route or authority to release the gate.
+
 This package supplies 84 exact source declarations, published content SHA-256s,
 a deterministic bounded shard selection, private application policy, resource
 policies, a zero-model contract and 24 native phase/job templates. It has not

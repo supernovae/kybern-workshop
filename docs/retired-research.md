@@ -25,7 +25,7 @@ acceptance records retain original identities; they are not current obligations.
 
 All `provenance/` imports (1,292 files), `catalog/` (8 files), personal
 `acceptance/` (14 files), legacy experiment landings/resources (35 files), and
-retired example scaffolds/landings (42 files) are removed: 1,391 files total.
+retired example scaffolds/landings (41 files) are removed: 1,390 files total.
 These counts describe this retirement only; the pinned snapshot is the exact
 file inventory and recovery source. Historical provenance subpaths above are
 relative to `provenance/lab/`.
@@ -37,8 +37,10 @@ relative to `provenance/lab/`.
 `experiments/devmind/`, both `results/` directories, `scripts/`, `tests/`,
 `examples/operator/` and the offline CI fixtures remain. Their operational
 records and safety checks are not replaced by historical links. In particular,
-LAB86 sources, manifests, controls and pilot templates are unchanged by this
-cleanup; its policy fix is independent PR38.
+LAB86 sources, controls and pilot templates retain merged PR38. This cleanup
+only adds the full-session limitation pointer to its README and refreshes that
+README hash. The old TinyStories entry URL remains a short redirect so recorded
+result documents stay byte-identical.
 
 The synthetic CPU example remains measured at its historical pin and supported
 for current native metadata authoring/inspection. The current metadata route is
@@ -51,3 +53,24 @@ that collection. Lab's neutral identity, provenance, refusal and verification
 regressions remain Lab-owned and unchanged. Historical acceptance/audit JSON is
 not rewritten to suggest new acceptance. The prior ownership audit is a dated
 snapshot; its retired repeatability entries are no longer a migration blocker.
+
+## Focused validation
+
+At Lab `0af1683188edacecf0856baa3520354363358f0d`, native recipe creation and
+preparation inspection of the retained synthetic CPU declarations passed using
+the documented current bindings. No payload directory was created. Existing
+Python 3.14.4 was used; no packages or models were installed.
+
+Offline retained fixtures: root suite 52 tests (51 passed, one explicit companion
+Harness integration skip), ROCm helpers 27 passed, TinyStories worker 16 passed.
+These exercise metadata/adapters with tiny fixtures, not accelerator work.
+All 145 LAB86 manifest hashes match. Retained scripts/tests, operator templates,
+synthetic declarations, result records and non-document TinyStories/DevMind inputs
+retain their bytes; the pilot template matches merged PR38.
+
+Current navigation has no unresolved local links. Eight pre-existing Lab-relative
+links inside the byte-authenticated copied microlab `declarations/README.md` and
+`declarations/acceptance.md` retain their original meaning: read them in the
+[original Lab tree](https://github.com/supernovae/tiny-sparse-lab/tree/eab014ef7ca92de89d37b47c30df2ebf021d9473/experiments/samples/tinystories-microlab).
+Their `migration.json` hashes are unchanged; they are historical source documents,
+not the current run guide. The ownership JSON is also an unchanged dated audit.
