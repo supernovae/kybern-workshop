@@ -35,6 +35,14 @@ No training, inference, model loading or payload reconstruction occurs.
 
 [Candidate 3fa477a evidence](candidate-3fa477a.json) records the explicit pass at
 `3fa477a71c97820f15bc3e9edb7550cc099cceba` and a reversed-config-order refusal.
+The [retained bundle inventory](candidate-3fa477a-bundle.json) ties that original
+evidence to the builder's existing output, with native bundle/report identities,
+exact file SHA256 values (including the manifest), and host-local inspection paths.
+The unchanged candidate's native loader accepted the retained bundle. The bundle
+and logs remain in local `/tmp`, are not uploaded, and may be lost on host cleanup;
+the inventory does not make those bytes remotely available. No acceptance was
+regenerated for this inventory.
+
 This depends on the candidate Lab report expectation extension; it is not yet a
 claim about merged Lab main. Existing `study report` already verifies the archived
 report, but previously had no fixed mode/ordered-digest expectation option or

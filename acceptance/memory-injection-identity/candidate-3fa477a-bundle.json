@@ -1,0 +1,150 @@
+{
+  "format": "workshop-retained-acceptance-bundle-v1",
+  "candidate_evidence": {
+    "path": "candidate-3fa477a.json",
+    "size_bytes": 2561,
+    "sha256": "fffe765c3fc564457050552bd84bf8c18859ca00f4eafe7e145a7a736425e9e3"
+  },
+  "candidate_lab_commit": "3fa477a71c97820f15bc3e9edb7550cc099cceba",
+  "workshop_archive_commit": "b74dff53259343aafd336cd00e3480246d70133b",
+  "provenance": "Original builder output retained from the candidate-3fa477a metadata acceptance; reused without regeneration. Digests measured directly from these local bytes, not from reviewer output.",
+  "location": {
+    "environment": "Ubuntu-26.04 WSL on the builder host",
+    "evidence_root": "/tmp/native-memory-acceptance-6xxdw_og",
+    "bundle_directory": "/tmp/native-memory-acceptance-6xxdw_og/report/6ce28f9a3d838ab9350d4f35ea5e53bbc1c9dd738805854d2e350352a8f29c9f",
+    "candidate_source_checkout": "/home/byron/src/lab-study-identity-acceptance",
+    "interpreter": "/home/byron/src/tiny-sparse-lab/.venv/bin/python",
+    "archive_inspection_root": "/home/byron/src/workshop-memory-identity-acceptance/provenance/lab"
+  },
+  "native_identities": {
+    "bundle_sha256": "6ce28f9a3d838ab9350d4f35ea5e53bbc1c9dd738805854d2e350352a8f29c9f",
+    "report_sha256": "39a1f30127cef816b3c7d08ef7459ebb79edcea95f700a1ff91d25132dac6654",
+    "note": "Native manifest identities; report_sha256 is not the SHA256 of serialized report.json bytes. Exact file hashes are recorded separately below."
+  },
+  "bundle_files": [
+    {
+      "path": "charts/card-1.svg",
+      "size_bytes": 1863,
+      "sha256": "e3dce3fc6cf16ca9c04c00031e3e956c1def27513045ddc761c2efeed50a871b"
+    },
+    {
+      "path": "charts/card-2.svg",
+      "size_bytes": 1847,
+      "sha256": "b0055a9f14bb57de88da1af7939a1c8fb6299d92be7ff328fd5bbfd1592fd9ca"
+    },
+    {
+      "path": "charts/card-3.svg",
+      "size_bytes": 1849,
+      "sha256": "8ad7dc625c9b8b56e8423b2a89179df1eb27b46c01168ec93cf47beb61457dd1"
+    },
+    {
+      "path": "charts/card-4.svg",
+      "size_bytes": 1851,
+      "sha256": "f17ed8b6f1e27980c8e6cb1edf13c9ea2580c0a4cf3460598d3c5a3eab9cd9dd"
+    },
+    {
+      "path": "charts/pair-deltas.svg",
+      "size_bytes": 6373,
+      "sha256": "ab826deff99e60785fdeac52efbfde584b27d2ee7012c0ba24205312a453bb26"
+    },
+    {
+      "path": "index.html",
+      "size_bytes": 765828,
+      "sha256": "96db70398ad6e823d97f15f47ffadf83ff18619f01d7db909e9e0e2965dc81ba"
+    },
+    {
+      "path": "inputs/cards/098fa8e57760d429b98b46820398699b1c5ab24dd2bd0c3e7b168007b2413424.json",
+      "size_bytes": 3184,
+      "sha256": "81a2a823605e6a9e3ec32c655592118dd58946c010f0f4f138a9e84a1e6f93a6"
+    },
+    {
+      "path": "inputs/cards/28d357a5de98a59c2984ff10955cac587ffeadf3a863e664c4d5fdfc5db4012f.json",
+      "size_bytes": 3807,
+      "sha256": "eb956d17de74fc53678832f455a757f39af5340a8cfd2aebac9f9943f01c0e8b"
+    },
+    {
+      "path": "inputs/cards/55913cb81abcfa0bdd59388f0cdba57238d89cc751e2b77db818f827360bf873.json",
+      "size_bytes": 4200,
+      "sha256": "91b2a7c039255bdbc0fc1b1101a052b0794ed64149a13e145b0b6b21837f17a7"
+    },
+    {
+      "path": "inputs/cards/bc3e133d53cbd5d4e81b909b35c7ac6d61ae7f86ab614232c995a1bf0d1bd8da.json",
+      "size_bytes": 4788,
+      "sha256": "a50161491fe6db9d024f0fd2fb8303eb4e7ee3d4c2f15852d179065032f08b7f"
+    },
+    {
+      "path": "inputs/collected-report.json",
+      "size_bytes": 438482,
+      "sha256": "8c5baa9b8f507303a7b7bab5dff9b90b5242a1896a9b4b386395b0b194d0915e"
+    },
+    {
+      "path": "inputs/matrix.yaml",
+      "size_bytes": 695,
+      "sha256": "51daba8623daf3d6fed5cc36cb08eec8f6d383bcc10cdfea9f4f368e0154917a"
+    },
+    {
+      "path": "inputs/receipt.json",
+      "size_bytes": 3799,
+      "sha256": "2c9707d9ca00de7152cc412b6a4f7fbb85bd587a81527aa29b15afa5739b4bcb"
+    },
+    {
+      "path": "inputs/study.yaml",
+      "size_bytes": 776,
+      "sha256": "11bb18dde7aed805529bd704b1d27b6455a70f25fc81f3ac0f559338387f680e"
+    },
+    {
+      "path": "manifest.json",
+      "size_bytes": 2531,
+      "sha256": "1f199f831511005d43226cf6e2c9ed26ccf349cab5d954b119e7f98a4d14c2dd"
+    },
+    {
+      "path": "report.json",
+      "size_bytes": 459441,
+      "sha256": "0f128df8c4a5ed58b2caaa6ef9411a12bd04e3bfe9929c188a0252f7b1f4d103"
+    },
+    {
+      "path": "summary.md",
+      "size_bytes": 425,
+      "sha256": "a1b3e200ed4aef40dab02b1b79046ab0e2dd8c3060d933181b9ed354ebfd88a5"
+    }
+  ],
+  "retained_run_files": [
+    {
+      "path": "stdout.log",
+      "size_bytes": 111,
+      "sha256": "1f5e4894d859342c067830780ebdfb04fcea2f8028352f3592b66a5f4104b728"
+    },
+    {
+      "path": "stderr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bad.json",
+      "size_bytes": 903,
+      "sha256": "5b7b8c1cc1948527e677b1bf807e07fa877b338c79ecf32b0a2cba7be48eb559"
+    },
+    {
+      "path": "negative.stdout",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "negative.stderr",
+      "size_bytes": 1210,
+      "sha256": "4bd736b2949d6cd1274d94ef8b59ad8d4c0a589cfb48c4e2e74fb2131c12cad4"
+    }
+  ],
+  "verification": {
+    "native_loader": "sparselab.experiments.reporting.load_report_bundle",
+    "result": "passed on the existing bundle",
+    "identity_acceptance_matches_candidate_evidence": true,
+    "manifest_file_sizes_and_sha256": "all 16 entries matched",
+    "activity": "Read-only metadata verification and hashing; no acceptance regeneration or workload execution."
+  },
+  "limitations": [
+    "Bundle and logs remain in host-local /tmp; they are not uploaded, committed, or guaranteed durable across host cleanup.",
+    "This supplemental inventory permits inspection where the retained directory is available; hashes alone do not make its bytes accessible elsewhere.",
+    "Original candidate evidence and archived inputs remain unchanged. This is not a new candidate acceptance, scientific qualification, or fresh external review."
+  ]
+}
