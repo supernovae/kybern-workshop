@@ -9,7 +9,7 @@
   "max_operational_validation_batches": 0,
   "max_operational_validation_forward_positions": 0,
   "max_wall_seconds": 172800,
-  "content_identity_sha256": "800d0ab6c5189008e7ff4441055c3ab368cdad896b173a83b0615227865302a0",
+  "content_identity_sha256": "568ca9fcd4bb5fb3fe53205eafe4ab7fb591976edd62ce63d91398befad22d5d",
   "monitor_policy_sha256": "48359ad0124e95f1a005686a460c204126987748ed6b9312b8824b972b08b3a5",
   "workspace_baseline_sha256": "${HOST_WORKSPACE_BASELINE_SHA256}",
   "acquisition_project_sha256": "c1e7e031aa9ed81a8304c7fc1e77afdd89ae4ed4dd8eb3c3b18400725d235ba8",

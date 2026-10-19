@@ -5,32 +5,38 @@
     {
       "source": "experiments/research/exp1-preparation/LAB86-VALIDATION.md",
       "destination": "experiments/devmind/preparation/LAB86-VALIDATION.md",
-      "sha256": "45dfd4edfd19b674bcc63f3e166c591262e74b19e379f2ef270a0de206dcad4f"
+      "sha256": "45dfd4edfd19b674bcc63f3e166c591262e74b19e379f2ef270a0de206dcad4f",
+      "source_sha256": "e84402c855a81c6d9ead6d6aa3bac5f598c6ccee079d6e6914cd7cbf2a6c720e"
     },
     {
       "source": "experiments/research/exp1-preparation/README.md",
       "destination": "experiments/devmind/preparation/README.md",
-      "sha256": "71f7448b401d28d38b5c971f4fa833875247a7c9c41e3c8fe84b2dc7fb99e398"
+      "sha256": "71f7448b401d28d38b5c971f4fa833875247a7c9c41e3c8fe84b2dc7fb99e398",
+      "source_sha256": "3a7af2287a219b68f561a63525aa186d2e45caf8b53a412e50fa1cf3d41f762a"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/PILOT.md",
       "destination": "experiments/devmind/preparation/lab86/PILOT.md",
-      "sha256": "9f5b8088aead1d63eea8b01161a182edf96f72f88955b45e74dd56da19a5cdaa"
+      "sha256": "9f5b8088aead1d63eea8b01161a182edf96f72f88955b45e74dd56da19a5cdaa",
+      "source_sha256": "8e87cecda18484575b076dbb4aecce7526b67dcd433056cb1577ee8db2e48616"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/POLICY.md",
       "destination": "experiments/devmind/preparation/lab86/POLICY.md",
-      "sha256": "3e46830b36cab89e85d59e3162d8833e4b376c8850834a83f155175f621be94b"
+      "sha256": "fc58397302ecc28f973d09c0a922fde390feab400201c2d6e888b12cf4c3cbfb",
+      "source_sha256": "d3e0c858553d70d6acb39afd9ec5da58bc57ae7438d6aa441ab0821764d76cb4"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/README.md",
       "destination": "experiments/devmind/preparation/lab86/README.md",
-      "sha256": "d0b18b1ae64a7104c21dabdb919b699c34b8229cc28a1e7b4bc2951bad628cf0"
+      "sha256": "d0b18b1ae64a7104c21dabdb919b699c34b8229cc28a1e7b4bc2951bad628cf0",
+      "source_sha256": "33fe205c2f0bde306f3142dcf869b51fecfe3d2d8e1b4fa32f9f68a2d9b64675"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/application-policy.json",
       "destination": "experiments/devmind/preparation/lab86/application-policy.json",
-      "sha256": "451d6f38f26a5342c8b0e833389f31981d7f4b1013be13e7b37fd752b6c3fce5"
+      "sha256": "d206cc8f8bc9cfeecadd05ca8bb7bd2e15285389ba804a1a76df9e4a12364980",
+      "source_sha256": "451d6f38f26a5342c8b0e833389f31981d7f4b1013be13e7b37fd752b6c3fce5"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/attempt-contract.template.json",
@@ -205,7 +211,8 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/package-sha256.json",
       "destination": "experiments/devmind/preparation/lab86/package-sha256.json",
-      "sha256": "28d29764170bcc3dfcb5037a707b1cd4bffd08d8749fdae9b02561edf8a9ec5b"
+      "sha256": "3cdfaf044e7795ad9891abdfd2cbc2067e269fc0f10a18aea2c3a46327a5e64d",
+      "source_sha256": "28d29764170bcc3dfcb5037a707b1cd4bffd08d8749fdae9b02561edf8a9ec5b"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/phase-bindings.template.json",
@@ -215,17 +222,20 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/pilot-application-policy.json",
       "destination": "experiments/devmind/preparation/lab86/pilot-application-policy.json",
-      "sha256": "70925ce80f434863488f560ed23eacf248baee647ddee29f083e4fbac28f8d90"
+      "sha256": "a45829a972d691df8a8ee6f56780d78bc899eb9dfa1e6d0aca2b97be616c7038",
+      "source_sha256": "70925ce80f434863488f560ed23eacf248baee647ddee29f083e4fbac28f8d90"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/pilot-content.json",
       "destination": "experiments/devmind/preparation/lab86/pilot-content.json",
-      "sha256": "800d0ab6c5189008e7ff4441055c3ab368cdad896b173a83b0615227865302a0"
+      "sha256": "568ca9fcd4bb5fb3fe53205eafe4ab7fb591976edd62ce63d91398befad22d5d",
+      "source_sha256": "800d0ab6c5189008e7ff4441055c3ab368cdad896b173a83b0615227865302a0"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/pilot-contract.template.json",
       "destination": "experiments/devmind/preparation/lab86/pilot-contract.template.json",
-      "sha256": "3e166c6d19aee12808f10e6579470fad9b5e50df08b35f5e4c7d8b1656df2415"
+      "sha256": "fc574171acc89ffa8fde43847080f661bb8e4eba86089a4219ae89f4d84e713e",
+      "source_sha256": "3e166c6d19aee12808f10e6579470fad9b5e50df08b35f5e4c7d8b1656df2415"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/pilot-inspection-selection.json",
@@ -240,22 +250,26 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/pilot-jobs/pilot-acquire.template.json",
       "destination": "experiments/devmind/preparation/lab86/pilot-jobs/pilot-acquire.template.json",
-      "sha256": "3a2b4e104b02189959fafcd6c085714ecbf07d93ca897fd9dbb13578b9a7a91e"
+      "sha256": "3dd8f91f53d35a151647cbc479969a473ee600c83061896b6f7c4a31d6171f38",
+      "source_sha256": "3a2b4e104b02189959fafcd6c085714ecbf07d93ca897fd9dbb13578b9a7a91e"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/pilot-jobs/pilot-budget-status.template.json",
       "destination": "experiments/devmind/preparation/lab86/pilot-jobs/pilot-budget-status.template.json",
-      "sha256": "06aec25df7517a69e30c1ad1a5868848fa10a6e4f6bc6305a3d5dc75c6489441"
+      "sha256": "ef0910dd8f9fde675e40f5fb08e5df046f1de892a36f0ea2b0930e7037e8c5cb",
+      "source_sha256": "06aec25df7517a69e30c1ad1a5868848fa10a6e4f6bc6305a3d5dc75c6489441"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/pilot-jobs/transport-init.template.json",
       "destination": "experiments/devmind/preparation/lab86/pilot-jobs/transport-init.template.json",
-      "sha256": "a91ade5632ebaa6af49a0255cb7aec8e49914ec67783a1282bea547ad5e706d3"
+      "sha256": "c3819c7f42836ba5bc62194ffcb41e141ee9f80005c246453d06538b8b7637ea",
+      "source_sha256": "a91ade5632ebaa6af49a0255cb7aec8e49914ec67783a1282bea547ad5e706d3"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/pilot-session.template.json",
       "destination": "experiments/devmind/preparation/lab86/pilot-session.template.json",
-      "sha256": "d080f36c78174ca634b2577b98afd452bf83f207bace428aa2c9bf784e97d08d"
+      "sha256": "4958ba0c567f0f0c1e1a9504bc90b2c7e219c826fe7efa3a5c6414e0a0744443",
+      "source_sha256": "d080f36c78174ca634b2577b98afd452bf83f207bace428aa2c9bf784e97d08d"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/project-acquire.yaml",
@@ -742,5 +756,9 @@
       "destination": "experiments/devmind/preparation/preparation.json",
       "sha256": "af54055489d43ec2598293d963e15f58c715ebe75ef60cfd73261a9c9f5ee1b5"
     }
-  ]
+  ],
+  "hash_semantics": {
+    "sha256": "Current destination file bytes.",
+    "source_sha256": "Original source file bytes at source_commit, recorded when different from destination."
+  }
 }
