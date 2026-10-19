@@ -1,5 +1,10 @@
 # Useful story demo: current-interface reproduction backlog
 
+Historical proposal. The [completed learning baseline](../tinystories-useful/README.md)
+and [all actual outputs](../../results/2026-10-19-tinystories-cpu/README.md) supersede
+the pending-execution status below. The original quality gate failed; the owner
+accepted publication as a baseline to improve. Further training remains backlog.
+
 Owner direction on 2026-10-17 is to reproduce or regenerate experiments using
 current native interfaces. The old records below are scientific evidence only.
 Do not build candidate-recovery tooling, backward v2/v3/v4 adapters, or a legacy
