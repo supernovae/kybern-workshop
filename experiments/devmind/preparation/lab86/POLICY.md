@@ -1,35 +1,55 @@
-# DevMind Corpus Preparation & Filtering Policy
+# LAB86 private preparation policy v1
 
-[Back to Package Overview](README.md)
+Authority provenance: owner approvals recorded on canonical LAB86,
+https://app.notion.com/p/3fb3b68cca2281a5a68fc549ca0c62d6 (2026-10-17 04:09 UTC;
+configuration assembly reaffirmed 04:55 UTC). This document records that scope;
+it does not grant authority, release a gate, accept terms, or clear LAB39/LAB70.
 
-This policy governs source selection, licensing, deduplication, splitting, and tokenization for the **DevMind 340M Base** corpus preparation package (`preparation/lab86/`).
+Use only the pinned candidate shards in shards.json. The first three are the
+approved feasibility pilot. Remaining compressed byte allocations are operational
+bounds, not token ratios or a claim that the pilot represents the entire corpus.
+Stop at the 4 GiB cumulative body gate and retain failed acquisition receipts.
+Continue only on the native report-bound reviewed decision using the same ledger.
+All metadata and retry response bodies count toward 100 GiB. No automatic retry,
+budget reset, reweighting, source substitution or repeated target exposure.
 
-## 1. Source Scope & Transport Gate
+Keep everything private and quarantined pending actual admission review. SmolLM's
+ODC-By card label does not license every underlying FineWeb page. Retain URL,
+dump/date, source ID, original row/shard hashes and notices; inspect source rights
+and exclusions. Cosmopedia uses generated text only, not prompt extracts; preserve
+seed_data, prompt, audience and format provenance. Group common seed families
+before splitting. A dataset-level seed label is a coarse family, not permission
+to invent document-level seeds. Reject absent provenance.
 
-- Acquire only the 84 pinned candidate shards declared in [`shards.json`](shards.json).
-- The first three shards (`000-web.yaml`, `001-synthetic.yaml`, `002-code.yaml`) form the 4 GiB feasibility pilot.
-- Acquisition stops automatically at the 4 GiB cumulative response-body gate so pilot yields, schemas, and license metadata can be reviewed before continuing up to the 100 GiB total cap.
+Code needs repository/path/license attribution. Initial allowed labels are MIT,
+Apache-2.0, BSD-2-Clause, BSD-3-Clause and ISC. Inspect file notices; exclude
+conflicts, absent licenses, vendored/generated content and secrets. Allowed
+languages: Python, JavaScript, TypeScript, Go, Rust, Shell, SQL and Markdown.
+The loader's Apache-2.0 notice is not a blanket license for repository content.
+No external loader execution or unreviewed language derivation is authorized here.
 
-## 2. Licensing & Provenance Filtering
+Use exact/canonical dedup and reviewed cross-source near-duplicate clusters while
+preserving code indentation. Group repositories, seed families and duplicates
+before a frozen 98/1/1 train/validation/test split. Report benchmark contamination
+coverage and gaps; absence of checks is not decontamination. Fewer than 100
+eligible families per stratum blocks the native split; do not weaken grouping.
 
-- **Educational Web (`smollm-corpus` FineWeb-Edu):** Retain URL, crawl dump/date, source ID, row/shard hashes, and attribution notices.
-- **Synthetic Text (`smollm-corpus` Cosmopedia-v2):** Use generated text (`text`) only; preserve `seed_data`, `prompt`, `audience`, and `format` metadata for family grouping. Reject rows missing provenance fields.
-- **Code (`codeparrot/github-code-clean`):** Require repository, path, and license attribution. Allowed licenses: `MIT`, `Apache-2.0`, `BSD-2-Clause`, `BSD-3-Clause`, and `ISC`. Allowed languages: `Python`, `JavaScript`, `TypeScript`, `Go`, `Rust`, `Shell`, `SQL`, and `Markdown`. Exclude vendored/generated files, license conflicts, and secrets.
+Fit one fresh 32768 byte-level BPE, reserved native special tokens, from TRAIN
+only: <=512 MiB, 60/20/20 bytes web/synthetic/code. Preserve whitespace, case and
+byte coverage. Audit >=1000 unseen TRAIN documents per stratum where available;
+report shortages, roundtrip/UNK, bytes per token, identifiers, numbers,
+multilingual text and code whitespace. Never borrow validation/test for fitting.
+Measure unique usable TRAIN targets after admission/dedup/splitting/tokenization.
+7.2B/2.4B/2.4B are conditional floors, not available-supply claims. Shuffle native
+mixtures deterministically without replacement (max_exposures=1). Pack native
+int32 tokens at sequence length 2048. No model steps or inference are authorized.
 
-## 3. Deduplication & 98/1/1 Family Split
-
-- Perform exact and canonical deduplication plus cross-source near-duplicate clustering while preserving code indentation.
-- Group repositories, seed families, and near-duplicate clusters prior to freezing a **98% train / 1% validation / 1% test** split.
-- Require at least **100 distinct families per stratum** before freezing splits.
-
-## 4. Tokenizer & 12B Unique Mixture
-
-- Fit a single 32,768-token byte-level BPE tokenizer on `TRAIN` data only (up to 512 MiB sampled at 60% web / 20% synthetic / 20% code), preserving whitespace, case, and byte fallback.
-- Audit the tokenizer on at least 1,000 unseen `TRAIN` documents per stream; never use validation or test splits for tokenizer fitting or auditing.
-- Verify unique usable `TRAIN` token floors (`7.2B` web, `2.4B` synthetic, `2.4B` code = `12.0B` total) and pack deterministic 2,048-token `int32` sequences without replacement (`max_exposures: 1`).
-
-## 5. Resource Limits
-
-- **Wall time:** 48 hours maximum across preparation.
-- **Compute & RAM:** Up to 8 CPU threads (single-threaded numeric libraries) and 16 GiB observed RSS ceiling.
-- **Storage:** 300 GiB maximum additional workspace usage; per-shard scan capped at 5M rows and 8 GiB emitted JSONL.
+48 hours includes operator waits and cleanup. At most eight CPU threads; native
+library thread settings are one. 16 GiB RSS is sampled observation with stop,
+not a hard cap. Require measured RAM and disk headroom. 300 GiB additional disk
+includes retained inputs/intermediates/caches/receipts. Parquet expanded byte
+measurement is unsupported; do not claim it is bounded by compressed bytes.
+A 5M-row prefix and 8 GiB emitted JSONL ceiling per shard are conservative maximums,
+not observed counts. Record any cutoff/shortfall; do not claim whole-shard coverage.
+No package installation, model/corpus download, registry action or runner job was
+performed to assemble this package.
