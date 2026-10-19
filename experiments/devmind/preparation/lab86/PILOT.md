@@ -8,8 +8,10 @@ This guide covers the four-step initial pilot session defined by `pilot-session.
 
 1. **Prepare Environment & Runtime:**
    Use a Linux `amd64` container environment with Tiny Sparse Lab (`0af1683188edacecf0856baa3520354363358f0d` or newer, which includes ISO-8601 Parquet timestamp serialization). Verify at least 24 GiB available RAM, 310 GiB free disk space, and 100,000 free inodes.
-2. **Capture Workspace Baseline:**
+2. **Prepare Receipt Parent & Capture Workspace Baseline:**
+   In the fresh private workspace, create the native phase receipt parent before the baseline. Validate that `$WORK` and its parents are real directories, not symlinks. Do not precreate harness session receipt roots.
    ```sh
+   mkdir -m 700 -p "$WORK/phases/receipts"
    python -m sparselab monitor-baseline "$WORK" --output "$WORK/baseline.json" --json
    ```
    Bind the resulting baseline SHA-256 into `pilot-contract.template.json` alongside the SHA-256 of `pilot-content.json`.
@@ -33,8 +35,12 @@ This guide covers the four-step initial pilot session defined by `pilot-session.
    Run the four slots in sequence:
    - `attempt-init` — initializes the zero-model preparation attempt contract.
    - `transport-init` — initializes the 4 GiB / 100 GiB transport budget ledger.
-   - `pilot-acquire` — downloads the three pilot shards (`000-web.yaml`, `001-synthetic.yaml`, `002-code.yaml`, totaling 3.51 GiB) and stops when the fourth shard reservation exceeds the 4 GiB initial gate.
+   - `pilot-acquire` — uses `project-pilot-acquire.json`, which selects only the three unchanged pilot declarations (`000-web.yaml`, `001-synthetic.yaml`, `002-code.yaml`, totaling 3,771,713,555 compressed bytes). It completes after those three sources if metadata and retries fit the cumulative 4 GiB initial gate; otherwise it refuses earlier. No fourth source is selected.
    - `pilot-budget-status` — records the transport ledger status and retained snapshot hashes for pilot review.
+
+The native projected disk bound for this three-source project is 28,021,704,695 bytes (three 8 GiB expanded-output limits, the largest compressed shard, and 65,536 bytes of metadata). The 300 GiB workspace ceiling and approved deadline still apply. The remaining 523,253,741 bytes under the initial transfer gate cover metadata and any retries; they are not additional source allowance.
+
+A changed project binding cannot reuse or reset an existing transport ledger. These templates do not authorize another attempt, refund failed reservations, extend a deadline, or release the gate. Keep prior histories and unfinished reservations intact; any future attempt needs its own explicit approval and cumulative accounting.
 
 ## Reference Pins
 

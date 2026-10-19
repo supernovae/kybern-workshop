@@ -29,7 +29,7 @@
     "--label",
     "pilot-acquire",
     "--bindings-json",
-    "{\"ACQUISITION_PROJECT\":\"${PACKAGE_ROOT}/project-acquire.yaml\"}",
+    "{\"ACQUISITION_PROJECT\":\"${PACKAGE_ROOT}/project-pilot-acquire.json\"}",
     "--ledger",
     "${HOST_WORK_ROOT}/attempt.sqlite",
     "--workspace",
@@ -41,7 +41,7 @@
     "--baseline",
     "${HOST_WORK_ROOT}/baseline.json",
     "--content-identity-sha256",
-    "568ca9fcd4bb5fb3fe53205eafe4ab7fb591976edd62ce63d91398befad22d5d"
+    "87e290d59e96d6dd6a198d6a9883de0e5103f8062a82e1c5f69c3459aac1c273"
   ],
   "runtime": "${HOST_RUNTIME_OBJECT}",
   "required_files": "${HOST_REQUIRED_FILES_OBJECT}",

@@ -17,7 +17,7 @@ The 84 selected shards in [`shards.json`](shards.json) total **85,077,359,484 by
 
 ## Three-Stream 4 GiB Pilot
 
-The three pilot shards sort first by declaration path (`000-web.yaml`, `001-synthetic.yaml`, `002-code.yaml`) so that initial acquisition tests all three data streams before hitting the 4 GiB gate:
+[`project-pilot-acquire.json`](project-pilot-acquire.json) selects exactly three unchanged declarations (`000-web.yaml`, `001-synthetic.yaml`, `002-code.yaml`). The 4 GiB initial gate counts cumulative source bodies, metadata, and retry reservations:
 
 | Stream | Pinned Shard | Compressed Bytes |
 | --- | --- | ---: |
@@ -31,7 +31,7 @@ Each shard declaration scans up to 5M rows and caps emitted JSONL at 8 GiB. See 
 ## Downstream Phases After Pilot Review
 
 1. **Offline Pilot Inspection (`project-pilot-reuse.template.yaml`):** Reuses the three downloaded pilot snapshots with `reuse_only` source effects to inspect schema, license filtering, and family counts offline.
-2. **Full Acquisition & Split Freeze:** After releasing the 4 GiB transport gate, `continue-acquire` downloads the remaining shards, and `freeze-splits` creates a 98/1/1 train/validation/test split grouped by repository and seed family (>=100 families per stratum).
+2. **Full Acquisition & Split Freeze:** Not enabled by the pilot correction. The full 84-source `project-acquire.yaml` has a different ledger binding and its projected expanded disk bound exceeds the 300 GiB ceiling. Do not retarget the pilot ledger or treat gate release as permission to continue. A separately reviewed continuation design must preserve the policy, cumulative accounting, and deadline before full acquisition and split freeze can run.
 3. **Tokenizer & 12B Unique Mixture:** Exports 2,048-token sequences, fits a 32,768-token byte-level BPE tokenizer on up to 512 MiB of `60/20/20` training bytes (`tokenizer-sampling.yaml`), verifies token floors (`token-floors.yaml`), and packs the unique training mixture (`mixture.template.yaml`, `max_exposures: 1`).
 
 ## Resource Bounds
