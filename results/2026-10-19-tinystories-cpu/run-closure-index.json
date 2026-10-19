@@ -1,0 +1,147 @@
+{
+  "file_count": 28,
+  "bytes": 153407120,
+  "files": [
+    {
+      "path": "progress.json",
+      "bytes": 18748,
+      "sha256": "1c5d492f4b580f3b26b17549c19f57832e8a5e437244233f2916690c58c39974"
+    },
+    {
+      "path": "tokenizer_manifest.json",
+      "bytes": 1333,
+      "sha256": "04b9ef8ae5dc72dbd9deb1825b8a6a622a48630fbca60e2ed827690c6f4c5cbc"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 42394,
+      "sha256": "2c055257367791fca21456d1c0c9ee1da1dd5037c1b31b93c3278304781b3b50"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 265532,
+      "sha256": "a30e7eeec9e085eb6df1cbc377bb7f11d1e58a6a30890856ea74b816352efefa"
+    },
+    {
+      "path": "resolved_config.yaml",
+      "bytes": 2830,
+      "sha256": "1d57d43027df5252141a4d6a2ede272c16a71639f381b7b066cca5bb9ea99e5f"
+    },
+    {
+      "path": "evaluations/validation_step_00003072_gen_000008.json",
+      "bytes": 768,
+      "sha256": "635a8e8d2dff73ca795d6f01eec7a693137bf7e0b09ddbc11e7fabf57a5a3e83"
+    },
+    {
+      "path": "evaluations/validation_step_00007168_gen_000024.json",
+      "bytes": 769,
+      "sha256": "3d6485816b3c2d392333959f9c72cabc943e7113610ae1f1b9c8b8a204f82081"
+    },
+    {
+      "path": "evaluations/validation_step_00008192_gen_000028.json",
+      "bytes": 768,
+      "sha256": "84c06b11fd9304e611a2af6c1949b8f52b950e30eda20130f394539b744dc9eb"
+    },
+    {
+      "path": "evaluations/validation_step_00002048_gen_000004.json",
+      "bytes": 766,
+      "sha256": "a4bac3718c6468ee047a655fc29807e0a2bddc28982900e6f332c39903272352"
+    },
+    {
+      "path": "evaluations/validation_step_00001406_gen_000001.json",
+      "bytes": 767,
+      "sha256": "0cc72d8ad066b8aad1d645e1f19d08c91cec9cb8a62b289584685a783a91d8e0"
+    },
+    {
+      "path": "evaluations/validation_step_00005120_gen_000016.json",
+      "bytes": 768,
+      "sha256": "ade7439f548f5c312331f82c787bea332f9a85f11448ef67ff643d2f852b7825"
+    },
+    {
+      "path": "evaluations/validation_step_00006144_gen_000020.json",
+      "bytes": 766,
+      "sha256": "cee036933643efcbdbabcf30295ecd23163cc42d7c9c10af88bfc35843c13041"
+    },
+    {
+      "path": "evaluations/eval-5c3b32ce0cc86814cfd6f971a05ad9cd0a7039b7f1a28fc3133c3bf2080b5bea.json",
+      "bytes": 3818,
+      "sha256": "5c3b32ce0cc86814cfd6f971a05ad9cd0a7039b7f1a28fc3133c3bf2080b5bea"
+    },
+    {
+      "path": "evaluations/validation_step_00004096_gen_000012.json",
+      "bytes": 769,
+      "sha256": "11b326c3e646fe24d45fdad119f80e6d693919e9790f849d8079bc8b5deaf4c9"
+    },
+    {
+      "path": "checkpoints/latest.json",
+      "bytes": 395,
+      "sha256": "27ae46a8246bb4a302373c51ef2e289a94ec26fe4e360df891a9c0923c9525a5"
+    },
+    {
+      "path": "checkpoints/best.json",
+      "bytes": 395,
+      "sha256": "27ae46a8246bb4a302373c51ef2e289a94ec26fe4e360df891a9c0923c9525a5"
+    },
+    {
+      "path": "checkpoints/.writer.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/train.npy",
+      "bytes": 45481904,
+      "sha256": "a0f09c3835bedda0b29cab501d03df8f2c13c2709624391b541edfaf29effce3"
+    },
+    {
+      "path": "data/validation.npy",
+      "bytes": 418828,
+      "sha256": "c5b90438a4eb11f6b14b7ff63c8a717be522c0f14a11cf3095b1cd6c59465ad2"
+    },
+    {
+      "path": "data/.sparselab-cache-owner.json",
+      "bytes": 173,
+      "sha256": "52c12abd103811168b74abb9f64ac328d0140d527aa1d9e8cf6cd5f600d27f11"
+    },
+    {
+      "path": "data/manifest.json",
+      "bytes": 5407,
+      "sha256": "eb6c7d63d5122209e5a923ebbb1a5bb339376dad80ffcbb5ed28c70fb10c7cdc"
+    },
+    {
+      "path": "post-train-triage/9d2a3466be5ac6dc14ad3b316b68614d5671ac60bdca4a272c2998729839618f.json",
+      "bytes": 26145,
+      "sha256": "9d2a3466be5ac6dc14ad3b316b68614d5671ac60bdca4a272c2998729839618f"
+    },
+    {
+      "path": "checkpoints/step_00008192_gen_000028/training_state.pt",
+      "bytes": 35720621,
+      "sha256": "82367a63409ed90723d3925a6d7f5677a42ec4c6bd98b7609301ce25768c6deb"
+    },
+    {
+      "path": "checkpoints/step_00008192_gen_000028/manifest.json",
+      "bytes": 7267,
+      "sha256": "b78fe5f8fdbd091df0003412ac8ebdf1d5cc3c6303ebf2b339153f93bbb4ce58"
+    },
+    {
+      "path": "checkpoints/step_00008192_gen_000028/weights-00001.safetensors",
+      "bytes": 17838656,
+      "sha256": "f1d8c8906c8e8644ac66adc10fd74bd345c42561fa7c736cb06331e1521523bf"
+    },
+    {
+      "path": "checkpoints/step_00007936_gen_000027/training_state.pt",
+      "bytes": 35720621,
+      "sha256": "7fe3b0581f4d45562ff86ccbe0777154bb77511393649e59e979286903e5135c"
+    },
+    {
+      "path": "checkpoints/step_00007936_gen_000027/manifest.json",
+      "bytes": 7256,
+      "sha256": "4f9b2751b381fb9df84459063114699fd493e906ebb1672cf091f6b46faf85f3"
+    },
+    {
+      "path": "checkpoints/step_00007936_gen_000027/weights-00001.safetensors",
+      "bytes": 17838656,
+      "sha256": "8f006df54f39d56dfab36a3f87969d0f39e35bd11307534c4c7e0250abc11a31"
+    }
+  ],
+  "note": "Inventory of retained native closure, not files distributed in this repository."
+}
