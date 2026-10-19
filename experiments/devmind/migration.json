@@ -17,7 +17,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/PILOT.md",
       "destination": "experiments/devmind/preparation/lab86/PILOT.md",
-      "sha256": "a57aabda09e917d0d78ee02d3867c40e89dfdaec32684ac69c367ebfc2a821e4",
+      "sha256": "1133b08f34f8c83fe22b0a926e422cda2728b6673073f171810698f7fecb28bf",
       "source_sha256": "8e87cecda18484575b076dbb4aecce7526b67dcd433056cb1577ee8db2e48616"
     },
     {
@@ -211,7 +211,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/package-sha256.json",
       "destination": "experiments/devmind/preparation/lab86/package-sha256.json",
-      "sha256": "c303925fd638d37f1aacaf97b85518ac8f3089a0b790f7858ed158d1693f6305",
+      "sha256": "cb75147aab7d6bb3790bfe91ce11df2b3a2d4a5066d589b64920fed98863a098",
       "source_sha256": "28d29764170bcc3dfcb5037a707b1cd4bffd08d8749fdae9b02561edf8a9ec5b"
     },
     {

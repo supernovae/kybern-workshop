@@ -54,7 +54,10 @@ After acquisition and budget reconciliation, use the `pilot-preview` phase in
 `../preparation.json` with `PILOT_PREVIEW_DECLARATION` and
 `PILOT_PREVIEW_INPUT_ROOT`. Render `preview.template.json` with independently
 recorded exact manifest hashes/sizes. It pins the three retained data files and
-snapshot IDs; input root is the existing acquisition work root, mounted read-only.
+snapshot IDs. Each source declares its acquired text field: `text` for web and
+synthetic, `code` for code. Preview must support this per-source selector and hash
+the unchanged original row; do not rename or copy acquired data. The connected
+fixture loads these fields from the production acquisition project. The input root is the existing acquisition work root, mounted read-only.
 This route explicitly **defers pilot-reuse**: preview reads original snapshots
 without creating the separate pilot view. Existing admission/draft phases still
 use that view and are not implied by this route.

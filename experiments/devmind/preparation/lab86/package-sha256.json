@@ -1,6 +1,6 @@
 {
   "../preparation.json": "584ff66382a9617c6b20168ceab03ee12917377e6bde4ef1a365458ed0ec807c",
-  "PILOT.md": "a57aabda09e917d0d78ee02d3867c40e89dfdaec32684ac69c367ebfc2a821e4",
+  "PILOT.md": "1133b08f34f8c83fe22b0a926e422cda2728b6673073f171810698f7fecb28bf",
   "POLICY.md": "fc58397302ecc28f973d09c0a922fde390feab400201c2d6e888b12cf4c3cbfb",
   "README.md": "6c14b1c29b431e5c076ca82bf8a64c30709cca7be0c05ba35f1a43ddc7f5c85c",
   "application-policy.json": "d206cc8f8bc9cfeecadd05ca8bb7bd2e15285389ba804a1a76df9e4a12364980",
@@ -50,7 +50,7 @@
   "pilot-session.template.json": "edf98cd45ae818ea45d1378c24730d25358218c41deeebc685ec433561cee610",
   "preview-job.template.json": "11f4853dd67473391fed9a878b484450b7411c495bbfee10b3bf9a3738d065bd",
   "preview-session.template.json": "922c714e8b8b1ff6079d9e88e3c60d8cbc63db0ff51a4446e2853d489cbf0104",
-  "preview.template.json": "f12c7f0672fc3850471e58bef74c66f6d8dec332678f6e350d7fdf00fe45caef",
+  "preview.template.json": "7210693d6402d51cbeea95a4004e536abefb67ab8351968aa57f76158d2331c8",
   "project-acquire.yaml": "c1e7e031aa9ed81a8304c7fc1e77afdd89ae4ed4dd8eb3c3b18400725d235ba8",
   "project-build.template.yaml": "db2c9e406a6e9e593147966952a3b45c4f13f848fb3c14e2cd33a01947c38de7",
   "project-pilot-acquire.json": "daf6ae234fbf8c882cf628e345c811b6e8e33e3db8007b27fb20069a1a8025ba",

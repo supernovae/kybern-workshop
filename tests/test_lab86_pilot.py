@@ -92,6 +92,11 @@ class PilotDeclarations(unittest.TestCase):
         self.assertEqual(job["cwd"], "${LAB_ROOT}/src")
         self.assertIn("/inputs", job["argv"])
 
+    def test_preview_uses_actual_source_text_fields(self):
+        spec = read("preview.template.json")
+        self.assertEqual({s["source_id"]: s["text_field"] for s in spec["sources"]},
+                         {"lab86_000_web": "text", "lab86_001_synthetic": "text", "lab86_002_code": "code"})
+
     def test_package_and_migration_hashes(self):
         manifest = read("package-sha256.json")
         self.assertIn("project-pilot-acquire.json", manifest)
@@ -170,6 +175,9 @@ class NativePreview(unittest.TestCase):
             spec = json.loads(rendered.read_text())
             Preview.model_validate(spec)
             self.assertEqual(spec["max_read_bytes"], 16 * 1024**3)
+            from sparselab.corpus.project import load_project
+            project = load_project(PACKAGE / "project-pilot-acquire.json")
+            text_fields = {s.id: s.acquisition.text_field for s in project.sources}
             # Explicit fixture substitutions: actual snapshots are never opened.
             for source in spec["sources"]:
                 for key in ["manifest", "data"]:
@@ -177,7 +185,9 @@ class NativePreview(unittest.TestCase):
                     path.parent.mkdir(parents=True, exist_ok=True)
                     if key == "manifest": payload = b'{"fixture":true}'
                     else:
-                        row = {"text": "tiny fixture"}
+                        field = text_fields[source["source_id"]]
+                        self.assertEqual(source["text_field"], field)
+                        row = {field: "tiny fixture"}
                         row["_sparselab_source"] = {"source_row_index": 0,
                             "source_row_sha256": hashlib.sha256(canonical_json(row)).hexdigest()}
                         payload = canonical_json(row) + b"\n"
@@ -196,3 +206,5 @@ class NativePreview(unittest.TestCase):
             receipt = json.loads((output / "report.json").read_text())
             self.assertEqual(len(receipt["sources"]), 3)
             self.assertFalse(receipt["admission"])
+            self.assertEqual({s["source_id"]: s["text_field"] for s in receipt["sources"]}, text_fields)
+            self.assertTrue(all(s["items"][0]["excerpt"] == "tiny fixture" for s in receipt["sources"]))
