@@ -1,66 +1,46 @@
-# DevMind
+# DevMind — DevMind 340M Base
 
-Recipe: **DevMind 340M Base** — approximately 340M dense base model.
+[Back to Workshop README](../../README.md) · [DevMind Pilot Status (kybern.dev)](https://kybern.dev/models/devmind/)
 
-EXP-1 and LAB86 remain historical planning/attempt identifiers and provenance
-aliases. This is the fresh 340M recipe: the public DevMind name does not imply
-reuse of historical DevMind corpora, tokenizer or checkpoints.
+**DevMind 340M Base** is our ~342M-parameter dense base model recipe in pilot setup (`pilot pending runtime binding`).
+This directory contains the declarative model and optimizer specifications, the 24-phase corpus preparation plan, and the pinned upstream dataset shard definitions to be executed with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
 
-Status: **authored preparation and proposed scientific configuration; not trained,
-not execution-ready**. There are no published base weights or completed corpus
-receipts in this repository. The 4 GiB preparation pilot is not a model build.
+> **Current status:** Architecture and corpus preparation recipes are authored and validated at the schema level; corpus acquisition, tokenizer fitting, and model training have not yet been executed. No trained weights are published yet.
 
-This project contains declarations, documentation and artifact references only.
-Use installed Tiny Sparse Lab directly from this directory or a copy in your own
-repository. GitHub, Notion, bots and lab-harness are not runtime dependencies.
+---
 
-## Read in order
+## Documentation Guide
 
-1. [Scientific protocol](protocol.md): proposed architecture, exposure, evaluation
-   and unresolved review decisions.
-2. [Native operation map](native-commands.md): preparation through training,
-   evaluation, reporting and the known portable interface gaps.
-3. [Base artifact and derivative](base-artifact.md): required verified outputs,
-   access policy and evaluation-only reuse without retraining.
-4. [Migration provenance](migration.json): 148 files copied byte-for-byte from
-   Lab `8975c5abcaefb1d3e595a9f1f466db97f9ab7682`.
+1. **[Scientific Protocol (`protocol.md`)](protocol.md)** — Architecture dimensions, 60/20/20 corpus mixture (educational web, synthetic text, code), training hyperparameters, and zero-shot evaluation benchmarks.
+2. **[Tiny Sparse Lab Commands (`native-commands.md`)](native-commands.md)** — How to validate the model/optimizer sections and compile preparation phase commands with `sparselab`.
+3. **[Base Checkpoint & Evaluation Contract (`base-artifact.md`)](base-artifact.md)** — Required artifact closure and evaluation-only reuse specification once the base model is trained.
+4. **[Corpus Preparation Plan (`preparation/README.md`)](preparation/README.md)** — 24-phase preparation workflow (`preparation/preparation.json`) and the 84 pinned shard declarations in [`preparation/lab86/`](preparation/lab86/README.md).
 
-`model.json` and `optimizer.json` use native Lab configuration section fields.
-They are **proposals**, not full RunConfig files or launch instructions. In
-particular, optimizer decay horizon, dataset/tokenizer identities, exact target
-and step limits, evaluation inputs, and finite checkpoint/storage/runtime limits
-must be bound before a full runnable configuration exists.
+## Quick Validation with `sparselab`
 
-## Preparation and preserved internal records
+You can validate the model and optimizer configuration sections directly from a [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab) environment:
 
-`preparation/preparation.json` is the native 24-phase preparation plan.
-`preparation/lab86/` contains exact pinned source declarations and scientific
-policies, alongside the original internal job/session templates and documentation.
-The original bytes are preserved for migration verification. Their historical
-mentions of required Harness image allowlists, host bindings and operator job
-submission apply **only to that internal deployment**, not public reproduction.
-Do not treat their old Python-test claims as Workshop validation or use their
-old command-rendering snippets as a new Workshop implementation. Native Lab is
-responsible for validation, rendering and execution.
+```sh
+sparselab config validate experiments/devmind/model.json --kind model --json
+sparselab config validate experiments/devmind/optimizer.json --kind optimizer --json
+```
 
-The matching active EXP1/LAB86 paths were retired by merged Lab PR161 after
-preservation verification. The imported originals remain evidence, not a second
-current Lab recipe owner.
-The original source commit retains the historical evidence and Python tests.
+To compile and inspect a corpus preparation phase command without creating an attempt directory or downloading data:
 
-## Pins and scope
+```sh
+sparselab attempt phase-command \
+  --plan experiments/devmind/preparation/preparation.json \
+  --attempt-root /tmp/devmind-preview \
+  --label transport-init \
+  --bindings-json '{"ACQUISITION_PROJECT":"/path/to/experiments/devmind/preparation/lab86/project-acquire.yaml"}'
+```
 
-The imported source declarations pin upstream datasets and shard hashes. The
-reference Lab revision above includes the reusable Parquet timestamp support;
-its main CI had an independently diagnosed archive inventory race, so it is a
-provenance reference, not a cleared execution/runtime recommendation. The archive-race correction and native section/recipe authoring interfaces are
-now merged. [Current metadata acceptance](../../docs/native-acceptance-2026-10-18.md)
-uses Lab `7e306a96bcc617468d2a06493dab4562bff6beb0`. This establishes no execution
-runtime pin: select the reviewed source/runtime and dependency lock separately. No image digest is activated here.
+## Architecture Summary
 
-Python/runtime dependencies follow that Lab revision's lock and supported
-platform contract. Runtime fit is unmeasured. The old local preparation envelope
-(48 hours, 300 GiB additional disk, observed 16 GiB RSS, eight threads) is an
-approval-specific internal deployment limit, not a universal machine requirement.
-No GPU training, benchmark/model acquisition, publication or spend is approved
-by these files. Approval text is provenance, never fresh authority.
+| Parameter | Value |
+| --- | --- |
+| **Architecture** | Dense causal transformer with SwiGLU, RMSNorm, RoPE, and tied input/output embeddings |
+| **Layers / Width / Heads** | 24 layers, hidden dim 1,024, FFN intermediate dim 2,816, 16 attention heads |
+| **Context & Vocabulary** | 2,048 tokens, 32,768 byte-level BPE vocabulary |
+| **Total Parameters** | **341,885,952** (33.55M embeddings + 100.66M attention + 207.62M FFN + 50.2K norms) |
+| **Target Corpus Mixture** | 60% educational web (`smollm-corpus` FineWeb-Edu), 20% synthetic (`cosmopedia-v2`), 20% code (`github-code-clean`) |

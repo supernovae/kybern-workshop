@@ -1,20 +1,24 @@
-# Recorded TinyStories CPU learning baseline
+# TinyStories 8,192-Update CPU Baseline — Recorded Results
 
-The native workflow completed 8,192 updates / 33,554,432 targets and produced verified checkpoints and actual continuations. The owner accepted publishing this as a baseline to learn from. **The original story-quality gate failed:** provisional assistant scoring found 2/24 passing outputs (required 20), 1/12 held-out outputs (required 10), and 17/24 endings (required 18). No claim of human quality clearance is made. Part 2 improvement work is backlog only.
+[Back to Workshop README](../../README.md) · [Walkthrough & Replication Guide](../../examples/tinystories-useful/README.md) · [Interactive Viewer on kybern.dev](https://kybern.dev/models/tinystories-training/)
 
-- [Full review and all 27 unedited prompt/response pairs](review.md)
-- [Result, source/runtime pins and timing](summary.json)
-- [All per-output scores](quality-assessment.json), [generation timings](generation-metrics.json), [loss trajectory](loss-trajectory.csv)
-- [Executed native argv and outcomes](commands.json)
-- [Recorded configuration](resolved-config.json), [retained closure inventory](run-closure-index.json)
-- [Public native walkthrough](../../examples/tinystories-useful/README.md)
+This directory contains the complete public evidence package for our **8,192-update (33,554,432-target)** TinyStories CPU baseline run on a 4.46M-parameter dense transformer.
 
-`outputs/final-greedy-1.json` through `final-greedy-12.json` and `final-sampled-1.json` through `final-sampled-12.json` are the complete fixed 192-token panel. `outputs/website-baseline-1.json` through `website-baseline-3.json` contain the separate 48-token website baselines, excluded from scoring. No output was selected away, resampled or rewritten.
+**Key takeaway:** The model trained smoothly to a validation loss of **`1.7043`** (perplexity **`5.4976`**), and **17 of 24** full-length continuations reach a story ending—yet **only 2 of 24** pass our strict story-coherence rubric (1 of 12 on the held-out prompt subset). Sentence repetition loops, character swaps, and plot drift remain common, making this a practical baseline for testing architecture, data, or decoding improvements.
 
-Each output remains a `format: raw` native envelope usable by the website importer. Only `identity.config.logging.root_dir` is replaced by `${RUNS}`; `_publication` discloses the edit and original file SHA256. Original hashes authenticate retained originals, not these sanitized derivatives. The viewer displays provenance; it does not verify checkpoint bytes. `manifest.json` hashes the public files.
+## Contents of This Directory
 
-Weights, training state, tokenizer and prepared arrays remain retained locally and are **not distributed here**. The closure inventory is evidence, not a downloadable model. A fresh reproduction creates its own run/checkpoint identity and must verify its own bytes. The actual checkpoint is `step_00008192_gen_000028`, SHA256 `d5ba0e06c91d7a864264c5af411ced1c1b1c4e136632d71cd0a7b4309a728149`.
+- **[Full Quality Review & All 27 Prompt/Response Pairs (`review.md`)](review.md)** — Loss trajectory, failure analysis, and every unedited story continuation.
+- **[Run Summary (`summary.json`)](summary.json)** — Pinned commits, container digest, timings, and evaluation metrics.
+- **[Per-Output Quality Assessment (`quality-assessment.json`)](quality-assessment.json)** — Rubric scores for all 24 full-length outputs.
+- **[Loss Trajectory (`loss-trajectory.csv`)](loss-trajectory.csv)** & **[Generation Timings (`generation-metrics.json`)](generation-metrics.json)** — Step-by-step training loss curve and inference resource measurements.
+- **[Executed CLI Commands (`commands.json`)](commands.json)** — Exact `sparselab` command arguments and exit statuses.
+- **[Resolved Configuration (`resolved-config.json`)](resolved-config.json)** & **[Checkpoint Closure Index (`run-closure-index.json`)](run-closure-index.json)** — Model/training hyperparameters and SHA-256 digests for checkpoint `step_00008192_gen_000028` (`d5ba0e06c91d7a864264c5af411ced1c1b1c4e136632d71cd0a7b4309a728149`).
+- **[Raw Generation Envelopes (`outputs/`)](outputs/)** — `final-greedy-1.json` through `12.json` (192 tokens, greedy), `final-sampled-1.json` through `12.json` (192 tokens, `temp=0.7, top_k=40`), and `website-baseline-1.json` through `3.json` (48 tokens, greedy).
 
-Training used Linux/WSL2 CPU FP32, Python 3.14.4, Torch 2.14.1+cpu, an eight-CPU quota and an offline pinned container. Final continuation took 9,895.28 seconds; successful trainer lineage took 11,861.47 seconds. All 27 inference processes took 89.64 seconds total, including startup/loading/verification. Peak sampled RSS was 929.14 MiB for continuation and 429.29 MiB for inference. The 16 GiB RSS and 20 GiB retained-storage thresholds were observations/stop policies, not hard caps. All 35 final-session jobs completed with exit zero, complete evidence and verified cleanup; no training job remains active.
+## Runtime & Resource Summary
 
-Earlier acquisition/lease/path/selector failures and a host crash remain part of the history. The first acquisition encountered a descriptor leak fixed in the pinned Lab image; a first trainer crashed before update 1,024 and its uncheckpointed updates were not resumed. Later read-only-parent and stale-path attempts refused. `--checkpoint latest` failed; the supported pointer is `latest.json`. One config validation omitted required `--kind run` and failed. A successful 1,024-update run was resumed, deliberately paused at 1,406 with full state, then continued to 8,192 in a fresh session. Retries were explicit new jobs, not automatic recovery or erased history.
+- **Environment:** Linux/WSL2 CPU FP32, Python 3.14.4, PyTorch 2.14.1+cpu, 8-CPU container quota (`ghcr.io/supernovae/tiny-sparse-lab@sha256:e3356de49998903e5f03ee2cb28a9b33a5270d380d65d1ceb6fe195531ea812c`).
+- **Training wall time & memory:** 11,861.47 seconds (~3.3 hours) across the completed trainer lineage (9,895.28 seconds in the final continuation), with 929.14 MiB peak sampled RSS.
+- **Inference wall time & memory:** 89.64 seconds total across all 27 generation processes (including startup and checkpoint verification), with 429.29 MiB peak sampled RSS.
+- **Artifact verification:** [`manifest.json`](manifest.json) records the SHA-256 and byte size of every file in this directory.

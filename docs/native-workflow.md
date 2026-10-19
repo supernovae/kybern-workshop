@@ -1,80 +1,63 @@
-# Use native Lab from any recipe directory
+# Running Workshop Recipes with Tiny Sparse Lab
 
-Lab owns authoring, parsing, planning, execution and verification. Your experiment
-repository owns DSL/configuration, cards, documentation and artifact references.
-Ordinary Git can version that directory; no Workshop account, Harness checkout,
-Notion integration or per-recipe Python is required.
+Every experiment in this repository is designed to run with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab) (`sparselab`).
+Workshop stores the declarative configurations, dataset pins, and result records; Tiny Sparse Lab handles data preparation, training, evaluation, behavioral probes, and reporting.
 
-Use an already installed, reviewed Lab runtime. These commands describe interfaces,
-not permission to install packages or run a workload. Current metadata evidence
-and its exact source pin are in [the acceptance record](native-acceptance-2026-10-18.md).
+You can run these recipes from a clone of this repository or copy any recipe directory into your own project. For a guided introduction to the workbench, see [Run the Lab on kybern.dev](https://kybern.dev/learn/lab/).
 
-## Choose the existing route
+## Choosing a Workflow
 
-| Need | Native route | Boundary |
+| Goal | `sparselab` workflow | Notes |
 | --- | --- | --- |
-| Simple controlled comparison | `config validate`, `config derive`, then `try` and `report` | `try` performs model work; use the recipe’s actual input and runtime limits |
-| Author a shareable inventory | `experiment recipe create` with explicit files and profile | Copies selected metadata; no scientific design or future hashes |
-| Relocate an existing inventory | `experiment recipe export` then the profile’s `inspect` | Local artifact bindings remain explicit and separate |
-| Prepare inputs | `experiment recipe preparation inspect`, then admitted `apply`/`resume` | Inspection creates no tokenizer/data; execution retains native receipts and limits |
-| Prepared-input workflow | `experiment recipe workflow inspect`, verified `resolve`/`publish`, admitted `apply`/`approve`/`resume`, then `report` | Supported CPU profiles only; publication is not execution authority |
-| Inspect a declared derivative | Matrix `recipe inspect` checkpoint-phase projection | Missing payloads stay unavailable; inherited settings and compatibility require native verification |
+| **Compare a single change** | `config validate`, `config derive`, then `try` and `report` | Trains baseline and candidate arms on shared data and scores held-out loss + probes. Used by [TinyStories microlab](../examples/tinystories-microlab/README.md). |
+| **Train & inspect a full baseline** | `data lock`, `experiment recipe preparation apply`, `stage`, `train`, `eval`, `generate` | Step-by-step pipeline with checkpoint continuation and prompt-panel generation. Used by [TinyStories CPU baseline](../examples/tinystories-useful/README.md). |
+| **Package a shareable recipe** | `experiment recipe create` and `experiment recipe export` | Bundles configs and metadata with content hashes so another developer can inspect and bind local paths. |
+| **Prepare a corpus & tokenizer** | `experiment recipe preparation inspect` and `apply` | Validates output paths before running dataset snapshot, tokenizer training, and token packing. Used by [Synthetic CPU](../examples/synthetic-cpu/README.md). |
+| **Run a staged campaign** | `experiment recipe workflow inspect`, `resolve`, `apply`, `approve`, and `report` | End-to-end campaign pipeline with explicit approval gates and verified reporting. |
 
-The [TinyStories microlab](../examples/tinystories-microlab/README.md) uses the
-simple comparison route. Its advanced Campaign is not interchangeable with the
-bounded matrix preview. [DevMind](../experiments/devmind/README.md) still lacks a
-full RunConfig and real generated identities; validate its sections and compile
-its declared preparation argv without claiming the whole experiment is ready.
+## Packaging and Inspecting a Recipe
 
-## Author and inspect without execution
+You can package any recipe directory into a verified inventory and inspect its path bindings before running a single training step.
 
-From any working directory, let `INPUT` be the absolute directory containing the
-`examples/synthetic-cpu` declarations in your Workshop checkout (or a byte-identical
-copy), and `DEST` an unused absolute directory whose parent already exists:
+For example, using the declarations in [`examples/synthetic-cpu`](../examples/synthetic-cpu/README.md):
 
 ```sh
+INPUT="/path/to/kybern-workshop/examples/synthetic-cpu"
+DEST="/path/to/work/synthetic-cpu-recipe"
+
 sparselab experiment recipe create "$INPUT" --profile preparation \
   --id workshop-synthetic-cpu-preparation --entrypoint preparation-campaign.json \
   --file campaign:preparation-campaign.json --file run_config:run.json \
   --file tokenizer_config:tokenizer-config.json --file metadata:monitor.json \
   --output "$DEST"
+
 sparselab experiment recipe preparation inspect "$DEST/recipe.json" \
-  --bindings /absolute/local-bindings.json --json
+  --bindings /path/to/work/local-bindings.json --json
 ```
 
-The current local bindings use native field names, without an obsolete bindings
-version field. Choose output locations under your eventual external work root;
-inspection does not create them:
+Where `local-bindings.json` maps the recipe's outputs to your local workspace directory outside Git:
 
 ```json
 {
   "artifacts": {},
   "config_paths": {
     "tokenizer-config.json": {
-      "output_dir": "/absolute/work/tokenizer",
-      "dataset.cache_dir": "/absolute/work/cache"
+      "output_dir": "/path/to/work/tokenizer",
+      "dataset.cache_dir": "/path/to/work/cache"
     },
     "run.json": {
-      "tokenizer.path": "/absolute/work/tokenizer/tokenizer.json",
-      "dataset.cache_dir": "/absolute/work/cache",
-      "logging.root_dir": "/absolute/work/runs"
+      "tokenizer.path": "/path/to/work/tokenizer/tokenizer.json",
+      "dataset.cache_dir": "/path/to/work/cache",
+      "logging.root_dir": "/path/to/work/runs"
     }
   }
 }
 ```
 
-Creation uses the selected declarations unchanged. It does not choose scientific
-settings, fabricate artifact identities or grant approval. Commit the resulting
-metadata with ordinary Git if desired. Later execution needs a separately reviewed
-admission containing the actual inspected recipe/binding identities, supported
-runtime and finite limits. Generated outputs must be verified before binding them
-into later workflow declarations; preserve original preparation provenance and
-accounting through review and resume.
+`inspect` checks that all configuration schemas and path bindings are valid without creating output directories or starting a run. See the [metadata validation record](native-acceptance-2026-10-18.md) for example CLI checks across the active Workshop recipes.
 
-For exact supported operations and admission fields, use the pinned Lab
-[portable authoring](https://github.com/supernovae/tiny-sparse-lab/blob/7e306a96bcc617468d2a06493dab4562bff6beb0/docs/portable-recipes.md),
-[preparation](https://github.com/supernovae/tiny-sparse-lab/blob/7e306a96bcc617468d2a06493dab4562bff6beb0/docs/preparation-recipes.md)
-and [workflow](https://github.com/supernovae/tiny-sparse-lab/blob/7e306a96bcc617468d2a06493dab4562bff6beb0/docs/workflow-recipes.md)
-contracts. Existing example result pins remain historical evidence, not current
-runtime qualification. New reproductions use current interfaces and new identities;
-no compatibility adapter is provided.
+## Further Reading
+
+- [Tiny Sparse Lab Documentation](https://github.com/supernovae/tiny-sparse-lab/tree/main/docs) — CLI guides for `try`, `report`, `probe`, `explore`, and `dashboard`.
+- [TinyStories Training Guide (kybern.dev)](https://kybern.dev/models/tinystories-training/) — Interactive walkthrough of the TinyStories baseline and microlab comparison.
+- [Matched Comparisons (kybern.dev)](https://kybern.dev/learn/lab/matched-comparisons/) — How to design controlled experiments with paired seeds.

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">Kybern Workshop</title>
+  <desc id="desc">Shareable recipes and reproducible small-model experiments built with Tiny Sparse Lab.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1">
+      <stop stop-color="#0d1726"/>
+      <stop offset="1" stop-color="#17243a"/>
+    </linearGradient>
+    <linearGradient id="accent">
+      <stop stop-color="#7ceac4"/>
+      <stop offset="1" stop-color="#a7a2ff"/>
+    </linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="1" fill="#7285a4" opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="300" rx="18" fill="url(#bg)"/>
+  <rect width="1200" height="300" rx="18" fill="url(#grid)"/>
+  <rect x="52" y="52" width="48" height="5" rx="2.5" fill="url(#accent)"/>
+  <text x="52" y="88" fill="#7ceac4" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="14" letter-spacing="3">OPEN EXPERIMENT HUB FOR TINY SPARSE LAB</text>
+  <text x="48" y="155" fill="#f1f5fc" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="750" letter-spacing="-2">Kybern Workshop</text>
+  <text x="52" y="204" fill="#c0cce0" font-family="system-ui, -apple-system, sans-serif" font-size="25">Small models. Shareable experiments.</text>
+  <text x="52" y="254" fill="#8397b5" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="14">PREPARE  /  TRAIN  /  EVALUATE  /  REPLICATE</text>
+  <g stroke="#526987" stroke-width="2" fill="none" opacity=".65">
+    <path d="M838 70H1054V230H838Z M892 70V230 M946 70V230 M1000 70V230 M838 110H1054 M838 150H1054 M838 190H1054"/>
+  </g>
+  <g stroke="url(#accent)" stroke-width="3" fill="none">
+    <path d="M838 110L892 70L946 150L1000 110L1054 190 M838 230L892 190L946 150L1000 230 M892 110L946 70L1000 110L1054 70"/>
+  </g>
+  <g fill="#7ceac4" stroke="#0d1726" stroke-width="3">
+    <circle cx="838" cy="110" r="7"/><circle cx="892" cy="70" r="7"/>
+    <circle cx="946" cy="150" r="10"/><circle cx="1000" cy="230" r="7"/>
+    <circle cx="838" cy="230" r="7"/><circle cx="892" cy="190" r="7"/>
+  </g>
+  <g fill="#a7a2ff" stroke="#0d1726" stroke-width="3">
+    <circle cx="1000" cy="110" r="10"/><circle cx="1054" cy="190" r="7"/>
+    <circle cx="892" cy="110" r="7"/><circle cx="946" cy="70" r="7"/>
+    <circle cx="1054" cy="70" r="7"/>
+  </g>
+</svg>

@@ -1,5 +1,5 @@
-# TinyStories
+# TinyStories Recipes
 
-Use the [current microlab guide](../tinystories-microlab/README.md).
-The [historical guide](https://github.com/supernovae/kybern-workshop/blob/fd259e2cad4e9856d6d659e8df34728a98b32502/examples/tinystories/README.md)
-remains evidence at its original pins, not current execution instructions.
+- **Starter comparison (`sparselab try`):** [TinyStories Microlab](../tinystories-microlab/README.md)
+- **Completed 8,192-update baseline:** [TinyStories CPU Learning Baseline](../tinystories-useful/README.md) · [27 Recorded Outputs](../../results/2026-10-19-tinystories-cpu/README.md)
+- **Interactive walkthrough:** [kybern.dev/models/tinystories-training](https://kybern.dev/models/tinystories-training/)

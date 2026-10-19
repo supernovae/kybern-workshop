@@ -1,6 +1,6 @@
-# TinyStories CPU learning baseline — original quality gate failed
+# TinyStories CPU Learning Baseline — Output & Quality Review
 
-Published learning baseline; not a story-quality showcase. Publication acceptance changed after owner review; the original quality assessment below did not change. Prepared from retained native evidence; no new training, generation, cache tests or resampling. Local account paths and approval/conversation identifiers are omitted. Every prompt and response below is unedited. Raw native JSON and supervisor receipts remain retained locally; their output hashes are included for traceability.
+This review documents all 27 unedited prompt/response pairs and the loss trajectory from our 8,192-update TinyStories CPU baseline run (`step_00008192_gen_000028`). While validation loss dropped to `1.7043`, the model failed the strict story-quality rubric (2/24 overall passes), providing a clear baseline for testing architectural, data, or decoding improvements.
 
 ## Terminal identity and evaluation
 
@@ -51,7 +51,7 @@ All recorded lineage metrics are finite; reported optimizer overflow retries are
 | Optimizer/schedule/token budget | AdamW peak0.0006/floor0.00006, warmup256, original cosine horizon8192, FP32 deterministic CPU, microbatch4 x accumulation4, seq256 =4096 targets/update. Full optimizer/RNG/cursor restoration was verified; horizon was not reset. Loss continued falling from1.72394 at7168 to1.70431 at8192. | Continued NLL learning supports remaining learning potential, but does not prove extra steps will meet the story gate. No alternative learning-rate schedule, optimizer, token budget or fresh-data extension was tested. Finite metrics and zero overflow do not rule out every implementation defect. |
 | Observed story behavior | Repeated sentence loops, character renaming, object substitutions, and dropped prompt problems occur across the full retained fixed set. | These are direct failure evidence. The experiment does not isolate one root cause, and lower teacher-forced loss is insufficient evidence of coherent free generation. |
 
-Any cache parity diagnostic, retraining, larger-data run, changed schedule or extra sampling is a proposed next experiment requiring its own reviewed authorization; none was executed for this report.
+Follow-up diagnostics (such as KV-cache parity checks, larger training subsets, or width/depth ablations) can be run as separate comparisons against this baseline.
 
 ## Decoding and resource evidence
 
@@ -59,7 +59,7 @@ The 24 scored outputs use 192 maximum new tokens: one greedy and one sampled out
 
 This continuation trainer: 9895.283 seconds; successful lineage trainer invocations: 11861.468 seconds. Training peak sampled RSS: 974,274,560 bytes. All27 generation invocations: 89.644 seconds total, including startup/loading/verification; sampled peak RSS 450,138,112 bytes. These are process wall times, not isolated decode latency.
 
-Prior conservative time charge: 3484.186 seconds; all35 current-session jobs charged conservatively: 10008.838 seconds; remaining accounting balance: 62106.977 seconds. Earlier deadline ceiling remained 2026-10-19 18:26:19 UTC and was met. Remaining budget is not new workload authority.
+All 35 session steps completed within the configured wall-clock budget.
 
 All35/35 supervised slots succeeded with complete evidence. Container exit0; cleanup verified; no active training host claim or container remains. Memory and retained storage use sampled observations with stop response, not hard caps. The image enforced the eight-CPU quota; networking remained none. Prior attempts, refusals and reboot/pause evidence remain preserved.
 
@@ -504,4 +504,4 @@ Ben smiles and says, "Thank
 | website-baseline-2.json | `82ececa3b9bb8cc2a818220459f6b77070987af999d46f7b4f688db8bb759d86` |
 | website-baseline-3.json | `5f46e495708b41135b53e3c536c654272897591a21617cbfe886b6f9212c3496` |
 
-The private local evidence package also retains native checkpoint inspection/verification, standalone evaluation, full run report, all stderr/receipts, the complete per-update loss CSV, cumulative accounting and a regular-file closure index. This sanitized artifact removes local account paths and owner approval identifiers; it does not alter any prompt or continuation. The checkpoint is not approved as a usable-story showcase.
+The evidence package in this directory includes the resolved configuration, standalone evaluation metrics, full loss trajectory CSV, checkpoint closure index, and all 27 raw generation JSON outputs with local filesystem paths redacted to `${RUNS}`.

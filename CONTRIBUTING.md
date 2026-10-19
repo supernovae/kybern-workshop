@@ -1,38 +1,27 @@
-# Contributing to Workshop
+# Contributing to Kybern Workshop
 
-This policy applies until a production release tag establishes a reviewed
-compatibility contract. It records the owner's 2026-10-17 direction and the
-[canonical portable experiment plan](https://app.notion.com/p/3f83b68cca2281f59998c5b285816910).
+We welcome pull requests from anyone running small language-model experiments with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab)—whether you are replicating an existing recipe on your own hardware, testing an improvement to one of our baselines, or sharing a new experiment from your fork.
 
-Adapt plans, recipes and model definitions to current supported Lab interfaces.
-Do not change Lab to emulate old experiment behavior, introduce backward-version
-adapters, or build candidate-recovery machinery for historical runs. Report a
-missing current capability explicitly for coordinated native implementation.
+## Ways to Contribute
 
-New experiment authoring belongs in declarative Lab schemas, configuration and
-documentation. Generic scientific implementations and validators belong in Lab;
-process supervision belongs in Harness. Do not add Workshop Python engines,
-launchers or per-recipe test frameworks. Existing procedural helpers remain
-migration inventory, not a precedent for new engines.
+1. **Link your fork or experiment in the README**  
+   Running an experiment in your own repository or fork? Open a PR to add it to the **Community Experiments & Forks** section of the [main README](README.md#community-experiments--forks). Include your repository link, the question you are testing, model size/backend, and a brief summary of what you found.
+2. **Replicate or improve an active recipe**  
+   Run the [Basic CPU smoke test](examples/synthetic-cpu/README.md), compare architectures in the [TinyStories microlab](examples/tinystories-microlab/README.md), or try to beat our [8,192-update TinyStories baseline](examples/tinystories-useful/README.md) (where validation loss dropped to `1.704`, but free generation still loops and drifts).
+3. **Share a new declarative recipe**  
+   Add a self-contained experiment recipe under `examples/` or `experiments/` using native Tiny Sparse Lab YAML/JSON declarations.
 
-The active showcase is basic synthetic CPU, TinyStories and DevMind. Retired
-families remain in immutable Git history, not an active compatibility backlog.
-Preserve original historical bytes, hashes and IDs when citing that history. Historical claims
-in Workshop describe their original evidence and conditions; they are not current
-Lab guarantees. Reading, interpreting and hash-verifying old evidence is allowed
-without recreating its runtime or changing the archive to fit new interfaces.
+## How Workshop and Tiny Sparse Lab Fit Together
 
-A fresh reproduction is a new experiment with new run/artifact identities and
-explicit lineage to its historical reference. Never reuse an old identity to
-imply that new outputs reproduce old bytes. Record changed scientific choices,
-current source/runtime pins, generated bindings, budgets and limitations.
+- **Workshop owns recipes and evidence:** declarative configs (`RunConfig`, tokenizer configs, dataset locks, `try` deltas, and campaign definitions), walkthrough documentation, and compact result records.
+- **Tiny Sparse Lab owns the engine:** data preparation, training, behavioral probes, checkpoint verification, reporting, and the web dashboard live in [supernovae/tiny-sparse-lab](https://github.com/supernovae/tiny-sparse-lab).
+- **Keep recipes declarative:** avoid adding custom Python training loops or per-recipe runner frameworks to Workshop. If an experiment needs a new model mechanism or CLI feature, contribute that capability upstream to Tiny Sparse Lab first.
 
-Keep active research intent, historical execution, metadata validation and current
-runtime readiness separate. A reproduction backlog, valid schema or reviewed PR
-is not workload approval. Acquisition, training, generation and publication still
-require their applicable explicit authorization; do not infer it from old receipts.
+## Guidelines for Reproducible Submissions
 
-For review, state the exact head, native interfaces checked, preserved origins,
-actual validation performed and remaining blockers. Reviewers should reread this
-policy and the canonical plan. Preserve failures and distinguish unexecuted
-proposals from actual results; do not claim self-review clearance.
+We follow the evidence practices described in the [Kybern Community Lab](https://kybern.dev/research/community-lab/) and [Experiment Methods](https://kybern.dev/experiments/methods/):
+
+- **Pin your environment:** record the `tiny-sparse-lab` commit SHA, Python and PyTorch/MLX versions, hardware backend (`cpu`, `cuda`, `rocm`, `xpu`, `mps`, or `metal`), and dataset revision.
+- **Use fresh run identities:** every reproduction or follow-up experiment generates new run and checkpoint IDs. Link to the baseline you are comparing against rather than overwriting historical result records.
+- **Keep large binaries out of Git:** never commit raw dataset downloads, packed token arrays, or model weight files (`.pt`, `.safetensors`, etc.). Commit the declarative configs, SHA-256 manifests, loss curves, and representative generation JSONs so others can inspect your results and replicate the run locally.
+- **Publish negative and inconclusive results:** a clean negative result—or a model that lowers loss while failing a generation rubric—is just as valuable as a win. Keep failed checks and limitations visible alongside the metrics.

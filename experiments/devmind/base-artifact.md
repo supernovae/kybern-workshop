@@ -1,39 +1,22 @@
-# Base artifact and derivative evaluation contract
+# DevMind Base Checkpoint & Evaluation Contract
 
-No base checkpoint currently exists. This document specifies the required native
-artifact closure; it is not a manifest with invented hashes or a new Workshop
-artifact format. Use Lab's native checkpoint/config/report verification.
+[Back to DevMind Overview](README.md)
 
-A released base reference must identify:
+Once **DevMind 340M Base** completes training, its released artifact record must include the following verifiable metadata so anyone can inspect or evaluate the checkpoint with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab):
 
-- Immutable checkpoint location and SHA256 (or authenticated native manifest),
-  checkpoint generation, actual committed targets, and full-state recovery files.
-- Exact model RunConfig, tokenizer bytes/hash and vocabulary, producer Lab revision,
-  dependency/runtime identity, and Workshop recipe revision/content identity.
-- Corpus release, family split/admission, prepared mixture and packing identities;
-  actual training ledger and checkpoint lineage, including interruptions.
-- Verified native evaluation/report references and limits; access/retrieval method,
-  license and permission to publish checkpoint and tokenizer separately.
+- **Checkpoint identity:** immutable checkpoint generation name, manifest and weight SHA-256 digests, committed training target count, and full-state recovery files.
+- **Configuration & tokenizer:** resolved `RunConfig`, 32,768-token BPE tokenizer file and SHA-256 digest, and the exact `tiny-sparse-lab` and `kybern-workshop` commit SHAs.
+- **Corpus provenance:** frozen corpus release manifest, family split and deduplication receipts, prepared 60/20/20 mixture manifest, and training loss ledger.
+- **Evaluation & licensing:** verified `sparselab` evaluation reports and explicit license metadata for any distributed weights or tokenizers.
 
-Payloads stay outside Git. Locations, credentials and machine mounts are local
-bindings; no secrets belong here. Imported private-quarantine data does not confer
-model publication rights. Public release requires separate authorization.
+Binary payloads (model weights, optimizer states, and packed token arrays) remain stored outside Git.
 
-## Derivative: evaluate the retained base without rebuilding
+## Evaluation-Only Reuse
 
-The first derivative is evaluation-only: consume one verified base checkpoint,
-its matching model configuration and tokenizer, and the frozen public-benchmark
-protocol from `protocol.md`. Hold model weights and evaluation settings fixed;
-report separate primary/supporting scores and per-item uncertainty. This establishes
-reusable artifact consumption, not a causal architecture improvement.
+To evaluate a trained DevMind base checkpoint without retraining:
 
-Execution must verify the supplied artifact closure, use native Lab evaluation and
-report functions, and record producer/consumer identities. There is no preparation
-or training phase in this derivative. A missing checkpoint/tokenizer/protocol or
-unapproved dataset acquisition must refuse, not trigger base training, downloads
-or an automatic fallback. No executable derivative declaration is supplied until
-the native portable artifact-input interface is agreed in Lab #158; inventing a
-Workshop-only schema would hide this gap.
+1. Verify the checkpoint closure locally with `sparselab checkpoint inspect` and `sparselab checkpoint verify`.
+2. Run the frozen zero-shot benchmark and completion panels defined in [`protocol.md`](protocol.md) using `sparselab eval` and `sparselab model exercise`.
+3. Report both primary and supporting benchmark metrics alongside standard errors.
 
-Later SFT or memory variants require a separately reviewed concrete configuration,
-matched baseline/evaluation and explicit budget. They cannot overwrite this base.
+Follow-up instruction fine-tuning (SFT) or conditional-memory experiments build on top of the verified base checkpoint as separate recipes with matched baseline controls.

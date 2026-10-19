@@ -1,72 +1,162 @@
-# Kybern Workshop
+<p align="center">
+  <img src="docs/assets/workshop-banner.svg" alt="Kybern Workshop — Small models. Shareable experiments." width="100%">
+</p>
 
-Runnable projects and experiment recipes built with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
-Choose a project, inspect its configuration, run it with the pinned Lab runtime,
-and use its evidence to understand what happened. Workshop holds the project
-recipes and results; Lab provides preparation, execution, evaluation and reporting.
+<p align="center">
+  <a href="https://github.com/supernovae/kybern-workshop/actions/workflows/tinystories-rocm.yml"><img src="https://github.com/supernovae/kybern-workshop/actions/workflows/tinystories-rocm.yml/badge.svg" alt="Recipe Fixtures CI"></a>
+  <a href="https://github.com/supernovae/tiny-sparse-lab"><img src="https://img.shields.io/badge/Workbench-Tiny%20Sparse%20Lab-7ceac4" alt="Tiny Sparse Lab"></a>
+  <a href="https://github.com/supernovae/tiny-sparse-lab"><img src="https://img.shields.io/badge/Python-3.14-3776AB?logo=python&amp;logoColor=white" alt="Python 3.14"></a>
+  <a href="docs/native-workflow.md"><img src="https://img.shields.io/badge/Recipes-YAML%20%26%20JSON-a7a2ff" alt="Declarative Recipes"></a>
+  <a href="https://kybern.dev"><img src="https://img.shields.io/badge/Learn-kybern.dev-0d1726?labelColor=17243a&amp;color=7ceac4" alt="kybern.dev"></a>
+</p>
 
-Use the [native Lab workflow](docs/native-workflow.md) to author and inspect declarations
-in any local directory or repository, then follow the selected recipe’s native
-preparation and execution guide. Workshop, Harness and Notion are not runtime
-requirements. The [internal operator reference](docs/operator.md) preserves an older
-runner integration; its helpers are tracked in the [ownership audit](docs/ownership-boundaries.md).
+<p align="center">
+  <a href="https://kybern.dev/models/tinystories-training/">TinyStories Guide</a> ·
+  <a href="examples/synthetic-cpu/README.md">Basic CPU Smoke</a> ·
+  <a href="experiments/devmind/README.md">DevMind 340M</a> ·
+  <a href="#community-experiments--forks">Community Experiments</a> ·
+  <a href="https://kybern.dev/experiments/">Kybern Research</a>
+</p>
 
-## Projects
+**Kybern Workshop** is the open experiment hub for **[Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab)**.
+To keep individual studies decoupled from the core workbench engine, Workshop stores shareable, declarative experiment recipes—dataset locks, tokenizer configs, model `RunConfig` files, `try` interventions, and recorded run outputs—so anyone can inspect what we ran, replicate it on their own hardware, or fork a recipe to test a new idea.
 
-| Project | What you'll learn | Readiness | Start here |
+We publish complete records—including negative results and models that lower validation loss while still failing generation rubrics—so you can see what actually happens inside small language models.
+
+---
+
+## Active Experiments & Recipes
+
+| Experiment | What it tests | Status & Evidence | Links |
 | --- | --- | --- | --- |
-| TinyStories microlab | Compare FFN width 256 versus 384 using native Lab commands; inspect a completed longer CPU learning baseline. | 40-update comparison remains unexecuted; the separate 8,192-update baseline completed with a failed story-quality gate. | [Native run guide](examples/tinystories-microlab/README.md) · [Historical smaller CPU smoke](results/2026-10-15-tinystories-smoke/README.md) |
-| Synthetic CPU | Prepare synthetic text and a tokenizer, approve one tiny training attempt, evaluate it and verify a report. No corpus or model download. | Measured end to end at its recorded pins, including replay with no new attempt. Demonstrates workflow wiring, not model quality. | [Run guide](examples/synthetic-cpu/README.md) · [Recorded result](results/2026-10-14-synthetic-cpu/README.md) |
+| **TinyStories Baseline (4.46M)** | Full 8,192-update (33.5M-token) CPU training run of a 4-layer dense transformer with a 12-prompt story continuation panel. | **Completed baseline.** Validation loss reached `1.7043` (perplexity `5.4976`), while 22/24 continuations still loop or drift—a concrete baseline to improve. | [Walkthrough](examples/tinystories-useful/README.md) · [27 Recorded Outputs](results/2026-10-19-tinystories-cpu/README.md) · [Interactive Guide](https://kybern.dev/models/tinystories-training/) |
+| **TinyStories Microlab** | Starter paired comparison (`FFN width 256` vs. `384`) on 2,000 stories using `sparselab try`. | **Ready to run.** 40-update (10,240-target) teaching comparison for learning the `sparselab` workflow. | [Microlab Guide](examples/tinystories-microlab/README.md) · [Container Smoke Result](results/2026-10-15-tinystories-smoke/README.md) |
+| **Basic Synthetic CPU** | Offline end-to-end smoke test: synthetic text generation, BPE tokenizer fitting, 1-step training, evaluation, and verified reporting. | **Measured & verified.** Runs completely offline on CPU with zero dataset or model downloads. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Recorded Result](results/2026-10-14-synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
+| **DevMind 340M Base** | ~342M-parameter dense base model (24 layers, width 1,024, SwiGLU, RoPE) and 24-phase corpus preparation across web, synthetic, and code data. | **In pilot setup.** Architecture, optimizer, and 84-shard preparation plan authored and schema-validated; awaiting pilot execution. | [DevMind Overview](experiments/devmind/README.md) · [Scientific Protocol](experiments/devmind/protocol.md) · [Pilot Status (kybern.dev)](https://kybern.dev/models/devmind/) |
 
-For a basic CPU introduction, start with [synthetic CPU](examples/synthetic-cpu/README.md)
-and its [current metadata route](docs/native-workflow.md). For stories, use the [native TinyStories microlab](examples/tinystories-microlab/README.md).
-Its 40-update teaching comparison is distinct from the measured width-32 CPU smoke.
-The [longer CPU learning baseline](examples/tinystories-useful/README.md) now has
-[all 27 recorded outputs](results/2026-10-19-tinystories-cpu/README.md), immutable
-checkpoint/source identities and measured budgets. Its original story-quality gate
-failed; it is published to support reproducible learning and future improvement.
+---
 
-## Authored experiments
+## Running Workshop Experiments with Tiny Sparse Lab
 
-[DevMind — DevMind 340M Base](experiments/devmind/README.md)
-relocates the exact preparation declarations and records proposed model/training
-science. It is not execution-ready: generated inputs, scientific review, native
-portable bindings and runtime budgets remain outstanding. No weights are supplied.
+All recipes in this repository execute inside **[Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab)**.
+Install **Python 3.14** and [uv](https://docs.astral.sh/uv/), then clone both repositories side by side:
 
-## Before you run
+```sh
+git clone https://github.com/supernovae/tiny-sparse-lab.git
+git clone https://github.com/supernovae/kybern-workshop.git
 
-- Have Git, a writable external work directory and the project's pinned Lab
-  environment and matching backend image. The synthetic guide records Python 3.14.8, PyTorch 2.14.0+cpu,
-  exact Lab/Workshop revisions and dependency setup.
-- Read the project's workload, resource limits and approval steps before executing
-  commands. Preparation, runtime probes and evaluation can do work beyond the main
-  training budget; provision a runtime only when authorized.
-- Keep generated data, checkpoints, bindings, admissions and local execution
-  records outside Git. Reuse verified prepared inputs through writable copies when starting a fresh
-  experiment; cloning a recipe does not include dataset payloads or checkpoints.
+cd tiny-sparse-lab
+uv sync --locked --extra cpu --dev
+export SPARSELAB_WORK_DIR="$HOME/.local/share/sparselab"
+```
 
-For a no-download introduction, use the [synthetic CPU setup](examples/synthetic-cpu/README.md#pins-and-setup),
-then follow its preparation, approval, execution and reporting steps in order.
-The example remains pinned to Lab `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc`;
-its recorded validation does not establish compatibility with newer Lab contracts.
+### 1. Run a Quick Offline CPU Smoke Test
 
-## Inspect and build on a project
+Verify your local installation end-to-end without downloading any external datasets (see the [Offline Installation Check on kybern.dev](https://kybern.dev/models/cpu-smoke/)):
 
-Browse the [synthetic declarations](examples/synthetic-cpu), read the
-[measured result and limitations](results/2026-10-14-synthetic-cpu/README.md), or
-inspect the [historical command record](results/2026-10-14-synthetic-cpu/commands.md).
-The project run guide retains setup details, monitoring instructions and failure
-notes. Preserve earlier evidence when changing a recipe, and distinguish a
-proposed configuration from a measured result.
+```sh
+uv run --locked --extra cpu sparselab readiness smoke --family dense \
+  --output "$SPARSELAB_WORK_DIR/first-run"
+uv run --locked --extra cpu sparselab dashboard --runs-dir "$SPARSELAB_WORK_DIR/first-run/runs"
+```
 
-## Scope and historical research
+Want to inspect or replicate the full multi-stage synthetic campaign recipe? Follow [`examples/synthetic-cpu/README.md`](examples/synthetic-cpu/README.md).
 
-The active showcase contains three families: basic synthetic CPU, TinyStories,
-and DevMind. Other experiments and imported old-run archives have been retired
-from this tree. Their original bytes remain in Git history; see the
-[retirement map](docs/retired-research.md). Future research ideas belong to the
-coordinated Notion backlog as new experiments, not promises to resume old runs.
+### 2. Run Your First Controlled Comparison (`TinyStories Microlab`)
+
+Copy the [TinyStories microlab declarations](examples/tinystories-microlab/README.md) into a fresh workspace directory, prepare the dataset and 2,048-token BPE tokenizer once, and test whether a wider feed-forward layer (`ffn_dim: 384` vs. `256`) lowers held-out loss at the same token budget:
+
+```sh
+EXPERIMENT="$SPARSELAB_WORK_DIR/experiments/tinystories-microlab-001"
+SAMPLE="../kybern-workshop/examples/tinystories-microlab/declarations"
+mkdir -p "$EXPERIMENT/inputs"
+cp "$SAMPLE/source.yaml" "$SAMPLE/tokenizer.yaml" "$SAMPLE/run.yaml" "$EXPERIMENT/inputs/"
+
+# 1. Lock and snapshot the TinyStories subset, then fit the tokenizer
+uv run --locked --extra cpu sparselab data lock "$EXPERIMENT/inputs/source.yaml" \
+  --output "$EXPERIMENT/inputs/source.lock.json"
+uv run --locked --extra cpu sparselab data snapshot "$EXPERIMENT/inputs/source.lock.json" \
+  --output "$EXPERIMENT/snapshot"
+uv run --locked --extra cpu sparselab tokenizer train "$EXPERIMENT/inputs/tokenizer.yaml"
+
+# 2. Run a matched comparison: FFN width 384 vs. baseline 256
+cat > "$EXPERIMENT/wider-ffn.yaml" <<'YAML'
+question: Does a wider FFN lower held-out loss at the same token budget?
+set:
+  model.ffn_dim: 384
+YAML
+
+uv run --locked --extra cpu sparselab try "$EXPERIMENT/wider-ffn.yaml" \
+  --vs "$EXPERIMENT/inputs/run.yaml"
+```
+
+Once `try` finishes, use the printed `TRY_ID` to inspect the verdict, run deeper behavioral probes, or launch the visual dashboard:
+
+```sh
+uv run --locked --extra cpu sparselab report TRY_ID
+uv run --locked --extra cpu sparselab explore TRY_ID
+uv run --locked --extra cpu sparselab dashboard
+```
+
+### The Everyday Experiment Loop
+
+| Goal | Tiny Sparse Lab Command | What it does |
+| --- | --- | --- |
+| **Validate a config** | `sparselab config validate run.yaml --kind run` | Checks YAML/JSON declarations before any data or training work runs. |
+| **Test one change** | `sparselab try DELTA.yaml --vs BASELINE.yaml` | Trains baseline & candidate (or reuses a verified baseline), scores held-out loss, and runs fast probes. |
+| **Read the verdict** | `sparselab report TRY_ID` | Prints the sealed comparison report, metrics delta, and probe summary. |
+| **Inspect weights & loss** | `sparselab explore TRY_ID` | Computes per-token loss, attention maps, and weight statistics. |
+| **Generate text** | `sparselab generate RUN_ID --checkpoint CHECKPOINT --prompt "..."` | Runs deterministic or sampled continuations from a verified checkpoint. |
+| **Browse visually** | `sparselab dashboard` | Opens the local web UI for runs, Pareto frontiers, probes, and checkpoints. |
+
+---
+
+## Community Experiments & Forks
+
+As Tiny Sparse Lab grows, this section tracks reproducible small-model experiments, replications, and baselines shared by the community in their own forks and repositories.
+
+| Project / Fork | Author | Question / Experiment | Model & Backend | Summary / Findings |
+| --- | --- | --- | --- | --- |
+| *No community forks listed yet — yours could be the first!* | — | Run a replication, test an architectural change, or try to beat our [TinyStories baseline](examples/tinystories-useful/README.md). | CPU / GPU / MLX | **[Open a PR](CONTRIBUTING.md) to add a link to your fork or experiment here! 🙂** |
+
+**Have an experiment in your fork?** We'd love to feature it! Whether you replicated a recipe on new hardware (CUDA, ROCm, Intel XPU, or Apple Silicon MLX), improved story coherence on TinyStories, or tested a clean negative result, open a pull request to add your repository to the table above. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+---
+
+## Learn & Explore on [kybern.dev](https://kybern.dev)
+
+Our website pairs directly with the recipes in this repository:
+
+- **[TinyStories: Build, Read, and Improve a Small Story Model](https://kybern.dev/models/tinystories-training/)** — Step-by-step walkthrough plus an interactive browser viewer for all 27 recorded story outputs.
+- **[Offline CPU Installation Check](https://kybern.dev/models/cpu-smoke/)** — Quick local verification guide for new Tiny Sparse Lab installs.
+- **[DevMind Pilot Status](https://kybern.dev/models/devmind/)** — Overview of the DevMind 340M Base pilot and preparation milestones.
+- **[Experiments & Research Roadmap](https://kybern.dev/experiments/)** — Pending studies on conditional memory, fact swaps, context overrides, and ideas you can test on your own hardware.
+- **[Matched Comparisons](https://kybern.dev/learn/lab/matched-comparisons/) & [Inspecting Runs](https://kybern.dev/learn/lab/inspect-runs/)** — How to design controlled experiments with paired seeds and interpret probe verdicts.
+- **[Free 18-Lesson Curriculum](https://kybern.dev/learn/)** — Hands-on lessons from tensors and autograd to building a causal decoder and running controlled lab comparisons.
+
+---
+
+## Repository Structure
+
+```text
+kybern-workshop/
+├── examples/
+│   ├── synthetic-cpu/         # Offline synthetic CPU smoke recipe
+│   ├── tinystories-microlab/  # 40-update FFN width comparison (256 vs. 384)
+│   ├── tinystories-useful/    # 8,192-update CPU baseline recipe & improvement exercises
+│   ├── tinystories-worker/    # Paired CPU worker campaign recipe
+│   └── tinystories-rocm/      # Containerized AMD ROCm campaign recipe
+├── experiments/
+│   └── devmind/               # DevMind 340M Base protocol, model/optimizer configs & 24-phase corpus prep
+├── results/
+│   ├── 2026-10-14-synthetic-cpu/     # Recorded synthetic CPU smoke metrics & report
+│   ├── 2026-10-15-tinystories-smoke/ # Recorded paired CPU container smoke summary
+│   └── 2026-10-19-tinystories-cpu/   # Recorded 8,192-update baseline metrics & 27 story outputs
+└── docs/
+    ├── native-workflow.md     # Guide to packaging, inspecting & running recipes with sparselab
+    └── operator.md            # Optional Docker campaign supervisor helper reference
+```
 
 ## Contributing
 
-Read the [current-interface contribution policy](CONTRIBUTING.md) before adapting or reproducing an experiment. Historical evidence remains preserved; new reproductions use current interfaces and new identities.
+Pull requests for experiment replications, new declarative recipes, baseline improvements, and links to community forks are welcome! Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Kybern Community Lab guide](https://kybern.dev/research/community-lab/) to get started.

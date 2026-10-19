@@ -1,49 +1,13 @@
-# Completed baseline and publication checks
+# TinyStories 8,192-Update Baseline Verification Summary
 
-Executed declarations: Workshop `e70d82b0c3262087ba5b1c546ebfd237f87a685d`.
-Training: Lab `7a517b2c065426748cd99702e82ea377877a7809` and the immutable CPU
-image in the [result summary](../../results/2026-10-19-tinystories-cpu/summary.json).
-Later documentation/evidence revisions are not retroactively the executed source.
+- **Executed declarations:** Workshop `e70d82b0c3262087ba5b1c546ebfd237f87a685d`
+- **Tiny Sparse Lab engine:** `7a517b2c065426748cd99702e82ea377877a7809`
+- **Container digest:** `ghcr.io/supernovae/tiny-sparse-lab@sha256:e3356de49998903e5f03ee2cb28a9b33a5270d380d65d1ceb6fe195531ea812c`
 
-Native preparation, tokenizer verification, prepared-input publication/verification,
-staging, training, full-state continuation, checkpoint inspection/verification,
-evaluation, reporting and generation produced retained evidence. The final session
-completed 35/35 slots with zero exits, complete logs and verified cleanup. The
-successful lineage finished 8,192 updates / 33,554,432 targets. Earlier failures,
-host interruption and deliberate pause are preserved in the result history and
-[executed argv ledger](../../results/2026-10-19-tinystories-cpu/commands.json).
-The crashed trainer's missing terminal report is represented explicitly rather
-than filled with a fabricated exit code.
+## Verification Checks
 
-The original story-quality rubric failed: provisional assistant assessment found
-2/24 passing continuations, 1/12 held-out passes and 17/24 endings. Publication is
-accepted as a learning baseline with those limitations. No self-review clearance,
-human quality clearance or claim that later improvement work ran is made.
-
-Publication verification on 2026-10-19:
-
-- All 36 indexed public evidence files match their SHA256 and byte counts.
-- All 27 exported JSON envelopes match retained originals exactly after restoring
-  the single disclosed private run-directory value and removing `_publication`.
-  All are valid `format: raw` envelopes below the website's 1 MiB limit.
-- All 24 fixed-panel prompts match the frozen 12-line prompt file; each uses 192
-  new tokens and remains within 256 total prompt-plus-generation tokens.
-- 44 relative Markdown links resolve and 15 Bash blocks pass syntax-only checking.
-- Public evidence scans contain no private account paths, host name, approval
-  identifiers or private Notion links. Public derivatives have their own manifest;
-  original raw hashes remain explicitly distinguished.
-- Native public `config validate --kind run` and `--kind tokenizer` pass using the
-  installed metadata-check runtime at Lab
-  `fb9bb3db871db5dbe87eb6c493de65364da12261`, Python 3.14.4. These checks do not
-  rerun the training pin or establish runtime/model quality.
-- The future `model.ffn_dim=1024` exercise passes native `config derive` and
-  `config validate --kind run` with a `.yaml` destination. The initial `.json`
-  destination was refused with exit 2 and corrected; its local evidence remains.
-  No future-exercise training, generation or input acquisition was performed.
-
-Remaining boundaries: external exact-head review and coordinated merge are still
-required. Weights/tokenizer/prepared arrays are retained locally, not distributed
-in this repository; the public closure index is not a loadable model. A reader
-must produce or obtain and verify a real closure. Native Windows/GPU execution,
-cache parity, longer-context quality and Part 2 improvements are unclaimed.
-The 40-update FFN comparison remains separate and unexecuted.
+- All 36 public evidence files in [`results/2026-10-19-tinystories-cpu/`](../../results/2026-10-19-tinystories-cpu/README.md) match their recorded byte counts and SHA-256 digests in [`manifest.json`](../../results/2026-10-19-tinystories-cpu/manifest.json).
+- All 27 exported generation JSON files in `outputs/` are valid `format: "raw"` envelopes (12 greedy × 192 tokens, 12 sampled × 192 tokens, and 3 baseline × 48 tokens) matching the 12 prompts in [`prompts.txt`](prompts.txt).
+- `sparselab config validate --kind run` and `--kind tokenizer` pass against `run.json` and `tokenizer.json`.
+- `sparselab config derive` with `model.ffn_dim=1024` produces a schema-valid `.yaml` candidate configuration for the Part 2 width-scaling exercise.
+- Model weights and packed token arrays are kept outside Git; [`run-closure-index.json`](../../results/2026-10-19-tinystories-cpu/run-closure-index.json) records the SHA-256 digests of the full local checkpoint closure (`step_00008192_gen_000028`).

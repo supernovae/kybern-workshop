@@ -1,120 +1,76 @@
-# Synthetic CPU project
+# Basic Synthetic CPU Smoke Test
 
-[Back to Workshop projects](../../README.md)
+[Back to Workshop README](../../README.md) · [Offline Installation Check Guide (kybern.dev)](https://kybern.dev/models/cpu-smoke/)
 
-A tiny end-to-end exercise using the pinned Tiny Sparse Lab CLI.
+A lightweight, offline end-to-end exercise for [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
+It prepares a tiny synthetic text dataset and BPE tokenizer, runs a single-step training attempt through an explicit approval gate, scores held-out validation loss, and generates a verified report—with no dataset or model downloads required.
 
-The [synthetic CPU example](.) exercises native preparation,
-an explicit approval gate, one training attempt, held-out evaluation and verified
-reporting. It demonstrates wiring, not model quality. Workflow artifact identities come from successful native preparation receipts.
+- **Recorded run & metrics:** [2026-10-14 Synthetic CPU Result](../../results/2026-10-14-synthetic-cpu/README.md)
+- **Current CLI recipe packaging:** [Running Workshop Recipes with Tiny Sparse Lab](../../docs/native-workflow.md)
 
-The completed [2026-10-14 measured result](../../results/2026-10-14-synthetic-cpu/README.md)
-includes failed invocations, verified reporting and no-new-attempt replay.
+---
 
-## Historical procedure; current metadata entrypoint
+## Quick Offline Smoke Check (Current CLI)
 
-This guide preserves the historical Lab `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc`
-procedure and its measured evidence. Its setup, bindings and admissions below
-belong to that revision; they are not current execution instructions or fresh
-runtime qualification.
+If you just installed [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab) and want to verify your local CPU setup in one command, you can also run the built-in readiness check from your `tiny-sparse-lab` checkout (see the [kybern.dev guide](https://kybern.dev/models/cpu-smoke/)):
 
-Current Lab rejects `preparation_bindings_version`,
-`preparation_admission_version` and `workflow_admission_version`. Current workflow
-admission also requires explicit `limits` with `max_training_updates`,
-`max_target_positions` and `max_eval_batches`. Those values require the actual
-reviewed run declaration; this guide does not supply current budgets or admission.
-Do not partially modernize the historical procedure by removing individual fields.
+```sh
+uv sync --locked --extra cpu --dev
+export SPARSELAB_WORK_DIR="$HOME/.local/share/sparselab"
+uv run --locked --extra cpu sparselab readiness smoke --family dense \
+  --output "$SPARSELAB_WORK_DIR/first-run"
+uv run --locked --extra cpu sparselab dashboard --runs-dir "$SPARSELAB_WORK_DIR/first-run/runs"
+```
 
-For current non-executing authoring and inspection, use
-[the native workflow guide](../../docs/native-workflow.md). New execution needs
-separate source/runtime selection and approval; the historical results below do
-not authorize it. Historical procedure restored and scope clarified 2026-10-18.
+To package and inspect the declarative files in this directory (`examples/synthetic-cpu`) with the latest `sparselab` CLI, see [Packaging and Inspecting a Recipe](../../docs/native-workflow.md#packaging-and-inspecting-a-recipe).
 
-## Pins and setup
+---
 
-Use Tiny Sparse Lab commit `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc`
-(PR128; reviewed head `45230f446bde5d88b26857630c9b7a53eaaf602e`). Its native
-installed-source SHA-256 is
-`1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26`.
-Its `uv.lock` SHA-256 is
-`2058fe5c126df074879648018c36288386190446b94b147b811671185958ac86`.
-The provisioned environment uses CPython 3.14.8, PyTorch 2.14.0+cpu,
-tokenizers 0.22.2, NumPy 2.5.3, datasets 4.8.5, PyArrow 25.0.1,
-Pydantic 2.13.5, PyYAML 6.0.3, huggingface-hub 0.36.2 and psutil 7.2.2.
-All dependency pins are in the lab lock. Tiny Sparse Lab is MIT licensed; see
-its pinned LICENSE. The example uses generated synthetic text, with no corpus
-or model downloads. Workshop's new declarations are independently authored.
+## Replicating the Recorded Campaign Run
 
-An ordinary clone and pinned checkout is sufficient; no remote-fetch framework is
-needed. From a writable parent directory, preserve separate A and B worktrees:
+The steps below document the exact pinned procedure used to produce the [2026-10-14 recorded result](../../results/2026-10-14-synthetic-cpu/README.md).
+
+### Pins and Environment Setup
+
+| Component | Pinned Identity |
+| --- | --- |
+| **Tiny Sparse Lab commit** | `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc` |
+| **Installed source SHA-256** | `1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26` |
+| **`uv.lock` SHA-256** | `2058fe5c126df074879648018c36288386190446b94b147b811671185958ac86` |
+| **Runtime** | CPython 3.14.8, PyTorch 2.14.0+cpu, tokenizers 0.22.2, NumPy 2.5.3, datasets 4.8.5, PyArrow 25.0.1 |
+
+From a writable parent directory, clone Workshop and Tiny Sparse Lab at the recorded revisions:
 
 ```sh
 git clone https://github.com/supernovae/kybern-workshop.git workshop
 cd workshop
 git checkout --detach e8250556412bc8535c029d80af3fa735b82c1ffa
 git worktree add --detach ../workshop-preparation-a 28a01d69442c8b08e5ba78e4561ff4f69443e1e5
-# B is the absolute workshop path; A is the absolute preparation worktree path.
-# Do not advance either checkout while its admission is in use.
+# B is the workshop path; A is the preparation worktree path.
 cd ..
 git clone https://github.com/supernovae/tiny-sparse-lab.git lab
 git -C lab checkout --detach b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc
-# LAB is the absolute lab path. Read this updated guide from the results revision.
 ```
 
-The historical workflow references locally retained prepared inputs; cloning does
-not download those payloads or create admission. A fresh reproduction must prepare
-its own inputs, author/commit their identities, inspect and obtain approval for its
-own exact workflow commit. Do not borrow this run's admission or claim its receipts.
-
-Provisioning requires authorization and precedes measurement:
+Provision the locked CPU environment:
 
 ```sh
-# LAB is a clean checkout at the exact commit above; other paths are outside Git.
 UV_PYTHON_INSTALL_DIR="$PYTHON_STORE" UV_CACHE_DIR="$UV_CACHE" \
   UV_PROJECT_ENVIRONMENT="$CPU_ENV" \
   uv sync --locked --extra cpu --no-dev --project "$LAB" --python 3.14.8
 CPU_PYTHON="$CPU_ENV/bin/python"
 ```
 
-Freeze the installed source identity before preparation. Do not reinstall or
-update it between preparation and workflow execution. A new source identity
-needs fresh preparation evidence; keep earlier receipts unchanged.
+### Model and Workload Specification
 
-## Workload and limits
+- **Model:** Dense decoder, 1 layer, hidden dimension 16, FFN dimension 32, 2 heads, context length 32, vocabulary size 260 (6,768 parameters).
+- **Training:** Seed 7, PyTorch CPU FP32, sequence length 16, microbatch 1, gradient accumulation 1 (16 targets/update). Runs 2 smoke updates, 5 warmup updates, and 1 main update.
+- **Synthetic data:** 8 training and 4 validation documents (token caps 256 and 128), tokenizer trained on up to 8 documents.
+- **Resource monitor (`monitor.json`):** 600-second wall ceiling, 4 GiB process-tree RSS ceiling, and 1 GiB workspace growth ceiling, sampled every second.
 
-Run seed and synthetic-data seed are integer 7. The dense model has one layer,
-hidden width 16, FFN width 32, two heads, context 32 and vocabulary 260.
-Runtime is PyTorch CPU FP32. Sequence 16, microbatch 1 and accumulation 1 give
-16 targets per update. The main budget is one update; native smoke 2 and warmup 5
-remain enabled. Optimizer warmup is separately zero. Evaluation reads at most
-one validation batch. Runtime probes are additional work, not training updates.
+### 1. Prepare Synthetic Inputs
 
-Preparation declares eight training and four validation documents, token caps
-256 and 128, and tokenizer training on at most eight documents. These are caps,
-not observed counts. Compared with the lab contract fixture, this example keeps
-model dimensions, seeds, sequence/batch settings and native staging counts, but
-changes vocabulary (260 versus 512; the preparation execution fixture uses 264),
-token caps (256/128 versus 129/81), evaluation batches (1 versus 4), optimizer
-settings and main budget. The token caps are larger, despite the smaller
-vocabulary/evaluation budget. This is not exact reproduction. The historical
-149.486-second/1.50-GiB proof is not this example's measurement.
-
-Wrap every runtime-bearing command with `monitor.json`: 600-second wall ceiling,
-4-GiB process-tree RSS ceiling and 1-GiB added-workspace ceiling, sampled every
-second, with five-second termination grace. These are stop ceilings, not
-predictions or instantaneous kernel quotas. Preserve native failed receipts,
-monitor samples/completion and descendant-cleanup evidence; diagnose before
-retrying and stop if scope must expand.
-
-## Preparation at commit A
-
-Use an absolute `WORK` directory outside every Git repository for all bindings,
-admissions, receipts, logs and payloads. Preserve a detached checkout `A` at the
-preparation commit. Never advance A to workflow commit B: any HEAD change
-invalidates A's admission. The descriptor directory is the recipe root; inventory
-hashes cover exact member bytes without replacing native scientific hashes.
-
-Create `$WORK/preparation-bindings.json`, replacing `/absolute/work` with `WORK`:
+Use an external `WORK` directory outside Git for all local bindings, receipts, logs, and generated payloads. Create `$WORK/preparation-bindings.json`:
 
 ```json
 {
@@ -134,7 +90,7 @@ Create `$WORK/preparation-bindings.json`, replacing `/absolute/work` with `WORK`
 }
 ```
 
-Inspect committed A:
+Inspect the preparation recipe:
 
 ```sh
 PREP="$A/examples/synthetic-cpu/preparation.json"
@@ -143,12 +99,7 @@ POLICY="$A/examples/synthetic-cpu/monitor.json"
   --bindings "$WORK/preparation-bindings.json" --json > "$WORK/preparation-inspect.json"
 ```
 
-Author `$WORK/preparation-admission.json` with `preparation_admission_version: 1`,
-A's full Git SHA as `reviewed_commit`, the inspection's exact `recipe_sha256` and
-`binding_sha256`, and the running interpreter's exact `sys.executable` as
-`cpu_python`. Set `max_documents: 12`, `max_tokens: 384`, `max_vocab_size: 260`,
-`min_free_bytes: 268435456` and `min_free_inodes: 128`. Admission asserts review
-of committed bytes; it does not replace native verification.
+Create `$WORK/preparation-admission.json` with `preparation_admission_version: 1`, `A`'s full Git SHA as `reviewed_commit`, the exact `recipe_sha256` and `binding_sha256` from inspection, and your `CPU_PYTHON` path as `cpu_python`. Set `max_documents: 12`, `max_tokens: 384`, `max_vocab_size: 260`, `min_free_bytes: 268435456`, and `min_free_inodes: 128`. Then run preparation under the resource monitor:
 
 ```sh
 "$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor-baseline "$WORK" \
@@ -162,36 +113,11 @@ of committed bytes; it does not replace native verification.
   > "$WORK/preparation-monitor.json"
 ```
 
-The monitor retains child stdout/stderr in its log directory. Require COMPLETE
-`train-tokenizer` and `pack-data` stages, not just exit zero. Use their native
-`outputs` identities and `availability.path` locations; never invent an identity
-or adopt unreceipted output. For replay use `resume` with preserved A and unchanged
-bindings/admission, writing into a fresh monitor log directory.
+Both `train-tokenizer` and `pack-data` stages should report `COMPLETE`.
 
-## Workflow handoff
+### 2. Seal Inputs and Run the Workflow
 
-After preparation, author a one-cell native plan, diagnostic `heldout_lm` suite,
-Campaign and workflow descriptor with the successful native identities and exact
-inventory hashes. Commit B before its inspection and admission; keep artifact
-locations only in local bindings. Review B's admission before the model attempt.
-
-The public operations are `experiment recipe workflow apply`, `approve`,
-`apply --execute-runs --max-wait-seconds 540`, `resume` and `report`.
-Even `apply` without `--execute-runs` may execute acceptance probes; monitor it.
-Select the plan-stage lock/workspace and collect-stage evidence index explicitly
-for reporting, retaining the separate evaluation index. Require a completed and
-ingested native attempt, checkpoint-bound evaluation, verified report, then
-completed replay with no new attempt. Report executed/skipped stages, update and
-probe counts, time, RSS, workspace growth and cleanup separately. Successful
-rendering does not establish scientific effectiveness.
-
-## Author and admit workflow B
-
-The [stdlib helper](../../scripts/seal-inputs.py) only copies the two COMPLETE native
-preparation outputs into the authored Campaign ports and workflow descriptor,
-then hashes member bytes for the inventory. It writes local bindings separately.
-It is not a verifier: use native `resolve` to cold-verify the payloads. Preserve
-old declarations/receipts before authoring a new identity.
+Use [`scripts/seal-inputs.py`](../../scripts/seal-inputs.py) to bind the completed preparation artifact hashes into the workflow descriptor, then inspect and resolve:
 
 ```sh
 RECIPE="$B/examples/synthetic-cpu"
@@ -199,18 +125,14 @@ RECIPE="$B/examples/synthetic-cpu"
   --receipt "$WORK/monitor/preparation-1/command.stdout.log" \
   --recipe "$RECIPE" --bindings "$WORK/workflow-bindings.json" \
   --logging-root "$WORK/workflow-runs"
-# Commit the authored declarations at B before inspection/admission.
+
 "$CPU_PYTHON" -m sparselab experiment recipe workflow inspect "$RECIPE/workflow.json" \
   --bindings "$WORK/workflow-bindings.json" --json > "$WORK/workflow-inspect.json"
 "$CPU_PYTHON" -m sparselab experiment recipe workflow resolve "$RECIPE/workflow.json" \
   --bindings "$WORK/workflow-bindings.json" --json > "$WORK/workflow-resolve.json"
 ```
 
-For this already authored example, do not rerun the helper against an existing
-bindings output; it refuses that overwrite. A fresh reproduction must prepare its
-own inputs and commit the resulting declarations before admitting them.
-
-Create `$WORK/workflow-admission.json` with exactly:
+Create `$WORK/workflow-admission.json`:
 
 ```json
 {
@@ -222,31 +144,15 @@ Create `$WORK/workflow-admission.json` with exactly:
 }
 ```
 
-Replace all placeholders with the reviewed commit, native inspection digests
-and exact running interpreter. Keep this document outside Git. Review these
-fields and the preparation identities before starting the following steps.
-
-Before workflow commands, select a writable local lease namespace for this CPU
-session. Use the same namespace consistently across all commands; do not create
-isolated namespaces to bypass another worker's lease. This example owns one CPU
-worker and allocates no accelerators. This is a per-session environment variable,
-not a change to the scientific declaration or global machine configuration:
+Set a writable local worker lease directory:
 
 ```sh
 export SPARSELAB_WORKER_LEASE_DIR="$WORK/worker-leases"
 ```
 
-Use the ordinary native monitor without `strace`; tracing caused worker transport
-timeouts in the recorded attempt. Passive process observation may corroborate
-probe counts but must disclose sampling gaps and distinguish observed lifetimes
-from exact timings. Preserve failures, diagnose before continuing the same attempt,
-and never submit a replacement merely because transport or ingestion is pending.
-
-For each runtime command below, use a unique `STEP`, capture a fresh baseline
-and wrap the command with the native monitor. Do not reuse a log directory:
+Run each workflow step (`workflow-plan`, `workflow-approve`, `workflow-run`, and `workflow-replay`) under the native monitor:
 
 ```sh
-# Set STEP to workflow-plan, workflow-approve, workflow-run or workflow-replay.
 "$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor-baseline "$WORK" \
   --output "$WORK/$STEP-baseline.json" --json
 "$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor \
@@ -257,35 +163,14 @@ and wrap the command with the native monitor. Do not reuse a log directory:
   --work-dir "$WORK" --json > "$WORK/$STEP-monitor.json"
 ```
 
-1. `workflow-plan`: use the command above unchanged. Require `approve-model` to
-   be AWAITING_APPROVAL and no model attempt.
-2. `workflow-approve`: replace `apply "$RECIPE/workflow.json"` with
-   `approve "$RECIPE/workflow.json" approve-model`, adding
-   `--note "Owner approved one bounded synthetic CPU attempt"`. This is the
-   explicit native approval; no helper implicitly approves.
-3. `workflow-run`: use `apply`, adding `--execute-runs --max-wait-seconds 540`.
-   Require every stage COMPLETE and exactly one COMPLETE/ingested attempt.
-4. `workflow-replay`: replace `apply` with `resume`, without `--execute-runs`.
-   Require every stage COMPLETE and unchanged attempt/receipt identities.
+1. **`workflow-plan`:** runs `apply` as shown above; reaches `AWAITING_APPROVAL` at `approve-model`.
+2. **`workflow-approve`:** replaces `apply "$RECIPE/workflow.json"` with `approve "$RECIPE/workflow.json" approve-model --note "Approved synthetic CPU smoke run"`.
+3. **`workflow-run`:** runs `apply` with `--execute-runs --max-wait-seconds 540` to execute training and held-out evaluation.
+4. **`workflow-replay`:** runs `resume` (without `--execute-runs`) to verify idempotent replay with no new training attempt.
 
-The selected no-profile CPU acceptance stage checks storage/runtime declarations;
-its source does not itself call a runtime probe. Execution is expected to perform
-six one-update precision probes: Controller candidate validation, worker dispatch
-validation, staging validation, and each of smoke, warmup and main trainer
-initialization. Each dense FP32 probe updates a 4-by-4 parameter once; these are
-not 16-target training updates. The source paths are `workers/controller.py`,
-`workers/execution.py`, `staging.py`, `training/trainer.py`, `engines/pytorch.py`
-and `runtime_probe.py`. Verify observed counts/timings from execution evidence;
-this is a source-derived expectation, not a measured result. PyTorch held-out
-inference loads the verified checkpoint directly and does not call that optimizer
-probe. Continue monitoring every apply/approval/replay because command flags alone
-do not establish that no runtime work occurs.
+### 3. Generate the Verified Report
 
-## Verified report
-
-From the COMPLETE `lock-plan` stage take `availability.path` as `LOCK` and
-`availability.workspace` as `EXPERIMENT_WORKSPACE`. From `collect-run` take
-`availability.path` as `INDEX`. Preserve the separate `evaluate-heldout` index.
+Using the `LOCK` and `EXPERIMENT_WORKSPACE` paths from `lock-plan` and the `INDEX` path from `collect-run`:
 
 ```sh
 "$CPU_PYTHON" -m sparselab experiment recipe workflow report "$LOCK" \
@@ -296,30 +181,4 @@ From the COMPLETE `lock-plan` stage take `availability.path` as `LOCK` and
   --output "$WORK/report.md" --format markdown
 ```
 
-Reporting verifies the selected snapshot; it neither recollects nor silently
-chooses a newer evaluation. The Campaign collects before evaluation, so retain
-both the report and evaluation evidence rather than implying the earlier index
-contains the later evaluation. Report files are exclusively created; identical
-replay is allowed. Changed evidence needs an explicitly selected new snapshot.
-
-## Measured preparation status
-
-Preparation A is `28a01d69442c8b08e5ba78e4561ff4f69443e1e5`. Both native stages
-completed on 2026-10-14 with one preparation attempt each. The monitored command
-measured 9.587894 seconds, 437,280,768 bytes peak process-tree RSS and 73,736 bytes
-peak/final added workspace. Ten samples reported no violations; the owned-process
-receipt reported zero living descendants. Preparation ran no model updates or
-runtime optimizer probes. Full machine-local records remain outside Git.
-
-The first monitor launch failed before spawning preparation because its default
-work directory was read-only. That failed launch record and empty stdout were
-preserved. The corrected command specifies global `--work-dir` and a persisted
-growth baseline; no native failed preparation attempt was overwritten or retried.
-The environment also briefly disconnected while editing the guide, before any
-experiment was running; runtime metadata and remote refs were rechecked.
-
-Workflow execution, ingestion, diagnostic evaluation, verified reporting and
-completed replay are now measured. See the [complete result](../../results/2026-10-14-synthetic-cpu/README.md),
-including both failed invocations and their cleanup evidence.
-
-Preparation replay completed in 6.452063 seconds, with 430,981,120 bytes peak tree RSS and 23,824 bytes final added workspace. Both stage receipts, artifact identities and one-attempt histories were unchanged. Its owned-process receipt also reported zero living descendants.
+See [`results/2026-10-14-synthetic-cpu/README.md`](../../results/2026-10-14-synthetic-cpu/README.md) for the recorded timings, memory observations, and generated report artifacts.

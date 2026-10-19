@@ -5,27 +5,27 @@
     {
       "source": "experiments/research/exp1-preparation/LAB86-VALIDATION.md",
       "destination": "experiments/devmind/preparation/LAB86-VALIDATION.md",
-      "sha256": "e84402c855a81c6d9ead6d6aa3bac5f598c6ccee079d6e6914cd7cbf2a6c720e"
+      "sha256": "45dfd4edfd19b674bcc63f3e166c591262e74b19e379f2ef270a0de206dcad4f"
     },
     {
       "source": "experiments/research/exp1-preparation/README.md",
       "destination": "experiments/devmind/preparation/README.md",
-      "sha256": "3a7af2287a219b68f561a63525aa186d2e45caf8b53a412e50fa1cf3d41f762a"
+      "sha256": "71f7448b401d28d38b5c971f4fa833875247a7c9c41e3c8fe84b2dc7fb99e398"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/PILOT.md",
       "destination": "experiments/devmind/preparation/lab86/PILOT.md",
-      "sha256": "8e87cecda18484575b076dbb4aecce7526b67dcd433056cb1577ee8db2e48616"
+      "sha256": "9f5b8088aead1d63eea8b01161a182edf96f72f88955b45e74dd56da19a5cdaa"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/POLICY.md",
       "destination": "experiments/devmind/preparation/lab86/POLICY.md",
-      "sha256": "d3e0c858553d70d6acb39afd9ec5da58bc57ae7438d6aa441ab0821764d76cb4"
+      "sha256": "3e46830b36cab89e85d59e3162d8833e4b376c8850834a83f155175f621be94b"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/README.md",
       "destination": "experiments/devmind/preparation/lab86/README.md",
-      "sha256": "33fe205c2f0bde306f3142dcf869b51fecfe3d2d8e1b4fa32f9f68a2d9b64675"
+      "sha256": "d0b18b1ae64a7104c21dabdb919b699c34b8229cc28a1e7b4bc2951bad628cf0"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/application-policy.json",

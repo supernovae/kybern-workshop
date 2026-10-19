@@ -3,8 +3,8 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "bc2ae6ddd992cc87c6f0d401ba4ac290a6d6c587f159d9b34cd2bcecf097878e",
-      "bytes": 3435
+      "sha256": "31a3168b80c3aa33f01ec3b91563da323d00638966dec15da55db621a2421baa",
+      "bytes": 3017
     },
     {
       "path": "commands.json",
@@ -168,8 +168,8 @@
     },
     {
       "path": "review.md",
-      "sha256": "a041348ec7deb559f5e3a9c0cc213ecd3fc350d85be299cad2a64d0fc962d00d",
-      "bytes": 31465
+      "sha256": "3ba4a78d5530f0572e9057fd41e8aef5a2f46d1250a3adb6fa65400cd8556715",
+      "bytes": 30900
     },
     {
       "path": "run-closure-index.json",
