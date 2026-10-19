@@ -4,7 +4,9 @@
 
 This recipe documents a completed [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab) training run on CPU: **8,192 updates (33,554,432 target tokens)** on a 4.46M-parameter dense transformer, including verified full-state checkpoints, held-out evaluation, and 27 generated story continuations.
 
-**Why this baseline is interesting:** Validation loss dropped smoothly from `8.369` to `1.704` (perplexity `5.498`), and 17 of 24 full-length outputs reach a recognizable story ending—yet **only 2 of 24 pass our strict story-quality rubric**. The model frequently falls into repetition loops, swaps character names, or drifts away from the opening prompt. We publish the full configuration and all 27 unedited outputs as a concrete, reproducible baseline you can inspect and improve.
+**Why this baseline is interesting:** Validation loss dropped smoothly from `8.369` to `1.704` (perplexity `5.498`), and 17 of 24 full-length outputs reach a recognizable story ending—yet **only 2 of 24 pass the provisional assistant-scored story-quality rubric**. The model frequently falls into repetition loops, swaps character names, or drifts away from the opening prompt. We publish the full configuration and all 27 unedited outputs as a concrete, reproducible baseline you can inspect and improve.
+
+The 24 scored outputs come from 12 prompts with greedy and sampled decoding. These judgments are not independent human quality clearance; the [per-output assessment](../../results/2026-10-19-tinystories-cpu/quality-assessment.json) preserves the rubric and limitations. The held-out prompts were excluded from model selection, but train-disjointness has not been audited. The run history includes failed setup steps and a host interruption. Model weights are retained locally, not distributed here; the checkpoint hashes identify historical artifacts, not downloadable weights. A reproduction trains its own model and creates new run and checkpoint identities.
 
 For a fast 40-update starter comparison, see the [TinyStories microlab](../tinystories-microlab/README.md).
 
@@ -29,7 +31,7 @@ For a fast 40-update starter comparison, see the [TinyStories microlab](../tinys
 
 ## How to Replicate This Run with `sparselab`
 
-Choose a fresh external workspace directory `WORK` outside Git, set `SOURCE` to this directory (`examples/tinystories-useful`), and pick unique run IDs (`FIRST_RUN_ID` and `CONTINUED_RUN_ID`).
+Choose a fresh external workspace directory `WORK` outside Git, set `SOURCE` to this directory (`examples/tinystories-useful`), and pick unique run IDs (`FIRST_RUN_ID` and `CONTINUED_RUN_ID`). Use absolute paths for `WORK` and `SOURCE`, create `WORK` before proceeding, and use the [Lab installation setup](../../README.md#running-workshop-experiments-with-tiny-sparse-lab) for your selected backend. The table above records the historical execution environment; running current Lab creates a new reproduction, not a re-verification of those retained checkpoint bytes.
 
 ### 1. Lock the Dataset and Package the Preparation Recipe
 
@@ -105,7 +107,7 @@ sparselab train "$WORK/continued.yaml" --backend cpu --runs-dir "$WORK/runs" \
 
 ### 3. Verify, Evaluate, and Generate Stories
 
-Once training completes at step 8,192, verify the final checkpoint (`GENERATION` / basename `CHECKPOINT`), run held-out evaluation, and generate continuations across the 12 prompts in [`prompts.txt`](prompts.txt):
+Once training completes at step 8,192, set `RUN_ID="$CONTINUED_RUN_ID"`. Inspect its `latest.json`, then set `CHECKPOINT` to the immutable generation basename reported by inspection and `GENERATION="$WORK/runs/$RUN_ID/checkpoints/$CHECKPOINT"`. Use the generation from your own completed run; do not substitute the published run’s generation name. Verify that checkpoint, run held-out evaluation, and generate continuations across the 12 prompts in [`prompts.txt`](prompts.txt):
 
 ```sh
 sparselab checkpoint inspect "$WORK/runs/$RUN_ID/checkpoints/latest.json" --json
