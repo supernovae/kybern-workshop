@@ -1,0 +1,78 @@
+{
+  "schema": 2,
+  "job_id": "${JOB_ID}",
+  "card_id": "LAB86",
+  "approval": {
+    "owner": "${APPROVAL_OWNER}",
+    "reference": "${APPROVAL_REFERENCE}",
+    "approved_wall_seconds": 600
+  },
+  "source": {
+    "path": "${LAB_ROOT}",
+    "commit": "${LAB_COMMIT}"
+  },
+  "cwd": "${LAB_ROOT}/src",
+  "output_root": "${RECEIPT_ROOT}/${SESSION_ID}/A",
+  "argv": [
+    "/opt/venv/bin/python",
+    "-B",
+    "-m",
+    "sparselab",
+    "--work-dir",
+    "${STATE_ROOT}",
+    "corpus",
+    "preview",
+    "${STATE_ROOT}/preview.json",
+    "--input-root",
+    "/inputs",
+    "--output",
+    "${RECEIPT_ROOT}/${SESSION_ID}/A/${JOB_ID}/artifacts/preview"
+  ],
+  "runtime": {
+    "python": "3.14.4",
+    "executable_sha256": "18e5076d335579021f66100894222c763322c2a84c8eb78ad572e099b37de56f",
+    "venv": {
+      "root": "/opt/venv",
+      "invocation": "/opt/venv/bin/python",
+      "target": "/usr/local/bin/python3.14",
+      "links": {
+        "/opt/venv/bin/python": "/usr/local/bin/python3.14"
+      },
+      "config_sha256": "5a7804e0ae5fa4fd3937129b71f165cd018dc590b160af4773ee0278bab24f40"
+    }
+  },
+  "required_files": {
+    "${STATE_ROOT}/preview.json": "${PREVIEW_SHA256}",
+    "${LAB_ROOT}/src/sparselab/corpus/preview.py": "${PREVIEW_MODULE_SHA256}",
+    "${LAB_ROOT}/uv.lock": "${LAB_LOCK_SHA256}"
+  },
+  "wrap": null,
+  "environment": {
+    "SPARSELAB_WORK_DIR": "${STATE_ROOT}",
+    "SPARSELAB_WORKER_LEASE_DIR": "${STATE_ROOT}/worker-leases",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "CUDA_VISIBLE_DEVICES": "",
+    "HF_HUB_OFFLINE": "1",
+    "HF_DATASETS_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "UV_OFFLINE": "1",
+    "HF_HOME": "${STATE_ROOT}/hf_home",
+    "HF_HUB_CACHE": "${STATE_ROOT}/hf_hub_cache",
+    "HF_DATASETS_CACHE": "${STATE_ROOT}/hf_datasets_cache",
+    "TMPDIR": "${STATE_ROOT}/tmpdir",
+    "XDG_CACHE_HOME": "${STATE_ROOT}/xdg_cache_home"
+  },
+  "environment_profile": "preparation-offline",
+  "limits": {
+    "wall_seconds": 540,
+    "log_bytes": 1048576,
+    "artifact_bytes": 4194304,
+    "artifact_entries": 100,
+    "memory": {
+      "mode": "observe_rss",
+      "max_bytes": 2147483648
+    }
+  }
+}

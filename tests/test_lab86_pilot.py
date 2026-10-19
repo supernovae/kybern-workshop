@@ -74,6 +74,24 @@ class PilotDeclarations(unittest.TestCase):
             visit(value)
         self.assertEqual(count, 6)
 
+    def test_preview_session_job_contract_is_consistent(self):
+        session = read("preview-session.template.json")
+        job = read("preview-job.template.json")
+        slot = session["slots"][0]
+        self.assertEqual(len(session["slots"]), 1)
+        for key in ["argv", "environment", "environment_profile"]:
+            self.assertEqual(job[key], slot[key])
+        self.assertEqual(job["approval"], session["approval"])
+        self.assertEqual(job["card_id"], session["card_id"])
+        self.assertEqual(job["runtime"].get("venv"), session["runtime_venv"])
+        self.assertEqual(job["limits"]["memory"], session["limits"]["rss"])
+        self.assertEqual(job["limits"]["wall_seconds"], slot["allowance_seconds"])
+        self.assertLess(slot["allowance_seconds"] + session["limits"]["shutdown_reserve_seconds"], session["limits"]["wall_seconds"])
+        self.assertEqual(session["execution_policy"]["network"], "none")
+        self.assertEqual(session["limits"]["storage"]["aggregate_bytes"], 64 * 1024**2)
+        self.assertEqual(job["cwd"], "${LAB_ROOT}/src")
+        self.assertIn("/inputs", job["argv"])
+
     def test_package_and_migration_hashes(self):
         manifest = read("package-sha256.json")
         self.assertIn("project-pilot-acquire.json", manifest)
@@ -133,3 +151,48 @@ class NativePilotLedger(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+@unittest.skipUnless(os.environ.get("WORKSHOP_LAB_CHECKOUT"), "requires preview-capable Lab")
+class NativePreview(unittest.TestCase):
+    def test_render_compile_and_tiny_three_source_preview(self):
+        sys.path.insert(0, str(Path(os.environ["WORKSHOP_LAB_CHECKOUT"]) / "src"))
+        from sparselab.corpus.declaration_render import render_declaration
+        from sparselab.corpus.preview import Preview, preview
+        from sparselab.training.preparation import compile_phase
+        from sparselab.training.manifest import canonical_json
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            rendered = root / "rendered.json"
+            values = {sid.upper() + "_MANIFEST_SHA256": "b" * 64 for sid in
+                      ["lab86_000_web", "lab86_001_synthetic", "lab86_002_code"]}
+            render_declaration(PACKAGE / "preview.template.json", json.dumps(values), rendered, root)
+            spec = json.loads(rendered.read_text())
+            Preview.model_validate(spec)
+            self.assertEqual(spec["max_read_bytes"], 16 * 1024**3)
+            # Explicit fixture substitutions: actual snapshots are never opened.
+            for source in spec["sources"]:
+                for key in ["manifest", "data"]:
+                    path = root / source[key]["path"]
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    if key == "manifest": payload = b'{"fixture":true}'
+                    else:
+                        row = {"text": "tiny fixture"}
+                        row["_sparselab_source"] = {"source_row_index": 0,
+                            "source_row_sha256": hashlib.sha256(canonical_json(row)).hexdigest()}
+                        payload = canonical_json(row) + b"\n"
+                    path.write_bytes(payload)
+                    source[key]["bytes"] = len(payload)
+                    source[key]["sha256"] = hashlib.sha256(payload).hexdigest()
+            fixture = root / "fixture.json"
+            fixture.write_text(json.dumps(spec))
+            compiled = compile_phase(PACKAGE.parent / "preparation.json", root / "attempt", "pilot-preview", {
+                "PILOT_PREVIEW_DECLARATION": str(fixture), "PILOT_PREVIEW_INPUT_ROOT": str(root)})
+            self.assertEqual(compiled["args"][:2], ["corpus", "preview"])
+            output = Path(compiled["leaf"])
+            output.parent.mkdir(parents=True)
+            result = preview(fixture, root, output)
+            self.assertEqual(result["status"], "complete")
+            receipt = json.loads((output / "report.json").read_text())
+            self.assertEqual(len(receipt["sources"]), 3)
+            self.assertFalse(receipt["admission"])
