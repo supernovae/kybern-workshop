@@ -1,6 +1,6 @@
 {
   "purpose": "LAB86 initial pilot acquisition only; no gate release or model work",
-  "acquisition_project_file_sha256": "c1e7e031aa9ed81a8304c7fc1e77afdd89ae4ed4dd8eb3c3b18400725d235ba8",
+  "acquisition_project_file_sha256": "daf6ae234fbf8c882cf628e345c811b6e8e33e3db8007b27fb20069a1a8025ba",
   "policy_sha256": "fc58397302ecc28f973d09c0a922fde390feab400201c2d6e888b12cf4c3cbfb",
   "phase_plan_sha256": "af54055489d43ec2598293d963e15f58c715ebe75ef60cfd73261a9c9f5ee1b5",
   "initial_body_bytes": 4294967296,
