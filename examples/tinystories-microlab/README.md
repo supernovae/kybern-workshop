@@ -13,6 +13,11 @@ Workshop Python, Harness, bot, Notion account or website is required. The
 for the website's meaningful model requirement; do not promote this teaching
 run merely because its commands succeed.
 
+The separate [longer CPU learning baseline](../tinystories-useful/README.md)
+completed 8,192 updates and published all 27 final outputs. Its original story-quality
+gate failed; publication now presents a working baseline with known shortcomings.
+This does not change the unexecuted status of the 40-update comparison here.
+
 ## Runtime and provenance
 
 Use an existing installed Lab environment compatible with the recorded source

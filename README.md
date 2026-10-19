@@ -15,15 +15,16 @@ runner integration; its helpers are tracked in the [ownership audit](docs/owners
 
 | Project | What you'll learn | Readiness | Start here |
 | --- | --- | --- | --- |
-| TinyStories microlab | Compare FFN width 256 versus 384 using native Lab commands; inspect a separate usable-story validation proposal. | Declarations and metadata checks complete; this recipe and its story-quality proposal are unexecuted. | [Native run guide](examples/tinystories-microlab/README.md) · [Historical smaller CPU smoke](results/2026-10-15-tinystories-smoke/README.md) |
+| TinyStories microlab | Compare FFN width 256 versus 384 using native Lab commands; inspect a completed longer CPU learning baseline. | 40-update comparison remains unexecuted; the separate 8,192-update baseline completed with a failed story-quality gate. | [Native run guide](examples/tinystories-microlab/README.md) · [Historical smaller CPU smoke](results/2026-10-15-tinystories-smoke/README.md) |
 | Synthetic CPU | Prepare synthetic text and a tokenizer, approve one tiny training attempt, evaluate it and verify a report. No corpus or model download. | Measured end to end at its recorded pins, including replay with no new attempt. Demonstrates workflow wiring, not model quality. | [Run guide](examples/synthetic-cpu/README.md) · [Recorded result](results/2026-10-14-synthetic-cpu/README.md) |
 
 For a basic CPU introduction, start with [synthetic CPU](examples/synthetic-cpu/README.md)
 and its [current metadata route](docs/native-workflow.md). For stories, use the [native TinyStories microlab](examples/tinystories-microlab/README.md).
 Its 40-update teaching comparison is distinct from the measured width-32 CPU smoke.
-The [usable-story proposal](examples/tinystories-microlab/usable-story-proposal.md)
-requires verified retained model artifacts and fresh CPU quality evidence; neither
-metadata checks nor a successful tiny run establish useful story generation.
+The [longer CPU learning baseline](examples/tinystories-useful/README.md) now has
+[all 27 recorded outputs](results/2026-10-19-tinystories-cpu/README.md), immutable
+checkpoint/source identities and measured budgets. Its original story-quality gate
+failed; it is published to support reproducible learning and future improvement.
 
 ## Authored experiments
 

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "name": "tinystories-useful-cpu-v1",
+  "seed": 42,
+  "model": {
+    "vocab_size": 4096,
+    "hidden_dim": 256,
+    "num_layers": 4,
+    "num_heads": 4,
+    "ffn_dim": 768,
+    "max_seq_len": 512
+  },
+  "tokenizer": {
+    "path": "tokenizer/tokenizer.json"
+  },
+  "dataset": {
+    "source": "snapshot",
+    "revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+    "dataset_config": "default",
+    "cache_dir": "data",
+    "train_path": "snapshot/train.jsonl",
+    "validation_path": "snapshot/validation.jsonl",
+    "source_manifest_path": "snapshot/manifest.json",
+    "license": "CDLA-Sharing-1.0",
+    "train_max_documents": 50000,
+    "validation_max_documents": 512,
+    "train_max_tokens": 16000000,
+    "validation_max_tokens": 131072
+  },
+  "training": {
+    "seq_len": 256,
+    "micro_batch_size": 4,
+    "gradient_accumulation": 4,
+    "max_steps": 8192,
+    "max_tokens": 33554432,
+    "deterministic": true
+  },
+  "optimizer": {
+    "name": "adamw",
+    "peak": 0.0006,
+    "floor": 6e-05,
+    "warmup_steps": 256
+  },
+  "runtime": {
+    "engine": "pytorch",
+    "backend": "cpu",
+    "precision": "fp32"
+  },
+  "checkpoint": {
+    "every_steps": 1024,
+    "keep_periodic": false
+  },
+  "evaluation": {
+    "every_steps": 1024,
+    "max_batches": 16
+  },
+  "logging": {
+    "root_dir": "runs",
+    "every_steps": 16
+  },
+  "staging": {
+    "smoke_steps": 2,
+    "warmup_steps": 5
+  }
+}
