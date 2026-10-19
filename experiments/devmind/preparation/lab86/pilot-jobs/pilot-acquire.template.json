@@ -41,7 +41,7 @@
     "--baseline",
     "${HOST_WORK_ROOT}/baseline.json",
     "--content-identity-sha256",
-    "800d0ab6c5189008e7ff4441055c3ab368cdad896b173a83b0615227865302a0"
+    "568ca9fcd4bb5fb3fe53205eafe4ab7fb591976edd62ce63d91398befad22d5d"
   ],
   "runtime": "${HOST_RUNTIME_OBJECT}",
   "required_files": "${HOST_REQUIRED_FILES_OBJECT}",

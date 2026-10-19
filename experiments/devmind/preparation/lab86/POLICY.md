@@ -1,12 +1,10 @@
-# LAB86 private preparation policy v1
+# DevMind corpus preparation policy
 
-Authority provenance: owner approvals recorded on canonical LAB86,
-https://app.notion.com/p/3fb3b68cca2281a5a68fc549ca0c62d6 (2026-10-17 04:09 UTC;
-configuration assembly reaffirmed 04:55 UTC). This document records that scope;
-it does not grant authority, release a gate, accept terms, or clear LAB39/LAB70.
+This policy defines data-handling and reproducibility constraints. It does not
+grant permission to acquire data, accept source terms, or release a review gate.
 
-Use only the pinned candidate shards in shards.json. The first three are the
-approved feasibility pilot. Remaining compressed byte allocations are operational
+Use only the pinned candidate shards in shards.json. The first three define the
+feasibility pilot. Remaining compressed byte allocations are operational
 bounds, not token ratios or a claim that the pilot represents the entire corpus.
 Stop at the 4 GiB cumulative body gate and retain failed acquisition receipts.
 Continue only on the native report-bound reviewed decision using the same ledger.
@@ -26,7 +24,7 @@ Apache-2.0, BSD-2-Clause, BSD-3-Clause and ISC. Inspect file notices; exclude
 conflicts, absent licenses, vendored/generated content and secrets. Allowed
 languages: Python, JavaScript, TypeScript, Go, Rust, Shell, SQL and Markdown.
 The loader's Apache-2.0 notice is not a blanket license for repository content.
-No external loader execution or unreviewed language derivation is authorized here.
+Do not execute external loaders or infer languages without a reviewed rule.
 
 Use exact/canonical dedup and reviewed cross-source near-duplicate clusters while
 preserving code indentation. Group repositories, seed families and duplicates
@@ -42,7 +40,7 @@ multilingual text and code whitespace. Never borrow validation/test for fitting.
 Measure unique usable TRAIN targets after admission/dedup/splitting/tokenization.
 7.2B/2.4B/2.4B are conditional floors, not available-supply claims. Shuffle native
 mixtures deterministically without replacement (max_exposures=1). Pack native
-int32 tokens at sequence length 2048. No model steps or inference are authorized.
+int32 tokens at sequence length 2048. This preparation contract excludes model training and inference.
 
 48 hours includes operator waits and cleanup. At most eight CPU threads; native
 library thread settings are one. 16 GiB RSS is sampled observation with stop,
@@ -51,5 +49,3 @@ includes retained inputs/intermediates/caches/receipts. Parquet expanded byte
 measurement is unsupported; do not claim it is bounded by compressed bytes.
 A 5M-row prefix and 8 GiB emitted JSONL ceiling per shard are conservative maximums,
 not observed counts. Record any cutoff/shortfall; do not claim whole-shard coverage.
-No package installation, model/corpus download, registry action or runner job was
-performed to assemble this package.
