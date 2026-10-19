@@ -104,7 +104,7 @@ class NativePilotLedger(unittest.TestCase):
         full = self.load(PACKAGE / "project-acquire.yaml")
         self.assertEqual(self.project.config.transport_budget, full.config.transport_budget)
         selected = {source.id for source in self.project.sources}
-        self.assertEqual(self.project.config.source_effects,
+        self.assertEqual(list(self.project.config.source_effects),
                          [effect for effect in full.config.source_effects if effect.source_id in selected])
         full_ledger = self.budget_type.initialize(Path(self.temp.name) / "full.sqlite", full)
         self.assertEqual(full_ledger.projected_disk_bytes(), 724028121832)
