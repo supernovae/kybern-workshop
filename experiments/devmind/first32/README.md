@@ -70,3 +70,7 @@ BPE vocabulary, 6,000 fit bytes and 300 training targets, then reaches a cold
 prepared bundle. It performs no model execution and proves no real-data capacity
 or model quality. The production values remain 98/1/1, 32,768 vocabulary,
 32 MiB fit and 4,194,304 targets.
+
+The generated-fixture test also hides all original parent, recipe, mixture and
+cache paths before cold-verifying and copying the sealed prepared bundle. This
+checks the runner handoff boundary without executing a model.

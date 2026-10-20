@@ -163,6 +163,14 @@ class ConnectedFirst32(unittest.TestCase):
             materialize_prepared_inputs(config, bundle, tokenizer_batch_source_bytes=1024, verification_mode="cold")
             verify_prepared_inputs(bundle, config, verification_mode="cold")
             self.assertTrue((bundle / "inputs.json").is_file())
+            # The GPU handoff must not reopen controller-only parents or recipe paths.
+            for name in ("recipe", "parents", "corpora", "mixture", "cache"):
+                (root / name).rename(root / (name + "-unavailable"))
+            verify_prepared_inputs(bundle, config, verification_mode="cold")
+            detached = root / "detached-prepared"
+            materialize_prepared_inputs(config, detached, prepared_inputs=bundle,
+                                        verification_mode="cold")
+            verify_prepared_inputs(detached, config, verification_mode="cold")
 
 if __name__ == "__main__":
     unittest.main()
