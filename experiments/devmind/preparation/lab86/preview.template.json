@@ -1,0 +1,57 @@
+{
+  "format": "sparselab-corpus-preview-v1",
+  "seed": "lab86-pinned-preview-v1",
+  "sources": [
+    {
+      "source_id": "lab86_000_web",
+      "snapshot_sha256": "a1eab5f4fa4205b9fa53c12244b8244ab6b04bf3c74799682d121962d393e542",
+      "manifest": {
+        "path": "corpora/lab86-fresh-exp1-v1/snapshots/lab86_000_web/a1eab5f4fa4205b9fa53c12244b8244ab6b04bf3c74799682d121962d393e542/manifest.json",
+        "sha256": "${LAB86_000_WEB_MANIFEST_SHA256}",
+        "bytes": 161616824
+      },
+      "data": {
+        "path": "corpora/lab86-fresh-exp1-v1/snapshots/lab86_000_web/a1eab5f4fa4205b9fa53c12244b8244ab6b04bf3c74799682d121962d393e542/files/fineweb-edu-dedup/train-00068-of-00234.parquet.sample.jsonl",
+        "sha256": "9d8fa4897c57a9a4732c6e25c8630715c086bc2b0450bc25eab3b9e17522098d",
+        "bytes": 4352505620
+      },
+      "text_field": "text"
+    },
+    {
+      "source_id": "lab86_001_synthetic",
+      "snapshot_sha256": "3daccb64a3f1f36646b6f466da0121e945e642914fb3205323dfe9fe2c307316",
+      "manifest": {
+        "path": "corpora/lab86-fresh-exp1-v1/snapshots/lab86_001_synthetic/3daccb64a3f1f36646b6f466da0121e945e642914fb3205323dfe9fe2c307316/manifest.json",
+        "sha256": "${LAB86_001_SYNTHETIC_MANIFEST_SHA256}",
+        "bytes": 74774489
+      },
+      "data": {
+        "path": "corpora/lab86-fresh-exp1-v1/snapshots/lab86_001_synthetic/3daccb64a3f1f36646b6f466da0121e945e642914fb3205323dfe9fe2c307316/files/cosmopedia-v2/train-00000-of-00104.parquet.sample.jsonl",
+        "sha256": "f3e7e1c54de9ae257a919f4cb6581de51b0b0a92dceddfdf1c6dfc8f50f929bf",
+        "bytes": 2214112808
+      },
+      "text_field": "text"
+    },
+    {
+      "source_id": "lab86_002_code",
+      "snapshot_sha256": "59ba589f53e99f8d56f40e4e5fbccf817780cd16ac6984195aefc2bff0b58cfe",
+      "manifest": {
+        "path": "corpora/lab86-fresh-exp1-v1/snapshots/lab86_002_code/59ba589f53e99f8d56f40e4e5fbccf817780cd16ac6984195aefc2bff0b58cfe/manifest.json",
+        "sha256": "${LAB86_002_CODE_MANIFEST_SHA256}",
+        "bytes": 25151166
+      },
+      "data": {
+        "path": "corpora/lab86-fresh-exp1-v1/snapshots/lab86_002_code/59ba589f53e99f8d56f40e4e5fbccf817780cd16ac6984195aefc2bff0b58cfe/files/data/train-00570-of-00880.parquet.sample.jsonl",
+        "sha256": "2dfbff4611958015f10123679b90d3234e8a4b8df7f9f7c6d63d810fde9489d6",
+        "bytes": 1125363458
+      },
+      "text_field": "code"
+    }
+  ],
+  "max_read_bytes": 17179869184,
+  "max_record_bytes": 8388608,
+  "samples_per_source": 12,
+  "max_excerpt_bytes": 1024,
+  "max_output_bytes": 2097152,
+  "max_wall_seconds": 530
+}

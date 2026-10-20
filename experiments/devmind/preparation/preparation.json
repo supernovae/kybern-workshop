@@ -28,6 +28,18 @@
         "${ACQUISITION_PROJECT}"
       ]
     },
+    "pilot-preview": {
+      "leaf": "pilot-preview",
+      "args": [
+        "corpus",
+        "preview",
+        "${PILOT_PREVIEW_DECLARATION}",
+        "--input-root",
+        "${PILOT_PREVIEW_INPUT_ROOT}",
+        "--output",
+        "@pilot-preview"
+      ]
+    },
     "pilot-reuse": {
       "leaf": null,
       "args": [

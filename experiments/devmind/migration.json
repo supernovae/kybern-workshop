@@ -17,7 +17,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/PILOT.md",
       "destination": "experiments/devmind/preparation/lab86/PILOT.md",
-      "sha256": "f9b689f96291458e5c7a6db765d6126ebcfb88a22782801f1154149b92921b1b",
+      "sha256": "1133b08f34f8c83fe22b0a926e422cda2728b6673073f171810698f7fecb28bf",
       "source_sha256": "8e87cecda18484575b076dbb4aecce7526b67dcd433056cb1577ee8db2e48616"
     },
     {
@@ -211,7 +211,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/package-sha256.json",
       "destination": "experiments/devmind/preparation/lab86/package-sha256.json",
-      "sha256": "cdf460e1c8d68ed57c698024954924bc4064a6089782d65acf22d219ee459e2b",
+      "sha256": "cb75147aab7d6bb3790bfe91ce11df2b3a2d4a5066d589b64920fed98863a098",
       "source_sha256": "28d29764170bcc3dfcb5037a707b1cd4bffd08d8749fdae9b02561edf8a9ec5b"
     },
     {
@@ -754,7 +754,8 @@
     {
       "source": "experiments/research/exp1-preparation/preparation.json",
       "destination": "experiments/devmind/preparation/preparation.json",
-      "sha256": "af54055489d43ec2598293d963e15f58c715ebe75ef60cfd73261a9c9f5ee1b5"
+      "sha256": "584ff66382a9617c6b20168ceab03ee12917377e6bde4ef1a365458ed0ec807c",
+      "source_sha256": "af54055489d43ec2598293d963e15f58c715ebe75ef60cfd73261a9c9f5ee1b5"
     }
   ],
   "hash_semantics": {

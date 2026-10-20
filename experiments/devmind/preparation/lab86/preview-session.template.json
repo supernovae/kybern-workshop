@@ -1,0 +1,109 @@
+{
+  "schema": 4,
+  "session_id": "${SESSION_ID}",
+  "card_id": "LAB86",
+  "approval": {
+    "owner": "${APPROVAL_OWNER}",
+    "reference": "${APPROVAL_REFERENCE}",
+    "approved_wall_seconds": 600
+  },
+  "python": "3.14.4",
+  "boot_id": "${BOOT_ID}",
+  "runtime_sha256": "18e5076d335579021f66100894222c763322c2a84c8eb78ad572e099b37de56f",
+  "source_paths": [
+    "${HARNESS_ROOT}",
+    "${LAB_ROOT}",
+    "${WORKSHOP_ROOT}"
+  ],
+  "roots": {
+    "A": "${STATE_ROOT}"
+  },
+  "receipt_root": "${RECEIPT_ROOT}",
+  "limits": {
+    "wall_seconds": 600,
+    "shutdown_reserve_seconds": 30,
+    "rss": {
+      "mode": "observe_rss",
+      "max_bytes": 2147483648
+    },
+    "storage": {
+      "mode": "observe_retained",
+      "root_bytes": {
+        "A": 58720256
+      },
+      "aggregate_bytes": 67108864,
+      "shared_overhead_bytes": 8388608
+    },
+    "scan_entries": 10000,
+    "scan_seconds": 10,
+    "capture_bytes": 1048576
+  },
+  "slots": [
+    {
+      "id": "preview",
+      "root": "A",
+      "step": "preparation",
+      "allowance_seconds": 540,
+      "retained_allowance_bytes": 8388608,
+      "captures": [],
+      "environment_profile": "preparation-offline",
+      "argv": [
+        "/opt/venv/bin/python",
+        "-B",
+        "-m",
+        "sparselab",
+        "--work-dir",
+        "${STATE_ROOT}",
+        "corpus",
+        "preview",
+        "${STATE_ROOT}/preview.json",
+        "--input-root",
+        "/inputs",
+        "--output",
+        "${RECEIPT_ROOT}/${SESSION_ID}/A/${JOB_ID}/artifacts/preview"
+      ],
+      "environment": {
+        "SPARSELAB_WORK_DIR": "${STATE_ROOT}",
+        "SPARSELAB_WORKER_LEASE_DIR": "${STATE_ROOT}/worker-leases",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "CUDA_VISIBLE_DEVICES": "",
+        "HF_HUB_OFFLINE": "1",
+        "HF_DATASETS_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "UV_OFFLINE": "1",
+        "HF_HOME": "${STATE_ROOT}/hf_home",
+        "HF_HUB_CACHE": "${STATE_ROOT}/hf_hub_cache",
+        "HF_DATASETS_CACHE": "${STATE_ROOT}/hf_datasets_cache",
+        "TMPDIR": "${STATE_ROOT}/tmpdir",
+        "XDG_CACHE_HOME": "${STATE_ROOT}/xdg_cache_home"
+      }
+    }
+  ],
+  "execution_policy": {
+    "version": 1,
+    "image": "ghcr.io/supernovae/tiny-sparse-lab@sha256:e3356de49998903e5f03ee2cb28a9b33a5270d380d65d1ceb6fe195531ea812c",
+    "image_source_commit": "7a517b2c065426748cd99702e82ea377877a7809",
+    "cpus": 2,
+    "network": "none",
+    "headroom": {
+      "total_memory_bytes": 4294967296,
+      "admission_memory_bytes": 3221225472,
+      "stop_memory_bytes": 1073741824,
+      "admission_disk_bytes": 1073741824,
+      "stop_disk_bytes": 536870912,
+      "admission_inodes": 10000,
+      "stop_inodes": 1000
+    }
+  },
+  "runtime_venv": {
+    "root": "/opt/venv",
+    "invocation": "/opt/venv/bin/python",
+    "target": "/usr/local/bin/python3.14",
+    "links": {
+      "/opt/venv/bin/python": "/usr/local/bin/python3.14"
+    },
+    "config_sha256": "5a7804e0ae5fa4fd3937129b71f165cd018dc590b160af4773ee0278bab24f40"
+  }
+}
