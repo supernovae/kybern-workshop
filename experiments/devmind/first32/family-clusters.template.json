@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "inventory_sha256": "${INVENTORY_SHA256}",
+  "seed": "lab86-first32-splits-v1",
+  "source_strata": {
+    "lab86_000_web": "web",
+    "lab86_001_synthetic": "synthetic",
+    "lab86_002_code": "code"
+  },
+  "split_weights": {
+    "train": 98,
+    "validation": 1,
+    "test": 1
+  },
+  "merges": "${REVIEWED_MERGES_JSON}",
+  "reviewer": "${REVIEWER}",
+  "reviewed_on": "${REVIEW_DATE}"
+}

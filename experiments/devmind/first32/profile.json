@@ -1,0 +1,30 @@
+{
+  "profile_id": "lab86-first32-retained-v1",
+  "status": "requires_rendered_pins_and_verified_preparation",
+  "model_sha256": "47fe3e80dbe99abd53d083f8e0e558e691f102e7be64f247573a89aa61e42107",
+  "selection": {
+    "hash_modulus": 100,
+    "hash_remainders": [
+      0
+    ],
+    "seed": 86,
+    "max_rows": 30000,
+    "max_bytes": 104857600,
+    "max_record_bytes": 262144
+  },
+  "held_out": {
+    "max_documents_per_split": 1000,
+    "max_text_bytes_per_split": 2097152,
+    "min_validation_positions": 65537,
+    "min_test_positions_per_stratum": 2049
+  },
+  "training_targets": 4194304,
+  "target_quotas": {
+    "web": 2516582,
+    "synthetic": 838861,
+    "code": 838861
+  },
+  "max_exposures": 1,
+  "small_run_policy": "validate substantial code changes, not a mandatory rehearsal for later unchanged code",
+  "gpu_launch": "authorized runner handoff only; this package does not launch"
+}

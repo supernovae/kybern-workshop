@@ -1,0 +1,11 @@
+source_strata:
+  lab86_000_web: web
+  lab86_001_synthetic: synthetic
+  lab86_002_code: code
+byte_weights:
+  web: 60
+  synthetic: 20
+  code: 20
+max_fit_bytes: 33554432
+audit_documents_per_stratum: 1000
+max_audit_bytes: 67108864
