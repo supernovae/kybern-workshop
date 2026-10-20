@@ -74,3 +74,10 @@ or model quality. The production values remain 98/1/1, 32,768 vocabulary,
 The generated-fixture test also hides all original parent, recipe, mixture and
 cache paths before cold-verifying and copying the sealed prepared bundle. This
 checks the runner handoff boundary without executing a model.
+
+For supervised subset creation, bind both `acquisition_project_sha256` (the
+rendered project file) and `preparation_acquisition_identity_sha256` (the native
+resolved acquisition identity), paired with `preparation_normalizer`. Source-file
+changes after binding must refuse before reservation. Parent replay scratch belongs
+inside the accounted work area. Validation/test come from this subset's native
+family split, never an independently selected subset presumed disjoint.
