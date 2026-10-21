@@ -48,7 +48,7 @@ receipt and these limits. Do not proceed if any value is missing or out of bound
   have validation and test families, with no family or exact-content leakage.
 
 ```sh
-sparselab corpus describe "$RELEASE" --tokenizer "$TOKENIZER" --json \
+sparselab corpus describe "$RELEASE" --tokenizer "$TOKENIZER" \
   > "$ATTEMPT/held-out-census.json"
 ```
 
