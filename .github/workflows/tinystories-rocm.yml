@@ -1,9 +1,9 @@
 name: TinyStories ROCm recipe fixtures
 on:
   pull_request:
-    paths: ['experiments/devmind/preparation/**', 'experiments/devmind/migration.json', 'examples/tinystories-rocm/**', 'scripts/**', 'tests/**', 'docs/**', 'examples/operator/**', '.github/workflows/tinystories-rocm.yml']
+    paths: ['experiments/devmind/first32/**', 'experiments/devmind/preparation/**', 'experiments/devmind/migration.json', 'examples/tinystories-rocm/**', 'scripts/**', 'tests/**', 'docs/**', 'examples/operator/**', '.github/workflows/tinystories-rocm.yml']
   push:
-    paths: ['experiments/devmind/preparation/**', 'experiments/devmind/migration.json', 'examples/tinystories-rocm/**', 'scripts/**', 'tests/**', 'docs/**', 'examples/operator/**', '.github/workflows/tinystories-rocm.yml']
+    paths: ['experiments/devmind/first32/**', 'experiments/devmind/preparation/**', 'experiments/devmind/migration.json', 'examples/tinystories-rocm/**', 'scripts/**', 'tests/**', 'docs/**', 'examples/operator/**', '.github/workflows/tinystories-rocm.yml']
 permissions:
   contents: read
 jobs:

@@ -7,8 +7,8 @@ It validates recent code changes; do not require another small rehearsal for an
 unchanged-code larger run. No downloads, spend or resource expansion is implied.
 
 Render source templates with the three original retained snapshot paths, snapshot
-SHA256s and exact manifest SHA256s. Historical parents remain read-only. Native
-`corpus acquire project-acquire.yaml` needs the reviewed retained-subset Lab change;
+SHA256s and exact manifest SHA256s. Historical parents remain read-only. Use Tiny Sparse Lab commit `c5961c44bc9ea563a7ea552975321183b22c1ba2`
+(merged PR #204). Native `corpus acquire project-acquire.yaml` uses its retained-subset path;
 `--offline` verifies an existing acquisition and does not create a derivative.
 The selector uses the declared 1% hash rule, unchanged original rows, explicit
 256 KiB long-row exclusion and aggregate 30,000-row/100 MiB refusal limits. Actual
@@ -81,3 +81,9 @@ resolved acquisition identity), paired with `preparation_normalizer`. Source-fil
 changes after binding must refuse before reservation. Parent replay scratch belongs
 inside the accounted work area. Validation/test come from this subset's native
 family split, never an independently selected subset presumed disjoint.
+
+The resolved acquisition identity also binds downstream split inventory, split freeze,
+and build supervision. All three project declarations therefore preserve the same
+project ID and source declarations; reviewed release, split and transform references
+change without changing that acquisition identity. Retained cold replay requires
+writable scratch in the accounted snapshot work area.
