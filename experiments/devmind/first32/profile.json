@@ -16,7 +16,9 @@
     "max_documents_per_split": 1000,
     "max_text_bytes_per_split": 2097152,
     "min_validation_positions": 65537,
-    "min_test_positions_per_stratum": 2049
+    "min_test_positions_per_stratum": 2049,
+    "enforcement": "operator_stop_after_measure_tokens_before_materialize_or_pack",
+    "evidence": "complete-release LM census with fitted tokenizer, parsed-text UTF-8 byte census, realized split-family review"
   },
   "training_targets": 4194304,
   "target_quotas": {

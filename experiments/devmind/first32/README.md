@@ -28,10 +28,40 @@ do not edit the sealed export. Fit/audit TRAIN-only 32,768-vocabulary BPE and re
 unfilled fit/audit quotas. Measure `token-floors.yaml`, materialize the rendered
 mixture and cold-verify it with native commands. No exposures beyond one.
 
-Gate validation/test to at most 1,000 documents and 2 MiB text each; require 65,537
-validation positions and at least 2,049 test positions from each stratum. Preserve
-the complete validation split: native mixture verification binds its actual count
-and rendered-byte budget, not an arbitrary prefix. Test remains sealed.
+The held-out limits in `profile.json` are mandatory **operator stops**, not native
+Lab gates. After `measure-tokens`, and before `materialize-unique` or `pack`, retain
+a held-out inspection record bound to the release ID, tokenizer SHA256, split-freeze
+receipt and these limits. Do not proceed if any value is missing or out of bounds:
+
+- Validation and test each contain at most 1,000 LM records and 2 MiB of normalized
+  text encoded as UTF-8. Count the complete release's `lm/validation.jsonl` and
+  `lm/test.jsonl`, summing the UTF-8 bytes of each parsed `text` value (not the JSON
+  file size or character count). Use an already installed JSON reader; do not trim.
+- Require at least 65,537 validation token positions in total. Test requires at
+  least 2,049 token positions in **each** of web, synthetic and code. Run the native descriptive census below
+  with the fitted tokenizer against the complete release, including its sealed test
+  split. In `measurement.views.lm`, inspect each split's `records` and `actual_tokens`,
+  and test's `dimensions.source_domain.{web,synthetic,code}.actual_tokens`. These
+  counts exclude appended EOS, so applying the same position floors to them is a
+  conservative check. Missing/null counts or a missing stratum stop preparation.
+- Inspect the split-freeze receipt's realized family counts: every stratum must
+  have validation and test families, with no family or exact-content leakage.
+
+```sh
+sparselab corpus describe "$RELEASE" --tokenizer "$TOKENIZER" --json \
+  > "$ATTEMPT/held-out-census.json"
+```
+
+`token-measurements.json` from `measure-tokens` authenticates distinct TRAIN source
+supply; it does **not** contain this held-out census. `token-floors.yaml` enforces
+only its declared native training-token floors. Neither `pack`, `verify-prepared`
+nor `verify-mixture` reads `profile.json` or enforces these operator limits. Retain
+the byte census, family review and explicit pass/stop decision alongside the native
+reports. A failed check stops this profile; do not resample, trim or enlarge caps.
+
+Preserve the complete validation split: native mixture verification binds its actual
+count and rendered-byte budget, not an arbitrary prefix. Test remains sealed for
+model evaluation; the census only measures preparation supply and runs no model.
 
 Bind the final RunConfig to actual mixture train count/tokens, full validation
 count/byte budget, tokenizer, cache and run paths, with `source: local_token_mixture`.
