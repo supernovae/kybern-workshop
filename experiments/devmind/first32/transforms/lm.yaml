@@ -1,0 +1,8 @@
+id: first32_lm
+version: '1'
+kind: lm_text
+parameters: {}
+inputs:
+- lab86_000_web
+- lab86_001_synthetic
+- lab86_002_code

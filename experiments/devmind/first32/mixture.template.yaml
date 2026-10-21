@@ -1,0 +1,15 @@
+schema_version: 1
+release_path: ${RELEASE_PATH}
+tokenizer_config: ${TOKENIZER_CONFIG}
+family_inventory: ${FAMILY_INVENTORY}
+source_strata:
+  lab86_000_web: web
+  lab86_001_synthetic: synthetic
+  lab86_002_code: code
+target_quotas:
+  web: 2516582
+  synthetic: 838861
+  code: 838861
+seed: 86
+max_exposures: 1
+tokenizer_origin_release_id: ${RELEASE_ID}

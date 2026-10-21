@@ -1,0 +1,60 @@
+{
+  "policy_id": "lab86-first32-attribution-v1",
+  "policy_sha256": "a6226b701364b73777357f4a424a045332b574f52ffc5b5887723cde00fceae4",
+  "sources": [
+    {
+      "source_id": "lab86_000_web",
+      "license_label": "Multiple underlying content rights; pinned dataset card claim only",
+      "rights": {
+        "training_eligibility": "eligible_with_obligations",
+        "redistribution_mode": "metadata_reconstruction_only",
+        "license_references": [
+          "https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus/blob/3ba9d605774198c5868892d7a8deda78031a781f/README.md"
+        ],
+        "notices": [
+          "Private first-run use under the separately approved application policy; retain source attribution and explicit restriction evidence."
+        ]
+      },
+      "row_use_policy": {
+        "mode": "record_attribution",
+        "restricted_rows": {}
+      }
+    },
+    {
+      "source_id": "lab86_001_synthetic",
+      "license_label": "Multiple underlying content rights; pinned dataset card claim only",
+      "rights": {
+        "training_eligibility": "eligible_with_obligations",
+        "redistribution_mode": "metadata_reconstruction_only",
+        "license_references": [
+          "https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus/blob/3ba9d605774198c5868892d7a8deda78031a781f/README.md"
+        ],
+        "notices": [
+          "Private first-run use under the separately approved application policy; retain source attribution and explicit restriction evidence."
+        ]
+      },
+      "row_use_policy": {
+        "mode": "record_attribution",
+        "restricted_rows": {}
+      }
+    },
+    {
+      "source_id": "lab86_002_code",
+      "license_label": "Multiple underlying content rights; pinned dataset card claim only",
+      "rights": {
+        "training_eligibility": "eligible_with_obligations",
+        "redistribution_mode": "metadata_reconstruction_only",
+        "license_references": [
+          "https://huggingface.co/datasets/codeparrot/github-code-clean/blob/c48d40f9e70f0196f8236901ee35807f7d6c44c0/README.md"
+        ],
+        "notices": [
+          "Private first-run use under the separately approved application policy; retain source attribution and explicit restriction evidence."
+        ]
+      },
+      "row_use_policy": {
+        "mode": "record_attribution",
+        "restricted_rows": {}
+      }
+    }
+  ]
+}

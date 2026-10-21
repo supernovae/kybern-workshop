@@ -1,0 +1,4 @@
+min_unique_train_tokens_by_domain:
+  web: 2516582
+  synthetic: 838861
+  code: 838861
