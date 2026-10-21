@@ -15,6 +15,15 @@ The selector uses the declared 1% hash rule, unchanged original rows, explicit
 selected counts, qualification, family supply and token floors are unknown until
 measured. Never change seeds, truncate a failing selection or relax caps silently.
 
+Serialized selected-byte allowances are 50 MiB web, 30 MiB synthetic and 20 MiB
+code, totaling the same 100 MiB. Row allowances remain 18,000 / 6,000 / 6,000.
+The prior 60/20/20 MiB allocation stopped at the synthetic source's combined
+row/byte guard after web selected 8,133 rows / 43,361,852 bytes. This redistribution
+uses web headroom; it does not establish the full synthetic total or guarantee
+completion. The fixed selection inputs and original parent pins stay unchanged.
+Changed declaration limits create new truthful acquisition/snapshot identities;
+retain the earlier refusal and child snapshot rather than rewriting their hashes.
+
 Run native admission draft/inspection with `application-policy.json` and POLICY.md;
 record actual inspection/review and explicit restricted rows. Render the reviewed
 release declaration, create split inventory, review duplicate/family merges and

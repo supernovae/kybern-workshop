@@ -26,7 +26,7 @@ acquisition:
   split: train
   text_field: text
   max_rows: 6000
-  max_bytes: 20971520
+  max_bytes: 31457280
   bounded_shards:
   - path: cosmopedia-v2/train-00000-of-00104.parquet
     expected_sha256: 5a25721146377d6e7f288c244e991df93e672b8cc3e535fd4aac5da4cdb1491d
