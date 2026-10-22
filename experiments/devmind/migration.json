@@ -29,7 +29,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/README.md",
       "destination": "experiments/devmind/preparation/lab86/README.md",
-      "sha256": "6c14b1c29b431e5c076ca82bf8a64c30709cca7be0c05ba35f1a43ddc7f5c85c",
+      "sha256": "c5b76049f1d20df5a6f04ce4de9f5224b401a3b4e9830dea68f0c293b9f2580b",
       "source_sha256": "33fe205c2f0bde306f3142dcf869b51fecfe3d2d8e1b4fa32f9f68a2d9b64675"
     },
     {
@@ -211,7 +211,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/package-sha256.json",
       "destination": "experiments/devmind/preparation/lab86/package-sha256.json",
-      "sha256": "cb75147aab7d6bb3790bfe91ce11df2b3a2d4a5066d589b64920fed98863a098",
+      "sha256": "1b659decd4a90e113056bfb7ea7a929b55b046415f1879e91ae7a14894d9bb28",
       "source_sha256": "28d29764170bcc3dfcb5037a707b1cd4bffd08d8749fdae9b02561edf8a9ec5b"
     },
     {
@@ -739,7 +739,8 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/splits-acquire.yaml",
       "destination": "experiments/devmind/preparation/lab86/splits-acquire.yaml",
-      "sha256": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4"
+      "sha256": "0fa6402544db7d2b531a357be438a1046310ec7cf56989f6087f1dd7aa997dec",
+      "source_sha256": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/token-floors.yaml",

@@ -2,7 +2,7 @@
   "../preparation.json": "584ff66382a9617c6b20168ceab03ee12917377e6bde4ef1a365458ed0ec807c",
   "PILOT.md": "1133b08f34f8c83fe22b0a926e422cda2728b6673073f171810698f7fecb28bf",
   "POLICY.md": "fc58397302ecc28f973d09c0a922fde390feab400201c2d6e888b12cf4c3cbfb",
-  "README.md": "6c14b1c29b431e5c076ca82bf8a64c30709cca7be0c05ba35f1a43ddc7f5c85c",
+  "README.md": "c5b76049f1d20df5a6f04ce4de9f5224b401a3b4e9830dea68f0c293b9f2580b",
   "application-policy.json": "d206cc8f8bc9cfeecadd05ca8bb7bd2e15285389ba804a1a76df9e4a12364980",
   "attempt-contract.template.json": "d3239c4879a38f3a4b61ab497d499f6b3b2a4eb9f09c6af8d0829630ac0ef92a",
   "evidence/candidate-catalog.json": "e41ca2c6d365d13d0cd952bca070bb9653708466e186ea256c47449f255fe3a7",
@@ -145,7 +145,7 @@
   "sources/081-code.yaml": "d5ae042a8f23ec963c84f556fb35b6faddba0688f6c85526dfdd36739e350430",
   "sources/082-code.yaml": "0afb1f2c98b25ba3290ec600a12da7576b12742166180e88d97fc0290c0b9d43",
   "sources/083-code.yaml": "cbe35abb6810f1f6984acc75c16b390cf3e4bdcf01b72c7da34d5fecdfe64ed7",
-  "splits-acquire.yaml": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4",
+  "splits-acquire.yaml": "0fa6402544db7d2b531a357be438a1046310ec7cf56989f6087f1dd7aa997dec",
   "token-floors.yaml": "241e20b0bb8a28f9b2bc901ff17490cd516cc7c6b869ad5856964af3a3b429b1",
   "tokenizer-sampling.yaml": "186df94b73b2a0a0c7d3829a0154268b417adff54b71afde9b985d53d13f9c88"
 }
