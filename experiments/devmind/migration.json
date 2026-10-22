@@ -29,7 +29,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/README.md",
       "destination": "experiments/devmind/preparation/lab86/README.md",
-      "sha256": "c5b76049f1d20df5a6f04ce4de9f5224b401a3b4e9830dea68f0c293b9f2580b",
+      "sha256": "6f141e871376cb6391f591fa507e65765566b7b4b90ddd7a4e8d82bfe562b350",
       "source_sha256": "33fe205c2f0bde306f3142dcf869b51fecfe3d2d8e1b4fa32f9f68a2d9b64675"
     },
     {
@@ -211,7 +211,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/package-sha256.json",
       "destination": "experiments/devmind/preparation/lab86/package-sha256.json",
-      "sha256": "1b659decd4a90e113056bfb7ea7a929b55b046415f1879e91ae7a14894d9bb28",
+      "sha256": "102c1d1c9297e8c4b3160f0f083072d875ea22b2a9463a6a232eca4a1f36c1bd",
       "source_sha256": "28d29764170bcc3dfcb5037a707b1cd4bffd08d8749fdae9b02561edf8a9ec5b"
     },
     {
@@ -289,7 +289,8 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/project-pre-freeze.template.yaml",
       "destination": "experiments/devmind/preparation/lab86/project-pre-freeze.template.yaml",
-      "sha256": "9ca3931ba3cbe855519e2f2212779a2ec61442198909fcc4c6e95d9345807377"
+      "sha256": "da89fc87c41e52f3499157a06443fe841e1cdfdfa33a6ef2b36c5e40101b2dde",
+      "source_sha256": "9ca3931ba3cbe855519e2f2212779a2ec61442198909fcc4c6e95d9345807377"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/release-quarantine.yaml",
@@ -739,7 +740,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/splits-acquire.yaml",
       "destination": "experiments/devmind/preparation/lab86/splits-acquire.yaml",
-      "sha256": "0fa6402544db7d2b531a357be438a1046310ec7cf56989f6087f1dd7aa997dec",
+      "sha256": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4",
       "source_sha256": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4"
     },
     {

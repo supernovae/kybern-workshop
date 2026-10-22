@@ -5,32 +5,3 @@ assignments:
   lab86_web: train
   lab86_synthetic: train
   lab86_code: train
-family_fields_by_source:
-  lab86_001_synthetic:
-  - prompt
-  lab86_024_synthetic:
-  - prompt
-  lab86_025_synthetic:
-  - prompt
-  lab86_026_synthetic:
-  - prompt
-  lab86_027_synthetic:
-  - prompt
-  lab86_028_synthetic:
-  - prompt
-  lab86_029_synthetic:
-  - prompt
-  lab86_030_synthetic:
-  - prompt
-  lab86_031_synthetic:
-  - prompt
-  lab86_032_synthetic:
-  - prompt
-  lab86_033_synthetic:
-  - prompt
-  lab86_034_synthetic:
-  - prompt
-  lab86_035_synthetic:
-  - prompt
-  lab86_036_synthetic:
-  - prompt

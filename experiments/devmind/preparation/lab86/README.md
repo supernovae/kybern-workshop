@@ -47,8 +47,10 @@ Use Tiny Sparse Lab commit `7ac454c67b2571d42406454043c1569a725c1d3b`
 ([PR #216](https://github.com/supernovae/tiny-sparse-lab/pull/216)) for this rule.
 Record the exact Lab and Workshop commits in each new preparation receipt.
 
-`splits-acquire.yaml` maps each of the 14 synthetic source IDs to `[prompt]`
-under `family_fields_by_source`. The native inventory hashes the exact original prompt
+`splits-pre-freeze.yaml` maps each of the 14 synthetic source IDs to `[prompt]`
+under `family_fields_by_source`. The full pre-freeze project selects this file;
+acquisition-only declarations keep their original split declaration. The native
+inventory hashes the exact original prompt
 as the sole element of a canonical UTF-8 JSON array and prefixes its SHA-256
 with `synthetic_text-family:`. It does not trim whitespace, fold case, normalize
 Unicode or extract quoted seed excerpts. Identical prompts group together across
@@ -66,8 +68,8 @@ One qualified row missing a selected family field makes the entire native
 freeze refuse; it is not silently dropped or regrouped by `seed_data`. Correct
 its provenance or record an explicit reviewed admission decision before retrying.
 
-The existing cross-split lexical screen is `sparselab corpus near-duplicates
-RELEASE`. It retains rows and shingles in memory and defaults to 100,000
+The existing cross-split lexical screen is
+`sparselab corpus near-duplicates RELEASE`. It retains rows and shingles in memory and defaults to 100,000
 documents / 128 MiB of text, so those defaults do not cover this full corpus.
 Record actual screening coverage and gaps; a cap refusal is not a clear result.
 Any discovered overlap clusters need reviewed merges before training. The prompt
