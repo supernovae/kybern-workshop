@@ -39,3 +39,48 @@ Each shard declaration scans up to 5M rows and caps emitted JSONL at 8 GiB. See 
 - **Memory:** 24 GiB available host RAM required at start (4 GiB minimum free floor); 16 GiB observed RSS limit.
 - **Disk:** 310 GiB free disk space and 100,000 free inodes required at start; 300 GiB retained workspace ceiling (including a 64 MiB shared evidence reserve).
 - **CPU:** Up to 8 CPU threads, single-threaded BLAS/OpenMP library settings, no GPU required for corpus preparation.
+
+
+## Reproducing the synthetic split families
+
+Use Tiny Sparse Lab commit `7ac454c67b2571d42406454043c1569a725c1d3b`
+([PR #216](https://github.com/supernovae/tiny-sparse-lab/pull/216)) for this rule.
+Record the exact Lab and Workshop commits in each new preparation receipt.
+
+`splits-pre-freeze.yaml` maps each of the 14 synthetic source IDs to `[prompt]`
+under `family_fields_by_source`. The full pre-freeze project selects this file;
+acquisition-only declarations keep their original split declaration. The native
+inventory hashes the exact original prompt
+as the sole element of a canonical UTF-8 JSON array and prefixes its SHA-256
+with `synthetic_text-family:`. It does not trim whitespace, fold case, normalize
+Unicode or extract quoted seed excerpts. Identical prompts group together across
+shards, regardless of the dataset label in `seed_data`.
+
+The acquired source declarations and checksums remain unchanged. `seed_data`,
+prompt, audience and format stay retained as original provenance. In inspected
+Cosmopedia records, `seed_data` was a dataset label and prompts contained quoted
+seed excerpts; the retained schema has no separate authenticated source-seed ID.
+This explicit prompt-family rule is the reproducible grouping used for this
+experiment. Different prompts can share an underlying seed, so these held-out
+splits do not establish original-seed independence.
+
+One qualified row missing a selected family field makes the entire native
+freeze refuse; it is not silently dropped or regrouped by `seed_data`. Correct
+its provenance or record an explicit reviewed admission decision before retrying.
+
+The existing cross-split lexical screen is
+`sparselab corpus near-duplicates RELEASE`. It retains rows and shingles in memory and defaults to 100,000
+documents / 128 MiB of text, so those defaults do not cover this full corpus.
+Record actual screening coverage and gaps; a cap refusal is not a clear result.
+Any discovered overlap clusters need reviewed merges before training. The prompt
+proxy and a lexical screen do not prove original-seed or semantic independence.
+
+Keep the exact Lab and Workshop commits, pinned upstream revisions and shard
+checksums, acquisition/snapshot receipts, reviewed admission and family merges,
+inventory digest, and split seed `lab86-exp1-splits-v1`. The existing 98/1/1 split
+weights, 60/20/20 mixture and unique-target requirements stay declared. Native
+freezing ranks families by SHA-256 of `[seed, stratum, family]`, with the family
+name breaking ties, and allocates deterministic integer counts. Preserve its
+frozen YAML, assignment companion, family inventory and commit receipt together;
+the frozen YAML carries the same field rule for cold replay. Reproduction
+requires the same bytes to remain available and pass their digest checks.

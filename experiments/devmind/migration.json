@@ -29,7 +29,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/README.md",
       "destination": "experiments/devmind/preparation/lab86/README.md",
-      "sha256": "6c14b1c29b431e5c076ca82bf8a64c30709cca7be0c05ba35f1a43ddc7f5c85c",
+      "sha256": "6f141e871376cb6391f591fa507e65765566b7b4b90ddd7a4e8d82bfe562b350",
       "source_sha256": "33fe205c2f0bde306f3142dcf869b51fecfe3d2d8e1b4fa32f9f68a2d9b64675"
     },
     {
@@ -211,7 +211,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/package-sha256.json",
       "destination": "experiments/devmind/preparation/lab86/package-sha256.json",
-      "sha256": "cb75147aab7d6bb3790bfe91ce11df2b3a2d4a5066d589b64920fed98863a098",
+      "sha256": "102c1d1c9297e8c4b3160f0f083072d875ea22b2a9463a6a232eca4a1f36c1bd",
       "source_sha256": "28d29764170bcc3dfcb5037a707b1cd4bffd08d8749fdae9b02561edf8a9ec5b"
     },
     {
@@ -289,7 +289,8 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/project-pre-freeze.template.yaml",
       "destination": "experiments/devmind/preparation/lab86/project-pre-freeze.template.yaml",
-      "sha256": "9ca3931ba3cbe855519e2f2212779a2ec61442198909fcc4c6e95d9345807377"
+      "sha256": "da89fc87c41e52f3499157a06443fe841e1cdfdfa33a6ef2b36c5e40101b2dde",
+      "source_sha256": "9ca3931ba3cbe855519e2f2212779a2ec61442198909fcc4c6e95d9345807377"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/release-quarantine.yaml",
@@ -739,7 +740,8 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/splits-acquire.yaml",
       "destination": "experiments/devmind/preparation/lab86/splits-acquire.yaml",
-      "sha256": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4"
+      "sha256": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4",
+      "source_sha256": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/token-floors.yaml",

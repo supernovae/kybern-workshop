@@ -86,7 +86,7 @@ sources:
 - sources/082-code.yaml
 - sources/083-code.yaml
 transforms: []
-splits: splits-acquire.yaml
+splits: splits-pre-freeze.yaml
 release: ${GENERATED_REVIEWED_RELEASE_DECLARATION}
 source_effects:
 - source_id: lab86_000_web
