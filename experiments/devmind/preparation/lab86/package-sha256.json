@@ -52,7 +52,7 @@
   "preview-session.template.json": "922c714e8b8b1ff6079d9e88e3c60d8cbc63db0ff51a4446e2853d489cbf0104",
   "preview.template.json": "7210693d6402d51cbeea95a4004e536abefb67ab8351968aa57f76158d2331c8",
   "project-acquire.yaml": "c1e7e031aa9ed81a8304c7fc1e77afdd89ae4ed4dd8eb3c3b18400725d235ba8",
-  "project-build.template.yaml": "db2c9e406a6e9e593147966952a3b45c4f13f848fb3c14e2cd33a01947c38de7",
+  "project-build.template.yaml": "300849b3e68964045092205bb66a2e345a64a24485f3deef32dd8af609a596e2",
   "project-pilot-acquire.json": "daf6ae234fbf8c882cf628e345c811b6e8e33e3db8007b27fb20069a1a8025ba",
   "project-pilot-reuse.template.yaml": "fda763e868a65b6a4c78d12ec4b7e0d6c3d954a5f664a75aaeaba56e30522131",
   "project-pre-freeze.template.yaml": "da89fc87c41e52f3499157a06443fe841e1cdfdfa33a6ef2b36c5e40101b2dde",
@@ -148,5 +148,6 @@
   "splits-acquire.yaml": "62a04c1af430b42762392777cc0bca1bbecdf3d20b135c7c6a4a99a00a7511a4",
   "splits-pre-freeze.yaml": "0fa6402544db7d2b531a357be438a1046310ec7cf56989f6087f1dd7aa997dec",
   "token-floors.yaml": "241e20b0bb8a28f9b2bc901ff17490cd516cc7c6b869ad5856964af3a3b429b1",
-  "tokenizer-sampling.yaml": "186df94b73b2a0a0c7d3829a0154268b417adff54b71afde9b985d53d13f9c88"
+  "tokenizer-sampling.yaml": "186df94b73b2a0a0c7d3829a0154268b417adff54b71afde9b985d53d13f9c88",
+  "transforms/000-lm-text.yaml": "9c298deef5da84a5d82b545673d7ec4e7671e2a99f36a62335fb78779605b32a"
 }
