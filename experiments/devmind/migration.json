@@ -211,7 +211,7 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/package-sha256.json",
       "destination": "experiments/devmind/preparation/lab86/package-sha256.json",
-      "sha256": "102c1d1c9297e8c4b3160f0f083072d875ea22b2a9463a6a232eca4a1f36c1bd",
+      "sha256": "df002baab29c4f31caab2a3be37de18a028b28888f3a6b5bf5cf9715a1f9c65d",
       "source_sha256": "28d29764170bcc3dfcb5037a707b1cd4bffd08d8749fdae9b02561edf8a9ec5b"
     },
     {
@@ -279,7 +279,8 @@
     {
       "source": "experiments/research/exp1-preparation/lab86/project-build.template.yaml",
       "destination": "experiments/devmind/preparation/lab86/project-build.template.yaml",
-      "sha256": "db2c9e406a6e9e593147966952a3b45c4f13f848fb3c14e2cd33a01947c38de7"
+      "sha256": "300849b3e68964045092205bb66a2e345a64a24485f3deef32dd8af609a596e2",
+      "source_sha256": "db2c9e406a6e9e593147966952a3b45c4f13f848fb3c14e2cd33a01947c38de7"
     },
     {
       "source": "experiments/research/exp1-preparation/lab86/project-pilot-reuse.template.yaml",

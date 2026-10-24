@@ -85,7 +85,8 @@ sources:
 - sources/081-code.yaml
 - sources/082-code.yaml
 - sources/083-code.yaml
-transforms: []
+transforms:
+- transforms/000-lm-text.yaml
 splits: ${GENERATED_FROZEN_SPLITS}
 release: ${GENERATED_REVIEWED_RELEASE_DECLARATION}
 source_effects:
