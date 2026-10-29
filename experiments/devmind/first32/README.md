@@ -1,5 +1,11 @@
 # DevMind first-run retained subset
 
+This is the retained historical attempt profile. Its caps and pins are specific to
+that attempt, not lab-wide defaults. Use the [editable native run path](../run.md)
+for new iterations. Production/model execution is currently stopped pending
+integrated verification and owner review; later execution language below records
+the original profile and does not lift that hold.
+
 This separate profile keeps the 341,885,952-parameter model, 2048 context,
 microbatch 2, accumulation 32, seed 42 and 32-update checkpoint/restore exercise.
 Its 4,194,304 unique training targets use 60/20/20 web/synthetic/code quotas.

@@ -2,19 +2,21 @@
 
 [Back to Workshop README](../../README.md) · [DevMind Pilot Status (kybern.dev)](https://kybern.dev/models/devmind/)
 
-**DevMind 340M Base** is our ~342M-parameter dense base model recipe in pilot setup (`pilot pending runtime binding`).
-This directory contains the declarative model and optimizer specifications, the 24-phase corpus preparation plan, and the pinned upstream dataset shard definitions to be executed with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
+**DevMind 340M Base** is our 341,885,952-parameter dense base model experiment.
+Start with the [editable experiment and native run loop](run.md).
+This directory contains the declarative model and optimizer specifications, the 25-leaf corpus preparation plan, and the pinned upstream dataset shard definitions to be executed with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
 
-> **Current status:** Architecture and corpus preparation recipes are authored and validated at the schema level; corpus acquisition, tokenizer fitting, and model training have not yet been executed. No trained weights are published yet.
+> **Current status (2026-10-29, operator-reported):** Retained corpus R36 and the 32K tokenizer R40 are complete. Another 49 code shards were acquired but are not admitted. The scientific 12B unique-target 60/20/20 mixture is incomplete. Production/model execution remains stopped pending integrated verification and owner review; no DevMind trained baseline or weights are published. These progress facts do not substitute for verifying the actual artifacts when binding.
 
 ---
 
 ## Documentation Guide
 
-1. **[Scientific Protocol (`protocol.md`)](protocol.md)** — Architecture dimensions, 60/20/20 corpus mixture (educational web, synthetic text, code), training hyperparameters, and zero-shot evaluation benchmarks.
-2. **[Tiny Sparse Lab Commands (`native-commands.md`)](native-commands.md)** — How to validate the model/optimizer sections and compile preparation phase commands with `sparselab`.
-3. **[Base Checkpoint & Evaluation Contract (`base-artifact.md`)](base-artifact.md)** — Required artifact closure and evaluation-only reuse specification once the base model is trained.
-4. **[Corpus Preparation Plan (`preparation/README.md`)](preparation/README.md)** — 24-phase preparation workflow (`preparation/preparation.json`) and the 84 pinned shard declarations in [`preparation/lab86/`](preparation/lab86/README.md).
+1. **[Run and revise (`run.md`)](run.md)** — Bind editable intent to real inputs, then use native train, checkpoint inspection, resume, evaluation and derivation.
+2. **[Scientific Protocol (`protocol.md`)](protocol.md)** — Architecture dimensions, 60/20/20 corpus mixture (educational web, synthetic text, code), training hyperparameters, and zero-shot evaluation benchmarks.
+3. **[Tiny Sparse Lab Commands (`native-commands.md`)](native-commands.md)** — How to validate the model/optimizer sections and compile preparation phase commands with `sparselab`.
+4. **[Base Checkpoint & Evaluation Contract (`base-artifact.md`)](base-artifact.md)** — Required artifact closure and evaluation-only reuse specification once the base model is trained.
+5. **[Corpus Preparation Plan (`preparation/README.md`)](preparation/README.md)** — 25-leaf preparation workflow (`preparation/preparation.json`) and the 84 pinned shard declarations in [`preparation/lab86/`](preparation/lab86/README.md).
 
 ## Quick Validation with `sparselab`
 

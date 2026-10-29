@@ -1,0 +1,49 @@
+{
+  "experiment_id": "devmind-340m-base",
+  "goal": "Measure how the 341,885,952-parameter dense base model learns from 12B unique training targets at a 60/20/20 web/synthetic/code mixture.",
+  "definition_of_done": [
+    "Retain the bound configuration and native attempt/run identities, including any cancellation or failure.",
+    "For a completed budget, retain full-state checkpoints, held-out loss and protocol benchmark results with actual token exposure.",
+    "Report incomplete supply, unreached milestones and missing evaluations explicitly; a successful preparation or smoke test is not a trained baseline."
+  ],
+  "recipe": {
+    "unique_training_targets": 12000000000,
+    "max_exposures": 1,
+    "mixture": {
+      "web": 0.6,
+      "synthetic": 0.2,
+      "code": 0.2
+    },
+    "protocol": "protocol.md"
+  },
+  "model_file": "model.json",
+  "optimizer_file": "optimizer.json",
+  "run": {
+    "schema_version": 2,
+    "name": "devmind-340m-base-12b",
+    "seed": 42,
+    "training": {
+      "seq_len": 2048,
+      "micro_batch_size": 2,
+      "gradient_accumulation": 32,
+      "max_steps": 91553,
+      "max_tokens": 12000000000,
+      "grad_clip_norm": 1.0,
+      "deterministic": true
+    },
+    "checkpoint": {
+      "every_steps": 1024,
+      "keep_periodic": true
+    },
+    "evaluation": {
+      "every_steps": 256,
+      "max_batches": 64
+    }
+  },
+  "bindings": [
+    "dataset",
+    "tokenizer",
+    "runtime",
+    "logging"
+  ]
+}

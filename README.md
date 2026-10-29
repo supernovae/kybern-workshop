@@ -34,7 +34,7 @@ Active experiment recipes and published evidence live here in Workshop; Kybern�
 | **TinyStories Baseline (4.46M)** | Full 8,192-update (33.5M-token) CPU training run of a 4-layer dense transformer with a 12-prompt story continuation panel. | **Completed baseline.** Validation loss reached `1.7043` (perplexity `5.4976`), while 22/24 scored continuations failed the provisional assistant-scored quality rubric—a concrete baseline to improve. | [Walkthrough](examples/tinystories-useful/README.md) · [27 Recorded Outputs](results/2026-10-19-tinystories-cpu/README.md) · [Interactive Guide](https://kybern.dev/models/tinystories-training/) |
 | **TinyStories Microlab** | Starter paired comparison (`FFN width 256` vs. `384`) on 2,000 stories using `sparselab try`. | **Ready to run.** 40-update (10,240-target) teaching comparison for learning the `sparselab` workflow. | [Microlab Guide](examples/tinystories-microlab/README.md) · [Container Smoke Result](results/2026-10-15-tinystories-smoke/README.md) |
 | **Basic Synthetic CPU** | Offline end-to-end smoke test: synthetic text generation, BPE tokenizer fitting, 1-step training, evaluation, and verified reporting. | **Measured & verified.** Runs completely offline on CPU with zero dataset or model downloads. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Recorded Result](results/2026-10-14-synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
-| **DevMind 340M Base** | ~342M-parameter dense base model (24 layers, width 1,024, SwiGLU, RoPE) and 24-phase corpus preparation across web, synthetic, and code data. | **In pilot setup.** Architecture, optimizer, and 84-shard preparation plan authored and schema-validated; awaiting pilot execution. | [DevMind Overview](experiments/devmind/README.md) · [Scientific Protocol](experiments/devmind/protocol.md) · [Pilot Status (kybern.dev)](https://kybern.dev/models/devmind/) |
+| **DevMind 340M Base** | ~342M-parameter dense base model (24 layers, width 1,024, SwiGLU, RoPE) and a 12B unique-target 60/20/20 web/synthetic/code experiment. | **Preparation partially complete; model execution stopped.** Corpus R36 and 32K tokenizer R40 retained; 49 additional code shards acquired, not admitted. Scientific 12B mixture incomplete. [Bind, run and revise](experiments/devmind/run.md). | [DevMind Overview](experiments/devmind/README.md) · [Scientific Protocol](experiments/devmind/protocol.md) · [Pilot Status (kybern.dev)](https://kybern.dev/models/devmind/) |
 
 ---
 
@@ -149,7 +149,7 @@ kybern-workshop/
 │   ├── tinystories-worker/    # Paired CPU worker campaign recipe
 │   └── tinystories-rocm/      # Containerized AMD ROCm campaign recipe
 ├── experiments/
-│   └── devmind/               # DevMind 340M Base protocol, model/optimizer configs & 24-phase corpus prep
+│   └── devmind/               # DevMind 340M Base protocol, model/optimizer configs & 25-leaf corpus prep
 ├── results/
 │   ├── 2026-10-14-synthetic-cpu/     # Recorded synthetic CPU smoke metrics & report
 │   ├── 2026-10-15-tinystories-smoke/ # Recorded paired CPU container smoke summary

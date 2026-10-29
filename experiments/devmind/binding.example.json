@@ -1,0 +1,35 @@
+{
+  "dataset": {
+    "source": "local_token_mixture",
+    "mixture_declaration_path": null,
+    "mixture_output_path": null,
+    "cache_dir": null,
+    "train_max_documents": null,
+    "validation_max_documents": null,
+    "train_max_tokens": null,
+    "validation_max_tokens": null,
+    "license": null,
+    "train_path": null,
+    "validation_path": null
+  },
+  "tokenizer": {
+    "path": null
+  },
+  "runtime": {
+    "engine": "pytorch",
+    "backend": null,
+    "precision": "bf16",
+    "memory": {
+      "estimate_policy": "observe",
+      "activation_checkpointing": {
+        "enabled": true,
+        "strategy": "transformer_block"
+      }
+    }
+  },
+  "logging": {
+    "root_dir": null,
+    "every_steps": 1,
+    "architecture_diagnostics": "scalar"
+  }
+}
