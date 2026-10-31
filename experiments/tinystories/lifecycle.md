@@ -67,6 +67,34 @@ and full-config staging are distinct operations; consult the Lab
 If a reuse request reports a mismatch, preserve the diagnostic and inspect which
 identity changed before repeating expensive preparation.
 
+## Scaling shared data
+
+Model parameter count does not define prepared-data identity. The 5M and 50M
+recipes, and a future 100M model, can reuse the same completed data when tokenizer,
+objective, packing and input semantics remain compatible. Increasing supervised
+exposure or repeating more epochs does not require more unique data or another
+preparation pass. Report corpus supply and repeated exposure separately.
+
+To increase unique supply, create a new versioned additive shard inventory that
+references unchanged completed shards alongside new shards. Reuse completed
+tokenization for unchanged content only when tokenizer bytes and tokenization
+semantics match; fit changes invalidate affected tokenization. Preserve stable
+train/validation assignments and validation-first global deduplication across both
+retained and new content. Resolve overlap before publishing the new inventory.
+If new validation content excludes previously retained training records, record
+the exclusions and resulting inventory change rather than claiming every old
+training shard remains eligible unchanged.
+
+Check packing boundaries, document order, usable blocks and tails when extending
+an inventory. Appending can change boundary packing or coverage even when tokenized
+content is reusable. Repack affected boundaries or invalidate dependent artifacts
+when required by their semantics, with an explicit reason; arbitrary append-only
+compatibility is not guaranteed. Preserve prior versions for reproducible runs.
+
+This is a data-scaling contract, not a third 100M training recipe. A larger model
+needs its own explicit configuration and run; data reuse does not enlarge model
+weights or make an existing checkpoint compatible with a different architecture.
+
 ## Physical placement and concurrency
 
 The following placement options are planned generic Lab capabilities to validate
