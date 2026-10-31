@@ -12,9 +12,12 @@ declaration, source-loader, shape and separate CPU parameter checks on Lab
 `1b9fed431f7257007e2bdb931de05f63b8c19109` and the intended workflow reference,
 `b3a1630ec09dbddae36301b0acef4122623ed939`, with unchanged Workshop declarations.
 Metadata-only dataset locking and native lock verification also passed on the
-reference pin; this did not download corpus bodies. GPU fit, source acquisition,
-data preparation/reuse, training, performance, recovery and remote/Colab handoffs
-remain unvalidated.
+reference pin; this did not download corpus bodies. Subsequent
+[local ROCm results](../../results/2026-10-31-tinystories-rocm/README.md) record acquisition,
+preparation/reuse, GPU pilots, full 5M completion with signal/resume checks, and
+bounded 50M calibration. Full 50M completion and remote/Colab handoffs remain
+unvalidated. Source-pin migration also exposed an unexpected packed-cache rebuild,
+recorded explicitly rather than counted as reuse.
 
 ## Workflow
 
