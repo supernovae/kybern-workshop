@@ -7,10 +7,14 @@ check operational portability to another machine. The checked-in runtime is an
 example PyTorch/ROCm FP32 configuration. Bind local storage paths and select the
 supported runtime for your hardware before staging.
 
-These recipes have no published execution results. Their native schema validation,
-model instantiation, shared-input reuse and remote/Colab handoffs remain unvalidated.
-The command reference is Lab `b3a1630ec09dbddae36301b0acef4122623ed939`;
-check compatibility when using another revision.
+The [versioned validation note](README.md#versioned-validation) records successful
+declaration, source-loader, shape and separate CPU parameter checks on Lab
+`1b9fed431f7257007e2bdb931de05f63b8c19109` and the intended workflow reference,
+`b3a1630ec09dbddae36301b0acef4122623ed939`, with unchanged Workshop declarations.
+Metadata-only dataset locking and native lock verification also passed on the
+reference pin; this did not download corpus bodies. GPU fit, source acquisition,
+data preparation/reuse, training, performance, recovery and remote/Colab handoffs
+remain unvalidated.
 
 ## Workflow
 

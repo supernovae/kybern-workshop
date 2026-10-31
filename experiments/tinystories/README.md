@@ -8,10 +8,29 @@ checkpoint, resume, evaluate and check operational portability. The included
 runtime is an example PyTorch/ROCm FP32 configuration; select a supported backend
 and bind local paths for your system.
 
-**Validation status:** native schema validation, instantiated parameter counts,
-training results, preparation reuse and remote/Colab handoffs are not yet verified
-for these recipes. The [4.46M baseline](../../examples/tinystories-useful/README.md)
-has separate configurations and results.
+## Versioned validation
+
+At Workshop revision `e186e42194bd69f2fb68318a79c51c9bbcc4e7c7`, native
+`config validate` passed for both run declarations and the tokenizer declaration.
+The native source loader also accepted `source.json`; there is no public source
+config-kind validator. Public `inspect` passed shape inspection. Separate CPU FP32
+model instantiation counted **5,311,232** and **50,556,800** parameters, matching
+the calculations below.
+
+These checks passed on both Lab `1b9fed431f7257007e2bdb931de05f63b8c19109`
+and the intended workflow reference, `b3a1630ec09dbddae36301b0acef4122623ed939`,
+with the Workshop declarations unchanged. The reference-pin repeat used clean
+isolated checkouts and the existing PyTorch `2.13.0+rocm10.0.0` dependencies.
+This validates declarations, shapes and CPU parameter counts on the reference pin,
+not GPU fit or workflow execution. On the same reference pin and Workshop revision,
+the metadata-only dataset lock completed in 3.381 seconds (exit 0) and passed native
+verification: `ce604a08b892e74669d62bbff1d90d0b04c0b0e522f605963c7c4e22f50558d5`.
+It pins source `f54c09fd23315a6f9c86f9dc80f725de7d8f9c64` in standard Parquet
+format, declaring five upstream files totaling 1,000,775,442 bytes; the lock step
+did not download corpus bodies. Source acquisition, preparation, training, data
+reuse, performance, recovery and portability remain unvalidated.
+The [4.46M baseline](../../examples/tinystories-useful/README.md) has separate
+configurations and results.
 
 ## Definitions
 
@@ -19,7 +38,7 @@ has separate configurations and results.
 | --- | --- | --- |
 | Native declaration | [run-5m.json](run-5m.json) | [run-50m.json](run-50m.json) |
 | Dense tied-embedding decoder | 5 layers, width 256, FFN 768, 4 heads | 9 layers, width 640, FFN 1,920, 10 heads |
-| Calculated parameters | 5,311,232 | 50,556,800 |
+| Calculated / CPU-verified parameters | 5,311,232 | 50,556,800 |
 | Update budget | 24,415 | 244,141 |
 | Supervised target exposure cap | 100,003,840 | 1,000,001,536 |
 | Exposure / parameter | ~18.83 | ~19.78 |
@@ -32,8 +51,10 @@ supervised targets/update), max context 512, 4,096 vocabulary, dense attention,
 SwiGLU/RMSNorm/RoPE, deterministic PyTorch, initial ROCm FP32. These choices make a
 clear starting baseline, not a claim of optimal hyperparameters or hardware fit.
 Parameter totals use `V*h + L*(4*h*h + 3*h*f + 2*h) + h` for the current tied,
-bias-free architecture. Confirm the instantiated totals with native `inspect`;
-these are calculated, not measured. Budgets are rounded up to whole updates.
+bias-free architecture. Native `inspect` checks shapes; it does not instantiate
+the model. Separate CPU instantiation confirmed these totals on both tested Lab
+revisions, including the workflow reference pin. Budgets are rounded up to whole
+updates.
 Actual committed supervised targets from native records are authoritative; masked
 targets or skipped updates must not be counted as exposure.
 
@@ -221,7 +242,7 @@ A changed device may still require explicit best-effort runtime-drift handling.
 
 ## Acceptance and evidence
 
-All acceptance results are **unverified** for these recipes. Record actual results
+Operational acceptance remains **unverified** for these recipes. Record actual results
 in a compact `results/` record after execution; keep data and checkpoint binaries
 outside Git.
 
