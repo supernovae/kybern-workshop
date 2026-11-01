@@ -1,0 +1,430 @@
+{
+  "lab_commit": "903ad2f0bb261935132dee53295aba6b66f8e792",
+  "workshop_recipe_head": "d7a88144f2823d1a0f040ed529ef8afe67a16ac7",
+  "hardware": "AMD Radeon RX 7900 XTX 24 GB",
+  "framework": "2.13.0+rocm10.0.0",
+  "scope": "Four separate fresh-seed-42 calibration runs; 256 actual updates each; no profiler; excluded from scientific budgets",
+  "common_settings": {
+    "sequence_length": 512,
+    "microbatch": 4,
+    "accumulation": 2,
+    "precision": "bf16",
+    "targets_per_update": 4096,
+    "schedule_horizon_updates": 24415,
+    "measured_updates": [
+      17,
+      256
+    ]
+  },
+  "limitations": [
+    "Two sequential samples per implementation in A-B-B-A order; bounded local timing evidence, not a full-run speedup or quality result",
+    "Native architecture identity includes attention implementation; these are fresh calibrations, not promotion or continuation",
+    "Installed AMD-SMI and ROCm-SMI cannot expose utilization in this WSL environment: required Linux modules are not visible. No driver repair or installation attempted.",
+    "Prepared inputs were already verified and cached; no cold remote I/O or Colab measurement",
+    "Per-update timing and native phase categories do not separately identify data-loader starvation"
+  ],
+  "cases": {
+    "reference": {
+      "config_sha256": "96ca77339f041dddf855593149925f9f90339852e2c94cbd080132f98f8b5e2e",
+      "initial_weights_sha256": "8990e1a7cbc8859f916238fce7fb31272e5b35aced1e5e00c10d2b340ab73ab7",
+      "checkpoint_sha256": "8b21d3c94741d07411d0d53a66399594b1bafe2de0f8e360944327f015a9e384",
+      "step": 256,
+      "targets": 1048576,
+      "steady_updates": 240,
+      "steady_optimizer_seconds": 22.18917088257149,
+      "steady_targets_per_second": 44302.69184920875,
+      "median_update_seconds": 0.09139523690100759,
+      "train_loss_min": 4.4803996086120605,
+      "train_loss_max": 8.481194496154785,
+      "overflow_retries_max": 0.0,
+      "peak_device_reserved_bytes": 2678063104.0,
+      "peak_process_rss_bytes": 1855746048.0,
+      "phase_times": {
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 3.729654910042882
+        },
+        "checkpoint_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "evaluation": {
+          "availability": "not_observed",
+          "reason": "training records inline validation separately",
+          "seconds": null
+        },
+        "generation": {
+          "availability": "not_observed",
+          "reason": "generation is a separate inference operation",
+          "seconds": null
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 256,
+          "seconds": 23.967288348590955
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 9.703892283141613e-05
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.6711976660881191
+        },
+        "relay_transfer": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 528,
+          "seconds": 2.1908450284972787
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "seconds": 7.47827974986285
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 1.3297108260449022
+        },
+        "validation_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        }
+      },
+      "publish_command_seconds": 36.19864554493688,
+      "stage_command_seconds": 76.77432980318554,
+      "train_command_seconds": 48.69581629312597,
+      "validation": [
+        {
+          "step": 0,
+          "loss": 8.449890375137329
+        },
+        {
+          "step": 256,
+          "loss": 4.430218353867531
+        }
+      ]
+    },
+    "sdpa": {
+      "config_sha256": "74f7dd6e23693ab9b1d4767c49b6bd2cde959da5fb2a5362326e7576cc24edd6",
+      "initial_weights_sha256": "8990e1a7cbc8859f916238fce7fb31272e5b35aced1e5e00c10d2b340ab73ab7",
+      "checkpoint_sha256": "d0bdca3aa1675a1dabc4d10c1032c1669cc2bc35843ac88bdfb9a180c5bbc835",
+      "step": 256,
+      "targets": 1048576,
+      "steady_updates": 240,
+      "steady_optimizer_seconds": 18.556657088454813,
+      "steady_targets_per_second": 52975.058778857696,
+      "median_update_seconds": 0.07689151691738516,
+      "train_loss_min": 4.4801201820373535,
+      "train_loss_max": 8.481263160705566,
+      "overflow_retries_max": 0.0,
+      "peak_device_reserved_bytes": 2053111808.0,
+      "peak_process_rss_bytes": 1866711040.0,
+      "phase_times": {
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 3.958417513174936
+        },
+        "checkpoint_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "evaluation": {
+          "availability": "not_observed",
+          "reason": "training records inline validation separately",
+          "seconds": null
+        },
+        "generation": {
+          "availability": "not_observed",
+          "reason": "generation is a separate inference operation",
+          "seconds": null
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 256,
+          "seconds": 20.10440872819163
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.0006368150934576988
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.6726798838935792
+        },
+        "relay_transfer": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 528,
+          "seconds": 5.684267899952829
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "seconds": 7.652718754950911
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 1.0690989047288895
+        },
+        "validation_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        }
+      },
+      "publish_command_seconds": 34.658693289151415,
+      "stage_command_seconds": 74.03118909918703,
+      "train_command_seconds": 48.55487014306709,
+      "validation": [
+        {
+          "step": 0,
+          "loss": 8.449906706809998
+        },
+        {
+          "step": 256,
+          "loss": 4.4299753457307816
+        }
+      ]
+    },
+    "sdpa-repeat": {
+      "config_sha256": "74f7dd6e23693ab9b1d4767c49b6bd2cde959da5fb2a5362326e7576cc24edd6",
+      "initial_weights_sha256": "8990e1a7cbc8859f916238fce7fb31272e5b35aced1e5e00c10d2b340ab73ab7",
+      "checkpoint_sha256": "838faac6aa36ac36f2c5e07c862927d4700f3bac5df506ba7e14ac0b0824c940",
+      "step": 256,
+      "targets": 1048576,
+      "steady_updates": 240,
+      "steady_optimizer_seconds": 18.04181596939452,
+      "steady_targets_per_second": 54486.75464086283,
+      "median_update_seconds": 0.0748862543841824,
+      "train_loss_min": 4.4801201820373535,
+      "train_loss_max": 8.481263160705566,
+      "overflow_retries_max": 0.0,
+      "peak_device_reserved_bytes": 2053111808.0,
+      "peak_process_rss_bytes": 2192113664.0,
+      "phase_times": {
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 3.6807000080589205
+        },
+        "checkpoint_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "evaluation": {
+          "availability": "not_observed",
+          "reason": "training records inline validation separately",
+          "seconds": null
+        },
+        "generation": {
+          "availability": "not_observed",
+          "reason": "generation is a separate inference operation",
+          "seconds": null
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 256,
+          "seconds": 19.688515956513584
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.0007635238580405712
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.6721830700989813
+        },
+        "relay_transfer": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 528,
+          "seconds": 2.165495859924704
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "seconds": 11.323972903657705
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 1.106593629810959
+        },
+        "validation_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        }
+      },
+      "train_command_seconds": 49.98261615796946,
+      "reuse": "Reused the existing verified configuration-specific stage; no repeated publication, packing or warmup",
+      "validation": [
+        {
+          "step": 0,
+          "loss": 8.449906706809998
+        },
+        {
+          "step": 256,
+          "loss": 4.4299753457307816
+        }
+      ]
+    },
+    "reference-repeat": {
+      "config_sha256": "96ca77339f041dddf855593149925f9f90339852e2c94cbd080132f98f8b5e2e",
+      "initial_weights_sha256": "8990e1a7cbc8859f916238fce7fb31272e5b35aced1e5e00c10d2b340ab73ab7",
+      "checkpoint_sha256": "5b16035d36e5a07ccc36741888a5205d7667add66f6c4df491f74c2aa016cd07",
+      "step": 256,
+      "targets": 1048576,
+      "steady_updates": 240,
+      "steady_optimizer_seconds": 22.042518778936937,
+      "steady_targets_per_second": 44597.44414233453,
+      "median_update_seconds": 0.09138956409879029,
+      "train_loss_min": 4.4803996086120605,
+      "train_loss_max": 8.481194496154785,
+      "overflow_retries_max": 0.0,
+      "peak_device_reserved_bytes": 2678063104.0,
+      "peak_process_rss_bytes": 2182397952.0,
+      "phase_times": {
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 3.7615174129605293
+        },
+        "checkpoint_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "evaluation": {
+          "availability": "not_observed",
+          "reason": "training records inline validation separately",
+          "seconds": null
+        },
+        "generation": {
+          "availability": "not_observed",
+          "reason": "generation is a separate inference operation",
+          "seconds": null
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 256,
+          "seconds": 23.78559958562255
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.0006006050389260054
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.6735207729507238
+        },
+        "relay_transfer": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 528,
+          "seconds": 2.172630447195843
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "seconds": 11.551600981270894
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 1.2617757997941226
+        },
+        "validation_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        }
+      },
+      "train_command_seconds": 52.658916090847924,
+      "reuse": "Reused the existing verified configuration-specific stage; no repeated publication, packing or warmup",
+      "validation": [
+        {
+          "step": 0,
+          "loss": 8.449890375137329
+        },
+        {
+          "step": 256,
+          "loss": 4.430218353867531
+        }
+      ]
+    }
+  },
+  "replication_protocol": {
+    "purpose": "Resolve reporting-time variability with one reverse-order replication, then stop",
+    "order": [
+      "reference",
+      "sdpa",
+      "sdpa-repeat",
+      "reference-repeat"
+    ],
+    "updates_per_run": 256,
+    "measured_updates": [
+      17,
+      256
+    ],
+    "fresh_seed": 42,
+    "no_profiler": true,
+    "scientific_budget_consumption": 0
+  },
+  "timing_boundary": {
+    "source": "src/sparselab/engines/pytorch.py",
+    "line": 1461,
+    "observation": "The engine synchronizes after optimizer.step and before elapsed capture. Reporting writes occur after that boundary."
+  },
+  "aggregate": {
+    "reference": {
+      "steady_targets_per_second": 44449.579363705256,
+      "mean_train_command_seconds": 50.67736619198695,
+      "reporting_seconds": [
+        2.1908450284972787,
+        2.172630447195843
+      ],
+      "peak_reserved_bytes": 2678063104.0
+    },
+    "sdpa": {
+      "steady_targets_per_second": 53720.27398225926,
+      "mean_train_command_seconds": 49.268743150518276,
+      "reporting_seconds": [
+        5.684267899952829,
+        2.165495859924704
+      ],
+      "peak_reserved_bytes": 2053111808.0
+    }
+  },
+  "aggregate_sdpa_over_reference_steady_ratio": 1.208566532040658,
+  "first_pair_sdpa_over_reference_steady_ratio": 1.195752595782819
+}

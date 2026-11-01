@@ -11,7 +11,7 @@ These fresh calibration identities derive from the 50M recipe at Workshop `e186e
 
 Bind paths with native `config derive`, publish a configuration-specific prepared-input bundle, stage through warmup, then train with `--stop-after-step 256`. Compare updates 17 through 256; record startup and full-command times separately. The native smoke and warmup pilots are disposable and excluded from calibration exposure. These 256-update segments are calibration only, not continuation or completion of the original scientific run.
 
-Do not resume the original checkpoint using these changed configurations. Different floating-point reduction orders and precision do not establish trajectory equivalence. Preserve the original 50M step-256 checkpoint and budget. BF16 and SDPA are tested separately against FP32 8 × 2; their combination is untested. A full run of an alternative requires an explicit new scientific identity.
+Do not resume the original checkpoint using these changed configurations. Different floating-point reduction orders and precision do not establish trajectory equivalence. Preserve the original 50M step-256 checkpoint and budget. BF16 and SDPA are tested separately against FP32 8 × 2; those original tests did not combine them. A later [BF16 context-512 attention comparison](../context/rocm-attention-performance.json) on Lab `903ad2f0bb261935132dee53295aba6b66f8e792` records the combined option separately. A full run of an alternative requires an explicit new scientific identity.
 
 The default validation protocol uses 32 batches, so microbatch 4/8/16 evaluates 32,768/65,536/131,072 targets. Compare validation losses only within the same selection; these measurements do not establish a quality ranking across batch sizes.
 
