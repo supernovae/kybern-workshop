@@ -1,0 +1,357 @@
+{
+  "lab_commit": "903ad2f0bb261935132dee53295aba6b66f8e792",
+  "hardware": "AMD Radeon RX 7900 XTX 24 GB",
+  "purpose": "Separate promoted calibration; excluded from scientific arm budgets and scored throughput",
+  "limitations": [
+    "cProfile overhead is included; cumulative function times overlap and must not be added",
+    "Whole-command fsync counts include checkpoints and setup, not just reporting",
+    "Serialization growth excludes I/O and does not attribute the original full-run reporting total"
+  ],
+  "arms": {
+    "256": {
+      "step": 256,
+      "targets": 1048576,
+      "checkpoint": "f07f50b7c55fb617e27fa5a4329326a3cb8e2b8b50d094f874f8d08f4b3d33d7",
+      "phases": {
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 3.9922065001446754
+        },
+        "checkpoint_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "evaluation": {
+          "availability": "not_observed",
+          "reason": "training records inline validation separately",
+          "seconds": null
+        },
+        "generation": {
+          "availability": "not_observed",
+          "reason": "generation is a separate inference operation",
+          "seconds": null
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 256,
+          "seconds": 24.820449261460453
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.0007342940662056208
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.9909182819537818
+        },
+        "relay_transfer": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 528,
+          "seconds": 5.486904608551413
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "seconds": 10.612553864018992
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 1.4704966209828854
+        },
+        "validation_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        }
+      },
+      "functions": [
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method posix.fsync>",
+          "primitive_calls": 570,
+          "calls": 570,
+          "self_seconds": 6.476167657,
+          "cumulative_seconds": 6.476167657
+        },
+        {
+          "file": "sparselab/training/trainer.py",
+          "line": 1541,
+          "function": "save_boundary",
+          "primitive_calls": 2,
+          "calls": 2,
+          "self_seconds": 0.00013198000000000002,
+          "cumulative_seconds": 4.124614698
+        },
+        {
+          "file": "sparselab/training/checkpoints.py",
+          "line": 927,
+          "function": "save",
+          "primitive_calls": 2,
+          "calls": 2,
+          "self_seconds": 0.0009579230000000001,
+          "cumulative_seconds": 3.9777995400000004
+        },
+        {
+          "file": "sparselab/training/checkpoints.py",
+          "line": 100,
+          "function": "_atomic_json",
+          "primitive_calls": 274,
+          "calls": 274,
+          "self_seconds": 0.005164951,
+          "cumulative_seconds": 3.617769242
+        },
+        {
+          "file": "sparselab/training/trainer.py",
+          "line": 1451,
+          "function": "progress",
+          "primitive_calls": 266,
+          "calls": 266,
+          "self_seconds": 0.006556729000000001,
+          "cumulative_seconds": 3.556272471
+        },
+        {
+          "file": "sparselab/training/metrics.py",
+          "line": 464,
+          "function": "_write",
+          "primitive_calls": 289,
+          "calls": 289,
+          "self_seconds": 0.002551322,
+          "cumulative_seconds": 2.060907887
+        },
+        {
+          "file": "sparselab/training/checkpoints.py",
+          "line": 1398,
+          "function": "verify",
+          "primitive_calls": 7,
+          "calls": 7,
+          "self_seconds": 0.001135871,
+          "cumulative_seconds": 2.026914771
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'commit' of 'sqlite3.Connection' objects>",
+          "primitive_calls": 290,
+          "calls": 290,
+          "self_seconds": 1.9967597170000002,
+          "cumulative_seconds": 1.9967597170000002
+        },
+        {
+          "file": "sparselab/training/metrics.py",
+          "line": 508,
+          "function": "log_metrics",
+          "primitive_calls": 258,
+          "calls": 258,
+          "self_seconds": 0.003098982,
+          "cumulative_seconds": 1.847359564
+        },
+        {
+          "file": "sparselab/training/checkpoints.py",
+          "line": 89,
+          "function": "_fsync_directory",
+          "primitive_calls": 279,
+          "calls": 279,
+          "self_seconds": 0.0010590410000000001,
+          "cumulative_seconds": 1.7457898470000002
+        }
+      ]
+    },
+    "512": {
+      "step": 256,
+      "targets": 1048576,
+      "checkpoint": "cdfcf63bf7e02362904ada38cc51d483fd569bc3baa2da705a875c88345951b0",
+      "phases": {
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 3.9689819109626114
+        },
+        "checkpoint_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "evaluation": {
+          "availability": "not_observed",
+          "reason": "training records inline validation separately",
+          "seconds": null
+        },
+        "generation": {
+          "availability": "not_observed",
+          "reason": "generation is a separate inference operation",
+          "seconds": null
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 256,
+          "seconds": 25.901698591653258
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.00018276902846992016
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 1.0363516530487686
+        },
+        "relay_transfer": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 528,
+          "seconds": 5.528792250435799
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "seconds": 12.039312021806836
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 1.4056155229918659
+        },
+        "validation_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        }
+      },
+      "functions": [
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method posix.fsync>",
+          "primitive_calls": 570,
+          "calls": 570,
+          "self_seconds": 6.4064974160000006,
+          "cumulative_seconds": 6.4064974160000006
+        },
+        {
+          "file": "sparselab/training/checkpoints.py",
+          "line": 1398,
+          "function": "verify",
+          "primitive_calls": 7,
+          "calls": 7,
+          "self_seconds": 0.00122498,
+          "cumulative_seconds": 4.441328175000001
+        },
+        {
+          "file": "sparselab/training/trainer.py",
+          "line": 1541,
+          "function": "save_boundary",
+          "primitive_calls": 2,
+          "calls": 2,
+          "self_seconds": 0.00011647,
+          "cumulative_seconds": 4.09864739
+        },
+        {
+          "file": "sparselab/training/checkpoints.py",
+          "line": 927,
+          "function": "save",
+          "primitive_calls": 2,
+          "calls": 2,
+          "self_seconds": 0.0009257950000000001,
+          "cumulative_seconds": 3.9589762970000004
+        },
+        {
+          "file": "sparselab/training/checkpoints.py",
+          "line": 100,
+          "function": "_atomic_json",
+          "primitive_calls": 274,
+          "calls": 274,
+          "self_seconds": 0.004889537,
+          "cumulative_seconds": 3.6408149510000003
+        },
+        {
+          "file": "sparselab/training/trainer.py",
+          "line": 1451,
+          "function": "progress",
+          "primitive_calls": 266,
+          "calls": 266,
+          "self_seconds": 0.006426757000000001,
+          "cumulative_seconds": 3.599973443
+        },
+        {
+          "file": "sparselab/training/metrics.py",
+          "line": 464,
+          "function": "_write",
+          "primitive_calls": 289,
+          "calls": 289,
+          "self_seconds": 0.002536623,
+          "cumulative_seconds": 2.059584468
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'commit' of 'sqlite3.Connection' objects>",
+          "primitive_calls": 290,
+          "calls": 290,
+          "self_seconds": 2.012680971,
+          "cumulative_seconds": 2.012680971
+        },
+        {
+          "file": "sparselab/training/metrics.py",
+          "line": 508,
+          "function": "log_metrics",
+          "primitive_calls": 258,
+          "calls": 258,
+          "self_seconds": 0.003115539,
+          "cumulative_seconds": 1.8465522570000001
+        },
+        {
+          "file": "sparselab/training/checkpoints.py",
+          "line": 89,
+          "function": "_fsync_directory",
+          "primitive_calls": 279,
+          "calls": 279,
+          "self_seconds": 0.000890142,
+          "cumulative_seconds": 1.773750527
+        }
+      ]
+    }
+  },
+  "serialization_growth": {
+    "scope": "Serialization-only replay of retained real native StageRecord prefixes using dataclasses.asdict and canonical_json; no I/O or training. Not a full reporting benchmark.",
+    "observations": [
+      {
+        "records": 10,
+        "repeats": 20,
+        "median_serialization_seconds": 3.0429568141698837e-05,
+        "serialized_bytes": 2006
+      },
+      {
+        "records": 100,
+        "repeats": 20,
+        "median_serialization_seconds": 0.00026619306299835443,
+        "serialized_bytes": 20365
+      },
+      {
+        "records": 1000,
+        "repeats": 20,
+        "median_serialization_seconds": 0.002673789393156767,
+        "serialized_bytes": 205771
+      },
+      {
+        "records": 2150,
+        "repeats": 20,
+        "median_serialization_seconds": 0.00596396392211318,
+        "serialized_bytes": 443825
+      }
+    ]
+  }
+}
