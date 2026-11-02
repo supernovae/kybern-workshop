@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-02T00:32:47.024332+00:00",
+  "question": "Does a tenfold lower learning-rate schedule improve story consistency after a fixed additional 100003840 supervised targets?",
+  "lab_commit": "903ad2f0bb261935132dee53295aba6b66f8e792",
+  "parent_checkpoint_sha256": "c72d7d0283de2c6008f1b80d855bad6cb6ebc497f0094957a8982bd58a049110",
+  "parent_weights_sha256": "59a5b29d86846a8ac11e24bf220740b6aae28dfb1ae5021fdaaff4c98df97dcf",
+  "continuation": "native weights-only promotion; fresh AdamW moments, RNG seed42, cursor and counters; not continuation from either context child",
+  "schedule_kind": "warmup_cosine_v1",
+  "arms": {
+    "low": {
+      "peak": 6e-05,
+      "floor": 6e-06,
+      "warmup_steps": 2048,
+      "max_steps": 24415
+    },
+    "high": {
+      "peak": 0.0006,
+      "floor": 6e-05,
+      "warmup_steps": 2048,
+      "max_steps": 24415
+    }
+  },
+  "treatment": "Scale the entire learning-rate schedule by 0.1; floor/peak ratio stays0.1. This is not a peak-only test with a common absolute floor.",
+  "common": {
+    "parameters": 50556800,
+    "seed": 42,
+    "precision": "bf16",
+    "attention": "reference",
+    "optimizer": "adamw",
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.1,
+    "targets_per_update": 4096,
+    "targets": 100003840,
+    "checkpoint_every_steps": 256,
+    "keep_periodic": false,
+    "evaluation_every_steps": 1024,
+    "evaluation_max_batches": 32,
+    "gradient_clip_norm": 1.0
+  },
+  "context_selection": "Choose one training context after both current Intel context arms complete their frozen evaluation/generation; use the same context and compensated microbatch for both ROCm LR arms. Record the choice before either starts.",
+  "execution": "Sequential on the same existing ROCm device/runtime; stop at256 once and verify full-state resume without resetting budget; record preparation, training, reporting, checkpoint, evaluation and generation elapsed cost separately.",
+  "evaluation": "Both existing held-out context256/context512 panels plus frozen story-panel.json and story-rubric.json; blind paired labels withheld until scoring is frozen.",
+  "policy_sha256": "8f464a54dd042b7938eee078cfa5d0cc17d46f758002e83fade09907e250c79d"
+}

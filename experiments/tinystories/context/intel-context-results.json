@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "completed_at": "2026-11-02T02:40:18.270013+00:00",
+  "lab_commit": "903ad2f0bb261935132dee53295aba6b66f8e792",
+  "source_identity_sha256": "b9a071b17e12c366598b8f65a585e5753cfe14b673c7fb560528ea9f312eb1cc",
+  "hardware": "Intel Arc A380, approximately 6 GB VRAM; existing configuration without ReBAR",
+  "runtime": {
+    "python": "3.14.4",
+    "torch": "2.14.1+xpu",
+    "training_precision": "bf16",
+    "evaluation_precision": "fp32"
+  },
+  "parent_checkpoint_sha256": "c72d7d0283de2c6008f1b80d855bad6cb6ebc497f0094957a8982bd58a049110",
+  "parent_weights_sha256": "59a5b29d86846a8ac11e24bf220740b6aae28dfb1ae5021fdaaff4c98df97dcf",
+  "parent_evaluation": {
+    "256": {
+      "loss": 1.0752856247127056,
+      "valid_targets": 65536,
+      "comparison_group": "faa756d7caba2af54b8fbd1ed427b01ac89c84a75a840cf088e9357da06c0e96"
+    },
+    "512": {
+      "loss": 1.9336966834962368,
+      "valid_targets": 65536,
+      "comparison_group": "b93f7d576130107c69a7ed4d526f42be45e89aaa875c8c0ff5fd5deff7c35551"
+    }
+  },
+  "arms": {
+    "256": {
+      "config_sha256": "fdb4142eeb9dece836474a47d347a174aec3db9ea7efcea4855f8dea334dd574",
+      "checkpoint_sha256": "fbe3588b10036df1d6eabe7bb5a85dcb9072bebed92b79b6f81bc8ace6608a75",
+      "verified_files": [
+        {
+          "name": "training_state.pt",
+          "sha256": "a3597a9fa9da6d4135db25869230064dcd071fae11ba606e3f0ebdf91642a065"
+        },
+        {
+          "name": "weights-00001.safetensors",
+          "sha256": "31dfbe3382dacf73e8ce0a3c91a5f6ae2cfae2cde52a61f2711005dc80a7cb51"
+        }
+      ],
+      "full_state_verification_passed": true,
+      "updates": 24415,
+      "targets": 100003840,
+      "metric_audit": {
+        "applied_updates": 24415,
+        "contiguous_unique_steps": true,
+        "targets_per_update": 4096,
+        "all_train_losses_finite": true
+      },
+      "resume_verification": {
+        "restored_step": 256,
+        "restored_targets": 1048576,
+        "checks": {
+          "optimizer": true,
+          "rng": true,
+          "scaler": true,
+          "cursor": true,
+          "schedule": true,
+          "step": true,
+          "tokens_seen": true,
+          "config_sha256": true,
+          "architecture_sha256": true,
+          "source_identity_sha256": true,
+          "optimizer_parameter_names": true,
+          "weights": true
+        },
+        "all_passed": true,
+        "initial_generation": "23dc721717f341ae16c8c4e48d7dcbfa35a8dae1cba0ae7e7ad6078b62a312c7"
+      },
+      "promotion_initial_state": {
+        "weights_sha256": "59a5b29d86846a8ac11e24bf220740b6aae28dfb1ae5021fdaaff4c98df97dcf",
+        "step": 0,
+        "targets": 0,
+        "cursor": [
+          0,
+          0
+        ],
+        "optimizer_entries": 0,
+        "schedule": {
+          "kind": "warmup_cosine_v1",
+          "completed_updates": 0,
+          "max_steps": 24415,
+          "warmup_steps": 2048,
+          "peak": 0.0006,
+          "floor": 6e-05
+        },
+        "parent_checkpoint": "c72d7d0283de2c6008f1b80d855bad6cb6ebc497f0094957a8982bd58a049110"
+      },
+      "command_wall_seconds": 21479.460605223663,
+      "command_targets_per_second": 4655.7891670557,
+      "optimizer_update_seconds_cumulative": 18670.949854810257,
+      "optimizer_targets_per_second": 5356.119574936124,
+      "resume_phase_costs": {
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 96,
+          "seconds": 301.02510982053354
+        },
+        "checkpoint_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "evaluation": {
+          "availability": "not_observed",
+          "reason": "training records inline validation separately",
+          "seconds": null
+        },
+        "generation": {
+          "availability": "not_observed",
+          "reason": "generation is a separate inference operation",
+          "seconds": null
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 24159,
+          "seconds": 18476.08586018579
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.000525051262229681
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 1.3223009868524969
+        },
+        "relay_transfer": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 48779,
+          "seconds": 1981.9069732385688
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "seconds": 333.05219084536657
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 25,
+          "seconds": 81.07632648479193
+        },
+        "validation_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        }
+      },
+      "resource_metrics": {
+        "memory/device_peak_allocated_bytes": {
+          "observations": 24415,
+          "maximum": 2057633792.0
+        },
+        "memory/device_peak_reserved_bytes": {
+          "observations": 24415,
+          "maximum": 2185232384.0
+        },
+        "memory/process_peak_rss_bytes": {
+          "observations": 24415,
+          "maximum": 4777357312.0
+        },
+        "optimizer/overflow_retries": {
+          "observations": 24415,
+          "maximum": 0.0,
+          "sum": 0.0
+        },
+        "performance/step_seconds": {
+          "observations": 24415,
+          "maximum": 1.9166643200442195,
+          "sum": 18670.949854810257
+        }
+      },
+      "service_guard": {
+        "samples": 69,
+        "minimum_available_ram_bytes": 11815542784,
+        "maximum_training_rss_bytes": 4818563072,
+        "maximum_training_swap_bytes": 0,
+        "all_node_observations_ready_without_pressure": true
+      },
+      "evaluations": {
+        "256": {
+          "status": "complete",
+          "loss": 1.0888737477362156,
+          "perplexity": 2.9709261752980476,
+          "valid_targets": 65536,
+          "comparison_group": "faa756d7caba2af54b8fbd1ed427b01ac89c84a75a840cf088e9357da06c0e96",
+          "protocol_sha256": "13692a023e15600a4fe3d9133700b520eb0df902e575e54c00d65c96d9313a2b",
+          "elapsed_seconds": 7.820202279370278,
+          "evaluation_seconds": 5.1460201242007315
+        },
+        "512": {
+          "status": "complete",
+          "loss": 1.6490228101611137,
+          "perplexity": 5.201894104664322,
+          "valid_targets": 65536,
+          "comparison_group": "b93f7d576130107c69a7ed4d526f42be45e89aaa875c8c0ff5fd5deff7c35551",
+          "protocol_sha256": "9318de608e552d64735a8d31ee97964f18043a1d11ba77e959c6c52d896fcbff",
+          "elapsed_seconds": 8.115765003021806,
+          "evaluation_seconds": 5.4400013028644025
+        }
+      }
+    },
+    "512": {
+      "config_sha256": "906f4578565c7c98206720330047f43df47309278e583585c5574c687c56d81b",
+      "checkpoint_sha256": "8c459d4f8031a8dab9d0b9bfc033e224c5e04594efbe468048d69eb0c15e18e6",
+      "verified_files": [
+        {
+          "name": "training_state.pt",
+          "sha256": "8c5d4fbcf4211d6a471b2c08cd7fd06024b39ba12821b645280c6dd92d8a8695"
+        },
+        {
+          "name": "weights-00001.safetensors",
+          "sha256": "25ac84b16bbfe3597a86028e23fd9d9d88863c118e4808fb49b84638151bc1cb"
+        }
+      ],
+      "full_state_verification_passed": true,
+      "updates": 24415,
+      "targets": 100003840,
+      "metric_audit": {
+        "applied_updates": 24415,
+        "contiguous_unique_steps": true,
+        "targets_per_update": 4096,
+        "all_train_losses_finite": true
+      },
+      "resume_verification": {
+        "restored_step": 256,
+        "restored_targets": 1048576,
+        "checks": {
+          "optimizer": true,
+          "rng": true,
+          "scaler": true,
+          "cursor": true,
+          "schedule": true,
+          "step": true,
+          "tokens_seen": true,
+          "model": true,
+          "config_sha256": true,
+          "architecture_sha256": true,
+          "source_identity_sha256": true
+        },
+        "all_passed": true,
+        "initial_generation": "c95c10141c4f48d78e9aa68d4d6b1f87f57606bd792034c4b27554129b9093bf"
+      },
+      "promotion_initial_state": {
+        "checkpoint_sha256": "b66d76fb9a2c793318957afef859aa2682b073e1dde6d7c1724d8b2151586715",
+        "parent_checkpoint_sha256": "c72d7d0283de2c6008f1b80d855bad6cb6ebc497f0094957a8982bd58a049110",
+        "checks": {
+          "step_zero": true,
+          "targets_zero": true,
+          "cursor_zero": true,
+          "optimizer_fresh": true,
+          "weights_match_parent": true
+        },
+        "schedule": {
+          "kind": "warmup_cosine_v1",
+          "completed_updates": 0,
+          "max_steps": 24415,
+          "warmup_steps": 2048,
+          "peak": 0.0006,
+          "floor": 6e-05
+        },
+        "config_sha256": "906f4578565c7c98206720330047f43df47309278e583585c5574c687c56d81b"
+      },
+      "command_wall_seconds": 22223.61471768096,
+      "command_targets_per_second": 4499.890826510667,
+      "optimizer_update_seconds_cumulative": 19176.051334771793,
+      "optimizer_targets_per_second": 5215.038187693197,
+      "resume_phase_costs": {
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 96,
+          "seconds": 313.2326214881614
+        },
+        "checkpoint_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "evaluation": {
+          "availability": "not_observed",
+          "reason": "training records inline validation separately",
+          "seconds": null
+        },
+        "generation": {
+          "availability": "not_observed",
+          "reason": "generation is a separate inference operation",
+          "seconds": null
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 24159,
+          "seconds": 18977.394263214897
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.0007598050870001316
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 1.3585601169615984
+        },
+        "relay_transfer": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 48779,
+          "seconds": 2113.563499770593
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "seconds": 404.8328312956728
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 25,
+          "seconds": 94.84404429374263
+        },
+        "validation_attempt": {
+          "availability": "unavailable",
+          "observation_count": 0,
+          "seconds": null
+        }
+      },
+      "resource_metrics": {
+        "memory/device_peak_allocated_bytes": {
+          "observations": 24415,
+          "maximum": 2343960576.0
+        },
+        "memory/device_peak_reserved_bytes": {
+          "observations": 24415,
+          "maximum": 2510290944.0
+        },
+        "memory/process_peak_rss_bytes": {
+          "observations": 24415,
+          "maximum": 4842024960.0
+        },
+        "optimizer/overflow_retries": {
+          "observations": 24415,
+          "maximum": 0.0,
+          "sum": 0.0
+        },
+        "performance/step_seconds": {
+          "observations": 24415,
+          "maximum": 1.9431237978860736,
+          "sum": 19176.051334771793
+        }
+      },
+      "service_guard": {
+        "samples": 375,
+        "minimum_available_ram_bytes": 10118909952,
+        "maximum_training_rss_bytes": 4858036224,
+        "maximum_training_swap_bytes": 0,
+        "all_node_observations_ready_without_pressure": true
+      },
+      "evaluations": {
+        "256": {
+          "status": "complete",
+          "loss": 1.0904440376907587,
+          "perplexity": 2.975595055615357,
+          "valid_targets": 65536,
+          "comparison_group": "faa756d7caba2af54b8fbd1ed427b01ac89c84a75a840cf088e9357da06c0e96",
+          "protocol_sha256": "13692a023e15600a4fe3d9133700b520eb0df902e575e54c00d65c96d9313a2b",
+          "elapsed_seconds": 8.183310176245868,
+          "evaluation_seconds": 5.264148105401546
+        },
+        "512": {
+          "status": "complete",
+          "loss": 1.0262561179697514,
+          "perplexity": 2.790598580962909,
+          "valid_targets": 65536,
+          "comparison_group": "b93f7d576130107c69a7ed4d526f42be45e89aaa875c8c0ff5fd5deff7c35551",
+          "protocol_sha256": "9318de608e552d64735a8d31ee97964f18043a1d11ba77e959c6c52d896fcbff",
+          "elapsed_seconds": 8.319140535779297,
+          "evaluation_seconds": 5.672330772038549
+        }
+      }
+    }
+  },
+  "limits": [
+    "One seed and reused development validation, not an untouched final test.",
+    "Same target counts, different sequence block boundaries and shuffled block order.",
+    "Both arms reset optimizer, schedule and data cursor from the same parent weights.",
+    "Whole-command timing includes startup and shutdown; optimizer timing excludes reporting/checkpoints. Phase costs shown for the resumed invocation only.",
+    "Resource metrics are sampled observations; no hardware utilization percentage or isolated data-starvation measurement.",
+    "The context generation CLI does not expose token counts or stop reasons; do not treat every unfinished continuation as a demonstrated EOS ending failure."
+  ]
+}
