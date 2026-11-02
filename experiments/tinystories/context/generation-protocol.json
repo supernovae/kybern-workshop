@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "purpose": "development diagnostics",
+  "prompts": [
+    {
+      "id": "01",
+      "kind": "existing_short",
+      "text": "Lily put her red ball in a blue box. Later, she opened the box and",
+      "prompt_tokens": 18
+    },
+    {
+      "id": "02",
+      "kind": "existing_short",
+      "text": "Sam saw a small bird stuck in a puddle. He found a dry stick and",
+      "prompt_tokens": 16
+    },
+    {
+      "id": "03",
+      "kind": "existing_short",
+      "text": "Mia wanted to share her last apple with Ben. She cut it in two and",
+      "prompt_tokens": 16
+    },
+    {
+      "id": "04",
+      "kind": "existing_short",
+      "text": "Eli broke his favorite cup. He decided to tell the truth about what happened.",
+      "prompt_tokens": 18
+    },
+    {
+      "id": "05",
+      "kind": "existing_short",
+      "text": "Ada planted a seed in a small pot. Every day she carefully looked after it.",
+      "prompt_tokens": 20
+    },
+    {
+      "id": "06",
+      "kind": "existing_short",
+      "text": "Two friends both wanted the same toy. They tried to find a fair way to share.",
+      "prompt_tokens": 20
+    },
+    {
+      "id": "07",
+      "kind": "existing_short",
+      "text": "Noah found a mitten on the snowy path. He wanted to return it, but",
+      "prompt_tokens": 20
+    },
+    {
+      "id": "08",
+      "kind": "existing_short",
+      "text": "The little boat had a hole in its side. Nora and her brother decided to",
+      "prompt_tokens": 18
+    },
+    {
+      "id": "09",
+      "kind": "existing_short",
+      "text": "At first, the kitten was afraid of the rain. Then it noticed",
+      "prompt_tokens": 14
+    },
+    {
+      "id": "10",
+      "kind": "existing_short",
+      "text": "Ben promised to water the flowers while his neighbor was away. On the last day,",
+      "prompt_tokens": 17
+    },
+    {
+      "id": "11",
+      "kind": "existing_short",
+      "text": "A girl made two paper crowns, one large and one small. She gave the small one to",
+      "prompt_tokens": 20
+    },
+    {
+      "id": "12",
+      "kind": "existing_short",
+      "text": "The lights went out just before the puppet show. The children found a way to",
+      "prompt_tokens": 18
+    },
+    {
+      "id": "13",
+      "kind": "long_context",
+      "text": "Mira put a silver key in the green tin before leaving for school. The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  When Mira came home, she wanted the silver key. She looked in",
+      "prompt_tokens": 281
+    },
+    {
+      "id": "14",
+      "kind": "long_context",
+      "text": "Jon promised to give the yellow kite to his sister Beth after lunch. The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  After lunch, Jon picked up the yellow kite and went to",
+      "prompt_tokens": 279
+    },
+    {
+      "id": "15",
+      "kind": "long_context",
+      "text": "Nina saw a hole in the little wooden boat and left it on the sand. The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  Nina came back to the boat. Before putting it in the water, she decided to",
+      "prompt_tokens": 288
+    },
+    {
+      "id": "16",
+      "kind": "long_context",
+      "text": "Leo put three apples in a basket and gave one apple to his friend. The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  The children spent the morning in the garden. They watched a small bird land on a branch. A gentle wind moved the leaves. They talked about the clouds and the games they liked. Then they walked along the path and waved to a neighbor.  When Leo looked in his basket again, he counted",
+      "prompt_tokens": 277
+    }
+  ],
+  "modes": [
+    {
+      "name": "greedy",
+      "temperature": 0,
+      "top_k": 0
+    },
+    {
+      "name": "sampled",
+      "temperature": 0.7,
+      "top_k": 40
+    }
+  ],
+  "seed": 42,
+  "max_new_tokens": 192,
+  "strict_context": true,
+  "context_length": 512,
+  "parent_short_panel": "results/2026-10-31-tinystories-rocm/generation-panel-50m.json",
+  "selection": "All outputs retained; parent needs only the eight new long-context outputs because the original 24 short outputs already exist for the exact same checkpoint and settings. No prompt tuning after outputs."
+}

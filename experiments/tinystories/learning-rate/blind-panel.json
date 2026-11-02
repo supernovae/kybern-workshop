@@ -1,0 +1,465 @@
+{
+  "created_at": "2026-11-02T04:59:19.743010+00:00",
+  "panel_sha256": "2fc535fa459eca6b5a9d36ed7c2c74a3ae0083ec5be8795a5472bc4714937511",
+  "rubric_sha256": "8bdc9b8dd87384ef3cc918a20bc1734487f9828182a1eb28618531c563e4e446",
+  "assignment_sha256": "6b9d2e1e7217f97a2fc0a5a311fb4bb51a40c66fa8c6f45fdae46ea563012055",
+  "pairs": [
+    {
+      "pair_id": "story-01-greedy",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to go on journeys with her mommy and daddy. One day, they decided to go on a journey to a big green forest.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to go on journeys with her mommy and daddy. One day, they decided to go on a journey to a big green forest.\n\nAs they walked through the forest, they saw many trees and animals. Lily was having so much fun that she didn't notice the dark clouds in the sky. Suddenly, it started to rain and they had to go back home.\n\nLily was sad because she didn't want to leave the forest. But her mommy and daddy told her they would come back another day. They packed up their things and started their journey back home.\n\nWhen they arrived, Lily was so happy to see her mommy and daddy again. She hugged them tightly and said, \"I'm so glad you're back!\"",
+        "termination": "eos",
+        "completion_tokens": 123,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to go on journeys with her mommy and daddy. One day, they decided to go on a journey to a big green forest. \n\nAs they walked, Lily saw a big tree with a hole in it. She asked her mommy if they could peek inside. Her mommy said yes, so they went closer to the tree. \n\nSuddenly, they heard a loud noise. It was a big bear! Lily was scared, but her daddy said, \"Don't worry, I'll protect you.\" He took out a stick and scared the bear away. \n\nAfter that, they continued on their journey. Lily was happy to have her mommy and daddy with her. She said, \"I love you, mommy and daddy.\" They hugged her and said, \"We love you too, Lily.\"",
+        "termination": "eos",
+        "completion_tokens": 135,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-01-sampled",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to go on journeys with her mommy and daddy. One day, they decided to go on a journey to a big green forest.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to go on journeys with her mommy and daddy. One day, they decided to go on a journey to a big green forest.\n\nAs they walked through the forest, they saw many trees and animals. They saw a small pond with fish swimming in it. Lily loved to watch the fish and listen to the birds sing.\n\nSuddenly, they heard a loud noise. It was a big bear! Lily got scared and held her mommy and daddy tight. But then the bear came closer and sniffed their hands. It was a friendly bear!\n\nLily and her family were safe now and happy. They continued their journey to the big green forest, feeling grateful for the bear's help.",
+        "termination": "eos",
+        "completion_tokens": 115,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to go on journeys with her mommy and daddy. One day, they decided to go on a journey to a big green forest.\n\nAs they walked through the forest, they saw many trees and animals. They even found a pretty flower to pick. Lily was so happy to be on the journey with her family.\n\nBut soon, Lily started to feel sleepy. She asked her mommy if they could take a break and rest. They found a nice spot under a big tree and sat down. Lily closed her eyes and fell asleep.\n\nWhen she woke up, they continued on their journey. Lily was so excited for their next adventure!",
+        "termination": "eos",
+        "completion_tokens": 105,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-02-greedy",
+      "prompt": "Once upon a time, there was a monkey who lived in the jungle. One day, the monkey got confused and lost his way. He climbed up a tall tree to try and see where he was, but he still couldn't figure it out.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a monkey who lived in the jungle. One day, the monkey got confused and lost his way. He climbed up a tall tree to try and see where he was, but he still couldn't figure it out.\n\nSuddenly, he heard a voice. \"Hello, little monkey. Are you lost?\" It was a kind elephant who saw the monkey's problem and offered to help. The elephant showed the monkey the way back to his home.\n\nThe monkey was so happy and grateful to the elephant. \"Thank you so much, you are my hero!\" he said. The elephant smiled and replied, \"No problem, little monkey. That's what friends are for.\" And from that day on, the monkey and the elephant were the best of friends.",
+        "termination": "eos",
+        "completion_tokens": 111,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a monkey who lived in the jungle. One day, the monkey got confused and lost his way. He climbed up a tall tree to try and see where he was, but he still couldn't figure it out.\n\nSuddenly, he heard a voice calling out to him. It was his friend, the bird. The bird said, \"Don't worry, monkey. I'll help you find your way back home.\" The monkey was so happy and grateful to have such a good friend.\n\nTogether, they climbed the tree and finally found the monkey's home. The monkey was so happy and grateful to have such a good friend. From that day on, the monkey never got confused again and always remembered to ask for help when he needed it.",
+        "termination": "eos",
+        "completion_tokens": 110,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-02-sampled",
+      "prompt": "Once upon a time, there was a monkey who lived in the jungle. One day, the monkey got confused and lost his way. He climbed up a tall tree to try and see where he was, but he still couldn't figure it out.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a monkey who lived in the jungle. One day, the monkey got confused and lost his way. He climbed up a tall tree to try and see where he was, but he still couldn't figure it out.\n\nJust then, a kind lion saw the monkey and asked, \"Are you lost?\" The monkey replied, \"I am lost and I don't know where to go.\" The lion took the monkey to his den and gave him some food and water.\n\nBut then, the lion said, \"I have an idea. You can reverse into the jungle and find your way back home.\" The monkey was scared but he trusted the lion and followed him. The lion led him to his den and the monkey was so happy to be home.\n\nHe thanked the lion and promised to never get confused again. From that day on, the monkey knew he could always reverse into the jungle and find his way back home.",
+        "termination": "eos",
+        "completion_tokens": 153,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a monkey who lived in the jungle. One day, the monkey got confused and lost his way. He climbed up a tall tree to try and see where he was, but he still couldn't figure it out.\n\nJust then, a beautiful bird flew by and saw the monkey in trouble. The bird asked the monkey what was wrong and the monkey told him about his lost home. The bird offered to help and told the monkey to climb up the tree with him.\n\nThe monkey was so happy and thanked the bird for his help. But as they climbed higher up the tree, the monkey started to feel scared. The bird told him not to worry and promised to always help him find his way back home.\n\nFinally, they reached the monkey's home and the monkey realized that the bird was right. He was happy to be back with his family and promised to always be grateful for the help of a friend.",
+        "termination": "eos",
+        "completion_tokens": 144,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-03-greedy",
+      "prompt": "Once upon a time, there was a little boy named Timmy. Timmy loved to play with his toy trains. He had a big train set in his room with lots of tracks and trains to play with.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little boy named Timmy. Timmy loved to play with his toy trains. He had a big train set in his room with lots of tracks and trains to play with. One day, Timmy's mom asked him to clean up his room. Timmy didn't want to clean up, so he ignored his mom and kept playing with his trains.\n\nLater that day, Timmy's mom came into his room and saw that it was still messy. She told Timmy that he needed to clean up his room before he could play with his trains again. Timmy didn't want to clean up, but he knew he had to listen to his mom. So, he started to pick up his toys and put them away.\n\nAs he was cleaning, Timmy found a toy train that he had forgotten about. He was so happy to have found it again! He played with it for a while, but then he remembered that he had to clean up his room. So, he put all his trains away and cleaned up his room. When he was finished, he felt proud of himself for listening to his mom and cleaning up his room.",
+        "termination": "eos",
+        "completion_tokens": 194,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little boy named Timmy. Timmy loved to play with his toy trains. He had a big train set in his room with lots of tracks and trains to play with. One day, Timmy's mom asked him to clean up his toys before dinner. Timmy didn't want to clean up, but he knew he had to listen to his mom.\n\nAs Timmy was cleaning up, he found a shiny copper penny on the floor. He picked it up and showed it to his mom. \"Look, Mommy! I found a copper penny!\" he said. His mom smiled and said, \"That's great, Timmy. You can keep it.\"\n\nLater that night, Timmy was getting ready for bed. He put his copper penny in his pocket and went to bed. As he was falling asleep, he heard a noise outside his window. He got up and went to see what it was. It was his friend, Billy. Billy had a shiny copper penny too. Timmy was so happy to see it and he asked Billy if he could have it. Billy said yes and Timmy was so happy. He went to bed with his copper penny and dreamed about all the fun he would have with it the next day.",
+        "termination": "eos",
+        "completion_tokens": 217,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-03-sampled",
+      "prompt": "Once upon a time, there was a little boy named Timmy. Timmy loved to play with his toy trains. He had a big train set in his room with lots of tracks and trains to play with.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little boy named Timmy. Timmy loved to play with his toy trains. He had a big train set in his room with lots of tracks and trains to play with.\n\nOne day, Timmy's mom asked him to clean up his toys before dinner. Timmy didn't want to clean up, but he knew he had to listen to his mom. So, he quickly put away all of his toys and made his bed.\n\nAfter dinner, Timmy's mom told him it was time to go to bed. Timmy was sad because he didn't want to stop playing with his trains. But he knew he had to listen to his mom. He got into his bed and gave his favorite train a big hug. Timmy fell asleep feeling happy and relaxed by his new train.",
+        "termination": "eos",
+        "completion_tokens": 123,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little boy named Timmy. Timmy loved to play with his toy trains. He had a big train set in his room with lots of tracks and trains to play with.\n\nOne day, Timmy's friend Billy came over to play. Billy had a toy train too, but it was much bigger and more impressive than Timmy's. Timmy felt a little jealous because he wanted a bigger train too.\n\nBut then, Timmy's mom brought out a bigger's train set. It was bigger and more impressive than Timmy's little train set. Timmy felt happy again and forgot all about feeling jealous. He and Billy played with their trains together and had lots of fun. The end.",
+        "termination": "eos",
+        "completion_tokens": 103,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-04-greedy",
+      "prompt": "Once upon a time, there was a big, fierce lion. He lived in a jungle with many other animals. One day, the lion got hurt while playing with his friends. His paw hurt so much that he couldn't walk anymore.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a big, fierce lion. He lived in a jungle with many other animals. One day, the lion got hurt while playing with his friends. His paw hurt so much that he couldn't walk anymore. \n\nThe other animals were sad because they wanted to help the lion feel better. They decided to unite and find a way to help him. They searched high and low until they found a big, strong tree. They brought it to the lion and asked him to rest on it. \n\nThe lion was so happy that he could now walk again. He thanked his friends and they all played together in the jungle. From that day on, the lion was more careful when he played with his friends.",
+        "termination": "eos",
+        "completion_tokens": 102,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a big, fierce lion. He lived in a jungle with many other animals. One day, the lion got hurt while playing with his friends. His paw hurt so much that he couldn't walk anymore. \n\nThe other animals tried to help the lion, but they didn't know what to do. Then, a wise owl came and told them that they needed to go to the doctor. The lion was scared, but he trusted the owl. \n\nAt the doctor's office, the doctor looked at the lion's paw and said that he needed to rest for a while. The lion was sad because he couldn't play with his friends anymore. But the doctor said that he would be back soon and that the lion would be all better soon. \n\nAfter a few days, the lion's paw felt better and he was able to play with his friends again. He was so happy that he could run and jump with his friends once more. From that day on, the lion was careful not to get hurt again.",
+        "termination": "eos",
+        "completion_tokens": 166,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-04-sampled",
+      "prompt": "Once upon a time, there was a big, fierce lion. He lived in a jungle with many other animals. One day, the lion got hurt while playing with his friends. His paw hurt so much that he couldn't walk anymore.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a big, fierce lion. He lived in a jungle with many other animals. One day, the lion got hurt while playing with his friends. His paw hurt so much that he couldn't walk anymore.\n\nThe lion's friends knew that he needed a veterinarian to help him feel better. They all went to the veterinarian's office and waited for him to arrive. The veterinarian was very kind and took care of the lion's paw.\n\nAfter the veterinarian checked the lion's paw, he told them that he needed to rest for a few days. The lion was sad that he couldn't play with his friends anymore, but he knew he needed to rest. He thanked the veterinarian for helping him and promised to be more careful with his paw in the future.",
+        "termination": "eos",
+        "completion_tokens": 131,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a big, fierce lion. He lived in a jungle with many other animals. One day, the lion got hurt while playing with his friends. His paw hurt so much that he couldn't walk anymore.\n\nThe lion's friends knew they had to help him. They decided to go to the veterinarian to see what was wrong. The veterinarian looked at the lion's paw and told him it was just a little scratch. He gave the lion a bandage and the lion felt better.\n\nThe next day, the lion was all better. His wing was all better and he could play with his friends again. The lion was so happy that he gave his friends a big hug. From that day on, the lion knew that he had the best friends in the jungle.",
+        "termination": "eos",
+        "completion_tokens": 121,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-05-greedy",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved playing with balloons. One day, Lily's mom gave her a big, red balloon. Lily was so happy and played with it all day long.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved playing with balloons. One day, Lily's mom gave her a big, red balloon. Lily was so happy and played with it all day long.\n\nBut then, Lily's little brother came and took the balloon away. Lily was sad and didn't know what to do. She wanted her balloon back.\n\nLily's mom saw what happened and said, \"Don't worry, Lily. We can get another balloon. Let's go to the store and find one that is available.\"\n\nLily and her mom went to the store and found a new balloon. Lily was so happy and played with it all day long. She learned that sometimes things can be taken away, but there are always other things available to make you happy.",
+        "termination": "eos",
+        "completion_tokens": 120,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved playing with balloons. One day, Lily's mom gave her a big, red balloon. Lily was so happy and played with it all day long.\n\nBut then, Lily's little brother came and took the balloon away. Lily was sad and didn't know what to do. She asked her mom for help. Her mom told her to release the balloon and let her brother play with it too.\n\nLily released the balloon and watched it fly up into the sky. She was happy again and played with her brother all day long. The end.",
+        "termination": "eos",
+        "completion_tokens": 85,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-05-sampled",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved playing with balloons. One day, Lily's mom gave her a big, red balloon. Lily was so happy and played with it all day long.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved playing with balloons. One day, Lily's mom gave her a big, red balloon. Lily was so happy and played with it all day long.\n\nLater that day, Lily's mom asked her to clean up her toys. Lily didn't want to stop playing with her balloon, but she knew she had to listen to her mom. So, she picked up all her toys and put them away.\n\nAfter she was done, Lily's mom asked her to return the balloon to its place. Lily didn't know where the balloon went, but she knew she had to return it. She went back to where she found it and gave it to her mom.\n\nWhen Lily's mom saw the balloon, she was so happy and proud of her. She told Lily how thoughtful she was and how much she appreciated her help. From that day on, Lily made sure to take care of her balloons and always return them to their place.",
+        "termination": "eos",
+        "completion_tokens": 163,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved playing with balloons. One day, Lily's mom gave her a big, red balloon. Lily was so happy and played with it all day long.\n\nLater that day, Lily's friend came over to play. Lily's friend wanted to play with the balloon too, but Lily didn't want to share. She was being selfish and didn't want to share.\n\nLily's friend felt sad and left. But then, Lily's mom told her to be kind and share with her friend. Lily felt bad and decided to surrender the balloon to her friend. They played together and had so much fun.\n\nFrom that day on, Lily learned that it's important to share and be kind to others. She learned that being selfish can make others happy and that it's okay to share.",
+        "termination": "eos",
+        "completion_tokens": 132,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-06-greedy",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved animals, especially puppies. One day, Lily's parents took her to the park to play. While they were there, a little puppy came up to Lily and wagged its tail.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved animals, especially puppies. One day, Lily's parents took her to the park to play. While they were there, a little puppy came up to Lily and wagged its tail. Lily was so happy to see the puppy and she wanted to play with it.\n\nLily's parents told her that the puppy was very special and had a lot of value. Lily didn't understand what \"valuable\" meant, but she knew that the puppy was very special. She decided to take the puppy home with her and play with it every day.\n\nLily's parents were happy to see the puppy and they all played together. Lily was so happy that she got to see the puppy and play with it. She knew that the puppy was very valuable and she wanted to take care of it. From that day on, Lily and the puppy became best friends and played together every day.",
+        "termination": "eos",
+        "completion_tokens": 143,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved animals, especially puppies. One day, Lily's parents took her to the park to play. While they were there, a little puppy came up to Lily and wagged its tail. Lily was so happy to see the puppy and she wanted to pet it. \n\nBut the puppy was scared and ran away. Lily's parents told her that the puppy didn't like strangers and that she shouldn't touch it. Lily felt sad and wanted to make the puppy feel better. So, she decided to give the puppy a hug. The puppy felt happy and licked Lily's face. \n\nLily's parents were proud of her for being kind to the puppy. They told her that it's important to be kind to animals and to always try to make them feel better. Lily learned that even though she didn't get to pet the puppy, she still had a good time playing with it.",
+        "termination": "eos",
+        "completion_tokens": 144,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-06-sampled",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved animals, especially puppies. One day, Lily's parents took her to the park to play. While they were there, a little puppy came up to Lily and wagged its tail.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved animals, especially puppies. One day, Lily's parents took her to the park to play. While they were there, a little puppy came up to Lily and wagged its tail.\n\nLily was so happy to see the puppy. She petted it and said, \"You're so cute!\"\n\nThe puppy barked happily and Lily's parents smiled. Suddenly, the puppy ran off and Lily felt a bit scared. But then she realized that the puppy was friendly and just wanted to play.\n\nLily's parents continued their walk and Lily played with the puppy until it was time to go home. When they got home, Lily's parents were there to discuss what to do with the puppy. They decided to keep it and named it Max.\n\nLily was so excited to have a new friend. She loved Max and Max loved her too. From that day on, Lily and Max became best friends and played together every day.",
+        "termination": "eos",
+        "completion_tokens": 155,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved animals, especially puppies. One day, Lily's parents took her to the park to play. While they were there, a little puppy came up to Lily and wagged its tail.\n\n\"Hi there, little pup! You're so cute!\" said Lily.\n\nThe puppy's owner, a kind lady, said hello and asked if she could hold it. The little puppy licked Lily's face and she giggled.\n\n\"Thank you for letting me hold your puppy,\" said Lily.\n\n\"You're welcome. He loves making new friends,\" said the lady.\n\nLily and her parents played with the puppy for a while before saying goodbye and heading home. Lily was so happy to have made a new friend.",
+        "termination": "eos",
+        "completion_tokens": 114,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-07-greedy",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to draw and color. One day, Lily's mommy brought home a big turkey for dinner. \n\nLily saw the turkey and said, \"Wow, that's a big bird!\"",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to draw and color. One day, Lily's mommy brought home a big turkey for dinner. \n\nLily saw the turkey and said, \"Wow, that's a big bird!\" \n\nMommy said, \"Yes, it is. But we have to cook it first.\" \n\nLily helped her mommy cook the turkey. They put it in a pan and cooked it. When it was ready, they put it on a plate and ate it. It was delicious! \n\nAfter dinner, Lily went to bed. She was so tired that she fell asleep right away. The turkey was still there, waiting for her to wake up.",
+        "termination": "eos",
+        "completion_tokens": 94,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to draw and color. One day, Lily's mommy brought home a big turkey for dinner. \n\nLily saw the turkey and said, \"Wow, that's a big bird!\" \n\nHer mommy said, \"Yes, it is. Do you want to draw it?\" \n\nLily said, \"Yes, please!\" \n\nSo, her mommy gave her a piece of paper and some crayons. Lily drew the turkey and said, \"Look, mommy! I drew the turkey!\" \n\nHer mommy said, \"That's great, Lily! You're such a good artist.\" \n\nLily smiled and said, \"Thank you, mommy. I love drawing with you.\"",
+        "termination": "eos",
+        "completion_tokens": 104,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-07-sampled",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to draw and color. One day, Lily's mommy brought home a big turkey for dinner. \n\nLily saw the turkey and said, \"Wow, that's a big bird!\"",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to draw and color. One day, Lily's mommy brought home a big turkey for dinner. \n\nLily saw the turkey and said, \"Wow, that's a big bird!\" \n\nMommy said, \"Yes, it's a special turkey. It's very tasty.\" \n\nLily said, \"Can we take a picture of the turkey?\" \n\nMommy said, \"Sure, let's take a picture.\" \n\nLily took a picture of the turkey with her camera. When they got home, Lily drew a picture of the turkey with her camera. She was happy to have such an ordinary family member.",
+        "termination": "eos",
+        "completion_tokens": 93,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to draw and color. One day, Lily's mommy brought home a big turkey for dinner. \n\nLily saw the turkey and said, \"Wow, that's a big bird!\" \n\nHer mommy said, \"Yes, it is. But it looks very cold. Let's make it warm.\"\n\nLily's mommy took a knife and cut the turkey into slices. She spread some butter on the turkey and gave one piece to Lily. \n\nLily said, \"This turkey is yummy! Thank you, mommy.\" \n\nHer mommy smiled and said, \"You're welcome, sweetie. I'm glad you like it.\" \n\nLily ate her turkey and said, \"That was yummy too, mommy. Can we make this turkey again tomorrow?\" \n\nHer mommy said, \"Of course, we can make this turkey again tomorrow.\" \n\nAnd so, Lily and her mommy had a fun dinner together, making the big turkey warm and yummy turkey.",
+        "termination": "eos",
+        "completion_tokens": 167,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-08-greedy",
+      "prompt": "Once upon a time, there was a little rabbit named Benny. Benny loved to play hide and seek with his friends. One day, he found a bulb in the ground and was very enthusiastic about it.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little rabbit named Benny. Benny loved to play hide and seek with his friends. One day, he found a bulb in the ground and was very enthusiastic about it. He showed it to his friends and they all thought it was cool.\n\nBenny decided to hide the bulb in his burrow so he could show it to his friends later. But when he went to get it, he realized it was gone! He looked everywhere but couldn't find it.\n\nBenny was very sad and didn't know what to do. He decided to go on a search to find the bulb. He searched high and low until he finally found it under his bed. He was so happy and enthusiastic about his find. From that day on, Benny always checked his bulb before he played hide and seek with his friends.",
+        "termination": "eos",
+        "completion_tokens": 139,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little rabbit named Benny. Benny loved to play hide and seek with his friends. One day, he found a bulb in the ground and was very enthusiastic about it. He showed it to his friends and they all agreed that it was very pretty.\n\nBenny decided to hide the bulb in his burrow so that it would stay safe. He dug a hole and put the bulb inside. He covered it with dirt and patted it down. He was very proud of himself for being so responsible.\n\nLater that day, Benny's friends came over to play. They asked him if he wanted to play hide and seek. Benny was excited and said yes. They played for hours and had so much fun. Benny was happy that he found the bulb and that he could share it with his friends.",
+        "termination": "eos",
+        "completion_tokens": 137,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-08-sampled",
+      "prompt": "Once upon a time, there was a little rabbit named Benny. Benny loved to play hide and seek with his friends. One day, he found a bulb in the ground and was very enthusiastic about it.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little rabbit named Benny. Benny loved to play hide and seek with his friends. One day, he found a bulb in the ground and was very enthusiastic about it.\n\nBenny's friend, a little bird named Billy, saw the bulb and asked, \"What is that, Benny?\"\n\n\"It's a bulb,\" Benny replied. \"I don't know what will happen if I plant it.\"\n\nBut as Benny planted the bulb, he felt a little strange. He wondered if he would ever find out what would happen.\n\nLater that day, Benny found himself in a big bundle of leaves. He looked up and saw that the bulb had sprung up and was now covered in tiny seeds. Benny was so happy!\n\nThe next day, Benny and Billy went outside to play again. Benny put the bulb in the ground and watered it. He was so enthusiastic about it, but he was also a little scared. He didn't know if it would grow into a big plant like the bulb he found.\n\nAnd that's how Benny learned about bulbs and how they can sprout and grow into something beautiful.",
+        "termination": "eos",
+        "completion_tokens": 220,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little rabbit named Benny. Benny loved to play hide and seek with his friends. One day, he found a bulb in the ground and was very enthusiastic about it.\n\nBenny showed the bulb to his friends, but they didn't think it was very pretty. They thought it was just a big rock. Benny didn't listen to them and kept the bulb for himself.\n\nOne day, Benny's friends wanted to play with the bulb too, but Benny didn't want to share. He didn't even want to share it with them. His friends were sad and went home.\n\nBenny felt bad for not sharing the bulb with his friends. He realized that it was important to be kind and share with his friends. From that day on, Benny learned to share his toys and be kind to his friends.",
+        "termination": "eos",
+        "completion_tokens": 140,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-09-greedy",
+      "prompt": "Once upon a time, there was a little girl named Lily who loved to play outside. One day, she saw a blue butterfly and wanted to catch it. She ran after it, but she didn't watch where she was going and fell down.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily who loved to play outside. One day, she saw a blue butterfly and wanted to catch it. She ran after it, but she didn't watch where she was going and fell down. She hurt her knee and started to cry.\n\nHer mom came outside and asked, \"What happened, Lily?\"\n\n\"I fell down and hurt my knee,\" Lily said.\n\nHer mom hugged her and said, \"It's okay, Lily. Let's go inside and put a band-aid on it.\"\n\nLily felt better and they went inside to put a band-aid on her knee. She learned to be more careful and watch where she was going.",
+        "termination": "eos",
+        "completion_tokens": 99,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily who loved to play outside. One day, she saw a blue butterfly and wanted to catch it. She ran after it, but she didn't watch where she was going and fell down. She hurt her knee and started to cry.\n\nHer mom came outside and asked, \"What happened, Lily?\"\n\n\"I fell down and hurt my knee,\" Lily said.\n\nHer mom hugged her and said, \"It's okay, we'll clean it up and put a band-aid on it.\"\n\nLily felt better and said, \"Thank you, Mommy.\"\n\nLater that day, Lily's friend came over to play. They were having fun until Lily's friend accidentally broke her favorite toy. Lily felt sad and said, \"I'm sorry, I didn't mean to break it.\"\n\nHer friend said, \"It's okay, accidents happen. Let's play together instead.\"\n\nLily felt happy again and they played together until it was time for her friend to go home. Lily's mom came outside and saw her friend's broken toy. She asked, \"Did you have fun playing with your friend?\"\n\nLily's friend said, \"Yes, I did. I'm sorry I broke your toy.\"\n\nLily's mom smiled and said, \"It's okay, accidents happen. Let's go inside and have some cookies.\"",
+        "termination": "eos",
+        "completion_tokens": 244,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-09-sampled",
+      "prompt": "Once upon a time, there was a little girl named Lily who loved to play outside. One day, she saw a blue butterfly and wanted to catch it. She ran after it, but she didn't watch where she was going and fell down.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily who loved to play outside. One day, she saw a blue butterfly and wanted to catch it. She ran after it, but she didn't watch where she was going and fell down.\n\n\"Ouch!\" cried Lily.\n\nHer mom came outside and asked, \"What happened, Lily?\"\n\n\"I fell down,\" said Lily.\n\nHer mom took her inside and gave her a band-aid. But Lily was still sad that she couldn't catch the blue butterfly. She decided to try again later and went inside.\n\nLater that day, Lily's mom asked her to help tidy up the house. As she was putting away the toys, she accidentally stepped on a blue piece of paper and it got stuck in her shoe.\n\nLily tried to pull it out, but it wouldn't budge. Suddenly, her mom came in and saw what happened. She quickly grabbed the paper and saw that it was a message that Lily had cut out from the paper.\n\nBut it was too late, the message was ruined and Lily and her mom were both very sad. From that day on, Lily learned to be more careful when climbing and to always check the house for any paper that might get stuck in her shoe.",
+        "termination": "eos",
+        "completion_tokens": 217,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily who loved to play outside. One day, she saw a blue butterfly and wanted to catch it. She ran after it, but she didn't watch where she was going and fell down.\n\n\"Ouch!\" she cried.\n\nHer mommy came outside and asked, \"Are you okay, Lily?\"\n\nLily replied, \"I fell down and hurt my knee. That's why I'm going to cry.\"\n\nHer mommy kissed her knee and said, \"Don't worry, we'll put a band-aid on it and it will feel better soon.\"\n\nLily felt better and hugged her mommy. \"Thank you for helping me,\" she said. \"You're the best mommy ever.\"",
+        "termination": "eos",
+        "completion_tokens": 107,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-10-greedy",
+      "prompt": "Once upon a time, there was a girl named Lily. She loved to play outside in the hot sun. But today, the weather was not so hot. It was cloudy and rainy.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a girl named Lily. She loved to play outside in the hot sun. But today, the weather was not so hot. It was cloudy and rainy. Lily was sad because she could not play outside.\n\nLily's mom saw her sad face and had an idea. She said, \"Let's make a big, fun game inside!\" Lily and her mom played a game called \"freeze the Score\". They had to freeze the toys in a big box. Lily and her mom had so much fun playing the game.\n\nAfter they finished playing, the rain stopped. The sun came out and the weather was not hot anymore. Lily and her mom went outside to play in the sun again. They were happy and had a great day.",
+        "termination": "eos",
+        "completion_tokens": 125,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a girl named Lily. She loved to play outside in the hot sun. But today, the weather was not so hot. It was cloudy and rainy. Lily was sad because she wanted to play outside.\n\nLily's mom told her to put on her raincoat and boots. Lily put on her raincoat and boots and went outside to play. She jumped in puddles and splashed around. But then, she saw a big puddle that was too deep for her to jump in. She was sad again.\n\nLily's mom told her that sometimes we can't do everything we want. But Lily didn't listen. She jumped in the puddle anyway. But then, she slipped and fell in. She was hurt and couldn't get up. Her mom called for help, but it was too late. Lily had to go to the hospital and get hurt. She learned that sometimes it's better to listen to her mom and not do things that are too dangerous.",
+        "termination": "eos",
+        "completion_tokens": 166,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-10-sampled",
+      "prompt": "Once upon a time, there was a girl named Lily. She loved to play outside in the hot sun. But today, the weather was not so hot. It was cloudy and rainy.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a girl named Lily. She loved to play outside in the hot sun. But today, the weather was not so hot. It was cloudy and rainy.\n\nLily went to her friend's house to play. Her friend had a new toy that Lily really wanted to play with. Her friend said no, but Lily insisted. They started to argue and push each other.\n\nSuddenly, they heard a loud noise. It was the sound of a big truck driving by. They looked up and saw a big truck with lots of boxes inside. The truck driver stopped and opened the boxes. Inside, there were lots of toys! Lily and her friend were so happy. They played with the toys and had lots of fun.",
+        "termination": "eos",
+        "completion_tokens": 118,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a girl named Lily. She loved to play outside in the hot sun. But today, the weather was not so hot. It was cloudy and rainy. Lily was sad because she could not go outside to play.\n\nHer mom said, \"Don't worry, Lily. We can go inside and play a game.\" Lily liked games, so she smiled and followed her mom inside. They played a game and had fun, even though it was raining outside.\n\nAfter the game, Lily's mom said, \"Now, let's make some hot chocolate.\" They went to the kitchen and made the hot chocolate. They drank it and it was very yummy. Lily was happy again because she loved spending time with her mom.",
+        "termination": "eos",
+        "completion_tokens": 118,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-11-greedy",
+      "prompt": "Once upon a time, there was a little boy named Timmy. Timmy had a toy box with many toys. One day, Timmy's friend came over to play. Timmy's friend wanted to play with Timmy's favorite toy, but Timmy didn't want to share.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little boy named Timmy. Timmy had a toy box with many toys. One day, Timmy's friend came over to play. Timmy's friend wanted to play with Timmy's favorite toy, but Timmy didn't want to share. \n\nTimmy's friend got upset and said, \"Timmy, you're being selfish. Let's play together!\" But Timmy didn't want to play with his friend anymore. \n\nLater that day, Timmy's mom came in and saw that Timmy's toy box was empty. She asked Timmy if he had shared his toys with his friend. Timmy felt bad and said, \"I'm sorry, Mom. I didn't want to share my toys.\" \n\nTimmy's mom smiled and said, \"It's okay, Timmy. You can share your toys with your friend. That's what friends do.\" Timmy felt happy again and they played together with all the toys. The end.",
+        "termination": "eos",
+        "completion_tokens": 138,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little boy named Timmy. Timmy had a toy box with many toys. One day, Timmy's friend came over to play. Timmy's friend wanted to play with Timmy's favorite toy, but Timmy didn't want to share. Timmy's friend felt sad and left.\n\nLater that day, Timmy's mom asked him to help her with the dishes. Timmy didn't want to help because he was feeling selfish. But then he remembered how he felt when his friend wanted to play with his toy. So, Timmy decided to help his mom. He put the dishes in the dishwasher and turned it on. His mom was so proud of him for helping. Timmy felt happy and not selfish anymore.",
+        "termination": "eos",
+        "completion_tokens": 97,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-11-sampled",
+      "prompt": "Once upon a time, there was a little boy named Timmy. Timmy had a toy box with many toys. One day, Timmy's friend came over to play. Timmy's friend wanted to play with Timmy's favorite toy, but Timmy didn't want to share.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little boy named Timmy. Timmy had a toy box with many toys. One day, Timmy's friend came over to play. Timmy's friend wanted to play with Timmy's favorite toy, but Timmy didn't want to share.\n\nTimmy's friend felt sad and went home. Timmy felt bad and realized he should share his toys with his friend. He decided to take out his favorite toy car and share it with his friend.\n\nTimmy's friend was happy and they played together. Timmy realized that sharing is important and it feels good to make people happy. From that day on, Timmy always shared his toys with his friends and they had lots of fun together. The end.",
+        "termination": "eos",
+        "completion_tokens": 92,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little boy named Timmy. Timmy had a toy box with many toys. One day, Timmy's friend came over to play. Timmy's friend wanted to play with Timmy's favorite toy, but Timmy didn't want to share.\n\n\"I want to play with my toy,\" said Timmy.\n\n\"But I want to play with it too,\" said Timmy's friend.\n\nTimmy thought for a moment and then said, \"Let's play together! We can share my toy car.\"\n\nTimmy's friend was happy to hear that and they played together happily. Timmy learned that sharing is important and it's not nice to be selfish.",
+        "termination": "eos",
+        "completion_tokens": 86,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-12-greedy",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to play outside in her backyard. One day, she found a cool hedge that she had never seen before. She wanted to explore it, but her mom said it wasn't safe.",
+      "mode": "greedy",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to play outside in her backyard. One day, she found a cool hedge that she had never seen before. She wanted to explore it, but her mom said it wasn't safe.\n\nLily was sad, but she didn't give up. She decided to make a plan to explore the hedge without her mom knowing. She found a big stick and used it to climb up the hedge. When she got to the top, she saw a beautiful garden with lots of flowers and trees.\n\nLily was so happy that she found a way to explore the cool hedge without her mom knowing. She played in the garden all day and even made a new friend. From that day on, Lily knew that sometimes it's better to be safe than sorry.",
+        "termination": "eos",
+        "completion_tokens": 114,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to play outside in her backyard. One day, she found a cool hedge that she had never seen before. She wanted to explore it, but her mom said it wasn't safe.\n\nLily was sad, but she listened to her mom and stayed away from the hedge. She played with her toys and had fun. But then, she saw a butterfly and wanted to catch it. She ran after it, but she didn't see the big rock in her way. She tripped and fell, hurting her knee.\n\nLily's mom came outside and saw what happened. She hugged her and said, \"I told you not to go near the hedge. It's not safe.\" Lily learned her lesson and promised to always listen to her mom. From that day on, she always listened to her mom and stayed safe.",
+        "termination": "eos",
+        "completion_tokens": 130,
+        "error_type": null
+      }
+    },
+    {
+      "pair_id": "story-12-sampled",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to play outside in her backyard. One day, she found a cool hedge that she had never seen before. She wanted to explore it, but her mom said it wasn't safe.",
+      "mode": "sampled",
+      "A": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to play outside in her backyard. One day, she found a cool hedge that she had never seen before. She wanted to explore it, but her mom said it wasn't safe.\n\nLily didn't listen and went into the hedge anyway. She got stuck and couldn't get out. Her mom searched and searched, but couldn't find her. Unfortunately, Lily was stuck and couldn't escape.\n\nThe moral of the story is that it's important to listen to your parents and not do things that could hurt you. It's important to be careful and not do things that could hurt you.",
+        "termination": "eos",
+        "completion_tokens": 89,
+        "error_type": null
+      },
+      "B": {
+        "status": "complete",
+        "text": "Once upon a time, there was a little girl named Lily. She loved to play outside in her backyard. One day, she found a cool hedge that she had never seen before. She wanted to explore it, but her mom said it wasn't safe.\n\nLily didn't listen to her mom and went to explore the hedge anyway. She found a treasure chest inside! She was so excited and wanted to show her mom. But when she tried to open it, she realized that the chest was stuck.\n\nLily realized that her mom's warning had led her to a dangerous situation. She learned that sometimes things that seem cool can be dangerous. From that day on, she listened to her mom's advice and never explored the hedge again.",
+        "termination": "eos",
+        "completion_tokens": 102,
+        "error_type": null
+      }
+    }
+  ],
+  "packet_sha256": "2dd0f4fe6118073a5116eb15bf55a96fe20833a49d4cf7b6ed8ac1dab368dec5"
+}

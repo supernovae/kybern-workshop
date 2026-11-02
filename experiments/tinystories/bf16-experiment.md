@@ -1,0 +1,9 @@
+# 50M BF16 experiment
+
+[run-50m-bf16.json](run-50m-bf16.json) is a fresh scientific run derived from the published BF16 8 × 2 calibration. It is named `tinystories-50m-bf16`, uses Lab `903ad2f0bb261935132dee53295aba6b66f8e792`, and does not resume or warm-start the FP32 baseline or calibration checkpoints. Those artifacts remain preserved. Record the immutable Workshop publication commit and native bound-config identity with execution evidence.
+
+The model has 50,556,800 parameters, seed 42, reference dense attention, BF16, microbatch 8, accumulation 2 and sequence length 256. The original horizon is 244,141 updates / 1,000,001,536 targets. AdamW and its 2,048-update warmup are unchanged. Checkpoint every 256 updates with `keep_periodic=false`; evaluation every 1,024 updates, at most 32 batches. No BF16/SDPA combination is introduced.
+
+Reuse the pinned snapshot and 4,096-entry tokenizer. At this Lab pin, prepare one native cache if absent; do not relabel historical caches, reacquire the corpus or refit the tokenizer. Publish and verify a configuration-specific input bundle, then use public staging through warmup. Start from initialization and stop at step 256 without shortening the horizon. Verify its full-state generation, resume unchanged into a child identity, compare restored optimizer/RNG/cursor/counters, and continue to the original budget. Disposable staging pilots are not scientific exposure. Account for current, best/initial and temporary checkpoint generations despite periodic retention being disabled.
+
+BF16 evaluation covers up to 65,536 targets (32 × 8 × 256), whereas the completed 5M evaluation covers 32,768. These are different protocols, so do not rank their losses as matched quality measurements. The calibration showed a throughput benefit; full convergence, generated-story quality and remote/Colab portability remain unproven until actual evidence exists.

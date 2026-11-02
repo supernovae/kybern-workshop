@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "status": "pre-scientific-arm portability and calibration evidence",
+  "lab_commit": "903ad2f0bb261935132dee53295aba6b66f8e792",
+  "hardware": {
+    "gpu": "Intel Arc A380",
+    "device_total_bytes": 6064541696,
+    "torch": "2.14.1+xpu",
+    "python": "3.14.4",
+    "warning": "Resizable BAR not detected; no host settings changed"
+  },
+  "calibration": {
+    "purpose": "Separate promoted calibration, excluded from scientific arm budget",
+    "context": 512,
+    "step": 256,
+    "targets": 1048576,
+    "state": "INTERRUPTED",
+    "elapsed_including_worker_staging_seconds": 329.16045071184635,
+    "optimizer_targets_per_second": 5284.318812236228,
+    "phases": {
+      "checkpoint": {
+        "availability": "observed",
+        "observation_count": 2,
+        "seconds": 5.231233485974371
+      },
+      "checkpoint_attempt": {
+        "availability": "unavailable",
+        "observation_count": 0,
+        "seconds": null
+      },
+      "evaluation": {
+        "availability": "not_observed",
+        "reason": "training records inline validation separately",
+        "seconds": null
+      },
+      "generation": {
+        "availability": "not_observed",
+        "reason": "generation is a separate inference operation",
+        "seconds": null
+      },
+      "optimizer_update": {
+        "availability": "observed",
+        "observation_count": 256,
+        "seconds": 198.43163087964058
+      },
+      "planning": {
+        "availability": "observed",
+        "observation_count": 1,
+        "seconds": 0.0000863960012793541
+      },
+      "preparation": {
+        "availability": "observed",
+        "observation_count": 1,
+        "seconds": 0.8012733859941363
+      },
+      "relay_transfer": {
+        "availability": "unavailable",
+        "observation_count": 0,
+        "seconds": null
+      },
+      "reporting": {
+        "availability": "observed",
+        "observation_count": 526,
+        "seconds": 18.40655149705708
+      },
+      "unclassified_overhead": {
+        "availability": "derived_residual",
+        "seconds": 12.5960070672445
+      },
+      "validation": {
+        "availability": "observed",
+        "observation_count": 1,
+        "seconds": 5.042869871947914
+      },
+      "validation_attempt": {
+        "availability": "unavailable",
+        "observation_count": 0,
+        "seconds": null
+      }
+    },
+    "checkpoint_sha256": "ae2879e6196a9e1135da7402327773433134484ab8b6e8c35b811b42bfc28af1",
+    "resource_metrics": [
+      {
+        "name": "memory/device_allocated_bytes",
+        "min": 867967488,
+        "max": 878486016,
+        "count": 256
+      },
+      {
+        "name": "memory/device_peak_allocated_bytes",
+        "min": 1938260992,
+        "max": 2343960576,
+        "count": 256
+      },
+      {
+        "name": "memory/device_peak_reserved_bytes",
+        "min": 2006974464,
+        "max": 2476736512,
+        "count": 256
+      },
+      {
+        "name": "memory/device_reserved_bytes",
+        "min": 2006974464,
+        "max": 2476736512,
+        "count": 256
+      },
+      {
+        "name": "memory/observer_active_seconds",
+        "min": 0,
+        "max": 0,
+        "count": 256
+      },
+      {
+        "name": "memory/process_peak_rss_bytes",
+        "min": 3873480704,
+        "max": 3886182400,
+        "count": 256
+      },
+      {
+        "name": "memory/process_rss_bytes",
+        "min": 3873480704,
+        "max": 3886182400,
+        "count": 256
+      },
+      {
+        "name": "memory/sampling_seconds",
+        "min": 0.0031814337708055973,
+        "max": 0.004308683797717094,
+        "count": 256
+      },
+      {
+        "name": "memory/system_available_bytes",
+        "min": 10957414400,
+        "max": 11819319296,
+        "count": 256
+      },
+      {
+        "name": "moe/router_auxiliary_loss",
+        "min": 0,
+        "max": 0,
+        "count": 256
+      },
+      {
+        "name": "optimizer/overflow_retries",
+        "min": 0,
+        "max": 0,
+        "count": 256
+      },
+      {
+        "name": "train/loss",
+        "min": 0.9151418805122375,
+        "max": 2.1050310134887695,
+        "count": 256
+      },
+      {
+        "name": "validation/loss",
+        "min": 1.9335598573088646,
+        "max": 1.9335598573088646,
+        "count": 1
+      }
+    ],
+    "stop": "Native cancellation requested at observed step 256; final checkpoint step 256; no error"
+  },
+  "promotion": {
+    "step": 0,
+    "targets": 0,
+    "cursor": [
+      0,
+      0
+    ],
+    "optimizer_state_entries": 0,
+    "schedule": {
+      "kind": "warmup_cosine_v1",
+      "completed_updates": 0,
+      "max_steps": 24415,
+      "warmup_steps": 2048,
+      "peak": 0.0006,
+      "floor": 0.00006
+    },
+    "rng_components": [
+      "python",
+      "numpy_kind",
+      "numpy_keys",
+      "numpy_pos",
+      "numpy_has_gauss",
+      "numpy_cached_gaussian",
+      "torch",
+      "device_type",
+      "device_index",
+      "device_rng"
+    ],
+    "updated_parameters": [],
+    "parent_checkpoint": "c72d7d0283de2c6008f1b80d855bad6cb6ebc497f0094957a8982bd58a049110"
+  },
+  "handoff": [
+    {
+      "context": 256,
+      "bundle_digest": "74255346b2ec265f6b38cc6e350ea1dbfb796f34f186fe44b27f3544b1e8b993",
+      "install_elapsed_seconds": 10.411234281025827,
+      "cache": {
+        "operation": "install",
+        "cache_hits": 14,
+        "cache_misses": 1
+      }
+    },
+    {
+      "context": 512,
+      "bundle_digest": "a0e897ae026b6956efcbe0e5dccf56706388b1099a73e7c5af8ae7039bd93853",
+      "install_elapsed_seconds": 9.054530076216906,
+      "cache": {
+        "operation": "install",
+        "cache_hits": 0,
+        "cache_misses": 12
+      }
+    }
+  ],
+  "parent_panels": [
+    {
+      "context": 256,
+      "status": "complete",
+      "requested_checkpoint_sha256": "8d7a367a4df808eab5a4f128ee1f8b1b9c727180986010a12c9d9803b0bc253d",
+      "loss": 1.0752856247127056,
+      "valid_targets": 65536,
+      "batches": 32,
+      "evaluation_seconds": 5.1667390880174935,
+      "comparison_group": "faa756d7caba2af54b8fbd1ed427b01ac89c84a75a840cf088e9357da06c0e96"
+    },
+    {
+      "context": 512,
+      "status": "complete",
+      "requested_checkpoint_sha256": "8d7a367a4df808eab5a4f128ee1f8b1b9c727180986010a12c9d9803b0bc253d",
+      "loss": 1.9336966834962368,
+      "valid_targets": 65536,
+      "batches": 32,
+      "evaluation_seconds": 5.554164927918464,
+      "comparison_group": "b93f7d576130107c69a7ed4d526f42be45e89aaa875c8c0ff5fd5deff7c35551"
+    }
+  ],
+  "limits": [
+    "Standalone eval of the minimal native continuation parent failed before forwards: artifact integrity failure: data/.sparselab-cache-owner.json. The native worker promotion succeeded.",
+    "Parent diagnostics use the native promoted step-zero replica, whose weights file exactly matches the original completed parent. This is a different checkpoint identity with identical model weights.",
+    "Direct train --promote initially failed before run creation because the source tokenizer path was absent. Native config derive bound the existing local tokenizer/output locations without changing config identity. Failed receipts are retained.",
+    "Native sealed bundles, content-addressed cache and reflink materialization are verified here; unified topology placement and Colab execution are not verified.",
+    "Transport used existing controller SSH connections. The second whole bundle was transported redundantly even though native installation reused 14 of 15 file entries.",
+    "These are development diagnostics, one seed, not an independent final benchmark. Scientific arm completion is not claimed."
+  ],
+  "rocm_parent_panels": [
+    {
+      "context": 256,
+      "loss": 1.0752856191247702,
+      "valid_targets": 65536
+    },
+    {
+      "context": 512,
+      "loss": 1.933696698397398,
+      "valid_targets": 65536
+    }
+  ],
+  "cross_runtime_note": "Frozen FP32 panel losses agree within 1.5e-8; backend/runtime and checkpoint identities differ, so native comparison groups remain distinct."
+}

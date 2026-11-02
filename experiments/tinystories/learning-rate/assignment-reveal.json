@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "panel_sha256": "2fc535fa459eca6b5a9d36ed7c2c74a3ae0083ec5be8795a5472bc4714937511",
+  "rubric_sha256": "8bdc9b8dd87384ef3cc918a20bc1734487f9828182a1eb28618531c563e4e446",
+  "assignments": [
+    {
+      "pair_id": "story-01-greedy",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-01-sampled",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-02-greedy",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-02-sampled",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-03-greedy",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-03-sampled",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-04-greedy",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-04-sampled",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-05-greedy",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-05-sampled",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-06-greedy",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-06-sampled",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-07-greedy",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-07-sampled",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-08-greedy",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-08-sampled",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-09-greedy",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-09-sampled",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-10-greedy",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-10-sampled",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-11-greedy",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-11-sampled",
+      "A": "high",
+      "B": "low"
+    },
+    {
+      "pair_id": "story-12-greedy",
+      "A": "low",
+      "B": "high"
+    },
+    {
+      "pair_id": "story-12-sampled",
+      "A": "high",
+      "B": "low"
+    }
+  ]
+}

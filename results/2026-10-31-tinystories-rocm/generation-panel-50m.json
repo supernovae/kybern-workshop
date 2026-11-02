@@ -1,0 +1,501 @@
+{
+  "lab_pin": "903ad2f0bb261935132dee53295aba6b66f8e792",
+  "workshop_recipe_pin": "7aa2d54d3fc5beead7e80f158fc3b2a9e3366277",
+  "checkpoint_sha256": "c72d7d0283de2c6008f1b80d855bad6cb6ebc497f0094957a8982bd58a049110",
+  "checkpoint_selection": "Final full-budget checkpoint, not best-loss selection.",
+  "protocol": "12 fixed Workshop prompts; sampled temperature0.7 top_k40 and greedy temperature0 top_k0; seed42;192 new tokens;strict context512;ROCm. All24 retained unedited.",
+  "same_prompts_and_generation_settings_as_5m": true,
+  "commands_completed": 24,
+  "command_failures": 0,
+  "command_elapsed_seconds": 324.50792800541967,
+  "assessment": "Several simple continuations retain details lost by 5M: the red ball, bird rescue, apple sharing and Eli name. Reliability remains limited: Noah becomes Mah, the boat hole and power outage can be ignored, and neighbor absence is lost. Repetition, arbitrary conflicts and unfinished text remain. All 24 outputs are retained unedited.",
+  "comparison_limits": [
+    "12 prompts in two modes, not 24 distinct prompts.",
+    "Provisional assistant observations, not independent human scoring or a train-disjoint benchmark.",
+    "Training differs in model size, budget, precision, schedule and Lab source pin; improvements cannot be attributed to parameter count alone.",
+    "Matched decoding settings do not guarantee identical numerical execution across model/runtime paths.",
+    "The 192-token cap can truncate a continuation; no regeneration or output selection was performed."
+  ],
+  "outputs": [
+    {
+      "id": "01-greedy",
+      "raw_file_sha256": "8102284925784f9670a294a1a4402b5e00ca0091343848dd5ed1fcb00d34be22",
+      "provisional_assistant_observation": "Retains the red ball and box; simple complete continuation.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "Lily put her red ball in a blue box. Later, she opened the box and",
+      "prompt_tokens": 18,
+      "response": " saw that her red ball was still there. She was so happy! She played with her red ball all day long. And from that day on, Lily always put her red ball in the box when she was done playing.",
+      "text": "Lily put her red ball in a blue box. Later, she opened the box and saw that her red ball was still there. She was so happy! She played with her red ball all day long. And from that day on, Lily always put her red ball in the box when she was done playing."
+    },
+    {
+      "id": "01-sampled",
+      "raw_file_sha256": "48729bb067e6737893387a875a901b3bedc312502bbde0c208cdeb37deeb1a74",
+      "provisional_assistant_observation": "Retains the ball; introduces an unexplained plural they.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "Lily put her red ball in a blue box. Later, she opened the box and",
+      "prompt_tokens": 18,
+      "response": " saw the big red ball. She played with it all day long. When they were tired, Lily put the ball back in the box. She was happy that the big red ball was safe.",
+      "text": "Lily put her red ball in a blue box. Later, she opened the box and saw the big red ball. She played with it all day long. When they were tired, Lily put the ball back in the box. She was happy that the big red ball was safe."
+    },
+    {
+      "id": "02-greedy",
+      "raw_file_sha256": "545186c36169b2ed9d72d7feae9c1bfd0a35f812a2ca9ca1f462b95d30b1590f",
+      "provisional_assistant_observation": "Coherent bird rescue and relevant ending.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "Sam saw a small bird stuck in a puddle. He found a dry stick and",
+      "prompt_tokens": 16,
+      "response": " used it to help the bird get out of the puddle. The bird flew away, and Sam felt happy that he could help.\n\nSam went home and told his mom about the bird. His mom said, \"You did a good thing, Sam. You helped the bird and made it happy.\" Sam smiled and felt proud of himself.",
+      "text": "Sam saw a small bird stuck in a puddle. He found a dry stick and used it to help the bird get out of the puddle. The bird flew away, and Sam felt happy that he could help.\n\nSam went home and told his mom about the bird. His mom said, \"You did a good thing, Sam. You helped the bird and made it happy.\" Sam smiled and felt proud of himself."
+    },
+    {
+      "id": "02-sampled",
+      "raw_file_sha256": "d5dcacab9032c0d0fb7d6b73a6974152d671e053d432bc0fec2b2a8d1daf5c64",
+      "provisional_assistant_observation": "Coherent rescue; adds an unrelated moral about different people.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "Sam saw a small bird stuck in a puddle. He found a dry stick and",
+      "prompt_tokens": 16,
+      "response": " used it to scoop up the bird. The bird was happy and flew away.\n\nSam felt proud of himself. He had helped the bird and that made him smile. From that day on, Sam always looked out for animals that needed help. He knew that even people who were different can be kind and helpful.",
+      "text": "Sam saw a small bird stuck in a puddle. He found a dry stick and used it to scoop up the bird. The bird was happy and flew away.\n\nSam felt proud of himself. He had helped the bird and that made him smile. From that day on, Sam always looked out for animals that needed help. He knew that even people who were different can be kind and helpful."
+    },
+    {
+      "id": "03-greedy",
+      "raw_file_sha256": "3d38ae962864fa32f9a9b1ac18b2e3c55f3647d8053d3fa6d03103ee4002ecbc",
+      "provisional_assistant_observation": "Preserves sharing and characters; clear ending.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "Mia wanted to share her last apple with Ben. She cut it in two and",
+      "prompt_tokens": 16,
+      "response": " gave one piece to Ben.\n\n\"Here, Ben, you can have some of my apple. It is yummy,\" Mia said.\n\nBen smiled and took the piece. He bit into it and said, \"Thank you, Mia. This is the best apple ever. You are a good friend.\"\n\nMia smiled and said, \"You are welcome, Ben. You are a good friend too. I am happy to share with you.\"\n\nThey ate their apples and enjoyed the sunny day. They learned that sharing is good and makes friends happy.",
+      "text": "Mia wanted to share her last apple with Ben. She cut it in two and gave one piece to Ben.\n\n\"Here, Ben, you can have some of my apple. It is yummy,\" Mia said.\n\nBen smiled and took the piece. He bit into it and said, \"Thank you, Mia. This is the best apple ever. You are a good friend.\"\n\nMia smiled and said, \"You are welcome, Ben. You are a good friend too. I am happy to share with you.\"\n\nThey ate their apples and enjoyed the sunny day. They learned that sharing is good and makes friends happy."
+    },
+    {
+      "id": "03-sampled",
+      "raw_file_sha256": "2ecbd6afa90adbcb4772905da9ccb460b95ccef92f05a2d651a85f66ed3ea794",
+      "provisional_assistant_observation": "Starts with sharing, then introduces a dog conflict and hits the token cap unfinished.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "Mia wanted to share her last apple with Ben. She cut it in two and",
+      "prompt_tokens": 16,
+      "response": " gave one piece to Ben.\n\n\"Thank you, Mia,\" Ben said.\n\n\"You're welcome, Ben,\" Mia said.\n\nThey ate their apples and smiled. They were happy. They liked apples.\n\nBut then, they heard a loud noise. It was their dog, Rex. Rex was big and black and liked to chase things. He saw the apples and ran towards them. He wanted to eat them.\n\n\"Rex, no!\" Ben shouted. He tried to hold his apple, but Rex was too strong. He pulled the apple from Mia's hand and ran away.\n\n\"Hey, come back!\" Mia cried. She ran after Rex.\n\nBut Rex was too fast. He ran into the street, where there were many cars and trucks. He did not see the cars and trucks. He only saw Mia and Ben and their apples.\n\n\"Help!\" Mia and Ben cried",
+      "text": "Mia wanted to share her last apple with Ben. She cut it in two and gave one piece to Ben.\n\n\"Thank you, Mia,\" Ben said.\n\n\"You're welcome, Ben,\" Mia said.\n\nThey ate their apples and smiled. They were happy. They liked apples.\n\nBut then, they heard a loud noise. It was their dog, Rex. Rex was big and black and liked to chase things. He saw the apples and ran towards them. He wanted to eat them.\n\n\"Rex, no!\" Ben shouted. He tried to hold his apple, but Rex was too strong. He pulled the apple from Mia's hand and ran away.\n\n\"Hey, come back!\" Mia cried. She ran after Rex.\n\nBut Rex was too fast. He ran into the street, where there were many cars and trucks. He did not see the cars and trucks. He only saw Mia and Ben and their apples.\n\n\"Help!\" Mia and Ben cried"
+    },
+    {
+      "id": "04-greedy",
+      "raw_file_sha256": "d8a8238cebaf3f1d9fddb3ecf0322b13c764dd959db052b3b0afe6e3c72e337b",
+      "provisional_assistant_observation": "Keeps Eli, but scolds him for lying despite his truthful confession; repeated promise.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "Eli broke his favorite cup. He decided to tell the truth about what happened.",
+      "prompt_tokens": 18,
+      "response": "\n\nEli went to his mom and told her what happened. His mom was not happy. She told him that lying is not good. Eli felt bad and said sorry to his mom. His mom hugged him and said it was okay. They went to the store to buy a new cup for Eli.\n\nEli learned that it is better to tell the truth and not lie. He promised to always tell the truth from now on. Eli and his mom were happy again, and Eli promised to always be honest.",
+      "text": "Eli broke his favorite cup. He decided to tell the truth about what happened.\n\nEli went to his mom and told her what happened. His mom was not happy. She told him that lying is not good. Eli felt bad and said sorry to his mom. His mom hugged him and said it was okay. They went to the store to buy a new cup for Eli.\n\nEli learned that it is better to tell the truth and not lie. He promised to always tell the truth from now on. Eli and his mom were happy again, and Eli promised to always be honest."
+    },
+    {
+      "id": "04-sampled",
+      "raw_file_sha256": "8d7b78dd918b4238300c2fb589ed12c5e345daf8aee67bc591183660cecd296f",
+      "provisional_assistant_observation": "Keeps Eli and confession; adds an unsupported collecting habit.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "Eli broke his favorite cup. He decided to tell the truth about what happened.",
+      "prompt_tokens": 18,
+      "response": "\n\nEli went to his mom. He said, \"Mom, I broke my cup. I'm sorry.\" His mom said, \"It's okay, Eli. Accidents happen. But you should be careful with your things. You don't want to break them.\"\n\nEli nodded. He learned his lesson. He said, \"Thank you, mom. I love you.\" His mom said, \"I love you too, Eli.\" She gave him a kiss and a tissue. She said, \"Let's clean up the mess and find you a new cup.\" Eli smiled. He felt better. He still liked to collect things, but he made sure to be more careful with his things. He did not want to break anything again.",
+      "text": "Eli broke his favorite cup. He decided to tell the truth about what happened.\n\nEli went to his mom. He said, \"Mom, I broke my cup. I'm sorry.\" His mom said, \"It's okay, Eli. Accidents happen. But you should be careful with your things. You don't want to break them.\"\n\nEli nodded. He learned his lesson. He said, \"Thank you, mom. I love you.\" His mom said, \"I love you too, Eli.\" She gave him a kiss and a tissue. She said, \"Let's clean up the mess and find you a new cup.\" Eli smiled. He felt better. He still liked to collect things, but he made sure to be more careful with his things. He did not want to break anything again."
+    },
+    {
+      "id": "05-greedy",
+      "raw_file_sha256": "df10dc5163a448d1a0d9961413f3058e20307db51088f969169b3933508b4957",
+      "provisional_assistant_observation": "Follows plant care; introduces a talking plant.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "Ada planted a seed in a small pot. Every day she carefully looked after it.",
+      "prompt_tokens": 20,
+      "response": " She watered it and sang to it.\n\nOne day, Ada's mom said, \"Ada, you have to take care of it. It needs to grow.\"\n\nAda was so excited. She said, \"Yes, I will take care of it!\"\n\nEvery day, Ada watered the seed. She watched it grow and grow. Soon, it was a big, beautiful plant.\n\nAda was so proud of her plant. She said, \"I'm so happy you are growing!\"\n\nThe plant replied, \"Thank you, Ada. I'm so happy you are taking care of me.\"\n\nAda smiled and said, \"I'm glad I can help you grow.\"",
+      "text": "Ada planted a seed in a small pot. Every day she carefully looked after it. She watered it and sang to it.\n\nOne day, Ada's mom said, \"Ada, you have to take care of it. It needs to grow.\"\n\nAda was so excited. She said, \"Yes, I will take care of it!\"\n\nEvery day, Ada watered the seed. She watched it grow and grow. Soon, it was a big, beautiful plant.\n\nAda was so proud of her plant. She said, \"I'm so happy you are growing!\"\n\nThe plant replied, \"Thank you, Ada. I'm so happy you are taking care of me.\"\n\nAda smiled and said, \"I'm glad I can help you grow.\""
+    },
+    {
+      "id": "05-sampled",
+      "raw_file_sha256": "e0652ca639b42522c929b9abc134a2ec1149222843f2b3b198161438b699189f",
+      "provisional_assistant_observation": "Plant moves from pot to side of house; chronology and location drift.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "Ada planted a seed in a small pot. Every day she carefully looked after it.",
+      "prompt_tokens": 20,
+      "response": "\n\nOne morning, Ada woke up and went to check on her seed. She watered it and waited. Ada was so excited that the plant was growing!\n\nThe next morning Ada went outside and saw something strange. There was a big, green plant on the side of her house. She had never seen it before.\n\nAda was very surprised and ran inside to tell her mom. Her mom said, \"That's a very cool plant, Ada. It looks very healthy.\" Ada was so happy and went to bed.\n\nThat night, Ada went outside to check on her plant. She was excited to see it growing. And to this day, the plant is growing bigger and bigger.",
+      "text": "Ada planted a seed in a small pot. Every day she carefully looked after it.\n\nOne morning, Ada woke up and went to check on her seed. She watered it and waited. Ada was so excited that the plant was growing!\n\nThe next morning Ada went outside and saw something strange. There was a big, green plant on the side of her house. She had never seen it before.\n\nAda was very surprised and ran inside to tell her mom. Her mom said, \"That's a very cool plant, Ada. It looks very healthy.\" Ada was so happy and went to bed.\n\nThat night, Ada went outside to check on her plant. She was excited to see it growing. And to this day, the plant is growing bigger and bigger."
+    },
+    {
+      "id": "06-greedy",
+      "raw_file_sha256": "8ee570c3746e58021b53637749db6bcde54ce783d846aac5f1fd376ae7ebb069",
+      "provisional_assistant_observation": "Fair turn-taking solution with repeated dialogue.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "Two friends both wanted the same toy. They tried to find a fair way to share.",
+      "prompt_tokens": 20,
+      "response": " They talked and talked. They decided to take turns playing with the toy.\n\nThe first friend said, \"Let's take turns playing with the toy.\" The second friend said, \"Yes, let's take turns.\" They took turns playing with the toy. They had fun and learned to share. They were happy and became good friends.",
+      "text": "Two friends both wanted the same toy. They tried to find a fair way to share. They talked and talked. They decided to take turns playing with the toy.\n\nThe first friend said, \"Let's take turns playing with the toy.\" The second friend said, \"Yes, let's take turns.\" They took turns playing with the toy. They had fun and learned to share. They were happy and became good friends."
+    },
+    {
+      "id": "06-sampled",
+      "raw_file_sha256": "d24335146706160f094a81d8d1789f2a4459dae23e585a2d80903415843b6a62",
+      "provisional_assistant_observation": "Fair sharing solution; minor plural drift.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "Two friends both wanted the same toy. They tried to find a fair way to share.",
+      "prompt_tokens": 20,
+      "response": "\n\n\"I want the ball!\" said Tim.\n\"But I want it too!\" said Sam.\n\nThey did not know what to do. Then, Tim had an idea.\n\n\"Let's work together,\" said Tim. \"We can take turns playing with the ball and the other toys.\"\n\nSam liked the idea. They all finished sharing and played happily together. In the end, they learned that sharing is better than fighting.",
+      "text": "Two friends both wanted the same toy. They tried to find a fair way to share.\n\n\"I want the ball!\" said Tim.\n\"But I want it too!\" said Sam.\n\nThey did not know what to do. Then, Tim had an idea.\n\n\"Let's work together,\" said Tim. \"We can take turns playing with the ball and the other toys.\"\n\nSam liked the idea. They all finished sharing and played happily together. In the end, they learned that sharing is better than fighting."
+    },
+    {
+      "id": "07-greedy",
+      "raw_file_sha256": "255f9751a03c0af5ee92409723e392cef6749c1c5a3c537b301fec6d876f4b39",
+      "provisional_assistant_observation": "Contradictory permission; claims return to owner without finding owner.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "Noah found a mitten on the snowy path. He wanted to return it, but",
+      "prompt_tokens": 20,
+      "response": " he knew it was not his. He asked his mom if he could take it. His mom said no, but she said he could take it.\n\nSo, he took the mitten and returned it to where he found it. He was happy that he did the right thing. He was also happy that he was able to return the mitten to its owner.",
+      "text": "Noah found a mitten on the snowy path. He wanted to return it, but he knew it was not his. He asked his mom if he could take it. His mom said no, but she said he could take it.\n\nSo, he took the mitten and returned it to where he found it. He was happy that he did the right thing. He was also happy that he was able to return the mitten to its owner."
+    },
+    {
+      "id": "07-sampled",
+      "raw_file_sha256": "d95f07795d3d9860372faa44a66354b00885f80f2979464e9ec27fff44f4e26b",
+      "provisional_assistant_observation": "Noah becomes Mah; return intent reverses; repeated refusal.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "Noah found a mitten on the snowy path. He wanted to return it, but",
+      "prompt_tokens": 20,
+      "response": " his mom said no.\n\n\"We have to stay here on the cold,\" she said.\n\nBut Mah refused. He wanted to keep the mitten.\n\n\"No, Mah,\" his mom said firmly. \"You don't want to return the mitten.\"\n\nBut Mah refused again. He put on the mitten and ran off.\n\nHis mom was very angry. She chased him and told him to come back.\n\nBut Mah refused. He just kept wearing his mitten and didn't want to return it. \n\nThe end.",
+      "text": "Noah found a mitten on the snowy path. He wanted to return it, but his mom said no.\n\n\"We have to stay here on the cold,\" she said.\n\nBut Mah refused. He wanted to keep the mitten.\n\n\"No, Mah,\" his mom said firmly. \"You don't want to return the mitten.\"\n\nBut Mah refused again. He put on the mitten and ran off.\n\nHis mom was very angry. She chased him and told him to come back.\n\nBut Mah refused. He just kept wearing his mitten and didn't want to return it. \n\nThe end."
+    },
+    {
+      "id": "08-greedy",
+      "raw_file_sha256": "9f13b6caedfd5e5203d01b1a0969040aa930f5045c4867f9b7cca31724e7a027",
+      "provisional_assistant_observation": "Ignores boat hole and sails; inconsistent return to water.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "The little boat had a hole in its side. Nora and her brother decided to",
+      "prompt_tokens": 18,
+      "response": " take the boat out for a sail. They put the boat in the water and it started to move.\n\nThe little boat was so excited! It sailed around the lake and it was so much fun. Nora and her brother laughed and smiled as they sailed.\n\nWhen they were done sailing, they put the boat back in the water and said goodbye. Nora and her brother went home, happy and tired from their fun day.",
+      "text": "The little boat had a hole in its side. Nora and her brother decided to take the boat out for a sail. They put the boat in the water and it started to move.\n\nThe little boat was so excited! It sailed around the lake and it was so much fun. Nora and her brother laughed and smiled as they sailed.\n\nWhen they were done sailing, they put the boat back in the water and said goodbye. Nora and her brother went home, happy and tired from their fun day."
+    },
+    {
+      "id": "08-sampled",
+      "raw_file_sha256": "311a3937b85377989cc9c8a35d4f1ed0e7369627d6e1a43c6e72a8e15926580f",
+      "provisional_assistant_observation": "Attempts repair but repeats sharp nails and gives a garbled lesson.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "The little boat had a hole in its side. Nora and her brother decided to",
+      "prompt_tokens": 18,
+      "response": " fix the hole. They took some wood and nails and put them in the hole. Then they used the hammer to hit the nails into the hole.\n\nThe nails were very sharp and it hurt their hands. Nora and her brother had to be careful and the nails were very sharp. They kept going but all of the nails got more sharp. \n\nNora and her brother kept trying but the nails were too sharp for them. But eventually they were able to make the hole smaller and they were able to do it. \n\nNora and her brother were very happy with their work. They had learned a valuable lesson: when something looks scary, it is not always to get too close.",
+      "text": "The little boat had a hole in its side. Nora and her brother decided to fix the hole. They took some wood and nails and put them in the hole. Then they used the hammer to hit the nails into the hole.\n\nThe nails were very sharp and it hurt their hands. Nora and her brother had to be careful and the nails were very sharp. They kept going but all of the nails got more sharp. \n\nNora and her brother kept trying but the nails were too sharp for them. But eventually they were able to make the hole smaller and they were able to do it. \n\nNora and her brother were very happy with their work. They had learned a valuable lesson: when something looks scary, it is not always to get too close."
+    },
+    {
+      "id": "09-greedy",
+      "raw_file_sha256": "2540aa76dbf2ef556b3b3f83c1c0128c504c05d073b06fb504cc5a20fee74867",
+      "provisional_assistant_observation": "Provides shelter, but calls rain warm and leaves location unclear.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "At first, the kitten was afraid of the rain. Then it noticed",
+      "prompt_tokens": 14,
+      "response": " a big, fluffy blanket. It was so excited! It ran to the blanket and curled up inside.\n\nThe rain was so nice and warm. The kitten felt so cozy and safe under the blanket. It was so happy that it decided to stay there for a long time.\n\nThe rain eventually stopped and the kitten was so happy. It ran around the house, playing and having fun. The kitten was so glad that it had found the blanket. It was the best thing it ever found!",
+      "text": "At first, the kitten was afraid of the rain. Then it noticed a big, fluffy blanket. It was so excited! It ran to the blanket and curled up inside.\n\nThe rain was so nice and warm. The kitten felt so cozy and safe under the blanket. It was so happy that it decided to stay there for a long time.\n\nThe rain eventually stopped and the kitten was so happy. It ran around the house, playing and having fun. The kitten was so glad that it had found the blanket. It was the best thing it ever found!"
+    },
+    {
+      "id": "09-sampled",
+      "raw_file_sha256": "2bbe030fafce73c01af86a8e13970d1a6fd63491757d39cddc006aaec59bb1be",
+      "provisional_assistant_observation": "Rain problem drifts into helping a talking bird.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "At first, the kitten was afraid of the rain. Then it noticed",
+      "prompt_tokens": 14,
+      "response": " something. It was a big, scary bird. The bird was very loud and it was flapping its wings.\n\nThe kitten was scared, but it was also brave. It took a step forward and asked the bird, \"Why are you so loud?\"\n\nThe bird replied, \"I'm just trying to get some water from the rain. I'm very thirsty.\"\n\nThe kitten thought for a moment and then said, \"I can help you. I'll give you some of my milk. That will make you feel better.\"\n\nThe bird was so happy! He said, \"Thank you, little kitten. I really appreciate it.\"\n\nThe kitten smiled and watched the bird drink the milk. The rain stopped and the kitten went home, feeling happy and relieved.",
+      "text": "At first, the kitten was afraid of the rain. Then it noticed something. It was a big, scary bird. The bird was very loud and it was flapping its wings.\n\nThe kitten was scared, but it was also brave. It took a step forward and asked the bird, \"Why are you so loud?\"\n\nThe bird replied, \"I'm just trying to get some water from the rain. I'm very thirsty.\"\n\nThe kitten thought for a moment and then said, \"I can help you. I'll give you some of my milk. That will make you feel better.\"\n\nThe bird was so happy! He said, \"Thank you, little kitten. I really appreciate it.\"\n\nThe kitten smiled and watched the bird drink the milk. The rain stopped and the kitten went home, feeling happy and relieved."
+    },
+    {
+      "id": "10-greedy",
+      "raw_file_sha256": "7cf2b0c0821e26ce118b4d7e0b29ee31be260a50aa4859aebd0f810469412874",
+      "provisional_assistant_observation": "Neighbor absence ignored; arbitrary pursuit and punishment; loses watering promise.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "Ben promised to water the flowers while his neighbor was away. On the last day,",
+      "prompt_tokens": 17,
+      "response": " Ben went to the neighbor's house and asked to borrow some water. The neighbor said yes and gave Ben a bottle of water.\n\nBen was so happy that he ran back to his house and started to water the flowers. He was so excited that he didn't notice the neighbor's dog coming towards him. The dog was big and scary and it wanted to chase Ben. Ben was scared and he ran away as fast as he could.\n\nThe neighbor saw what happened and he was very angry. He chased Ben and caught him by the leg. Ben was very scared and he started to cry. The neighbor took Ben to the hospital and the doctors said he had been very naughty.\n\nBen was very sad and he never went back to the neighbor's house again. He learned his lesson and he never borrowed water again.",
+      "text": "Ben promised to water the flowers while his neighbor was away. On the last day, Ben went to the neighbor's house and asked to borrow some water. The neighbor said yes and gave Ben a bottle of water.\n\nBen was so happy that he ran back to his house and started to water the flowers. He was so excited that he didn't notice the neighbor's dog coming towards him. The dog was big and scary and it wanted to chase Ben. Ben was scared and he ran away as fast as he could.\n\nThe neighbor saw what happened and he was very angry. He chased Ben and caught him by the leg. Ben was very scared and he started to cry. The neighbor took Ben to the hospital and the doctors said he had been very naughty.\n\nBen was very sad and he never went back to the neighbor's house again. He learned his lesson and he never borrowed water again."
+    },
+    {
+      "id": "10-sampled",
+      "raw_file_sha256": "3decc0decd5c7e59b9859528492a08c96be5903a4b7c1f8ef3fc23305fff70c7",
+      "provisional_assistant_observation": "Neighbor absence and watering promise lost; awkward closing.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "Ben promised to water the flowers while his neighbor was away. On the last day,",
+      "prompt_tokens": 17,
+      "response": " Ben went to visit his neighbor. Sure enough, his neighbor was already there.\n\nBen was amazed. He had never seen a neighbor so close to the flowers before. From then on, Ben and his neighbor enjoyed their visits together. \n\nBen was so grateful for his neighbor and the special kind of flowers. Imagine what it would be like to be like his neighbor!",
+      "text": "Ben promised to water the flowers while his neighbor was away. On the last day, Ben went to visit his neighbor. Sure enough, his neighbor was already there.\n\nBen was amazed. He had never seen a neighbor so close to the flowers before. From then on, Ben and his neighbor enjoyed their visits together. \n\nBen was so grateful for his neighbor and the special kind of flowers. Imagine what it would be like to be like his neighbor!"
+    },
+    {
+      "id": "11-greedy",
+      "raw_file_sha256": "a06435157839f1945bf78c3898374aef22a69730cf747eff291a8caa3f81c780",
+      "provisional_assistant_observation": "Short gift exchange; speaker attribution ambiguous.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "A girl made two paper crowns, one large and one small. She gave the small one to",
+      "prompt_tokens": 20,
+      "response": " her friend and said, \"This is for you!\"\n\nThe friend was so happy and thanked the girl for the gift. She said, \"You're welcome! I'm glad you like it.\"\n\nThe girl smiled and said, \"Me too!\"",
+      "text": "A girl made two paper crowns, one large and one small. She gave the small one to her friend and said, \"This is for you!\"\n\nThe friend was so happy and thanked the girl for the gift. She said, \"You're welcome! I'm glad you like it.\"\n\nThe girl smiled and said, \"Me too!\""
+    },
+    {
+      "id": "11-sampled",
+      "raw_file_sha256": "7473a566ff45cd1c0f3692ca5adb7c993d9e75ce2d81fe01ada193441edacea2",
+      "provisional_assistant_observation": "Crown setup followed by a bird conflict and broken crowns.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "A girl made two paper crowns, one large and one small. She gave the small one to",
+      "prompt_tokens": 20,
+      "response": " Ben.\n\n\"Here, you can have this. I don't need it. I have a flower.\"\n\nBen smiled. He took the paper crown and put it on his head. He felt happy and proud.\n\n\"Thank you, Lily. You are a good friend. I have a nice crown. I feel like a king.\"\n\nThey hugged and played with their paper crowns. They did not see the big bird that came to the tree. The bird saw the paper crowns and wanted them too. It flew down and tried to grab them.\n\n\"Hey, that's my crown! Give it back!\"\n\nLily and Ben were scared. They saw the bird and threw the paper crowns at it. The paper crowns fell to the ground and broke. The bird was very angry. It pecked at the paper crowns and broke them. It made a lot of noise and flew away.",
+      "text": "A girl made two paper crowns, one large and one small. She gave the small one to Ben.\n\n\"Here, you can have this. I don't need it. I have a flower.\"\n\nBen smiled. He took the paper crown and put it on his head. He felt happy and proud.\n\n\"Thank you, Lily. You are a good friend. I have a nice crown. I feel like a king.\"\n\nThey hugged and played with their paper crowns. They did not see the big bird that came to the tree. The bird saw the paper crowns and wanted them too. It flew down and tried to grab them.\n\n\"Hey, that's my crown! Give it back!\"\n\nLily and Ben were scared. They saw the bird and threw the paper crowns at it. The paper crowns fell to the ground and broke. The bird was very angry. It pecked at the paper crowns and broke them. It made a lot of noise and flew away."
+    },
+    {
+      "id": "12-greedy",
+      "raw_file_sha256": "ace10f7d6f0eb2fc385e4ec5975511dacd79f0b93b7e13eae46b78ab8715b3d7",
+      "provisional_assistant_observation": "Power outage unresolved; TV solution unexplained and helpful-puppet phrasing repeats.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.0,
+        "top_k": 0,
+        "use_cache": true
+      },
+      "prompt": "The lights went out just before the puppet show. The children found a way to",
+      "prompt_tokens": 18,
+      "response": " make it work. They put the puppet on the TV and it started to move. The children were so happy!\n\nThe puppet was so helpful. It showed the children all sorts of fun things to do. The children had so much fun with the puppet. They laughed and played for hours.\n\nThe puppet was so helpful that it was able to help the children. It was a great way to show them how to have fun. The children were so happy to have the puppet to play with them. They all had a great time.",
+      "text": "The lights went out just before the puppet show. The children found a way to make it work. They put the puppet on the TV and it started to move. The children were so happy!\n\nThe puppet was so helpful. It showed the children all sorts of fun things to do. The children had so much fun with the puppet. They laughed and played for hours.\n\nThe puppet was so helpful that it was able to help the children. It was a great way to show them how to have fun. The children were so happy to have the puppet to play with them. They all had a great time."
+    },
+    {
+      "id": "12-sampled",
+      "raw_file_sha256": "ecf61a2cc3e7df1e570707e878e7a6857612c6135c054d9aa4285e1180c99418",
+      "provisional_assistant_observation": "Declares success without explaining the solution to lost lighting.",
+      "format": "raw",
+      "generation": {
+        "context_length": 512,
+        "max_new_tokens": 192,
+        "seed": 42,
+        "stop_sequences": [],
+        "strict_context": true,
+        "temperature": 0.7,
+        "top_k": 40,
+        "use_cache": true
+      },
+      "prompt": "The lights went out just before the puppet show. The children found a way to",
+      "prompt_tokens": 18,
+      "response": " get around and they started to have a great time. They laughed and played, and the puppet show was a lot of fun too. In the end, the puppet show was a big success and all the children were very happy. \n\nThe puppet show was the best one ever!",
+      "text": "The lights went out just before the puppet show. The children found a way to get around and they started to have a great time. They laughed and played, and the puppet show was a lot of fun too. In the end, the puppet show was a big success and all the children were very happy. \n\nThe puppet show was the best one ever!"
+    }
+  ]
+}
