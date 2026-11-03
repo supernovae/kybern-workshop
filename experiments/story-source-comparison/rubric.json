@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "criteria": {
+    "character_consistency": {
+      "2": "Characters, identities and relationships stay consistent and relevant.",
+      "1": "Ambiguous references, unsupported character drift, or insufficient continuation to establish consistency.",
+      "0": "Explicit identity/relationship contradiction or dominant unexplained character replacement."
+    },
+    "object_state_continuity": {
+      "2": "Prompt facts and subsequent object/location/state changes remain consistent, with plausible transitions.",
+      "1": "An anchor is dropped or transitions are unclear without a definite contradiction.",
+      "0": "Explicit contradiction or impossible unexplained change in an established object/state."
+    },
+    "causal_resolution": {
+      "2": "The episode or introduced problem reaches a coherent resolution supported by preceding events.",
+      "1": "A plausible but shallow or weakly connected ending; partial resolution.",
+      "0": "EOS ending is incoherent, abandons an unresolved central problem, or contradicts its causal setup.",
+      "null": "Token-limit truncation or failed generation; do not mislabel a censored ending as failed resolution."
+    },
+    "repetition": {
+      "2": "No disruptive repetition beyond ordinary narrative references.",
+      "1": "Isolated redundant sentence/phrase or unnecessary restatement, but story advances.",
+      "0": "Repeated clauses/sentences form a loop or dominate the continuation."
+    }
+  },
+  "aggregation": "Report each criterion distribution and paired differences where both scores are available; report EOS, token-limit and generation-error counts separately. Do not replace missing/censored scores with zero, hide failures, or claim statistical/general quality significance from this small one-seed panel.",
+  "review": "Conceal dataset, checkpoint and run identities; randomly permute A/B independently per prompt/mode/checkpoint pair. Commit private assignment digest before training; reveal only after scores are frozen. Record reviewer identity/type. Assistant scores are exploratory, not independent human judgments.",
+  "creativity": "Exploratory notes only: note an unexpected but coherent event, with output ID and text evidence. Do not reward novelty that contradicts established facts; no unvalidated scalar creativity score."
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "status": "declared-not-run",
+  "lab_revision": "903ad2f0bb261935132dee53295aba6b66f8e792",
+  "workshop_parent": "9f55a3a3690980154594bf610da0717d4820e93a",
+  "question": "At matched processed-target exposure, how does training source change a fresh 50.6M model under the existing TinyStories tokenizer?",
+  "arms": [
+    "tinystories",
+    "simplestories"
+  ],
+  "initialization": "Fresh seed-42 initialization for each arm; verify step-0 model tensors match. Never promote pretrained TinyStories weights.",
+  "tokenizer": {
+    "file_sha256": "71707840b1c02e8a2c7cb72ecdf981a29dc96b2c332650349323d6ab3f96bf04",
+    "canonical_sha256": "b93299619657c9a9c6f056e5090259b3d44d9ca2eb3b913ef75c43ae003d6303",
+    "vocab_size": 4096,
+    "origin": "Existing TinyStories train-only tokenizer; bytes must be obtained and verified on authorized host. No refitting."
+  },
+  "targets_per_update": 4096,
+  "checkpoints": [
+    {
+      "step": 0,
+      "committed_targets": 0
+    },
+    {
+      "step": 256,
+      "committed_targets": 1048576
+    },
+    {
+      "step": 24415,
+      "committed_targets": 100003840
+    },
+    {
+      "step": 122071,
+      "committed_targets": 500002816
+    },
+    {
+      "step": 244141,
+      "committed_targets": 1000001536
+    }
+  ],
+  "quality_steps": [
+    24415,
+    122071,
+    244141
+  ],
+  "loss_panels": {
+    "sources": [
+      "tinystories",
+      "simplestories"
+    ],
+    "split": "validation",
+    "sampling": "first_eligible_blocks",
+    "sequence_length": 512,
+    "blocks": 128,
+    "supervised_targets": 65536,
+    "batch_size": 4,
+    "max_forward_positions": 65536,
+    "purpose": "development"
+  },
+  "generation_outputs_expected": 144,
+  "execution_order": [
+    "tinystories",
+    "simplestories"
+  ],
+  "repeated_exposure": "Record native usable unique supervised targets U separately per arm; report T/U as exposure-equivalents at every checkpoint. This is not a count of unique tokens actually visited, nor distinct vocabulary IDs.",
+  "pending": [
+    "Native source locks and file inventories",
+    "Snapshot acquisition and native verification",
+    "Cross-source holdout and prompt audit",
+    "Tokenizer bytes verification",
+    "Prepared coverage and bound panel digests",
+    "ROCm execution-task runtime verification and measured storage envelope",
+    "Step-zero matching weights, training, evaluation and blind outputs"
+  ],
+  "results": null
+}
