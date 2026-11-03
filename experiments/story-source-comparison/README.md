@@ -90,6 +90,15 @@ Reuse the verified existing tokenizer bytes at `$WORK/shared/tokenizer.json`;
 do not refit a same-sized replacement. If those bytes are unavailable, the
 experiment is blocked pending retrieval or an explicitly revised tokenizer study.
 
+**Host preparation blocker:** the native tokenizer-origin check currently requires
+the consuming dataset to match the tokenizer's training dataset. This rejects the
+intended cross-source reuse even with identical tokenizer bytes. A separate Lab
+task owns explicit provenance binding. Preserve that failure; do not change the
+tokenizer's recorded origin or fit a replacement to bypass it. Before either
+scientific arm starts, record the resulting Lab fix revision and revalidate both
+configs and the shared-tokenizer path. The pin above is the inspected authoring
+baseline, not evidence that this cross-source preparation succeeds on that pin.
+
 Copy the source declarations to `$WORK/inputs/` and bind their free-space reserve
 to actual capacity. Lock and snapshot each source using native commands:
 
@@ -105,9 +114,13 @@ sparselab config derive "$STUDY/run-$ARM.json" \
   --set "dataset.validation_path=\"$WORK/$ARM/snapshot/validation.jsonl\"" \
   --set "dataset.source_manifest_path=\"$WORK/$ARM/snapshot/manifest.json\"" \
   --set "logging.root_dir=\"$WORK/runs\"" \
-  --output "$WORK/run-$ARM.json" --json
-sparselab tokenizer verify "$WORK/run-$ARM.json" --json
+  --output "$WORK/run-$ARM.yaml" --json
+sparselab tokenizer verify "$WORK/run-$ARM.yaml" --json
 ```
+
+The checked-in source configs are JSON, but native `config derive` requires a
+`.yaml` or `.yml` output filename. All subsequent commands consume that derived
+YAML file.
 
 Verify both snapshots with native `sparselab.data.sources.verify_snapshot` before
 the supplementary audit. Native within-source dedup does **not** check the other
@@ -129,12 +142,12 @@ remove inconvenient evaluation outputs. The audit checks exact decoded text and
 case-sensitive full-prompt substrings only, not semantic near-duplicates.
 
 ```sh
-sparselab data prepare "$WORK/run-$ARM.json"
+sparselab data prepare "$WORK/run-$ARM.yaml"
 # PREPARED is the actual directory reported by prepare, not a guessed cache key.
-sparselab data coverage --prepared-root "$PREPARED" --config "$WORK/run-$ARM.json" --json
-sparselab inspect "$WORK/run-$ARM.json" --json
-sparselab data prepared-inputs publish "$WORK/run-$ARM.json" --output "$WORK/prepared-$ARM"
-sparselab data prepared-inputs verify "$WORK/run-$ARM.json" "$WORK/prepared-$ARM"
+sparselab data coverage --prepared-root "$PREPARED" --config "$WORK/run-$ARM.yaml" --json
+sparselab inspect "$WORK/run-$ARM.yaml" --json
+sparselab data prepared-inputs publish "$WORK/run-$ARM.yaml" --output "$WORK/prepared-$ARM"
+sparselab data prepared-inputs verify "$WORK/run-$ARM.yaml" "$WORK/prepared-$ARM"
 ```
 
 Save native counts, corpus/manifest/tokenizer identities, exclusions, block tails,

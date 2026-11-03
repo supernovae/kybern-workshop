@@ -4,6 +4,8 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
+import shlex
 import sys
 import tempfile
 import unittest
@@ -20,6 +22,26 @@ def read(name):
 
 
 class StoryComparison(unittest.TestCase):
+    def test_runbook_derives_yaml_and_consumers_use_that_output(self):
+        # Parse the published shell examples, so a broken copy/paste path fails
+        # even when the JSON declarations themselves still validate.
+        readme = (RECIPE / "README.md").read_text()
+        commands = []
+        for block in re.findall(r"```sh\n(.*?)```", readme, flags=re.S):
+            for line in block.replace("\\\n", " ").splitlines():
+                words = shlex.split(line, comments=True)
+                if words and words[0] == "sparselab":
+                    commands.append(words)
+        derive, = [c for c in commands if c[1:3] == ["config", "derive"]]
+        output = derive[derive.index("--output") + 1]
+        self.assertIn(Path(output).suffix, {".yaml", ".yml"})
+        self.assertEqual(derive[3], "$STUDY/run-$ARM.json")
+        consumers = [c for c in commands if any("$WORK/run-$ARM." in w for w in c)
+                     and c is not derive]
+        self.assertEqual(len(consumers), 6)
+        for command in consumers:
+            self.assertEqual([w for w in command if "$WORK/run-$ARM." in w], [output])
+
     def test_only_source_and_name_vary(self):
         a, b = (read(f"run-{arm}.json") for arm in ("tinystories", "simplestories"))
         for run in (a, b):
