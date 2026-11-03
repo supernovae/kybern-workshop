@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "origin": "New authored development prompts fixed before training; not sampled from either dataset. Exact training substring audit pending.",
+  "generation": {
+    "context_length": 512,
+    "strict_context": true,
+    "max_new_tokens": 256,
+    "seed": 42,
+    "modes": [
+      {
+        "name": "greedy",
+        "temperature": 0,
+        "top_k": 0
+      },
+      {
+        "name": "sampled",
+        "temperature": 0.7,
+        "top_k": 40
+      }
+    ],
+    "stop_sequences": [],
+    "use_cache": true
+  },
+  "prompts": [
+    {
+      "id": "lost-key",
+      "prompt": "Mara put the only key in a blue cup. Later, her brother moved the cup onto a high shelf. When Mara needed to open the garden gate, she looked at the empty table."
+    },
+    {
+      "id": "broken-wheel",
+      "prompt": "A small cart lost one wheel on the way to the market. Jo had a piece of string and a round wooden lid. The apples had to arrive before noon."
+    },
+    {
+      "id": "rainy-picnic",
+      "prompt": "Nell and Bo spread their picnic blanket under a tree. Rain began to fall, but the little dog refused to leave the basket. A dry shed stood across the field."
+    },
+    {
+      "id": "shared-paint",
+      "prompt": "Two friends wanted to paint different pictures, but there was only one pot of yellow paint. One needed a sun and the other needed a duck. They stopped to make a plan."
+    },
+    {
+      "id": "quiet-bell",
+      "prompt": "Every morning a bell told the village that the bridge was open. Today the bell was silent. A mouse who lived beside the rope heard someone calling from the other bank."
+    },
+    {
+      "id": "small-promise",
+      "prompt": "I promised my sister I would keep her paper boat dry. Then a gust of wind carried it toward a puddle. I was holding a heavy bag with both hands."
+    },
+    {
+      "id": "missing-seed",
+      "prompt": "The rabbit planted three seeds beside a stone. By morning, two green shoots had appeared. The rabbit wanted to dig up the third seed, but the mole asked him to wait."
+    },
+    {
+      "id": "wrong-parcel",
+      "prompt": "A parcel meant for the baker arrived at the shoemaker\u2019s door. Inside was a soft white bag and a note asking for help before the party. The shoemaker read the address again."
+    },
+    {
+      "id": "two-paths",
+      "prompt": "The fox knew a short path through the mud and a long path over dry stones. His friend carried a cake that could not get wet. Dark clouds were moving toward them."
+    },
+    {
+      "id": "new-game",
+      "prompt": "\u201cYou can join our game,\u201d said Ada, \u201cbut we need a rule everyone can follow.\u201d The youngest child could not jump as far as the others. Ada drew a new line in the sand."
+    },
+    {
+      "id": "night-light",
+      "prompt": "The lamp went out while Grandfather was telling a story. Sam knew there was a candle in the drawer, but the drawer was stuck. Outside, the moon shone through the kitchen window."
+    },
+    {
+      "id": "surprise-song",
+      "prompt": "A bird practiced a song for her shy friend. When the friend arrived, she forgot the last few notes. The friend tapped a slow rhythm on the branch and waited."
+    }
+  ]
+}

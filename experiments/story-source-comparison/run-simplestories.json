@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "name": "story-source-50m-simplestories",
+  "seed": 42,
+  "model": {
+    "vocab_size": 4096,
+    "hidden_dim": 640,
+    "num_layers": 9,
+    "num_heads": 10,
+    "ffn_dim": 1920,
+    "max_seq_len": 512,
+    "tie_embeddings": true,
+    "ffn": "dense",
+    "memory": "none"
+  },
+  "tokenizer": {
+    "path": "shared/tokenizer.json"
+  },
+  "dataset": {
+    "source": "snapshot",
+    "revision": "e63b8adc3b1a1bdc7cac5b500d150b71346b0628",
+    "dataset_config": "default",
+    "cache_dir": "simplestories/data",
+    "train_path": "simplestories/snapshot/train.jsonl",
+    "validation_path": "simplestories/snapshot/validation.jsonl",
+    "source_manifest_path": "simplestories/snapshot/manifest.json",
+    "license": "MIT",
+    "train_max_documents": 500000,
+    "validation_max_documents": 4096,
+    "train_max_tokens": 160000000,
+    "validation_max_tokens": 2097152
+  },
+  "training": {
+    "seq_len": 512,
+    "micro_batch_size": 4,
+    "gradient_accumulation": 2,
+    "max_steps": 244141,
+    "max_tokens": 1000001536,
+    "deterministic": true,
+    "grad_clip_norm": 1.0
+  },
+  "optimizer": {
+    "name": "adamw",
+    "peak": 0.0006,
+    "floor": 6e-05,
+    "warmup_steps": 2048,
+    "decay_steps": 244141,
+    "weight_decay": 0.1,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "eps": 1e-08
+  },
+  "runtime": {
+    "engine": "pytorch",
+    "backend": "rocm",
+    "precision": "bf16"
+  },
+  "checkpoint": {
+    "every_steps": 256,
+    "keep_periodic": false,
+    "steps": [
+      0,
+      256,
+      24415,
+      122071,
+      244141
+    ],
+    "retention": {
+      "milestones": [
+        {
+          "name": "initial",
+          "step": 0,
+          "committed_targets": 0
+        },
+        {
+          "name": "pilot",
+          "step": 256,
+          "committed_targets": 1048576
+        },
+        {
+          "name": "targets-100m",
+          "step": 24415,
+          "committed_targets": 100003840
+        },
+        {
+          "name": "targets-500m",
+          "step": 122071,
+          "committed_targets": 500002816
+        }
+      ],
+      "terminal_step": 244141,
+      "terminal_targets": 1000001536,
+      "max_generations": 8,
+      "max_generation_bytes": 1073741824,
+      "max_retained_bytes": 8589934592,
+      "max_peak_bytes": 9663676416,
+      "reserve_free_bytes": 0
+    }
+  },
+  "evaluation": {
+    "every_steps": 1024,
+    "max_batches": 32
+  },
+  "logging": {
+    "root_dir": "runs",
+    "every_steps": 16
+  },
+  "staging": {
+    "smoke_steps": 2,
+    "warmup_steps": 5
+  },
+  "attention": {
+    "kind": "dense",
+    "implementation": "reference"
+  }
+}
