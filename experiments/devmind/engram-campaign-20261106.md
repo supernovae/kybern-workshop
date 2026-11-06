@@ -89,3 +89,49 @@ At 00:36:43 UTC, applied step 23,148 reached 1,338,752,554 Engram targets. Inclu
 ## Performance follow-up
 
 See the [B70 performance summary](b70-performance-20261106.md) for the bounded padding comparison, trace limitations, verified return to production and the next upstream kernel hypothesis. Detailed operator artifacts remain local.
+
+## Continuation progress through 2.516B+ Engram targets and 160M / 95M segment staging
+
+Subsequent finite continuations on the pinned nightly XPU runtime (`2.16.0.dev20261105+xpu`) advanced the campaign past **2.516B Engram-phase valid targets** (`4.597B` combined exposure targets including the `2,080,374,784` inherited dense-backbone targets):
+
+- **Post-reboot 14M continuation:** Completed 107 optimizer updates (`14,005,146` valid targets) to step **31,422** / `2,429,314,666` Engram targets; cold-verified full-state checkpoint SHA-256 `b7d521277c4abe1cbec7a55b5658b3b2e135689ad2693c0fcbd1c8533526f717`, terminal validation loss **2.5700909473**.
+- **Subsequent 7M bridge continuation:** Completed 54 optimizer updates (`7,004,505` valid targets: `2,450,694` FineWeb-Edu 4+, `2,102,033` notebooks, `1,051,449` FineMath 4+, `1,050,043` Tulu-3 instructions, `350,286` Cosmopedia v2) to step **31,476** / `2,436,319,171` Engram targets. Cold-verified initial state (`step 31,422`, SHA-256 `730161f5d5a7beb2ee7eedc51cbc2476289beb4b2ef2d8eafdf84b761191799b`), intermediate 5M save (`step 31,460`, SHA-256 `b1aa262959a72e1800a97a365e71e0b798a239bfaeff4d8dede71d12ef54196a`), and terminal full-state checkpoint (`step 31,476`, SHA-256 `ed793f4ab87d1bc61d192867338fb42cec0a4a857c26edb052ec5a913303ea23`), with terminal validation loss improving to **2.5687490960** (`21,887.7` optimizer valid targets/s).
+- **Active 160M continuation (`devmind-engram-after7m-160m-131k-nvme-20261106-v1`):**
+  - Bound to `step_00031476_gen_000003` (`ed793f4ab87d1bc61d192867338fb42cec0a4a857c26edb052ec5a913303ea23`); cold-verified initial child checkpoint `step_00031476_gen_000001` (`01fc86bfbc116b902a6184d90634a0a6e25cc2659dbc63ac9c624e7f61bde89b`).
+  - Packs **160,002,769 new targets** (`162,913` whole documents / `1,213` optimizer updates $\to$ step **32,689** / **2,596,321,940** Engram targets): `56,000,151` FineWeb-Edu 4+ (35.0%), `48,000,026` notebooks (30.0%), `24,000,477` FineMath 4+ (15.0%), `2,000,208` OpenCodeInstruct + `22,000,905` Tulu-3 instructions (`24,001,113`, 15.0%), and `8,001,002` Cosmopedia v2 (5.0%).
+  - Already passed **step 32,083 / 2,516,383,537 Engram targets** (`+80.06M` targets into the segment), with validation loss improving to **2.5684862384** at step 31,600 (`step_00031600_gen_000005`, SHA-256 `9d1a1aa2ed2170d7055ca7ab158f954646419c9932c781414f37042f6a147f83`) and end-to-end throughput reaching **20,254.9 valid targets/s (+6.9% vs 14M run)**.
+- **Pre-staged 95M continuation (`after-160m-95m-append-4k-v1`):**
+  - Pre-packed and verified on Tank (`native_data_manifest_sha256: 45164058035aa8830352efc2a9f7a17911bea74c30f2e1c8d6debe41937168c8`, `95,003,026` new targets / `96,718` documents / `721` updates $\to$ step **33,410** / **2,691,324,966** Engram targets; armed via `devmind-after160m-95m-handoff-20261106-v1.service` for immediate zero-idle handoff from step 32,689): `33,250,766` FineWeb-Edu 4+, `28,500,897` notebooks, `14,250,687` FineMath 4+, `1,350,196` OpenCodeInstruct + `12,900,065` Tulu-3 instructions, and `4,750,415` Cosmopedia v2, with `checkpoint.every_tokens` increased from `5,000,000` to `25,000,000` to eliminate 80% of periodic checkpoint pause overhead.
+
+### Qualified dataset inventory and 16-worker parallel screening pipeline
+
+All newly acquired and qualified shards preserve the unchanged **35% Web / 30% Notebooks / 15% FineMath / 15% Instructions / 5% Cosmopedia** mixture, whole-document 4K (`<=4096` tokens with EOS, no truncation), `NORMALIZER_V3` structure cleaning, permissive license gates, 40-pool prior-index MinHash LSH ($\ge 0.65$) deduplication, and 1,406,036-query protected benchmark/heldout screening:
+
+| Pillar | Dataset & Pinned Revision | Shard / Interval | Raw SHA-256 (prefix) | Qualified Docs | Qualified Targets |
+|---|---|---|---|---:|---:|
+| **Web (35%)** | `HuggingFaceTB/smollm-corpus` (`3ba9d605...`) | `fineweb-edu-dedup/train-00080-of-00234.parquet` `[150000, 812684)` | `abbe6bc1260630c1...` | 74,685 | 61,041,985 |
+| **Web (35%)** | `HuggingFaceTB/smollm-corpus` (`3ba9d605...`) | `fineweb-edu-dedup/train-00081-of-00234.parquet` | `02d188d2c0b3eb29...` | 91,633 | 76,659,215 |
+| **Web (35%)** | `HuggingFaceTB/smollm-corpus` (`3ba9d605...`) | `fineweb-edu-dedup/train-00082-of-00234.parquet` | `54b19f880cc23347...` | 91,951 | 76,809,281 |
+| **Notebooks (30%)** | `codeparrot/github-jupyter` (`495a499a...`) | `data/file-000000000000.json.gz`..`file-000000000024.json.gz` (25 files) | `1d948daa...`..`be628258...` | 47,273 | 59,295,033 |
+| **Notebooks (30%)** | `codeparrot/github-jupyter` (`495a499a...`) | `data/file-000000000025.json.gz`..`file-000000000032.json.gz` (8 files) | `70e6b9f5...`..`bd88c857...` | 14,119 | 17,344,378 |
+| **FineMath (15%)** | `HuggingFaceTB/finemath` (`e92b25a6...`) | `finemath-4plus/train-00004-of-00064.parquet` (+ shards 5–6 acquired) | `9644be6589159f9a...` | 91,364 | 95,726,331 |
+| **Instructions (15%)** | `nvidia/OpenCodeInstruct` (`8f3ba5ba...`) | `data/train-00000-of-00050.parquet` (`[0, 100000)`) | `342757e0c6b706c8...` | 6,736 | 2,815,235 |
+| **Instructions (15%)** | `nvidia/OpenCodeInstruct` (`8f3ba5ba...`) | `data/train-00001` & `train-00002-of-00050.parquet` | `2e822b1c...`, `3fe342d7...` | 3,494 | 1,397,137 |
+| **Instructions (15%)** | `nvidia/OpenCodeInstruct` (`8f3ba5ba...`) | `data/train-00003`..`train-00010-of-00050.parquet` (8 shards) | `19aed4cc...`..`c887eb84...` | 26,744 | 11,092,182 |
+| **Instructions (15%)** | `allenai/tulu-3-sft-mixture` (`b14afda6...`) | `data/train-00000-of-00006.parquet` (`oasst1` + `wildchat`) | `41d4524345443ccc...` | 42,701 | 49,309,394 |
+| **Instructions (15%)** | `allenai/tulu-3-sft-mixture` (`b14afda6...`) | `data/train-00001-of-00006.parquet` (`oasst1` + `wildchat`) | `c612164eabfacb99...` | 36,218 | 46,767,808 |
+
+### DevMind v2 Recipe & Data-Flow Blueprint
+
+For **DevMind v2**, the data flows, screening optimizations, and kernel improvements developed during this continuation should be integrated from step 0 rather than bolted on mid-campaign:
+
+1. **Cluster-level notebook deduplication instead of repository-name collapse:**
+   - Earlier `codeparrot/github-jupyter` screening scripts grouped union-find components by `family_id` (`repo_name`), which collapsed multi-notebook educational/data-science repositories (`10–50+` distinct notebooks per repo) down to a single notebook and discarded `91–94%` of valid targets (`51.07M` encoded $\to$ `2.79M` retained).
+   - Deduplicating by **exact content + within-shard/cross-shard MinHash LSH ($\ge 0.65$) cluster** while still blocking any cluster that hits a prior pool, protected query, heldout repository, or content-review hold retains **~75% (`76.64M` targets across files 0–32)** of distinct, high-quality notebooks.
+   - For v2, combine `HuggingFaceTB/issues-kaggle-notebooks` (`kaggle` config, 11 shards, `~654M` clean targets), `codeparrot/github-jupyter` (all 33 files `0–32`, `~76.6M` clean targets), and `jupyter-agent/jupyter-agent-dataset` (`10a8dd461bb6c580fa25b83cd3b2f6810f1d6385`, Apache-2.0 executable notebook agentic traces with `tool_calls`) from the start of the corpus build.
+2. **Execution-verified Python coding & agentic trajectories in the Instruction pillar:**
+   - `nvidia/OpenCodeInstruct` (`8f3ba5bafe4d6e8db46082cf7ae6741bc370604d`, 50 shards, CC-BY-4.0) enforces `average_test_score == 1.0`, 10 passing unit tests with 10 distinct AST-parsed `assert` statements, balanced code fences, and 5/5 LLM judgements across `requirement_conformance`, `logical_correctness`, and `edge_case_consideration`. Scaling across all 50 shards in v2 provides **~70M+ execution-verified Python coding targets**.
+3. **16-worker parallel SQLite/MinHash qualification & pre-sharded protected query cache:**
+   - Replacing single-worker sequential `screen_queries` over 40 prior SQLite indexes and 1.41M protected queries with a 16-worker `ProcessPoolExecutor` (`mp_context='spawn'`) and pre-sharded `queries-{0..15}.jsonl` reduced whole-shard qualification wall time from **3–4 hours to 3–9 minutes per shard** on Threadripper, enabling continuous multi-hundred-million-token runway preparation ahead of GPU training.
+4. **Runtime & checkpoint cadence defaults for v2:**
+   - Adopt `padding_multiple=64` (measured **+3.18%** steady throughput on B70 XPU when paired with vectorized `TokenNgramMemory` diagnostics in [Tiny Sparse Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335)), skip redundant per-microbatch `/proc` RSS/meminfo syscalls inside `MemoryMonitor.sample()` when native XPU/CUDA peak counters are active, and set `checkpoint.every_tokens` to `25,000,000–50,000,000` (`+2.8%` end-to-end wall-clock gain over 5M checkpointing).
