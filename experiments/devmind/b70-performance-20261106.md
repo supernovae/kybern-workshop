@@ -46,19 +46,20 @@ Recorded training losses remained finite, and recorded optimizer overflow retrie
 
 The old runtime remains available as fallback and was not needed during this validation. Fresh-process GPU resume and terminal cold full-state reload are now demonstrated for this finite nightly continuation. **100M targets do not establish stability over billions of targets**; continued monitoring and further training evidence remain necessary. No permanent runtime promotion or subsequent segment outcome is claimed here.
 
-## Campaign progress through step 31,476 (2.436B Engram targets)
+## Campaign progress through 2.516B+ Engram targets (160M active continuation)
 
-Subsequent finite continuations on the same nightly runtime (`2.16.0.dev20261105+xpu`) completed through optimizer step **31,476** and **2,436,319,171 cumulative Engram-phase valid targets** (4,516,693,955 combined targets including the 2,080,374,784 inherited dense-backbone targets).
+Subsequent finite continuations on the same nightly runtime (`2.16.0.dev20261105+xpu`) completed through optimizer step **31,476** (`2,436,319,171` Engram targets), and the active **160,002,769-target continuation (`devmind-engram-after7m-160m-131k-nvme-20261106-v1`, step 31,476 $\to$ 32,689 / `2,596,321,940` Engram targets)** has passed **step 32,083 / 2,516,383,537 Engram targets** (`4,596,758,321` combined exposure targets including the `2,080,374,784` inherited dense-backbone targets):
 
-| Milestone / Segment | Cumulative Engram targets | Step | Terminal validation loss |
-|---|---:|---:|---:|
-| First 100M nightly validation | 1,715,287,502 | 26,005 | 2.5825059 |
-| Following 200M continuation | 1,915,291,338 | 27,522 | 2.5787988 |
-| Post-reboot 14M continuation | 2,429,314,666 | 31,422 | 2.5700909 |
-| Subsequent 7M bridge continuation | 2,436,319,171 | 31,476 | **2.5687491** |
+| Milestone / Segment | Cumulative Engram targets | Step | Validation loss | End-to-end valid targets/s | Optimizer-only valid targets/s |
+|---|---:|---:|---:|---:|---:|
+| First 100M nightly validation | 1,715,287,502 | 26,005 | 2.5825059 | — | — |
+| Following 200M continuation | 1,915,291,338 | 27,522 | 2.5787988 | — | — |
+| Pre-reboot 25M continuation | 2,415,309,520 | 31,315 | 2.5706154 | 19,396.0 | 21,765.0 |
+| Post-reboot 14M continuation | 2,429,314,666 | 31,422 | 2.5700909 | 18,948.0 | 21,511.0 |
+| Subsequent 7M bridge continuation | 2,436,319,171 | 31,476 | 2.5687491 | 19,312.4 | 21,887.7 |
+| **Active 160M continuation (at +80.1M)** | **2,516,383,537** | **32,083** | **2.5684862** (step 31,600) | **20,254.9 (+6.9%)** | **21,626.8** (16 CPU cores busy) |
 
 Every segment bound to its predecessor's cold-verified CPU full-state checkpoint, preserved model/Adam/RNG/cursor/schedule state and the `1e-5` learning-rate floor (`5e-5` memory-table floor), and verified bit-exact initial state before applying updates.
-
 ## Vectorized Engram diagnostics and padding A/B/A comparison
 
 A follow-up operator-observed A/B/A comparison on the B70 XPU (4 steady updates / 532,612 valid targets per arm after warmup, starting from the verified step 31,422 state) evaluated vectorizing `TokenNgramMemory` multi-stream diagnostics and reusing shifted input slices ([Tiny Sparse Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335)), reducing per-microbatch `/proc` host-memory syscalls during native device peak tracking, and combining those changes with `padding_multiple=64` and `padding_multiple=32`:
@@ -78,11 +79,14 @@ Key findings and negative results:
 - **Negative results retained:**
   - Compiling `F.conv1d(..., groups=hidden.shape[-1])` inside a standalone helper across variable microbatch sequence lengths hit Dynamo's `recompile_limit (8)` due to shape guards on the depthwise convolution input.
   - Enabling `AdamW(foreach=True)` on XPU across the model's heterogeneous parameter groups measured slightly slower (`21,652.81` vs `21,799.14` targets/s in an earlier 3-update screen) than `foreach=False`.
+- **Production deployment in the 160M run & checkpoint cadence optimization:**
+  - Deploying the vectorized Engram diagnostics + light `MemoryMonitor` path (`B1`, keeping `padding_multiple=128` for exact microbatch-group prefix parity) increased end-to-end valid-target throughput in the active 160M run to **20,254.9 valid targets/s (+6.9% over the 14M run)** and sustained **21,626.8 optimizer-only valid targets/s** (`21,117.8–21,348.4 /s` across recent 5M spans) even while 16 host CPU cores concurrently executed 41-pool SQLite/MinHash qualification across `FineMath`, `Jupyter`, `OpenCodeInstruct`, `FineWeb-Edu`, and `Tulu-3` shards.
+  - Stage-timing inspection of the 160M run showed that `checkpoint.every_tokens = 5,000,000` (~every 38 steps / 4 minutes) pauses training for `~6.5–9.0 seconds` per save+cold-verification (`~3.5%` wall-clock overhead). Increasing `checkpoint.every_tokens` to `25,000,000` in the pre-staged 95M successor (`after-160m-95m-append-4k-v1`) eliminates 80% of periodic checkpoint pauses (`+2.8%` end-to-end wall-clock gain) while retaining milestone and recovery saves.
 
 ## Remaining experiments and reusable improvements
 
 - Broader forward/loss compilation captures token and Engram lookups in CPU checks, but source inspection indicates XPU embedding backward still lowers to the native fallback. Its numerical behavior, memory and speed need a separate GPU comparison.
 - Padding-index changes require care: this path fills with EOS, also a legitimate learned token. SparseAdam changes untouched-row moment/update semantics and belongs in a separate learning experiment or v2, not an equivalent optimizer switch.
-- [Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335) contributes the vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers upstream. [Lab PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse, and [Retention PR #333](https://github.com/supernovae/tiny-sparse-lab/pull/333) merged retention-policy preservation during budget-extension comparisons.
+- [Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335) (all CI checks passing) contributes the vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers upstream. [Lab PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse, and [Retention PR #333](https://github.com/supernovae/tiny-sparse-lab/pull/333) merged retention-policy preservation during budget-extension comparisons.
 
 These are aggregate operator-observed findings. Detailed local evidence and failed artifacts are retained without publishing corpus content, checkpoints, private identifiers or filesystem paths.
