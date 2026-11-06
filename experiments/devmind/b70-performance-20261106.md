@@ -4,7 +4,7 @@ A short operator-observed A/B/A comparison tested padding multiples of 128 versu
 
 Padding 64 improved the fixed steady update window by approximately 1.4–1.5% against both baselines. The whole-training improvement against the warm repeated baseline was only 0.57%. Cache warming explains much of the larger comparison with the initial cold baseline. Loss differences were comparable to baseline-repeat numerical variation. Production remains on padding 128 pending a longer paired confirmation; no quality improvement or large speedup is claimed.
 
-A separate XPU capture showed fused attention and compiled loss execution. Host waits inside embedding backward warrant further investigation, but most of that wait overlapped useful GPU work and cannot be counted as recoverable elapsed time. [Intel PR #5725](https://github.com/intel/torch-xpu-ops/pull/5725) removes host segment-count dependencies in the dense embedding-backward helper, following [PyTorch CUDA PR #70943](https://github.com/pytorch/pytorch/pull/70943). An isolated runtime comparison must establish numerical behavior, dense Adam semantics, peak scratch memory and end-to-end throughput before adoption. No runtime upgrade has been deployed.
+A separate XPU capture showed fused attention and compiled loss execution. Host waits inside embedding backward warrant further investigation, but most of that wait overlapped useful GPU work and cannot be counted as recoverable elapsed time. [Intel PR #5725](https://github.com/intel/torch-xpu-ops/pull/5725) removes host segment-count dependencies in the dense embedding-backward helper, following [PyTorch CUDA PR #70943](https://github.com/pytorch/pytorch/pull/70943). An isolated runtime comparison must establish numerical behavior, dense Adam semantics, peak scratch memory and end-to-end throughput before adoption. At that initial investigation, no runtime upgrade had been deployed; the later finite nightly validation is reported below.
 
 The trace branch was interrupted safely after profiler aggregation exceeded its host-memory allowance. The captured update remained analyzable using bounded offline streaming. Future captures should export only while holding the GPU lease, aggregate offline, and stop at the intended native checkpoint boundary. Traced timing is excluded from the speed comparison.
 
@@ -30,12 +30,26 @@ Every arm explicitly called `torch.use_deterministic_algorithms(False)`. Global 
 
 The old runtime failed an additional empty-input embedding backward case; the nightly passed it, repeated-index and padding cases. Production uses nonempty lookups. The failed attempt and successful recovery evidence were retained, and the production trainer resumed on its known-good runtime, applied updates and saved a verified post-update checkpoint.
 
-Independent review recommends a planned finite 100M-target nightly validation, not yet started, with an early fresh-process GPU resume from a nightly-written checkpoint and the old runtime available as fallback. That GPU resume and long-run learning behavior remain unverified at this report's publication; no permanent runtime promotion is claimed.
+## Completed finite 100M-target nightly validation
+
+The recommended nightly validation has now completed **100,003,922 fresh valid targets across 759 applied optimizer updates**. After eight updates, the trainer saved full state, exited cleanly, and resumed from that nightly-written checkpoint in a fresh GPU process. The resumed process completed the remaining 751 updates and exited successfully. Terminal model, Adam, RNG, cursor and scheduler state passed native cold CPU verification. The established training configuration and learning-rate floor were preserved.
+
+| Measurement boundary | Fresh valid targets/s | Wall duration |
+|---|---:|---:|
+| Initial launch-request publication through final cold-verification receipt | 20,992.33 | 4,763.83 s |
+| Final sustained window, including checkpoint/evaluation pauses | 21,704.56 | 603.14 s |
+| Longer final sustained window, including checkpoint/evaluation pauses | 21,957.27 | 1,203.23 s |
+
+The whole-phase envelope includes initial startup, the early save/exit/cold-load/fresh restart, resumed training, validation, saves, exit and final verification. Its starting timestamp is the recorded launch-request publication immediately before process launch, not an independently recorded OS process-start time. The shorter steady wall windows exclude that initial startup and restart; they are not optimizer-only rates. These are measurements of this continuation, not a matched long-run speedup against the old runtime.
+
+Recorded training losses remained finite, and recorded optimizer overflow retries were zero. Validation loss changed from approximately 2.5838 at entry to **2.5825** at completion, with intermediate fluctuations. This is descriptive health evidence, not proof of learning equivalence, improved quality or runtime superiority. Allocator counters are not a measurement of total physical driver residency.
+
+The old runtime remains available as fallback and was not needed during this validation. Fresh-process GPU resume and terminal cold full-state reload are now demonstrated for this finite nightly continuation. **100M targets do not establish stability over billions of targets**; continued monitoring and further training evidence remain necessary. No permanent runtime promotion or subsequent segment outcome is claimed here.
 
 ## Remaining experiments and reusable improvements
 
 - Broader forward/loss compilation captures token and Engram lookups in CPU checks, but source inspection indicates XPU embedding backward still lowers to the native fallback. Its numerical behavior, memory and speed need a separate GPU comparison.
 - Padding-index changes require care: this path fills with EOS, also a legitimate learned token. SparseAdam changes untouched-row moment/update semantics and belongs in a separate learning experiment or v2, not an equivalent optimizer switch.
-- [Lab PR334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse after independent review and passing CI, reducing repeated preparation work. Retention PR333 remains open with a failing check; it is not presented as merged.
+- [Lab PR334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse after independent review and passing CI, reducing repeated preparation work. [Retention PR333](https://github.com/supernovae/tiny-sparse-lab/pull/333) also merged after independent review and passing CI. Its accumulation-test fixture now applies its existing configured seed before direct engine initialization; tolerances and production numerical behavior were unchanged.
 
 These are aggregate operator-observed findings. Detailed local evidence and failed artifacts are retained without publishing corpus content, checkpoints, private identifiers or filesystem paths.
