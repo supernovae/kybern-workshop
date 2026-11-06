@@ -6,7 +6,7 @@
 Start with the [editable experiment and native run loop](run.md).
 This directory contains the declarative model and optimizer specifications, the 25-leaf corpus preparation plan, and the pinned upstream dataset shard definitions to be executed with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
 
-> **Current status (2026-11-06, operator-observed):** Training is active in the subsequent Engram continuation. The latest completed segment reached 1,310,272,432 additional Engram targets; the next 100,003,501-target segment has applied optimizer updates and saved a verified full-state checkpoint. See the [current campaign record](engram-campaign-20261106.md) for preserved lineage, the current 35/30/15/15/5 mixture, exact checkpoint evidence, source expansion, storage policy and v2 opportunities. The original dense recipe below remains historical context. No model weights are published.
+> **Current status (2026-11-06, operator-observed):** Training continues in the Engram phase. Completed segments have reached step 31,476 / **2,436,319,171 additional Engram targets** (4,516,693,955 combined exposure including the inherited dense backbone, validation loss **2.568749**), with a further 160M-target segment staged from verified screened supply. See the [current campaign record](engram-campaign-20261106.md) and [B70 performance follow-up](b70-performance-20261106.md) for preserved lineage, the 35/30/15/15/5 mixture, Python/coding/agentic data expansion, exact checkpoint evidence, storage policy, and v2 opportunities. The original dense recipe below remains historical context. No model weights are published.
 
 ---
 

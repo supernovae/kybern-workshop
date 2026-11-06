@@ -46,10 +46,43 @@ Recorded training losses remained finite, and recorded optimizer overflow retrie
 
 The old runtime remains available as fallback and was not needed during this validation. Fresh-process GPU resume and terminal cold full-state reload are now demonstrated for this finite nightly continuation. **100M targets do not establish stability over billions of targets**; continued monitoring and further training evidence remain necessary. No permanent runtime promotion or subsequent segment outcome is claimed here.
 
+## Campaign progress through step 31,476 (2.436B Engram targets)
+
+Subsequent finite continuations on the same nightly runtime (`2.16.0.dev20261105+xpu`) completed through optimizer step **31,476** and **2,436,319,171 cumulative Engram-phase valid targets** (4,516,693,955 combined targets including the 2,080,374,784 inherited dense-backbone targets).
+
+| Milestone / Segment | Cumulative Engram targets | Step | Terminal validation loss |
+|---|---:|---:|---:|
+| First 100M nightly validation | 1,715,287,502 | 26,005 | 2.5825059 |
+| Following 200M continuation | 1,915,291,338 | 27,522 | 2.5787988 |
+| Post-reboot 14M continuation | 2,429,314,666 | 31,422 | 2.5700909 |
+| Subsequent 7M bridge continuation | 2,436,319,171 | 31,476 | **2.5687491** |
+
+Every segment bound to its predecessor's cold-verified CPU full-state checkpoint, preserved model/Adam/RNG/cursor/schedule state and the `1e-5` learning-rate floor (`5e-5` memory-table floor), and verified bit-exact initial state before applying updates.
+
+## Vectorized Engram diagnostics and padding A/B/A comparison
+
+A follow-up operator-observed A/B/A comparison on the B70 XPU (4 steady updates / 532,612 valid targets per arm after warmup, starting from the verified step 31,422 state) evaluated vectorizing `TokenNgramMemory` multi-stream diagnostics and reusing shifted input slices ([Tiny Sparse Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335)), reducing per-microbatch `/proc` host-memory syscalls during native device peak tracking, and combining those changes with `padding_multiple=64` and `padding_multiple=32`:
+
+| Arm | Steady valid targets/s | Steady wall seconds | Gain vs mean baseline | Max loss difference vs A1 |
+|---|---:|---:|---:|---:|
+| A1: baseline (`padding_multiple=128`) | 21,561.51 | 24.7020 | — | 0.0 |
+| B1: vectorized Engram + light monitor (`pad128`) | **21,840.27** | 24.3867 | **+1.64%** | $4.61 \times 10^{-5}$ |
+| B2: vectorized Engram + light monitor (`pad64`) | **22,171.84** | 24.0220 | **+3.18%** | $3.23 \times 10^{-5}$ |
+| B3: vectorized Engram + light monitor (`pad32`) | 22,075.48 | 24.1269 | +2.73% | $1.00 \times 10^{-5}$ |
+| A2: baseline repeat (`padding_multiple=128`) | 21,416.08 | 24.8697 | — | $6.30 \times 10^{-5}$ |
+
+Key findings and negative results:
+
+- **Vectorized multi-stream Engram diagnostics ([PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335)):** Previously, `TokenNgramMemory` recomputed shifted token slices per `(order, head)` stream and launched separate per-stream `torch.bincount`, `.norm(dim=-1)`, `gate.mean()`, and `hidden.norm(dim=-1)` reductions at each Engram site. Precomputing shifted slices once up to `max(ngram_orders)` and batching all streams into a single `[num_streams, table_size]` `bincount` and batched norm reduction preserves exact forward outputs, gradients, and diagnostic tensors while improving steady throughput at unchanged `padding_multiple=128` by **+1.64%**.
+- **Padding granularity (`64` vs `128` vs `32`):** Combining the vectorized Engram path with `padding_multiple=64` reached **22,171.84 valid targets/s (+3.18%)** even while 16 host CPU cores were concurrently executing corpus screening. `padding_multiple=64` outperformed `padding_multiple=32` (`22,075.48` targets/s), consistent with 64-token alignment matching B70 XMX systolic/FlashAttention tile sizes while avoiding excessive shape buckets.
+- **Negative results retained:**
+  - Compiling `F.conv1d(..., groups=hidden.shape[-1])` inside a standalone helper across variable microbatch sequence lengths hit Dynamo's `recompile_limit (8)` due to shape guards on the depthwise convolution input.
+  - Enabling `AdamW(foreach=True)` on XPU across the model's heterogeneous parameter groups measured slightly slower (`21,652.81` vs `21,799.14` targets/s in an earlier 3-update screen) than `foreach=False`.
+
 ## Remaining experiments and reusable improvements
 
 - Broader forward/loss compilation captures token and Engram lookups in CPU checks, but source inspection indicates XPU embedding backward still lowers to the native fallback. Its numerical behavior, memory and speed need a separate GPU comparison.
 - Padding-index changes require care: this path fills with EOS, also a legitimate learned token. SparseAdam changes untouched-row moment/update semantics and belongs in a separate learning experiment or v2, not an equivalent optimizer switch.
-- [Lab PR334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse after independent review and passing CI, reducing repeated preparation work. [Retention PR333](https://github.com/supernovae/tiny-sparse-lab/pull/333) also merged after independent review and passing CI. Its accumulation-test fixture now applies its existing configured seed before direct engine initialization; tolerances and production numerical behavior were unchanged.
+- [Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335) contributes the vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers upstream. [Lab PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse, and [Retention PR #333](https://github.com/supernovae/tiny-sparse-lab/pull/333) merged retention-policy preservation during budget-extension comparisons.
 
 These are aggregate operator-observed findings. Detailed local evidence and failed artifacts are retained without publishing corpus content, checkpoints, private identifiers or filesystem paths.

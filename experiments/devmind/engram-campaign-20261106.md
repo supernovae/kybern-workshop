@@ -89,3 +89,27 @@ At 00:36:43 UTC, applied step 23,148 reached 1,338,752,554 Engram targets. Inclu
 ## Performance follow-up
 
 See the [B70 performance summary](b70-performance-20261106.md) for the bounded padding comparison, trace limitations, verified return to production and the next upstream kernel hypothesis. Detailed operator artifacts remain local.
+
+## Continuation progress through step 31,476 and Python/coding/agentic supply expansion
+
+Subsequent finite continuations on the pinned nightly XPU runtime (`2.16.0.dev20261105+xpu`) advanced the campaign to optimizer step **31,476** and **2,436,319,171 Engram-phase valid targets** (4,516,693,955 combined exposure targets including the 2,080,374,784 inherited dense-backbone targets).
+
+- **Post-reboot 14M continuation:** Completed 107 optimizer updates (`14,005,146` valid targets) to step **31,422** / `2,429,314,666` Engram targets; cold-verified full-state checkpoint SHA-256 `b7d521277c4abe1cbec7a55b5658b3b2e135689ad2693c0fcbd1c8533526f717`, terminal validation loss **2.5700909473**.
+- **Subsequent 7M bridge continuation:** Completed 54 optimizer updates (`7,004,505` valid targets: `2,450,694` FineWeb-Edu 4+, `2,102,033` notebooks, `1,051,449` FineMath 4+, `1,050,043` Tulu-3 instructions, `350,286` Cosmopedia v2) to step **31,476** / `2,436,319,171` Engram targets. Cold-verified initial state (`step 31,422`, SHA-256 `730161f5d5a7beb2ee7eedc51cbc2476289beb4b2ef2d8eafdf84b761191799b`), intermediate 5M save (`step 31,460`, SHA-256 `b1aa262959a72e1800a97a365e71e0b798a239bfaeff4d8dede71d12ef54196a`), and terminal full-state checkpoint (`step 31,476`, SHA-256 `ed793f4ab87d1bc61d192867338fb42cec0a4a857c26edb052ec5a913303ea23`), with terminal validation loss improving to **2.5687490960** (`21,887.7` optimizer valid targets/s).
+
+### High-quality Python, coding, and agentic supply qualification
+
+To eliminate short supply-limited segments and strengthen Python, algorithmic coding, and executable notebook coverage within the unchanged **35% Web / 30% Notebooks / 15% FineMath / 15% Instructions / 5% Cosmopedia** spine and whole-document 4K (`<=4096` tokens with EOS) contract:
+
+1. **15% Instruction pillar (`nvidia/OpenCodeInstruct` + `allenai/tulu-3-sft-mixture`):**
+   - Two disjoint intervals (`[0, 20000)` and `[20000, 100000)`) of `nvidia/OpenCodeInstruct` (`8f3ba5bafe4d6e8db46082cf7ae6741bc370604d`, `data/train-00000-of-00050.parquet`, CC-BY-4.0) completed full 38-pool prior, upstream-test, IFEval, OASST, and Tulu-withheld lexical and family screening, yielding **6,736 test-verified Python coding documents / 2,815,235 qualified targets**. Additional shards (`train-00001` and `train-00002`) are acquired and hash-verified for follow-on qualification.
+   - `allenai/tulu-3-sft-mixture` (`b14afda60f1bbebe55d5d2fa1e4df5042f97f8be`, `data/train-00000-of-00006.parquet`, OASST Apache-2.0 and WildChat ODC-BY-1.0 components) retains **42,701 documents / 49,309,394 qualified targets** after 17 reviewed component holds and reverse OASST validation protection.
+2. **30% Notebook pillar (`codeparrot/github-jupyter` files 0–32 + `Meta Kaggle Code`):**
+   - Sixteen additional files (`files 9–24`) of `codeparrot/github-jupyter` (`495a499ae501478e2e934c453964d9bf5cd103eb`, permissive MIT/Apache-2.0/BSD/ISC allowlist, ordered markdown/code cells without outputs) completed full encoding (`38,886` documents / `51,065,264` targets) and 38-pool + 1.41M-query protected screening, alongside deterministic 4-per-file content review. The remaining eight files (`files 25–32`) have been acquired and hash-verified.
+   - Deduplicating at the per-notebook lexical cluster level (excluding all within-shard and 38-pool MinHash LSH near-duplicates at Jaccard $\ge 0.65$, all protected-query matches, all heldout-overlapping repositories, all quality holds, and all previously consumed documents) provides **45,600 unconsumed, protected-clean notebooks / 57.15M targets** across `files 1–24`.
+3. **35% Web & 15% FineMath replenishment:**
+   - The remaining unused interval `[150000, 812684)` of FineWeb-Edu shard 80 (`abbe6bc1260630c1e37acbeef5031c9c6dff4034a3077594a44edfe4e1097a40`) completed 39-pool prior and 1.41M-query protected screening, yielding **74,685 fresh documents / 61,041,985 qualified Web score-4+ targets** (combining with the `9.05M` residual from `[0, 150000)` for **70.09M** fresh Web targets).
+   - FineMath-4+ shard 4 (`9644be6589159f9ab85a147f71a48b4ea40ed712cb7c7b5b42bf91b1bb844973`) is acquired and hash-verified behind the `29.36M` screened FineMath residual.
+4. **Archive Round 10 and 160M segment staging:**
+   - Fourteen intermediate checkpoints (`63.26 GB`) from three completed historical phases were cold-verified on archive storage and released from NVMe (preserving `latest`, `best`, and recent recovery generations locally).
+   - A **160,000,000-target** same-mix continuation segment (`56M` Web 4+, `48M` Notebooks, `24M` FineMath 4+, `2.6M` OpenCodeInstruct + `21.4M` Tulu-3 instructions, `8M` Cosmopedia v2) is now packing via verified same-producer tail append for execution from step 31,476.
