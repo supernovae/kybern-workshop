@@ -101,7 +101,7 @@ Subsequent finite continuations on the pinned nightly XPU runtime (`2.16.0.dev20
   - Packs **160,002,769 new targets** (`162,913` whole documents / `1,213` optimizer updates $\to$ step **32,689** / **2,596,321,940** Engram targets): `56,000,151` FineWeb-Edu 4+ (35.0%), `48,000,026` notebooks (30.0%), `24,000,477` FineMath 4+ (15.0%), `2,000,208` OpenCodeInstruct + `22,000,905` Tulu-3 instructions (`24,001,113`, 15.0%), and `8,001,002` Cosmopedia v2 (5.0%).
   - Already passed **step 32,083 / 2,516,383,537 Engram targets** (`+80.06M` targets into the segment), with validation loss improving to **2.5684862384** at step 31,600 (`step_00031600_gen_000005`, SHA-256 `9d1a1aa2ed2170d7055ca7ab158f954646419c9932c781414f37042f6a147f83`) and end-to-end throughput reaching **20,254.9 valid targets/s (+6.9% vs 14M run)**.
 - **Pre-staged 95M continuation (`after-160m-95m-append-4k-v1`):**
-  - Pre-packed ahead of GPU completion for immediate zero-idle handoff from step 32,689 (`2,596,321,940` $\to$ **2,691,321,940** Engram targets): `33,250,000` FineWeb-Edu 4+, `28,500,000` notebooks, `14,250,000` FineMath 4+, `1,350,000` OpenCodeInstruct + `12,900,000` Tulu-3 instructions, and `4,750,000` Cosmopedia v2, with `checkpoint.every_tokens` increased from `5,000,000` to `25,000,000` to eliminate 80% of periodic checkpoint pause overhead.
+  - Pre-packed and verified on Tank (`native_data_manifest_sha256: 45164058035aa8830352efc2a9f7a17911bea74c30f2e1c8d6debe41937168c8`, `95,003,026` new targets / `96,718` documents / `721` updates $\to$ step **33,410** / **2,691,324,966** Engram targets; armed via `devmind-after160m-95m-handoff-20261106-v1.service` for immediate zero-idle handoff from step 32,689): `33,250,766` FineWeb-Edu 4+, `28,500,897` notebooks, `14,250,687` FineMath 4+, `1,350,196` OpenCodeInstruct + `12,900,065` Tulu-3 instructions, and `4,750,415` Cosmopedia v2, with `checkpoint.every_tokens` increased from `5,000,000` to `25,000,000` to eliminate 80% of periodic checkpoint pause overhead.
 
 ### Qualified dataset inventory and 16-worker parallel screening pipeline
 
@@ -116,7 +116,8 @@ All newly acquired and qualified shards preserve the unchanged **35% Web / 30% N
 | **Notebooks (30%)** | `codeparrot/github-jupyter` (`495a499a...`) | `data/file-000000000025.json.gz`..`file-000000000032.json.gz` (8 files) | `70e6b9f5...`..`bd88c857...` | 14,119 | 17,344,378 |
 | **FineMath (15%)** | `HuggingFaceTB/finemath` (`e92b25a6...`) | `finemath-4plus/train-00004-of-00064.parquet` (+ shards 5–6 acquired) | `9644be6589159f9a...` | 91,364 | 95,726,331 |
 | **Instructions (15%)** | `nvidia/OpenCodeInstruct` (`8f3ba5ba...`) | `data/train-00000-of-00050.parquet` (`[0, 100000)`) | `342757e0c6b706c8...` | 6,736 | 2,815,235 |
-| **Instructions (15%)** | `nvidia/OpenCodeInstruct` (`8f3ba5ba...`) | `data/train-00001` & `train-00002-of-00050.parquet` (+ shards 3–10 acquired) | `2e822b1c...`, `3fe342d7...` | 3,494 | 1,397,137 |
+| **Instructions (15%)** | `nvidia/OpenCodeInstruct` (`8f3ba5ba...`) | `data/train-00001` & `train-00002-of-00050.parquet` | `2e822b1c...`, `3fe342d7...` | 3,494 | 1,397,137 |
+| **Instructions (15%)** | `nvidia/OpenCodeInstruct` (`8f3ba5ba...`) | `data/train-00003`..`train-00010-of-00050.parquet` (8 shards) | `19aed4cc...`..`c887eb84...` | 26,744 | 11,092,182 |
 | **Instructions (15%)** | `allenai/tulu-3-sft-mixture` (`b14afda6...`) | `data/train-00000-of-00006.parquet` (`oasst1` + `wildchat`) | `41d4524345443ccc...` | 42,701 | 49,309,394 |
 | **Instructions (15%)** | `allenai/tulu-3-sft-mixture` (`b14afda6...`) | `data/train-00001-of-00006.parquet` (`oasst1` + `wildchat`) | `c612164eabfacb99...` | 36,218 | 46,767,808 |
 
