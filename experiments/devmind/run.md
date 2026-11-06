@@ -6,9 +6,14 @@
 The preparation phase maps are tools for producing missing inputs, not a mandatory
 25-step prerequisite for every iteration. Reuse unchanged native artifacts.
 
-Production/model execution is currently stopped pending integrated Harness/Lab/
-Workshop verification and owner review. The commands below are the execution path
-once that hold is lifted; authoring and schema checks do not lift it.
+This page documents the authored dense 12B baseline and its binding workflow, not
+live campaign status. The October 29 execution-stop notice is historical; see the
+[Engram campaign record](engram-campaign-20261106.md) for the subsequent continuation
+and the [B70 performance follow-up](b70-performance-20261106.md#completed-finite-100m-target-nightly-validation)
+for the completed finite 100M-target nightly validation, including fresh-process GPU
+resume and terminal cold full-state verification. Those results do not establish
+completion of the dense 12B baseline or promise uninterrupted future execution.
+Authoring and schema checks alone still do not establish execution readiness.
 
 ## Bind once to real inputs
 
