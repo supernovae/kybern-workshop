@@ -6,7 +6,7 @@
 Start with the [editable experiment and native run loop](run.md).
 This directory contains the declarative model and optimizer specifications, the 25-leaf corpus preparation plan, and the pinned upstream dataset shard definitions to be executed with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
 
-> **Current status (2026-10-29, operator-reported):** Retained corpus R36 and the 32K tokenizer R40 are complete. Another 49 code shards were acquired but are not admitted. The scientific 12B unique-target 60/20/20 mixture is incomplete. Production/model execution remains stopped pending integrated verification and owner review; no DevMind trained baseline or weights are published. These progress facts do not substitute for verifying the actual artifacts when binding.
+> **Current status (2026-11-06, operator-observed):** Training is active in the subsequent Engram continuation. The latest completed segment reached 1,310,272,432 additional Engram targets; the next 100,003,501-target segment has applied optimizer updates and saved a verified full-state checkpoint. See the [current campaign record](engram-campaign-20261106.md) for preserved lineage, the current 35/30/15/15/5 mixture, exact checkpoint evidence, source expansion, storage policy and v2 opportunities. The original dense recipe below remains historical context. No model weights are published.
 
 ---
 
@@ -37,7 +37,7 @@ sparselab attempt phase-command \
   --bindings-json '{"ACQUISITION_PROJECT":"/path/to/experiments/devmind/preparation/lab86/project-acquire.yaml"}'
 ```
 
-## Architecture Summary
+## Architecture Summary — Original Dense Recipe
 
 | Parameter | Value |
 | --- | --- |
@@ -46,3 +46,4 @@ sparselab attempt phase-command \
 | **Context & Vocabulary** | 2,048 tokens, 32,768 byte-level BPE vocabulary |
 | **Total Parameters** | **341,885,952** (33.55M embeddings + 100.66M attention + 207.62M FFN + 50.2K norms) |
 | **Target Corpus Mixture** | 60% educational web (`smollm-corpus` FineWeb-Edu), 20% synthetic (`cosmopedia-v2`), 20% code (`github-code-clean`) |
+
