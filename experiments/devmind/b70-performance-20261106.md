@@ -90,3 +90,29 @@ Key findings and negative results:
 - [Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335) (all CI checks passing) contributes the vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers upstream. [Lab PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse, and [Retention PR #333](https://github.com/supernovae/tiny-sparse-lab/pull/333) merged retention-policy preservation during budget-extension comparisons.
 
 These are aggregate operator-observed findings. Detailed local evidence and failed artifacts are retained without publishing corpus content, checkpoints, private identifiers or filesystem paths.
+
+## Dual Intel Arc Pro B70 (`2x B70`) microbatch-parallel scaling and 96 GB RAM upgrade (2026-11-09)
+
+After completing Segment 11 (`step 54,458 / 5,466,370,911` Engram targets, best validation loss **2.5426250** at step `53,800`) and reaching step `54,690` (`5,496,976,964` Engram targets, checkpoint SHA-256 `be152cd1d92792d0c38a238f57b28c105653a4b5cf5bf422fd5dcc8dea768dd4`) in Segment 12, the host was upgraded with a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` at PCI `0000:23:00.0`, `31.89 GiB`, alongside `868023e2-0000-0000-e300-000000000000` at PCI `0000:e3:00.0`, `31.89 GiB`) and **96 GB system RAM**.
+
+### Architecture and scientific equivalence invariants
+
+To split work across both B70 GPUs while keeping the pinned `b70-prepared-append` checkout (`93841d0541c45547104991356d450c56ed26bd78`), `RunConfig`, update grouping (`131,072` valid targets/update), `allow_runtime_drift=False`, and checkpoint format unchanged:
+
+1. **Device affinity & dual physical leases:** The primary trainer runs with `ZE_AFFINITY_MASK=1` so its `xpu:0` maps to physical UUID `868023e2-0000-0000-e300-000000000000` (identical to all prior checkpoints and manifests) and acquires exclusive `DeviceLease` locks on both physical B70 UUIDs. A persistent co-worker process runs with `ZE_AFFINITY_MASK=0` (`xpu:0` = `868023e2-0000-0000-2300-000000000000`), isolating `torch._dynamo` / `torch.compile` state across processes while reusing the same on-disk Inductor/Triton/SYCL `cache_scope`.
+2. **Interleaved microbatch partitioning & exact gradient reduction:** Because `collate_document_update` sorts documents by length ascending into `~20–45` microbatches per step and `PyTorchEngine._train_update` scales every microbatch loss by the full update's `valid_targets` (`backward_loss = (ce_sum + auxiliary * chunk_valid) / valid_targets`), assigning `microbatches[0::2]` to GPU 0 and `microbatches[1::2]` to GPU 1 balances sequence-length buckets across both GPUs. Partial FP32 gradients, loss sums, and additive document-scoped Engram diagnostics are reduced onto GPU 0 before a single `clip_grad_norm_` (`foreach=False`) and `AdamW.step()`, and updated FP32 weights are preloaded asynchronously onto GPU 1 between steps.
+
+### Isolated numerical equivalence and throughput comparison (`1x B70` vs `2x B70`)
+
+On a matched 16-microbatch update (`131,072` supervised targets at `seq_len=4096`) from identical model weights and optimizer state on the pinned nightly runtime (`2.16.0.dev20261105+xpu`):
+
+| Configuration | Step wall seconds | Valid targets/s | Speedup vs 1x B70 | Loss difference | Grad-norm difference | Max parameter difference |
+|---|---:|---:|---:|---:|---:|---:|
+| 1x B70 (`PyTorchEngine.train_update`) | 6.280 s | 20,873 | 1.000× | — | — | — |
+| 2x B70 (`DualB70Coordinator`, cold weight sync) | 3.849 s | 34,054 | **1.631× (+63.1%)** | $0.0$ | $7.99 \times 10^{-6}$ | $9.72 \times 10^{-5}$ |
+| 2x B70 (`DualB70Coordinator`, steady preloaded weights) | **3.728 s** | **35,163** | **1.685× (+68.5%)** | $0.0$ | — | — |
+
+### Live production verification (`devmind-engram-after3200m-300m-resume-131k-nvme-20261109-v1`)
+
+- Resumed from cold-verified `step_00054690_gen_000003` (`5,496,976,964` Engram targets); passed cold initial-state verification (`step_00054690_gen_000001`, SHA-256 `d6d1c585a2675821d16b0ace4387e13d7228643be992e88504bfec65f7b4769c`), applied step `54,691`, and committed verified post-update full-state checkpoint **`step_00054700_gen_000002`** (`5,498,297,748` Engram targets, validation loss **2.5446576**, SHA-256 `1fef0d1a0894d8956e348d46d49e9f867cfeab3a4876cfc8f668ae3fefe48e11`).
+- Observed live production optimizer throughput reached **34,274.5 valid targets/s (+60.5% over pre-upgrade 1x B70 `21,350.1 /s`)** while host CPU cores concurrently executed Stage 13 (`225M` target) corpus selection and cross-screening.
