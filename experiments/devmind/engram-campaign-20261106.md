@@ -136,9 +136,9 @@ For **DevMind v2**, the data flows, screening optimizations, and kernel improvem
 4. **Runtime & checkpoint cadence defaults for v2:**
    - Adopt `padding_multiple=64` (measured **+3.18%** steady throughput on B70 XPU when paired with vectorized `TokenNgramMemory` diagnostics in [Tiny Sparse Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335)), skip redundant per-microbatch `/proc` RSS/meminfo syscalls inside `MemoryMonitor.sample()` when native XPU/CUDA peak counters are active, and set `checkpoint.every_tokens` to `25,000,000–50,000,000` (`+2.8%` end-to-end wall-clock gain over 5M checkpointing).
 
-## Continuation progress through 5.941B Engram targets (8.022B combined) and 2x B70 multi-GPU upgrade (2026-11-10)
+## Continuation progress through 6.466B Engram targets (8.547B combined) and 2x B70 multi-GPU upgrade (2026-11-10)
 
-Subsequent finite continuations completed Segments 1 through 13 (`step 31,422 -> 58,058`, reaching **5,941,378,340 Engram targets** / **8,022,409,775 combined exposure targets** — **72.67%** of the `8,176,203,776` Engram reference target — and a new campaign-best validation loss of **2.5425144** at step `56,800`), including a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
+Subsequent finite continuations completed Segments 1 through 15 (`step 31,422 -> 62,039`, reaching **6,466,387,878 Engram targets** / **8,547,419,313 combined exposure targets** — **79.09%** of the `8,176,203,776` Engram reference target — and a new campaign-best validation loss of **2.5392119** at step `61,700`), including a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
 
 | Stage / Segment | Run ID | Step Range ($\Delta$ Steps) | New Targets | Cumulative Engram Targets | Best Val Loss (Step) | Terminal / Latest Checkpoint SHA-256 |
 |---|---|---|---:|---:|---|---|
@@ -158,6 +158,9 @@ Subsequent finite continuations completed Segments 1 through 13 (`step 31,422 ->
 | Segment 12 att. 1 (`after3200m-300m`) | `devmind-engram-after3200m-300m-131k-nvme-20261109-v1` | `54,458 -> 54,690` (`232` ckpt) | `30,606,053` | `5,496,976,964` | `2.5436645` (`54,500`) | `be152cd1d92792d0c38a238f57b28c105653a4b5cf5bf422fd5dcc8dea768dd4` |
 | **Segment 12 2x B70 resume** | `devmind-engram-after3200m-300m-resume-131k-nvme-20261109-v1` | `54,690 -> 56,353` (`1,663`) | `219,398,805` | `5,716,375,769` | `2.5435451` (`56,353`) | `2bda8216b9859775f9d7a127cb1313a2a862dc2c0b543fae66667f8035d9bc8e` |
 | **Segment 13 (`after3500m-300m`, 2x B70)** | `devmind-engram-after3500m-300m-131k-nvme-20261109-v1` | `56,353 -> 58,058` (`1,705`) | `225,002,571` | `5,941,378,340` | **`2.5425144`** (`56,800`) | `a87d31bc5c7931dd956339aed70167e11e4c3b7c76265b00147ebf8613dfd8ef` |
+| Segment 14 att. 1 (`after3725m-300m`) | `devmind-engram-after3725m-300m-131k-nvme-20261110-v1` | `58,058 -> 58,100` (`42` ckpt) | `5,537,370` | `5,946,915,710` | `2.5425456` (`58,100`) | `c637cc5adcf83242202f5bfa6eb4bd5a94a7e5f2fc778a92c1c1526b089f8109` |
+| **Segment 14 2x B70 resume** | `devmind-engram-after3725m-300m-resume-131k-nvme-20261110-v1` | `58,100 -> 60,333` (`2,233`) | `294,465,003` | `6,241,380,713` | **`2.5414132`** (`58,900`) | `6c4330314af24aafc3040bcb95a4c76d8fd5b55d68dca151f624261fb0cf5bee` |
+| **Segment 15 (`after4025m-300m`, 2x B70)** | `devmind-engram-after4025m-300m-131k-nvme-20261110-v1` | `60,333 -> 62,039` (`1,706`) | `225,007,165` | `6,466,387,878` | **`2.5392119`** (`61,700`) | `af7d1dee76ae0dc9e2063809ac347707ef9d1a35b86c29ef0256d766001bab19` |
 
 - **Additional qualified source expansions supporting Segments 1–15:**
   - **Notebooks (`30%`):** `bigcode/the-stack-jupyter-parsed-filtered` (`bigcode/jupyter-parsed`) shards 0–45, `bigcode/starcoderdata` (`jupyter-structured-clean-dedup` & `jupyter-scripts-dedup-filtered`), and `jordangong/jupyter-scripts-smollm3` (`98dcfd99ae3c6cf0f43e3d07d6a10a570d0da262`, shards 0–419, yielding `75.94M` screened targets in shards 140–279 and `69.52M` screened targets in shards 280–419).
