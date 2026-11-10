@@ -136,9 +136,9 @@ For **DevMind v2**, the data flows, screening optimizations, and kernel improvem
 4. **Runtime & checkpoint cadence defaults for v2:**
    - Adopt `padding_multiple=64` (measured **+3.18%** steady throughput on B70 XPU when paired with vectorized `TokenNgramMemory` diagnostics in [Tiny Sparse Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335)), skip redundant per-microbatch `/proc` RSS/meminfo syscalls inside `MemoryMonitor.sample()` when native XPU/CUDA peak counters are active, and set `checkpoint.every_tokens` to `25,000,000–50,000,000` (`+2.8%` end-to-end wall-clock gain over 5M checkpointing).
 
-## Continuation progress through 5.498B+ Engram targets and 2x B70 multi-GPU upgrade (2026-11-09)
+## Continuation progress through 5.941B Engram targets (8.022B combined) and 2x B70 multi-GPU upgrade (2026-11-10)
 
-Subsequent finite continuations completed Segments 1 through 11 (`step 31,422 -> 54,458`, reaching **5,466,370,911 Engram targets** / **7,547,402,346 combined exposure targets** and a new campaign-best validation loss of **2.5426250** at step `53,800`), followed by the **250,004,858-target Segment 12 continuation (`step 54,458 -> 56,353` / `5,716,375,769` Engram targets)** and a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
+Subsequent finite continuations completed Segments 1 through 13 (`step 31,422 -> 58,058`, reaching **5,941,378,340 Engram targets** / **8,022,409,775 combined exposure targets** — **72.67%** of the `8,176,203,776` Engram reference target — and a new campaign-best validation loss of **2.5425144** at step `56,800`), including a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
 
 | Stage / Segment | Run ID | Step Range ($\Delta$ Steps) | New Targets | Cumulative Engram Targets | Best Val Loss (Step) | Terminal / Latest Checkpoint SHA-256 |
 |---|---|---|---:|---:|---|---|
@@ -156,11 +156,12 @@ Subsequent finite continuations completed Segments 1 through 11 (`step 31,422 ->
 | Segment 10 (`after2600m-300m`) | `devmind-engram-after2600m-300m-131k-nvme-20261109-v1` | `52,183 -> 53,131` (`948`) | `125,004,791` | `5,291,366,016` | `2.5439336` (`52,800`) | `35c7331464307f2a5696bd1a96c4bc94b810999e5df0628ffa479491460792d4` |
 | **Segment 11 (`after2900m-300m`)** | `devmind-engram-after2900m-300m-131k-nvme-20261109-v1` | `53,131 -> 54,458` (`1,327`) | `175,004,895` | `5,466,370,911` | **`2.5426250`** (`53,800`) | `619c7b56950146b5816db2eac55cc27bd07c69353e6eb800b9a78c483bbcf858` |
 | Segment 12 att. 1 (`after3200m-300m`) | `devmind-engram-after3200m-300m-131k-nvme-20261109-v1` | `54,458 -> 54,690` (`232` ckpt) | `30,606,053` | `5,496,976,964` | `2.5436645` (`54,500`) | `be152cd1d92792d0c38a238f57b28c105653a4b5cf5bf422fd5dcc8dea768dd4` |
-| **Segment 12 2x B70 resume** | `devmind-engram-after3200m-300m-resume-131k-nvme-20261109-v1` | `54,690 -> 56,353` (active at `54,700+`) | `219,398,805` rem. | `5,498,297,748+` ($\to 5,716,375,769$) | `2.5446576` (`54,700`) | `1fef0d1a0894d8956e348d46d49e9f867cfeab3a4876cfc8f668ae3fefe48e11` |
+| **Segment 12 2x B70 resume** | `devmind-engram-after3200m-300m-resume-131k-nvme-20261109-v1` | `54,690 -> 56,353` (`1,663`) | `219,398,805` | `5,716,375,769` | `2.5435451` (`56,353`) | `2bda8216b9859775f9d7a127cb1313a2a862dc2c0b543fae66667f8035d9bc8e` |
+| **Segment 13 (`after3500m-300m`, 2x B70)** | `devmind-engram-after3500m-300m-131k-nvme-20261109-v1` | `56,353 -> 58,058` (`1,705`) | `225,002,571` | `5,941,378,340` | **`2.5425144`** (`56,800`) | `a87d31bc5c7931dd956339aed70167e11e4c3b7c76265b00147ebf8613dfd8ef` |
 
-- **Additional qualified source expansions supporting Segments 1–13:**
-  - **Notebooks (`30%`):** `bigcode/the-stack-jupyter-parsed-filtered` shards 0–34, `bigcode/starcoderdata` (`jupyter-structured-clean-dedup` & `jupyter-scripts-dedup-filtered`), and `jordangong/jupyter-scripts-smollm3` (`98dcfd99ae3c6cf0f43e3d07d6a10a570d0da262`, shards 0–419, yielding `75.94M` screened targets in shards 140–279 and `69.52M` screened targets in shards 280–419).
-  - **Web (`35%`):** `HuggingFaceTB/smollm-corpus` (`fineweb-edu-dedup`) shards 83–96 (plus shards 97–98 staged).
+- **Additional qualified source expansions supporting Segments 1–15:**
+  - **Notebooks (`30%`):** `bigcode/the-stack-jupyter-parsed-filtered` (`bigcode/jupyter-parsed`) shards 0–45, `bigcode/starcoderdata` (`jupyter-structured-clean-dedup` & `jupyter-scripts-dedup-filtered`), and `jordangong/jupyter-scripts-smollm3` (`98dcfd99ae3c6cf0f43e3d07d6a10a570d0da262`, shards 0–419, yielding `75.94M` screened targets in shards 140–279 and `69.52M` screened targets in shards 280–419).
+  - **Web (`35%`):** `HuggingFaceTB/smollm-corpus` (`fineweb-edu-dedup`) shards 83–100.
   - **FineMath (`15%`):** `HuggingFaceTB/finemath` (`finemath-4plus`) shards 5–10.
-  - **Instructions (`15%`):** `nvidia/OpenCodeInstruct` shards 11–49, `HuggingFaceH4/ultrachat_200k`, and `HuggingFaceTB/smoltalk` (`smol-magpie-ultra` shards 1–2, yielding `77.30M` screened targets).
+  - **Instructions (`15%`):** `nvidia/OpenCodeInstruct` shards 11–49, `HuggingFaceH4/ultrachat_200k`, and `HuggingFaceTB/smoltalk` (`smol-magpie-ultra` shards 1–4).
 - **Checkpoint retention policy on `/tank`:** Pruned 404 of 449 intermediate archived checkpoints on `/tank`, retaining 45 checkpoints (`10.0%`, evenly spaced every `~120M` tokens from `2.47M` to `5.442B` tokens) plus all 45 run-terminal checkpoints on NVMe, freeing **1,695.92 GiB** on `/tank`.
