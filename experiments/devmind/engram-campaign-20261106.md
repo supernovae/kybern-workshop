@@ -136,9 +136,9 @@ For **DevMind v2**, the data flows, screening optimizations, and kernel improvem
 4. **Runtime & checkpoint cadence defaults for v2:**
    - Adopt `padding_multiple=64` (measured **+3.18%** steady throughput on B70 XPU when paired with vectorized `TokenNgramMemory` diagnostics in [Tiny Sparse Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335)), skip redundant per-microbatch `/proc` RSS/meminfo syscalls inside `MemoryMonitor.sample()` when native XPU/CUDA peak counters are active, and set `checkpoint.every_tokens` to `25,000,000–50,000,000` (`+2.8%` end-to-end wall-clock gain over 5M checkpointing).
 
-## Continuation progress through 6.466B Engram targets (8.547B combined) and 2x B70 multi-GPU upgrade (2026-11-10)
+## Continuation progress through 6.766B Engram targets (8.847B combined) and 2x B70 multi-GPU upgrade (2026-11-10)
 
-Subsequent finite continuations completed Segments 1 through 15 (`step 31,422 -> 62,039`, reaching **6,466,387,878 Engram targets** / **8,547,419,313 combined exposure targets** — **79.09%** of the `8,176,203,776` Engram reference target — and a new campaign-best validation loss of **2.5392119** at step `61,700`), including a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
+Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 -> 64,315`, reaching **6,766,391,105 Engram targets** / **8,847,422,540 combined exposure targets** — **82.76%** of the `8,176,203,776` Engram reference target — and a new campaign-best validation loss of **2.5383300** at step `64,315`), including a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
 
 | Stage / Segment | Run ID | Step Range ($\Delta$ Steps) | New Targets | Cumulative Engram Targets | Best Val Loss (Step) | Terminal / Latest Checkpoint SHA-256 |
 |---|---|---|---:|---:|---|---|
@@ -161,6 +161,8 @@ Subsequent finite continuations completed Segments 1 through 15 (`step 31,422 ->
 | Segment 14 att. 1 (`after3725m-300m`) | `devmind-engram-after3725m-300m-131k-nvme-20261110-v1` | `58,058 -> 58,100` (`42` ckpt) | `5,537,370` | `5,946,915,710` | `2.5425456` (`58,100`) | `c637cc5adcf83242202f5bfa6eb4bd5a94a7e5f2fc778a92c1c1526b089f8109` |
 | **Segment 14 2x B70 resume** | `devmind-engram-after3725m-300m-resume-131k-nvme-20261110-v1` | `58,100 -> 60,333` (`2,233`) | `294,465,003` | `6,241,380,713` | **`2.5414132`** (`58,900`) | `6c4330314af24aafc3040bcb95a4c76d8fd5b55d68dca151f624261fb0cf5bee` |
 | **Segment 15 (`after4025m-300m`, 2x B70)** | `devmind-engram-after4025m-300m-131k-nvme-20261110-v1` | `60,333 -> 62,039` (`1,706`) | `225,007,165` | `6,466,387,878` | **`2.5392119`** (`61,700`) | `af7d1dee76ae0dc9e2063809ac347707ef9d1a35b86c29ef0256d766001bab19` |
+| Segment 16 att. 1 (`after4250m-300m`) | `devmind-engram-after4250m-300m-131k-nvme-20261110-v1` | `62,039 -> 62,400` (`361` ckpt) | `47,611,902` | `6,513,999,780` | `2.5400154` (`62,400`) | `d6093b3674e2ec6df35f4badf087ff6ab0d04a03c9ae11b40e03990ab1a7515d` |
+| **Segment 16 2x B70 resume** | `devmind-engram-after4250m-300m-resume-131k-nvme-20261110-v1` | `62,400 -> 64,315` (`1,915`) | `252,391,325` | `6,766,391,105` | **`2.5383300`** (`64,315`) | `efa5b61f28bef79a8b06395ec328dbe63c391674b1dd1f2539e5f73ece1bd980` |
 
 - **Additional qualified source expansions supporting Segments 1–15:**
   - **Notebooks (`30%`):** `bigcode/the-stack-jupyter-parsed-filtered` (`bigcode/jupyter-parsed`) shards 0–45, `bigcode/starcoderdata` (`jupyter-structured-clean-dedup` & `jupyter-scripts-dedup-filtered`), and `jordangong/jupyter-scripts-smollm3` (`98dcfd99ae3c6cf0f43e3d07d6a10a570d0da262`, shards 0–419, yielding `75.94M` screened targets in shards 140–279 and `69.52M` screened targets in shards 280–419).
