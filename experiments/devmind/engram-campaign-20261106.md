@@ -138,7 +138,7 @@ For **DevMind v2**, the data flows, screening optimizations, and kernel improvem
 
 ## Continuation progress through 6.766B Engram targets (8.847B combined) and 2x B70 multi-GPU upgrade (2026-11-10)
 
-Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 -> 64,315`, reaching **6,766,391,105 Engram targets** / **8,847,422,540 combined exposure targets** — **82.76%** of the `8,176,203,776` Engram reference target — and a new campaign-best validation loss of **2.5383300** at step `64,315`), including a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
+Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 -> 64,315`, reaching **6,766,391,105 Engram targets** — **82.76%** of the `8,176,203,776` Engram reference target, corresponding to **8,846,765,889** combined targets above the `2,080,374,784` nominal 15,872-step dense-backbone reference or **8,847,422,540** combined targets above the `2,081,031,435` actual packed dense-backbone tokens — and validation loss **2.5383300** at step `64,315`, followed by **2.5370861** at step `65,800` in active Segment 17), including a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
 
 | Stage / Segment | Run ID | Step Range ($\Delta$ Steps) | New Targets | Cumulative Engram Targets | Best Val Loss (Step) | Terminal / Latest Checkpoint SHA-256 |
 |---|---|---|---:|---:|---|---|
@@ -175,16 +175,16 @@ Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 ->
   - Completed grandparent runs on NVMe (`prior_run_to_trim`) replace their local `data/train.npy` copy with a symlink to the immutable SHA-256-verified `/tank` cache while keeping the immediate `parent_run / 'data/train.npy'` as a regular file for `load_continuation` verification, maintaining **370–410 GiB free on NVMe** throughout the `6.4B -> 8.2B` target range.
 - **Prospective Final-Phase Mixture (`devmind-engram-final-rebalanced-phase-20261110-v1`, `6.466B -> 8.176B` Engram targets):**
   - At `step 62,039` (`6,466,387,878` Engram targets / `8,547,419,313` combined exposure targets), all bulk permissive notebook sources under the strict whole-document 4K and no-image gates reached exhaustion (`1,883,203,267` unique notebook tokens consumed; `5,489,113` unreserved targets remaining).
-  - Authorized prospective final-phase identity **`devmind-engram-final-rebalanced-phase-20261110-v1`** consumes the final `5.0M` unreserved notebook targets in Stage 16 (`after-4250m-300m-append-4k-v1`, completed at `step 64,315` / `6,766,391,105` Engram targets with a new campaign-best validation loss of **`2.5383300`**) and reallocates the `30%` notebook quota across `web_4plus`, `finemath`, `instruction_ultrachat`, and `cosmopedia_v2` for Stages 16–21 (`6.466B -> 8.176B` Engram targets / `10.257B` combined exposure targets; **Segment 17** reached **`2.5382118` validation loss at `step 64,400`**):
+  - Authorized prospective final-phase identity **`devmind-engram-final-rebalanced-phase-20261110-v1`** consumes the final `5.0M` unreserved notebook targets in Stage 16 (`after-4250m-300m-append-4k-v1`, completed at `step 64,315` / `6,766,391,105` Engram targets with validation loss **`2.5383300`**) and reallocates the `30%` notebook quota across `web_4plus`, `finemath`, `instruction_ultrachat`, and `cosmopedia_v2` for Stages 16–21 (`6.466B -> 8.176B` Engram targets; **Segment 17** reached a new campaign-best **`2.5370861` validation loss at `step 65,800`**):
 
-| Final-Phase Stage | Run ID | Target Addition | Cumulative Engram Targets | Combined Exposure Targets | Status |
+| Final-Phase Stage | Run ID | Target Addition | Cumulative Engram Targets | Combined Targets (`+2,080,374,784` ref) | Status |
 |---|---|---:|---:|---:|---|
-| **Stage 16 (`after-4250m-300m`)** | `devmind-engram-after4250m-300m-resume-131k-nvme-20261110-v1` | `300,003,227` | `6,766,391,105` (`82.76%`) | `8,847,422,540` | **Completed (`step 64,315`, val loss `2.5383300`)** |
-| **Stage 17 (`after-4550m-300m`)** | `devmind-engram-after4550m-300m-131k-nvme-20261110-v1` | `300,002,477` | `7,066,393,582` (`86.43%`) | `9,147,425,017` | **Training on 2x B70 GPUs (`step 64,790+`, val loss `2.5382118` at `64,400`)** |
-| **Stage 18 (`after-4850m-300m`)** | `devmind-engram-after4850m-300m-131k-nvme-20261110-v1` | `300,002,889` | `7,366,396,471` (`90.10%`) | `9,447,427,906` | **Packed & verified on `/tank`; queued for zero-idle GPU handoff** |
-| **Stage 19 (`after-5150m-300m`)** | `devmind-engram-after5150m-300m-131k-nvme-20261110-v1` | `~300,000,000` | `~7,666,396,471` (`93.76%`) | `~9,747,427,906` | **Staged in `campaign_orchestrator.py`** |
-| **Stage 20 (`after-5450m-300m`)** | `devmind-engram-after5450m-300m-131k-nvme-20261110-v1` | `~300,000,000` | `~7,966,396,471` (`97.43%`) | `~10,047,427,906` | **Staged in `campaign_orchestrator.py`** |
-| **Stage 21 (`after-5750m-210m`)** | `devmind-engram-after5750m-210m-131k-nvme-20261110-v1` | `~210,000,000` | **`~8,176,396,471` (`100.00%`)** | **`~10,257,427,906` (`100.01%`)** | **Staged in `campaign_orchestrator.py` (terminal cold verification)** |
+| **Stage 16 (`after-4250m-300m`)** | `devmind-engram-after4250m-300m-resume-131k-nvme-20261110-v1` | `300,003,227` | `6,766,391,105` (`82.76%`) | `8,846,765,889` | **Completed (`step 64,315`, val loss `2.5383300`)** |
+| **Stage 17 (`after-4550m-300m`)** | `devmind-engram-after4550m-300m-131k-nvme-20261110-v1` | `300,002,477` | `7,066,393,582` (`86.43%`) | `9,146,768,366` | **Training on 2x B70 GPUs (`step 65,832+`, val loss `2.5370861` at `65,800`)** |
+| **Stage 18 (`after-4850m-300m`)** | `devmind-engram-after4850m-300m-131k-nvme-20261110-v1` | `300,002,889` | `7,366,396,471` (`90.10%`) | `9,446,771,255` | **Packed & verified on `/tank`; queued for zero-idle GPU handoff** |
+| **Stage 19 (`after-5150m-300m`)** | `devmind-engram-after5150m-300m-131k-nvme-20261110-v1` | `~300,000,000` | `~7,666,396,471` (`93.76%`) | `~9,746,771,255` | **Staged in `campaign_orchestrator.py`** |
+| **Stage 20 (`after-5450m-300m`)** | `devmind-engram-after5450m-300m-131k-nvme-20261110-v1` | `~300,000,000` | `~7,966,396,471` (`97.43%`) | `~10,046,771,255` | **Staged in `campaign_orchestrator.py`** |
+| **Stage 21 (`after-5750m-210m`)** | `devmind-engram-after5750m-210m-131k-nvme-20261110-v1` | `~210,000,000` | **`~8,176,396,471` (`100.00%`)** | **`~10,256,771,255` (`100.00%`)** | **Staged in `campaign_orchestrator.py` (terminal cold verification)** |
 
 ### Upstream Tiny Sparse Lab PRs Enabling DevMind v2
 
