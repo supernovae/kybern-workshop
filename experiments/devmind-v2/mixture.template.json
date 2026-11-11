@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "release_path": "${RELEASE_PATH}",
+  "tokenizer_config": "${TOKENIZER_CONFIG}",
+  "family_inventory": "${FAMILY_INVENTORY}",
+  "source_strata": {
+    "${WEB_SOURCE_ID}": "web",
+    "${NOTEBOOKS_SOURCE_ID}": "notebooks",
+    "${MATH_SOURCE_ID}": "math",
+    "${INSTRUCTION_SOURCE_ID}": "instruction",
+    "${REFERENCE_SOURCE_ID}": "reference"
+  },
+  "target_quotas": {
+    "web": 5128289280,
+    "notebooks": 1538486784,
+    "math": 2051315712,
+    "instruction": 1025657856,
+    "reference": 512828928
+  },
+  "seed": 42,
+  "max_exposures": 1,
+  "tokenizer_origin_release_id": "${RELEASE_ID}"
+}

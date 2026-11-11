@@ -1,0 +1,117 @@
+{
+  "dataset": {
+    "source": "local_token_mixture",
+    "mixture_declaration_path": null,
+    "mixture_output_path": null,
+    "cache_dir": null,
+    "train_path": null,
+    "validation_path": null,
+    "train_max_documents": null,
+    "validation_max_documents": null,
+    "train_max_tokens": null,
+    "validation_max_tokens": null,
+    "license": null
+  },
+  "tokenizer": {
+    "path": null
+  },
+  "runtime": {
+    "backend": null,
+    "engine": "pytorch",
+    "memory": {
+      "activation_checkpointing": {
+        "enabled": false,
+        "strategy": "transformer_block"
+      },
+      "activation_offload": {
+        "enabled": false
+      },
+      "estimate_policy": "observe",
+      "max_device_memory_fraction": 0.9,
+      "policy": "balanced"
+    },
+    "precision": "bf16"
+  },
+  "logging": {
+    "architecture_diagnostics": "scalar",
+    "every_steps": 10,
+    "root_dir": null
+  },
+  "evaluation": {
+    "batch_size": 1,
+    "every_steps": 100,
+    "max_batches": 8,
+    "panels": [
+      {
+        "name": "web",
+        "prepared_path": null,
+        "prepared_manifest_sha256": null,
+        "tokenizer_file_sha256": null,
+        "tokenizer_canonical_sha256": null,
+        "split": "validation",
+        "sampling": "first_eligible_blocks",
+        "sequence_length": 4096,
+        "blocks": 64,
+        "supervised_targets": 262144,
+        "batch_size": 1,
+        "max_forward_positions": 262144
+      },
+      {
+        "name": "notebooks",
+        "prepared_path": null,
+        "prepared_manifest_sha256": null,
+        "tokenizer_file_sha256": null,
+        "tokenizer_canonical_sha256": null,
+        "split": "validation",
+        "sampling": "first_eligible_blocks",
+        "sequence_length": 4096,
+        "blocks": 64,
+        "supervised_targets": 262144,
+        "batch_size": 1,
+        "max_forward_positions": 262144
+      },
+      {
+        "name": "math",
+        "prepared_path": null,
+        "prepared_manifest_sha256": null,
+        "tokenizer_file_sha256": null,
+        "tokenizer_canonical_sha256": null,
+        "split": "validation",
+        "sampling": "first_eligible_blocks",
+        "sequence_length": 4096,
+        "blocks": 64,
+        "supervised_targets": 262144,
+        "batch_size": 1,
+        "max_forward_positions": 262144
+      },
+      {
+        "name": "instruction",
+        "prepared_path": null,
+        "prepared_manifest_sha256": null,
+        "tokenizer_file_sha256": null,
+        "tokenizer_canonical_sha256": null,
+        "split": "validation",
+        "sampling": "first_eligible_blocks",
+        "sequence_length": 4096,
+        "blocks": 64,
+        "supervised_targets": 262144,
+        "batch_size": 1,
+        "max_forward_positions": 262144
+      },
+      {
+        "name": "reference",
+        "prepared_path": null,
+        "prepared_manifest_sha256": null,
+        "tokenizer_file_sha256": null,
+        "tokenizer_canonical_sha256": null,
+        "split": "validation",
+        "sampling": "first_eligible_blocks",
+        "sequence_length": 4096,
+        "blocks": 64,
+        "supervised_targets": 262144,
+        "batch_size": 1,
+        "max_forward_positions": 262144
+      }
+    ]
+  }
+}
