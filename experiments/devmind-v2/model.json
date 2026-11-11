@@ -1,0 +1,48 @@
+{
+  "experts_per_token": 1,
+  "ffn": "dense",
+  "ffn_dim": 2816,
+  "hidden_dim": 1024,
+  "max_seq_len": 4096,
+  "memory": "ngram",
+  "memory_addressing": "prime_xor_v1",
+  "memory_block_indices": [
+    1,
+    14
+  ],
+  "memory_conv_kernel_size": 4,
+  "memory_dim": 64,
+  "memory_hash_heads": 2,
+  "memory_hash_seed": 42,
+  "memory_independent_init": true,
+  "memory_injection": "after_block",
+  "memory_ngram_orders": [
+    2,
+    3
+  ],
+  "memory_ngram_size": 3,
+  "memory_package_path": null,
+  "memory_padding_token_id": 3,
+  "memory_table_size": 65537,
+  "memory_table_sizes": [
+    65537,
+    65539,
+    65543,
+    65551,
+    65557,
+    65563,
+    65579,
+    65581
+  ],
+  "memory_variant": "context_key",
+  "num_experts": 1,
+  "num_heads": 16,
+  "num_kv_heads": 16,
+  "num_layers": 24,
+  "rms_norm_eps": 1e-06,
+  "router_aux_loss_coefficient": 0.0,
+  "semantic_memory_dim": null,
+  "shared_expert": false,
+  "tie_embeddings": true,
+  "vocab_size": 32768
+}

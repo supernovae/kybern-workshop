@@ -1,0 +1,42 @@
+{
+  "engine_repository": "https://github.com/supernovae/tiny-sparse-lab",
+  "engine_commit": "4b92ed2f33181779f5beaa7e87c156a51a03b4d5",
+  "run_schema_version": 2,
+  "required_native_interfaces": [
+    "tokenizer memory-map",
+    "config derive",
+    "config schedule",
+    "data prepared-inputs publish",
+    "data prepared-inputs verify",
+    "stage",
+    "train",
+    "checkpoint verify",
+    "probe",
+    "report"
+  ],
+  "fixture_validation": {
+    "workshop_offline_tests": {
+      "run": 80,
+      "skipped": 15
+    },
+    "workshop_rocm_recipe_tests": {
+      "run": 27,
+      "skipped": 0
+    },
+    "v2_connected_tests": {
+      "run": 6,
+      "skipped": 0
+    },
+    "existing_devmind_connected_tests": {
+      "run": 5,
+      "skipped": 0
+    }
+  },
+  "not_established": [
+    "source inventory and usable target counts",
+    "artifact admission and full corpus preparation",
+    "accelerator qualification or training",
+    "behavioral capability or benchmark scores",
+    "independent recovery backup"
+  ]
+}

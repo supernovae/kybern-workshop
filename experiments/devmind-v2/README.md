@@ -1,63 +1,67 @@
-# DevMind v2: fresh-start planning checklist
+# DevMind v2: native fresh-start scaffold
 
-This is a planning-only follow-up to [campaign PR #73](https://github.com/supernovae/kybern-workshop/pull/73).
-It contains no runnable recipe, trained model, admitted dataset or launch approval.
-No training, downloads, backup, deletion or drive reset is performed by this PR.
+This package authors a complete fresh Engram recipe for Tiny Sparse Lab. It is
+not a trained model or launch approval. Code qualification comes first; usable
+data counts and source inventory come afterward. Nothing here downloads data,
+starts training, copies private archives, or deletes anything.
 
-## Scope of this public starting point
+## Contents
 
-This deliberately reduced public document omits recovered configurations, proposed
-run parameters and budgets, source revisions, engine/tokenizer hashes, local paths,
-archive locations and identifying provenance. Those artifacts are not preserved by
-this PR. It is not a substitute for the complete v2 configuration or a backup.
+- `experiment.json`, `model.json`, `optimizer.json`: full 24-layer, 1,024-wide,
+  4K-context backbone; tokenizer-bound Engram at blocks 1/14 from initialization;
+  prime-XOR tables, context-key gates, causal convolution and independent memory
+  initialization. This is not a reduced smoke model.
+- `binding.example.json`: explicit unbound artifact locations, runtime selection
+  and five individually authenticated fixed validation panels. The existing
+  Workshop binder refuses nulls and validates with native `RunConfig`.
+- `mixture.template.json`, `token-floors.template.json`: proposed whole-run unique
+  quotas for web, notebooks, math, instruction and reference, without invented
+  source revisions, inventory receipts or admitted capacity.
+- `probe-standard.json`, `probe-full.json`, `probe-final.json`: native evaluation
+  declarations, keeping ordinary iteration separate from held-back final probes.
+- `runtime-xpu.delta.json`: optional native `config derive --set` settings
+  for an explicitly selected XPU runtime. The optional two-device example uses native secondary-device support.
+- [Native commands](native-commands.md): binding, mapping, packing, measured
+  schedule derivation, re-verification, staging, training, recovery and reporting.
+- [Protocol](protocol.md): scientific settings, evaluation, acceptance and recovery.
+- `tests/test_devmind_v2.py`: offline contracts plus opt-in connected native schema,
+  mapping, derivation and command-parser tests. These never train or download.
 
-## Fresh initialization contract
+## Compatibility and tests
 
-- Create a new run identity and new output directories.
-- Initialize model weights, optimizer state, random state and counters from the
-  chosen fresh-run recipe. Do not bind a v1 checkpoint or continuation cursor.
-- Validate the configuration against an explicitly selected compatible engine.
-- Bind and verify the tokenizer before constructing vocabulary-dependent mappings.
-  If the tokenizer changes, regenerate mappings and validate special-token IDs.
-- Derive the schedule from actual frozen packed groups, not historical step counts.
-- Keep all launch inputs unbound until the checks below have independent evidence.
+Use the engine revision recorded in `compatibility.json`, not an older checkout
+that silently lacks Engram, dynamic document batching, retention or scheduling.
+Workshop remains declarative; engine implementations and behavioral tests belong
+in Tiny Sparse Lab. There is no second training loop or packing implementation.
 
-## Data admission checklist
+From Workshop, in an already provisioned compatible environment:
 
-For every proposed pillar, retain a reviewable inventory containing:
+```sh
+python -B -m unittest discover -s tests -p 'test_devmind_v2.py' -v
+WORKSHOP_LAB_CHECKOUT=/absolute/compatible/lab \
+  python -B -m unittest discover -s tests -p 'test_devmind_v2.py' -v
+```
 
-- Exact immutable source revisions, shard hashes and source-quality decisions.
-- Retained document identities and duplicate clusters across the full mixture.
-- Train, validation and test separation, including benchmark contamination checks.
-- Tokenizer identity and measured unique usable targets, with an explicit EOS rule.
-- Packed artifact hashes, group boundaries and the resulting full-run schedule.
+The first command deliberately skips connected tests. A skipped test is not a
+compatibility pass. The second imports the selected Lab source into the existing
+interpreter; it installs nothing. Run the complete offline Workshop test suite
+and the Lab feature tests before calling the pair merge-ready.
 
-Historical screened totals are not admitted capacity. Keep missing capacity visible;
-do not quietly rebalance an exhausted pillar. Prior training consumption alone is
-not a permanent exclusion for fresh initialization, but heldout and benchmark
-protections remain necessary. Freeze the complete feasible mixture before launch.
+## Honest boundaries
 
-## Acceptance gates
+The 10,256,578,560-target budget and 50/15/20/10/5 mixture are proposals, not
+measured supply or a quality guarantee. The 78,252-update authoring horizon is a
+packing bootstrap only. It must be replaced by native measured scheduling before
+training. Five panel hashes and paths are unbound until independently produced.
+Neither filling JSON fields nor passing a schema check authenticates artifacts.
 
-Before any separately authorized training, define a fixed behavioral evaluation
-rubric and numerical pass/stop criteria. Verify the native artifact/schema binding,
-fresh initialization, restart equivalence, finite loss and gradients, physical
-accelerator ownership, sustainable throughput and storage headroom. A passing
-planning checklist does not certify runtime readiness or model quality.
+Historical configurations, machine paths, raw data, tokenizer hashes and archive
+provenance are deliberately not copied into this portable recipe. The native
+memory-map command regenerates an identity mapping from the actual chosen
+32,768-token tokenizer. Do not substitute a tokenizer without regenerating the
+mapping and checking all special IDs, especially the configured padding ID 3.
 
-## Reset and recovery gate
-
-A repository PR does not make drives safe to wipe. Before any destructive action:
-
-1. Identify the exact physical devices to be reset and all dependent storage pools.
-2. Inventory the desired final checkpoint and complete training state, tokenizer,
-   resolved configuration, source code including local changes, dependency/environment
-   manifests, selection/split manifests and all data required for recovery.
-3. Copy that recovery set to storage independent of every device being reset.
-4. Verify destination checksums and perform a recovery test from that copy.
-5. Record missing dependencies and obtain explicit authorization for the concrete
-   destructive action only after those gaps are resolved.
-
-A different mountpoint or filesystem does not establish physical independence.
-This checklist supplies no deletion commands and makes no claim that any existing
-backup or recovery set is complete.
+Existing v1 source, data and checkpoints remain untouched. Full-state resume is
+for recovery of a new v2 run only, never initialization from v1. Before resetting
+any drives, independently copy and checksum the complete recovery closure and
+test restoration. This scaffold does not establish that any drive is safe to wipe.
