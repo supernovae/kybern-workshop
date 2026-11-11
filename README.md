@@ -145,7 +145,9 @@ The [5M / 50M study](experiments/tinystories/README.md) provides shared preparat
 100M / 1B training-token exposure budgets and training/resume runbooks. The
 [lifecycle guide](experiments/tinystories/lifecycle.md) covers storage, calibration,
 recovery and transfer limitations. The runtime declarations use ROCm as an example;
-these recipes do not yet have verified execution results or remote/Colab handoffs.
+completed ROCm 5M/50M runs, Intel context comparisons and a matched learning-rate
+study are recorded. Remote/Colab and cross-device optimizer-state handoffs remain
+unverified.
 
 ## Repository Structure
 

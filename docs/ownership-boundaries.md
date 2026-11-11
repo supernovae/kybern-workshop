@@ -10,7 +10,7 @@ Workshop is organized around declarative recipes that run on [Tiny Sparse Lab](h
 - [`examples/tinystories-worker/`](../examples/tinystories-worker/README.md) and [`examples/tinystories-rocm/`](../examples/tinystories-rocm/README.md) — Staged campaign and container handoff recipes for TinyStories smoke runs.
 - [`experiments/devmind/`](../experiments/devmind/README.md) — **DevMind 340M Base** model architecture proposal and 24-phase corpus preparation recipes.
 
-- [`experiments/tinystories/`](../experiments/tinystories/README.md) — 5M/50M recipes with shared preparation, tier budgets and a lifecycle/operations guide. Execution and portability remain unverified.
+- [`experiments/tinystories/`](../experiments/tinystories/README.md) — 5M/50M recipes with shared preparation, tier budgets and a lifecycle/operations guide. Completed ROCm execution, Intel context comparisons and learning-rate results are recorded; remote/Colab portability remains unverified.
 
 ## Helper Scripts Inventory
 

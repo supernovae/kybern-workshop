@@ -29,9 +29,12 @@ It pins source `f54c09fd23315a6f9c86f9dc80f725de7d8f9c64` in standard Parquet
 format, declaring five upstream files totaling 1,000,775,442 bytes; the lock step
 did not download corpus bodies. Subsequent [local ROCm execution evidence](../../results/2026-10-31-tinystories-rocm/README.md)
 records completed acquisition, shared preparation/reuse, both GPU pilots, the full
-5M budget with signal/resume checks, and bounded 50M performance comparisons.
-All 24 fixed-prompt 5M outputs are retained, including quality failures. Full 50M
-completion and remote/Colab portability remain unvalidated. The baseline recipes
+5M budget with signal/resume checks, bounded 50M performance comparisons, and
+full 50M BF16 completion with verified recovery. Both 24-output fixed-prompt
+panels are retained, including quality failures. Subsequent [Intel context
+comparisons](context/README.md) and the [completed learning-rate
+study](learning-rate/README.md) retain their distinct protocols and limitations.
+Remote/Colab and cross-device optimizer-state portability remain unvalidated. The baseline recipes
 are unchanged; proposed batch/precision variants have separate calibration identities.
 The [4.46M baseline](../../examples/tinystories-useful/README.md) has separate
 configurations and results.
@@ -247,7 +250,7 @@ A changed device may still require explicit best-effort runtime-drift handling.
 ## Acceptance and evidence
 
 Overall operational acceptance remains **incomplete**; the linked result record distinguishes
-verified local steps from pending full 50M and remote/Colab checks. Record actual results
+verified 5M and 50M BF16 completion from pending remote/Colab checks. Record actual results
 in a compact `results/` record after execution; keep data and checkpoint binaries
 outside Git.
 
