@@ -2,11 +2,22 @@
 
 This ongoing private research run supersedes the October 29 “execution stopped” status. No weights or source-text corpus are published here. Validation loss is a limited training-health observation, not evidence of reliable reasoning or factual accuracy.
 
+## Reading this historical record
+
+Sections preserve dated operator observations, not live status. The latest committed
+training snapshot is November 10: Segment 16 completed at 6,766,391,105 Engram
+targets and Segment 17 was active at step 65,832. Later stages in the final-phase
+table are planned endpoints unless explicitly marked completed.
+
+The notebook revision is [the existing March 19, 2025 Hub commit](https://huggingface.co/datasets/HuggingFaceTB/issues-kaggle-notebooks/commit/ef882ad1ed8274340e8fc9bac087c903f2f75396),
+already recorded in the original source table. The later catalog typo omitted
+one character; correcting it does not change the historical source selection.
+
 ## Budget and lineage
 
-The original EXP-1 manifest specifies 341,885,952 backbone parameters and 10,256,578,560 training targets (30× backbone size). The inherited dense checkpoint had already consumed 2,080,374,784 targets. The Engram counter is additional: the recovered original exposure target corresponds to 8,176,203,776 Engram targets. The subsequent memory-first design did not establish a separate final Engram budget. These counters must not be conflated; 12B was a corpus-preparation goal, not an additional training budget.
+The original EXP-1 manifest specifies 341,885,952 backbone parameters and 10,256,578,560 training targets (30× backbone size). The nominal dense-backbone reference is 2,080,374,784 targets (15,872 steps × 131,072). The later operator record distinguishes 2,081,031,435 actual packed dense-backbone tokens; totals using that addend are labeled separately. The Engram counter is additional: the recovered original exposure target corresponds to 8,176,203,776 Engram targets. The subsequent memory-first design did not establish a separate final Engram budget. These counters must not be conflated; 12B was a corpus-preparation goal, not an additional training budget.
 
-The latest completed 50,003,192-target phase ended at step 22,932 / 1,310,272,432 Engram targets. Its final full-state checkpoint is `step_00022932_gen_000013`, manifest SHA-256 `4131a159164aadf1346afbf2aea95ea4d1f86dcddf9e205e5e182ef3b9e31e86`, validation loss 2.587253632462752. The following 100,003,501-target phase has applied optimizer updates; its endpoint is step 23,691 / 1,410,275,933 targets. Terminal outcome remains pending.
+At the initial November 6 observation, the completed 50,003,192-target phase ended at step 22,932 / 1,310,272,432 Engram targets. Its final full-state checkpoint is `step_00022932_gen_000013`, manifest SHA-256 `4131a159164aadf1346afbf2aea95ea4d1f86dcddf9e205e5e182ef3b9e31e86`, validation loss 2.587253632462752. The following 100,003,501-target phase has applied optimizer updates; its endpoint is step 23,691 / 1,410,275,933 targets. Terminal outcome was pending at that observation; later continuation milestones are preserved below.
 
 ## Observed execution configuration
 
@@ -19,7 +30,7 @@ The latest completed 50,003,192-target phase ended at step 22,932 / 1,310,272,43
 - One native GPU lease/writer. Active data and checkpoints on NVMe; historical generations archived separately.
 - Recent sustained windows measured roughly 18.4–18.8K real supervised targets/s including saves. This is observed throughput, not an isolated causal speedup claim.
 
-## Current data and next queue
+## November 6 data and next queue (historical)
 
 The current phase retains 35% FineWeb-Edu score-4+, 30% notebooks, 15% FineMath, 15% instructions and 5% Cosmopedia. Its exact targets are 35,000,626 / 30,001,127 / 15,000,211 / 15,000,600 / 5,000,937 respectively. Instructions in this phase are entirely the already approved Smol-SmolTalk source; the instruction pillar is unchanged. All-token continued pretraining and native role serialization remain unchanged.
 
@@ -165,7 +176,7 @@ Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 ->
 | **Segment 16 2x B70 resume** | `devmind-engram-after4250m-300m-resume-131k-nvme-20261110-v1` | `62,400 -> 64,315` (`1,915`) | `252,391,325` | `6,766,391,105` | **`2.5383300`** (`64,315`) | `efa5b61f28bef79a8b06395ec328dbe63c391674b1dd1f2539e5f73ece1bd980` |
 
 - **Additional qualified source expansions supporting Segments 1–21 (`8.176B` Engram / `10.257B` combined targets):**
-  - **Notebooks (`30%` in Stages 1–15, `1.888B` total unique notebook tokens):** `HuggingFaceTB/issues-kaggle-notebooks` (`ef882ad1ed8274340e8f9bac087c903f2f75396`, shards `0–10`), `codeparrot/github-jupyter` (`a9be1d2d9b8bf5cf1fb7f8ffab9dc431fb0fd031`, files `0–32`), `bigcode/the-stack-jupyter-parsed-filtered` (`bigcode/jupyter-parsed`, `eed65c314469b51419d08fb2ff7ee41e448774d4`, shards `0–45`), `secmlr/starcoderdata` (`0a11b2a003eb39252c919f3d28f3d26f412bc3d7`, `jupyter-structured-clean-dedup` & `jupyter-scripts-dedup-filtered`), `jordangong/jupyter-scripts-smollm3` (`98dcfd99ae3c6cf0f43e3d07d6a10a570d0da262`, shards `0–419`), and `MetaKaggle Code v184` (`trial1000-v1`).
+  - **Notebooks (`30%` in Stages 1–15, `1.888B` total unique notebook tokens):** `HuggingFaceTB/issues-kaggle-notebooks` (`ef882ad1ed8274340e8fc9bac087c903f2f75396`, shards `0–10`), `codeparrot/github-jupyter` (`a9be1d2d9b8bf5cf1fb7f8ffab9dc431fb0fd031`, files `0–32`), `bigcode/the-stack-jupyter-parsed-filtered` (`bigcode/jupyter-parsed`, `eed65c314469b51419d08fb2ff7ee41e448774d4`, shards `0–45`), `secmlr/starcoderdata` (`0a11b2a003eb39252c919f3d28f3d26f412bc3d7`, `jupyter-structured-clean-dedup` & `jupyter-scripts-dedup-filtered`), `jordangong/jupyter-scripts-smollm3` (`98dcfd99ae3c6cf0f43e3d07d6a10a570d0da262`, shards `0–419`), and `MetaKaggle Code v184` (`trial1000-v1`).
   - **Web (`35%` in Stages 1–15, `50%` in Stages 16–21):** `HuggingFaceTB/smollm-corpus` (`fineweb-edu-dedup`, `3ba9d605774198c5868892d7a8deda78031a781f`, shards `69–112`, `int_score >= 4`, English) and `HuggingFaceFW/finewiki` (`en`, `20261106-v1`).
   - **FineMath (`15%` in Stages 1–15, `20%–35%` in Stages 16–21):** `HuggingFaceTB/finemath` (`finemath-4plus`, `e92b25a616738fe95dc186b64dfb19f9c8525594`, shards `0–15`, `int_score >= 4`).
   - **Instructions (`15%` in Stages 1–15, `18%` in Stages 16–21):** `nvidia/OpenCodeInstruct` (`8f3ba5bafe4d6e8db46082cf7ae6741bc370604d`, shards `0–49`, `generic_python_verified_tests`), `HuggingFaceH4/ultrachat_200k` (`8ebe7fc305c02c2adca58c8bf303b1451be2f97f`, `train_sft` & `train_gen`), `HuggingFaceTB/smoltalk` (`smol-magpie-ultra`, `5feaf2fd3ffca7c237fc38d1861bc30365d48ffa`, shards `0–5`), `allenai/tulu-3-sft-mixture` (`8ab293f29a8f14e2e0e7fd97a63e2f5b4a13d920`, Permissive-2.0 subset, shards `0–1`), and `gretelai/synthetic_text_to_sql` (`Apache-2.0`).
@@ -174,7 +185,7 @@ Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 ->
   - Pruned 404 of 449 intermediate archived checkpoints on `/tank`, retaining 45 checkpoints (`10.0%`, evenly spaced every `~120M` tokens from `2.47M` to `5.442B` tokens) plus all run-terminal checkpoints on NVMe, freeing **1,695.92 GiB** on `/tank`.
   - Completed grandparent runs on NVMe (`prior_run_to_trim`) replace their local `data/train.npy` copy with a symlink to the immutable SHA-256-verified `/tank` cache while keeping the immediate `parent_run / 'data/train.npy'` as a regular file for `load_continuation` verification, maintaining **370–410 GiB free on NVMe** throughout the `6.4B -> 8.2B` target range.
 - **Prospective Final-Phase Mixture (`devmind-engram-final-rebalanced-phase-20261110-v1`, `6.466B -> 8.176B` Engram targets):**
-  - At `step 62,039` (`6,466,387,878` Engram targets / `8,547,419,313` combined exposure targets), all bulk permissive notebook sources under the strict whole-document 4K and no-image gates reached exhaustion (`1,883,203,267` unique notebook tokens consumed; `5,489,113` unreserved targets remaining).
+  - At `step 62,039` (`6,466,387,878` Engram targets / `8,547,419,313` combined exposure targets using the actual packed dense-backbone addend), all bulk permissive notebook sources under the strict whole-document 4K and no-image gates reached exhaustion (`1,883,203,267` unique notebook tokens consumed; `5,489,113` unreserved targets remaining).
   - Authorized prospective final-phase identity **`devmind-engram-final-rebalanced-phase-20261110-v1`** consumes the final `5.0M` unreserved notebook targets in Stage 16 (`after-4250m-300m-append-4k-v1`, completed at `step 64,315` / `6,766,391,105` Engram targets with validation loss **`2.5383300`**) and reallocates the `30%` notebook quota across `web_4plus`, `finemath`, `instruction_ultrachat`, and `cosmopedia_v2` for Stages 16–21 (`6.466B -> 8.176B` Engram targets; **Segment 17** reached a new campaign-best **`2.5370861` validation loss at `step 65,800`**):
 
 | Final-Phase Stage | Run ID | Target Addition | Cumulative Engram Targets | Combined Targets (`+2,080,374,784` ref) | Status |
@@ -189,7 +200,7 @@ Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 ->
 ### Upstream Tiny Sparse Lab PRs Enabling DevMind v2
 
 - **[PR #333](https://github.com/supernovae/tiny-sparse-lab/pull/333) (merged):** Preserve checkpoint retention policy during budget-extension comparisons.
-- **[PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) (merged):** Native `PreparedPrefix` verified prefix reuse for incremental corpus tail-appends without re-encoding historical prefix tokens.
+- **[PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) (merged):** Native `PreparedPrefix` reuse for a bounded smaller selection without tokenization; not the later `PreparedAppend` tail-append API.
 - **[PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335) (merged):** Vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers (**+1.64%** steady throughput at `padding_multiple=128`, **+3.18%** with `padding_multiple=64`).
 - **[PR #338](https://github.com/supernovae/tiny-sparse-lab/pull/338) & [PR #340](https://github.com/supernovae/tiny-sparse-lab/pull/340) (merged):** Native multi-GPU microbatch-parallel `PyTorchEngine` execution and fail-closed `MultiDeviceLease` physical device lock enforcement.
-- **[PR #342](https://github.com/supernovae/tiny-sparse-lab/pull/342) (open):** Multi-GPU device index enumeration (`0..device_count()-1`) and XPU/CUDA/ROCm physical UUID discovery in `discover_runtimes()`.
+- **[PR #342](https://github.com/supernovae/tiny-sparse-lab/pull/342) (merged):** Multi-GPU device index enumeration (`0..device_count()-1`) and XPU/CUDA/ROCm physical UUID discovery in `discover_runtimes()`.
