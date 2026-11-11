@@ -1,5 +1,8 @@
 # DevMind B70 performance follow-up — 2026-11-06
 
+These sections preserve historical measurement snapshots, not live production status.
+The later dual-B70 section and [campaign ledger](engram-campaign-20261106.md) supersede the early active-run descriptions. The early padding/nightly/vectorization comparisons do not record an exact executed Lab revision here; their results are operator observations, not fully reproducible run packages. The later prepared-append pin must not be substituted for those missing historical pins.
+
 A short operator-observed A/B/A comparison tested padding multiples of 128 versus 64 while keeping the training state, data and effective target groups fixed. All three arms completed and their full optimizer/RNG checkpoints passed cold CPU reload. Production resumed after the test.
 
 Padding 64 improved the fixed steady update window by approximately 1.4–1.5% against both baselines. The whole-training improvement against the warm repeated baseline was only 0.57%. Cache warming explains much of the larger comparison with the initial cold baseline. Loss differences were comparable to baseline-repeat numerical variation. Production remains on padding 128 pending a longer paired confirmation; no quality improvement or large speedup is claimed.
@@ -8,7 +11,7 @@ A separate XPU capture showed fused attention and compiled loss execution. Host 
 
 The trace branch was interrupted safely after profiler aggregation exceeded its host-memory allowance. The captured update remained analyzable using bounded offline streaming. Future captures should export only while holding the GPU lease, aggregate offline, and stop at the intended native checkpoint boundary. Traced timing is excluded from the speed comparison.
 
-The detailed experiment record and large artifacts remain with the operator. This summary does not publish checkpoints, corpus content, internal paths or private run identifiers. Ongoing fresh-data preparation and sequential training continue independently of this performance investigation.
+The detailed experiment record and large artifacts remain with the operator. This summary does not publish checkpoint binaries or corpus content. Later sections include operator run identifiers, device identifiers and storage paths already present in the historical record. Ongoing fresh-data preparation and sequential training continue independently of this performance investigation.
 
 ## Isolated nightly runtime comparison
 
@@ -46,7 +49,7 @@ Recorded training losses remained finite, and recorded optimizer overflow retrie
 
 The old runtime remains available as fallback and was not needed during this validation. Fresh-process GPU resume and terminal cold full-state reload are now demonstrated for this finite nightly continuation. **100M targets do not establish stability over billions of targets**; continued monitoring and further training evidence remain necessary. No permanent runtime promotion or subsequent segment outcome is claimed here.
 
-## Campaign progress through 2.516B+ Engram targets (160M active continuation)
+## Historical campaign snapshot through 2.516B+ Engram targets (November 6)
 
 Subsequent finite continuations on the same nightly runtime (`2.16.0.dev20261105+xpu`) completed through optimizer step **31,476** (`2,436,319,171` Engram targets), and the active **160,002,769-target continuation (`devmind-engram-after7m-160m-131k-nvme-20261106-v1`, step 31,476 $\to$ 32,689 / `2,596,321,940` Engram targets)** has passed **step 32,083 / 2,516,383,537 Engram targets** (`4,596,758,321` combined exposure targets including the `2,080,374,784` inherited dense-backbone targets):
 
@@ -87,6 +90,32 @@ Key findings and negative results:
 
 - Broader forward/loss compilation captures token and Engram lookups in CPU checks, but source inspection indicates XPU embedding backward still lowers to the native fallback. Its numerical behavior, memory and speed need a separate GPU comparison.
 - Padding-index changes require care: this path fills with EOS, also a legitimate learned token. SparseAdam changes untouched-row moment/update semantics and belongs in a separate learning experiment or v2, not an equivalent optimizer switch.
-- [Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335) (all CI checks passing) contributes the vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers upstream. [Lab PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse, and [Retention PR #333](https://github.com/supernovae/tiny-sparse-lab/pull/333) merged retention-policy preservation during budget-extension comparisons.
+- [Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335) (merged) contributes the vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers upstream. [Lab PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) merged verified prepared-prefix reuse, and [Retention PR #333](https://github.com/supernovae/tiny-sparse-lab/pull/333) merged retention-policy preservation during budget-extension comparisons.
 
-These are aggregate operator-observed findings. Detailed local evidence and failed artifacts are retained without publishing corpus content, checkpoints, private identifiers or filesystem paths.
+These are aggregate operator-observed findings. Detailed local evidence and failed artifacts are retained without publishing corpus content or checkpoint binaries. Later sections retain the already recorded operator identifiers and paths.
+
+## Dual Intel Arc Pro B70 (`2x B70`) microbatch-parallel scaling and 96 GB RAM upgrade (2026-11-09)
+
+After completing Segment 11 (`step 54,458 / 5,466,370,911` Engram targets, best validation loss **2.5426250** at step `53,800`) and reaching step `54,690` (`5,496,976,964` Engram targets, checkpoint SHA-256 `be152cd1d92792d0c38a238f57b28c105653a4b5cf5bf422fd5dcc8dea768dd4`) in Segment 12, the host was upgraded with a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` at PCI `0000:23:00.0`, `31.89 GiB`, alongside `868023e2-0000-0000-e300-000000000000` at PCI `0000:e3:00.0`, `31.89 GiB`) and **96 GB system RAM**.
+
+### Architecture and scientific equivalence invariants
+
+To split work across both B70 GPUs while keeping the pinned `b70-prepared-append` checkout (`93841d0541c45547104991356d450c56ed26bd78`), `RunConfig`, update grouping (`131,072` valid targets/update), `allow_runtime_drift=False`, and checkpoint format unchanged:
+
+1. **Device affinity & dual physical leases:** The primary trainer runs with `ZE_AFFINITY_MASK=1` so its `xpu:0` maps to physical UUID `868023e2-0000-0000-e300-000000000000` (identical to all prior checkpoints and manifests) and acquires exclusive `DeviceLease` locks on both physical B70 UUIDs. A persistent co-worker process runs with `ZE_AFFINITY_MASK=0` (`xpu:0` = `868023e2-0000-0000-2300-000000000000`), isolating `torch._dynamo` / `torch.compile` state across processes while reusing the same on-disk Inductor/Triton/SYCL `cache_scope`.
+2. **Interleaved microbatch partitioning & exact gradient reduction:** Because `collate_document_update` sorts documents by length ascending into `~20–45` microbatches per step and `PyTorchEngine._train_update` scales every microbatch loss by the full update's `valid_targets` (`backward_loss = (ce_sum + auxiliary * chunk_valid) / valid_targets`), assigning `microbatches[0::2]` to GPU 0 and `microbatches[1::2]` to GPU 1 balances sequence-length buckets across both GPUs. Partial FP32 gradients, loss sums, and additive document-scoped Engram diagnostics are reduced onto GPU 0 before a single `clip_grad_norm_` (`foreach=False`) and `AdamW.step()`, and updated FP32 weights are preloaded asynchronously onto GPU 1 between steps.
+
+### Isolated numerical equivalence and throughput comparison (`1x B70` vs `2x B70`)
+
+On a matched 16-microbatch update (`131,072` supervised targets at `seq_len=4096`) from identical model weights and optimizer state on the pinned nightly runtime (`2.16.0.dev20261105+xpu`):
+
+| Configuration | Step wall seconds | Valid targets/s | Speedup vs 1x B70 | Loss difference | Grad-norm difference | Max parameter difference |
+|---|---:|---:|---:|---:|---:|---:|
+| 1x B70 (`PyTorchEngine.train_update`) | 6.280 s | 20,873 | 1.000× | — | — | — |
+| 2x B70 (`DualB70Coordinator`, cold weight sync) | 3.849 s | 34,054 | **1.632× (+63.2%)** | $0.0$ | $7.99 \times 10^{-6}$ | $9.72 \times 10^{-5}$ |
+| 2x B70 (`DualB70Coordinator`, steady preloaded weights) | **3.728 s** | **35,163** | **1.685× (+68.5%)** | $0.0$ | — | — |
+
+### Live production verification (`devmind-engram-after3200m-300m-resume-131k-nvme-20261109-v1`)
+
+- Resumed from cold-verified `step_00054690_gen_000003` (`5,496,976,964` Engram targets); passed cold initial-state verification (`step_00054690_gen_000001`, SHA-256 `d6d1c585a2675821d16b0ace4387e13d7228643be992e88504bfec65f7b4769c`), applied step `54,691`, and committed verified post-update full-state checkpoint **`step_00054700_gen_000002`** (`5,498,297,748` Engram targets, validation loss **2.5446576**, SHA-256 `1fef0d1a0894d8956e348d46d49e9f867cfeab3a4876cfc8f668ae3fefe48e11`).
+- Observed live production optimizer throughput reached **34,274.5 valid targets/s (+60.5% over pre-upgrade 1x B70 `21,350.1 /s`)** while host CPU cores concurrently executed Stage 13 (`225M` target) corpus selection and cross-screening.
