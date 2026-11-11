@@ -1,6 +1,6 @@
 {
   "engine_repository": "https://github.com/supernovae/tiny-sparse-lab",
-  "engine_commit": "4b92ed2f33181779f5beaa7e87c156a51a03b4d5",
+  "engine_commit": "f775a4b33c4d5a058a9cb0178da2ae2688de8f32",
   "run_schema_version": 2,
   "required_native_interfaces": [
     "tokenizer memory-map",
@@ -38,5 +38,7 @@
     "accelerator qualification or training",
     "behavioral capability or benchmark scores",
     "independent recovery backup"
-  ]
+  ],
+  "engine_pull_request": "https://github.com/supernovae/tiny-sparse-lab/pull/343",
+  "pin_policy": "Tested PR source revision, not an ancestry gate. After squash merge, use the resulting main revision only after checking the merged diff and rerunning connected native contracts; record that replacement revision for the run."
 }

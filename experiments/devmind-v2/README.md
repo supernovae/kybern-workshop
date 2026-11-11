@@ -34,6 +34,12 @@ that silently lacks Engram, dynamic document batching, retention or scheduling.
 Workshop remains declarative; engine implementations and behavioral tests belong
 in Tiny Sparse Lab. There is no second training loop or packing implementation.
 
+The recorded SHA identifies the tested PR source, not a required merge strategy.
+A squash merge produces a different main SHA. Either check out the recorded source
+revision or verify the resulting merged diff and rerun the connected tests against
+that main checkout; record its actual SHA in run provenance. The connected tests
+exercise native contracts and do not impose an ancestor-only or exact-SHA gate.
+
 From Workshop, in an already provisioned compatible environment:
 
 ```sh
