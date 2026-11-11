@@ -26,18 +26,18 @@ class HandoffTests(unittest.TestCase):
             lock=None,experiment=None,index=None)
 
     def lock(self):
-        from sparselab.data.sources import lock_source, verify_lock
+        from klab.data.sources import lock_source, verify_lock
         source = h.read(ROOT/'source.json')
         provenance = dict(repo_id=source['repo_id'],revision=h.REVISION,loader='parquet',loader_options={},
             files={split:[dict(**pin,blob_id='a'*40)] for split,pin in h.read(ROOT/'first-files.json').items()})
         target=self.root/'source.lock.json'
-        with patch('sparselab.data.sources._hub_identity',return_value=provenance):
+        with patch('klab.data.sources._hub_identity',return_value=provenance):
             lock_source(ROOT/'source.json',target,self.root/'unused-cache')
         return target, verify_lock(target)
 
     def test_native_preparation_inspection_no_work(self):
-        from sparselab.experiments.preparation_recipe import inspect_preparation_recipe
-        from sparselab.experiments.preparation_execution import PreparationAdmission
+        from klab.experiments.preparation_recipe import inspect_preparation_recipe
+        from klab.experiments.preparation_execution import PreparationAdmission
         target,lock=self.lock()
         args=argparse.Namespace(recipe=str(ROOT),work=str(self.work),source_lock=str(target),
             destination=str(self.root/'recipe'),bindings=str(self.root/'bindings.json'))
@@ -60,7 +60,7 @@ class HandoffTests(unittest.TestCase):
             with self.assertRaises(ValueError):h.check_lock(lock,h.read(ROOT/'source.json'))
 
     def test_commands_are_native_parseable(self):
-        from sparselab.cli.main import build_parser
+        from klab.cli.main import build_parser
         parser=build_parser(self.work)
         self.args.lock=str(self.work/'experiment.lock.json')
         self.args.experiment=str(self.work/'experiment')
@@ -69,7 +69,7 @@ class HandoffTests(unittest.TestCase):
             result=h.commands(self.args)
         self.assertFalse(result['execution_enabled'])
         for row in result['steps']:
-            argv=row['argv']; native=argv[argv.index('sparselab')+1:]
+            argv=row['argv']; native=argv[argv.index('klab')+1:]
             parsed=parser.parse_args(native)
             self.assertTrue(callable(parsed.handler))
         self.assertEqual(sum('--execute-runs' in row['argv'] for row in result['steps']),1)
@@ -87,8 +87,8 @@ class HandoffTests(unittest.TestCase):
             self.assertEqual(child.stderr.strip(),'fixture stderr')
 
     def test_schema_and_scientific_budget(self):
-        from sparselab.config.models import RunConfig, TokenizerTrainConfig
-        from sparselab.campaign.plan import CampaignPlan
+        from klab.config.models import RunConfig, TokenizerTrainConfig
+        from klab.campaign.plan import CampaignPlan
         run=RunConfig.model_validate(h.read(ROOT/'run.json'))
         token=TokenizerTrainConfig.model_validate(h.read(ROOT/'tokenizer-config.json'))
         CampaignPlan.model_validate(h.read(ROOT/'preparation-campaign.json'))
@@ -110,7 +110,7 @@ class HandoffTests(unittest.TestCase):
         with self.assertRaises(ValueError):h.read(duplicate)
 
     def test_hard_memory_semantics_refuse(self):
-        from sparselab.experiments.acquisition_admission import AcquisitionAdmission
+        from klab.experiments.acquisition_admission import AcquisitionAdmission
         _,lock=self.lock(); value=h.acquisition(lock)
         self.assertEqual(value['max_retries_per_shard'],0)
         for field in ('require_hard_decoder_memory_bytes','require_hard_disk_bytes','require_expanded_bytes'):
@@ -124,7 +124,7 @@ class HandoffTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'reviewed commit'):h.admission(args)
 
     def test_sealed_pair_native_metadata_and_no_clobber(self):
-        from sparselab.experiments.workflow_recipe import inspect_workflow
+        from klab.experiments.workflow_recipe import inspect_workflow
         rows=[]
         for stage,kind,artifact,location in [
             ('snapshot','dataset_snapshot','dataset_snapshot',self.work/'snapshot/manifest.json'),
@@ -234,7 +234,7 @@ class HandoffTests(unittest.TestCase):
 
     def test_pair_projection_is_checked_in_admission(self):
         from types import SimpleNamespace
-        from sparselab.config.models import RunConfig
+        from klab.config.models import RunConfig
         cfg=RunConfig.model_validate(h.read(ROOT/'run.json'))
         two=SimpleNamespace(cells=[SimpleNamespace(config=cfg),SimpleNamespace(config=cfg)])
         self.assertEqual(h.check_pair_budget(two),dict(training_updates=16,target_positions=512,evaluation_batches=24))
@@ -250,13 +250,13 @@ class HandoffTests(unittest.TestCase):
             phase='workflow',output=str(self.root/'admission.json'))
         native=dict(recipe_sha256='b'*64,binding_sha256='c'*64)
         with patch.object(subprocess,'check_output',side_effect=lambda *a,**k:'a'*40 if 'rev-parse' in a[0] else ''), \
-             patch('sparselab.experiments.workflow_recipe.inspect_workflow',return_value=native), \
-             patch('sparselab.experiments.workflow_recipe.resolve_workflow',return_value=SimpleNamespace(cells=two.cells+[two.cells[0]])):
+             patch('klab.experiments.workflow_recipe.inspect_workflow',return_value=native), \
+             patch('klab.experiments.workflow_recipe.resolve_workflow',return_value=SimpleNamespace(cells=two.cells+[two.cells[0]])):
             with self.assertRaises(ValueError):h.admission(args)
             self.assertFalse(Path(args.output).exists())
         with patch.object(subprocess,'check_output',side_effect=lambda *a,**k:'a'*40 if 'rev-parse' in a[0] else ''), \
-             patch('sparselab.experiments.workflow_recipe.inspect_workflow',return_value=native), \
-             patch('sparselab.experiments.workflow_recipe.resolve_workflow',return_value=two):
+             patch('klab.experiments.workflow_recipe.inspect_workflow',return_value=native), \
+             patch('klab.experiments.workflow_recipe.resolve_workflow',return_value=two):
             h.admission(args)
             self.assertEqual(h.read(Path(args.output))['limits'],h.FLOW)
             before=Path(args.output).read_bytes()

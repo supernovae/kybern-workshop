@@ -76,8 +76,8 @@ class NativeFreshRecipe(unittest.TestCase):
         sys.path.insert(0, str(Path(os.environ['WORKSHOP_LAB_CHECKOUT']) / 'src'))
 
     def test_native_schema_full_model_and_five_panels(self):
-        from sparselab.config.models import RunConfig
-        from sparselab.model.inspection import parameter_inventory
+        from klab.config.models import RunConfig
+        from klab.model.inspection import parameter_inventory
         config = RunConfig.model_validate(binder.assemble(PLAN, bindings(Path('/fixture'))))
         self.assertEqual(len(config.evaluation.panels), 5)
         self.assertEqual(config.evaluation.batch_limit, 320)
@@ -88,9 +88,9 @@ class NativeFreshRecipe(unittest.TestCase):
             RunConfig.model_validate(bad)
 
     def test_bind_mapping_and_exclusive_native_derivation(self):
-        from sparselab.config.loading import load_config
-        from sparselab.derivation import derive_config
-        from sparselab.memory_tokenizer import build_memory_token_map
+        from klab.config.loading import load_config
+        from klab.derivation import derive_config
+        from klab.memory_tokenizer import build_memory_token_map
         from tokenizers import Tokenizer, models
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -118,9 +118,9 @@ class NativeFreshRecipe(unittest.TestCase):
                 binder.bind(PLAN, source, bound)
 
     def test_native_mixture_probe_and_command_contracts(self):
-        from sparselab.corpus.mixture import MixtureDeclaration
-        from sparselab.probes.config import load_probe_config
-        from sparselab.cli.main import build_parser
+        from klab.corpus.mixture import MixtureDeclaration
+        from klab.probes.config import load_probe_config
+        from klab.cli.main import build_parser
         declaration = binder.read(PACKAGE / 'mixture.template.json')
         declaration['tokenizer_origin_release_id'] = 'b' * 64
         self.assertEqual(MixtureDeclaration.model_validate(declaration).max_exposures, 1)

@@ -2,14 +2,14 @@
 
 [Back to DevMind Overview](../README.md) · [Shard Package (`lab86/README.md`)](lab86/README.md)
 
-[`preparation.json`](preparation.json) defines the 24-phase native [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab) corpus preparation workflow for **DevMind 340M Base**. The pinned candidate shard declarations, filtering policies, and job templates live in [`lab86/`](lab86/README.md).
+[`preparation.json`](preparation.json) defines the 24-phase native [Kybern Model Lab](https://github.com/supernovae/model-lab) corpus preparation workflow for **DevMind 340M Base**. The pinned candidate shard declarations, filtering policies, and job templates live in [`lab86/`](lab86/README.md).
 
 ## Inspecting Phase Commands
 
-Use `sparselab attempt phase-command` to compile and inspect the command arguments for any phase before running:
+Use `klab attempt phase-command` to compile and inspect the command arguments for any phase before running:
 
 ```sh
-sparselab attempt phase-command \
+klab attempt phase-command \
   --plan experiments/devmind/preparation/preparation.json \
   --attempt-root /tmp/devmind-preview \
   --label transport-init \
@@ -28,7 +28,7 @@ sparselab attempt phase-command \
    - `pilot-reuse` materializes the three pilot snapshots locally (`reuse_only`) for offline admission inspection and split inventory without additional network transfers.
 3. **Pilot Review & Full Acquisition:**
    - Review pilot schema, license filtering, family counts, and token yield projections.
-   - Release the transport gate with `sparselab corpus budget-release-gate` and run `continue-acquire` against the same transport ledger.
+   - Release the transport gate with `klab corpus budget-release-gate` and run `continue-acquire` against the same transport ledger.
 4. **Admission & Frozen Splits (98/1/1):**
    - Draft and inspect corpus admission using `application-policy.json`, `POLICY.md`, and `inspection-selection.json`.
    - Group duplicate, repository, and seed families (`family-clusters.template.json`) and freeze the `98/1/1` train/validation/test split (requiring at least 100 families per stratum).

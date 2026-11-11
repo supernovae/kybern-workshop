@@ -1,15 +1,15 @@
-# DevMind: Tiny Sparse Lab Command Map
+# DevMind: Kybern Model Lab Command Map
 
 [Back to DevMind Overview](README.md)
 
-Every stage of the **DevMind 340M Base** pipeline uses native [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab) (`sparselab`) commands. Keep generated datasets, tokenizers, checkpoints, and run stores in an external workspace directory outside Git.
+Every stage of the **DevMind 340M Base** pipeline uses native [Kybern Model Lab](https://github.com/supernovae/model-lab) (`klab`) commands. Keep generated datasets, tokenizers, checkpoints, and run stores in an external workspace directory outside Git.
 
 The ordinary experiment path is [bind → train → inspect → resume/evaluate → derive](run.md).
 Preparation commands below are available when inputs are missing or changed.
 
 ## Pipeline Operations
 
-| Stage | `sparselab` command | Required inputs |
+| Stage | `klab` command | Required inputs |
 | --- | --- | --- |
 | **Preview preparation command** | `attempt phase-command --plan preparation/preparation.json --attempt-root ROOT --label LABEL --bindings-json JSON` | Phase-specific bindings JSON; prints the resolved command without executing it. |
 | **Run preparation phase** | `attempt init` and `attempt run-phase` | Workspace baseline, attempt ledger, and resource envelope bindings. |
@@ -27,8 +27,8 @@ Preparation commands below are available when inputs are missing or changed.
 You can validate the standalone architecture and optimizer configurations right now:
 
 ```sh
-sparselab config validate experiments/devmind/model.json --kind model --json
-sparselab config validate experiments/devmind/optimizer.json --kind optimizer --json
+klab config validate experiments/devmind/model.json --kind model --json
+klab config validate experiments/devmind/optimizer.json --kind optimizer --json
 ```
 
 Both return `schema_valid: true` and `executable: false`. Native schema validation always reports no execution evidence, including for a complete RunConfig. Binding can reuse existing artifacts; it does not require replaying preparation:
@@ -41,7 +41,7 @@ Both return `schema_valid: true` and `executable: false`. Native schema validati
 The 25-leaf plan in [`preparation/preparation.json`](preparation/preparation.json) compiles deterministic argument arrays for each corpus preparation step:
 
 ```sh
-sparselab attempt phase-command \
+klab attempt phase-command \
   --plan experiments/devmind/preparation/preparation.json \
   --attempt-root /tmp/devmind-preview \
   --label transport-init \

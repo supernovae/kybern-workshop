@@ -11,7 +11,7 @@
         "kind": "tokenizer",
         "sha256": "1cf98b28bf82bf529743914f1bd103e3d7b81f8cba15492fc2b3a22b36bee43a",
         "version": 1,
-        "producer": "sparselab tokenizer train"
+        "producer": "klab tokenizer train"
       }
     },
     {
@@ -23,7 +23,7 @@
         "kind": "prepared_data",
         "sha256": "c0a3656d35b83d93d27ab44e4a06103c89a05d111ba6e3e2b8e3f9d6b0a5be90",
         "version": 1,
-        "producer": "sparselab data prepare"
+        "producer": "klab data prepare"
       }
     },
     {

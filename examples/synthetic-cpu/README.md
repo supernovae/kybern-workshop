@@ -2,27 +2,27 @@
 
 [Back to Workshop README](../../README.md) · [Offline Installation Check Guide (kybern.dev)](https://kybern.dev/models/cpu-smoke/)
 
-A lightweight, offline end-to-end exercise for [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
+A lightweight, offline end-to-end exercise for [Kybern Model Lab](https://github.com/supernovae/model-lab).
 It prepares a tiny synthetic text dataset and BPE tokenizer, runs a single-step training attempt through an explicit approval gate, scores held-out validation loss, and generates a verified report—with no dataset or model downloads required.
 
 - **Recorded run & metrics:** [2026-10-14 Synthetic CPU Result](../../results/2026-10-14-synthetic-cpu/README.md)
-- **Current CLI recipe packaging:** [Running Workshop Recipes with Tiny Sparse Lab](../../docs/native-workflow.md)
+- **Current CLI recipe packaging:** [Running Workshop Recipes with Kybern Model Lab](../../docs/native-workflow.md)
 
 ---
 
 ## Quick Offline Smoke Check (Current CLI)
 
-If you just installed [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab) and want to verify your local CPU setup in one command, you can also run the built-in readiness check from your `tiny-sparse-lab` checkout (see the [kybern.dev guide](https://kybern.dev/models/cpu-smoke/)):
+If you just installed [Kybern Model Lab](https://github.com/supernovae/model-lab) and want to verify your local CPU setup in one command, you can also run the built-in readiness check from your `model-lab` checkout (see the [kybern.dev guide](https://kybern.dev/models/cpu-smoke/)):
 
 ```sh
 uv sync --locked --extra cpu --dev
-export SPARSELAB_WORK_DIR="$HOME/.local/share/sparselab"
-uv run --locked --extra cpu sparselab readiness smoke --family dense \
-  --output "$SPARSELAB_WORK_DIR/first-run"
-uv run --locked --extra cpu sparselab dashboard --runs-dir "$SPARSELAB_WORK_DIR/first-run/runs"
+export KLAB_WORK_DIR="$HOME/.local/share/klab"
+uv run --locked --extra cpu klab readiness smoke --family dense \
+  --output "$KLAB_WORK_DIR/first-run"
+uv run --locked --extra cpu klab dashboard --runs-dir "$KLAB_WORK_DIR/first-run/runs"
 ```
 
-To package and inspect the declarative files in this directory (`examples/synthetic-cpu`) with the latest `sparselab` CLI, see [Packaging and Inspecting a Recipe](../../docs/native-workflow.md#packaging-and-inspecting-a-recipe).
+To package and inspect the declarative files in this directory (`examples/synthetic-cpu`) with the latest `klab` CLI, see [Packaging and Inspecting a Recipe](../../docs/native-workflow.md#packaging-and-inspecting-a-recipe).
 
 ---
 
@@ -34,12 +34,14 @@ The steps below document the exact pinned procedure used to produce the [2026-10
 
 | Component | Pinned Identity |
 | --- | --- |
-| **Tiny Sparse Lab commit** | `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc` |
+| **Kybern Model Lab commit** | `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc` |
 | **Installed source SHA-256** | `1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26` |
 | **`uv.lock` SHA-256** | `2058fe5c126df074879648018c36288386190446b94b147b811671185958ac86` |
 | **Runtime** | CPython 3.14.8, PyTorch 2.14.0+cpu, tokenizers 0.22.2, NumPy 2.5.3, datasets 4.8.5, PyArrow 25.0.1 |
 
-From a writable parent directory, clone Workshop and Tiny Sparse Lab at the recorded revisions:
+> **Pinned before the Lab rename:** this procedure pins a Kybern Model Lab commit from before the CLI was renamed `klab`. To replay exactly at the recorded pin, use `sparselab` (and `SPARSELAB_*` variables) in place of `klab`; see [Records Pinned Before the Rename](../../docs/native-workflow.md#records-pinned-before-the-rename).
+
+From a writable parent directory, clone Workshop and Kybern Model Lab at the recorded revisions:
 
 ```sh
 git clone https://github.com/supernovae/kybern-workshop.git workshop
@@ -48,7 +50,7 @@ git checkout --detach e8250556412bc8535c029d80af3fa735b82c1ffa
 git worktree add --detach ../workshop-preparation-a 28a01d69442c8b08e5ba78e4561ff4f69443e1e5
 # B is the workshop path; A is the preparation worktree path.
 cd ..
-git clone https://github.com/supernovae/tiny-sparse-lab.git lab
+git clone https://github.com/supernovae/model-lab.git lab
 git -C lab checkout --detach b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc
 ```
 
@@ -95,19 +97,19 @@ Inspect the preparation recipe:
 ```sh
 PREP="$A/examples/synthetic-cpu/preparation.json"
 POLICY="$A/examples/synthetic-cpu/monitor.json"
-"$CPU_PYTHON" -m sparselab experiment recipe preparation inspect "$PREP" \
+"$CPU_PYTHON" -m klab experiment recipe preparation inspect "$PREP" \
   --bindings "$WORK/preparation-bindings.json" --json > "$WORK/preparation-inspect.json"
 ```
 
 Create `$WORK/preparation-admission.json` with `preparation_admission_version: 1`, `A`'s full Git SHA as `reviewed_commit`, the exact `recipe_sha256` and `binding_sha256` from inspection, and your `CPU_PYTHON` path as `cpu_python`. Set `max_documents: 12`, `max_tokens: 384`, `max_vocab_size: 260`, `min_free_bytes: 268435456`, and `min_free_inodes: 128`. Then run preparation under the resource monitor:
 
 ```sh
-"$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor-baseline "$WORK" \
+"$CPU_PYTHON" -m klab --work-dir "$WORK" monitor-baseline "$WORK" \
   --output "$WORK/preparation-baseline.json" --json
-"$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor --policy "$POLICY" \
+"$CPU_PYTHON" -m klab --work-dir "$WORK" monitor --policy "$POLICY" \
   --baseline "$WORK/preparation-baseline.json" \
   --log-dir "$WORK/monitor/preparation-1" --workspace "$WORK" -- \
-  "$CPU_PYTHON" -m sparselab experiment recipe preparation apply "$PREP" \
+  "$CPU_PYTHON" -m klab experiment recipe preparation apply "$PREP" \
   --bindings "$WORK/preparation-bindings.json" \
   --admission "$WORK/preparation-admission.json" --work-dir "$WORK" --json \
   > "$WORK/preparation-monitor.json"
@@ -126,9 +128,9 @@ RECIPE="$B/examples/synthetic-cpu"
   --recipe "$RECIPE" --bindings "$WORK/workflow-bindings.json" \
   --logging-root "$WORK/workflow-runs"
 
-"$CPU_PYTHON" -m sparselab experiment recipe workflow inspect "$RECIPE/workflow.json" \
+"$CPU_PYTHON" -m klab experiment recipe workflow inspect "$RECIPE/workflow.json" \
   --bindings "$WORK/workflow-bindings.json" --json > "$WORK/workflow-inspect.json"
-"$CPU_PYTHON" -m sparselab experiment recipe workflow resolve "$RECIPE/workflow.json" \
+"$CPU_PYTHON" -m klab experiment recipe workflow resolve "$RECIPE/workflow.json" \
   --bindings "$WORK/workflow-bindings.json" --json > "$WORK/workflow-resolve.json"
 ```
 
@@ -147,18 +149,18 @@ Create `$WORK/workflow-admission.json`:
 Set a writable local worker lease directory:
 
 ```sh
-export SPARSELAB_WORKER_LEASE_DIR="$WORK/worker-leases"
+export KLAB_WORKER_LEASE_DIR="$WORK/worker-leases"
 ```
 
 Run each workflow step (`workflow-plan`, `workflow-approve`, `workflow-run`, and `workflow-replay`) under the native monitor:
 
 ```sh
-"$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor-baseline "$WORK" \
+"$CPU_PYTHON" -m klab --work-dir "$WORK" monitor-baseline "$WORK" \
   --output "$WORK/$STEP-baseline.json" --json
-"$CPU_PYTHON" -m sparselab --work-dir "$WORK" monitor \
+"$CPU_PYTHON" -m klab --work-dir "$WORK" monitor \
   --policy "$RECIPE/monitor.json" --baseline "$WORK/$STEP-baseline.json" \
   --log-dir "$WORK/monitor/$STEP" --workspace "$WORK" -- \
-  "$CPU_PYTHON" -m sparselab experiment recipe workflow apply "$RECIPE/workflow.json" \
+  "$CPU_PYTHON" -m klab experiment recipe workflow apply "$RECIPE/workflow.json" \
   --bindings "$WORK/workflow-bindings.json" --admission "$WORK/workflow-admission.json" \
   --work-dir "$WORK" --json > "$WORK/$STEP-monitor.json"
 ```
@@ -173,10 +175,10 @@ Run each workflow step (`workflow-plan`, `workflow-approve`, `workflow-run`, and
 Using the `LOCK` and `EXPERIMENT_WORKSPACE` paths from `lock-plan` and the `INDEX` path from `collect-run`:
 
 ```sh
-"$CPU_PYTHON" -m sparselab experiment recipe workflow report "$LOCK" \
+"$CPU_PYTHON" -m klab experiment recipe workflow report "$LOCK" \
   --workspace "$EXPERIMENT_WORKSPACE" --index "$INDEX" \
   --output "$WORK/report.json" --json
-"$CPU_PYTHON" -m sparselab experiment recipe workflow report "$LOCK" \
+"$CPU_PYTHON" -m klab experiment recipe workflow report "$LOCK" \
   --workspace "$EXPERIMENT_WORKSPACE" --index "$INDEX" \
   --output "$WORK/report.md" --format markdown
 ```

@@ -21,7 +21,7 @@ At the initial November 6 observation, the completed 50,003,192-target phase end
 
 ## Observed execution configuration
 
-- Tiny Sparse Lab commit `a2fdb25ed82519f3c65f1a9752aa86bbdedd2bcc`.
+- Kybern Model Lab commit `a2fdb25ed82519f3c65f1a9752aa86bbdedd2bcc`.
 - Intel B70, private Intel 26.40 stack, PyTorch 2.15.0+xpu, Python 3.14, bf16.
 - 4,096-token context; microbatch at most four documents; 131,072-target effective optimizer groups.
 - Compiled transformer blocks and output-head/loss, dynamic shapes; activation checkpointing off; optimizer foreach disabled.
@@ -145,7 +145,7 @@ For **DevMind v2**, the data flows, screening optimizations, and kernel improvem
 3. **16-worker parallel SQLite/MinHash qualification & pre-sharded protected query cache:**
    - Replacing single-worker sequential `screen_queries` over 40 prior SQLite indexes and 1.41M protected queries with a 16-worker `ProcessPoolExecutor` (`mp_context='spawn'`) and pre-sharded `queries-{0..15}.jsonl` reduced whole-shard qualification wall time from **3–4 hours to 3–9 minutes per shard** on Threadripper, enabling continuous multi-hundred-million-token runway preparation ahead of GPU training.
 4. **Runtime & checkpoint cadence defaults for v2:**
-   - Adopt `padding_multiple=64` (measured **+3.18%** steady throughput on B70 XPU when paired with vectorized `TokenNgramMemory` diagnostics in [Tiny Sparse Lab PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335)), skip redundant per-microbatch `/proc` RSS/meminfo syscalls inside `MemoryMonitor.sample()` when native XPU/CUDA peak counters are active, and set `checkpoint.every_tokens` to `25,000,000–50,000,000` (`+2.8%` end-to-end wall-clock gain over 5M checkpointing).
+   - Adopt `padding_multiple=64` (measured **+3.18%** steady throughput on B70 XPU when paired with vectorized `TokenNgramMemory` diagnostics in [Kybern Model Lab PR #335](https://github.com/supernovae/model-lab/pull/335)), skip redundant per-microbatch `/proc` RSS/meminfo syscalls inside `MemoryMonitor.sample()` when native XPU/CUDA peak counters are active, and set `checkpoint.every_tokens` to `25,000,000–50,000,000` (`+2.8%` end-to-end wall-clock gain over 5M checkpointing).
 
 ## Continuation progress through 6.766B Engram targets (8.847B combined) and 2x B70 multi-GPU upgrade (2026-11-10)
 
@@ -197,10 +197,10 @@ Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 ->
 | **Stage 20 (`after-5450m-300m`)** | `devmind-engram-after5450m-300m-131k-nvme-20261110-v1` | `~300,000,000` | `~7,966,396,471` (`97.43%`) | `~10,046,771,255` | **Staged in `campaign_orchestrator.py`** |
 | **Stage 21 (`after-5750m-210m`)** | `devmind-engram-after5750m-210m-131k-nvme-20261110-v1` | `~210,000,000` | **`~8,176,396,471` (`100.00%`)** | **`~10,256,771,255` (`100.00%`)** | **Staged in `campaign_orchestrator.py` (terminal cold verification)** |
 
-### Upstream Tiny Sparse Lab PRs Enabling DevMind v2
+### Upstream Kybern Model Lab PRs Enabling DevMind v2
 
-- **[PR #333](https://github.com/supernovae/tiny-sparse-lab/pull/333) (merged):** Preserve checkpoint retention policy during budget-extension comparisons.
-- **[PR #334](https://github.com/supernovae/tiny-sparse-lab/pull/334) (merged):** Native `PreparedPrefix` reuse for a bounded smaller selection without tokenization; not the later `PreparedAppend` tail-append API.
-- **[PR #335](https://github.com/supernovae/tiny-sparse-lab/pull/335) (merged):** Vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers (**+1.64%** steady throughput at `padding_multiple=128`, **+3.18%** with `padding_multiple=64`).
-- **[PR #338](https://github.com/supernovae/tiny-sparse-lab/pull/338) & [PR #340](https://github.com/supernovae/tiny-sparse-lab/pull/340) (merged):** Native multi-GPU microbatch-parallel `PyTorchEngine` execution and fail-closed `MultiDeviceLease` physical device lock enforcement.
-- **[PR #342](https://github.com/supernovae/tiny-sparse-lab/pull/342) (merged):** Multi-GPU device index enumeration (`0..device_count()-1`) and XPU/CUDA/ROCm physical UUID discovery in `discover_runtimes()`.
+- **[PR #333](https://github.com/supernovae/model-lab/pull/333) (merged):** Preserve checkpoint retention policy during budget-extension comparisons.
+- **[PR #334](https://github.com/supernovae/model-lab/pull/334) (merged):** Native `PreparedPrefix` reuse for a bounded smaller selection without tokenization; not the later `PreparedAppend` tail-append API.
+- **[PR #335](https://github.com/supernovae/model-lab/pull/335) (merged):** Vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers (**+1.64%** steady throughput at `padding_multiple=128`, **+3.18%** with `padding_multiple=64`).
+- **[PR #338](https://github.com/supernovae/model-lab/pull/338) & [PR #340](https://github.com/supernovae/model-lab/pull/340) (merged):** Native multi-GPU microbatch-parallel `PyTorchEngine` execution and fail-closed `MultiDeviceLease` physical device lock enforcement.
+- **[PR #342](https://github.com/supernovae/model-lab/pull/342) (merged):** Multi-GPU device index enumeration (`0..device_count()-1`) and XPU/CUDA/ROCm physical UUID discovery in `discover_runtimes()`.

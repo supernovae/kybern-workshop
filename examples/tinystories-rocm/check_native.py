@@ -6,13 +6,13 @@ import sys
 import tempfile
 from pathlib import Path
 
-from sparselab.campaign.plan import load_campaign
-from sparselab.cli.main import build_parser
-from sparselab.config.loading import load_config
-from sparselab.experiments.compiler import expand_axes
-from sparselab.experiments.plan import load_plan
-from sparselab.operational_monitor import MonitorPolicy
-from sparselab.runtime_profile import RuntimeProfile
+from klab.campaign.plan import load_campaign
+from klab.cli.main import build_parser
+from klab.config.loading import load_config
+from klab.experiments.compiler import expand_axes
+from klab.experiments.plan import load_plan
+from klab.operational_monitor import MonitorPolicy
+from klab.runtime_profile import RuntimeProfile
 
 root = Path(__file__).resolve().parent
 config = load_config(root / "run.json")
@@ -83,7 +83,7 @@ with tempfile.TemporaryDirectory() as tmp:
     parser = build_parser(work_dir=t / "work")
     for step in doc["steps"][1:]:
         argv = step["argv"]
-        assert argv[:4] == ["/opt/venv/bin/python", "-B", "-m", "sparselab"]
+        assert argv[:4] == ["/opt/venv/bin/python", "-B", "-m", "klab"]
         argv = argv[4:]
         parser.parse_args(
             argv

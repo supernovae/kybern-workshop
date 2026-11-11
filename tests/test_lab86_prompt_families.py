@@ -18,7 +18,7 @@ class NativePromptFamilies(unittest.TestCase):
 
     def test_pre_freeze_prompt_rule_keeps_acquisition_declarations(self):
         import yaml
-        from sparselab.corpus.project import load_project
+        from klab.corpus.project import load_project
 
         acquired = load_project(PACKAGE / "project-acquire.yaml")
         with tempfile.TemporaryDirectory() as directory:
@@ -43,7 +43,7 @@ class NativePromptFamilies(unittest.TestCase):
         self.assertEqual(acquired.config.source_effects, prepared.config.source_effects)
 
     def test_acquisition_declarations_do_not_inherit_the_full_family_map(self):
-        from sparselab.corpus.project import load_project
+        from klab.corpus.project import load_project
 
         for name in ("project-acquire.yaml", "project-pilot-acquire.json"):
             with self.subTest(project=name):

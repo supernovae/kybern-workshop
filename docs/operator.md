@@ -1,8 +1,8 @@
 # Container & Supervisor Helper Reference (`scripts/workshop.py`)
 
-For standard local experiments, run recipes directly with the `sparselab` CLI as shown in the [Tiny Sparse Lab workflow guide](native-workflow.md) and each project's README.
+For standard local experiments, run recipes directly with the `klab` CLI as shown in the [Kybern Model Lab workflow guide](native-workflow.md) and each project's README.
 
-This document covers `scripts/workshop.py`, an optional helper for running a pre-staged Tiny Sparse Lab Campaign inside a resource-bounded Linux/WSL Docker container.
+This document covers `scripts/workshop.py`, an optional helper for running a pre-staged Kybern Model Lab Campaign inside a resource-bounded Linux/WSL Docker container.
 
 ## Overview
 

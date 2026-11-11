@@ -111,10 +111,10 @@ root in the JSON strings; `$WORK` is not expanded inside config files. Current
 Validate the edited tokenizer and derive **both** run declarations:
 
 ```sh
-sparselab config validate "$WORK/tokenizer.json" --kind tokenizer --json
+klab config validate "$WORK/tokenizer.json" --kind tokenizer --json
 
 # Repeat this derivation for TIER=5m and TIER=50m.
-sparselab config derive "$STUDY/run-$TIER.json" \
+klab config derive "$STUDY/run-$TIER.json" \
   --set "tokenizer.path=\"$WORK/tokenizer/tokenizer.json\"" \
   --set "dataset.cache_dir=\"$WORK/data\"" \
   --set "dataset.train_path=\"$WORK/snapshot/train.jsonl\"" \
@@ -122,7 +122,7 @@ sparselab config derive "$STUDY/run-$TIER.json" \
   --set "dataset.source_manifest_path=\"$WORK/snapshot/manifest.json\"" \
   --set "logging.root_dir=\"$WORK/runs\"" \
   --output "$WORK/run-$TIER.yaml" --json
-sparselab config validate "$WORK/run-$TIER.yaml" --kind run --json
+klab config validate "$WORK/run-$TIER.yaml" --kind run --json
 ```
 
 Run acquisition and preparation once, with real per-phase measurements and the
@@ -135,19 +135,19 @@ initial real preparation segment.
 Preserve incomplete attempts and stop if actual capacity is threatened.
 
 ```sh
-sparselab data lock "$WORK/source.json" --output "$WORK/source.lock.json" --json
-sparselab data snapshot "$WORK/source.lock.json" --output "$WORK/snapshot" --json
-sparselab tokenizer train "$WORK/tokenizer.json"
-sparselab tokenizer verify "$WORK/run-5m.yaml" --json
-sparselab data prepare "$WORK/run-5m.yaml"
+klab data lock "$WORK/source.json" --output "$WORK/source.lock.json" --json
+klab data snapshot "$WORK/source.lock.json" --output "$WORK/snapshot" --json
+klab tokenizer train "$WORK/tokenizer.json"
+klab tokenizer verify "$WORK/run-5m.yaml" --json
+klab data prepare "$WORK/run-5m.yaml"
 ```
 
 Set `PREPARED` to the actual prepared-array directory reported by `data prepare`
 (not a guessed path or a staged bundle), then record coverage for each tier:
 
 ```sh
-sparselab data coverage --prepared-root "$PREPARED" --config "$WORK/run-$TIER.yaml" --json
-sparselab inspect "$WORK/run-$TIER.yaml" --json
+klab data coverage --prepared-root "$PREPARED" --config "$WORK/run-$TIER.yaml" --json
+klab inspect "$WORK/run-$TIER.yaml" --json
 ```
 
 A repeated same-input preparation request must reuse completed artifacts. Changing
@@ -163,11 +163,11 @@ single underlying prepared-data identity is required, not zero-copy assumed by f
 Do not give the 5M sealed stage to the 50M config and call it verified reuse.
 
 ```sh
-sparselab data prepared-inputs publish "$WORK/run-$TIER.yaml" --output "$WORK/prepared-$TIER"
-sparselab data prepared-inputs verify "$WORK/run-$TIER.yaml" "$WORK/prepared-$TIER"
-sparselab stage "$WORK/run-$TIER.yaml" --through warmup \
+klab data prepared-inputs publish "$WORK/run-$TIER.yaml" --output "$WORK/prepared-$TIER"
+klab data prepared-inputs verify "$WORK/run-$TIER.yaml" "$WORK/prepared-$TIER"
+klab stage "$WORK/run-$TIER.yaml" --through warmup \
   --prepared-inputs "$WORK/prepared-$TIER" --cold-verify --output "$WORK/stages-$TIER"
-sparselab train "$WORK/run-$TIER.yaml" --backend rocm --runs-dir "$WORK/runs" \
+klab train "$WORK/run-$TIER.yaml" --backend rocm --runs-dir "$WORK/runs" \
   --run-id "$RUN_ID" --stage-bundle "$WORK/stages-$TIER" --stop-after-step 256
 ```
 
@@ -187,11 +187,11 @@ Inspect the emitted pointer, then set `GENERATION` to its actual immutable gener
 path. Use the reported generation rather than an inferred filename.
 
 ```sh
-sparselab checkpoint inspect "$WORK/runs/$RUN_ID/checkpoints/latest.json" --json
-sparselab checkpoint inspect "$GENERATION" --json
-sparselab checkpoint verify "$GENERATION" --json
-sparselab report "$RUN_ID" --kind run --runs-dir "$WORK/runs" --json
-sparselab train "$WORK/run-$TIER.yaml" --backend rocm --runs-dir "$WORK/runs" \
+klab checkpoint inspect "$WORK/runs/$RUN_ID/checkpoints/latest.json" --json
+klab checkpoint inspect "$GENERATION" --json
+klab checkpoint verify "$GENERATION" --json
+klab report "$RUN_ID" --kind run --runs-dir "$WORK/runs" --json
+klab train "$WORK/run-$TIER.yaml" --backend rocm --runs-dir "$WORK/runs" \
   --run-id "$CHILD_ID" --resume "$GENERATION"
 ```
 
@@ -209,10 +209,10 @@ Set `FINAL_RUN_ID` to the finished child, `CHECKPOINT` to its immutable generati
 basename, and `GENERATION` to that actual path:
 
 ```sh
-sparselab checkpoint verify "$GENERATION" --json
-sparselab eval "$FINAL_RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" --backend rocm
-sparselab report "$FINAL_RUN_ID" --kind run --runs-dir "$WORK/runs" --json
-sparselab generate "$FINAL_RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" \
+klab checkpoint verify "$GENERATION" --json
+klab eval "$FINAL_RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" --backend rocm
+klab report "$FINAL_RUN_ID" --kind run --runs-dir "$WORK/runs" --json
+klab generate "$FINAL_RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" \
   --backend rocm --prompt "$PREFIX" --max-new-tokens 192 \
   --temperature 0.7 --top-k 40 --seed 42 --strict-context --show-prompt --json
 ```

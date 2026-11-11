@@ -135,12 +135,12 @@ def stage(inputs=Path("/inputs"), state=Path("/state")):
     import sys
     from importlib.metadata import version
 
-    from sparselab.config.models import RunConfig
-    from sparselab.data.sources import verify_lock, verify_snapshot
-    from sparselab.experiments.artifacts import verify_artifact
-    from sparselab.experiments.plan import Artifact
-    from sparselab.runtime_identity_probe import source_identity
-    from sparselab.training.manifest import source_identity as package_identity
+    from klab.config.models import RunConfig
+    from klab.data.sources import verify_lock, verify_snapshot
+    from klab.experiments.artifacts import verify_artifact
+    from klab.experiments.plan import Artifact
+    from klab.runtime_identity_probe import source_identity
+    from klab.training.manifest import source_identity as package_identity
 
     inputs, state = path(inputs), path(state)
     require(
@@ -246,11 +246,11 @@ def render(
             "copy-inputs",
             ["/opt/venv/bin/python", "-B", recipe + "/handoff.py", "stage"],
         ),
-        ("validate", ["sparselab", "campaign", "validate", campaign, "--json"]),
+        ("validate", ["klab", "campaign", "validate", campaign, "--json"]),
         (
             "apply",
             [
-                "sparselab",
+                "klab",
                 "campaign",
                 "apply",
                 campaign,
@@ -263,7 +263,7 @@ def render(
         (
             "approve",
             [
-                "sparselab",
+                "klab",
                 "campaign",
                 "approve",
                 campaign,
@@ -276,7 +276,7 @@ def render(
         (
             "run",
             [
-                "sparselab",
+                "klab",
                 "campaign",
                 "resume",
                 campaign,
@@ -287,7 +287,7 @@ def render(
                 "--json",
             ],
         ),
-        ("status", ["sparselab", "campaign", "status", campaign, "--json"]),
+        ("status", ["klab", "campaign", "status", campaign, "--json"]),
     ]
     return {
         "execution_enabled": False,
@@ -311,8 +311,8 @@ def render(
             {
                 "step": name,
                 "argv": (
-                    ["/opt/venv/bin/python", "-B", "-m", "sparselab", *argv[1:]]
-                    if argv[0] == "sparselab"
+                    ["/opt/venv/bin/python", "-B", "-m", "klab", *argv[1:]]
+                    if argv[0] == "klab"
                     else argv
                 ),
             }

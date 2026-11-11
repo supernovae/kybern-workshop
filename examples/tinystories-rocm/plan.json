@@ -55,7 +55,7 @@
       "kind": "tokenizer",
       "sha256": "7090a3b4075e47cf56aec6f741a475b80f407053e0e6a998eeda276b7e435cf3",
       "version": 1,
-      "producer": "sparselab tokenizer train",
+      "producer": "klab tokenizer train",
       "path": "/inputs/tokenizer/tokenizer.json"
     },
     "packed": {
@@ -63,7 +63,7 @@
       "kind": "prepared_data",
       "sha256": "d5835f06065fe52c4ac41531357a8227f726ef9e40b334db57d81e59ade2af8e",
       "version": 1,
-      "producer": "sparselab data prepare",
+      "producer": "klab data prepare",
       "path": "/state/cache/b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb"
     }
   }

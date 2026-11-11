@@ -2,18 +2,20 @@
 
 [Back to Workshop README](../../README.md)
 
-This recipe adapts the two-arm TinyStories smoke comparison (FFN width 64 vs. 96 on 64 train / 16 validation stories) for containerized AMD ROCm execution on Linux/WSL2 using `sparselab campaign` commands.
+This recipe adapts the two-arm TinyStories smoke comparison (FFN width 64 vs. 96 on 64 train / 16 validation stories) for containerized AMD ROCm execution on Linux/WSL2 using `klab campaign` commands.
 
 ## Workload & Resource Configuration
 
 | Setting | Value |
 | --- | --- |
-| **Tiny Sparse Lab commit** | `2d5ba0fd66b6087101ad152fdbfe17b44ce194a5` (pinned in [`pins.json`](pins.json)) |
+| **Kybern Model Lab commit** | `2d5ba0fd66b6087101ad152fdbfe17b44ce194a5` (pinned in [`pins.json`](pins.json)) |
 | **Dataset** | `roneneldan/TinyStories` (`f54c09fd23315a6f9c86f9dc80f725de7d8f9c64`), 64 train / 16 validation stories |
 | **Model arms** | Seed 7, vocab 512, hidden dim 32, 1 layer, 2 heads, FP32 on ROCm device 0; **FFN 64 vs. 96** |
 | **Training budget** | 2 smoke + 5 warmup + 1 main update per arm (16 updates / 512 targets total) |
 | **Evaluation** | 1 batch per pass (up to 24 evaluation batches / 768 targets total) |
 | **Container limits** | 1,800-second wall limit, 12 GiB RAM (zero swap), 2 CPUs, 256 PIDs |
+
+> **Pinned before the Lab rename:** this procedure pins a Kybern Model Lab commit from before the CLI was renamed `klab`. To replay exactly at the recorded pin, use `sparselab` (and `SPARSELAB_*` variables) in place of `klab`; see [Records Pinned Before the Rename](../../docs/native-workflow.md#records-pinned-before-the-rename).
 
 ## Staging Prepared Inputs
 

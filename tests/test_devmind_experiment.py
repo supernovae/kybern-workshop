@@ -64,10 +64,10 @@ class NativeExperimentContract(unittest.TestCase):
         sys.path.insert(0, str(Path(os.environ['WORKSHOP_LAB_CHECKOUT']) / 'src'))
 
     def test_bind_inventory_derive_and_native_commands_without_execution(self):
-        from sparselab.config.loading import load_config
-        from sparselab.derivation import derive_config
-        from sparselab.model.inspection import parameter_inventory
-        from sparselab.cli.main import build_parser
+        from klab.config.loading import load_config
+        from klab.derivation import derive_config
+        from klab.model.inspection import parameter_inventory
+        from klab.cli.main import build_parser
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             inputs = root / 'bindings.json'

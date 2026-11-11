@@ -70,7 +70,7 @@ streams can be reused. A backend change requires fresh device readiness checks.
 The current `stage --prepared-inputs` contract binds the full config and may copy
 assets. Do not use a 5M stage bundle as a 50M stage bundle. Compatible-input binding
 and full-config staging are distinct operations; consult the Lab
-[dataset guide](https://github.com/supernovae/tiny-sparse-lab/blob/b3a1630ec09dbddae36301b0acef4122623ed939/docs/datasets.md).
+[dataset guide](https://github.com/supernovae/model-lab/blob/b3a1630ec09dbddae36301b0acef4122623ed939/docs/datasets.md).
 If a reuse request reports a mismatch, preserve the diagnostic and inspect which
 identity changed before repeating expensive preparation.
 
@@ -267,7 +267,7 @@ A verified native full-state generation supports resume under compatible setting
 Full resume requires the same engine/backend, architecture, tokenizer/data,
 optimizer, schedule horizon, budget, batch, sequence length and deterministic
 settings. It creates a child run and preserves the parent. See the Lab
-[checkpoint guide](https://github.com/supernovae/tiny-sparse-lab/blob/b3a1630ec09dbddae36301b0acef4122623ed939/docs/checkpointing.md).
+[checkpoint guide](https://github.com/supernovae/model-lab/blob/b3a1630ec09dbddae36301b0acef4122623ed939/docs/checkpointing.md).
 
 Runtime/device drift may require explicit `--allow-runtime-drift` and records
 best-effort continuation, not bitwise equivalence. ROCm-to-CUDA is not strict

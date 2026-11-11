@@ -2,13 +2,13 @@
 
 [Back to Workshop README](../../README.md) · [Synthetic CPU Recipe Guide](../../examples/synthetic-cpu/README.md)
 
-This record captures an end-to-end offline synthetic CPU run in [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab): synthetic text and tokenizer preparation, a single-step model training attempt, held-out validation scoring, verified report generation, and idempotent replay.
+This record captures an end-to-end offline synthetic CPU run in [Kybern Model Lab](https://github.com/supernovae/model-lab): synthetic text and tokenizer preparation, a single-step model training attempt, held-out validation scoring, verified report generation, and idempotent replay.
 
 ## Pinned Revisions & Environment
 
 | Component | Revision / Digest |
 | --- | --- |
-| **Tiny Sparse Lab** | `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc` |
+| **Kybern Model Lab** | `b155cdcc1462cfbcbd5f0cf5261eb8aa197ef9dc` |
 | **Preparation commit (`A`)** | `28a01d69442c8b08e5ba78e4561ff4f69443e1e5` |
 | **Workflow commit (`B`)** | `e8250556412bc8535c029d80af3fa735b82c1ffa` |
 | **Installed source SHA-256** | `1f947cce513952bef88f9397e12bb3661efe97ece604cab04330f197e0a44a26` |
