@@ -71,8 +71,11 @@ executable Python completions with tests, simple arithmetic with exact answers,
 format-sensitive instruction following, factual reference answers, and repetition.
 Native standard probes do not measure all these tasks. Until a reviewed task suite,
 scorer and baseline are bound, those capability claims remain **unmeasured**. No
-synthetic pass criteria or invented baseline is included here. Prefer the existing
-Lab model exercise / controlled benchmark facilities over a Workshop scorer.
+synthetic pass criteria or invented baseline is included here. Use compatible native generation, controlled benchmark or optional code-work
+facilities rather than a Workshop scorer. The specialized `model exercise` dense
+reference contract requires memory disabled and fixed batch accounting; it is not
+a v2 Engram evaluator. Optional code-work needs its separately provisioned sandbox
+and reviewed task/scoring declaration; it is not enabled by this scaffold.
 
 Hard engineering stops: nonfinite loss or gradients, prepared/tokenizer/panel hash
 mismatch, exhausted unique data, failed full-state checkpoint verification, failed

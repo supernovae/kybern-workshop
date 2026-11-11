@@ -1,6 +1,6 @@
 {
   "engine_repository": "https://github.com/supernovae/tiny-sparse-lab",
-  "engine_commit": "f775a4b33c4d5a058a9cb0178da2ae2688de8f32",
+  "engine_commit": "7ce781c3d8a573ce2add90543496dc4a40caf6f4",
   "run_schema_version": 2,
   "required_native_interfaces": [
     "tokenizer memory-map",
