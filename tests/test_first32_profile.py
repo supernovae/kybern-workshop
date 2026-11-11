@@ -26,8 +26,8 @@ class First32Declaration(unittest.TestCase):
 class NativeFirst32Declaration(unittest.TestCase):
     def test_phase_map_uses_only_native_preparation_commands(self):
         sys.path.insert(0, str(Path(os.environ["WORKSHOP_LAB_CHECKOUT"]) / "src"))
-        from sparselab.training.preparation import compile_phase, load_preparation
-        from sparselab.cli.main import build_parser
+        from klab.training.preparation import compile_phase, load_preparation
+        from klab.cli.main import build_parser
         plan_path = PACKAGE / "preparation.json"
         plan = load_preparation(plan_path)
         with tempfile.TemporaryDirectory() as directory:
@@ -45,9 +45,9 @@ class NativeFirst32Declaration(unittest.TestCase):
     def test_rendered_acquisition_and_export_base_use_native_schemas(self):
         sys.path.insert(0, str(Path(os.environ["WORKSHOP_LAB_CHECKOUT"]) / "src"))
         import yaml
-        from sparselab.corpus.project import load_project
-        from sparselab.config.loading import load_config
-        from sparselab.corpus.declaration_render import render_declaration
+        from klab.corpus.project import load_project
+        from klab.config.loading import load_config
+        from klab.corpus.declaration_render import render_declaration
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             recipe = root / "recipe"

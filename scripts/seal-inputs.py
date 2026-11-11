@@ -24,8 +24,8 @@ if not args.logging_root.is_absolute():
     parser.error('logging root must be absolute')
 receipt = json.loads(args.receipt.read_text())
 rows = receipt.get('stages', [])
-expected = {'train-tokenizer': ('tokenizer_train', 'tokenizer', 'sparselab tokenizer train'),
-            'pack-data': ('data_prepare', 'prepared_data', 'sparselab data prepare')}
+expected = {'train-tokenizer': ('tokenizer_train', 'tokenizer', 'klab tokenizer train'),
+            'pack-data': ('data_prepare', 'prepared_data', 'klab data prepare')}
 if len(rows) != 2 or {row['id'] for row in rows} != set(expected):
     parser.error('expected exactly the two authored preparation stages')
 artifacts, locations = {}, {}

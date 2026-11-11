@@ -26,9 +26,9 @@ class NativeLmBuild(unittest.TestCase):
 
     def test_full_admitted_lm_project_selects_bounded_builder_without_reacquisition(self):
         import yaml
-        from sparselab.corpus.acquisition import _project_sha
-        from sparselab.corpus.pipeline import _ordered_transforms, _uses_disk_lm_builder
-        from sparselab.corpus.project import load_project
+        from klab.corpus.acquisition import _project_sha
+        from klab.corpus.pipeline import _ordered_transforms, _uses_disk_lm_builder
+        from klab.corpus.project import load_project
 
         acquired = load_project(PACKAGE / "project-acquire.yaml")
         with tempfile.TemporaryDirectory() as directory:

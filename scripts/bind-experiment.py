@@ -40,7 +40,7 @@ def assemble(plan_path, bindings):
 
 def bind(plan_path, bindings_path, output):
     # Native schema is authoritative; do not implement a competing RunConfig.
-    from sparselab.config.models import RunConfig
+    from klab.config.models import RunConfig
     run = assemble(plan_path, read(bindings_path))
     RunConfig.model_validate(run)
     with Path(output).open('x') as stream:

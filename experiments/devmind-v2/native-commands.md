@@ -11,7 +11,7 @@ workload commands require their own resource and execution authorization.
 After code qualification, use the existing native corpus preparation interface
 and the shared phase map at `../devmind/preparation/preparation.json`. Render its
 bindings for this new v2 corpus, not the historical three-pillar acquisition
-project. Inspect a phase without executing it with `sparselab attempt phase-command`.
+project. Inspect a phase without executing it with `klab attempt phase-command`.
 Native steps cover admission inspection, split inventory, family freezing, build,
 release audit, tokenizer fitting/verification, measured unique-token floors,
 mixture materialization/verification and prepared-input publication. Source IDs
@@ -28,8 +28,8 @@ claim those blocks already exist. Choose a backend and device explicitly.
 ```sh
 python "$WORKSHOP/scripts/bind-experiment.py" "$RECIPE/experiment.json" \
   --bindings "$V2/bindings.json" --output "$V2/packing.json"
-sparselab tokenizer verify "$V2/packing.json" --json
-sparselab tokenizer memory-map "$TOKENIZER" --mode identity \
+klab tokenizer verify "$V2/packing.json" --json
+klab tokenizer memory-map "$TOKENIZER" --mode identity \
   --output "$V2/memory-map.json" --bind-config "$V2/packing.json" \
   --config-output "$V2/mapped.yaml"
 ```
@@ -42,7 +42,7 @@ The five panel declarations are checked by the native prepared/evaluation path.
 Optional runtime optimization uses native derivation, before publishing inputs:
 
 ```sh
-sparselab config derive "$V2/mapped.yaml" \
+klab config derive "$V2/mapped.yaml" \
   --set 'runtime.backend="xpu"' --set 'runtime.device_index=0' \
   --set 'runtime.secondary_device_indices=[1]' --set 'runtime.precision="bf16"' \
   --set 'runtime.compile_dynamic_shapes=true' \
@@ -60,14 +60,14 @@ actual work; the example does not claim they are available.
 ## 2. Pack, measure schedule, rebind and cold-verify
 
 ```sh
-sparselab data prepared-inputs publish "$CONFIG" --output "$V2/bootstrap-inputs" \
+klab data prepared-inputs publish "$CONFIG" --output "$V2/bootstrap-inputs" \
   --resource-envelope "$ENVELOPE"
-sparselab data prepared-inputs verify "$CONFIG" "$V2/bootstrap-inputs"
-sparselab config schedule "$CONFIG" --prepared-inputs "$V2/bootstrap-inputs" \
+klab data prepared-inputs verify "$CONFIG" "$V2/bootstrap-inputs"
+klab config schedule "$CONFIG" --prepared-inputs "$V2/bootstrap-inputs" \
   --output "$V2/final.yaml"
-sparselab data prepared-inputs publish "$V2/final.yaml" --output "$V2/final-inputs" \
+klab data prepared-inputs publish "$V2/final.yaml" --output "$V2/final-inputs" \
   --resource-envelope "$ENVELOPE"
-sparselab data prepared-inputs verify "$V2/final.yaml" "$V2/final-inputs"
+klab data prepared-inputs verify "$V2/final.yaml" "$V2/final-inputs"
 ```
 
 The schedule command derives the terminal update and cosine-decay horizon from
@@ -85,8 +85,8 @@ warmup. Final schedule derivation is not evidence that the learning rate is stab
 ## 3. Qualify and launch only when separately authorized
 
 ```sh
-sparselab inspect "$V2/final.yaml" --json
-sparselab stage "$V2/final.yaml" --through validate --prepared-inputs "$V2/final-inputs" \
+klab inspect "$V2/final.yaml" --json
+klab stage "$V2/final.yaml" --through validate --prepared-inputs "$V2/final-inputs" \
   --cold-verify --output "$V2/validated-stage" --resource-envelope "$ENVELOPE"
 ```
 
@@ -99,7 +99,7 @@ code, dimensions, backend and ownership have not changed.
 After reviewing data, schedule, qualification, storage and behavior criteria:
 
 ```sh
-sparselab train "$V2/final.yaml" --run-id "$FRESH_RUN_ID" \
+klab train "$V2/final.yaml" --run-id "$FRESH_RUN_ID" \
   --stage-bundle "$V2/validated-stage" --resource-envelope "$ENVELOPE"
 ```
 
@@ -110,10 +110,10 @@ explicitly where needed. A resource envelope is a bound, not a spend approval.
 ## 4. Evaluate, recover and report exact generations
 
 ```sh
-sparselab checkpoint verify "$GENERATION" --config "$V2/final.yaml" --json
-sparselab probe "$GENERATION" --config "$RECIPE/probe-standard.json" --json
-sparselab probe "$GENERATION" --config "$RECIPE/probe-full.json" --json
-sparselab report "$FRESH_RUN_ID" --kind run --json
+klab checkpoint verify "$GENERATION" --config "$V2/final.yaml" --json
+klab probe "$GENERATION" --config "$RECIPE/probe-standard.json" --json
+klab probe "$GENERATION" --config "$RECIPE/probe-full.json" --json
+klab report "$FRESH_RUN_ID" --kind run --json
 ```
 
 Probes execute inference; the full tier additionally needs an already provisioned
@@ -126,7 +126,7 @@ candidate; never use its held-back split for tuning.
 Recovery is a separate native full-state operation after checkpoint verification:
 
 ```sh
-sparselab train "$V2/final.yaml" --resume "$GENERATION" --run-id "$RECOVERY_RUN_ID" \
+klab train "$V2/final.yaml" --resume "$GENERATION" --run-id "$RECOVERY_RUN_ID" \
   --resource-envelope "$ENVELOPE"
 ```
 

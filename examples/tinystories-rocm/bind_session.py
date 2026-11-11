@@ -119,8 +119,8 @@ def bind(
         session["runtime_venv"] = runtime["venv"]
     invocation = runtime.get("venv", {}).get("invocation", "/opt/venv/bin/python")
     env = {
-        "SPARSELAB_WORK_DIR": str(state),
-        "SPARSELAB_WORKER_LEASE_DIR": str(state / "worker-leases"),
+        "KLAB_WORK_DIR": str(state),
+        "KLAB_WORKER_LEASE_DIR": str(state / "worker-leases"),
         **{
             k: "1"
             for k in (
@@ -237,7 +237,7 @@ def report(state, lock, workspace, index):
             job["argv"][0],
             "-B",
             "-m",
-            "sparselab",
+            "klab",
             "experiment",
             "recipe",
             "workflow",

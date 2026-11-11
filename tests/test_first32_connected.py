@@ -22,20 +22,20 @@ class ConnectedFirst32(unittest.TestCase):
     def test_native_subset_to_cold_prepared_inputs(self):
         sys.path.insert(0, str(Path(os.environ["WORKSHOP_LAB_CHECKOUT"]) / "src"))
         import yaml
-        from sparselab.corpus.acquisition import acquire, _adapter, _digest, declaration_sha256
-        from sparselab.corpus.project import SourceDeclaration, load_project, source_declaration_payload
-        from sparselab.training.manifest import canonical_json, sha256_file
-        from sparselab.corpus.admission_draft import draft_admission_manifest
-        from sparselab.corpus.split_inventory import write_split_inventory
-        from sparselab.corpus.split_freeze import freeze_splits, finalize_family_inventory
-        from sparselab.corpus.pipeline import build
-        from sparselab.corpus.release import freeze, verify_release
-        from sparselab.corpus.export import export_release, _split_stats, _licenses
-        from sparselab.config.loading import load_config, load_tokenizer_config
-        from sparselab.config.models import TokenizerSampling, RunConfig
-        from sparselab.data.tokenizer import train_tokenizer, verify_tokenizer_artifact
-        from sparselab.corpus.mixture import materialize_mixture, verify_mixture
-        from sparselab.staging import materialize_prepared_inputs, verify_prepared_inputs
+        from klab.corpus.acquisition import acquire, _adapter, _digest, declaration_sha256
+        from klab.corpus.project import SourceDeclaration, load_project, source_declaration_payload
+        from klab.training.manifest import canonical_json, sha256_file
+        from klab.corpus.admission_draft import draft_admission_manifest
+        from klab.corpus.split_inventory import write_split_inventory
+        from klab.corpus.split_freeze import freeze_splits, finalize_family_inventory
+        from klab.corpus.pipeline import build
+        from klab.corpus.release import freeze, verify_release
+        from klab.corpus.export import export_release, _split_stats, _licenses
+        from klab.config.loading import load_config, load_tokenizer_config
+        from klab.config.models import TokenizerSampling, RunConfig
+        from klab.data.tokenizer import train_tokenizer, verify_tokenizer_artifact
+        from klab.corpus.mixture import materialize_mixture, verify_mixture
+        from klab.staging import materialize_prepared_inputs, verify_prepared_inputs
 
         def write(path, value):
             path.write_text(yaml.safe_dump(value, sort_keys=False))
@@ -82,7 +82,7 @@ class ConnectedFirst32(unittest.TestCase):
                     receipts.append(receipt)
                     envelope = {**receipt, "dataset_revision": source.revision,
                                 "source_shard_path": shard["path"], "source_shard_sha256": upstream_sha}
-                    rendered.append(canonical_json({**row, "_sparselab_source": envelope}) + b"\n")
+                    rendered.append(canonical_json({**row, "_klab_source": envelope}) + b"\n")
                 body = b"".join(rendered)
                 file = {"path": "fixture/train.jsonl.sample.jsonl", "size": len(body),
                         "sha256": hashlib.sha256(body).hexdigest()}

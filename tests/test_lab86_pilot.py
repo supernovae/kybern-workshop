@@ -110,8 +110,8 @@ class PilotDeclarations(unittest.TestCase):
 class NativePilotLedger(unittest.TestCase):
     def setUp(self):
         sys.path.insert(0, str(Path(os.environ["WORKSHOP_LAB_CHECKOUT"]) / "src"))
-        from sparselab.corpus.project import load_project
-        from sparselab.corpus.transport_budget import TransportBudget
+        from klab.corpus.project import load_project
+        from klab.corpus.transport_budget import TransportBudget
         self.load = load_project
         self.budget_type = TransportBudget
         self.project = load_project(PACKAGE / "project-pilot-acquire.json")
@@ -120,7 +120,7 @@ class NativePilotLedger(unittest.TestCase):
         self.ledger = TransportBudget.initialize(Path(self.temp.name) / "ledger.sqlite", self.project)
 
     def test_native_projection_and_identity(self):
-        from sparselab.corpus.acquisition import _project_sha
+        from klab.corpus.acquisition import _project_sha
         self.assertEqual(self.ledger.projected_disk_bytes(), 28021704695)
         self.assertLess(self.ledger.projected_disk_bytes(), self.ledger.spec.max_disk_bytes)
         self.assertEqual(_project_sha(self.project), read("pilot-contract.template.json")["preparation_acquisition_identity_sha256"])
@@ -161,11 +161,14 @@ if __name__ == "__main__":
 @unittest.skipUnless(os.environ.get("WORKSHOP_LAB_CHECKOUT"), "requires preview-capable Lab")
 class NativePreview(unittest.TestCase):
     def test_render_compile_and_tiny_three_source_preview(self):
+        if read("preview.template.json")["format"].startswith("sparselab-"):
+            self.skipTest("sealed LAB86 package keeps pre-rename sparselab-* format IDs; "
+                          "current klab rejects them by design")
         sys.path.insert(0, str(Path(os.environ["WORKSHOP_LAB_CHECKOUT"]) / "src"))
-        from sparselab.corpus.declaration_render import render_declaration
-        from sparselab.corpus.preview import Preview, preview
-        from sparselab.training.preparation import compile_phase
-        from sparselab.training.manifest import canonical_json
+        from klab.corpus.declaration_render import render_declaration
+        from klab.corpus.preview import Preview, preview
+        from klab.training.preparation import compile_phase
+        from klab.training.manifest import canonical_json
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             rendered = root / "rendered.json"
@@ -175,7 +178,7 @@ class NativePreview(unittest.TestCase):
             spec = json.loads(rendered.read_text())
             Preview.model_validate(spec)
             self.assertEqual(spec["max_read_bytes"], 16 * 1024**3)
-            from sparselab.corpus.project import load_project
+            from klab.corpus.project import load_project
             project = load_project(PACKAGE / "project-pilot-acquire.json")
             text_fields = {s.id: s.acquisition.text_field for s in project.sources}
             # Explicit fixture substitutions: actual snapshots are never opened.
@@ -188,7 +191,7 @@ class NativePreview(unittest.TestCase):
                         field = text_fields[source["source_id"]]
                         self.assertEqual(source["text_field"], field)
                         row = {field: "tiny fixture"}
-                        row["_sparselab_source"] = {"source_row_index": 0,
+                        row["_klab_source"] = {"source_row_index": 0,
                             "source_row_sha256": hashlib.sha256(canonical_json(row)).hexdigest()}
                         payload = canonical_json(row) + b"\n"
                     path.write_bytes(payload)

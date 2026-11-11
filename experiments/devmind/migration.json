@@ -1,17 +1,17 @@
 {
-  "source_repository": "https://github.com/supernovae/tiny-sparse-lab",
+  "source_repository": "https://github.com/supernovae/model-lab",
   "source_commit": "8975c5abcaefb1d3e595a9f1f466db97f9ab7682",
   "files": [
     {
       "source": "experiments/research/exp1-preparation/LAB86-VALIDATION.md",
       "destination": "experiments/devmind/preparation/LAB86-VALIDATION.md",
-      "sha256": "45dfd4edfd19b674bcc63f3e166c591262e74b19e379f2ef270a0de206dcad4f",
+      "sha256": "aee2f3415e2bb813912b511f24eb3a6de24facc1888d07f89bdfe47f6bd13738",
       "source_sha256": "e84402c855a81c6d9ead6d6aa3bac5f598c6ccee079d6e6914cd7cbf2a6c720e"
     },
     {
       "source": "experiments/research/exp1-preparation/README.md",
       "destination": "experiments/devmind/preparation/README.md",
-      "sha256": "71f7448b401d28d38b5c971f4fa833875247a7c9c41e3c8fe84b2dc7fb99e398",
+      "sha256": "97695f056a8377ba0190bf443b35795c861d5bdc3b3ebc5b24a1273c542ca482",
       "source_sha256": "3a7af2287a219b68f561a63525aa186d2e45caf8b53a412e50fa1cf3d41f762a"
     },
     {

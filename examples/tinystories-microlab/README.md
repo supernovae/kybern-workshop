@@ -2,7 +2,7 @@
 
 [Back to Workshop README](../../README.md) · [Interactive Guide on kybern.dev](https://kybern.dev/models/tinystories-training/)
 
-This starter recipe teaches the core [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab) comparison workflow (`sparselab try`).
+This starter recipe teaches the core [Kybern Model Lab](https://github.com/supernovae/model-lab) comparison workflow (`klab try`).
 It selects 2,000 training and 100 validation stories from `roneneldan/TinyStories`, fits a train-only 2,048-token BPE tokenizer, and compares two tiny dense decoders—**FFN width 256 vs. 384**—under the exact same seed (`42`), data split, and 40-update (10,240-target) training budget.
 
 - **Looking for a longer trained baseline?** See the [8,192-update TinyStories CPU baseline](../tinystories-useful/README.md) and its [27 recorded story outputs](../../results/2026-10-19-tinystories-cpu/README.md).
@@ -27,7 +27,7 @@ Create a fresh workspace directory outside your Git checkout and copy the recipe
 
 ```sh
 RECIPE=examples/tinystories-microlab
-WORK="$HOME/sparselab-experiments/tinystories-microlab-001"
+WORK="$HOME/klab-experiments/tinystories-microlab-001"
 mkdir -p "$WORK"
 cp -R "$RECIPE/declarations" "$WORK/declarations"
 cp "$RECIPE/wider-ffn.yaml" "$RECIPE/try.yaml" "$WORK/"
@@ -41,9 +41,9 @@ Relative paths inside `declarations/` resolve to `../snapshot`, `../tokenizer`, 
 Before downloading data or starting training, validate the baseline config and preview the candidate derivation:
 
 ```sh
-sparselab config validate "$WORK/declarations/run.yaml" --kind run --json
-sparselab config validate "$WORK/declarations/tokenizer.yaml" --kind tokenizer --json
-sparselab config derive "$WORK/declarations/run.yaml" \
+klab config validate "$WORK/declarations/run.yaml" --kind run --json
+klab config validate "$WORK/declarations/tokenizer.yaml" --kind tokenizer --json
+klab config derive "$WORK/declarations/run.yaml" \
   --set 'model.ffn_dim=384' --output "$WORK/candidate-preview.yaml" --json
 ```
 
@@ -51,29 +51,29 @@ Inspect `$WORK/candidate-preview.yaml` and its `.derivation.json` sidecar to ver
 
 ## 3. Prepare Inputs and Run the Comparison
 
-Lock and snapshot the dataset, train the tokenizer, and run the paired comparison with `sparselab try`:
+Lock and snapshot the dataset, train the tokenizer, and run the paired comparison with `klab try`:
 
 ```sh
-sparselab data lock "$WORK/declarations/source.yaml" \
+klab data lock "$WORK/declarations/source.yaml" \
   --output "$WORK/source.lock.json"
-sparselab data snapshot "$WORK/source.lock.json" --output "$WORK/snapshot"
-sparselab tokenizer train "$WORK/declarations/tokenizer.yaml"
-sparselab try "$WORK/wider-ffn.yaml" --vs "$WORK/declarations/run.yaml" \
+klab data snapshot "$WORK/source.lock.json" --output "$WORK/snapshot"
+klab tokenizer train "$WORK/declarations/tokenizer.yaml"
+klab try "$WORK/wider-ffn.yaml" --vs "$WORK/declarations/run.yaml" \
   --config "$WORK/try.yaml" --backend cpu --json
 ```
 
 > **Note on disk space:** Although the snapshot selects 2,100 stories (capped at 16 MiB of extracted text), the initial Hugging Face Hub download caches the upstream Parquet shard (~250 MB+).
 
-`sparselab try` prepares the tokenized dataset, trains both the baseline (`ffn_dim=256`) and candidate (`ffn_dim=384`) arms, and evaluates both checkpoints on the same held-out validation batches.
+`klab try` prepares the tokenized dataset, trains both the baseline (`ffn_dim=256`) and candidate (`ffn_dim=384`) arms, and evaluates both checkpoints on the same held-out validation batches.
 
 ## 4. Inspect Results
 
-Use the `TRY_ID` printed by `sparselab try` to view the experiment report or open the interactive dashboard:
+Use the `TRY_ID` printed by `klab try` to view the experiment report or open the interactive dashboard:
 
 ```sh
-sparselab report TRY_ID --lab-dir "$WORK/lab" --json
-sparselab explore TRY_ID --lab-dir "$WORK/lab"
-sparselab dashboard --lab-dir "$WORK/lab"
+klab report TRY_ID --lab-dir "$WORK/lab" --json
+klab explore TRY_ID --lab-dir "$WORK/lab"
+klab dashboard --lab-dir "$WORK/lab"
 ```
 
 ## Next Steps

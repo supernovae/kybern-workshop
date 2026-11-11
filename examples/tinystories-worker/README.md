@@ -2,7 +2,7 @@
 
 [Back to Workshop README](../../README.md)
 
-For the interactive TinyStories walkthrough and local `sparselab try` comparison, start with the [TinyStories microlab guide](../tinystories-microlab/README.md) or [kybern.dev/models/tinystories-training](https://kybern.dev/models/tinystories-training/).
+For the interactive TinyStories walkthrough and local `klab try` comparison, start with the [TinyStories microlab guide](../tinystories-microlab/README.md) or [kybern.dev/models/tinystories-training](https://kybern.dev/models/tinystories-training/).
 
 This directory contains a smaller, self-contained two-arm CPU Campaign recipe (64 train / 16 validation stories, FFN width 64 vs. 96) and a standard-library helper (`handoff.py`) for binding preparation and workflow stages on a CPU worker.
 
@@ -22,7 +22,7 @@ This directory contains a smaller, self-contained two-arm CPU Campaign recipe (6
 
 ## Handoff Helper Commands (`handoff.py`)
 
-`handoff.py` generates native `sparselab` CLI argument lists and binds artifact hashes between preparation and workflow stages without launching workloads itself.
+`handoff.py` generates native `klab` CLI argument lists and binds artifact hashes between preparation and workflow stages without launching workloads itself.
 
 1. **Render the command sequence:**
    ```sh
@@ -32,7 +32,7 @@ This directory contains a smaller, self-contained two-arm CPU Campaign recipe (6
      --work /path/to/work
    ```
 2. **Lock source metadata and bind preparation:**
-   After running `sparselab data lock` to produce `source.lock.json`, verify the lock against `first-files.json` and generate the preparation recipe:
+   After running `klab data lock` to produce `source.lock.json`, verify the lock against `first-files.json` and generate the preparation recipe:
    ```sh
    python3 -B examples/tinystories-worker/handoff.py bind-preparation \
      --recipe /path/to/examples/tinystories-worker \

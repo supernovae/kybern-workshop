@@ -138,7 +138,7 @@ def bind(args):
         session["runtime_venv"] = runtime["venv"]
     invocation = runtime.get("venv", {}).get("invocation", args.python)
     require(invocation == args.python, "explicit Python must match runtime invocation")
-    prefix = [invocation, "-B", "-m", "sparselab", "campaign"]
+    prefix = [invocation, "-B", "-m", "klab", "campaign"]
     argv = {
         "copy-inputs": [invocation, "-B", str(script), "stage"],
         "validate": [*prefix, "validate", str(campaign), "--json"],
@@ -150,7 +150,7 @@ def bind(args):
                 "--execute-runs", "--max-wait-seconds", str(limits["wall_seconds"]), "--json"],
         "status": [*prefix, "status", str(campaign), "--json"],
     }
-    env = {"SPARSELAB_WORK_DIR": str(state), "SPARSELAB_WORKER_LEASE_DIR": str(state / "worker-leases"),
+    env = {"KLAB_WORK_DIR": str(state), "KLAB_WORKER_LEASE_DIR": str(state / "worker-leases"),
            **{k: "1" for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
                                "HF_HUB_OFFLINE", "HF_DATASETS_OFFLINE", "TRANSFORMERS_OFFLINE", "UV_OFFLINE")}}
     jobs, requests = {}, []
@@ -198,7 +198,7 @@ def bind_report(state, native):
     require(lock.is_file() and index.is_file() and workspace.is_dir(), "missing native evidence")
     job = read(state / "status.json")
     session = read(state / "session.json")
-    job.update(job_id="report", argv=[job["argv"][0], "-B", "-m", "sparselab", "experiment", "recipe",
+    job.update(job_id="report", argv=[job["argv"][0], "-B", "-m", "klab", "experiment", "recipe",
                "workflow", "report", str(lock), "--workspace", str(workspace), "--index", str(index),
                "--output", str(state / "audit/report.json"), "--json"])
     job["limits"]["wall_seconds"] = session["slots"][-1]["allowance_seconds"]
@@ -244,7 +244,7 @@ def results(state):
             require(candidate.is_file() and candidate.stat().st_size == capture["bytes"] and
                     digest(candidate) == capture["sha256"], "captured report digest/size mismatch")
             report = read(candidate)
-            require(report.get("format") == "sparselab-publication-report", "native report format required")
+            require(report.get("format") == "klab-publication-report", "native report format required")
             report_path = candidate
         except (OSError, ValueError, KeyError, TypeError) as exc:
             read_errors.append({"path": str(capture_file), "error": str(exc)})

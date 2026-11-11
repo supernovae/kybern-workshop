@@ -44,8 +44,8 @@ cp experiments/devmind/binding.example.json "$EXPERIMENT_DIR/bindings.json"
 python scripts/bind-experiment.py experiments/devmind/experiment.json \
   --bindings "$EXPERIMENT_DIR/bindings.json" \
   --output "$EXPERIMENT_DIR/run.json"
-sparselab config validate "$EXPERIMENT_DIR/run.json" --kind run --json
-sparselab inspect "$EXPERIMENT_DIR/run.json" --json
+klab config validate "$EXPERIMENT_DIR/run.json" --kind run --json
+klab inspect "$EXPERIMENT_DIR/run.json" --json
 ```
 
 Binding writes a fresh file and validates the native RunConfig schema. It does not
@@ -63,13 +63,13 @@ cancellation. Retain the plan revision, bound config, runtime provenance and nat
 run ID beside the results. Editing the next plan never rewrites a completed attempt.
 
 ```sh
-sparselab train "$EXPERIMENT_DIR/run.json" --run-id "$RUN_ID"
+klab train "$EXPERIMENT_DIR/run.json" --run-id "$RUN_ID"
 # CHECKPOINT is a real immutable generation path emitted by Lab, not a run ID.
-sparselab checkpoint inspect "$CHECKPOINT" --json
-sparselab checkpoint verify "$CHECKPOINT" --config "$EXPERIMENT_DIR/run.json" --json
+klab checkpoint inspect "$CHECKPOINT" --json
+klab checkpoint verify "$CHECKPOINT" --config "$EXPERIMENT_DIR/run.json" --json
 # Only for an interrupted run with unchanged scientific config and budget:
-sparselab train "$EXPERIMENT_DIR/run.json" --resume "$CHECKPOINT" --run-id "$CHILD_ID"
-sparselab eval "$CHILD_ID" --checkpoint "$CHILD_CHECKPOINT" --runs-dir "$RUNS_DIR"
+klab train "$EXPERIMENT_DIR/run.json" --resume "$CHECKPOINT" --run-id "$CHILD_ID"
+klab eval "$CHILD_ID" --checkpoint "$CHILD_CHECKPOINT" --runs-dir "$RUNS_DIR"
 ```
 
 For an uninterrupted run, evaluate `RUN_ID` and its checkpoint instead. Resume
@@ -87,7 +87,7 @@ Use native `config derive` to create a new editable config with a recorded delta
 For example, an explicitly separate first full-model 32-update iteration:
 
 ```sh
-sparselab config derive "$EXPERIMENT_DIR/run.json" \
+klab config derive "$EXPERIMENT_DIR/run.json" \
   --set 'name="devmind-340m-first32"' \
   --set training.max_steps=32 --set training.max_tokens=4194304 \
   --set optimizer.warmup_steps=4 --set optimizer.decay_steps=32 \
@@ -113,7 +113,7 @@ and exercise native derivation. They never allocate/train the full model or acce
 production data. Run with Lab installed:
 
 ```sh
-WORKSHOP_LAB_CHECKOUT=/absolute/path/to/tiny-sparse-lab \
+WORKSHOP_LAB_CHECKOUT=/absolute/path/to/model-lab \
   python -m unittest discover -s tests -p test_devmind_experiment.py -v
 ```
 

@@ -43,4 +43,4 @@ def stage(source, state):
 
 if __name__ == "__main__":
     require(sys.argv[1:] == ["stage"], "usage: handoff.py stage")
-    print(json.dumps(stage(Path("/inputs"), Path(os.environ["SPARSELAB_WORK_DIR"]))))
+    print(json.dumps(stage(Path("/inputs"), Path(os.environ["KLAB_WORK_DIR"]))))

@@ -13,7 +13,7 @@ It validates recent code changes; do not require another small rehearsal for an
 unchanged-code larger run. No downloads, spend or resource expansion is implied.
 
 Render source templates with the three original retained snapshot paths, snapshot
-SHA256s and exact manifest SHA256s. Historical parents remain read-only. Use Tiny Sparse Lab commit `c5961c44bc9ea563a7ea552975321183b22c1ba2`
+SHA256s and exact manifest SHA256s. Historical parents remain read-only. Use Kybern Model Lab commit `c5961c44bc9ea563a7ea552975321183b22c1ba2`
 (merged PR #204). Native `corpus acquire project-acquire.yaml` uses its retained-subset path;
 `--offline` verifies an existing acquisition and does not create a derivative.
 The selector uses the declared 1% hash rule, unchanged original rows, explicit
@@ -63,7 +63,7 @@ receipt and these limits. Do not proceed if any value is missing or out of bound
   have validation and test families, with no family or exact-content leakage.
 
 ```sh
-sparselab corpus describe "$RELEASE" --tokenizer "$TOKENIZER" \
+klab corpus describe "$RELEASE" --tokenizer "$TOKENIZER" \
   > "$ATTEMPT/held-out-census.json"
 ```
 
@@ -107,7 +107,7 @@ The reviewed release's admission path is relative to that recipe directory.
 Offline contract checks use an already installed subset-capable Lab checkout:
 
 ```sh
-WORKSHOP_LAB_CHECKOUT=/absolute/path/to/tiny-sparse-lab python -m unittest discover -s tests -v
+WORKSHOP_LAB_CHECKOUT=/absolute/path/to/model-lab python -m unittest discover -s tests -v
 ```
 
 The connected test substitutes generated rows, 8/1/1 family weights, a 260-token

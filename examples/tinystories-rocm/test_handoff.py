@@ -41,12 +41,12 @@ class HandoffTests(unittest.TestCase):
             self.fail("source mismatch must refuse before native verification or copy")
         modules = {}
         for name, members in {
-            "sparselab.config.models": {"RunConfig": None},
-            "sparselab.data.sources": {"verify_lock": forbidden, "verify_snapshot": forbidden},
-            "sparselab.experiments.artifacts": {"verify_artifact": forbidden},
-            "sparselab.experiments.plan": {"Artifact": None},
-            "sparselab.runtime_identity_probe": {"source_identity": lambda: {"source_sha256": h.PINS["installed_source_sha256"]}},
-            "sparselab.training.manifest": {"source_identity": lambda: {"sha256": "0" * 64}},
+            "klab.config.models": {"RunConfig": None},
+            "klab.data.sources": {"verify_lock": forbidden, "verify_snapshot": forbidden},
+            "klab.experiments.artifacts": {"verify_artifact": forbidden},
+            "klab.experiments.plan": {"Artifact": None},
+            "klab.runtime_identity_probe": {"source_identity": lambda: {"source_sha256": h.PINS["installed_source_sha256"]}},
+            "klab.training.manifest": {"source_identity": lambda: {"sha256": "0" * 64}},
         }.items():
             module = types.ModuleType(name)
             module.__dict__.update(members)

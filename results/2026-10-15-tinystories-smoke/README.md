@@ -2,7 +2,7 @@
 
 [Back to Workshop README](../../README.md) · [TinyStories Worker Recipe](../../examples/tinystories-worker/README.md)
 
-This record summarizes the 2026-10-15 two-arm TinyStories CPU smoke run (`FFN 64` vs. `FFN 96`), exercising dataset preparation, cache reuse, paired training, and held-out evaluation in [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
+This record summarizes the 2026-10-15 two-arm TinyStories CPU smoke run (`FFN 64` vs. `FFN 96`), exercising dataset preparation, cache reuse, paired training, and held-out evaluation in [Kybern Model Lab](https://github.com/supernovae/model-lab).
 
 ## Run Summary
 
@@ -14,7 +14,7 @@ This record summarizes the 2026-10-15 two-arm TinyStories CPU smoke run (`FFN 64
 
 | Component | Value |
 | --- | --- |
-| **Tiny Sparse Lab commit** | `66ff9d71423e961ee15aed2267902164f04514c6` |
+| **Kybern Model Lab commit** | `66ff9d71423e961ee15aed2267902164f04514c6` |
 | **CPU container image** | `ghcr.io/supernovae/tiny-sparse-lab@sha256:553eefba27b7069ba17fb92c5734b2b53548ad3b40f868b1ad39dc3e3ad82ea4` |
 | **Runtime** | Python 3.14.4, PyTorch 2.14.1+cpu |
 | **Dataset** | `roneneldan/TinyStories` (`f54c09fd23315a6f9c86f9dc80f725de7d8f9c64`) |
@@ -24,4 +24,4 @@ This record summarizes the 2026-10-15 two-arm TinyStories CPU smoke run (`FFN 64
 
 ## Cache Reuse Notes
 
-When reusing a prepared dataset cache across runs, copy the prepared cache into a writable directory rather than mounting it read-only: Tiny Sparse Lab writes `.cleanup.lock` and `<id>.preparation.json` receipts in the cache parent directory during verification.
+When reusing a prepared dataset cache across runs, copy the prepared cache into a writable directory rather than mounting it read-only: Kybern Model Lab writes `.cleanup.lock` and `<id>.preparation.json` receipts in the cache parent directory during verification.

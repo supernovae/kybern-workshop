@@ -8,7 +8,7 @@ For the completed 8,192-update TinyStories baseline and all 27 generated story o
 
 ## Prompt Panel Declarations in This Directory
 
-This folder retains three declarative prompt-panel definitions that can be rebound to any verified Tiny Sparse Lab checkpoint for side-by-side story evaluation:
+This folder retains three declarative prompt-panel definitions that can be rebound to any verified Kybern Model Lab checkpoint for side-by-side story evaluation:
 
 | File | Decoding settings | Purpose |
 | --- | --- | --- |

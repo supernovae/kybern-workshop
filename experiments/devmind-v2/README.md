@@ -1,6 +1,6 @@
 # DevMind v2: native fresh-start scaffold
 
-This package authors a complete fresh Engram recipe for Tiny Sparse Lab. It is
+This package authors a complete fresh Engram recipe for Kybern Model Lab. It is
 not a trained model or launch approval. Code qualification comes first; usable
 data counts and source inventory come afterward. Nothing here downloads data,
 starts training, copies private archives, or deletes anything.
@@ -32,7 +32,7 @@ starts training, copies private archives, or deletes anything.
 Use the engine revision recorded in `compatibility.json`, not an older checkout
 that silently lacks Engram, dynamic document batching, retention or scheduling.
 Workshop remains declarative; engine implementations and behavioral tests belong
-in Tiny Sparse Lab. There is no second training loop or packing implementation.
+in Kybern Model Lab. There is no second training loop or packing implementation.
 
 The recorded SHA identifies the tested PR source, not a required merge strategy.
 A squash merge produces a different main SHA. Either check out the recorded source

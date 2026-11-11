@@ -98,7 +98,7 @@ def snapshot_paths(work):
 
 
 def bind_preparation(args):
-    from sparselab.data.sources import verify_lock
+    from klab.data.sources import verify_lock
     lock = verify_lock(path(args.source_lock))
     source = path(args.recipe)
     check_lock(lock, read(source/'source.json'))
@@ -138,8 +138,8 @@ def seal_workflow(args):
         require(len(row['outputs']) == 1 and row.get('receipt'), 'native output receipt missing')
         require(row['outputs'][0]['kind'] == kind, 'artifact kind differs')
     artifacts, locations = {}, {}
-    for name, stage, kind, producer in [('token','train-tokenizer','tokenizer','sparselab tokenizer train'),
-                                      ('packed','pack-data','prepared_data','sparselab data prepare')]:
+    for name, stage, kind, producer in [('token','train-tokenizer','tokenizer','klab tokenizer train'),
+                                      ('packed','pack-data','prepared_data','klab data prepare')]:
         row = rows[stage]
         output = row['outputs'][0]
         artifacts[name] = {**output, 'version':1, 'producer':producer}
@@ -194,17 +194,17 @@ def admission(args):
     status = subprocess.check_output(['git','-C',str(root),'status','--porcelain'],timeout=10,text=True)
     require(head == args.reviewed_commit and not status, 'clean externally reviewed commit required')
     if args.phase == 'preparation':
-        from sparselab.experiments.preparation_recipe import inspect_preparation_recipe
-        from sparselab.experiments.preparation_execution import PreparationAdmission
-        from sparselab.data.sources import verify_lock
+        from klab.experiments.preparation_recipe import inspect_preparation_recipe
+        from klab.experiments.preparation_execution import PreparationAdmission
+        from klab.data.sources import verify_lock
         lock = verify_lock(root/'source.lock.json')
         check_lock(lock, read(root/'source.json'))
         native = inspect_preparation_recipe(root/'preparation.json',bindings)
         extra = {**PREP,'acquisitions':{'snapshot':acquisition(lock)}}
         model = PreparationAdmission
     else:
-        from sparselab.experiments.workflow_recipe import inspect_workflow, resolve_workflow
-        from sparselab.experiments.workflow_execution import WorkflowAdmission
+        from klab.experiments.workflow_recipe import inspect_workflow, resolve_workflow
+        from klab.experiments.workflow_execution import WorkflowAdmission
         native = inspect_workflow(root/'workflow.json',bindings,max_runs=2)
         resolved = resolve_workflow(root/'workflow.json',bindings,max_runs=2)
         check_pair_budget(resolved)
@@ -222,10 +222,10 @@ def commands(args):
     python, recipe, work = path(args.python,runtime=True), path(args.recipe), path(args.work)
     require(not any((args.lock,args.experiment,args.index)) or all((args.lock,args.experiment,args.index)),
             'report requires lock, experiment workspace and index together')
-    cli = ['env',f'SPARSELAB_WORK_DIR={work}',f'SPARSELAB_WORKER_LEASE_DIR={work}/worker-leases',
+    cli = ['env',f'KLAB_WORK_DIR={work}',f'KLAB_WORKER_LEASE_DIR={work}/worker-leases',
            'OMP_NUM_THREADS=1','MKL_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','CUDA_VISIBLE_DEVICES=',
            'HF_HUB_OFFLINE=1','HF_DATASETS_OFFLINE=1','TRANSFORMERS_OFFLINE=1','UV_OFFLINE=1',
-           str(python),'-B','-m','sparselab']
+           str(python),'-B','-m','klab']
     prep=['experiment','recipe','preparation']; flow=['experiment','recipe','workflow']
     def common(phase):
         return [str(recipe/(phase+'.json')),'--bindings',str(work/(phase+'-bindings.json'))]

@@ -1,5 +1,5 @@
 {
-  "format": "sparselab-preparation-v1",
+  "format": "klab-preparation-v1",
   "defaults": {
     "MAX_INPUT_BYTES": "104857600"
   },

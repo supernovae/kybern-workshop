@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
   <title id="title">Kybern Workshop</title>
-  <desc id="desc">Shareable recipes and reproducible small-model experiments built with Tiny Sparse Lab.</desc>
+  <desc id="desc">Shareable recipes and reproducible small-model experiments built with Kybern Model Lab.</desc>
   <defs>
     <linearGradient id="bg" x2="1" y2="1">
       <stop stop-color="#0d1726"/>
@@ -17,7 +17,7 @@
   <rect width="1200" height="300" rx="18" fill="url(#bg)"/>
   <rect width="1200" height="300" rx="18" fill="url(#grid)"/>
   <rect x="52" y="52" width="48" height="5" rx="2.5" fill="url(#accent)"/>
-  <text x="52" y="88" fill="#7ceac4" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="14" letter-spacing="3">OPEN EXPERIMENT HUB FOR TINY SPARSE LAB</text>
+  <text x="52" y="88" fill="#7ceac4" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="14" letter-spacing="3">OPEN EXPERIMENT HUB FOR KYBERN MODEL LAB</text>
   <text x="48" y="155" fill="#f1f5fc" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="750" letter-spacing="-2">Kybern Workshop</text>
   <text x="52" y="204" fill="#c0cce0" font-family="system-ui, -apple-system, sans-serif" font-size="25">Small models. Shareable experiments.</text>
   <text x="52" y="254" fill="#8397b5" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="14">PREPARE  /  TRAIN  /  EVALUATE  /  REPLICATE</text>
