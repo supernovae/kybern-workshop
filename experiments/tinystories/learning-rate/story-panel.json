@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "source_snapshot_manifest_sha256": "386bd2a78f9c2f111fda39f16b37f40ce01143efa1bee7f49290832b548bfc25",
+  "source_split": "validation",
+  "minimum_source_ordinal": 2048,
+  "selection": "first 12 eligible records in source order; 180-500 total tokenizer tokens; first complete sentences totaling 40-120 prompt tokens, with at least 50 remaining story tokens; no candidate-output inspection",
+  "exact_disjointness_check": "one streaming membership pass over the existing 500000 selected training documents; reject any exact full-story duplicate or prompt substring match",
+  "prompt_count": 12,
+  "generation": {
+    "context_length": 512,
+    "strict_context": true,
+    "max_new_tokens": 256,
+    "seed": 42,
+    "modes": [
+      {
+        "name": "greedy",
+        "temperature": 0,
+        "top_k": 0
+      },
+      {
+        "name": "sampled",
+        "temperature": 0.7,
+        "top_k": 40
+      }
+    ],
+    "stop_sequences": [],
+    "use_cache": true
+  },
+  "created_at": "2026-11-01T23:45:24.161517+00:00",
+  "prompts": [
+    {
+      "id": "story-01",
+      "source_ordinal": 2048,
+      "source_text_sha256": "728aa93df2db398c0d3fea43ca9c1ced2a1e000f6221efb7fdb6e67432b96e55",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to go on journeys with her mommy and daddy. One day, they decided to go on a journey to a big green forest.",
+      "prompt_tokens": 42,
+      "source_tokens": 189
+    },
+    {
+      "id": "story-02",
+      "source_ordinal": 2050,
+      "source_text_sha256": "689812d90e23ce7a96275e6d3ae48b64da2a7f7ec812eaa8d4e4b46d344e46a3",
+      "prompt": "Once upon a time, there was a monkey who lived in the jungle. One day, the monkey got confused and lost his way. He climbed up a tall tree to try and see where he was, but he still couldn't figure it out.",
+      "prompt_tokens": 50,
+      "source_tokens": 209
+    },
+    {
+      "id": "story-03",
+      "source_ordinal": 2057,
+      "source_text_sha256": "fbcaf3f29642bfb964d0ea026c166163381c5b736890dfdb754975d131746aad",
+      "prompt": "Once upon a time, there was a little boy named Timmy. Timmy loved to play with his toy trains. He had a big train set in his room with lots of tracks and trains to play with.",
+      "prompt_tokens": 42,
+      "source_tokens": 211
+    },
+    {
+      "id": "story-04",
+      "source_ordinal": 2058,
+      "source_text_sha256": "051de5e4bf5e1c7dc85f16f1096c9247cc701d1ee2ea91c4184a8289d1a31092",
+      "prompt": "Once upon a time, there was a big, fierce lion. He lived in a jungle with many other animals. One day, the lion got hurt while playing with his friends. His paw hurt so much that he couldn't walk anymore.",
+      "prompt_tokens": 48,
+      "source_tokens": 222
+    },
+    {
+      "id": "story-05",
+      "source_ordinal": 2061,
+      "source_text_sha256": "4824f38b772c52533e4780c0fde44dbf30dda981bef316dd3f08a3882976d42f",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved playing with balloons. One day, Lily's mom gave her a big, red balloon. Lily was so happy and played with it all day long.",
+      "prompt_tokens": 45,
+      "source_tokens": 185
+    },
+    {
+      "id": "story-06",
+      "source_ordinal": 2062,
+      "source_text_sha256": "f322f3b1cb6c767c7bdee834c20148fb9eb0f2c57c7695c9388fbe1ef7df843c",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved animals, especially puppies. One day, Lily's parents took her to the park to play. While they were there, a little puppy came up to Lily and wagged its tail.",
+      "prompt_tokens": 53,
+      "source_tokens": 202
+    },
+    {
+      "id": "story-07",
+      "source_ordinal": 2064,
+      "source_text_sha256": "35186c644c47a036775a631f414e82bca5c4e88ec672ee47c3590fa424af41e1",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to draw and color. One day, Lily's mommy brought home a big turkey for dinner. \n\nLily saw the turkey and said, \"Wow, that's a big bird!\"",
+      "prompt_tokens": 54,
+      "source_tokens": 193
+    },
+    {
+      "id": "story-08",
+      "source_ordinal": 2066,
+      "source_text_sha256": "732b09dc69011ddbfe53118f6618cb51c2fa22f87aa8808e014d439a69587088",
+      "prompt": "Once upon a time, there was a little rabbit named Benny. Benny loved to play hide and seek with his friends. One day, he found a bulb in the ground and was very enthusiastic about it.",
+      "prompt_tokens": 46,
+      "source_tokens": 213
+    },
+    {
+      "id": "story-09",
+      "source_ordinal": 2068,
+      "source_text_sha256": "cabd9d7f9a34c2d48e618b014d31534ebcd06061905cf9b1f7baeecfd017041d",
+      "prompt": "Once upon a time, there was a little girl named Lily who loved to play outside. One day, she saw a blue butterfly and wanted to catch it. She ran after it, but she didn't watch where she was going and fell down.",
+      "prompt_tokens": 50,
+      "source_tokens": 204
+    },
+    {
+      "id": "story-10",
+      "source_ordinal": 2070,
+      "source_text_sha256": "3c4cab000ede678c86ba006327f7a727b8c771ef6c2c37c631f74def5b746d49",
+      "prompt": "Once upon a time, there was a girl named Lily. She loved to play outside in the hot sun. But today, the weather was not so hot. It was cloudy and rainy.",
+      "prompt_tokens": 41,
+      "source_tokens": 196
+    },
+    {
+      "id": "story-11",
+      "source_ordinal": 2072,
+      "source_text_sha256": "e52e9ebfa0da6758c171ebfbb1f1bf45887e18ac3340c23b739433bf28348738",
+      "prompt": "Once upon a time, there was a little boy named Timmy. Timmy had a toy box with many toys. One day, Timmy's friend came over to play. Timmy's friend wanted to play with Timmy's favorite toy, but Timmy didn't want to share.",
+      "prompt_tokens": 53,
+      "source_tokens": 187
+    },
+    {
+      "id": "story-12",
+      "source_ordinal": 2074,
+      "source_text_sha256": "d1d98c71eb6da70f73e0d5b0748804f5e2c8da13497f4175c0076c60384f2347",
+      "prompt": "Once upon a time, there was a little girl named Lily. She loved to play outside in her backyard. One day, she found a cool hedge that she had never seen before. She wanted to explore it, but her mom said it wasn't safe.",
+      "prompt_tokens": 52,
+      "source_tokens": 212
+    }
+  ],
+  "disjointness": {
+    "training_documents_checked": 500000,
+    "source_bytes_read": 470780684,
+    "elapsed_seconds": 3.450100649148226,
+    "matches": [],
+    "scope": "exact full-text and prompt-substring disjointness against the selected training snapshot; no semantic near-duplicate claim"
+  },
+  "protocol_sha256": "2fc535fa459eca6b5a9d36ed7c2c74a3ae0083ec5be8795a5472bc4714937511"
+}
