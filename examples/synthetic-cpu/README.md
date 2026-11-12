@@ -119,14 +119,18 @@ Both `train-tokenizer` and `pack-data` stages should report `COMPLETE`.
 
 ### 2. Seal Inputs and Run the Workflow
 
-Use [`scripts/seal-inputs.py`](../../scripts/seal-inputs.py) to bind the completed preparation artifact hashes into the workflow descriptor, then inspect and resolve:
+Bind the completed preparation's artifact identities into the workflow, then
+inspect and resolve. The recorded run did this with a helper script that has
+since been removed. By hand: for each `COMPLETE` stage in the preparation
+result (`train-tokenizer`, `pack-data`), copy its output's `kind`, `identifier`
+and `sha256` into the matching `artifact_reference` stage of `campaign.json`
+and into `workflow.json`'s `artifacts`, refresh the member hashes in
+`workflow.json`, and write the stage's `availability.path` into
+`$WORK/workflow-bindings.json` under `artifacts`, with `logging_root` set to an
+absolute run-store path. Never write an identity the preparation did not report.
 
 ```sh
 RECIPE="$B/examples/synthetic-cpu"
-"$CPU_PYTHON" "$B/scripts/seal-inputs.py" \
-  --receipt "$WORK/monitor/preparation-1/command.stdout.log" \
-  --recipe "$RECIPE" --bindings "$WORK/workflow-bindings.json" \
-  --logging-root "$WORK/workflow-runs"
 
 "$CPU_PYTHON" -m klab experiment recipe workflow inspect "$RECIPE/workflow.json" \
   --bindings "$WORK/workflow-bindings.json" --json > "$WORK/workflow-inspect.json"

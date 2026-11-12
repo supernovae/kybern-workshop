@@ -160,14 +160,15 @@ kybern-workshop/
 │   ├── tinystories-worker/    # Paired CPU worker campaign recipe
 │   └── tinystories-rocm/      # Containerized AMD ROCm campaign recipe
 ├── experiments/
-│   └── devmind/               # DevMind 340M Base protocol, model/optimizer configs & 25-leaf corpus prep
+│   ├── devmind/               # DevMind 340M Base protocol, model/optimizer configs & 25-leaf corpus prep
+│   ├── devmind-v2/            # DevMind v2 proposal: fresh backbone with Engram memory
+│   └── tinystories/           # TinyStories 5M / 50M recipes, context and learning-rate studies
 ├── results/
 │   ├── 2026-10-14-synthetic-cpu/     # Recorded synthetic CPU smoke metrics & report
 │   ├── 2026-10-15-tinystories-smoke/ # Recorded paired CPU container smoke summary
 │   └── 2026-10-19-tinystories-cpu/   # Recorded 8,192-update baseline metrics & 27 story outputs
 └── docs/
-    ├── native-workflow.md     # Guide to packaging, inspecting & running recipes with klab
-    └── operator.md            # Optional Docker campaign supervisor helper reference
+    └── native-workflow.md     # Guide to packaging, inspecting & running recipes with klab
 ```
 
 ## Contributing

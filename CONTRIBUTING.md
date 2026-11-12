@@ -15,7 +15,9 @@ We welcome pull requests from anyone running small language-model experiments wi
 
 - **Workshop owns recipes and evidence:** declarative configs (`RunConfig`, tokenizer configs, dataset locks, `try` deltas, and campaign definitions), walkthrough documentation, and compact result records.
 - **Kybern Model Lab owns the engine:** data preparation, training, behavioral probes, checkpoint verification, reporting, and the web dashboard live in [supernovae/model-lab](https://github.com/supernovae/model-lab).
-- **Keep recipes declarative:** avoid adding custom Python training loops or per-recipe runner frameworks to Workshop. If an experiment needs a new model mechanism or CLI feature, contribute that capability upstream to Kybern Model Lab first.
+- **Keep recipes declarative:** Workshop holds no helper scripts, launchers, validators or per-recipe tests, and CI rejects them. If an experiment needs a capability Lab lacks, contribute it to Kybern Model Lab. A new model part or training objective can ship as a component package under `components/`.
+- **Check your declarations:** `klab config validate .` validates every run, tokenizer, model and optimizer declaration against the Lab you have installed. CI runs the same check against Lab `main`.
+- **Working with an AI agent:** [`AGENTS.md`](AGENTS.md) tells it which Lab command to use for each job and what not to add here.
 
 ## Guidelines for Reproducible Submissions
 

@@ -23,58 +23,7 @@
   },
   "model_file": "model.json",
   "optimizer_file": "optimizer.json",
-  "run": {
-    "attention": {
-      "block_size": null,
-      "implementation": "sdpa",
-      "kind": "dense",
-      "latent_dim": null,
-      "rope_base": 10000.0,
-      "selected_blocks": null,
-      "window_size": null
-    },
-    "checkpoint": {
-      "every_steps": null,
-      "every_tokens": 25000000,
-      "keep_periodic": false,
-      "retention": {
-        "milestones": [],
-        "terminal_step": 78252,
-        "terminal_targets": 10256578560,
-        "max_generations": 4,
-        "max_generation_bytes": 5368709120,
-        "max_retained_bytes": 21474836480,
-        "max_peak_bytes": 26843545600,
-        "reserve_free_bytes": 107374182400
-      }
-    },
-    "name": "devmind-v2-fresh-base",
-    "schema_version": 2,
-    "seed": 42,
-    "staging": {
-      "smoke_steps": 2,
-      "warmup_steps": 5
-    },
-    "training": {
-      "deterministic": false,
-      "grad_clip_norm": 1.0,
-      "gradient_accumulation": 1,
-      "matched_stories": {
-        "document_batching": "padded",
-        "layout": "story",
-        "max_attention_cells": 16777216,
-        "max_padded_slots": 8192,
-        "targets_per_update": 131072,
-        "unpadded_documents": true,
-        "padding_multiple": 64
-      },
-      "max_steps": 78252,
-      "max_tokens": 10256578560,
-      "micro_batch_size": 4,
-      "neural_loss_weight": 1.0,
-      "seq_len": 4096
-    }
-  },
+  "run_file": "run.json",
   "bindings": [
     "dataset",
     "tokenizer",

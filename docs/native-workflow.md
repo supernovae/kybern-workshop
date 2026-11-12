@@ -9,6 +9,8 @@ You can run these recipes from a clone of this repository or copy any recipe dir
 
 | Goal | `klab` workflow | Notes |
 | --- | --- | --- |
+| **Check every declaration** | `config validate DIR` | Validates each run, tokenizer, model and optimizer declaration under a directory against the installed Lab; exits non-zero on a failure. CI runs it on this repository. |
+| **Bind sections and local paths** | `config compose` | Merges a run section, model and optimizer sections and a file of local paths into one validated run config. Used by [DevMind](../experiments/devmind/run.md). |
 | **Compare a single change** | `config validate`, `config derive`, then `try` and `report` | Trains baseline and candidate arms on shared data and scores held-out loss + probes. Used by [TinyStories microlab](../examples/tinystories-microlab/README.md). |
 | **Train & inspect a full baseline** | `data lock`, `experiment recipe preparation apply`, `stage`, `train`, `eval`, `generate` | Step-by-step pipeline with checkpoint continuation and prompt-panel generation. Used by [TinyStories CPU baseline](../examples/tinystories-useful/README.md). |
 | **Package a shareable recipe** | `experiment recipe create` and `experiment recipe export` | Bundles configs and metadata with content hashes so another developer can inspect and bind local paths. |

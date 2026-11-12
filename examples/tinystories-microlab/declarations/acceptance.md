@@ -6,7 +6,7 @@ heldout evaluation and descriptive generation. All 17 selected Campaign stages
 finished `COMPLETE`; all three controller entries separately report execution
 and ingestion `COMPLETE`, with no ingestion error. This establishes the bounded
 teaching workflow, not model quality or full-corpus feasibility. Follow the
-[walkthrough](../../../docs/tinystories-microlab.md) to create a new workspace.
+[walkthrough](https://github.com/supernovae/model-lab/blob/main/docs/tinystories-microlab.md) to create a new workspace.
 
 ## Provenance and retained evidence
 
@@ -143,7 +143,7 @@ full-checkpoint verification reports.
   passed. Offline Campaign coverage includes reconciliation, unchanged parent
   hashes and reapplication without redispatch.
 - Repeated cold snapshot verification adds substantial orchestration time.
-  [The implementation backlog](../../../TODO.md#native-diagnostic-interfaces)
+  [The implementation backlog](https://github.com/supernovae/model-lab/blob/main/ROADMAP.md)
   retains a typed verification-reuse task with mutation/invalidation gates.
 - Full-source acquisition/training, large models, seed replication and execution
   on CUDA, ROCm, XPU or MLX were not exercised. These require their own runtime,

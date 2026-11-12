@@ -26,17 +26,18 @@ hashes. Template panel sizes (64 blocks each) are a proposal. The example does n
 claim those blocks already exist. Choose a backend and device explicitly.
 
 ```sh
-python "$WORKSHOP/scripts/bind-experiment.py" "$RECIPE/experiment.json" \
-  --bindings "$V2/bindings.json" --output "$V2/packing.json"
-klab tokenizer verify "$V2/packing.json" --json
+klab config compose "$RECIPE/run.json" model="$RECIPE/model.json" \
+  optimizer="$RECIPE/optimizer.json" "$V2/bindings.json" \
+  --output "$V2/packing.yaml"
+klab tokenizer verify "$V2/packing.yaml" --json
 klab tokenizer memory-map "$TOKENIZER" --mode identity \
-  --output "$V2/memory-map.json" --bind-config "$V2/packing.json" \
+  --output "$V2/memory-map.json" --bind-config "$V2/packing.yaml" \
   --config-output "$V2/mapped.yaml"
 ```
 
 `TOKENIZER` must be the same file as the bound tokenizer. The map binds its bytes;
-identity mode preserves case, whitespace and code spelling. The binder itself
-performs schema validation only. It does not prove paths exist or admit a corpus.
+identity mode preserves case, whitespace and code spelling. `config compose`
+performs schema validation only and names any field still unbound. It does not prove paths exist or admit a corpus.
 The five panel declarations are checked by the native prepared/evaluation path.
 
 Optional runtime optimization uses native derivation, before publishing inputs:

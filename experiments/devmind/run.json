@@ -1,0 +1,22 @@
+{
+  "schema_version": 2,
+  "name": "devmind-340m-base-12b",
+  "seed": 42,
+  "training": {
+    "seq_len": 2048,
+    "micro_batch_size": 2,
+    "gradient_accumulation": 32,
+    "max_steps": 91553,
+    "max_tokens": 12000000000,
+    "grad_clip_norm": 1.0,
+    "deterministic": true
+  },
+  "checkpoint": {
+    "every_steps": 1024,
+    "keep_periodic": true
+  },
+  "evaluation": {
+    "every_steps": 256,
+    "max_batches": 64
+  }
+}
