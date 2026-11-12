@@ -2,7 +2,9 @@
 
 [Back to Preparation Plan](../README.md) · [Pilot Execution Guide (`PILOT.md`)](PILOT.md) · [Preparation Policy (`POLICY.md`)](POLICY.md)
 
-This package prepares the **DevMind 340M Base** training corpus with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab). It holds the 84 pinned shard files (`sources/`), their SHA-256 digests, the filtering and licensing policies (`application-policy.json`, `POLICY.md`), the resource limits (`resource-envelope.yaml`), and the phase job templates (`pilot-jobs/` and `jobs/`).
+> **Pinned before the Lab rename:** this package uses Kybern Model Lab commits from before the CLI was renamed `klab`. To replay it at those commits, use `sparselab` (and `SPARSELAB_*` variables) in place of `klab`; see [Records Pinned Before the Rename](../../../../docs/native-workflow.md#records-pinned-before-the-rename).
+
+This package prepares the **DevMind 340M Base** training corpus with [Kybern Model Lab](https://github.com/supernovae/model-lab). It holds the 84 pinned shard files (`sources/`), their SHA-256 digests, the filtering and licensing policies (`application-policy.json`, `POLICY.md`), the resource limits (`resource-envelope.yaml`), and the phase job templates (`pilot-jobs/` and `jobs/`).
 
 ## Candidate Catalog & Shard Selection
 
@@ -43,8 +45,8 @@ Each shard file scans up to 5M rows and caps emitted JSONL at 8 GiB. See [`PILOT
 
 ## Reproducing the synthetic split families
 
-Use Tiny Sparse Lab commit `7ac454c67b2571d42406454043c1569a725c1d3b`
-([PR #216](https://github.com/supernovae/tiny-sparse-lab/pull/216)) for this rule.
+Use Kybern Model Lab commit `7ac454c67b2571d42406454043c1569a725c1d3b`
+([PR #216](https://github.com/supernovae/model-lab/pull/216)) for this rule.
 Record the exact Lab and Workshop commits in each new preparation receipt.
 
 `splits-pre-freeze.yaml` maps each of the 14 synthetic source IDs to `[prompt]`
@@ -69,7 +71,7 @@ refuses; Lab doesn't drop the row or regroup it by `seed_data`. Fix that row's
 source information, or record a reviewed admission decision, before retrying.
 
 The existing cross-split lexical screen is
-`sparselab corpus near-duplicates RELEASE`. It holds rows and shingles in memory
+`klab corpus near-duplicates RELEASE`. It holds rows and shingles in memory
 and defaults to 100,000 documents / 128 MiB of text, so the defaults don't cover
 this full corpus. Record what the screen actually covered and what it missed; a
 cap refusal is not a clean result. Review and merge any overlap clusters it finds
