@@ -154,7 +154,7 @@ class ConnectedFirst32(unittest.TestCase):
             run["model"]["vocab_size"] = 260
             run["tokenizer"]["path"] = str(tokenizer)
             run["dataset"] = {"source": "local_token_mixture", "revision": release.name,
-                "cache_dir": str(root / "cache"), "train_path": str(output / "train.tokens.jsonl"),
+                "cache_dir": str(root / "cache"), "train_path": str(output / "train.tokens.ids"),
                 "validation_path": str(release / "lm/validation.jsonl"), "train_max_documents": receipt["records"],
                 "validation_max_documents": count, "train_max_tokens": 300, "validation_max_tokens": size + count + 1,
                 "license": _licenses(release), "mixture_declaration_path": str(declaration), "mixture_output_path": str(output)}
