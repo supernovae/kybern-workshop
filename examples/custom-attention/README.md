@@ -1,12 +1,11 @@
-# Train a model with an attention kind Lab does not ship
+# Train a model with a custom attention kind
 
-`model.yaml` sets `attention.kind: cosine`. That kind comes from
-[`components/`](../../components/README.md) in this repository; Lab is not
-edited. The corpus and tokenizer settings are Lab's small CC0
-`build-local-text` example.
+`model.yaml` sets `attention.kind: cosine`, a kind supplied by the package in
+[`components/`](../../components/README.md). The corpus and tokenizer settings
+come from Lab's small CC0 `build-local-text` example.
 
-Install the component package into the Lab environment once, then copy this
-directory out of the checkout so `work/` is created outside Git:
+Install the component package into your Lab environment once. Then copy this
+directory out of the checkout, so `work/` ends up outside Git:
 
 ```sh
 uv pip install -e /path/to/kybern-workshop/components
@@ -20,10 +19,10 @@ klab train model.yaml --run-id cosine
 klab generate cosine --runs-dir work/runs --prompt "The baker counts"
 ```
 
-Without the package installed, `klab` refuses the config and names the entry
-point it looked for. The run's events record
+If the package isn't installed, `klab` rejects the config and names the entry
+point it looked for. When it is, the run's events record
 `kybern-workshop-components 0.1.0` as the source of the kind.
 
-This proves the extension path on a 131K-parameter model and a 600-sentence
-corpus. It says nothing about whether cosine attention is better than dense
-attention.
+This shows that a custom kind can be plugged in and trained, using a
+131K-parameter model and a 600-sentence corpus. It's too small to tell you
+whether cosine attention beats dense attention.

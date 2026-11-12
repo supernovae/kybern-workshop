@@ -1,43 +1,43 @@
 # Run and revise DevMind
 
-[`experiment.json`](experiment.json) is the editable experiment intent. It references
+[`experiment.json`](experiment.json) is the experiment you edit. It references
 [`run.json`](run.json), [`model.json`](model.json) and
-[`optimizer.json`](optimizer.json), keeps the full
-341,885,952-parameter architecture and defines the 12B unique-target 60/20/20 baseline.
-The preparation phase maps are tools for producing missing inputs, not a mandatory
-25-step prerequisite for every iteration. Reuse unchanged native artifacts.
+[`optimizer.json`](optimizer.json). It keeps the full 341,885,952-parameter
+architecture and defines the 12B unique-target 60/20/20 baseline. Run the
+preparation phases only to produce inputs you are missing; you do not need all
+25 steps for every iteration. Reuse artifacts that haven't changed.
 
-This page documents the authored dense 12B baseline and its binding workflow, not
-live campaign status. The October 29 execution-stop notice is historical; see the
-[Engram campaign record](engram-campaign-20261106.md) for the subsequent continuation
-and the [B70 performance follow-up](b70-performance-20261106.md#completed-finite-100m-target-nightly-validation)
-for the completed finite 100M-target nightly validation, including fresh-process GPU
-resume and terminal cold full-state verification. Those results do not establish
-completion of the dense 12B baseline or promise uninterrupted future execution.
-Authoring and schema checks alone still do not establish execution readiness.
+This page covers the dense 12B baseline and how to bind it. For what happened
+after training stopped on October 29, see the
+[Engram campaign record](engram-campaign-20261106.md). The
+[B70 performance notes](b70-performance-20261106.md#completed-finite-100m-target-nightly-validation)
+describe the finished 100M-target nightly validation, including a GPU resume in a
+fresh process and a cold full-state check at the end. The dense 12B baseline
+itself has not been completed, and passing the schema checks below doesn't mean
+a run is ready to launch.
 
 ## Bind once to real inputs
 
-Run from a Workshop checkout using the Python environment where Lab is installed.
-Set `EXPERIMENT_DIR` to your external working experiment directory. Copy
-`binding.example.json` there and replace every null with actual values:
+Run from a Workshop checkout, in the Python environment where Lab is installed.
+Set `EXPERIMENT_DIR` to a working directory outside the repository. Copy
+`binding.example.json` there and replace every null with a real value:
 
-- `dataset`: the native authenticated materialized mixture declaration/output,
-  writable cache, measured document/token limits and real license provenance.
-  Preserve the complete validation split. The 12B scientific mixture is not yet
-  complete; retained R36 data or newly acquired shards do not establish it.
-- `tokenizer.path`: the retained, verified 32K tokenizer artifact (R40), or an
-  explicitly revised tokenizer. No fitting is required merely to bind a run.
-- `runtime`: the chosen engine, backend and precision. The example specifies BF16,
-  transformer-block activation checkpointing and `estimate_policy: observe`.
-  Memory estimates remain observations; actual resource limits, cancellation and
-  runtime failures still apply. No model/batch change or CPU-derived ceiling is
-  introduced. Choose the actual supported backend; do not leave `auto` as an
-  accidental hardware choice.
-- `logging.root_dir`: the native run store, outside the recipe repository.
+- `dataset`: the materialized mixture file and its output, a writable cache,
+  measured document and token limits, and the actual license information. Keep
+  the whole validation split. The 12B mixture is not finished yet; the retained
+  R36 data and newly acquired shards don't add up to it.
+- `tokenizer.path`: the retained 32K tokenizer (R40), or a tokenizer you have
+  deliberately revised. You don't need to fit a tokenizer just to bind a run.
+- `runtime`: the engine, backend and precision. The example uses BF16,
+  transformer-block activation checkpointing and `estimate_policy: observe`, so
+  memory estimates are reported but not enforced; real resource limits and
+  runtime failures still apply. The example doesn't change the model or batch or add
+  a CPU-derived limit.
+  Pick the backend you actually have rather than leaving `auto` in place.
+- `logging.root_dir`: the run store, outside the recipe repository.
 
-All bound paths must be absolute so moving the authored config does not redirect
-its inputs. Neither the example nor the unbound intent is a runnable config.
+Use absolute paths for everything you bind, so moving the config doesn't change
+its inputs. Neither the example nor the unbound experiment runs as-is.
 
 ```sh
 cp experiments/devmind/binding.example.json "$EXPERIMENT_DIR/bindings.json"
@@ -50,21 +50,20 @@ klab inspect "$EXPERIMENT_DIR/run.yaml" --json
 ```
 
 `config compose` merges the run section, the model and optimizer sections and
-your bindings, refuses the result unless it is a complete valid RunConfig (an
-unbound `null` is named in the error), and writes a fresh file with a receipt of
-each part's digest. It does not
-verify artifact contents or claim readiness. Lab's native mixture/tokenizer and
-prepared-input verification remain authoritative. Existing prepared inputs may be
-supplied through native `train --stage-bundle`; bind that artifact using Lab's own
-contract, not a supervisor log. Confirm runtime availability and measured supply
-at the execution site. No invented host paths or hashes are committed here.
+your bindings. If the result isn't a complete, valid RunConfig it refuses and
+names the unbound `null`. Otherwise it writes a new file with the digest of each
+part. It checks structure only; Lab's mixture, tokenizer and prepared-input
+checks are what confirm the artifacts themselves. To reuse prepared inputs, pass
+them with `train --stage-bundle` and bind them the way Lab expects rather than
+from a supervisor log. Check the runtime and the available data on the machine
+that will run the job. We don't commit host paths or hashes here.
 
 ## Run, inspect, resume, evaluate
 
-Use fresh `RUN_ID` and `CHILD_ID` values and set `RUNS_DIR` to the bound
-`logging.root_dir`. Native Lab owns run records, checkpoint identity, errors and
-cancellation. Retain the plan revision, bound config, runtime provenance and native
-run ID beside the results. Editing the next plan never rewrites a completed attempt.
+Pick new `RUN_ID` and `CHILD_ID` values and set `RUNS_DIR` to the bound
+`logging.root_dir`. Lab keeps the run records, checkpoints, errors and
+cancellations. Keep the plan revision, bound config, runtime details and run ID
+next to the results. Editing the next plan never changes a finished attempt.
 
 ```sh
 klab train "$EXPERIMENT_DIR/run.json" --run-id "$RUN_ID"
@@ -76,19 +75,17 @@ klab train "$EXPERIMENT_DIR/run.json" --resume "$CHECKPOINT" --run-id "$CHILD_ID
 klab eval "$CHILD_ID" --checkpoint "$CHILD_CHECKPOINT" --runs-dir "$RUNS_DIR"
 ```
 
-For an uninterrupted run, evaluate `RUN_ID` and its checkpoint instead. Resume
-creates a child run and preserves the parent. A runtime failure remains a failure,
-with any completed native checkpoint available for inspection; missing stdout does
-not turn an intact checkpoint into nonexistent work. Evaluation above measures
-native held-out loss; it does not claim the protocol's external benchmark suite or
-fixed English/technical panels have been run. Bind actual frozen panels before
-using `eval --panel PANEL --output NEW_RESULT.json`. Those panels and benchmark
-results remain outstanding scientific deliverables.
+If the run wasn't interrupted, evaluate `RUN_ID` and its checkpoint instead.
+Resume creates a child run and keeps the parent. A runtime failure is still a
+failure, but any checkpoint it finished is there to inspect, even if stdout was
+lost. The `eval` above measures held-out loss only. The protocol's benchmark
+suite and fixed English and technical panels still need to be run: bind the
+frozen panels first, then use `eval --panel PANEL --output NEW_RESULT.json`.
 
 ## Derive the next iteration
 
-Use native `config derive` to create a new editable config with a recorded delta.
-For example, an explicitly separate first full-model 32-update iteration:
+Use `config derive` to create a new config with the change recorded. For
+example, a separate first full-model iteration of 32 updates:
 
 ```sh
 klab config derive "$EXPERIMENT_DIR/run.json" \
@@ -99,26 +96,28 @@ klab config derive "$EXPERIMENT_DIR/run.json" \
   --output "$EXPERIMENT_DIR/first32.yaml"
 ```
 
-The architecture, tokenizer and batch stay unchanged. This explicit budget and
-schedule change is a separate experiment iteration, not completion of the 12B
-baseline or a universal prerequisite. Bind it to a matching verified unique mixture
-if the baseline's data is unavailable; changing only the training budget does not
-create missing data. [`first32/`](first32/README.md) records the older retained-subset
-recipe and its attempt-specific limits, not permanent lab limits. Scientific
-changes start new runs; `--resume` is for compatible checkpoint continuation.
+The architecture, tokenizer and batch stay the same. Only the budget and
+schedule change, so this is its own experiment iteration, and you don't need it
+before other runs. If the baseline's data isn't available, bind it to a matching
+unique mixture; a smaller budget doesn't create the missing data.
+[`first32/`](first32/README.md) records the older retained-subset recipe and the
+limits of that one attempt. Start a new run for any scientific change; use
+`--resume` only to continue a compatible checkpoint.
 
 ## Verification and remaining bindings
 
-Reviewed against Lab `9d4c840ef1f102becf27532c2548c505c2ed35a6`. To check
-these declarations against the Lab you have installed, run
+Reviewed against Lab `9d4c840ef1f102becf27532c2548c505c2ed35a6`. To check these
+configs against the Lab you have installed, run
 `klab config validate experiments/devmind` for the sections and
 `klab inspect "$EXPERIMENT_DIR/run.yaml"` for the composed config's parameter
-inventory and memory plan. Neither allocates the model or reads production data.
+inventory and memory plan. Neither command allocates the model or reads training
+data.
 
-Execution-site decisions still needed: verified mixture and tokenizer locations,
-actual data counts, runtime/device, cache/run store, checkpoint retention capacity,
-and frozen evaluation panels. The baseline uses 91,553 as a step ceiling for 12B
-training targets at 131,072/update; Lab stops at the declared target budget and
-records actual counters. Do not replace the baseline with a smaller model or
-silently increase exposures to satisfy supply. Success means the goal and
-`definition_of_done` in the experiment are met, not that all preparation leaves ran.
+Still to decide on the machine that runs it: where the mixture and tokenizer
+live, actual data counts, runtime and device, cache and run store, checkpoint
+storage, and the frozen evaluation panels. The baseline caps training at 91,553
+steps, which is 12B targets at 131,072 per update; Lab stops at the target budget
+and records the actual counts. If data runs short, report it. Don't shrink the
+model or quietly repeat data to fill the gap. The run is done when it meets the
+goal and `definition_of_done` in the experiment, whether or not every
+preparation leaf ran.

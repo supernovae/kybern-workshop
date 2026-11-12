@@ -2,11 +2,11 @@
 
 [Back to DevMind Overview](../README.md) · [Shard Package (`lab86/README.md`)](lab86/README.md)
 
-[`preparation.json`](preparation.json) defines the 24-phase native [Kybern Model Lab](https://github.com/supernovae/model-lab) corpus preparation workflow for **DevMind 340M Base**. The pinned candidate shard declarations, filtering policies, and job templates live in [`lab86/`](lab86/README.md).
+[`preparation.json`](preparation.json) is the 24-phase [Kybern Model Lab](https://github.com/supernovae/model-lab) workflow that prepares the **DevMind 340M Base** corpus. The pinned shard files, filtering policies and job templates are in [`lab86/`](lab86/README.md).
 
 ## Inspecting Phase Commands
 
-Use `klab attempt phase-command` to compile and inspect the command arguments for any phase before running:
+Before running a phase, print its command with `klab attempt phase-command`:
 
 ```sh
 klab attempt phase-command \
@@ -25,7 +25,7 @@ klab attempt phase-command \
 2. **Initial 4 GiB Pilot Gate:**
    - `transport-init` initializes the transport budget (`initial_body_bytes: 4294967296`, `max_total_body_bytes: 107374182400`).
    - `pilot-acquire` downloads the first three shards (`3,771,713,555` bytes total) and stops at the fourth shard reservation across the 4 GiB gate.
-   - `pilot-reuse` materializes the three pilot snapshots locally (`reuse_only`) for offline admission inspection and split inventory without additional network transfers.
+   - `pilot-reuse` materializes the three pilot snapshots locally (`reuse_only`), so you can inspect admission and build the split inventory offline without downloading anything else.
 3. **Pilot Review & Full Acquisition:**
    - Review pilot schema, license filtering, family counts, and token yield projections.
    - Release the transport gate with `klab corpus budget-release-gate` and run `continue-acquire` against the same transport ledger.
@@ -37,7 +37,7 @@ klab attempt phase-command \
 6. **LM Export & 32,768-Vocab BPE Tokenizer:**
    - Export LM sequences (`sequence_length: 2048`, `int32` tokens) and fit a byte-level BPE tokenizer (`vocab_size: 32768`) on up to 512 MiB of `TRAIN` data sampled at `60/20/20` (`tokenizer-sampling.yaml`).
 7. **Token Floor Verification & Mixture Packing:**
-   - Verify unique token supply against [`token-floors.yaml`](lab86/token-floors.yaml) (12B target: 7.2B web, 2.4B synthetic, 2.4B code with `max_exposures: 1`).
+   - Check unique token supply against [`token-floors.yaml`](lab86/token-floors.yaml) (12B target: 7.2B web, 2.4B synthetic, 2.4B code with `max_exposures: 1`).
    - Materialize and verify the mixture (`mixture.template.yaml`), then publish and cold-verify the packed training arrays.
 
 ## Resource Envelope (`lab86/resource-envelope.yaml`)

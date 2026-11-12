@@ -1,27 +1,27 @@
 # Running Workshop Recipes with Kybern Model Lab
 
-Every experiment in this repository is designed to run with [Kybern Model Lab](https://github.com/supernovae/model-lab) (`klab`).
-Workshop stores the declarative configurations, dataset pins, and result records; Kybern Model Lab handles data preparation, training, evaluation, behavioral probes, and reporting.
+Every experiment in this repository runs with [Kybern Model Lab](https://github.com/supernovae/model-lab) (`klab`).
+This repository holds the configs, dataset pins, and result records. Lab does the data preparation, training, evaluation, probes, and reporting.
 
-You can run these recipes from a clone of this repository or copy any recipe directory into your own project. For a guided introduction to the workbench, see [Run the Lab on kybern.dev](https://kybern.dev/learn/lab/).
+Run a recipe from a clone of this repository, or copy its directory into your own project. For a guided introduction to Lab, see [Run the Lab on kybern.dev](https://kybern.dev/learn/lab/).
 
 ## Choosing a Workflow
 
 | Goal | `klab` workflow | Notes |
 | --- | --- | --- |
-| **Check every declaration** | `config validate DIR` | Validates each run, tokenizer, model and optimizer declaration under a directory against the installed Lab; exits non-zero on a failure. CI runs it on this repository. |
-| **Bind sections and local paths** | `config compose` | Merges a run section, model and optimizer sections and a file of local paths into one validated run config. Used by [DevMind](../experiments/devmind/run.md). |
-| **Compare a single change** | `config validate`, `config derive`, then `try` and `report` | Trains baseline and candidate arms on shared data and scores held-out loss + probes. Used by [TinyStories microlab](../examples/tinystories-microlab/README.md). |
-| **Train & inspect a full baseline** | `data lock`, `experiment recipe preparation apply`, `stage`, `train`, `eval`, `generate` | Step-by-step pipeline with checkpoint continuation and prompt-panel generation. Used by [TinyStories CPU baseline](../examples/tinystories-useful/README.md). |
-| **Package a shareable recipe** | `experiment recipe create` and `experiment recipe export` | Bundles configs and metadata with content hashes so another developer can inspect and bind local paths. |
-| **Prepare a corpus & tokenizer** | `experiment recipe preparation inspect` and `apply` | Validates output paths before running dataset snapshot, tokenizer training, and token packing. Used by [Synthetic CPU](../examples/synthetic-cpu/README.md). |
-| **Run a staged campaign** | `experiment recipe workflow inspect`, `resolve`, `apply`, `approve`, and `report` | End-to-end campaign pipeline with explicit approval gates and verified reporting. |
+| **Check every config** | `config validate DIR` | Checks each run, tokenizer, model, and optimizer config under a directory against your installed Lab, and exits non-zero if any fail. CI runs it on this repository. |
+| **Bind sections and local paths** | `config compose` | Merges a run section, model and optimizer sections, and a file of local paths into one checked run config. Used by [DevMind](../experiments/devmind/run.md). |
+| **Compare a single change** | `config validate`, `config derive`, then `try` and `report` | Trains a baseline and a candidate on the same data, then scores held-out loss and probes. Used by [TinyStories microlab](../examples/tinystories-microlab/README.md). |
+| **Train & inspect a full baseline** | `data lock`, `experiment recipe preparation apply`, `stage`, `train`, `eval`, `generate` | Runs each step yourself, including continuing from a checkpoint and generating from a prompt panel. Used by [TinyStories CPU baseline](../examples/tinystories-useful/README.md). |
+| **Package a shareable recipe** | `experiment recipe create` and `experiment recipe export` | Bundles configs and metadata with content hashes, so someone else can inspect them and fill in their own local paths. |
+| **Prepare a corpus & tokenizer** | `experiment recipe preparation inspect` and `apply` | Checks output paths, then takes the dataset snapshot, trains the tokenizer, and packs tokens. Used by [Synthetic CPU](../examples/synthetic-cpu/README.md). |
+| **Run a staged campaign** | `experiment recipe workflow inspect`, `resolve`, `apply`, `approve`, and `report` | Runs a campaign end to end, stopping at each approval gate until you approve, and writes a report. |
 
 ## Packaging and Inspecting a Recipe
 
-You can package any recipe directory into a verified inventory and inspect its path bindings before running a single training step.
+Package a recipe directory and check its paths before you train anything.
 
-For example, using the declarations in [`examples/synthetic-cpu`](../examples/synthetic-cpu/README.md):
+For example, with the files in [`examples/synthetic-cpu`](../examples/synthetic-cpu/README.md):
 
 ```sh
 INPUT="/path/to/kybern-workshop/examples/synthetic-cpu"
@@ -37,7 +37,7 @@ klab experiment recipe preparation inspect "$DEST/recipe.json" \
   --bindings /path/to/work/local-bindings.json --json
 ```
 
-Where `local-bindings.json` maps the recipe's outputs to your local workspace directory outside Git:
+`local-bindings.json` points the recipe's outputs at a workspace directory outside Git:
 
 ```json
 {
@@ -56,17 +56,17 @@ Where `local-bindings.json` maps the recipe's outputs to your local workspace di
 }
 ```
 
-`inspect` checks that all configuration schemas and path bindings are valid without creating output directories or starting a run. See the [metadata validation record](native-acceptance-2026-10-18.md) for example CLI checks across the active Workshop recipes.
+`inspect` checks every config and path binding. It doesn't create output directories or start a run. The [validation record](native-acceptance-2026-10-18.md) shows example checks across the current recipes.
 
 ## Records Pinned Before the Rename
 
-Kybern Model Lab was previously published as `supernovae/tiny-sparse-lab` with a `sparselab` CLI. The project now lives at [supernovae/model-lab](https://github.com/supernovae/model-lab); the CLI and import package are `klab`, environment variables use the `KLAB_` prefix, and versioned format IDs use `klab-*`.
+Kybern Model Lab used to be `supernovae/tiny-sparse-lab`, with a `sparselab` CLI. It is now [supernovae/model-lab](https://github.com/supernovae/model-lab): the CLI and import package are `klab`, environment variables start with `KLAB_`, and versioned format IDs use `klab-*`.
 
-Recorded Lab commit SHAs and pull-request numbers are unchanged in the renamed repository. Recipes and records pinned to a Lab commit from before the rename keep three historical identities when replayed exactly at that pin:
+Commit SHAs and pull-request numbers carried over to the renamed repository unchanged. If you replay a recipe at a Lab commit from before the rename, three old names still apply:
 
 - The CLI and import package at those commits are `sparselab`, and environment variables use `SPARSELAB_`. Substitute those names when replaying at the recorded commit; use `klab` on current `main`.
 - Pinned container digests stay under their original package, `ghcr.io/supernovae/tiny-sparse-lab@sha256:...`. New images publish to `ghcr.io/supernovae/model-lab`.
-- Sealed evidence keeps its recorded bytes: the hash-sealed LAB86 preparation package (`experiments/devmind/preparation/lab86/`), JSON records under `results/`, and recorded host paths.
+- Recorded files keep their original bytes, old names included: the hashed LAB86 preparation package (`experiments/devmind/preparation/lab86/`), the JSON records under `results/`, and the host paths they mention.
 
 ## Further Reading
 

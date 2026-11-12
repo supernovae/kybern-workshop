@@ -1,16 +1,16 @@
-# TinyStories CPU Smoke Run: First Completed Pair
+# TinyStories CPU smoke run: first completed pair
 
-[Back to Workshop README](../../README.md) · [TinyStories Worker Recipe](../../examples/tinystories-worker/README.md)
+[Workshop README](../../README.md) · [TinyStories worker recipe](../../examples/tinystories-worker/README.md)
 
-This record summarizes the 2026-10-15 two-arm TinyStories CPU smoke run (`FFN 64` vs. `FFN 96`), exercising dataset preparation, cache reuse, paired training, and held-out evaluation in [Kybern Model Lab](https://github.com/supernovae/model-lab).
+On 2026-10-15 we ran a two-arm TinyStories smoke test on CPU (`FFN 64` vs. `FFN 96`) in [Kybern Model Lab](https://github.com/supernovae/model-lab). It tried out dataset preparation, cache reuse, paired training and held-out evaluation.
 
-## Run Summary
+## Run summary
 
-- **Completion status:** All 12 workflow stages completed with exit code `0`, zero OOM events, and verified container cleanup.
-- **Training budget:** 16 total updates across both arms (2 smoke + 5 warmup + 1 main update per arm = 512 total training target positions).
-- **Evaluation:** 6 evaluation batches executed (main step 0 and 1 for both arms plus 1 Campaign evaluation pass per arm, 32 targets per batch).
+- Status: all 12 workflow stages exited with code `0`, with zero OOM events, and container cleanup checked out.
+- Training: 16 updates across both arms (2 smoke + 5 warmup + 1 main update per arm), 512 training target positions in total.
+- Evaluation: 6 batches of 32 targets (main steps 0 and 1 for both arms, plus 1 Campaign evaluation pass per arm).
 
-## Pinned Revisions & Inputs
+## Pinned revisions and inputs
 
 | Component | Value |
 | --- | --- |
@@ -22,6 +22,6 @@ This record summarizes the 2026-10-15 two-arm TinyStories CPU smoke run (`FFN 64
 | **Snapshot manifest SHA-256** | `efd5e6924cb04e0bad0d2bad50b1863f1630b5bb6d3c58eb93879d8c20003239` |
 | **Prepared cache SHA-256** | `dfc008bd34c09fabf8ebc204f300277080735a49d5bedff7d0f8a99eb394d458` (`b7af269e44c026cd`) |
 
-## Cache Reuse Notes
+## Cache reuse
 
-When reusing a prepared dataset cache across runs, copy the prepared cache into a writable directory rather than mounting it read-only: Kybern Model Lab writes `.cleanup.lock` and `<id>.preparation.json` receipts in the cache parent directory during verification.
+To reuse a prepared dataset cache in another run, copy it into a writable directory. A read-only mount won't work, because Kybern Model Lab writes `.cleanup.lock` and `<id>.preparation.json` into the cache's parent directory while verifying it.

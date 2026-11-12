@@ -2,10 +2,10 @@
 
 [Back to Workshop README](../../README.md) · [Interactive Guide on kybern.dev](https://kybern.dev/models/tinystories-training/)
 
-This starter recipe teaches the core [Kybern Model Lab](https://github.com/supernovae/model-lab) comparison workflow (`klab try`).
-It selects 2,000 training and 100 validation stories from `roneneldan/TinyStories`, fits a train-only 2,048-token BPE tokenizer, and compares two tiny dense decoders—**FFN width 256 vs. 384**—under the exact same seed (`42`), data split, and 40-update (10,240-target) training budget.
+This starter recipe teaches the main [Kybern Model Lab](https://github.com/supernovae/model-lab) comparison workflow, `klab try`.
+It takes 2,000 training and 100 validation stories from `roneneldan/TinyStories`, fits a 2,048-token BPE tokenizer on the training stories, and compares two tiny dense decoders with **FFN width 256 and 384**. Both use the same seed (`42`), the same data split, and the same 40-update (10,240-target) training budget.
 
-- **Looking for a longer trained baseline?** See the [8,192-update TinyStories CPU baseline](../tinystories-useful/README.md) and its [27 recorded story outputs](../../results/2026-10-19-tinystories-cpu/README.md).
+- **Want a longer-trained baseline?** See the [8,192-update TinyStories CPU baseline](../tinystories-useful/README.md) and its [27 recorded story outputs](../../results/2026-10-19-tinystories-cpu/README.md).
 - **Interactive walkthrough:** Follow [TinyStories: build, read and improve a small story model](https://kybern.dev/models/tinystories-training/) on `kybern.dev`.
 
 ---
@@ -23,7 +23,7 @@ It selects 2,000 training and 100 validation stories from `roneneldan/TinyStorie
 
 ## 1. Set Up an External Workspace
 
-Create a fresh workspace directory outside your Git checkout and copy the recipe declarations into it:
+Create a fresh workspace directory outside your Git checkout and copy the recipe files into it:
 
 ```sh
 RECIPE=examples/tinystories-microlab
@@ -34,11 +34,11 @@ cp "$RECIPE/wider-ffn.yaml" "$RECIPE/try.yaml" "$WORK/"
 mkdir "$WORK/evidence"
 ```
 
-Relative paths inside `declarations/` resolve to `../snapshot`, `../tokenizer`, `../data`, and `../runs` within `$WORK`, while `try.yaml` stores paired experiment records under `$WORK/lab`.
+The configs in `declarations/` use relative paths, so their outputs land in `$WORK/snapshot`, `$WORK/tokenizer`, `$WORK/data`, and `$WORK/runs`. `try.yaml` keeps the comparison records in `$WORK/lab`.
 
 ## 2. Validate Configurations and Preview the Delta
 
-Before downloading data or starting training, validate the baseline config and preview the candidate derivation:
+Before you download data or train, check the baseline config and preview the candidate:
 
 ```sh
 klab config validate "$WORK/declarations/run.yaml" --kind run --json
@@ -47,7 +47,7 @@ klab config derive "$WORK/declarations/run.yaml" \
   --set 'model.ffn_dim=384' --output "$WORK/candidate-preview.yaml" --json
 ```
 
-Inspect `$WORK/candidate-preview.yaml` and its `.derivation.json` sidecar to verify that `model.ffn_dim` is the only modified hyperparameter.
+Open `$WORK/candidate-preview.yaml` and its `.derivation.json` sidecar file and check that `model.ffn_dim` is the only setting that changed.
 
 ## 3. Prepare Inputs and Run the Comparison
 
@@ -62,13 +62,13 @@ klab try "$WORK/wider-ffn.yaml" --vs "$WORK/declarations/run.yaml" \
   --config "$WORK/try.yaml" --backend cpu --json
 ```
 
-> **Note on disk space:** Although the snapshot selects 2,100 stories (capped at 16 MiB of extracted text), the initial Hugging Face Hub download caches the upstream Parquet shard (~250 MB+).
+> **Disk space:** the snapshot keeps only 2,100 stories (at most 16 MiB of text), but the first Hugging Face Hub download caches the whole Parquet shard (~250 MB+).
 
-`klab try` prepares the tokenized dataset, trains both the baseline (`ffn_dim=256`) and candidate (`ffn_dim=384`) arms, and evaluates both checkpoints on the same held-out validation batches.
+`klab try` tokenizes the dataset, trains the baseline (`ffn_dim=256`) and the candidate (`ffn_dim=384`), and evaluates both on the same held-out validation batches.
 
 ## 4. Inspect Results
 
-Use the `TRY_ID` printed by `klab try` to view the experiment report or open the interactive dashboard:
+Use the `TRY_ID` that `klab try` printed to read the report or open the dashboard:
 
 ```sh
 klab report TRY_ID --lab-dir "$WORK/lab" --json
@@ -78,6 +78,6 @@ klab dashboard --lab-dir "$WORK/lab"
 
 ## Next Steps
 
-- **Test across multiple seeds:** A single 40-update run teaches the mechanics of a controlled comparison, not whether a wider FFN reliably improves story generation. Repeat promising changes across paired seeds (`seed: 7`, `seed: 17`, etc.) using `--config`.
-- **Explore the 8,192-update baseline:** Check out [`examples/tinystories-useful`](../tinystories-useful/README.md) to see how a 4.46M-parameter model behaves after 33.5M training tokens—and try the improvement exercises to fix its repetition and plot-drift issues.
-- **Provenance:** [`migration.json`](migration.json) and [`VALIDATION.md`](VALIDATION.md) record the declaration hashes and CLI schema checks for this recipe.
+- **Try more seeds:** one 40-update run shows you how a comparison works. To learn whether a wider FFN reliably helps, repeat promising changes across paired seeds (`seed: 7`, `seed: 17`, and so on) with `--config`.
+- **Explore the 8,192-update baseline:** [`examples/tinystories-useful`](../tinystories-useful/README.md) shows how a 4.46M-parameter model behaves after 33.5M training tokens. Its exercises suggest ways to fix the repetition and plot drift.
+- **File hashes and checks:** [`migration.json`](migration.json) lists the hash of each config file, and [`VALIDATION.md`](VALIDATION.md) lists the CLI checks we ran on this recipe.

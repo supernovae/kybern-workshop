@@ -2,12 +2,12 @@
 
 [Back to Preparation Plan](README.md)
 
-This record summarizes offline schema, manifest, and mocked-acquisition tests for the 84-shard preparation package in [`lab86/`](lab86/README.md).
+These are the offline schema, manifest and mocked-acquisition tests we ran on the 84-shard preparation package in [`lab86/`](lab86/README.md).
 
 ## Validated Coverage
 
-- **84-shard selection & ordering:** deterministic hash-ranked shard selection from the pinned Hugging Face Hub tree metadata (`smollm-corpus` and `github-code-clean`), totaling `85,077,359,484` compressed bytes (79.24 GiB) with the three pilot shards sorted first (`3,771,713,555` bytes below the 4 GiB initial gate).
-- **24-phase plan compilation:** all 24 phase templates in `lab86/jobs/` and the 4 pilot jobs in `lab86/pilot-jobs/` render cleanly with `klab` and match their resource, offline/network, and storage ceilings.
-- **Schema & policy checks:** `project-acquire.yaml`, `project-pilot-reuse.template.yaml`, `project-pre-freeze.template.yaml`, `project-build.template.yaml`, `resource-envelope.yaml`, `tokenizer-sampling.yaml`, `token-floors.yaml`, and `mixture.template.yaml` pass native `klab` schema validation.
-- **Parquet timestamp & cold verification:** mocked acquisition tests verify ISO-8601 timestamp serialization, shard SHA-256 verification, canonical row hashing, and cold snapshot verification.
-- **Package manifest integrity:** all files in `lab86/` match their SHA-256 digests in [`lab86/package-sha256.json`](lab86/package-sha256.json).
+- **84-shard selection & ordering:** shards are selected by hash rank from the pinned Hugging Face Hub tree metadata (`smollm-corpus` and `github-code-clean`), always in the same order. They total `85,077,359,484` compressed bytes (79.24 GiB). The three pilot shards sort first and come to `3,771,713,555` bytes, under the 4 GiB initial gate.
+- **24-phase plan compilation:** all 24 phase templates in `lab86/jobs/` and the 4 pilot jobs in `lab86/pilot-jobs/` render cleanly with `klab` and stay within their resource, network and storage limits.
+- **Schema & policy checks:** `project-acquire.yaml`, `project-pilot-reuse.template.yaml`, `project-pre-freeze.template.yaml`, `project-build.template.yaml`, `resource-envelope.yaml`, `tokenizer-sampling.yaml`, `token-floors.yaml` and `mixture.template.yaml` pass `klab` schema validation.
+- **Parquet timestamps & cold checks:** mocked acquisition tests cover ISO-8601 timestamp serialization, shard SHA-256 checks, canonical row hashing and cold snapshot checks.
+- **Package manifest:** every file in `lab86/` matches its SHA-256 digest in [`lab86/package-sha256.json`](lab86/package-sha256.json).

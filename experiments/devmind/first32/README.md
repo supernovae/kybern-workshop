@@ -1,124 +1,135 @@
 # DevMind first-run retained subset
 
-This is the retained historical attempt profile. Its caps and pins are specific to
-that attempt, not lab-wide defaults. Use the [editable native run path](../run.md)
-for new iterations. Production/model execution is currently stopped pending
-integrated verification and owner review; later execution language below records
-the original profile and does not lift that hold.
+This is the profile from one earlier attempt. Its caps and pins belong to that
+attempt; they are not lab-wide defaults. For new iterations, use the
+[run guide](../run.md). Production and model runs on this profile are stopped
+until integrated checks and owner review are done. The steps below describe the
+profile as it was written and don't lift that hold.
 
-This separate profile keeps the 341,885,952-parameter model, 2048 context,
-microbatch 2, accumulation 32, seed 42 and 32-update checkpoint/restore exercise.
-Its 4,194,304 unique training targets use 60/20/20 web/synthetic/code quotas.
-It validates recent code changes; do not require another small rehearsal for an
-unchanged-code larger run. No downloads, spend or resource expansion is implied.
+The profile keeps the 341,885,952-parameter model, 2048 context, microbatch 2,
+accumulation 32, seed 42, and a 32-update checkpoint/restore exercise. It trains
+on 4,194,304 unique targets split 60/20/20 across web, synthetic and code. Its
+purpose was to test recent code changes. Once it passes, a larger run on
+unchanged code doesn't need another small rehearsal. It needs no downloads,
+spending or extra resources.
 
-Render source templates with the three original retained snapshot paths, snapshot
-SHA256s and exact manifest SHA256s. Historical parents remain read-only. Use Kybern Model Lab commit `c5961c44bc9ea563a7ea552975321183b22c1ba2`
-(merged PR #204). Native `corpus acquire project-acquire.yaml` uses its retained-subset path;
-`--offline` verifies an existing acquisition and does not create a derivative.
-The selector uses the declared 1% hash rule, unchanged original rows, explicit
-256 KiB long-row exclusion and aggregate 30,000-row/100 MiB refusal limits. Actual
-selected counts, qualification, family supply and token floors are unknown until
-measured. Never change seeds, truncate a failing selection or relax caps silently.
+Fill the source templates with the three original retained snapshot paths, their
+snapshot SHA256s and exact manifest SHA256s. Treat the historical parents as
+read-only. Use Kybern Model Lab commit `c5961c44bc9ea563a7ea552975321183b22c1ba2`
+(merged PR #204). `corpus acquire project-acquire.yaml` takes its retained-subset
+path; `--offline` checks an existing acquisition without creating a new one.
+The selector uses the 1% hash rule from the config, leaves original rows
+unchanged, excludes rows over 256 KiB, and refuses to go past 30,000 rows or
+100 MiB in total. You only learn the selected counts, qualification, family
+supply and token floors by measuring them. Never change seeds, truncate a
+failing selection or quietly loosen caps.
 
-Serialized selected-byte allowances are 50 MiB web, 30 MiB synthetic and 20 MiB
-code, totaling the same 100 MiB. Row allowances remain 18,000 / 6,000 / 6,000.
-The prior 60/20/20 MiB allocation stopped at the synthetic source's combined
-row/byte guard after web selected 8,133 rows / 43,361,852 bytes. This redistribution
-uses web headroom; it does not establish the full synthetic total or guarantee
-completion. The fixed selection inputs and original parent pins stay unchanged.
-Changed declaration limits create new truthful acquisition/snapshot identities;
-retain the earlier refusal and child snapshot rather than rewriting their hashes.
+The selected-byte allowances are 50 MiB web, 30 MiB synthetic and 20 MiB code,
+the same 100 MiB in total. Row allowances stay at 18,000 / 6,000 / 6,000. The
+earlier 60/20/20 MiB split stopped at the synthetic source's combined row/byte
+limit, after web had selected 8,133 rows / 43,361,852 bytes. The new split moves
+spare web headroom to synthetic. We don't yet know the full synthetic total, so
+this may still fall short. The fixed selection inputs and original parent pins
+are unchanged. Changing the limits produces a new acquisition and snapshot with
+new hashes; keep the earlier refusal and child snapshot as they are.
 
-Run native admission draft/inspection with `application-policy.json` and POLICY.md;
-record actual inspection/review and explicit restricted rows. Render the reviewed
-release declaration, create split inventory, review duplicate/family merges and
-freeze 98/1/1 family splits. Each stratum requires at least 100 eligible families.
-Build `project-build.yaml` offline, freeze, finalize family inventory and audit.
+Run the admission draft and inspection with `application-policy.json` and
+POLICY.md. Record the inspection and review you actually did, and list any
+restricted rows. Fill in the reviewed release template, create the split
+inventory, review duplicate and family merges, and freeze the 98/1/1 family
+splits. Each stratum needs at least 100 eligible families. Build
+`project-build.yaml` offline, then freeze, finalize the family inventory and
+audit.
 
-Export LM using `base-run.yaml` only as an export base; it is NOT a training-ready
-config and references unbound tokenizer/data paths. Create a separate native
-TokenizerTrainConfig using the verified export dataset and `tokenizer-sampling.yaml`;
-do not edit the sealed export. Fit/audit TRAIN-only 32,768-vocabulary BPE and report
-unfilled fit/audit quotas. Measure `token-floors.yaml`, materialize the rendered
-mixture and cold-verify it with native commands. No exposures beyond one.
+Export the LM data using `base-run.yaml` only as the export base. It is not a
+training config, and it points at unbound tokenizer and data paths. Write a
+separate TokenizerTrainConfig that uses the exported dataset and
+`tokenizer-sampling.yaml`; leave the frozen export alone. Fit and audit a
+TRAIN-only 32,768-vocabulary BPE, and report any fit or audit quotas you
+couldn't fill. Measure `token-floors.yaml`, materialize the mixture, and run the
+cold check with the Lab commands. Each token is used at most once.
 
-The held-out limits in `profile.json` are mandatory **operator stops**, not native
-Lab gates. After `measure-tokens`, and before `materialize-unique` or `pack`, retain
-a held-out inspection record bound to the release ID, tokenizer SHA256, split-freeze
-receipt and these limits. Do not proceed if any value is missing or out of bounds:
+The held-out limits in `profile.json` are **operator stops** that you check by
+hand; Lab doesn't enforce them. After `measure-tokens`, and before
+`materialize-unique` or `pack`, write a held-out inspection record tied to the
+release ID, tokenizer SHA256, split-freeze receipt and these limits. Stop if any
+value is missing or out of range:
 
-- Validation and test each contain at most 1,000 LM records and 2 MiB of normalized
-  text encoded as UTF-8. Count the complete release's `lm/validation.jsonl` and
-  `lm/test.jsonl`, summing the UTF-8 bytes of each parsed `text` value (not the JSON
-  file size or character count). Use an already installed JSON reader; do not trim.
-- Require at least 65,537 validation token positions in total. Test requires at
-  least 2,049 token positions in **each** of web, synthetic and code. Run the native descriptive census below
-  with the fitted tokenizer against the complete release, including its sealed test
-  split. In `measurement.views.lm`, inspect each split's `records` and `actual_tokens`,
-  and test's `dimensions.source_domain.{web,synthetic,code}.actual_tokens`. These
-  counts exclude appended EOS, so applying the same position floors to them is a
-  conservative check. Missing/null counts or a missing stratum stop preparation.
-- Inspect the split-freeze receipt's realized family counts: every stratum must
-  have validation and test families, with no family or exact-content leakage.
+- Validation and test each hold at most 1,000 LM records and 2 MiB of normalized
+  UTF-8 text. Count the full release's `lm/validation.jsonl` and
+  `lm/test.jsonl` by adding up the UTF-8 bytes of each parsed `text` value, not
+  the JSON file size or the character count. Use a JSON reader you already have
+  installed, and don't trim anything.
+- Validation needs at least 65,537 token positions in total. Test needs at least
+  2,049 token positions in **each** of web, synthetic and code. Run the census
+  below with the fitted tokenizer on the full release, including its held-back
+  test split. In `measurement.views.lm`, read each split's `records` and
+  `actual_tokens`, and test's
+  `dimensions.source_domain.{web,synthetic,code}.actual_tokens`. These counts
+  leave out the appended EOS, so applying the same position floors to them errs
+  on the safe side. If a count is missing or null, or a stratum is missing, stop.
+- Check the realized family counts in the split-freeze receipt. Every stratum
+  needs validation and test families, with no family or exact-content leakage.
 
 ```sh
 klab corpus describe "$RELEASE" --tokenizer "$TOKENIZER" \
   > "$ATTEMPT/held-out-census.json"
 ```
 
-`token-measurements.json` from `measure-tokens` authenticates distinct TRAIN source
-supply; it does **not** contain this held-out census. `token-floors.yaml` enforces
-only its declared native training-token floors. Neither `pack`, `verify-prepared`
-nor `verify-mixture` reads `profile.json` or enforces these operator limits. Retain
-the byte census, family review and explicit pass/stop decision alongside the native
-reports. A failed check stops this profile; do not resample, trim or enlarge caps.
+`token-measurements.json` from `measure-tokens` counts distinct TRAIN source
+supply; it doesn't include this held-out census. `token-floors.yaml` checks only
+its own training-token floors. `pack`, `verify-prepared` and `verify-mixture`
+don't read `profile.json` and won't check these limits for you. Keep the byte
+census, family review and your pass/stop decision next to the Lab reports. If a
+check fails, stop this profile; don't resample, trim or raise caps.
 
-Preserve the complete validation split: native mixture verification binds its actual
-count and rendered-byte budget, not an arbitrary prefix. Test remains sealed for
-model evaluation; the census only measures preparation supply and runs no model.
+Keep the whole validation split: mixture verification checks its actual count and
+byte budget, so you can't substitute a prefix. Test stays untouched for model
+evaluation; the census only measures preparation supply and runs no model.
 
-Bind the final RunConfig to actual mixture train count/tokens, full validation
-count/byte budget, tokenizer, cache and run paths, with `source: local_token_mixture`.
-Publish and cold-verify native prepared inputs. The fixed model and training settings
-must match the base and profile; there is no model execution during preparation.
-Hand off exact Lab/Workshop/Harness/runtime pins, hashes, resource measurements,
-remaining cumulative budget and current worker claim to the authorized runner.
-It trains to 4, verifies the immutable full-state checkpoint and resumes to 32.
-The two run stores share the 32 GiB new-file stop; per-run retention does not prove
-aggregate fit. RSS/VRAM are sampled stops, not hard limits.
+Bind the final RunConfig to the actual mixture's train count and tokens, the full
+validation count and byte budget, the tokenizer, the cache and run paths, and
+`source: local_token_mixture`. Publish the prepared inputs and run their cold
+check. The model and training settings must match the base and the profile;
+nothing runs the model during preparation. Hand the approved runner the exact
+Lab, Workshop, Harness and runtime pins, the hashes, resource measurements,
+remaining cumulative budget and current worker claim. The runner trains to step
+4, checks the full-state checkpoint and resumes to 32. Both run stores share the
+32 GiB limit on new files, and per-run retention alone doesn't show that both
+fit. RSS and VRAM are sampled and trigger a stop; they aren't hard limits.
 
-A larger run follows successful validation without another GPU approval or small
-rehearsal, provided measured unique supply, unchanged scientific intent and remaining
-approved time/storage allow it. The original 84-source/12B case still cannot fit this
-no-download profile. Report an exact data/time/capacity mismatch instead of silently
-redefining that case or increasing exposures. No GPU scheduling is done here.
+If validation succeeds, a larger run can follow without another GPU approval or
+small rehearsal, as long as the measured unique supply, the scientific intent and
+the remaining approved time and storage allow it. The original 84-source/12B case
+still doesn't fit this no-download profile. If data, time or capacity fall short,
+report the exact gap; don't redefine the case or add repeated exposures. This page
+schedules no GPU work.
 
-`preparation.json` is the native phase map: compile and run its leaves through
-the existing preparation supervisor. It contains no network allocation phase and
-no training command. Render review-dependent declarations only after their real
-inspection; a phase map does not supply review or approval evidence.
+`preparation.json` is the phase map. Compile its leaves and run them through the
+existing preparation supervisor. It has no network allocation phase and no
+training command. Fill review-dependent templates only after the real inspection;
+the phase map doesn't stand in for review or approval.
 
-Render the working recipe into the same fresh directory used as the phase map's
-attempt root. Its native split-freeze leaf is `splits-reviewed.yaml`, matching
-`project-build.yaml`; keep the accompanying freeze receipt and family candidates.
-The reviewed release's admission path is relative to that recipe directory.
+Write the working recipe into the same fresh directory you use as the phase map's
+attempt root. Its split-freeze leaf is `splits-reviewed.yaml`, matching
+`project-build.yaml`; keep the freeze receipt and family candidates with it. The
+reviewed release's admission path is relative to that recipe directory.
 
-Check the declarations against the Lab you have installed with
-`klab config validate experiments/devmind/first32`. Connected coverage of this
-preparation path on small generated inputs lives in Lab's own test suite, not
-here. The production values remain 98/1/1, 32,768 vocabulary, 32 MiB fit and
-4,194,304 targets.
+Check these configs against the Lab you have installed with
+`klab config validate experiments/devmind/first32`. Lab's own test suite covers
+this preparation path end to end on small generated inputs. The production values
+stay at 98/1/1, 32,768 vocabulary, 32 MiB fit and 4,194,304 targets.
 
-For supervised subset creation, bind both `acquisition_project_sha256` (the
-rendered project file) and `preparation_acquisition_identity_sha256` (the native
-resolved acquisition identity), paired with `preparation_normalizer`. Source-file
-changes after binding must refuse before reservation. Parent replay scratch belongs
-inside the accounted work area. Validation/test come from this subset's native
-family split, never an independently selected subset presumed disjoint.
+To create the supervised subset, bind both `acquisition_project_sha256` (the
+filled-in project file) and `preparation_acquisition_identity_sha256` (Lab's
+resolved acquisition hash), together with `preparation_normalizer`. If a source
+file changes after binding, the run refuses before reserving anything. Keep the
+parent replay scratch inside the accounted work area. Validation and test come
+from this subset's own family split; never use a separately selected subset and
+assume it doesn't overlap.
 
-The resolved acquisition identity also binds downstream split inventory, split freeze,
-and build supervision. All three project declarations therefore preserve the same
-project ID and source declarations; reviewed release, split and transform references
-change without changing that acquisition identity. Retained cold replay requires
-writable scratch in the accounted snapshot work area.
+The resolved acquisition hash also feeds the downstream split inventory, split
+freeze and build supervision. So all three project files keep the same project ID
+and source entries; only the reviewed release, split and transform references
+change. Cold replay of the retained data needs writable scratch in the accounted
+snapshot work area.

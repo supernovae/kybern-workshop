@@ -1,15 +1,15 @@
-# Executed command record
+# Commands run
 
-These are historical commands reconstructed from retained native monitor launch records.
-`CPU_PYTHON`, `A`, `B` and `WORK` substitute the original absolute local paths.
-They are audit records, not a script to rerun against an existing store.
-Provisioning, baseline capture and analysis overhead are excluded from child-command monitor timings.
-The [project guide](../../examples/synthetic-cpu/README.md) recommends native monitoring without strace; failed traced commands remain visible here.
+We rebuilt these commands from the native monitor's saved launch records.
+`CPU_PYTHON`, `A`, `B` and `WORK` stand in for the original absolute local paths.
+They record what we ran; don't rerun them as a script against an existing store.
+The monitor timings for each command leave out setup, baseline capture and analysis.
+The [project guide](../../examples/synthetic-cpu/README.md) recommends native monitoring without strace; we've kept the failed traced commands here anyway.
 
-All monitor policies use the committed 600-second / 4-GiB / 1-GiB limits except
+Every monitor policy uses the committed 600-second / 4-GiB / 1-GiB limits except
 `remaining-attempt-monitor.json`, a local copy with `max_wall_seconds: 328`.
-The successful continuation used a 300-second Controller wait; its earlier traced continuation used 420.
-The passive sampler ran separately, launching no lab commands. Its durations are sampled observations.
+The successful continuation used a 300-second Controller wait; the traced continuation before it used 420.
+A passive sampler ran alongside without launching any lab commands, so its durations are sampled.
 
 ## preparation-1
 
@@ -141,9 +141,9 @@ SPARSELAB_WORKER_LEASE_DIR="$WORK/worker-leases" "$CPU_PYTHON" -m sparselab --wo
   > "$WORK/workflow-completed-replay-monitor.json" 2> "$WORK/workflow-completed-replay-monitor.stderr"
 ```
 
-The first pre-preparation launch omitted global `--work-dir` and the growth baseline.
-It exited before child launch because the default work root was read-only; its empty
-stdout and failure note are retained privately. It has no native attempt or timing receipt.
-Both stopped traced invocations received SIGINT on their owned workflow process; native
-and independent cleanup checks are recorded in [cleanup-excerpt.json](cleanup-excerpt.json).
-No new attempt was created by either continuation.
+The very first launch, before preparation, left out the global `--work-dir` and the growth baseline.
+It exited before starting any child process because the default work root was read-only. We kept its
+empty stdout and our failure note privately; there is no native attempt or timing record for it.
+We stopped both traced runs by sending SIGINT to the workflow process each one owned. The native
+and independent cleanup checks are in [cleanup-excerpt.json](cleanup-excerpt.json).
+Neither continuation created a new attempt.

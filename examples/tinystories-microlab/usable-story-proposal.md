@@ -1,6 +1,6 @@
 # Story Generation Prompt Panels
 
-For the completed 8,192-update TinyStories baseline and all 27 generated story outputs, see:
+The completed 8,192-update TinyStories baseline and its 27 generated stories are here:
 
 - **Walkthrough & improvement exercises:** [`examples/tinystories-useful/README.md`](../tinystories-useful/README.md)
 - **Recorded outputs & quality review:** [`results/2026-10-19-tinystories-cpu/README.md`](../../results/2026-10-19-tinystories-cpu/README.md)
@@ -8,7 +8,7 @@ For the completed 8,192-update TinyStories baseline and all 27 generated story o
 
 ## Prompt Panel Declarations in This Directory
 
-This folder retains three declarative prompt-panel definitions that can be rebound to any verified Kybern Model Lab checkpoint for side-by-side story evaluation:
+This folder has three prompt-panel files. Point them at any Kybern Model Lab checkpoint to compare stories side by side:
 
 | File | Decoding settings | Purpose |
 | --- | --- | --- |
@@ -18,8 +18,8 @@ This folder retains three declarative prompt-panel definitions that can be rebou
 
 ## Evaluation Rubric
 
-When evaluating a new TinyStories checkpoint on the full 12-prompt panel (6 development + 6 held-out prefixes, greedy and sampled = 24 continuations at 192 tokens):
+To score a new TinyStories checkpoint, use the full 12-prompt panel: 6 development and 6 held-out prefixes, each decoded greedy and sampled, for 24 continuations of 192 tokens.
 
-- **Target quality threshold:** at least 20/24 relevant, readable, and internally consistent story continuations (including at least 10/12 on the held-out prefixes) and 18/24 complete story endings.
-- **Failure modes to check:** sentence-level repetition loops, character/object identity swaps (e.g., a red ball turning into a blue box), dropped prompt premises, and abrupt mid-sentence cutoffs.
-- **Honest reporting:** retain all 24 outputs—including failures—alongside validation loss and perplexity so readers can compare actual generation behavior rather than cherry-picked samples.
+- **Target:** at least 20 of 24 continuations that are relevant, readable, and consistent (with at least 10 of 12 on the held-out prefixes), and at least 18 of 24 that reach a complete ending.
+- **Failures to look for:** sentences repeating in loops, characters or objects swapping (a red ball turning into a blue box), the prompt's setup getting dropped, and stories cut off mid-sentence.
+- **Reporting:** keep all 24 outputs, failures included, next to the validation loss and perplexity, so readers see what the model really writes.
