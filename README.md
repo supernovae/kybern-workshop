@@ -175,3 +175,7 @@ kybern-workshop/
 
 Pull requests for experiment replications, new declarative recipes, baseline improvements, and links to community forks are welcome! Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Kybern Community Lab guide](https://kybern.dev/research/community-lab/) to get started.
 
+
+## License
+
+Workshop's recipes, declarations and documentation are [MIT licensed](LICENSE). Datasets, upstream model sources and any recorded third-party text keep their own licenses.
