@@ -31,37 +31,16 @@ inputs/
   packed/b0892750f1d1206ca5ddfc4a47ed3257bed54651146d3b8558e0321d280498fb/...
 ```
 
-Run the read-only preflight check or generate a transfer manifest with `handoff.py`:
+Verify the staged inputs with Lab before any GPU work: `klab tokenizer verify`
+checks the tokenizer against its config, and
+`klab data prepared-inputs verify` cold-verifies packed inputs at the
+execution site.
 
-```sh
-python3 examples/tinystories-rocm/handoff.py preflight --inputs /path/to/retained-inputs
-python3 examples/tinystories-rocm/handoff.py transfer-manifest \
-  --inputs /path/to/retained-inputs \
-  --output /path/to/evidence/transfer-manifest.json
-```
+## Running It
 
-During container execution, `handoff.py stage` verifies the read-only input manifests and copies the packed cache into a writable `/state/cache/<identifier>` directory before running cold artifact verification.
-
-## Binding a Container Session
-
-Use `bind_session.py` to generate the seven-slot session specification (`copy-inputs`, `validate`, `apply`, `approve`, `run`, `status`, and `report`):
-
-```sh
-python3 examples/tinystories-rocm/bind_session.py bind --help
-```
-
-After training completes, bind the report job from the campaign's lock, workspace, and evidence index paths:
-
-```sh
-python3 examples/tinystories-rocm/bind_session.py report \
-  --state /path/to/state --lock /path/to/state/lock.json \
-  --workspace /path/to/state/workspace --index /path/to/state/index.json
-```
-
-## Running Offline Tests
-
-The stdlib test suite exercises input preflight, manifest generation, staging guards, and session binding without requiring a GPU or Docker daemon:
-
-```sh
-python3 -m unittest discover -s examples/tinystories-rocm -p 'test_*.py' -v
-```
+The campaign runs through `klab experiment recipe workflow inspect`, `resolve`,
+`apply`, `approve` and `report`; see
+[packaging and inspecting a recipe](../../docs/native-workflow.md#packaging-and-inspecting-a-recipe).
+The recorded run used container-session helper scripts that have since been
+removed; they are preserved in Git history, and the result is in
+[`results/2026-10-31-tinystories-rocm`](../../results/2026-10-31-tinystories-rocm/README.md).

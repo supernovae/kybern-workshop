@@ -1,6 +1,6 @@
 # TinyStories sample declarations
 
-Start with the [lab walkthrough](../../../docs/tinystories-microlab.md).
+Start with the [lab walkthrough](https://github.com/supernovae/model-lab/blob/main/docs/tinystories-microlab.md).
 Copy only `source.yaml`, `tokenizer.yaml` and `run.yaml` into a fresh external
 workspace's `inputs/` directory, prepare the snapshot/tokenizer, and use `try`
 for the width comparison. Relative paths resolve against those copied YAML files.
@@ -18,15 +18,15 @@ previous lab baseline automatically.
 
 | File | Purpose | Native guide |
 | --- | --- | --- |
-| `continued.yaml` | PyTorch AdamW child: 80 cumulative updates / 20,480 targets, original 40-update decay horizon | [Checkpointing](../../../docs/checkpointing.md) |
-| `matrix.yaml` | Two fresh FFN widths at the baseline budget | [Experiments](../../../docs/experiments.md) |
-| `plan.yaml` | Width comparison with checkpoint-bound child phases | [Training programs](../../../docs/experiment-programs.md) |
-| `campaign.yaml` | Acquisition through evaluation for three selected cells; optional wider child unselected | [Campaigns](../../../docs/campaigns.md) |
+| `continued.yaml` | PyTorch AdamW child: 80 cumulative updates / 20,480 targets, original 40-update decay horizon | [Checkpointing](https://github.com/supernovae/model-lab/blob/main/docs/checkpointing.md) |
+| `matrix.yaml` | Two fresh FFN widths at the baseline budget | [Experiments](https://github.com/supernovae/model-lab/blob/main/docs/experiments.md) |
+| `plan.yaml` | Width comparison with checkpoint-bound child phases | [Training programs](https://github.com/supernovae/model-lab/blob/main/docs/experiment-programs.md) |
+| `campaign.yaml` | Acquisition through evaluation for three selected cells; optional wider child unselected | [Campaigns](https://github.com/supernovae/model-lab/blob/main/docs/campaigns.md) |
 
 For those routes copy the required declarations into a separate workspace;
 `campaign.yaml` belongs at its root with the other YAML files in `inputs/`.
 Keep matched scientific settings and backend selections consistent before locking.
-Larger-source exercises use [dataset coverage and budgets](../../../docs/datasets.md).
+Larger-source exercises use [dataset coverage and budgets](https://github.com/supernovae/model-lab/blob/main/docs/datasets.md).
 The original [acceptance record](acceptance.md) retains the completed Campaign's
 identities, measured results and limitations. It describes that execution, not
 the beginner lab walkthrough.

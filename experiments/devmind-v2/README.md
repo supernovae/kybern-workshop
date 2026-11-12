@@ -7,7 +7,7 @@ starts training, copies private archives, or deletes anything.
 
 ## Contents
 
-- `experiment.json`, `model.json`, `optimizer.json`: full 24-layer, 1,024-wide,
+- `experiment.json`, `run.json`, `model.json`, `optimizer.json`: full 24-layer, 1,024-wide,
   4K-context backbone; tokenizer-bound Engram at blocks 1/14 from initialization;
   prime-XOR tables, context-key gates, causal convolution and independent memory
   initialization. This is not a reduced smoke model.
@@ -24,34 +24,25 @@ starts training, copies private archives, or deletes anything.
 - [Native commands](native-commands.md): binding, mapping, packing, measured
   schedule derivation, re-verification, staging, training, recovery and reporting.
 - [Protocol](protocol.md): scientific settings, evaluation, acceptance and recovery.
-- `tests/test_devmind_v2.py`: offline contracts plus opt-in connected native schema,
-  mapping, derivation and command-parser tests. These never train or download.
 
-## Compatibility and tests
+## Compatibility
 
 Use the engine revision recorded in `compatibility.json`, not an older checkout
 that silently lacks Engram, dynamic document batching, retention or scheduling.
 Workshop remains declarative; engine implementations and behavioral tests belong
 in Kybern Model Lab. There is no second training loop or packing implementation.
 
-The recorded SHA identifies the tested PR source, not a required merge strategy.
-A squash merge produces a different main SHA. Either check out the recorded source
-revision or verify the resulting merged diff and rerun the connected tests against
-that main checkout; record its actual SHA in run provenance. The connected tests
-exercise native contracts and do not impose an ancestor-only or exact-SHA gate.
-
-From Workshop, in an already provisioned compatible environment:
+The recorded SHA identifies the tested source, not a required merge strategy.
+Record the SHA of the Lab you actually run in run provenance. To check these
+declarations against it, in an already provisioned environment:
 
 ```sh
-python -B -m unittest discover -s tests -p 'test_devmind_v2.py' -v
-WORKSHOP_LAB_CHECKOUT=/absolute/compatible/lab \
-  python -B -m unittest discover -s tests -p 'test_devmind_v2.py' -v
+klab config validate experiments/devmind-v2
 ```
 
-The first command deliberately skips connected tests. A skipped test is not a
-compatibility pass. The second imports the selected Lab source into the existing
-interpreter; it installs nothing. Run the complete offline Workshop test suite
-and the Lab feature tests before calling the pair merge-ready.
+That validates the model and optimizer sections against the installed schema
+and installs nothing. The composed config in
+[native commands](native-commands.md) is validated when it is written.
 
 ## Honest boundaries
 

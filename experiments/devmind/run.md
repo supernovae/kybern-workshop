@@ -1,7 +1,8 @@
 # Run and revise DevMind
 
 [`experiment.json`](experiment.json) is the editable experiment intent. It references
-[`model.json`](model.json) and [`optimizer.json`](optimizer.json), keeps the full
+[`run.json`](run.json), [`model.json`](model.json) and
+[`optimizer.json`](optimizer.json), keeps the full
 341,885,952-parameter architecture and defines the 12B unique-target 60/20/20 baseline.
 The preparation phase maps are tools for producing missing inputs, not a mandatory
 25-step prerequisite for every iteration. Reuse unchanged native artifacts.
@@ -41,14 +42,17 @@ its inputs. Neither the example nor the unbound intent is a runnable config.
 ```sh
 cp experiments/devmind/binding.example.json "$EXPERIMENT_DIR/bindings.json"
 # Edit bindings.json with actual artifacts, measured counts and selected runtime.
-python scripts/bind-experiment.py experiments/devmind/experiment.json \
-  --bindings "$EXPERIMENT_DIR/bindings.json" \
-  --output "$EXPERIMENT_DIR/run.json"
-klab config validate "$EXPERIMENT_DIR/run.json" --kind run --json
-klab inspect "$EXPERIMENT_DIR/run.json" --json
+klab config compose experiments/devmind/run.json \
+  model=experiments/devmind/model.json \
+  optimizer=experiments/devmind/optimizer.json \
+  "$EXPERIMENT_DIR/bindings.json" --output "$EXPERIMENT_DIR/run.yaml"
+klab inspect "$EXPERIMENT_DIR/run.yaml" --json
 ```
 
-Binding writes a fresh file and validates the native RunConfig schema. It does not
+`config compose` merges the run section, the model and optimizer sections and
+your bindings, refuses the result unless it is a complete valid RunConfig (an
+unbound `null` is named in the error), and writes a fresh file with a receipt of
+each part's digest. It does not
 verify artifact contents or claim readiness. Lab's native mixture/tokenizer and
 prepared-input verification remain authoritative. Existing prepared inputs may be
 supplied through native `train --stage-bundle`; bind that artifact using Lab's own
@@ -105,17 +109,11 @@ changes start new runs; `--resume` is for compatible checkpoint continuation.
 
 ## Verification and remaining bindings
 
-Reviewed against Lab `9d4c840ef1f102becf27532c2548c505c2ed35a6`.
-`tests/test_devmind_experiment.py` checks authoring, missing binding refusal and
-exclusive output. Its optional native integration checks validate the full model's
-RunConfig and parameter inventory, compile actual train/resume/eval CLI arguments,
-and exercise native derivation. They never allocate/train the full model or access
-production data. Run with Lab installed:
-
-```sh
-WORKSHOP_LAB_CHECKOUT=/absolute/path/to/model-lab \
-  python -m unittest discover -s tests -p test_devmind_experiment.py -v
-```
+Reviewed against Lab `9d4c840ef1f102becf27532c2548c505c2ed35a6`. To check
+these declarations against the Lab you have installed, run
+`klab config validate experiments/devmind` for the sections and
+`klab inspect "$EXPERIMENT_DIR/run.yaml"` for the composed config's parameter
+inventory and memory plan. Neither allocates the model or reads production data.
 
 Execution-site decisions still needed: verified mixture and tokenizer locations,
 actual data counts, runtime/device, cache/run store, checkpoint retention capacity,

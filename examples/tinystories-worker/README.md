@@ -4,7 +4,7 @@
 
 For the interactive TinyStories walkthrough and local `klab try` comparison, start with the [TinyStories microlab guide](../tinystories-microlab/README.md) or [kybern.dev/models/tinystories-training](https://kybern.dev/models/tinystories-training/).
 
-This directory contains a smaller, self-contained two-arm CPU Campaign recipe (64 train / 16 validation stories, FFN width 64 vs. 96) and a standard-library helper (`handoff.py`) for binding preparation and workflow stages on a CPU worker.
+This directory contains a smaller, self-contained two-arm CPU Campaign recipe (64 train / 16 validation stories, FFN width 64 vs. 96): its preparation campaign, run config, plan, campaign and evaluation suite.
 
 - **Recorded smoke result:** [`results/2026-10-15-tinystories-smoke/README.md`](../../results/2026-10-15-tinystories-smoke/README.md)
 
@@ -20,48 +20,15 @@ This directory contains a smaller, self-contained two-arm CPU Campaign recipe (6
 | **Evaluation** | 1 batch per evaluation pass (up to 24 batches / 768 targets across both arms) |
 | **Resource bounds** | 3,600-second wall limit, 4 GiB observed process-tree RSS, 2 GiB retained output |
 
-## Handoff Helper Commands (`handoff.py`)
+## Running It
 
-`handoff.py` generates native `klab` CLI argument lists and binds artifact hashes between preparation and workflow stages without launching workloads itself.
+The declarations run through Lab's own recipe commands; nothing here launches
+work. Lock the source with `klab data lock source.json`, then follow
+[packaging and inspecting a recipe](../../docs/native-workflow.md#packaging-and-inspecting-a-recipe):
+`klab experiment recipe create` inventories the declarations,
+`klab experiment recipe preparation inspect` and `apply` prepare the inputs, and
+`klab experiment recipe workflow inspect`, `resolve`, `apply`, `approve` and
+`report` run the paired campaign. Local paths go in a bindings file outside Git.
 
-1. **Render the command sequence:**
-   ```sh
-   python3 -B examples/tinystories-worker/handoff.py commands \
-     --python /path/to/venv/bin/python \
-     --recipe /path/to/examples/tinystories-worker \
-     --work /path/to/work
-   ```
-2. **Lock source metadata and bind preparation:**
-   After running `klab data lock` to produce `source.lock.json`, verify the lock against `first-files.json` and generate the preparation recipe:
-   ```sh
-   python3 -B examples/tinystories-worker/handoff.py bind-preparation \
-     --recipe /path/to/examples/tinystories-worker \
-     --source-lock /path/to/work/source.lock.json \
-     --destination /path/to/work/preparation-recipe \
-     --work /path/to/work \
-     --bindings /path/to/work/preparation-bindings.json
-   ```
-3. **Generate preparation admission:**
-   ```sh
-   python3 -B examples/tinystories-worker/handoff.py admission \
-     --phase preparation \
-     --recipe /path/to/work/preparation-recipe \
-     --reviewed-commit COMMIT_SHA \
-     --bindings /path/to/work/preparation-bindings.json \
-     --output /path/to/work/preparation-admission.json
-   ```
-4. **Seal the paired workflow after preparation completes:**
-   ```sh
-   python3 -B examples/tinystories-worker/handoff.py seal-workflow \
-     --recipe /path/to/work/preparation-recipe \
-     --receipt /path/to/work/preparation-result.json \
-     --destination /path/to/work/workflow-recipe \
-     --work /path/to/work \
-     --bindings /path/to/work/workflow-bindings.json
-   ```
-
-## Running the Unit Tests
-
-```sh
-python3 -B -m unittest discover -s examples/tinystories-worker -p test_handoff.py -v
-```
+The recorded smoke result used a helper script that has since been removed;
+its commands are preserved in Git history.

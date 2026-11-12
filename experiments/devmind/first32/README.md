@@ -104,21 +104,11 @@ attempt root. Its native split-freeze leaf is `splits-reviewed.yaml`, matching
 `project-build.yaml`; keep the accompanying freeze receipt and family candidates.
 The reviewed release's admission path is relative to that recipe directory.
 
-Offline contract checks use an already installed subset-capable Lab checkout:
-
-```sh
-WORKSHOP_LAB_CHECKOUT=/absolute/path/to/model-lab python -m unittest discover -s tests -v
-```
-
-The connected test substitutes generated rows, 8/1/1 family weights, a 260-token
-BPE vocabulary, 6,000 fit bytes and 300 training targets, then reaches a cold
-prepared bundle. It performs no model execution and proves no real-data capacity
-or model quality. The production values remain 98/1/1, 32,768 vocabulary,
-32 MiB fit and 4,194,304 targets.
-
-The generated-fixture test also hides all original parent, recipe, mixture and
-cache paths before cold-verifying and copying the sealed prepared bundle. This
-checks the runner handoff boundary without executing a model.
+Check the declarations against the Lab you have installed with
+`klab config validate experiments/devmind/first32`. Connected coverage of this
+preparation path on small generated inputs lives in Lab's own test suite, not
+here. The production values remain 98/1/1, 32,768 vocabulary, 32 MiB fit and
+4,194,304 targets.
 
 For supervised subset creation, bind both `acquisition_project_sha256` (the
 rendered project file) and `preparation_acquisition_identity_sha256` (the native

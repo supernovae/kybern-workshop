@@ -1,0 +1,42 @@
+name: Declarations
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    name: Declarations load with Kybern Model Lab
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: workshop
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: supernovae/model-lab
+          path: model-lab
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - name: Recipes are declarations, not programs
+        working-directory: workshop
+        run: |
+          # A component package under components/ is the one place Python belongs.
+          found="$(git ls-files '*.py' '*.sh' | grep -v '^components/' || true)"
+          if [ -n "$found" ]; then
+            echo "Workshop holds declarations only; move this into Kybern Model Lab:"
+            echo "$found"
+            exit 1
+          fi
+      - name: Validate every declaration against Lab main
+        working-directory: model-lab
+        # Schema validation needs no accelerator framework, so none is installed.
+        run: |
+          uv sync --locked --no-dev
+          uv run --locked --no-dev klab config validate ../workshop
