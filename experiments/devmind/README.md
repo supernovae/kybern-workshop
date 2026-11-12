@@ -6,7 +6,7 @@
 Start with the [run guide](run.md).
 This directory holds the model and optimizer configs, the 25-leaf corpus preparation plan, and the pinned upstream dataset shards. You run them with [Kybern Model Lab](https://github.com/supernovae/model-lab).
 
-> **Snapshot from 2026-11-10:** Training was continuing in the Engram phase on **2x Intel Arc Pro B70 GPUs**, at `~36,660 valid targets/s` (a **+68.5%** steady speedup).
+> **Snapshot from 2026-11-10:** Training was continuing in the Engram phase on **2x Intel Arc Pro B70 GPUs**, measured at `35,163 valid targets/s` in the isolated benchmark (**+68.5%** over one B70) and `34,274.5 valid targets/s` live (**+60.5%**); see the [B70 performance record](b70-performance-20261106.md).
 >
 > Segments 1 through 16 finished at step `64,315` with `6,766,391,105` Engram targets and validation loss **`2.5383300`**. Counting the dense backbone phase as well, that is `8,846,765,889` combined targets using the `2,080,374,784`-target nominal reference, or `8,847,422,540` using the `2,081,031,435` packed dense-backbone tokens.
 >

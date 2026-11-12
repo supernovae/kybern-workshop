@@ -15,8 +15,9 @@ The metadata-only dataset lock and its native verification also passed on the
 reference pin, without downloading the stories. The later
 [local ROCm results](../../results/2026-10-31-tinystories-rocm/README.md) record the
 download, preparation and reuse, GPU pilots, the full 5M run with signal and resume
-checks, and short 50M calibration runs. The full 50M run and the remote/Colab
-handoffs are still untested. Moving to a new source pin
+checks, short 50M calibration runs, and a full 50M BF16 run to 1,000,001,536
+targets. The original FP32 50M recipe (`run-50m.json`) has not run in full, and
+the remote/Colab handoffs are still untested. Moving to a new source pin
 also caused an unexpected rebuild of the packed cache; the record lists it as a
 rebuild rather than as reuse.
 

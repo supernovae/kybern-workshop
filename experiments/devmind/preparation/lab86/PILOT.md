@@ -2,17 +2,19 @@
 
 [Back to Package Overview](README.md)
 
+> **Pinned before the Lab rename:** this package uses Kybern Model Lab commits from before the CLI was renamed `klab`. To replay it at those commits, use `sparselab` (and `SPARSELAB_*` variables) in place of `klab`; see [Records Pinned Before the Rename](../../../../docs/native-workflow.md#records-pinned-before-the-rename).
+
 This guide walks through the four-step pilot session set up by `pilot-session.template.json`, `pilot-contract.template.json`, `pilot-content.json`, and the templates in `pilot-jobs/`.
 
 ## Pilot Workflow Steps
 
 1. **Prepare Environment & Runtime:**
-   Use a Linux `amd64` container environment with Tiny Sparse Lab (`0af1683188edacecf0856baa3520354363358f0d` or newer, which includes ISO-8601 Parquet timestamp serialization). Verify at least 24 GiB available RAM, 310 GiB free disk space, and 100,000 free inodes.
+   Use a Linux `amd64` container environment with Kybern Model Lab (`0af1683188edacecf0856baa3520354363358f0d` or newer, which includes ISO-8601 Parquet timestamp serialization). Verify at least 24 GiB available RAM, 310 GiB free disk space, and 100,000 free inodes.
 2. **Prepare Receipt Parent & Capture Workspace Baseline:**
    In a fresh private workspace, create the phase receipt directory before taking the baseline. Make sure `$WORK` and its parent directories are real directories rather than symlinks. Leave the harness session receipt directories for the harness to create.
    ```sh
    mkdir -m 700 -p "$WORK/phases/receipts"
-   python -m sparselab monitor-baseline "$WORK" --output "$WORK/baseline.json" --json
+   python -m klab monitor-baseline "$WORK" --output "$WORK/baseline.json" --json
    ```
    Bind the resulting baseline SHA-256 into `pilot-contract.template.json` alongside the SHA-256 of `pilot-content.json`.
 3. **Render Session & Job Templates:**
@@ -44,7 +46,7 @@ If the project binding changes, it can't reuse or reset an existing ledger. Runn
 
 ## Reference Pins
 
-- **Tiny Sparse Lab commit:** `0af1683188edacecf0856baa3520354363358f0d`
+- **Kybern Model Lab commit:** `0af1683188edacecf0856baa3520354363358f0d`
 - **Container image:** `ghcr.io/supernovae/tiny-sparse-lab@sha256:b56dc5b447503fd6f7e4aff7a208e8b225f102000da1b180d2586a732deffcd2`
 - **Package manifest:** [`package-sha256.json`](package-sha256.json)
 

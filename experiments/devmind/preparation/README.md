@@ -1,8 +1,8 @@
-# DevMind Corpus Preparation Plan (24 Phases)
+# DevMind Corpus Preparation Plan (25 Phases)
 
 [Back to DevMind Overview](../README.md) · [Shard Package (`lab86/README.md`)](lab86/README.md)
 
-[`preparation.json`](preparation.json) is the 24-phase [Kybern Model Lab](https://github.com/supernovae/model-lab) workflow that prepares the **DevMind 340M Base** corpus. The pinned shard files, filtering policies and job templates are in [`lab86/`](lab86/README.md).
+[`preparation.json`](preparation.json) is the 25-phase [Kybern Model Lab](https://github.com/supernovae/model-lab) workflow that prepares the **DevMind 340M Base** corpus. The pinned shard files, filtering policies and job templates are in [`lab86/`](lab86/README.md).
 
 ## Inspecting Phase Commands
 
