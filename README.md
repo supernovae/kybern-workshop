@@ -13,6 +13,7 @@
 <p align="center">
   <a href="https://kybern.dev/models/tinystories-training/">TinyStories Guide</a> ·
   <a href="examples/synthetic-cpu/README.md">Basic CPU Smoke</a> ·
+  <a href="components/README.md">Custom Components</a> ·
   <a href="experiments/devmind/README.md">DevMind 340M</a> ·
   <a href="#community-experiments--forks">Community Experiments</a> ·
   <a href="https://kybern.dev/experiments/">Kybern Research</a>
