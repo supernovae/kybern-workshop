@@ -1,0 +1,24 @@
+# Copy outside Git and fill in. Used for the instruct stage; the prefer stage
+# takes the same shape with `source: local_preference` and no tokenizer origin.
+tokenizer:
+  path: /data/devmind/tokenizer/tokenizer.json
+  # The tokenizer was fitted on the corpus, so a chat run names where it came
+  # from. The three digests are printed by `klab tokenizer verify`.
+  origin:
+    mixture_declaration_path: /data/devmind/recipe/corpus/mixture.yaml
+    mixture_declaration_sha256: REPLACE_WITH_MEASURED_SHA256
+    sha256: REPLACE_WITH_MEASURED_SHA256
+    manifest_sha256: REPLACE_WITH_MEASURED_SHA256
+dataset:
+  source: local_chat
+  chat_template: chatml
+  train_path: /data/devmind/chat/train.jsonl
+  validation_path: /data/devmind/chat/validation.jsonl
+  license: Mixed; see post-training/README.md
+  cache_dir: /data/devmind/prepared-chat
+  train_max_documents: REPLACE_WITH_CONVERSATION_COUNT
+  train_max_tokens: REPLACE_WITH_TOKEN_COUNT
+  validation_max_documents: REPLACE_WITH_CONVERSATION_COUNT
+  validation_max_tokens: REPLACE_WITH_TOKEN_COUNT
+logging:
+  root_dir: /data/devmind/runs

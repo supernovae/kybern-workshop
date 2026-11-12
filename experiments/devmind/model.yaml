@@ -1,0 +1,26 @@
+# Devmind: 729,709,856 parameters (klab inspect), 32,768-token context.
+vocab_size: 32768
+hidden_dim: 1536
+num_layers: 28
+num_heads: 24
+ffn_dim: 4096
+max_seq_len: 32768
+rms_norm_eps: 1.0e-06
+tie_embeddings: true
+ffn: dense
+# Engram n-gram memory, present from the first update, after blocks 1 and 14.
+memory: ngram
+memory_variant: context_key
+memory_injection: after_block
+memory_block_indices: [1, 14]
+memory_ngram_size: 3
+memory_ngram_orders: [2, 3]
+memory_hash_heads: 2
+memory_dim: 64
+memory_conv_kernel_size: 4
+memory_addressing: prime_xor_v1
+memory_hash_seed: 42
+memory_table_size: 65537
+memory_table_sizes: [65537, 65539, 65543, 65551, 65557, 65563, 65579, 65581]
+memory_padding_token_id: 3
+memory_independent_init: true

@@ -10,7 +10,7 @@ Run a recipe from a clone of this repository, or copy its directory into your ow
 | Goal | `klab` workflow | Notes |
 | --- | --- | --- |
 | **Check every config** | `config validate DIR` | Checks each run, tokenizer, model, and optimizer config under a directory against your installed Lab, and exits non-zero if any fail. CI runs it on this repository. |
-| **Bind sections and local paths** | `config compose` | Merges a run section, model and optimizer sections, and a file of local paths into one checked run config. Used by [DevMind](../experiments/devmind/run.md). |
+| **Bind sections and local paths** | `config compose` | Merges a run section, model and optimizer sections, and a file of local paths into one checked run config. Used by [Devmind](../experiments/devmind/README.md). |
 | **Compare a single change** | `config validate`, `config derive`, then `try` and `report` | Trains a baseline and a candidate on the same data, then scores held-out loss and probes. Used by [TinyStories microlab](../examples/tinystories-microlab/README.md). |
 | **Train & inspect a full baseline** | `data lock`, `experiment recipe preparation apply`, `stage`, `train`, `eval`, `generate` | Runs each step yourself, including continuing from a checkpoint and generating from a prompt panel. Used by [TinyStories CPU baseline](../examples/tinystories-useful/README.md). |
 | **Package a shareable recipe** | `experiment recipe create` and `experiment recipe export` | Bundles configs and metadata with content hashes, so someone else can inspect them and fill in their own local paths. |
@@ -66,7 +66,7 @@ Commit SHAs and pull-request numbers carried over to the renamed repository unch
 
 - The CLI and import package at those commits are `sparselab`, and environment variables use `SPARSELAB_`. Substitute those names when replaying at the recorded commit; use `klab` on current `main`.
 - Pinned container digests stay under their original package, `ghcr.io/supernovae/tiny-sparse-lab@sha256:...`. New images publish to `ghcr.io/supernovae/model-lab`.
-- Recorded files keep their original bytes, old names included: the hashed LAB86 preparation package (`experiments/devmind/preparation/lab86/`), the JSON records under `results/`, and the host paths they mention.
+- Recorded files keep their original bytes, old names included: the JSON records under `results/` and the host paths they mention.
 
 ## Further Reading
 

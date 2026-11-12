@@ -1,0 +1,69 @@
+schema_version: 2
+id: collab_github_threads
+kind: huggingface_dataset
+canonical_uri: https://huggingface.co/datasets/common-pile/github_archive_filtered
+revision: 52282fe96670254bdc0d44dd718ee7a27210ee85
+license: Per-thread permissive licenses (Blue Oak approved); no dataset-level license
+license_url: https://huggingface.co/datasets/common-pile/github_archive_filtered/blob/52282fe96670254bdc0d44dd718ee7a27210ee85/README.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  license_references:
+  - https://huggingface.co/datasets/common-pile/github_archive_filtered/blob/52282fe96670254bdc0d44dd718ee7a27210ee85/README.md
+  notices:
+  - Threads carry per-repository licenses in metadata.license.
+  - 'Exclude SWE-bench repositories at admission: astropy, django, matplotlib, seaborn, flask, requests,
+    xarray, pylint, pytest, scikit-learn, sphinx, sympy.'
+domains:
+- collaboration
+document_kinds:
+- prose
+source_family: collab_github_threads
+acquisition:
+  config: default
+  split: train
+  text_field: text
+  max_rows: 100000000
+  max_bytes: 549755813888
+  bounded_shards:
+  - path: gharchive-dolma-0000.json.gz
+    expected_sha256: c0ad81b1a536a05fc8fd08ab89756a3dead8d9f71005716b230ec352c03764d8
+    max_shard_bytes: 809769500
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: default
+    declared_split: train
+  - path: gharchive-dolma-0001.json.gz
+    expected_sha256: 6e40dba9fd6e727caef9fdd50481015e377199de5b804055f4c961b79dc9b4be
+    max_shard_bytes: 808351331
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: default
+    declared_split: train
+  - path: gharchive-dolma-0002.json.gz
+    expected_sha256: 4386ee5747526a2661d27d48892b2c0dfa8f7623cffbd871de9be7890db86fc5
+    max_shard_bytes: 801403891
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: default
+    declared_split: train
+  - path: gharchive-dolma-0003.json.gz
+    expected_sha256: 49dbcd1c482b118fe8673d57bab7ee53b379e2f0c90a283ab54d30ff1a0d5dfb
+    max_shard_bytes: 807203514
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: default
+    declared_split: train
+  qualification:
+    profile: web_text
+    family_fields:
+    - metadata.repo

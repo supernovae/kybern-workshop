@@ -1,0 +1,45 @@
+# Stage 4 (optional): preference tuning (DPO) on chosen and rejected replies,
+# starting from the instruct checkpoint. Lab runs this objective on one device,
+# and a second frozen copy of the model shares that device, so rows are short.
+schema_version: 2
+name: devmind-prefer
+seed: 42
+training:
+  seq_len: 2048
+  micro_batch_size: 1
+  gradient_accumulation: 8
+  max_steps: 1500
+  max_tokens: 24576000
+  grad_clip_norm: 1.0
+  deterministic: false
+  parent_checkpoint: REPLACE_WITH_INSTRUCT_RUN_DIRECTORY
+  objective:
+    kind: preference
+    params: {beta: 1.0}
+optimizer:
+  name: adamw
+  peak: 0.00001
+  floor: 0.000001
+  warmup_steps: 100
+  decay_steps: 1500
+  weight_decay: 0.0
+  betas: [0.9, 0.95]
+  eps: 1.0e-08
+evaluation:
+  every_steps: 100
+  max_batches: 16
+checkpoint:
+  every_steps: 500
+  save_on_new_best: false
+  keep_periodic: false
+logging:
+  every_steps: 10
+runtime:
+  engine: pytorch
+  backend: xpu
+  device_index: 0
+  precision: bf16
+  memory:
+    activation_checkpointing:
+      enabled: true
+      strategy: transformer_block

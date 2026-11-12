@@ -1,0 +1,25 @@
+schema_version: 2
+id: ref_express_docs
+kind: git
+canonical_uri: https://github.com/expressjs/expressjs.com
+revision: 2cbcce8fdc5b31b7e5ecdbf0c80fd52e9efaa3a2
+license: CC-BY-4.0
+license_url: https://github.com/expressjs/expressjs.com/blob/2cbcce8fdc5b31b7e5ecdbf0c80fd52e9efaa3a2/LICENSE.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-4.0
+  license_references:
+  - https://github.com/expressjs/expressjs.com/blob/2cbcce8fdc5b31b7e5ecdbf0c80fd52e9efaa3a2/LICENSE.md
+  notices:
+  - Attribute in the model card.
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_express_docs
+acquisition:
+  include:
+  - en/*.md
+  max_bytes: 1073741824

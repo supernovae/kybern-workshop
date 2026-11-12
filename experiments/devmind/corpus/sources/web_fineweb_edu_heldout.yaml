@@ -1,0 +1,45 @@
+schema_version: 2
+id: web_fineweb_edu_heldout
+kind: huggingface_dataset
+canonical_uri: https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus
+revision: 3ba9d605774198c5868892d7a8deda78031a781f
+license: ODC-By-1.0
+license_url: https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus/blob/3ba9d605774198c5868892d7a8deda78031a781f/README.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: ODC-By-1.0
+  license_references:
+  - https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus/blob/3ba9d605774198c5868892d7a8deda78031a781f/README.md
+  notices:
+  - Attribute the dataset and its upstream sources in the model card.
+  - 'License as stated upstream: ODC-By-1.0; Common Crawl terms of use.'
+domains:
+- web
+document_kinds:
+- prose
+source_family: web_fineweb_edu_heldout
+acquisition:
+  config: fineweb-edu-dedup
+  split: train
+  text_field: text
+  max_rows: 100000000
+  max_bytes: 549755813888
+  bounded_shards:
+  - path: fineweb-edu-dedup/train-00233-of-00234.parquet
+    expected_sha256: 224b049153c6bdb7ad02f8c2ac51999dd8512943b80526444ecf926f21f6cca9
+    max_shard_bytes: 2488065635
+    max_scanned_rows: 50000000
+    hash_modulus: 200
+    hash_remainders:
+    - 0
+    declared_config: fineweb-edu-dedup
+    declared_split: train
+  qualification:
+    profile: web_text
+    family_fields:
+    - metadata.url
+    language_field: metadata.language
+    allowed_languages:
+    - en

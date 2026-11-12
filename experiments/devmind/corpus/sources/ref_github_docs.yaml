@@ -1,0 +1,25 @@
+schema_version: 2
+id: ref_github_docs
+kind: git
+canonical_uri: https://github.com/github/docs
+revision: 6d56af0c8b62bde11bb3d9df46244fab5f0a00f9
+license: CC-BY-4.0
+license_url: https://github.com/github/docs/blob/6d56af0c8b62bde11bb3d9df46244fab5f0a00f9/LICENSE
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-4.0
+  license_references:
+  - https://github.com/github/docs/blob/6d56af0c8b62bde11bb3d9df46244fab5f0a00f9/LICENSE
+  notices:
+  - Attribute in the model card.
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_github_docs
+acquisition:
+  include:
+  - content/*.md
+  max_bytes: 4294967296

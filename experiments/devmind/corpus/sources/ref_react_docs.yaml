@@ -1,0 +1,25 @@
+schema_version: 2
+id: ref_react_docs
+kind: git
+canonical_uri: https://github.com/reactjs/react.dev
+revision: 46a54e0592729712b7640308b53268e84fdc7c9f
+license: CC-BY-4.0
+license_url: https://github.com/reactjs/react.dev/blob/46a54e0592729712b7640308b53268e84fdc7c9f/LICENSE-DOCS.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-4.0
+  license_references:
+  - https://github.com/reactjs/react.dev/blob/46a54e0592729712b7640308b53268e84fdc7c9f/LICENSE-DOCS.md
+  notices:
+  - Attribute in the model card.
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_react_docs
+acquisition:
+  include:
+  - src/content/*.md
+  max_bytes: 1073741824

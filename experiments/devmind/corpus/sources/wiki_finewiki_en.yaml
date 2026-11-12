@@ -1,0 +1,60 @@
+schema_version: 2
+id: wiki_finewiki_en
+kind: huggingface_dataset
+canonical_uri: https://huggingface.co/datasets/HuggingFaceFW/finewiki
+revision: 8bd13e72e6a002407649b3e898535f42ceb1aeb9
+license: CC-BY-SA-4.0
+license_url: https://huggingface.co/datasets/HuggingFaceFW/finewiki/blob/8bd13e72e6a002407649b3e898535f42ceb1aeb9/README.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-SA-4.0
+  license_references:
+  - https://huggingface.co/datasets/HuggingFaceFW/finewiki/blob/8bd13e72e6a002407649b3e898535f42ceb1aeb9/README.md
+  notices:
+  - 'Wikipedia text is share-alike: attribute it and keep this stratum separable.'
+  - 'License as stated upstream: CC-BY-SA-4.0 and GFDL.'
+domains:
+- wiki
+document_kinds:
+- prose
+source_family: wiki_finewiki_en
+acquisition:
+  config: enwiki
+  split: train
+  text_field: text
+  max_rows: 100000000
+  max_bytes: 549755813888
+  bounded_shards:
+  - path: data/enwiki/000_00000.parquet
+    expected_sha256: 8770000c2b1fd62743601ea24cdebd784f943cf3fa7bbe33161521a6f5ca7c74
+    max_shard_bytes: 2510037970
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: enwiki
+    declared_split: train
+  - path: data/enwiki/000_00001.parquet
+    expected_sha256: eb29c5b3d23010c17f225a9a6370049afa90b168f3d70744e5e015729455cb55
+    max_shard_bytes: 2559070630
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: enwiki
+    declared_split: train
+  - path: data/enwiki/000_00002.parquet
+    expected_sha256: b98a10ff8a3f21291e4174564a5cbe186eab66fcca9c53c0920d182f718c5b9a
+    max_shard_bytes: 2538629269
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: enwiki
+    declared_split: train
+  qualification:
+    profile: web_text
+    family_fields:
+    - url

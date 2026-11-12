@@ -1,0 +1,25 @@
+schema_version: 2
+id: practice_owasp_cheatsheets
+kind: git
+canonical_uri: https://github.com/OWASP/CheatSheetSeries
+revision: ef7070e672ad3791b6cbad20491a29b9abe01a82
+license: CC-BY-SA-4.0
+license_url: https://github.com/OWASP/CheatSheetSeries/blob/ef7070e672ad3791b6cbad20491a29b9abe01a82/LICENSE.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-SA-4.0
+  license_references:
+  - https://github.com/OWASP/CheatSheetSeries/blob/ef7070e672ad3791b6cbad20491a29b9abe01a82/LICENSE.md
+  notices:
+  - 'Share-alike: attribute and keep separable.'
+domains:
+- practice
+document_kinds:
+- markdown
+source_family: practice_owasp_cheatsheets
+acquisition:
+  include:
+  - cheatsheets/*.md
+  max_bytes: 1073741824

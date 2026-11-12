@@ -1,0 +1,26 @@
+schema_version: 2
+id: ref_mdn
+kind: git
+canonical_uri: https://github.com/mdn/content
+revision: 6520bd72ab19f400d537db7a53514f08a589301b
+license: CC-BY-SA-2.5
+license_url: https://github.com/mdn/content/blob/6520bd72ab19f400d537db7a53514f08a589301b/LICENSE.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-SA-2.5
+  license_references:
+  - https://github.com/mdn/content/blob/6520bd72ab19f400d537db7a53514f08a589301b/LICENSE.md
+  notices:
+  - 'MDN prose is share-alike: attribute it and keep this source separable.'
+  - 'License as stated upstream: CC-BY-SA-2.5 prose; code samples CC0-1.0.'
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_mdn
+acquisition:
+  include:
+  - files/en-us/*.md
+  max_bytes: 4294967296

@@ -1,0 +1,25 @@
+schema_version: 2
+id: ref_node_api
+kind: git
+canonical_uri: https://github.com/nodejs/node
+revision: 6728a1cfe024be07f560f09ffa73f394704b5442
+license: MIT
+license_url: https://github.com/nodejs/node/blob/6728a1cfe024be07f560f09ffa73f394704b5442/LICENSE
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: MIT
+  license_references:
+  - https://github.com/nodejs/node/blob/6728a1cfe024be07f560f09ffa73f394704b5442/LICENSE
+  notices:
+  - Attribute in the model card.
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_node_api
+acquisition:
+  include:
+  - doc/api/*.md
+  max_bytes: 1073741824

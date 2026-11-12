@@ -1,0 +1,70 @@
+schema_version: 2
+id: notebooks_kaggle
+kind: huggingface_dataset
+canonical_uri: https://huggingface.co/datasets/HuggingFaceTB/issues-kaggle-notebooks
+revision: ef882ad1ed8274340e8fc9bac087c903f2f75396
+license: Apache-2.0
+license_url: https://huggingface.co/datasets/HuggingFaceTB/issues-kaggle-notebooks/blob/ef882ad1ed8274340e8fc9bac087c903f2f75396/README.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: Apache-2.0
+  license_references:
+  - https://huggingface.co/datasets/HuggingFaceTB/issues-kaggle-notebooks/blob/ef882ad1ed8274340e8fc9bac087c903f2f75396/README.md
+  notices:
+  - 'License as stated upstream: Apache-2.0 (Kaggle notebooks, per dataset card).'
+notes: Family field file_id is taken from the dataset card and was not checked against a shard; confirm
+  with klab corpus preview before acquiring.
+domains:
+- notebooks
+document_kinds:
+- code
+source_family: notebooks_kaggle
+acquisition:
+  config: kaggle
+  split: train
+  text_field: text
+  max_rows: 100000000
+  max_bytes: 549755813888
+  bounded_shards:
+  - path: kaggle/train-00000-of-00011.parquet
+    expected_sha256: b3e07706cc048cfddc33652750b29880fbb2adc843f570ad5013baa7ef310a94
+    max_shard_bytes: 200547625
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: kaggle
+    declared_split: train
+  - path: kaggle/train-00001-of-00011.parquet
+    expected_sha256: 938cbdbc83446e276c65a03ec388dd2711f881f67b3a1f59371ef4c3fd1f5641
+    max_shard_bytes: 202923420
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: kaggle
+    declared_split: train
+  - path: kaggle/train-00002-of-00011.parquet
+    expected_sha256: 8ad7c7691af3f05b6def0e15874b73f4a972219655cdfc51292803b9cb70887f
+    max_shard_bytes: 203919807
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: kaggle
+    declared_split: train
+  - path: kaggle/train-00003-of-00011.parquet
+    expected_sha256: e5e7d892d950c3857d15e366b96b6ac97e8d115e8b0641de4c3803c58609c556
+    max_shard_bytes: 204156616
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: kaggle
+    declared_split: train
+  qualification:
+    profile: web_text
+    family_fields:
+    - file_id

@@ -1,0 +1,60 @@
+# Stage 2: long-context training on 12,288-token rows of long documents,
+# starting from the pretrained checkpoint.
+#
+# 12,288 tokens is the longest row Lab's memory planner accepts on a 32 GiB
+# B70 with room to spare (26.4 GiB estimated; the same planner estimated
+# 22.5 GiB for the 8,192-token row that measured 15.4 GiB). It has not been
+# run. Use `klab stage ... --through warmup` and read the measured peak, then
+# lengthen the row if there is room.
+#
+# Whole 32,768-token rows do not train on a 32 GiB card today: one such row
+# peaked at 26.9 GiB and then spilled into host memory. See the README.
+schema_version: 2
+name: devmind-long-context
+seed: 42
+training:
+  seq_len: 12288
+  micro_batch_size: 1
+  gradient_accumulation: 8
+  max_steps: 10173
+  max_tokens: 1000000000
+  grad_clip_norm: 1.0
+  deterministic: false
+  parent_checkpoint: REPLACE_WITH_PRETRAIN_RUN_DIRECTORY
+optimizer:
+  name: adamw
+  peak: 0.0001
+  floor: 0.00001
+  warmup_steps: 200
+  decay_steps: 10173
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  eps: 1.0e-08
+  memory_table_lr_multiplier: 5.0
+  memory_table_weight_decay: 0.0
+evaluation:
+  every_steps: null
+  every_tokens: 50000000
+  max_batches: 4
+checkpoint:
+  every_steps: null
+  every_tokens: 100000000
+  every_minutes: 120
+  save_on_new_best: false
+  keep_periodic: false
+logging:
+  every_steps: 10
+runtime:
+  engine: pytorch
+  backend: xpu
+  device_index: 0
+  secondary_device_indices: [1, 2, 3]
+  precision: bf16
+  output_head_chunk_tokens: 2048
+  memory:
+    activation_checkpointing:
+      enabled: true
+      strategy: transformer_block
+staging:
+  smoke_steps: 2
+  warmup_steps: 5

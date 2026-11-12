@@ -1,0 +1,81 @@
+schema_version: 2
+id: web_fineweb_edu
+kind: huggingface_dataset
+canonical_uri: https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus
+revision: 3ba9d605774198c5868892d7a8deda78031a781f
+license: ODC-By-1.0
+license_url: https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus/blob/3ba9d605774198c5868892d7a8deda78031a781f/README.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: ODC-By-1.0
+  license_references:
+  - https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus/blob/3ba9d605774198c5868892d7a8deda78031a781f/README.md
+  notices:
+  - Attribute the dataset and its upstream sources in the model card.
+  - 'License as stated upstream: ODC-By-1.0; Common Crawl terms of use.'
+domains:
+- web
+document_kinds:
+- prose
+source_family: web_fineweb_edu
+acquisition:
+  config: fineweb-edu-dedup
+  split: train
+  text_field: text
+  max_rows: 100000000
+  max_bytes: 549755813888
+  bounded_shards:
+  - path: fineweb-edu-dedup/train-00000-of-00234.parquet
+    expected_sha256: 220d0c36f13f24046f080dcd9a9339862d6a0e43f214dd430ed20552c265e309
+    max_shard_bytes: 2395121191
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: fineweb-edu-dedup
+    declared_split: train
+  - path: fineweb-edu-dedup/train-00001-of-00234.parquet
+    expected_sha256: 042c3142b34e287b9e010f0caec83a0e5325a7332559de26229a4e83da9c3eea
+    max_shard_bytes: 2409781018
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: fineweb-edu-dedup
+    declared_split: train
+  - path: fineweb-edu-dedup/train-00002-of-00234.parquet
+    expected_sha256: 6852af18f8f2441e68b37fe70794ceaebab6cf83ba3e9e842e7eec7fd34aafd9
+    max_shard_bytes: 2361762002
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: fineweb-edu-dedup
+    declared_split: train
+  - path: fineweb-edu-dedup/train-00003-of-00234.parquet
+    expected_sha256: cfb9a70502a8fa59598f4ca5f327d2cf535234d8e007c16ae35ff2c87daea9d9
+    max_shard_bytes: 2438670951
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: fineweb-edu-dedup
+    declared_split: train
+  - path: fineweb-edu-dedup/train-00004-of-00234.parquet
+    expected_sha256: ed9f09e315c8a90d104608cc2c7e4296bb4976945b2427788cdf719774f0effb
+    max_shard_bytes: 2347800786
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: fineweb-edu-dedup
+    declared_split: train
+  qualification:
+    profile: web_text
+    family_fields:
+    - metadata.url
+    language_field: metadata.language
+    allowed_languages:
+    - en

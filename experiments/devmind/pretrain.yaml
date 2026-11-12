@@ -1,0 +1,42 @@
+# Stage 1: pretraining. A section: compose it with model.yaml, attention.yaml,
+# optimizer.yaml and your local paths (see README) into a complete run config.
+schema_version: 2
+name: devmind-pretrain
+seed: 42
+training:
+  # One 8,192-token row per microbatch is the largest row measured to train
+  # steadily on a 32 GiB B70 (15.4 GiB peak). Sixteen rows make one update,
+  # four per device on four devices.
+  seq_len: 8192
+  micro_batch_size: 1
+  gradient_accumulation: 16
+  max_steps: 91553
+  max_tokens: 12000000000
+  grad_clip_norm: 1.0
+  deterministic: false
+evaluation:
+  every_steps: null
+  every_tokens: 100000000
+  max_batches: 16
+checkpoint:
+  every_steps: null
+  every_tokens: 250000000
+  every_minutes: 120
+  save_on_new_best: false
+  keep_periodic: false
+logging:
+  every_steps: 20
+runtime:
+  engine: pytorch
+  backend: xpu
+  device_index: 0
+  secondary_device_indices: [1, 2, 3]
+  precision: bf16
+  output_head_chunk_tokens: 2048
+  memory:
+    activation_checkpointing:
+      enabled: true
+      strategy: transformer_block
+staging:
+  smoke_steps: 2
+  warmup_steps: 5
