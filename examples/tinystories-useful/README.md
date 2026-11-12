@@ -2,11 +2,13 @@
 
 [Back to Workshop README](../../README.md) · [Interactive Guide & Output Viewer (kybern.dev)](https://kybern.dev/models/tinystories-training/) · [Recorded Results & 27 Outputs](../../results/2026-10-19-tinystories-cpu/README.md)
 
-This recipe documents a completed [Kybern Model Lab](https://github.com/supernovae/model-lab) training run on CPU: **8,192 updates (33,554,432 target tokens)** on a 4.46M-parameter dense transformer, including verified full-state checkpoints, held-out evaluation, and 27 generated story continuations.
+We trained a 4.46M-parameter dense transformer on CPU with [Kybern Model Lab](https://github.com/supernovae/model-lab) for **8,192 updates (33,554,432 target tokens)**. This recipe covers the whole run: full-state checkpoints, held-out evaluation, and 27 generated story continuations.
 
-**Why this baseline is interesting:** Validation loss dropped smoothly from `8.369` to `1.704` (perplexity `5.498`), and 17 of 24 full-length outputs reach a recognizable story ending—yet **only 2 of 24 pass the provisional assistant-scored story-quality rubric**. The model frequently falls into repetition loops, swaps character names, or drifts away from the opening prompt. We publish the full configuration and all 27 unedited outputs as a concrete, reproducible baseline you can inspect and improve.
+**Why it's worth a look:** validation loss fell smoothly from `8.369` to `1.704` (perplexity `5.498`), and 17 of 24 full-length outputs reach a recognizable story ending. Yet only 2 of 24 pass our story-quality rubric. The model often repeats itself in loops, swaps character names, or drifts away from the prompt. We publish the full config and all 27 unedited outputs so you can read them and try to do better.
 
-The 24 scored outputs come from 12 prompts with greedy and sampled decoding. These judgments are not independent human quality clearance; the [per-output assessment](../../results/2026-10-19-tinystories-cpu/quality-assessment.json) preserves the rubric and limitations. The held-out prompts were excluded from model selection, but train-disjointness has not been audited. The run history includes failed setup steps and a host interruption. Model weights are retained locally, not distributed here; the checkpoint hashes identify historical artifacts, not downloadable weights. A reproduction trains its own model and creates new run and checkpoint identities.
+The 24 scored outputs come from 12 prompts, each decoded greedily and with sampling. An AI assistant scored them against the rubric; no independent human review has been done yet. The [per-output assessment](../../results/2026-10-19-tinystories-cpu/quality-assessment.json) includes the rubric and its limitations. We kept the held-out prompts out of model selection, but haven't checked whether they overlap the training stories. The run history includes some failed setup steps and one host interruption.
+
+We kept the weights locally and don't distribute them; the checkpoint hashes in the records describe those local files. If you reproduce the run, you train your own model and get your own run and checkpoint IDs.
 
 For a fast 40-update starter comparison, see the [TinyStories microlab](../tinystories-microlab/README.md).
 
@@ -14,7 +16,7 @@ For a fast 40-update starter comparison, see the [TinyStories microlab](../tinys
 
 ## Baseline Specifications & Recorded Metrics
 
-| Component | Recorded Specification |
+| Component | Recorded Value |
 | --- | --- |
 | **Kybern Model Lab commit** | `7a517b2c065426748cd99702e82ea377877a7809` |
 | **CPU container image** | `ghcr.io/supernovae/tiny-sparse-lab@sha256:e3356de49998903e5f03ee2cb28a9b33a5270d380d65d1ceb6fe195531ea812c` |
@@ -27,13 +29,20 @@ For a fast 40-update starter comparison, see the [TinyStories microlab](../tinys
 | **Held-out evaluation** | 16 batches (16,384 targets): **loss `1.7043`**, **perplexity `5.4976`** |
 | **Measured wall time & RAM** | ~3.3 hours total training time (929 MiB peak RSS); 89.6s total for all 27 inference runs (429 MiB peak RSS) |
 
-> **Pinned before the Lab rename:** this procedure pins a Kybern Model Lab commit from before the CLI was renamed `klab`. To replay exactly at the recorded pin, use `sparselab` (and `SPARSELAB_*` variables) in place of `klab`; see [Records Pinned Before the Rename](../../docs/native-workflow.md#records-pinned-before-the-rename).
+> **Pinned before the Lab rename:** this procedure uses a Kybern Model Lab commit from before the CLI was renamed `klab`. To replay it at that commit, use `sparselab` (and `SPARSELAB_*` variables) in place of `klab`; see [Records Pinned Before the Rename](../../docs/native-workflow.md#records-pinned-before-the-rename).
 
 ---
 
 ## How to Replicate This Run with `klab`
 
-Choose a fresh external workspace directory `WORK` outside Git, set `SOURCE` to this directory (`examples/tinystories-useful`), and pick unique run IDs (`FIRST_RUN_ID` and `CONTINUED_RUN_ID`). Use absolute paths for `WORK` and `SOURCE`, create `WORK` before proceeding, and use the [Lab installation setup](../../README.md#running-workshop-experiments-with-kybern-model-lab) for your selected backend. The table above records the historical execution environment; running current Lab creates a new reproduction, not a re-verification of those retained checkpoint bytes.
+Before you start:
+
+- Create a fresh workspace directory outside Git and set `WORK` to its absolute path.
+- Set `SOURCE` to the absolute path of this directory (`examples/tinystories-useful`).
+- Pick two unique run IDs, `FIRST_RUN_ID` and `CONTINUED_RUN_ID`.
+- Install Lab for your backend, following the [setup steps](../../README.md#running-workshop-experiments-with-kybern-model-lab).
+
+The table above describes the environment of our original run. With current Lab you train a new model of your own; you won't get our checkpoint bytes back.
 
 ### 1. Lock the Dataset and Package the Preparation Recipe
 
@@ -42,7 +51,7 @@ klab data lock "$SOURCE/source.json" \
   --output "$WORK/source.lock.json" --cache-dir "$WORK/lock-cache" --json
 ```
 
-Copy `preparation-campaign.json`, `run.json`, `tokenizer.json`, and the generated `source.lock.json` into a fresh `$INPUT` directory, then create and inspect the preparation recipe:
+Copy `preparation-campaign.json`, `run.json`, `tokenizer.json`, and the new `source.lock.json` into a fresh `$INPUT` directory. Then create and inspect the preparation recipe:
 
 ```sh
 klab experiment recipe create "$INPUT" --profile preparation \
@@ -56,11 +65,11 @@ klab experiment recipe preparation inspect "$WORK/recipe/recipe.json" \
   --bindings "$WORK/bindings.json" --json
 ```
 
-Populate `$WORK/admission.json` from [`admission.template.json`](admission.template.json) using the hashes reported by `inspect` and your `source.lock.json`.
+Fill in `$WORK/admission.json` from [`admission.template.json`](admission.template.json), using the hashes that `inspect` printed and your `source.lock.json`.
 
 ### 2. Prepare Data, Stage, and Train
 
-Run dataset snapshotting, tokenizer training, and token packing:
+Snapshot the dataset, train the tokenizer, and pack the tokens:
 
 ```sh
 klab experiment recipe preparation apply "$WORK/recipe/recipe.json" \
@@ -68,7 +77,7 @@ klab experiment recipe preparation apply "$WORK/recipe/recipe.json" \
   --work-dir "$WORK" --json
 ```
 
-Bind the prepared paths into your training configuration, verify inputs, run smoke/warmup staging, and train through step 1,024:
+Write the prepared paths into your training config, check the inputs, run the smoke and warmup stages, and train through step 1,024:
 
 ```sh
 klab config derive "$SOURCE/run.json" \
@@ -87,7 +96,7 @@ klab stage "$WORK/train.yaml" --through warmup --prepared-inputs "$WORK/prepared
 klab train "$WORK/train.yaml" --backend cpu --runs-dir "$WORK/runs" --run-id "$FIRST_RUN_ID" --stage-bundle "$WORK/stages" --stop-after-step 1024
 ```
 
-Inspect and verify the step-1,024 checkpoint (`FIRST_GENERATION`) before continuing to step 8,192:
+Inspect and verify the step-1,024 checkpoint (`FIRST_GENERATION`) before you continue to step 8,192:
 
 ```sh
 klab checkpoint inspect "$WORK/runs/$FIRST_RUN_ID/checkpoints/latest.json" --json
@@ -96,7 +105,7 @@ klab checkpoint verify "$FIRST_GENERATION" --json
 klab report "$FIRST_RUN_ID" --kind run --runs-dir "$WORK/runs" --json
 ```
 
-To continue training from `FIRST_GENERATION` to the full 8,192 updates with checkpoints saved every 256 steps:
+Continue from `FIRST_GENERATION` to the full 8,192 updates, saving a checkpoint every 256 steps:
 
 ```sh
 klab config derive "$WORK/runs/$FIRST_RUN_ID/resolved_config.yaml" \
@@ -109,7 +118,11 @@ klab train "$WORK/continued.yaml" --backend cpu --runs-dir "$WORK/runs" \
 
 ### 3. Verify, Evaluate, and Generate Stories
 
-Once training completes at step 8,192, set `RUN_ID="$CONTINUED_RUN_ID"`. Inspect its `latest.json`, then set `CHECKPOINT` to the immutable generation basename reported by inspection and `GENERATION="$WORK/runs/$RUN_ID/checkpoints/$CHECKPOINT"`. Use the generation from your own completed run; do not substitute the published run’s generation name. Verify that checkpoint, run held-out evaluation, and generate continuations across the 12 prompts in [`prompts.txt`](prompts.txt):
+When training reaches step 8,192:
+
+1. Set `RUN_ID="$CONTINUED_RUN_ID"` and inspect its `latest.json`.
+2. Set `CHECKPOINT` to the generation name that inspection reports, and `GENERATION="$WORK/runs/$RUN_ID/checkpoints/$CHECKPOINT"`. Use the name from your own run; ours won't exist in your workspace.
+3. Verify that checkpoint, run held-out evaluation, and generate continuations for the 12 prompts in [`prompts.txt`](prompts.txt):
 
 ```sh
 klab checkpoint inspect "$WORK/runs/$RUN_ID/checkpoints/latest.json" --json
@@ -119,7 +132,7 @@ klab eval "$RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" --backend
 klab report "$RUN_ID" --kind run --runs-dir "$WORK/runs" --json
 ```
 
-Run generation for each prompt in [`prompts.txt`](prompts.txt) using both greedy decoding (`TEMPERATURE=0 TOP_K=0`) and sampled decoding (`TEMPERATURE=0.7 TOP_K=40`):
+Generate from each prompt in [`prompts.txt`](prompts.txt) twice: once greedy (`TEMPERATURE=0 TOP_K=0`) and once sampled (`TEMPERATURE=0.7 TOP_K=40`):
 
 ```sh
 klab generate "$RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" \
@@ -128,7 +141,7 @@ klab generate "$RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" \
   --strict-context --show-prompt --json
 ```
 
-You can also chat interactively with your verified checkpoint locally:
+You can also chat with your checkpoint locally:
 
 ```sh
 klab surface chat --cell "candidate=$GENERATION" --backend cpu --seed 42 --port 8502
@@ -138,9 +151,9 @@ klab surface chat --cell "candidate=$GENERATION" --backend cpu --seed 42 --port 
 
 ## Ideas to Beat This Baseline
 
-Want to run a follow-up experiment and submit a PR? Here are four concrete directions to test:
+Want to run a follow-up and send a PR? Here are four directions to try:
 
-1. **Inspect the loss vs. generation gap:** Compare [`loss-trajectory.csv`](../../results/2026-10-19-tinystories-cpu/loss-trajectory.csv) and [`review.md`](../../results/2026-10-19-tinystories-cpu/review.md) to see why lower validation NLL did not prevent sentence loops or character drift.
-2. **Test decoding settings:** Using a verified checkpoint, evaluate different temperature or top-k schedules on a fresh prompt panel to see how much repetition comes from decoding versus model capacity.
-3. **Scale one architectural axis:** Use `klab config derive run.json --set model.ffn_dim=1024 --output wider.yaml` (or test deeper layers / conditional memory) at the same 33.5M-token budget and compare both held-out loss and story coherence.
-4. **Increase unique story exposure:** Train on a larger slice of `roneneldan/TinyStories` (>50,000 stories) so the model sees 33.5M tokens in a single pass rather than repeating the same stories ~3 times.
+1. **Inspect the loss vs. generation gap:** Compare [`loss-trajectory.csv`](../../results/2026-10-19-tinystories-cpu/loss-trajectory.csv) and [`review.md`](../../results/2026-10-19-tinystories-cpu/review.md) to see why lower validation NLL still left sentence loops and character drift.
+2. **Test decoding settings:** On a checkpoint you've verified, try other temperature or top-k schedules on a fresh prompt panel, to see how much of the repetition comes from decoding and how much from the model.
+3. **Scale one architectural axis:** Use `klab config derive run.json --set model.ffn_dim=1024 --output wider.yaml` (or try more layers or conditional memory) at the same 33.5M-token budget, and compare both held-out loss and story coherence.
+4. **Increase unique story exposure:** Train on a larger slice of `roneneldan/TinyStories` (>50,000 stories) so the model sees its 33.5M tokens in a single pass instead of reading the same stories about 3 times.

@@ -2,7 +2,7 @@
 
 [Back to Preparation Plan](../README.md) · [Pilot Execution Guide (`PILOT.md`)](PILOT.md) · [Preparation Policy (`POLICY.md`)](POLICY.md)
 
-This package contains the 84 pinned shard declarations (`sources/`), content SHA-256 digests, filtering and licensing policies (`application-policy.json`, `POLICY.md`), resource envelope (`resource-envelope.yaml`), and phase job templates (`pilot-jobs/` and `jobs/`) for preparing the **DevMind 340M Base** training corpus with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab).
+This package prepares the **DevMind 340M Base** training corpus with [Tiny Sparse Lab](https://github.com/supernovae/tiny-sparse-lab). It holds the 84 pinned shard files (`sources/`), their SHA-256 digests, the filtering and licensing policies (`application-policy.json`, `POLICY.md`), the resource limits (`resource-envelope.yaml`), and the phase job templates (`pilot-jobs/` and `jobs/`).
 
 ## Candidate Catalog & Shard Selection
 
@@ -17,7 +17,7 @@ The 84 selected shards in [`shards.json`](shards.json) total **85,077,359,484 by
 
 ## Three-Stream 4 GiB Pilot
 
-[`project-pilot-acquire.json`](project-pilot-acquire.json) selects exactly three unchanged declarations (`000-web.yaml`, `001-synthetic.yaml`, `002-code.yaml`). The 4 GiB initial gate counts cumulative source bodies, metadata, and retry reservations:
+[`project-pilot-acquire.json`](project-pilot-acquire.json) selects exactly three unchanged shard files (`000-web.yaml`, `001-synthetic.yaml`, `002-code.yaml`). The 4 GiB initial gate counts everything downloaded so far: source bodies, metadata and retry reservations.
 
 | Stream | Pinned Shard | Compressed Bytes |
 | --- | --- | ---: |
@@ -26,12 +26,12 @@ The 84 selected shards in [`shards.json`](shards.json) total **85,077,359,484 by
 | **Code** (`002-code.yaml`) | `data/train-00570-of-00880.parquet` | `345,453,831` |
 | **Pilot Total** | — | **`3,771,713,555` (~3.51 GiB)** |
 
-Each shard declaration scans up to 5M rows and caps emitted JSONL at 8 GiB. See [`PILOT.md`](PILOT.md) for running the initial four-step pilot session (`attempt-init`, `transport-init`, `pilot-acquire`, and `pilot-budget-status`).
+Each shard file scans up to 5M rows and caps emitted JSONL at 8 GiB. See [`PILOT.md`](PILOT.md) for running the initial four-step pilot session (`attempt-init`, `transport-init`, `pilot-acquire`, and `pilot-budget-status`).
 
 ## Downstream Phases After Pilot Review
 
 1. **Offline Pilot Inspection (`project-pilot-reuse.template.yaml`):** Reuses the three downloaded pilot snapshots with `reuse_only` source effects to inspect schema, license filtering, and family counts offline.
-2. **Full Acquisition & Split Freeze:** Not enabled by the pilot correction. The full 84-source `project-acquire.yaml` has a different ledger binding and its projected expanded disk bound exceeds the 300 GiB ceiling. Do not retarget the pilot ledger or treat gate release as permission to continue. A separately reviewed continuation design must preserve the policy, cumulative accounting, and deadline before full acquisition and split freeze can run.
+2. **Full Acquisition & Split Freeze:** Not ready yet. The full 84-source `project-acquire.yaml` is bound to a different ledger, and its projected expanded disk use exceeds the 300 GiB ceiling. Keep the pilot ledger as it is, and releasing the gate doesn't mean you can carry on. Full acquisition and the split freeze need a separately reviewed plan first, one that keeps the policy, the running totals and the deadline.
 3. **Tokenizer & 12B Unique Mixture:** Exports 2,048-token sequences, fits a 32,768-token byte-level BPE tokenizer on up to 512 MiB of `60/20/20` training bytes (`tokenizer-sampling.yaml`), verifies token floors (`token-floors.yaml`), and packs the unique training mixture (`mixture.template.yaml`, `max_exposures: 1`).
 
 ## Resource Bounds
@@ -48,39 +48,41 @@ Use Tiny Sparse Lab commit `7ac454c67b2571d42406454043c1569a725c1d3b`
 Record the exact Lab and Workshop commits in each new preparation receipt.
 
 `splits-pre-freeze.yaml` maps each of the 14 synthetic source IDs to `[prompt]`
-under `family_fields_by_source`. The full pre-freeze project selects this file;
-acquisition-only declarations keep their original split declaration. The native
-inventory hashes the exact original prompt
-as the sole element of a canonical UTF-8 JSON array and prefixes its SHA-256
-with `synthetic_text-family:`. It does not trim whitespace, fold case, normalize
+under `family_fields_by_source`. The full pre-freeze project uses this file;
+the acquisition-only projects keep their original split file. Lab's inventory
+puts the exact original prompt into a canonical UTF-8 JSON array as its only
+element, hashes it with SHA-256, and prefixes the hash with
+`synthetic_text-family:`. It doesn't trim whitespace, fold case, normalize
 Unicode or extract quoted seed excerpts. Identical prompts group together across
-shards, regardless of the dataset label in `seed_data`.
+shards, whatever dataset label `seed_data` carries.
 
-The acquired source declarations and checksums remain unchanged. `seed_data`,
-prompt, audience and format stay retained as original provenance. In inspected
-Cosmopedia records, `seed_data` was a dataset label and prompts contained quoted
-seed excerpts; the retained schema has no separate authenticated source-seed ID.
-This explicit prompt-family rule is the reproducible grouping used for this
-experiment. Different prompts can share an underlying seed, so these held-out
-splits do not establish original-seed independence.
+The acquired source files and checksums are unchanged. We keep `seed_data`,
+prompt, audience and format as they came from the source. In the Cosmopedia
+records we inspected, `seed_data` was a dataset label and prompts contained
+quoted seed excerpts; the schema has no separate ID for the original seed. This
+prompt-family rule is the grouping we use for this experiment, and it is
+reproducible. Different prompts can share an underlying seed, so the held-out
+splits may still share original seeds.
 
-One qualified row missing a selected family field makes the entire native
-freeze refuse; it is not silently dropped or regrouped by `seed_data`. Correct
-its provenance or record an explicit reviewed admission decision before retrying.
+If one qualified row is missing a selected family field, the whole freeze
+refuses; Lab doesn't drop the row or regroup it by `seed_data`. Fix that row's
+source information, or record a reviewed admission decision, before retrying.
 
 The existing cross-split lexical screen is
-`sparselab corpus near-duplicates RELEASE`. It retains rows and shingles in memory and defaults to 100,000
-documents / 128 MiB of text, so those defaults do not cover this full corpus.
-Record actual screening coverage and gaps; a cap refusal is not a clear result.
-Any discovered overlap clusters need reviewed merges before training. The prompt
-proxy and a lexical screen do not prove original-seed or semantic independence.
+`sparselab corpus near-duplicates RELEASE`. It holds rows and shingles in memory
+and defaults to 100,000 documents / 128 MiB of text, so the defaults don't cover
+this full corpus. Record what the screen actually covered and what it missed; a
+cap refusal is not a clean result. Review and merge any overlap clusters it finds
+before training. Neither the prompt grouping nor a lexical screen shows that
+splits are independent by original seed or meaning.
 
-Keep the exact Lab and Workshop commits, pinned upstream revisions and shard
-checksums, acquisition/snapshot receipts, reviewed admission and family merges,
-inventory digest, and split seed `lab86-exp1-splits-v1`. The existing 98/1/1 split
-weights, 60/20/20 mixture and unique-target requirements stay declared. Native
-freezing ranks families by SHA-256 of `[seed, stratum, family]`, with the family
-name breaking ties, and allocates deterministic integer counts. Preserve its
-frozen YAML, assignment companion, family inventory and commit receipt together;
-the frozen YAML carries the same field rule for cold replay. Reproduction
-requires the same bytes to remain available and pass their digest checks.
+Keep together: the exact Lab and Workshop commits, pinned upstream revisions and
+shard checksums, acquisition and snapshot receipts, reviewed admission and
+family merges, the inventory digest, and split seed `lab86-exp1-splits-v1`. The
+98/1/1 split weights, 60/20/20 mixture and unique-target requirements stay as
+configured. When Lab freezes the splits, it ranks families by the SHA-256 of
+`[seed, stratum, family]`, breaks ties by family name, and assigns whole-number
+counts the same way every time. Keep the frozen YAML, its assignment companion,
+the family inventory and the commit receipt together; the frozen YAML carries
+the same field rule so it can be replayed cold. Reproducing it requires the same
+bytes to stay available and pass their digest checks.

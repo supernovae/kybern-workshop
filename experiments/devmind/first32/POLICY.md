@@ -1,18 +1,20 @@
 # First-run private attribution policy
 
-Apply the native record-attribution overlay for private training on the three
-retained sources. Preserve original row/shard/revision ancestry, available license
-labels and notice pointers, explicit unknowns and conflicting evidence. Unknown
-labels alone do not establish a restriction or legal clearance. Retain and exclude
-explicit restrictions on the intended use through pinned restricted-row evidence.
-No redistribution or model publication is implied.
+Apply Lab's record-attribution overlay for private training on the three
+retained sources. Keep each record's original row, shard and revision, any
+license labels and notice pointers, and note unknowns and conflicting evidence.
+An unknown label is neither a restriction nor a legal clearance. Where a source
+explicitly restricts our intended use, keep the pinned restricted-row evidence
+and exclude those rows. This policy covers private training only; it doesn't
+cover redistribution or publishing a model.
 
-Keep quality and family/provenance checks separate from attribution. Quarantine
-missing required provenance, empty/nontext content and credentials; retain native
-language and code-quality rules. Freeze reviewed family and exact-content groups
-before TRAIN-only tokenizer fitting. Do not move held-out families to fill quotas.
+Run quality and family checks separately from attribution. Quarantine records
+with missing source information, empty or non-text content, or credentials; keep
+Lab's language and code-quality rules. Freeze the reviewed family and
+exact-content groups before fitting the TRAIN-only tokenizer. Never move held-out
+families into training to fill a quota.
 
-This first-run profile validates implementation changes; it is not a mandatory
-rehearsal before every later run. Successful validation permits the authorized
-larger-case route when its data, measured capacity and remaining resource budget
-fit. It does not make the historical 84-source/12B-token plan executable.
+This first-run profile tests implementation changes; you don't need to rerun it
+before every later run. Once it passes, the approved larger run can go ahead if
+its data, measured capacity and remaining resource budget fit. The historical
+84-source/12B-token plan still can't run on this profile.

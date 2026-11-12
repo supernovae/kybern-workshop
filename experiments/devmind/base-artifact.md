@@ -2,21 +2,21 @@
 
 [Back to DevMind Overview](README.md)
 
-Once **DevMind 340M Base** completes training, its released artifact record must include the following verifiable metadata so anyone can inspect or evaluate the checkpoint with [Kybern Model Lab](https://github.com/supernovae/model-lab):
+When **DevMind 340M Base** finishes training, publish its checkpoint record with the following metadata, so anyone can inspect or evaluate it with [Kybern Model Lab](https://github.com/supernovae/model-lab):
 
-- **Checkpoint identity:** immutable checkpoint generation name, manifest and weight SHA-256 digests, committed training target count, and full-state recovery files.
-- **Configuration & tokenizer:** resolved `RunConfig`, 32,768-token BPE tokenizer file and SHA-256 digest, and the exact `model-lab` and `kybern-workshop` commit SHAs.
-- **Corpus provenance:** frozen corpus release manifest, family split and deduplication receipts, prepared 60/20/20 mixture manifest, and training loss ledger.
-- **Evaluation & licensing:** verified `klab` evaluation reports and explicit license metadata for any distributed weights or tokenizers.
+- **Checkpoint:** the checkpoint generation name, SHA-256 digests of the manifest and weights, the committed training target count, and the full-state recovery files.
+- **Configuration & tokenizer:** the resolved `RunConfig`, the 32,768-token BPE tokenizer file and its SHA-256, and the exact `model-lab` and `kybern-workshop` commit SHAs.
+- **Corpus:** the frozen corpus release manifest, the family split and deduplication records, the prepared 60/20/20 mixture manifest, and the training loss ledger.
+- **Evaluation & licensing:** `klab` evaluation reports, and license metadata for any weights or tokenizers we distribute.
 
-Binary payloads (model weights, optimizer states, and packed token arrays) remain stored outside Git.
+Keep binary files (model weights, optimizer states and packed token arrays) out of Git.
 
 ## Evaluation-Only Reuse
 
 To evaluate a trained DevMind base checkpoint without retraining:
 
-1. Verify the checkpoint closure locally with `klab checkpoint inspect` and `klab checkpoint verify`.
-2. Run the frozen zero-shot benchmark and completion panels defined in [`protocol.md`](protocol.md) using `klab eval` and `klab model exercise`.
-3. Report both primary and supporting benchmark metrics alongside standard errors.
+1. Check the checkpoint locally with `klab checkpoint inspect` and `klab checkpoint verify`.
+2. Run the zero-shot benchmarks and completion panels from [`protocol.md`](protocol.md) with `klab eval` and `klab model exercise`.
+3. Report the primary and supporting benchmark metrics with their standard errors.
 
-Follow-up instruction fine-tuning (SFT) or conditional-memory experiments build on top of the verified base checkpoint as separate recipes with matched baseline controls.
+Instruction fine-tuning (SFT) and conditional-memory experiments start from this base checkpoint as separate recipes, each with a matched baseline.

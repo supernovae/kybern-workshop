@@ -59,15 +59,19 @@ missing from it:
   a local file outside Git with `klab config compose`. Never commit a host
   path, a credential or a machine name.
 - **Outputs stay outside Git**, under `$KLAB_WORK_DIR` or an ignored `work/`.
-- **Never write an identity that was not measured.** A hash, token count or
+- **Never write a value that was not measured.** A hash, token count or
   checkpoint digest comes from a Lab receipt, or the field stays unbound.
 - **Changing a published recipe makes a new recipe.** Do not edit the
   declarations behind a recorded result; add a variant and link the baseline.
+- **Write documentation like a person explaining their own recipe:** say what
+  something is and what to do with it, not where it isn't; avoid reflexive
+  "X, not Y" contrasts, repeated hedges, and audit words (sealed, identity,
+  provenance, admission) in prose.
 
 ## 5. Recording results
 
-- State what ran, on what, and what was not run. A schema check or a dry run
-  is not a trained model.
+- Say what ran, on what, and what you skipped. A schema check or a dry run
+  does not count as a trained model.
 - Keep negative, interrupted and inconclusive results.
 - One seed is within-run noise only; say so.
 - Name the Lab commit, backend, dataset revision, run ID and status for

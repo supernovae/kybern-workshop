@@ -1,40 +1,49 @@
 # DevMind Engram continuation — operator evidence, 2026-11-06
 
-This ongoing private research run supersedes the October 29 “execution stopped” status. No weights or source-text corpus are published here. Validation loss is a limited training-health observation, not evidence of reliable reasoning or factual accuracy.
+After training stopped on October 29, we resumed DevMind as a private research run with Engram memory added. This page is our dated notebook for that run. We publish no weights or source text here.
 
 ## Reading this historical record
 
-Sections preserve dated operator observations, not live status. The latest committed
-training snapshot is November 10: Segment 16 completed at 6,766,391,105 Engram
-targets and Segment 17 was active at step 65,832. Later stages in the final-phase
-table are planned endpoints unless explicitly marked completed.
+Each section records what we saw at the time it was written. These are observations from a run in progress: validation loss tracks training health, not reasoning or factual accuracy, and the later stages in the final-phase table are plans unless marked completed.
 
-The notebook revision is [the existing March 19, 2025 Hub commit](https://huggingface.co/datasets/HuggingFaceTB/issues-kaggle-notebooks/commit/ef882ad1ed8274340e8fc9bac087c903f2f75396),
-already recorded in the original source table. The later catalog typo omitted
-one character; correcting it does not change the historical source selection.
+The latest training snapshot is from November 10. Segment 16 had finished at 6,766,391,105 Engram targets, and Segment 17 was running at step 65,832.
+
+The notebook dataset revision is [the March 19, 2025 Hub commit](https://huggingface.co/datasets/HuggingFaceTB/issues-kaggle-notebooks/commit/ef882ad1ed8274340e8fc9bac087c903f2f75396) listed in the original source table. A later catalog entry dropped one character of the hash; we fixed the typo, and the source we used is unchanged.
 
 ## Budget and lineage
 
-The original EXP-1 manifest specifies 341,885,952 backbone parameters and 10,256,578,560 training targets (30× backbone size). The nominal dense-backbone reference is 2,080,374,784 targets (15,872 steps × 131,072). The later operator record distinguishes 2,081,031,435 actual packed dense-backbone tokens; totals using that addend are labeled separately. The Engram counter is additional: the recovered original exposure target corresponds to 8,176,203,776 Engram targets. The subsequent memory-first design did not establish a separate final Engram budget. These counters must not be conflated; 12B was a corpus-preparation goal, not an additional training budget.
+Several counters appear below. Keep them apart:
 
-At the initial November 6 observation, the completed 50,003,192-target phase ended at step 22,932 / 1,310,272,432 Engram targets. Its final full-state checkpoint is `step_00022932_gen_000013`, manifest SHA-256 `4131a159164aadf1346afbf2aea95ea4d1f86dcddf9e205e5e182ef3b9e31e86`, validation loss 2.587253632462752. The following 100,003,501-target phase has applied optimizer updates; its endpoint is step 23,691 / 1,410,275,933 targets. Terminal outcome was pending at that observation; later continuation milestones are preserved below.
+- **Backbone and original budget.** The original EXP-1 manifest specifies 341,885,952 backbone parameters and 10,256,578,560 training targets (30× backbone size).
+- **Dense backbone phase.** The nominal reference is 2,080,374,784 targets (15,872 steps × 131,072). The actual packed count was 2,081,031,435 tokens. Totals using that second number are labeled separately.
+- **Engram phase.** Engram targets are counted on top of the dense phase. Reaching the original exposure target means 8,176,203,776 Engram targets. The later memory-first design never set a separate final Engram budget.
+- **12B** was the corpus-preparation goal, not an extra training budget.
+
+On the first November 6 check, the 50,003,192-target phase had finished at step 22,932 / 1,310,272,432 Engram targets. Its last full-state checkpoint is `step_00022932_gen_000013` (manifest SHA-256 `4131a159164aadf1346afbf2aea95ea4d1f86dcddf9e205e5e182ef3b9e31e86`), with validation loss 2.587253632462752. The next phase, 100,003,501 targets, had started applying updates and ends at step 23,691 / 1,410,275,933 targets. Its outcome was still open at that point; later progress is recorded below.
 
 ## Observed execution configuration
 
 - Kybern Model Lab commit `a2fdb25ed82519f3c65f1a9752aa86bbdedd2bcc`.
 - Intel B70, private Intel 26.40 stack, PyTorch 2.15.0+xpu, Python 3.14, bf16.
-- 4,096-token context; microbatch at most four documents; 131,072-target effective optimizer groups.
-- Compiled transformer blocks and output-head/loss, dynamic shapes; activation checkpointing off; optimizer foreach disabled.
-- Per-microbatch shape bounds: 8,192 padded slots and 16,777,216 attention cells.
-- Adam/RNG, consumed token/document/group prefix and frozen segment boundaries preserved. Trunk LR floor 1e-5, memory-table multiplier 5; no warmup restart or reheating.
-- One native GPU lease/writer. Active data and checkpoints on NVMe; historical generations archived separately.
-- Recent sustained windows measured roughly 18.4–18.8K real supervised targets/s including saves. This is observed throughput, not an isolated causal speedup claim.
+- 4,096-token context; at most four documents per microbatch; 131,072-target optimizer groups.
+- Compiled transformer blocks and output head/loss, with dynamic shapes. Activation checkpointing off; optimizer foreach off.
+- Per-microbatch shape limits: 8,192 padded slots and 16,777,216 attention cells.
+- Adam and RNG state, the consumed token/document/group prefix and the frozen segment boundaries all carry over. Trunk LR floor 1e-5, memory-table multiplier 5. No warmup restart or reheating.
+- One GPU lease and one writer. Active data and checkpoints on NVMe; older generations archived separately.
+- Recent sustained windows ran at roughly 18.4–18.8K real supervised targets/s, including saves. This is the rate we observed on this run.
 
 ## November 6 data and next queue (historical)
 
-The current phase retains 35% FineWeb-Edu score-4+, 30% notebooks, 15% FineMath, 15% instructions and 5% Cosmopedia. Its exact targets are 35,000,626 / 30,001,127 / 15,000,211 / 15,000,600 / 5,000,937 respectively. Instructions in this phase are entirely the already approved Smol-SmolTalk source; the instruction pillar is unchanged. All-token continued pretraining and native role serialization remain unchanged.
+The current phase keeps the mixture at 35% FineWeb-Edu score-4+, 30% notebooks, 15% FineMath, 15% instructions and 5% Cosmopedia. In exact targets that is 35,000,626 / 30,001,127 / 15,000,211 / 15,000,600 / 5,000,937. All instructions in this phase come from Smol-SmolTalk, which was already approved, so the instruction pillar is unchanged. We still train on all tokens and keep the same role serialization.
 
-Native packing verified identical historical tokens, identical historical optimizer-group boundaries, zero consumed-family overlap, and full-state continuation binding. The 100M phase has 96,764 fresh documents and 759 new optimizer updates. A 25,005,482-target bridge is packed from already-screened supply, followed by an installed 180M-ceiling phase waiting for notebook 7, web 76 and Cosmopedia 1 screening. The bridge replaced an unselected 60M ceiling to avoid waiting for the larger Cosmopedia pool. Installed supervisors are not claims of actual training.
+Packing confirmed that the historical tokens and optimizer-group boundaries are identical, that no consumed family overlaps, and that the phase continues from full state. The 100M phase adds 96,764 fresh documents and 759 optimizer updates.
+
+Next in the queue:
+
+- A 25,005,482-target bridge, packed from data we had already screened. We chose it over a 60M ceiling so we wouldn't wait on the larger Cosmopedia pool.
+- A 180M-ceiling phase, waiting for notebook 7, web 76 and Cosmopedia 1 screening.
+
+Both are installed as supervisors; neither had trained at this point.
 
 Pinned replenishment sources:
 
@@ -45,78 +54,89 @@ Pinned replenishment sources:
 | HuggingFaceTB/finemath | `e92b25a616738fe95dc186b64dfb19f9c8525594` | FineMath-4plus shard 2 screened |
 | HuggingFaceTB/smollm-corpus, Cosmopedia-v2 | `3ba9d605774198c5868892d7a8deda78031a781f` | Shard 1 acquired; screening pending |
 
-Protected-screened usable supply: web 75 = 76,099,829 targets; notebook 6 = 64,808,539; math 2 = 98,221,774. These are pre-selection pool counts, not all unreserved capacity. Raw encoded totals must not be substituted for usable fresh targets.
+Usable supply after protected screening: web 75 = 76,099,829 targets; notebook 6 = 64,808,539; math 2 = 98,221,774. These are pool sizes before selection, and some of each is already reserved. Count usable fresh targets, not raw encoded totals.
 
-A math-screening attempt failed on a mistaken heldout filename. Its artifacts were preserved; the correct immutable heldout was used in a completed rerun of all 556,041 protected queries. No screening standard was relaxed. Web 74 yielded only 18,829 targets because almost all candidate families were already protected; that rejection was preserved.
+One math-screening attempt failed because it pointed at the wrong held-out file. We kept its artifacts and reran all 556,041 protected queries against the correct held-out file; the rerun finished. We kept the screening standard the same. Web 74 yielded only 18,829 targets because nearly all its candidate families were already protected, and we kept that rejection on record.
 
 ## Storage and recovery
 
-A bounded copy job is moving 76 older generations from three completed phases to tank (343,410,076,650 logical bytes). Both source and archive receive native full-state verification. Latest, best and the three most recent generations are excluded. Copying alone does not reclaim NVMe; cutover remains a separately verified step.
+A copy job is moving 76 older generations from three finished phases to tank (343,410,076,650 logical bytes). Both the source and the archive copy get a full-state check. The latest, best and three most recent generations stay where they are. Copying alone frees no NVMe space; switching over to the archive is a separate, checked step.
 
-The user subsequently requested a sensible periodic history rather than every intermediate snapshot. Only the not-yet-started bridge and subsequent phases have a prospective native retention policy staged: keep latest, previous, best, terminal and approximately every tenth 5M-target periodic boundary (50M). Actual milestone counters come from native packed group offsets. Existing phase configurations and historical generations are unchanged. This keeps the normal recovery cadence while bounding historical retention. Native retention/recovery checks passed nine CPU test cases; schema validation also passed. Actual future runtime retention remains unobserved until that phase runs.
+The user then asked for a sensible periodic history instead of every intermediate snapshot. We set a new retention policy for the bridge and later phases only, none of which had started: keep the latest, previous, best and terminal checkpoints, plus roughly every tenth 5M-target boundary (every 50M). The milestone counters come from the packed group offsets. Existing phase configs and old generations are untouched. This keeps the normal recovery cadence but stops history from growing without limit. The retention and recovery logic passed nine CPU test cases and schema validation; we'll see how it behaves at runtime once that phase runs.
 
 ## Supply expansion and v2 work
 
-The current notebook dataset contains 11 shards. A census of one pinned shard found 78,247,136 raw targets in documents longer than 4K, in addition to 73,817,785 short-document targets. Long-document totals are not deduplicated or protected-screened usable supply. Any contiguous segmentation policy must explicitly preserve source-family exclusion, no repeated target positions, 4K shape limits and new provenance.
+The notebook dataset has 11 shards. A census of one pinned shard found 78,247,136 raw targets in documents longer than 4K, plus 73,817,785 targets in shorter documents. The long-document count is before deduplication and protected screening. Any policy that splits long documents into contiguous pieces must still exclude source families, never repeat a target position, respect the 4K shape limits and record where each piece came from.
 
-The previously acquired codeparrot/github-code-clean corpus is locally present, with a completed build and per-row license/language qualification; it is not automatically fresh. Its prior consumption/protection must be reconciled before admission. Further shards of the same source offer a candidate alternative to exhausting notebooks. A notebook-to-code proportion change would be recorded as a new mixture in a later segment, not slipped into the active phase.
+We already have the codeparrot/github-code-clean corpus locally, built and qualified per row for license and language. It may overlap data we already used or protected, so we need to reconcile that before training on it. More shards of the same source could stand in once notebooks run out. If we shift the notebook-to-code ratio, that becomes a new mixture in a later segment; we won't change the active phase.
 
-New authorized candidate areas are being acquired/reviewed separately: NASA systems engineering, NIST community resilience, Census factual reference data, and a bounded train-only PG-19 cultural-book pilot. The primary PG-19 provider cautions against general-purpose use because of historical style/bias; historical books should be a capped cultural component, not a source of current scientific facts. Cynefin material carries attribution/share-alike obligations and remains separate for rights/provenance review. No new domain source has yet been admitted to training.
+We are acquiring and reviewing new candidate areas separately: NASA systems engineering, NIST community resilience, Census reference data, and a small train-only PG-19 book pilot. The PG-19 maintainers warn against general-purpose use because of historical style and bias, so we treat those books as a capped cultural component and never as a source of current scientific facts. Cynefin material comes with attribution and share-alike terms, so we are reviewing its rights separately. None of these new domains has entered training yet.
 
 Priorities for v2:
 
-1. Native append preparation that authenticates and reuses the immutable prefix instead of re-tokenizing all accumulated data each segment.
-2. Prepare enough verified fresh data ahead of the GPU; distinguish raw, qualified, screened, reserved, packed and consumed inventories.
-3. Keep optimizer-update semantics explicit when changing target-group size; preserve Adam step and scheduler lineage.
-4. Measure padding and reporting costs in controlled comparisons; do not infer speedups from peak FLOPs or sorting already present in the collator.
-5. Separate validation-loss health from untouched behavioral/factual and n-gram-memory evaluations. Preserve source-level heldouts for added domains.
-6. Record cadence/retention decisions and verify real checkpoint recovery, archive cutovers and terminal outcomes.
-7. Preserve failures, low-yield source decisions, exact source revisions, exclusions, actual instruction proportions and any future mixture changes.
+1. Append new data by reusing the already-prepared prefix, instead of re-tokenizing everything each segment.
+2. Prepare enough fresh data ahead of the GPU. Track raw, qualified, screened, reserved, packed and consumed inventory separately.
+3. When target-group size changes, keep optimizer-update counting explicit and carry Adam step and scheduler state forward.
+4. Measure padding and reporting costs in controlled comparisons. Don't estimate speedups from peak FLOPs, or from length sorting the collator already does.
+5. Keep validation loss separate from behavioral, factual and n-gram-memory evaluations on untouched data. Keep source-level held-out sets for each new domain.
+6. Write down checkpoint cadence and retention choices, and test real checkpoint recovery, archive switchovers and final outcomes.
+7. Keep failures, low-yield source decisions, exact source revisions, exclusions, actual instruction proportions and any future mixture changes.
 
 Primary source references: [PG-19](https://github.com/google-deepmind/pg19), [NASA handbook record](https://ntrs.nasa.gov/citations/20170001761), [NIST resilience guide](https://www.nist.gov/publications/community-resilience-planning-guide-buildings-and-infrastructure-systems-volume-i), [NIST reuse terms](https://www.nist.gov/open/license), [Census state codes](https://www.census.gov/library/reference/code-lists/ansi/ansi-codes-for-states.html), [Cynefin terms](https://cynefin.io/wiki/Terms_of_Use).
 
 ## Verified handoff update, 00:18 UTC
 
-The 100M successor reached step 22,987 / 1,317,523,826 targets. Its first verified post-update full-state checkpoint is step 22,970 / generation 2, manifest SHA-256 `5e01918d7113295844958209d0d801ac056d2766dbf5976a69a0db0d0ee00256`, saved at 00:15:56 UTC. A 315-second window measured 18,823 targets/s including saves. The sole trainer PID is 2032776. These are operator-observed results, not a terminal report.
+The 100M phase reached step 22,987 / 1,317,523,826 targets. Its first full-state checkpoint after updates began is step 22,970 / generation 2 (manifest SHA-256 `5e01918d7113295844958209d0d801ac056d2766dbf5976a69a0db0d0ee00256`), saved at 00:15:56 UTC and checked. A 315-second window ran at 18,823 targets/s including saves. The only trainer process was PID 2032776. The phase was still running.
 
 ## Subsequent preparation update
 
-The bridge selected 25,005,482 fresh targets (web 8,752,741; notebooks 7,501,724; math 3,750,619; Smol instructions 3,750,101; Cosmopedia 1,250,297). It was packing at that observation; the later 00:36 update records completed packing. No bridge optimizer update is claimed. The following 180M ceiling remains dependent on screened replenishment.
+The bridge selected 25,005,482 fresh targets: web 8,752,741; notebooks 7,501,724; math 3,750,619; Smol instructions 3,750,101; Cosmopedia 1,250,297. It was still packing at this check (the 00:36 update records it as packed) and had applied no updates. The 180M phase after it still depends on screened replenishment.
 
-NASA text, Census state codes and 16 primary PG-19 train books were acquired with hashes; all selected book dates are 1849–1916. Both NIST download attempts returned HTTP 403, so NIST is not acquired. Codeparrot/github-code-clean shard 50 at revision `c48d40f9e70f0196f8236901ee35807f7d6c44c0` was acquired with SHA-256 `50f2550c8e19ad69b335212ed36be071fc8e01eff95a9d4901feae96c081156f` and is being qualified/screened. Existing native row checks restrict licenses to MIT/Apache-2.0/BSD-2-Clause/BSD-3-Clause/ISC, retain allowed languages and reject credential/notice exceptions. The inherited web-score phrase in its initial receipt is explicitly corrected in final-stage metadata; executed filtering is the native code policy. No new domain or code source has entered training.
+We acquired the NASA text, the Census state codes and 16 primary PG-19 training books, all with hashes; the books date from 1849–1916. Both NIST downloads returned HTTP 403, so we don't have NIST. We acquired codeparrot/github-code-clean shard 50 at revision `c48d40f9e70f0196f8236901ee35807f7d6c44c0` (SHA-256 `50f2550c8e19ad69b335212ed36be071fc8e01eff95a9d4901feae96c081156f`) and are qualifying and screening it. The existing row checks allow only MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause and ISC licenses, keep the allowed languages, and reject rows with credentials or notice exceptions. Its first screening record carried a phrase inherited from the web-score filter; the final-stage metadata corrects it, and the filter that actually ran was the code policy. No new domain or code source has entered training.
 
 ### 00:36 UTC operational follow-up
 
-The midnight phase reached applied step 23,141 / 1,337,833,198 Engram targets at 00:35:58 UTC. Its verified full-state checkpoint was step 23,122, generation 6; the latest 315-second wall window yielded 18,835 targets/s. NVMe had 328.7 GiB free. The predawn bridge is packed with 25,005,482 fresh targets over 190 updates, with identical historical tokens/groups and zero consumed-family overlap; its supervisor still waits for the midnight terminal checkpoint. Sunrise remains an unselected 180M ceiling waiting for final web/Cosmopedia protection screening.
+The midnight phase reached step 23,141 / 1,337,833,198 Engram targets at 00:35:58 UTC. Its latest checked full-state checkpoint was step 23,122, generation 6. The latest 315-second window ran at 18,835 targets/s. NVMe had 328.7 GiB free.
 
-Archive copying has verified 36 of 76 completed-run generations; no source space has yet been reclaimed. The supervised cutover waits for completed copy verification and checks open-file access before releasing only verified duplicate NVMe copies. The archive mapping is `checkpoint-copy-20261106-v1/original-to-archive.json`; do not rewrite or confuse it with the previous 187-generation mapping.
+The predawn bridge is packed: 25,005,482 fresh targets over 190 updates, with identical historical tokens and groups and no consumed-family overlap. Its supervisor is waiting for the midnight phase's final checkpoint. The sunrise phase is still an unselected 180M ceiling, waiting on final web and Cosmopedia protection screening.
 
-The original 12B-token mixture receipt records a single maximum exposure, but scheduled token positions are not the same as applied supervised targets. Recovering its unused tail is an opportunity, not verified usable inventory: it requires exact dense checkpoint cursor mapping, subsequent consumed/scheduled family exclusions and all heldout protection. Do not relax the present conservative baseline-family exclusion based on capacity arithmetic.
+The archive copy has checked 36 of the 76 generations from finished runs; no source space has been freed yet. The supervised switchover waits until every copy is checked, then makes sure no file is open before deleting only the NVMe copies that have a checked duplicate. The archive mapping is `checkpoint-copy-20261106-v1/original-to-archive.json`. Leave it as written, and keep it distinct from the earlier 187-generation mapping.
 
-Code shard 50 yielded 2,243,703 candidate targets before its final explicit protected-query pass. Its reused screening metadata contains an incorrect web source label; code document IDs, pinned acquisition, row and repository-family identities remain available. Preserve the original receipts and attach the explicit correction record before any future selection. No code or cultural pilot has been admitted to the pinned training mix.
+The original 12B-token mixture record allows each token once, but scheduled token positions are not the same as targets the model actually trained on. The unused tail of that mixture might be recoverable, but we can't count it yet. Recovering it needs an exact map from the dense checkpoint cursor, exclusion of every family consumed or scheduled since, and full held-out protection. Until then we keep the current conservative exclusion of baseline families; capacity arithmetic alone isn't a reason to loosen it.
 
-At 00:36:43 UTC, applied step 23,148 reached 1,338,752,554 Engram targets. Including the inherited dense phase, this is 3,419,127,338 targets, just beyond 10× backbone parameters; it is not 10× Engram-only exposure or a model-quality milestone.
+Code shard 50 yielded 2,243,703 candidate targets before its final protected-query pass. The screening metadata it reused has the wrong source label (web). The code document IDs, pinned acquisition, rows and repository families are all still intact. Keep the original records and attach the correction before anything is selected from this shard. No code or cultural pilot data is in the pinned training mix.
+
+At 00:36:43 UTC, step 23,148 reached 1,338,752,554 Engram targets. With the inherited dense phase that is 3,419,127,338 targets, just past 10× the backbone parameter count. That counts both phases together; it is not 10× in Engram targets alone, and it says nothing about model quality.
 
 ## Performance follow-up
 
-See the [B70 performance summary](b70-performance-20261106.md) for the bounded padding comparison, trace limitations, verified return to production and the next upstream kernel hypothesis. Detailed operator artifacts remain local.
+See the [B70 performance summary](b70-performance-20261106.md) for the padding comparison, the trace limits, the return to production and the next upstream kernel idea. Detailed run artifacts stay local.
 
 ## Continuation progress through 2.516B+ Engram targets and 160M / 95M segment staging
 
-Subsequent finite continuations on the pinned nightly XPU runtime (`2.16.0.dev20261105+xpu`) advanced the campaign past **2.516B Engram-phase valid targets** (`4.597B` combined exposure targets including the `2,080,374,784` inherited dense-backbone targets):
+Further finite continuations on the pinned nightly XPU runtime (`2.16.0.dev20261105+xpu`) took the campaign past **2.516B Engram-phase valid targets**. With the `2,080,374,784` inherited dense-backbone targets, that is `4.597B` combined.
 
-- **Post-reboot 14M continuation:** Completed 107 optimizer updates (`14,005,146` valid targets) to step **31,422** / `2,429,314,666` Engram targets; cold-verified full-state checkpoint SHA-256 `b7d521277c4abe1cbec7a55b5658b3b2e135689ad2693c0fcbd1c8533526f717`, terminal validation loss **2.5700909473**.
-- **Subsequent 7M bridge continuation:** Completed 54 optimizer updates (`7,004,505` valid targets: `2,450,694` FineWeb-Edu 4+, `2,102,033` notebooks, `1,051,449` FineMath 4+, `1,050,043` Tulu-3 instructions, `350,286` Cosmopedia v2) to step **31,476** / `2,436,319,171` Engram targets. Cold-verified initial state (`step 31,422`, SHA-256 `730161f5d5a7beb2ee7eedc51cbc2476289beb4b2ef2d8eafdf84b761191799b`), intermediate 5M save (`step 31,460`, SHA-256 `b1aa262959a72e1800a97a365e71e0b798a239bfaeff4d8dede71d12ef54196a`), and terminal full-state checkpoint (`step 31,476`, SHA-256 `ed793f4ab87d1bc61d192867338fb42cec0a4a857c26edb052ec5a913303ea23`), with terminal validation loss improving to **2.5687490960** (`21,887.7` optimizer valid targets/s).
+- **Post-reboot 14M continuation:** 107 optimizer updates (`14,005,146` valid targets) to step **31,422** / `2,429,314,666` Engram targets. Cold-checked full-state checkpoint SHA-256 `b7d521277c4abe1cbec7a55b5658b3b2e135689ad2693c0fcbd1c8533526f717`; final validation loss **2.5700909473**.
+- **7M bridge continuation:** 54 optimizer updates to step **31,476** / `2,436,319,171` Engram targets. The `7,004,505` valid targets were `2,450,694` FineWeb-Edu 4+, `2,102,033` notebooks, `1,051,449` FineMath 4+, `1,050,043` Tulu-3 instructions and `350,286` Cosmopedia v2. We cold-checked three checkpoints: the starting state (`step 31,422`, SHA-256 `730161f5d5a7beb2ee7eedc51cbc2476289beb4b2ef2d8eafdf84b761191799b`), an intermediate 5M save (`step 31,460`, SHA-256 `b1aa262959a72e1800a97a365e71e0b798a239bfaeff4d8dede71d12ef54196a`) and the final full state (`step 31,476`, SHA-256 `ed793f4ab87d1bc61d192867338fb42cec0a4a857c26edb052ec5a913303ea23`). Final validation loss improved to **2.5687490960**, at `21,887.7` optimizer valid targets/s.
 - **Active 160M continuation (`devmind-engram-after7m-160m-131k-nvme-20261106-v1`):**
-  - Bound to `step_00031476_gen_000003` (`ed793f4ab87d1bc61d192867338fb42cec0a4a857c26edb052ec5a913303ea23`); cold-verified initial child checkpoint `step_00031476_gen_000001` (`01fc86bfbc116b902a6184d90634a0a6e25cc2659dbc63ac9c624e7f61bde89b`).
-  - Packs **160,002,769 new targets** (`162,913` whole documents / `1,213` optimizer updates $\to$ step **32,689** / **2,596,321,940** Engram targets): `56,000,151` FineWeb-Edu 4+ (35.0%), `48,000,026` notebooks (30.0%), `24,000,477` FineMath 4+ (15.0%), `2,000,208` OpenCodeInstruct + `22,000,905` Tulu-3 instructions (`24,001,113`, 15.0%), and `8,001,002` Cosmopedia v2 (5.0%).
-  - Already passed **step 32,083 / 2,516,383,537 Engram targets** (`+80.06M` targets into the segment), with validation loss improving to **2.5684862384** at step 31,600 (`step_00031600_gen_000005`, SHA-256 `9d1a1aa2ed2170d7055ca7ab158f954646419c9932c781414f37042f6a147f83`) and end-to-end throughput reaching **20,254.9 valid targets/s (+6.9% vs 14M run)**.
-- **Pre-staged 95M continuation (`after-160m-95m-append-4k-v1`):**
-  - Pre-packed and verified on Tank (`native_data_manifest_sha256: 45164058035aa8830352efc2a9f7a17911bea74c30f2e1c8d6debe41937168c8`, `95,003,026` new targets / `96,718` documents / `721` updates $\to$ step **33,410** / **2,691,324,966** Engram targets; armed via `devmind-after160m-95m-handoff-20261106-v1.service` for immediate zero-idle handoff from step 32,689): `33,250,766` FineWeb-Edu 4+, `28,500,897` notebooks, `14,250,687` FineMath 4+, `1,350,196` OpenCodeInstruct + `12,900,065` Tulu-3 instructions, and `4,750,415` Cosmopedia v2, with `checkpoint.every_tokens` increased from `5,000,000` to `25,000,000` to eliminate 80% of periodic checkpoint pause overhead.
+  - Starts from `step_00031476_gen_000003` (`ed793f4ab87d1bc61d192867338fb42cec0a4a857c26edb052ec5a913303ea23`). Its first child checkpoint, `step_00031476_gen_000001` (`01fc86bfbc116b902a6184d90634a0a6e25cc2659dbc63ac9c624e7f61bde89b`), passed a cold check.
+  - Packs **160,002,769 new targets** in `162,913` whole documents and `1,213` optimizer updates, ending at step **32,689** / **2,596,321,940** Engram targets. The mix is `56,000,151` FineWeb-Edu 4+ (35.0%), `48,000,026` notebooks (30.0%), `24,000,477` FineMath 4+ (15.0%), `2,000,208` OpenCodeInstruct + `22,000,905` Tulu-3 instructions (`24,001,113`, 15.0%), and `8,001,002` Cosmopedia v2 (5.0%).
+  - Had passed **step 32,083 / 2,516,383,537 Engram targets** (`+80.06M` targets into the segment). Validation loss improved to **2.5684862384** at step 31,600 (`step_00031600_gen_000005`, SHA-256 `9d1a1aa2ed2170d7055ca7ab158f954646419c9932c781414f37042f6a147f83`). End-to-end throughput reached **20,254.9 valid targets/s (+6.9% vs 14M run)**.
+- **Next: 95M continuation (`after-160m-95m-append-4k-v1`):**
+  - Packed ahead of time and checked on Tank (`native_data_manifest_sha256: 45164058035aa8830352efc2a9f7a17911bea74c30f2e1c8d6debe41937168c8`). It holds `95,003,026` new targets in `96,718` documents and `721` updates, ending at step **33,410** / **2,691,324,966** Engram targets.
+  - The mix is `33,250,766` FineWeb-Edu 4+, `28,500,897` notebooks, `14,250,687` FineMath 4+, `1,350,196` OpenCodeInstruct + `12,900,065` Tulu-3 instructions, and `4,750,415` Cosmopedia v2.
+  - `devmind-after160m-95m-handoff-20261106-v1.service` starts it as soon as the 160M run reaches step 32,689, so the GPU doesn't sit idle.
+  - We raised `checkpoint.every_tokens` from `5,000,000` to `25,000,000`, which removes 80% of the periodic checkpoint pauses.
 
 ### Qualified dataset inventory and 16-worker parallel screening pipeline
 
-All newly acquired and qualified shards preserve the unchanged **35% Web / 30% Notebooks / 15% FineMath / 15% Instructions / 5% Cosmopedia** mixture, whole-document 4K (`<=4096` tokens with EOS, no truncation), `NORMALIZER_V3` structure cleaning, permissive license gates, 40-pool prior-index MinHash LSH ($\ge 0.65$) deduplication, and 1,406,036-query protected benchmark/heldout screening:
+Every newly acquired shard goes through the same processing and keeps the **35% Web / 30% Notebooks / 15% FineMath / 15% Instructions / 5% Cosmopedia** mixture:
+
+- whole documents up to 4K (`<=4096` tokens with EOS, no truncation);
+- `NORMALIZER_V3` structure cleaning;
+- permissive license checks;
+- MinHash LSH deduplication ($\ge 0.65$) against 40 prior index pools;
+- screening against 1,406,036 protected benchmark and held-out queries.
 
 | Pillar | Dataset & Pinned Revision | Shard / Interval | Raw SHA-256 (prefix) | Qualified Docs | Qualified Targets |
 |---|---|---|---|---:|---:|
@@ -134,22 +154,30 @@ All newly acquired and qualified shards preserve the unchanged **35% Web / 30% N
 
 ### DevMind v2 Recipe & Data-Flow Blueprint
 
-For **DevMind v2**, the data flows, screening optimizations, and kernel improvements developed during this continuation should be integrated from step 0 rather than bolted on mid-campaign:
+For **DevMind v2**, build the data flows, screening speedups and kernel improvements from this continuation in from step 0, instead of adding them mid-campaign:
 
-1. **Cluster-level notebook deduplication instead of repository-name collapse:**
-   - Earlier `codeparrot/github-jupyter` screening scripts grouped union-find components by `family_id` (`repo_name`), which collapsed multi-notebook educational/data-science repositories (`10–50+` distinct notebooks per repo) down to a single notebook and discarded `91–94%` of valid targets (`51.07M` encoded $\to$ `2.79M` retained).
-   - Deduplicating by **exact content + within-shard/cross-shard MinHash LSH ($\ge 0.65$) cluster** while still blocking any cluster that hits a prior pool, protected query, heldout repository, or content-review hold retains **~75% (`76.64M` targets across files 0–32)** of distinct, high-quality notebooks.
-   - For v2, combine `HuggingFaceTB/issues-kaggle-notebooks` (`kaggle` config, 11 shards, `~654M` clean targets), `codeparrot/github-jupyter` (all 33 files `0–32`, `~76.6M` clean targets), and `jupyter-agent/jupyter-agent-dataset` (`10a8dd461bb6c580fa25b83cd3b2f6810f1d6385`, Apache-2.0 executable notebook agentic traces with `tool_calls`) from the start of the corpus build.
-2. **Execution-verified Python coding & agentic trajectories in the Instruction pillar:**
-   - `nvidia/OpenCodeInstruct` (`8f3ba5bafe4d6e8db46082cf7ae6741bc370604d`, 50 shards, CC-BY-4.0) enforces `average_test_score == 1.0`, 10 passing unit tests with 10 distinct AST-parsed `assert` statements, balanced code fences, and 5/5 LLM judgements across `requirement_conformance`, `logical_correctness`, and `edge_case_consideration`. Scaling across all 50 shards in v2 provides **~70M+ execution-verified Python coding targets**.
-3. **16-worker parallel SQLite/MinHash qualification & pre-sharded protected query cache:**
-   - Replacing single-worker sequential `screen_queries` over 40 prior SQLite indexes and 1.41M protected queries with a 16-worker `ProcessPoolExecutor` (`mp_context='spawn'`) and pre-sharded `queries-{0..15}.jsonl` reduced whole-shard qualification wall time from **3–4 hours to 3–9 minutes per shard** on Threadripper, enabling continuous multi-hundred-million-token runway preparation ahead of GPU training.
-4. **Runtime & checkpoint cadence defaults for v2:**
-   - Adopt `padding_multiple=64` (measured **+3.18%** steady throughput on B70 XPU when paired with vectorized `TokenNgramMemory` diagnostics in [Kybern Model Lab PR #335](https://github.com/supernovae/model-lab/pull/335)), skip redundant per-microbatch `/proc` RSS/meminfo syscalls inside `MemoryMonitor.sample()` when native XPU/CUDA peak counters are active, and set `checkpoint.every_tokens` to `25,000,000–50,000,000` (`+2.8%` end-to-end wall-clock gain over 5M checkpointing).
+1. **Deduplicate notebooks by content cluster, not by repository name:**
+   - Earlier `codeparrot/github-jupyter` screening scripts grouped union-find components by `family_id` (`repo_name`). That collapsed educational and data-science repositories with `10–50+` distinct notebooks down to one notebook each, and threw away `91–94%` of valid targets (`51.07M` encoded $\to$ `2.79M` kept).
+   - Deduplicating by **exact content plus a within-shard and cross-shard MinHash LSH ($\ge 0.65$) cluster** keeps **~75% (`76.64M` targets across files 0–32)** of distinct, good notebooks. It still blocks any cluster that matches a prior pool, a protected query, a held-out repository or a content-review hold.
+   - For v2, combine three sources from the start of the corpus build: `HuggingFaceTB/issues-kaggle-notebooks` (`kaggle` config, 11 shards, `~654M` clean targets), `codeparrot/github-jupyter` (all 33 files `0–32`, `~76.6M` clean targets) and `jupyter-agent/jupyter-agent-dataset` (`10a8dd461bb6c580fa25b83cd3b2f6810f1d6385`, Apache-2.0 executable notebook agent traces with `tool_calls`).
+2. **Add execution-tested Python coding and agent trajectories to the Instruction pillar:**
+   - `nvidia/OpenCodeInstruct` (`8f3ba5bafe4d6e8db46082cf7ae6741bc370604d`, 50 shards, CC-BY-4.0). Our filter requires `average_test_score == 1.0`, 10 passing unit tests with 10 distinct AST-parsed `assert` statements, balanced code fences, and 5/5 LLM judgements on `requirement_conformance`, `logical_correctness` and `edge_case_consideration`. Using all 50 shards in v2 gives **~70M+ execution-tested Python coding targets**.
+3. **Parallel SQLite/MinHash qualification with a pre-sharded query cache:**
+   - We replaced single-worker sequential `screen_queries` (over 40 prior SQLite indexes and 1.41M protected queries) with a 16-worker `ProcessPoolExecutor` (`mp_context='spawn'`) and pre-sharded `queries-{0..15}.jsonl`. Qualifying a whole shard dropped from **3–4 hours to 3–9 minutes** on the Threadripper, which lets us prepare several hundred million tokens of runway ahead of GPU training.
+4. **Runtime and checkpoint defaults for v2:**
+   - Use `padding_multiple=64`. It measured **+3.18%** steady throughput on the B70 XPU together with the vectorized `TokenNgramMemory` diagnostics from [Kybern Model Lab PR #335](https://github.com/supernovae/model-lab/pull/335).
+   - Skip the per-microbatch `/proc` RSS/meminfo syscalls in `MemoryMonitor.sample()` when XPU/CUDA peak counters are available.
+   - Set `checkpoint.every_tokens` to `25,000,000–50,000,000`, which gave a `+2.8%` end-to-end wall-clock gain over checkpointing every 5M.
 
 ## Continuation progress through 6.766B Engram targets (8.847B combined) and 2x B70 multi-GPU upgrade (2026-11-10)
 
-Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 -> 64,315`, reaching **6,766,391,105 Engram targets** — **82.76%** of the `8,176,203,776` Engram reference target, corresponding to **8,846,765,889** combined targets above the `2,080,374,784` nominal 15,872-step dense-backbone reference or **8,847,422,540** combined targets above the `2,081,031,435` actual packed dense-backbone tokens — and validation loss **2.5383300** at step `64,315`, followed by **2.5370861** at step `65,800` in active Segment 17), including a host hardware upgrade adding a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000` alongside `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**:
+By November 10, Segments 1 through 16 had finished (`step 31,422 -> 64,315`).
+
+- They reached **6,766,391,105 Engram targets**, **82.76%** of the `8,176,203,776` Engram reference target.
+- Combined with the dense phase, that is **8,846,765,889** targets using the `2,080,374,784`-target nominal 15,872-step reference, or **8,847,422,540** using the `2,081,031,435` actual packed dense-backbone tokens.
+- Validation loss was **2.5383300** at step `64,315`, then **2.5370861** at step `65,800` in Segment 17, which was still running.
+
+Along the way we upgraded the host with a **second Intel Arc Pro B70 GPU** (`868023e2-0000-0000-2300-000000000000`, next to `868023e2-0000-0000-e300-000000000000`) and **96 GB system RAM**.
 
 | Stage / Segment | Run ID | Step Range ($\Delta$ Steps) | New Targets | Cumulative Engram Targets | Best Val Loss (Step) | Terminal / Latest Checkpoint SHA-256 |
 |---|---|---|---:|---:|---|---|
@@ -175,18 +203,19 @@ Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 ->
 | Segment 16 att. 1 (`after4250m-300m`) | `devmind-engram-after4250m-300m-131k-nvme-20261110-v1` | `62,039 -> 62,400` (`361` ckpt) | `47,611,902` | `6,513,999,780` | `2.5400154` (`62,400`) | `d6093b3674e2ec6df35f4badf087ff6ab0d04a03c9ae11b40e03990ab1a7515d` |
 | **Segment 16 2x B70 resume** | `devmind-engram-after4250m-300m-resume-131k-nvme-20261110-v1` | `62,400 -> 64,315` (`1,915`) | `252,391,325` | `6,766,391,105` | **`2.5383300`** (`64,315`) | `efa5b61f28bef79a8b06395ec328dbe63c391674b1dd1f2539e5f73ece1bd980` |
 
-- **Additional qualified source expansions supporting Segments 1–21 (`8.176B` Engram / `10.257B` combined targets):**
+- **Extra qualified sources for Segments 1–21 (`8.176B` Engram / `10.257B` combined targets):**
   - **Notebooks (`30%` in Stages 1–15, `1.888B` total unique notebook tokens):** `HuggingFaceTB/issues-kaggle-notebooks` (`ef882ad1ed8274340e8fc9bac087c903f2f75396`, shards `0–10`), `codeparrot/github-jupyter` (`a9be1d2d9b8bf5cf1fb7f8ffab9dc431fb0fd031`, files `0–32`), `bigcode/the-stack-jupyter-parsed-filtered` (`bigcode/jupyter-parsed`, `eed65c314469b51419d08fb2ff7ee41e448774d4`, shards `0–45`), `secmlr/starcoderdata` (`0a11b2a003eb39252c919f3d28f3d26f412bc3d7`, `jupyter-structured-clean-dedup` & `jupyter-scripts-dedup-filtered`), `jordangong/jupyter-scripts-smollm3` (`98dcfd99ae3c6cf0f43e3d07d6a10a570d0da262`, shards `0–419`), and `MetaKaggle Code v184` (`trial1000-v1`).
   - **Web (`35%` in Stages 1–15, `50%` in Stages 16–21):** `HuggingFaceTB/smollm-corpus` (`fineweb-edu-dedup`, `3ba9d605774198c5868892d7a8deda78031a781f`, shards `69–112`, `int_score >= 4`, English) and `HuggingFaceFW/finewiki` (`en`, `20261106-v1`).
   - **FineMath (`15%` in Stages 1–15, `20%–35%` in Stages 16–21):** `HuggingFaceTB/finemath` (`finemath-4plus`, `e92b25a616738fe95dc186b64dfb19f9c8525594`, shards `0–15`, `int_score >= 4`).
   - **Instructions (`15%` in Stages 1–15, `18%` in Stages 16–21):** `nvidia/OpenCodeInstruct` (`8f3ba5bafe4d6e8db46082cf7ae6741bc370604d`, shards `0–49`, `generic_python_verified_tests`), `HuggingFaceH4/ultrachat_200k` (`8ebe7fc305c02c2adca58c8bf303b1451be2f97f`, `train_sft` & `train_gen`), `HuggingFaceTB/smoltalk` (`smol-magpie-ultra`, `5feaf2fd3ffca7c237fc38d1861bc30365d48ffa`, shards `0–5`), `allenai/tulu-3-sft-mixture` (`8ab293f29a8f14e2e0e7fd97a63e2f5b4a13d920`, Permissive-2.0 subset, shards `0–1`), and `gretelai/synthetic_text_to_sql` (`Apache-2.0`).
   - **Cosmopedia & Technical Reference (`5%` in Stages 1–15, `12%` in Stages 16–21):** `HuggingFaceTB/smollm-corpus` (`cosmopedia-v2`, `3ba9d605774198c5868892d7a8deda78031a781f`), Python 3.14 Official Documentation (`PSF-2.0`), IETF RFCs (`rfc0001–rfc9699`), and PostgreSQL 17.2 Official Documentation (`PostgreSQL License`).
-- **Checkpoint retention & NVMe storage policy:**
-  - Pruned 404 of 449 intermediate archived checkpoints on `/tank`, retaining 45 checkpoints (`10.0%`, evenly spaced every `~120M` tokens from `2.47M` to `5.442B` tokens) plus all run-terminal checkpoints on NVMe, freeing **1,695.92 GiB** on `/tank`.
-  - Completed grandparent runs on NVMe (`prior_run_to_trim`) replace their local `data/train.npy` copy with a symlink to the immutable SHA-256-verified `/tank` cache while keeping the immediate `parent_run / 'data/train.npy'` as a regular file for `load_continuation` verification, maintaining **370–410 GiB free on NVMe** throughout the `6.4B -> 8.2B` target range.
-- **Prospective Final-Phase Mixture (`devmind-engram-final-rebalanced-phase-20261110-v1`, `6.466B -> 8.176B` Engram targets):**
-  - At `step 62,039` (`6,466,387,878` Engram targets / `8,547,419,313` combined exposure targets using the actual packed dense-backbone addend), all bulk permissive notebook sources under the strict whole-document 4K and no-image gates reached exhaustion (`1,883,203,267` unique notebook tokens consumed; `5,489,113` unreserved targets remaining).
-  - Authorized prospective final-phase identity **`devmind-engram-final-rebalanced-phase-20261110-v1`** consumes the final `5.0M` unreserved notebook targets in Stage 16 (`after-4250m-300m-append-4k-v1`, completed at `step 64,315` / `6,766,391,105` Engram targets with validation loss **`2.5383300`**) and reallocates the `30%` notebook quota across `web_4plus`, `finemath`, `instruction_ultrachat`, and `cosmopedia_v2` for Stages 16–21 (`6.466B -> 8.176B` Engram targets; **Segment 17** reached a new campaign-best **`2.5370861` validation loss at `step 65,800`**):
+- **Checkpoint retention and NVMe storage:**
+  - We pruned 404 of 449 intermediate archived checkpoints on `/tank`. We kept 45 (`10.0%`, evenly spaced about every `~120M` tokens from `2.47M` to `5.442B` tokens) plus every run's final checkpoint on NVMe. This freed **1,695.92 GiB** on `/tank`.
+  - For finished grandparent runs on NVMe (`prior_run_to_trim`), we replace the local `data/train.npy` with a symlink to the SHA-256-checked copy on `/tank`. The immediate parent's `parent_run / 'data/train.npy'` stays a regular file, because `load_continuation` checks it. This kept **370–410 GiB free on NVMe** across the `6.4B -> 8.2B` target range.
+- **Planned final-phase mixture (`devmind-engram-final-rebalanced-phase-20261110-v1`, `6.466B -> 8.176B` Engram targets):**
+  - At `step 62,039` (`6,466,387,878` Engram targets; `8,547,419,313` combined using the actual packed dense-backbone count), we had used up every bulk permissive notebook source that passes the strict whole-document 4K and no-image rules. That is `1,883,203,267` unique notebook tokens consumed, with `5,489,113` unreserved targets left.
+  - The approved final phase, **`devmind-engram-final-rebalanced-phase-20261110-v1`**, spends the last `5.0M` unreserved notebook targets in Stage 16 (`after-4250m-300m-append-4k-v1`). Stage 16 finished at `step 64,315` / `6,766,391,105` Engram targets with validation loss **`2.5383300`**.
+  - For Stages 16–21 (`6.466B -> 8.176B` Engram targets), it moves the `30%` notebook share to `web_4plus`, `finemath`, `instruction_ultrachat` and `cosmopedia_v2`. **Segment 17** reached a new campaign best of **`2.5370861` validation loss at `step 65,800`**.
 
 | Final-Phase Stage | Run ID | Target Addition | Cumulative Engram Targets | Combined Targets (`+2,080,374,784` ref) | Status |
 |---|---|---:|---:|---:|---|
@@ -199,8 +228,8 @@ Subsequent finite continuations completed Segments 1 through 16 (`step 31,422 ->
 
 ### Upstream Kybern Model Lab PRs Enabling DevMind v2
 
-- **[PR #333](https://github.com/supernovae/model-lab/pull/333) (merged):** Preserve checkpoint retention policy during budget-extension comparisons.
-- **[PR #334](https://github.com/supernovae/model-lab/pull/334) (merged):** Native `PreparedPrefix` reuse for a bounded smaller selection without tokenization; not the later `PreparedAppend` tail-append API.
+- **[PR #333](https://github.com/supernovae/model-lab/pull/333) (merged):** Keep the checkpoint retention policy when comparing budget extensions.
+- **[PR #334](https://github.com/supernovae/model-lab/pull/334) (merged):** `PreparedPrefix` reuse, which selects a smaller prefix without re-tokenizing. The later `PreparedAppend` tail-append API is a separate change.
 - **[PR #335](https://github.com/supernovae/model-lab/pull/335) (merged):** Vectorized multi-stream `TokenNgramMemory` diagnostics and shared shifted-input buffers (**+1.64%** steady throughput at `padding_multiple=128`, **+3.18%** with `padding_multiple=64`).
-- **[PR #338](https://github.com/supernovae/model-lab/pull/338) & [PR #340](https://github.com/supernovae/model-lab/pull/340) (merged):** Native multi-GPU microbatch-parallel `PyTorchEngine` execution and fail-closed `MultiDeviceLease` physical device lock enforcement.
+- **[PR #338](https://github.com/supernovae/model-lab/pull/338) & [PR #340](https://github.com/supernovae/model-lab/pull/340) (merged):** Multi-GPU microbatch-parallel `PyTorchEngine` execution, and a `MultiDeviceLease` lock that refuses to run unless it holds every physical device.
 - **[PR #342](https://github.com/supernovae/model-lab/pull/342) (merged):** Multi-GPU device index enumeration (`0..device_count()-1`) and XPU/CUDA/ROCm physical UUID discovery in `discover_runtimes()`.

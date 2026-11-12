@@ -2,7 +2,7 @@
 
 [Back to DevMind Overview](README.md) · [DevMind Pilot Status (kybern.dev)](https://kybern.dev/models/devmind/)
 
-This document defines the architecture, corpus preparation mixture, training schedule, and evaluation protocol for **DevMind 340M Base**.
+This page covers the architecture, corpus mixture, training schedule and evaluation plan for **DevMind 340M Base**.
 
 ## 1. Model Architecture
 
@@ -14,13 +14,13 @@ This document defines the architecture, corpus preparation mixture, training sch
 
 ## 2. Corpus Mixture & Preparation
 
-Source declarations and filtering policies live in [`preparation/lab86/`](preparation/lab86/README.md):
+The source files and filtering policies are in [`preparation/lab86/`](preparation/lab86/README.md):
 
 - **Target training mixture:** 60% educational web (`HuggingFaceTB/smollm-corpus` FineWeb-Edu), 20% synthetic textbooks/stories (`cosmopedia-v2`), and 20% permissively licensed code (`codeparrot/github-code-clean`).
 - **Deduplication & splitting:** exact and canonical deduplication plus family clustering (grouping repositories and seed families) prior to a frozen **98% train / 1% validation / 1% test** split, requiring at least 100 distinct families per stratum.
 - **Tokenizer:** byte-level BPE with 32,768 vocabulary trained on up to 512 MiB of `TRAIN` text sampled at 60/20/20 across the three streams, audited on at least 1,000 unseen `TRAIN` documents per stream.
-- **Packing & exposure:** sequences packed to length 2,048 (`int32` tokens) with `max_exposures: 1` (up to 12B unique training tokens without silent repetition).
-- **Pilot gate:** acquisition starts with a 4 GiB pilot across three candidate shards (one web, one synthetic, one code) to verify schema, license filtering, family counts, and token yield before full corpus acquisition.
+- **Packing & exposure:** sequences packed to length 2,048 (`int32` tokens) with `max_exposures: 1` (up to 12B unique training tokens, each seen once).
+- **Pilot gate:** acquisition starts with a 4 GiB pilot of three shards (one web, one synthetic, one code). Check schema, license filtering, family counts and token yield there before downloading the full corpus.
 
 ## 3. Training Schedule & Optimizer
 

@@ -1,14 +1,14 @@
 # TinyStories CPU Learning Baseline — Output & Quality Review
 
-This review documents all 27 unedited prompt/response pairs and the loss trajectory from our 8,192-update TinyStories CPU baseline run (`step_00008192_gen_000028`). While validation loss dropped to `1.7043`, the model failed the strict story-quality rubric (2/24 overall passes), providing a clear baseline for testing architectural, data, or decoding improvements.
+This review covers the loss curve and all 27 prompt/response pairs, unedited, from our 8,192-update TinyStories CPU baseline (`step_00008192_gen_000028`). Validation loss fell to `1.7043`, but the model failed the strict story-quality rubric, passing 2 of 24. That gives a clear baseline for testing changes to architecture, data or decoding.
 
-## Terminal identity and evaluation
+## Final checkpoint and evaluation
 
-Run `tinystories-r7-continued`; immutable generation `step_00008192_gen_000028`.
+Run `tinystories-r7-continued`, final checkpoint `step_00008192_gen_000028`.
 
 Checkpoint SHA256: `d5ba0e06c91d7a864264c5af411ced1c1b1c4e136632d71cd0a7b4309a728149`
 
-8,192 updates; 33,554,432 supervised targets. Native full-state verification valid. Standalone evaluation matches training terminal evaluation: loss **1.7043116390705109**, perplexity **5.497600031351529**, 16,384 targets in 16 batches. This is a fixed validation slice, not a broad capability benchmark.
+8,192 updates; 33,554,432 supervised targets. The full-state checkpoint passed native verification. A standalone evaluation matched the evaluation at the end of training: loss **1.7043116390705109**, perplexity **5.497600031351529**, 16,384 targets in 16 batches. It is a fixed slice of the validation set, so it measures fit to TinyStories text and nothing broader.
 
 Weights SHA256: `f1d8c8906c8e8644ac66adc10fd74bd345c42561fa7c736cb06331e1521523bf`. Training state SHA256: `82367a63409ed90723d3925a6d7f5677a42ec4c6bd98b7609301ce25768c6deb`.
 
@@ -39,9 +39,9 @@ Last-256-update mean recorded train losses:
 | 6144 | 1.94041347 |
 | 8192 | 1.88325411 |
 
-All recorded lineage metrics are finite; reported optimizer overflow retries are zero. Validation repeated at continuation boundaries exactly reproduced the saved values. Training/validation losses are measured on different batches and are not a controlled overfitting test.
+Every recorded metric across the run lineage is finite, and there were zero optimizer overflow retries. Validation rerun at each continuation point reproduced the saved values exactly. Training and validation losses come from different batches, so comparing them is a rough guide to overfitting at best.
 
-## Evidence-supported limitations versus untested explanations
+## What we observed and what we haven't tested
 
 | Area | Observed evidence | Interpretation and uncertainty |
 |---|---|---|
@@ -55,13 +55,11 @@ Follow-up diagnostics (such as KV-cache parity checks, larger training subsets, 
 
 ## Decoding and resource evidence
 
-The 24 scored outputs use 192 maximum new tokens: one greedy and one sampled output for each of 12 frozen prefixes. The first six are development prefixes; the final six were withheld from model selection. Three additional website baselines use the first three prefixes, greedy decoding, and 48 maximum new tokens; they are excluded from quality scoring. All native identities and prompt token counts matched.
+The 24 scored outputs allow up to 192 new tokens: one greedy and one sampled output for each of 12 frozen prompts. We used the first six prompts during development and held the last six back from model selection. Three extra website samples use the first three prompts, greedy decoding and up to 48 new tokens; they are not scored. All native run and checkpoint hashes and prompt token counts matched.
 
-This continuation trainer: 9895.283 seconds; successful lineage trainer invocations: 11861.468 seconds. Training peak sampled RSS: 974,274,560 bytes. All27 generation invocations: 89.644 seconds total, including startup/loading/verification; sampled peak RSS 450,138,112 bytes. These are process wall times, not isolated decode latency.
+Training took 9895.283 seconds in this final continuation and 11861.468 seconds across all successful training runs in the lineage, with a peak sampled RSS of 974,274,560 bytes. All 27 generation runs took 89.644 seconds in total, including startup, loading and verification, with a peak sampled RSS of 450,138,112 bytes. These are whole-process wall times, so they overstate decoding time alone.
 
-All 35 session steps completed within the configured wall-clock budget.
-
-All35/35 supervised slots succeeded with complete evidence. Container exit0; cleanup verified; no active training host claim or container remains. Memory and retained storage use sampled observations with stop response, not hard caps. The image enforced the eight-CPU quota; networking remained none. Prior attempts, refusals and reboot/pause evidence remain preserved.
+All 35 session steps finished within the configured wall-clock budget, and all 35 supervised slots succeeded with complete records. The container exited 0, cleanup checked out, and no training host claim or container was left running. Memory and storage were watched by sampling, with a stop if they ran too high, rather than enforced as hard caps. The image enforced the eight-CPU quota, with networking off. Earlier attempts, refusals, and the reboot and pause records are kept.
 
 | Output | Prompt tokens | Max new | Process seconds | Peak sampled RSS bytes |
 |---|---:|---:|---:|---:|
@@ -95,7 +93,7 @@ All35/35 supervised slots succeeded with complete evidence. Container exit0; cle
 
 ## Per-output assessment
 
-Assistant provisional rubric assessment, not independent human clearance. A quality pass requires relevance, readable sentence flow, character/object consistency and event continuity, without a repeated-sentence/semantic loop. Understandable endings are counted separately; a closing sentence does not repair other failures. The borderline sampled-3 output is counted generously.
+One assistant scored these against the rubric; no human reviewed them. To pass, an output must stay on the prompt, read smoothly, keep characters and objects consistent, keep events connected, and avoid looping on a sentence or idea. Understandable endings are counted separately, and a good closing sentence can't make up for other failures. We counted the borderline sampled-3 output as a pass, which is generous.
 
 **Quality:2/24 (required20); held-out-prefix subset:1/12 (required10); understandable endings:17/24 (required18). Gate failed.**
 
@@ -130,7 +128,7 @@ Assistant provisional rubric assessment, not independent human clearance. A qual
 
 # Final fixed story outputs
 
-All outputs below are unedited native continuations. The original raw JSON, stderr and supervisor receipt accompany each output. No retries or resampling.
+The outputs below are exactly what the model wrote, with no retries or resampling. Each one comes with its original raw JSON, stderr and supervisor record.
 
 ## final-greedy-1
 
@@ -465,7 +463,7 @@ Ben smiles and says, "Thank
 ```
 
 
-## Provenance and raw-output digests
+## Source revisions and raw-output digests
 
 - lab: `7a517b2c065426748cd99702e82ea377877a7809`
 - workshop: `e70d82b0c3262087ba5b1c546ebfd237f87a685d`
@@ -504,4 +502,4 @@ Ben smiles and says, "Thank
 | website-baseline-2.json | `82ececa3b9bb8cc2a818220459f6b77070987af999d46f7b4f688db8bb759d86` |
 | website-baseline-3.json | `5f46e495708b41135b53e3c536c654272897591a21617cbfe886b6f9212c3496` |
 
-The evidence package in this directory includes the resolved configuration, standalone evaluation metrics, full loss trajectory CSV, checkpoint closure index, and all 27 raw generation JSON outputs with local filesystem paths redacted to `${RUNS}`.
+This directory also has the resolved config, the standalone evaluation metrics, the full loss-curve CSV, the checkpoint file index, and all 27 raw generation JSON outputs, with local file paths replaced by `${RUNS}`.

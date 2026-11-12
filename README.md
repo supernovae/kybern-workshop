@@ -19,12 +19,15 @@
   <a href="https://kybern.dev/experiments/">Kybern Research</a>
 </p>
 
-**Kybern Workshop** is the open experiment hub for **[Kybern Model Lab](https://github.com/supernovae/model-lab)**.
-To keep individual studies decoupled from the core workbench engine, Workshop stores shareable, declarative experiment recipes—dataset locks, tokenizer configs, model `RunConfig` files, `try` interventions, and recorded run outputs—so anyone can inspect what we ran, replicate it on their own hardware, or fork a recipe to test a new idea.
+**Kybern Workshop** holds the experiment recipes we run with **[Kybern Model Lab](https://github.com/supernovae/model-lab)**: dataset locks, tokenizer configs, model `RunConfig` files, `try` changes, and the recorded outputs of each run. Use them to see exactly what we ran, repeat a run on your own hardware, or copy a recipe and test your own idea.
 
-We publish complete records—including negative results and models that lower validation loss while still failing generation rubrics—so you can see what actually happens inside small language models.
+We publish everything we record, including negative results and models whose validation loss improved while their stories still failed our rubric. Small models are easier to understand when you can see where they go wrong.
 
-Active experiment recipes and published evidence live here in Workshop; Kybern’s backlog and coordination live in Notion. Neither Notion nor an internal runner is needed to use these recipes. The TinyStories scores are provisional assistant assessments, not independent human quality clearance. Model weights are retained locally and are not distributed by Workshop; reproductions train their own model with new run identities.
+A few things to know before you start:
+
+- You only need this repository and Lab to run the recipes.
+- The TinyStories quality scores come from an AI assistant applying a written rubric. No human panel reviewed them yet, so treat them as provisional.
+- We don't publish model weights. A reproduction trains its own model and gets its own run IDs.
 
 ---
 
@@ -32,16 +35,16 @@ Active experiment recipes and published evidence live here in Workshop; Kybern�
 
 | Experiment | What it tests | Status & Evidence | Links |
 | --- | --- | --- | --- |
-| **TinyStories Baseline (4.46M)** | Full 8,192-update (33.5M-token) CPU training run of a 4-layer dense transformer with a 12-prompt story continuation panel. | **Completed baseline.** Validation loss reached `1.7043` (perplexity `5.4976`), while 22/24 scored continuations failed the provisional assistant-scored quality rubric—a concrete baseline to improve. | [Walkthrough](examples/tinystories-useful/README.md) · [27 Recorded Outputs](results/2026-10-19-tinystories-cpu/README.md) · [Interactive Guide](https://kybern.dev/models/tinystories-training/) |
-| **TinyStories Microlab** | Starter paired comparison (`FFN width 256` vs. `384`) on 2,000 stories using `klab try`. | **Ready to run.** 40-update (10,240-target) teaching comparison for learning the `klab` workflow. | [Microlab Guide](examples/tinystories-microlab/README.md) · [Container Smoke Result](results/2026-10-15-tinystories-smoke/README.md) |
-| **Basic Synthetic CPU** | Offline end-to-end smoke test: synthetic text generation, BPE tokenizer fitting, 1-step training, evaluation, and verified reporting. | **Measured & verified.** Runs completely offline on CPU with zero dataset or model downloads. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Recorded Result](results/2026-10-14-synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
-| **DevMind 340M Base / Engram continuation** | 341.9M-parameter backbone with a subsequent learned-memory continuation; preserved checkpoint lineage and explicit fresh-data mixtures. | **Latest committed snapshot (2026-11-10, operator-observed).** Segment 16 completed at 6.766B additional Engram targets; Segment 17 was active. The campaign record distinguishes nominal and packed dense-backbone exposure totals. No weights published. | [Current campaign record](experiments/devmind/engram-campaign-20261106.md) · [Original dense protocol](experiments/devmind/protocol.md) · [Run and revise](experiments/devmind/run.md) |
+| **TinyStories Baseline (4.46M)** | An 8,192-update (33.5M-token) training run on CPU of a 4-layer dense transformer, with a 12-prompt story continuation panel. | **Completed.** Validation loss reached `1.7043` (perplexity `5.4976`), but 22 of 24 scored continuations failed the quality rubric. A good baseline to try to beat. | [Walkthrough](examples/tinystories-useful/README.md) · [27 Recorded Outputs](results/2026-10-19-tinystories-cpu/README.md) · [Interactive Guide](https://kybern.dev/models/tinystories-training/) |
+| **TinyStories Microlab** | A starter comparison of FFN width 256 and 384 on 2,000 stories, using `klab try`. | **Ready to run.** A 40-update (10,240-target) exercise for learning the `klab` workflow. | [Microlab Guide](examples/tinystories-microlab/README.md) |
+| **Basic Synthetic CPU** | An offline end-to-end check: generate synthetic text, fit a BPE tokenizer, train one step, evaluate, and write a report. | **Recorded.** Runs offline on CPU and downloads nothing. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Recorded Result](results/2026-10-14-synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
+| **DevMind 340M Base / Engram continuation** | A 341.9M-parameter backbone, then continued training with a learned memory (Engram) on fresh data mixtures, keeping the checkpoint lineage. | **In progress (snapshot from 2026-11-10).** Segment 16 finished at 6.766B additional Engram targets and Segment 17 was running. The campaign record lists both the nominal and packed token counts for the dense backbone. No weights published. | [Current campaign record](experiments/devmind/engram-campaign-20261106.md) · [Original dense protocol](experiments/devmind/protocol.md) · [Run and revise](experiments/devmind/run.md) |
 
 ---
 
 ## Running Workshop Experiments with Kybern Model Lab
 
-All recipes in this repository execute inside **[Kybern Model Lab](https://github.com/supernovae/model-lab)**.
+Every recipe here runs with **[Kybern Model Lab](https://github.com/supernovae/model-lab)**.
 Install **Python 3.14** and [uv](https://docs.astral.sh/uv/), then clone both repositories side by side:
 
 ```sh
@@ -55,7 +58,7 @@ export KLAB_WORK_DIR="$HOME/.local/share/klab"
 
 ### 1. Run a Quick Offline CPU Smoke Test
 
-Verify your local installation end-to-end without downloading any external datasets (see the [Offline Installation Check on kybern.dev](https://kybern.dev/models/cpu-smoke/)):
+Check that your install works end to end. This downloads nothing (more in the [offline installation check on kybern.dev](https://kybern.dev/models/cpu-smoke/)):
 
 ```sh
 uv run --locked --extra cpu klab readiness smoke --family dense \
@@ -63,11 +66,11 @@ uv run --locked --extra cpu klab readiness smoke --family dense \
 uv run --locked --extra cpu klab dashboard --runs-dir "$KLAB_WORK_DIR/first-run/runs"
 ```
 
-Want to inspect or replicate the full multi-stage synthetic campaign recipe? Follow [`examples/synthetic-cpu/README.md`](examples/synthetic-cpu/README.md).
+To see or repeat the full multi-stage synthetic recipe, follow [`examples/synthetic-cpu/README.md`](examples/synthetic-cpu/README.md).
 
 ### 2. Run Your First Controlled Comparison (`TinyStories Microlab`)
 
-Copy the [TinyStories microlab declarations](examples/tinystories-microlab/README.md) into a fresh workspace directory, prepare the dataset and 2,048-token BPE tokenizer once, and test whether a wider feed-forward layer (`ffn_dim: 384` vs. `256`) lowers held-out loss at the same token budget:
+Copy the [TinyStories microlab](examples/tinystories-microlab/README.md) config files into a fresh workspace, prepare the dataset and a 2,048-token BPE tokenizer once, then test whether a wider feed-forward layer (`ffn_dim: 384` instead of `256`) lowers held-out loss at the same token budget:
 
 ```sh
 EXPERIMENT="$KLAB_WORK_DIR/experiments/tinystories-microlab-001"
@@ -93,7 +96,7 @@ uv run --locked --extra cpu klab try "$EXPERIMENT/wider-ffn.yaml" \
   --vs "$EXPERIMENT/inputs/run.yaml"
 ```
 
-Once `try` finishes, use the printed `TRY_ID` to inspect the verdict, run deeper behavioral probes, or launch the visual dashboard:
+When `try` finishes, it prints a `TRY_ID`. Use it to read the verdict, dig into the runs, or open the dashboard:
 
 ```sh
 uv run --locked --extra cpu klab report TRY_ID
@@ -105,56 +108,60 @@ uv run --locked --extra cpu klab dashboard
 
 | Goal | Kybern Model Lab Command | What it does |
 | --- | --- | --- |
-| **Validate a config** | `klab config validate run.yaml --kind run` | Checks YAML/JSON declarations before any data or training work runs. |
-| **Test one change** | `klab try DELTA.yaml --vs BASELINE.yaml` | Trains baseline & candidate (or reuses a verified baseline), scores held-out loss, and runs fast probes. |
-| **Read the verdict** | `klab report TRY_ID` | Prints the sealed comparison report, metrics delta, and probe summary. |
+| **Validate a config** | `klab config validate run.yaml --kind run` | Checks YAML or JSON configs before you spend time on data or training. |
+| **Test one change** | `klab try DELTA.yaml --vs BASELINE.yaml` | Trains the baseline and the candidate (or reuses a baseline it already checked), scores held-out loss, and runs quick probes. |
+| **Read the verdict** | `klab report TRY_ID` | Prints the comparison report, the change in metrics, and a probe summary. |
 | **Inspect weights & loss** | `klab explore TRY_ID` | Computes per-token loss, attention maps, and weight statistics. |
-| **Generate text** | `klab generate RUN_ID --checkpoint CHECKPOINT --prompt "..."` | Runs deterministic or sampled continuations from a verified checkpoint. |
-| **Browse visually** | `klab dashboard` | Opens the local web UI for runs, Pareto frontiers, probes, and checkpoints. |
+| **Generate text** | `klab generate RUN_ID --checkpoint CHECKPOINT --prompt "..."` | Writes greedy or sampled continuations from a checkpoint. |
+| **Browse visually** | `klab dashboard` | Opens a local web UI for runs, Pareto frontiers, probes, and checkpoints. |
 
 ---
 
 ## Community Experiments & Forks
 
-As Kybern Model Lab grows, this section tracks reproducible small-model experiments, replications, and baselines shared by the community in their own forks and repositories.
+This is where we list experiments people run in their own forks and repositories: replications, new baselines, and changes to our recipes.
 
 | Project / Fork | Author | Question / Experiment | Model & Backend | Summary / Findings |
 | --- | --- | --- | --- | --- |
-| *No community forks listed yet — yours could be the first!* | — | Run a replication, test an architectural change, or try to beat our [TinyStories baseline](examples/tinystories-useful/README.md). | CPU / GPU / MLX | **[Open a PR](CONTRIBUTING.md) to add a link to your fork or experiment here! 🙂** |
+| *Nothing listed yet.* | — | Repeat a recipe, test an architecture change, or try to beat our [TinyStories baseline](examples/tinystories-useful/README.md). | CPU / GPU / MLX | [Open a PR](CONTRIBUTING.md) to add yours. |
 
-**Have an experiment in your fork?** We'd love to feature it! Whether you replicated a recipe on new hardware (CUDA, ROCm, Intel XPU, or Apple Silicon MLX), improved story coherence on TinyStories, or tested a clean negative result, open a pull request to add your repository to the table above. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+If you've run something with these recipes, we'd like to hear about it. That could be a recipe repeated on different hardware (CUDA, ROCm, Intel XPU, or Apple Silicon with MLX), better story coherence on TinyStories, or a clean negative result. Open a pull request that adds a row to the table. [CONTRIBUTING.md](CONTRIBUTING.md) explains what to include.
 
 ---
 
 ## Learn & Explore on [kybern.dev](https://kybern.dev)
 
-Our website pairs directly with the recipes in this repository:
+The website walks through these recipes in more detail:
 
-- **[TinyStories: Build, Read, and Improve a Small Story Model](https://kybern.dev/models/tinystories-training/)** — Step-by-step walkthrough plus an interactive browser viewer for all 27 recorded story outputs.
-- **[Offline CPU Installation Check](https://kybern.dev/models/cpu-smoke/)** — Quick local verification guide for new Kybern Model Lab installs.
-- **[DevMind Pilot Status](https://kybern.dev/models/devmind/)** — Overview of the DevMind 340M Base pilot and preparation milestones.
-- **[Experiments & Research Roadmap](https://kybern.dev/experiments/)** — Pending studies on conditional memory, fact swaps, context overrides, and ideas you can test on your own hardware.
-- **[Matched Comparisons](https://kybern.dev/learn/lab/matched-comparisons/) & [Inspecting Runs](https://kybern.dev/learn/lab/inspect-runs/)** — How to design controlled experiments with paired seeds and interpret probe verdicts.
-- **[Free 18-Lesson Curriculum](https://kybern.dev/learn/)** — Hands-on lessons from tensors and autograd to building a causal decoder and running controlled lab comparisons.
+- **[TinyStories: Build, Read, and Improve a Small Story Model](https://kybern.dev/models/tinystories-training/)** — A step-by-step walkthrough, with a browser viewer for all 27 recorded story outputs.
+- **[Offline CPU Installation Check](https://kybern.dev/models/cpu-smoke/)** — A quick way to check a new Kybern Model Lab install.
+- **[DevMind Pilot Status](https://kybern.dev/models/devmind/)** — Where the DevMind 340M Base pilot stands.
+- **[Experiments & Research Roadmap](https://kybern.dev/experiments/)** — Planned studies on conditional memory, fact swaps, and context overrides, plus ideas you can test on your own hardware.
+- **[Matched Comparisons](https://kybern.dev/learn/lab/matched-comparisons/) & [Inspecting Runs](https://kybern.dev/learn/lab/inspect-runs/)** — How to set up a fair comparison with paired seeds and read probe verdicts.
+- **[Free 18-Lesson Curriculum](https://kybern.dev/learn/)** — Hands-on lessons, from tensors and autograd to building a causal decoder and running your own comparisons.
 
 ---
 
 ## TinyStories 5M and 50M recipes
 
-The [5M / 50M study](experiments/tinystories/README.md) provides shared preparation,
-100M / 1B training-token exposure budgets and training/resume runbooks. The
-[lifecycle guide](experiments/tinystories/lifecycle.md) covers storage, calibration,
-recovery and transfer limitations. The runtime declarations use ROCm as an example;
-completed ROCm 5M/50M runs, Intel context comparisons and a matched learning-rate
-study are recorded. Remote/Colab and cross-device optimizer-state handoffs remain
-unverified.
+The [5M / 50M study](experiments/tinystories/README.md) covers shared data
+preparation, training budgets of 100M and 1B tokens, and runbooks for training
+and resuming. The [lifecycle guide](experiments/tinystories/lifecycle.md)
+covers storage, calibration, recovery, and moving runs between machines. The
+runtime configs use ROCm as the example backend. Recorded so far: completed
+5M and 50M runs on ROCm, context-length comparisons on Intel, and a matched
+learning-rate study. Handing a run off to a remote machine or Colab, and moving
+optimizer state from one device to another, are still untested.
 
 ## Repository Structure
 
 ```text
 kybern-workshop/
+├── components/                # Python package for custom model parts (the only Python here)
 ├── examples/
+│   ├── custom-attention/      # Train with an attention kind from components/
 │   ├── synthetic-cpu/         # Offline synthetic CPU smoke recipe
+│   ├── tinystories/           # Index of the TinyStories recipes
 │   ├── tinystories-microlab/  # 40-update FFN width comparison (256 vs. 384)
 │   ├── tinystories-useful/    # 8,192-update CPU baseline recipe & improvement exercises
 │   ├── tinystories-worker/    # Paired CPU worker campaign recipe
@@ -166,16 +173,16 @@ kybern-workshop/
 ├── results/
 │   ├── 2026-10-14-synthetic-cpu/     # Recorded synthetic CPU smoke metrics & report
 │   ├── 2026-10-15-tinystories-smoke/ # Recorded paired CPU container smoke summary
-│   └── 2026-10-19-tinystories-cpu/   # Recorded 8,192-update baseline metrics & 27 story outputs
+│   ├── 2026-10-19-tinystories-cpu/   # Recorded 8,192-update baseline metrics & 27 story outputs
+│   └── 2026-10-31-tinystories-rocm/  # Recorded ROCm 5M and 50M runs
 └── docs/
     └── native-workflow.md     # Guide to packaging, inspecting & running recipes with klab
 ```
 
 ## Contributing
 
-Pull requests for experiment replications, new declarative recipes, baseline improvements, and links to community forks are welcome! Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Kybern Community Lab guide](https://kybern.dev/research/community-lab/) to get started.
-
+We welcome pull requests for replications, new recipes, improvements to a baseline, and links to your forks. Start with [CONTRIBUTING.md](CONTRIBUTING.md) and the [Kybern Community Lab guide](https://kybern.dev/research/community-lab/).
 
 ## License
 
-Workshop's recipes, declarations and documentation are [MIT licensed](LICENSE). Datasets, upstream model sources and any recorded third-party text keep their own licenses.
+Workshop's recipes, configs, and documentation are [MIT licensed](LICENSE). Datasets, upstream model sources and any recorded third-party text keep their own licenses.

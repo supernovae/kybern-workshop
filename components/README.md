@@ -1,15 +1,16 @@
 # Workshop components
 
-Model parts that Workshop projects add to
-[Kybern Model Lab](https://github.com/supernovae/model-lab) without editing it.
-Lab looks up every attention, feed-forward and memory by kind; this package
-registers extra kinds through the `klab.components` entry-point group. Lab's
+This package adds model parts to
+[Kybern Model Lab](https://github.com/supernovae/model-lab) from outside Lab.
+Lab looks up each attention, feed-forward and memory layer by its kind, and
+this package registers extra kinds through the `klab.components` entry-point
+group. Lab's
 [component guide](https://github.com/supernovae/model-lab/blob/main/docs/components.md)
-describes the contract.
+explains what a component has to provide.
 
 | Kind | Slot | What it is |
 | --- | --- | --- |
-| `cosine` | attention | scores are scaled cosine similarities of rotary-encoded queries and keys; each head learns one scale. Supports incremental decoding. |
+| `cosine` | attention | Scores are scaled cosine similarities of rotary-encoded queries and keys, and each head learns one scale. Supports incremental decoding. |
 
 ## Install
 
@@ -39,6 +40,6 @@ small model with it.
    `pyproject.toml`, named `SLOT.KIND` (`attention.*`, `ffn.*` or `memory.*`).
 3. Reinstall the package so the new entry point is visible.
 
-A run records the package name and version that supplied each kind. Bump
-`version` when a kind's behaviour changes, so two runs of the same config can be
-told apart.
+Each run records the package name and version that supplied each kind. Bump
+`version` whenever a kind's behaviour changes, so you can tell apart two runs
+of the same config.

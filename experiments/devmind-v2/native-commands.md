@@ -1,29 +1,31 @@
 # Native authoring and execution path
 
-These are staged instructions, not an executable launch script. Use an existing
-provisioned environment and a new persistent work root outside Git. Set `RECIPE`
-to this package, `WORKSHOP` to its repository, and `V2` to a new work directory.
-Paths below must be absolute. No command installs dependencies. Preparation and
-workload commands require their own resource and execution authorization.
+These steps are meant to be read and run one at a time; this is not a launch
+script. Use an environment that is already set up and a new persistent work root
+outside Git. Set `RECIPE` to this package, `WORKSHOP` to its repository, and `V2`
+to a new work directory. All paths below must be absolute. None of the commands
+install dependencies. Preparation and training each need their own resource and
+run approval.
 
 ## 1. Bind previously verified inputs
 
-After code qualification, use the existing native corpus preparation interface
-and the shared phase map at `../devmind/preparation/preparation.json`. Render its
-bindings for this new v2 corpus, not the historical three-pillar acquisition
-project. Inspect a phase without executing it with `klab attempt phase-command`.
-Native steps cover admission inspection, split inventory, family freezing, build,
-release audit, tokenizer fitting/verification, measured unique-token floors,
-mixture materialization/verification and prepared-input publication. Source IDs
-and release identities in the v2 mixture/floor templates are intentionally unbound.
-Map every chosen source ID to a pillar; multiple source IDs can map to one pillar.
-Keep a complete frozen feasible mixture, not a succession of exhausted shards.
+After code qualification, prepare the corpus with Lab's corpus preparation
+commands and the shared phase map at `../devmind/preparation/preparation.json`.
+Fill in its bindings for the new v2 corpus; the historical three-pillar
+acquisition project doesn't apply. To see a phase's command without running it,
+use `klab attempt phase-command`. The Lab steps cover admission inspection, split
+inventory, family freezing, build, release audit, tokenizer fitting and checks,
+measured unique-token floors, mixture materialization and checks, and
+prepared-input publication. Source IDs and release IDs in the v2 mixture and
+floor templates are left blank on purpose. Map every source ID you choose to a
+pillar; several source IDs can share one pillar. Freeze one complete mixture that
+can actually be filled, rather than moving from one exhausted shard to the next.
 
-Copy `binding.example.json` to `$V2/bindings.json` and bind all fields from verified
-native outputs. Five heldout panels must share the model tokenizer and 4K context;
-fill their *measured* supervised-target counts and independently verified manifest
-hashes. Template panel sizes (64 blocks each) are a proposal. The example does not
-claim those blocks already exist. Choose a backend and device explicitly.
+Copy `binding.example.json` to `$V2/bindings.json` and fill every field from
+checked Lab outputs. The five held-out panels must use the model's tokenizer and
+4K context. Enter their *measured* supervised-target counts and their manifest
+hashes, checked separately. The 64 blocks per panel in the template is a
+proposal; those blocks don't exist yet. Choose a backend and device explicitly.
 
 ```sh
 klab config compose "$RECIPE/run.json" model="$RECIPE/model.json" \
@@ -35,12 +37,13 @@ klab tokenizer memory-map "$TOKENIZER" --mode identity \
   --config-output "$V2/mapped.yaml"
 ```
 
-`TOKENIZER` must be the same file as the bound tokenizer. The map binds its bytes;
-identity mode preserves case, whitespace and code spelling. `config compose`
-performs schema validation only and names any field still unbound. It does not prove paths exist or admit a corpus.
-The five panel declarations are checked by the native prepared/evaluation path.
+`TOKENIZER` must be the same file as the bound tokenizer; the map is tied to its
+bytes. Identity mode keeps case, whitespace and code spelling. `config compose`
+checks the schema and names any field still unbound. It doesn't check that paths
+exist or that the corpus has been admitted. Lab's prepared-input and evaluation
+steps check the five panel configs.
 
-Optional runtime optimization uses native derivation, before publishing inputs:
+To tune the runtime, derive a new config before publishing inputs:
 
 ```sh
 klab config derive "$V2/mapped.yaml" \
@@ -51,12 +54,12 @@ klab config derive "$V2/mapped.yaml" \
   --set 'runtime.compile_transformer_blocks=true' --output "$V2/runtime.yaml"
 ```
 
-For the remaining commands, `CONFIG` names mapped.yaml or the explicitly derived
-runtime.yaml. Do not infer device availability or multi-GPU execution from a backend
-string. Select a registered native runtime/profile and owned devices separately.
-The native secondary-device setting replaces dependency on the previous external
-two-GPU launcher. Verify both selected physical devices and replica behavior before
-actual work; the example does not claim they are available.
+For the remaining commands, `CONFIG` is mapped.yaml or the derived runtime.yaml.
+A backend string doesn't tell you which devices exist or whether multi-GPU works.
+Pick a registered runtime/profile and the devices you own separately. Lab's
+secondary-device setting replaces the old external two-GPU launcher. Check both
+physical devices and the replica behavior before real work; the example assumes
+nothing about what hardware you have.
 
 ## 2. Pack, measure schedule, rebind and cold-verify
 
@@ -71,17 +74,18 @@ klab data prepared-inputs publish "$V2/final.yaml" --output "$V2/final-inputs" \
 klab data prepared-inputs verify "$V2/final.yaml" "$V2/final-inputs"
 ```
 
-The schedule command derives the terminal update and cosine-decay horizon from
-actual authenticated packed groups, rather than dividing targets by nominal batch
-size. It binds the checkpoint terminal boundary consistently and refuses missing
-supply. Inspect its receipt, including actual committed targets and partial final
-update semantics. A schedule change changes RunConfig identity: do not feed the
-bootstrap bundle to the final config. Republish with native cache reuse, then
-cold-verify the final bundle. No private grouping or identity bypass is permitted.
+The schedule command works out the final update and the cosine-decay horizon from
+the actual packed groups, instead of dividing targets by the nominal batch size.
+It sets the terminal checkpoint boundary to match, and refuses if supply is
+missing. Read its receipt, including the actual committed targets and how the
+partial final update is handled. A new schedule makes a new RunConfig, so don't
+use the bootstrap bundle with the final config. Republish with Lab's cache reuse,
+then cold-check the final bundle. Don't regroup data by hand or work around the
+hash checks.
 
-The optimizer warmup is a deliberate 1,000-step proposal. If the measured horizon
-cannot support it, revise the experiment explicitly instead of silently clipping
-warmup. Final schedule derivation is not evidence that the learning rate is stable.
+The 1,000-step warmup is a deliberate choice. If the measured horizon is too
+short for it, revise the experiment openly instead of quietly shortening warmup.
+Deriving the schedule doesn't tell you whether the learning rate is stable.
 
 ## 3. Qualify and launch only when separately authorized
 
@@ -91,22 +95,24 @@ klab stage "$V2/final.yaml" --through validate --prepared-inputs "$V2/final-inpu
   --cold-verify --output "$V2/validated-stage" --resource-envelope "$ENVELOPE"
 ```
 
-Schema and data validation are not a finite-gradient or accelerator test. When
-runtime qualification is authorized, native `stage --through smoke` or `warmup`
-executes real work. Use a new stage output and the selected runtime profile; do
-not label it training-free. Reuse applicable prior runtime verification only when
-code, dimensions, backend and ownership have not changed.
+Schema and data validation don't test gradients or the accelerator. Once runtime
+qualification is approved, `stage --through smoke` or `warmup` does real work on
+the device. Give it a new stage output and the chosen runtime profile, and record
+it as real work. Reuse an earlier runtime check only if the code, dimensions,
+backend and device ownership are all unchanged.
 
-After reviewing data, schedule, qualification, storage and behavior criteria:
+After you have reviewed the data, schedule, qualification, storage and behavior
+criteria:
 
 ```sh
 klab train "$V2/final.yaml" --run-id "$FRESH_RUN_ID" \
   --stage-bundle "$V2/validated-stage" --resource-envelope "$ENVELOPE"
 ```
 
-Do not add `--resume`, `--promote`, `--add-ngram-memory`, `--append-data`, historical
-cursors or old frozen boundaries to the fresh command. Select the native runtime
-explicitly where needed. A resource envelope is a bound, not a spend approval.
+Keep `--resume`, `--promote`, `--add-ngram-memory`, `--append-data`, historical
+cursors and old frozen boundaries out of the fresh command. Choose the runtime
+explicitly where needed. A resource envelope sets limits; it doesn't approve
+spending.
 
 ## 4. Evaluate, recover and report exact generations
 
@@ -117,22 +123,24 @@ klab probe "$GENERATION" --config "$RECIPE/probe-full.json" --json
 klab report "$FRESH_RUN_ID" --kind run --json
 ```
 
-Probes execute inference; the full tier additionally needs an already provisioned
-lm-eval dependency and task data. Missing task data or results remain missing, not
-passes. Bind the correct runtime before inference. Use exact checkpoint paths,
-not an unverified latest generation. Keep per-pillar losses separate from aggregate
-loss and probe verdicts. Run `probe-final.json` only once on the already chosen
-candidate; never use its held-back split for tuning.
+Probes run inference. The full tier also needs lm-eval and its task data already
+installed. If task data or results are missing, record them as missing, not as
+passes. Bind the right runtime before inference. Use exact checkpoint paths
+rather than whatever the latest generation happens to be. Report per-pillar
+losses separately from the aggregate loss and the probe verdicts. Run
+`probe-final.json` only once, on the candidate you've already chosen, and never
+tune on its held-back split.
 
-Recovery is a separate native full-state operation after checkpoint verification:
+Recovery is a separate full-state operation, after the checkpoint check:
 
 ```sh
 klab train "$V2/final.yaml" --resume "$GENERATION" --run-id "$RECOVERY_RUN_ID" \
   --resource-envelope "$ENVELOPE"
 ```
 
-Resume only a matching v2 generation, preserving optimizer/RNG/counters and data
-identity. Do not use drift or budget-extension overrides to hide mismatches. Retain
-the native cancellation/failure record if a run stops. Back up full state,
-tokenizer, config, prepared/source closure and environment/code pins independently
-before any destructive cleanup. Checkpoints alone are not a recovery closure.
+Resume only a matching v2 generation, keeping optimizer, RNG, counters and data
+unchanged. Don't use drift or budget-extension overrides to paper over a
+mismatch. If a run stops, keep Lab's cancellation or failure record. Before any
+destructive cleanup, back up the full state, tokenizer, config, prepared and
+source data, and environment and code pins to separate storage. Checkpoints
+alone aren't enough to recover a run.
