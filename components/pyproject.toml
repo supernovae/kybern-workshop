@@ -1,0 +1,19 @@
+[project]
+name = "kybern-workshop-components"
+version = "0.1.0"
+description = "Model components that Kybern Workshop projects add to Kybern Model Lab."
+requires-python = ">=3.14"
+# Lab and Torch come from the Lab environment this package is installed into.
+dependencies = ["pydantic>=2"]
+
+# One entry per kind, named SLOT.KIND. Lab loads an entry only when a config
+# names that kind.
+[project.entry-points."klab.components"]
+"attention.cosine" = "workshop_components.cosine:COMPONENT"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
