@@ -197,7 +197,7 @@ Open in Lab:
 | Several devices share one process, which holds device memory in host RAM on Arc | Pretraining uses one card | [#428](https://github.com/supernovae/model-lab/issues/428) |
 | Grouped-query attention is refused with SDPA | Full-width keys and values: about 5.3 GiB of generation cache per 32,768-token sequence | |
 | The leakage screen covers probe items only | Nothing checks the corpus against HumanEval or MBPP | |
-| `corpus near-duplicates` is all-in-memory and all-or-nothing | It cannot cover the full corpus; coverage is recorded by hand in [`near-duplicate-screen.md`](corpus/near-duplicate-screen.md) | |
+| `corpus near-duplicates` is all-in-memory and all-or-nothing | It cannot cover the full corpus; coverage is recorded by hand in [`near-duplicate-screen.md`](corpus/near-duplicate-screen.md) | [#432](https://github.com/supernovae/model-lab/issues/432) |
 
 Now in Lab and not yet used by this recipe: remote-code Hugging Face export
 (#415), chat and multi-field converters (#416), `document_start` packing and

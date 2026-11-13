@@ -62,3 +62,4 @@ Full coverage needs a screen that does not hold the whole corpus in memory, for
 example one that indexes the (small) validation side and streams the training
 side past it, or one that shards by band. Until Lab has that, partial coverage
 with an owner's acceptance is the only way to proceed on a full-size release.
+Tracked in [model-lab#432](https://github.com/supernovae/model-lab/issues/432).
