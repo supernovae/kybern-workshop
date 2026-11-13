@@ -1,20 +1,23 @@
-# Stage 2: long-context training on 16,384-token rows of long documents,
-# starting from the pretrained checkpoint. Pretraining stays at 4,096-token
-# rows; this short stage teaches the model the longer context.
+# Stage 2: lengthen the context from 4,096 to 16,384 tokens. Starts from the
+# pretrained run and trains 500 million tokens (about 4% of pretraining) on
+# 16,384-token rows from the long-context mixture
+# (corpus/long-context-mixture.template.yaml), where every document of 4,096
+# tokens or more starts its own row and shorter documents pack around them.
 #
-# Measured on one B70, dense attention with recomputation: 16,384-token rows
-# at 2,348 targets/s (21.2 GiB peak). 32,768-token rows need
-# optimizer.state_offload: true and run at 1,285 targets/s (22.1 GiB peak).
+# Compose it with context-16k.yaml, which sets the 16,384-token context and
+# YaRN RoPE scaling. long-context-abf.yaml is the alternative to compare
+# against: a larger RoPE base instead of YaRN.
 #
-# This stage should also raise the RoPE base (or apply YaRN) for the longer
-# context. Lab refuses any change to the attention section in a child stage
-# today, so it waits on that; see the README.
+# Measured on one B70, dense attention with recomputation (compile is refused
+# with it): 16,384-token rows at 2,348 targets/s, 21.2 GiB peak. Two cards are
+# not measured at this length.
 schema_version: 2
 name: devmind-long-context
 seed: 42
 training:
   seq_len: 16384
   micro_batch_size: 1
+  # 8 rows per update (131,072 targets, as in pretraining), 4 on each card.
   gradient_accumulation: 8
   max_steps: 3815
   max_tokens: 500000000
@@ -48,6 +51,7 @@ runtime:
   engine: pytorch
   backend: xpu
   device_index: 0
+  secondary_device_indices: [1]
   precision: bf16
   output_head_chunk_tokens: 2048
   memory:

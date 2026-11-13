@@ -1,0 +1,64 @@
+# Stage 3: lengthen the context from 16,384 to 32,768 tokens. Starts from the
+# stage 2 run and trains 250 million tokens on 32,768-token rows from the
+# long-context mixture rebuilt with row_tokens: 32768 and half its quotas
+# (see post-training/README.md).
+#
+# Compose it with context-32k.yaml: YaRN from the same 4,096-token original
+# context, now factor 8. If stage 2's comparison chose a larger RoPE base
+# instead, compose this stage with a copy of context-32k.yaml that doubles
+# that base again and drops rope_scaling.
+#
+# Measured on one B70, dense attention with recomputation and optimizer state
+# offload (without offload it runs out of memory): 32,768-token rows at 1,285
+# targets/s, 22.1 GiB peak. Two cards are not measured at this length.
+schema_version: 2
+name: devmind-long-context-32k
+seed: 42
+training:
+  seq_len: 32768
+  micro_batch_size: 1
+  # 4 rows per update (131,072 targets, as in pretraining), 2 on each card.
+  gradient_accumulation: 4
+  max_steps: 1908
+  max_tokens: 250000000
+  grad_clip_norm: 1.0
+  deterministic: false
+  parent_checkpoint: REPLACE_WITH_LONG_CONTEXT_RUN_DIRECTORY
+optimizer:
+  name: adamw
+  peak: 0.0001
+  floor: 0.00001
+  warmup_steps: 100
+  decay_steps: 1908
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  eps: 1.0e-08
+  memory_table_lr_multiplier: 5.0
+  memory_table_weight_decay: 0.0
+  state_offload: true
+evaluation:
+  every_steps: null
+  every_tokens: 25000000
+  max_batches: 2
+checkpoint:
+  every_steps: null
+  every_tokens: 50000000
+  every_minutes: 120
+  save_on_new_best: false
+  keep_periodic: false
+logging:
+  every_steps: 10
+runtime:
+  engine: pytorch
+  backend: xpu
+  device_index: 0
+  secondary_device_indices: [1]
+  precision: bf16
+  output_head_chunk_tokens: 2048
+  memory:
+    activation_checkpointing:
+      enabled: true
+      strategy: transformer_block
+staging:
+  smoke_steps: 2
+  warmup_steps: 5

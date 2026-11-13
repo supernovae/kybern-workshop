@@ -1,6 +1,6 @@
 # Dense causal attention through the backend's fused kernel (flash SDPA on the
 # B70), with the standard RoPE base. Pretraining uses 4,096-token rows; the
-# long-context stage lengthens the context by raising the RoPE base (or YaRN)
-# on longer rows, the way Code Llama and Qwen2.5 did. See the README.
+# long-context stages keep these settings and add YaRN RoPE scaling from a
+# 4,096-token original context (context-16k.yaml, context-32k.yaml).
 kind: dense
 implementation: sdpa
