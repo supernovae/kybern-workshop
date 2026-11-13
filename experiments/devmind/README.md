@@ -109,7 +109,6 @@ klab --work-dir "$WORK" corpus acquire "$R/corpus/corpus.yaml"
 BUILD=$(klab --work-dir "$WORK" corpus build "$R/corpus/corpus.yaml" --offline)
 RELEASE=$(klab --work-dir "$WORK" corpus freeze "$BUILD")
 klab corpus audit "$RELEASE"
-klab corpus near-duplicates "$RELEASE"
 klab corpus finalize-family-inventory "$RELEASE" \
   --splits "$R/corpus/splits.yaml" --output "$WORK/family-inventory.jsonl"
 ```
@@ -117,6 +116,22 @@ klab corpus finalize-family-inventory "$RELEASE" \
 `--plan` checks every declaration without the network. Acquisition downloads
 about 43 GiB of dataset shards plus fifteen git repositories, and can be run
 one source at a time with `--source-id`.
+
+**Gate: cross-split near-duplicates.** The validation sources come from shards
+no training source uses, but copied files, forked repositories and re-posted
+pages can still put near-copies of validation text in training. Exact
+duplicates are refused at build. Near-duplicates are not, and before any
+pretraining run you must complete
+[`corpus/near-duplicate-screen.md`](corpus/near-duplicate-screen.md).
+
+`klab corpus near-duplicates "$RELEASE"` holds every document and its shingles
+in memory and stops with no partial report when it passes a bound (by default
+100,000 documents and 128 MiB of text). A 12-billion-token release is several
+hundred times over that, so the default run will stop. Raise the bounds as far
+as the host allows (`--max-documents`, `--max-input-text-bytes`,
+`--max-total-shingles`, `--max-comparisons`) and record exactly what was and
+was not covered, or have the owner accept the gap in writing. Do not start
+pretraining on an empty or unfilled record.
 
 ### 2. Tokenizer and mixture
 
@@ -182,6 +197,7 @@ Open in Lab:
 | Several devices share one process, which holds device memory in host RAM on Arc | Pretraining uses one card | [#428](https://github.com/supernovae/model-lab/issues/428) |
 | Grouped-query attention is refused with SDPA | Full-width keys and values: about 5.3 GiB of generation cache per 32,768-token sequence | |
 | The leakage screen covers probe items only | Nothing checks the corpus against HumanEval or MBPP | |
+| `corpus near-duplicates` is all-in-memory and all-or-nothing | It cannot cover the full corpus; coverage is recorded by hand in [`near-duplicate-screen.md`](corpus/near-duplicate-screen.md) | [#432](https://github.com/supernovae/model-lab/issues/432) |
 
 Now in Lab and not yet used by this recipe: remote-code Hugging Face export
 (#415), chat and multi-field converters (#416), `document_start` packing and
