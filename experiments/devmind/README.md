@@ -8,7 +8,7 @@ complete demonstration of Lab, from pinned sources to a chat model, and a
 baseline to change one thing at a time.
 
 **Nothing has been trained from this recipe yet.** The declarations load with
-Lab, the model shape has been measured on one Arc Pro B70 for a handful of
+Lab, the model shape has been measured on Arc Pro B70s for a handful of
 updates, and the data has not been downloaded. The sections below say which
 numbers were measured and which are plans.
 
@@ -17,11 +17,11 @@ numbers were measured and which are plans.
 | | |
 | --- | --- |
 | Parameters | 729,709,856 (`klab inspect`); 28 layers, width 1,536, 24 heads, feed-forward 4,096 |
-| Context | `max_seq_len: 32768` |
-| Attention | [`local_selected`](https://github.com/supernovae/model-lab/blob/main/docs/sparse-attention.md): the 512 tokens before each position, 16 selected earlier 64-token blocks, learned block summaries, and 384-wide latent keys and values |
+| Context | Pretrained on 4,096-token rows, then a short long-context stage on 16,384-token rows; `max_seq_len: 32768` |
+| Attention | Dense causal attention through flash SDPA, standard RoPE base |
 | Memory | Engram n-gram tables (orders 2 and 3, two hash heads) after blocks 1 and 14, from the first update |
 | Tokenizer | 32,768-entry BPE fitted on the corpus, with the ChatML markers as single tokens |
-| Pretraining | 12 billion tokens in ten strata, see [corpus](corpus/README.md) |
+| Pretraining | 12 billion tokens in ten strata, see [corpus](corpus/README.md); compiled blocks and loss, no activation recomputation |
 | After pretraining | longer rows, then chat tuning, then optional preference tuning, see [post-training](post-training/README.md) |
 
 The earlier 340M model and its later variants are gone from this directory.
@@ -42,37 +42,57 @@ Their files are in Git history before this recipe was added.
 
 ## What was measured
 
-One Arc Pro B70 (32 GiB), bf16, activation recomputation on, synthetic text,
-this model with a 32,768-entry tokenizer, one row per microbatch, Lab at
-`c1cbe3a2` plus [#414](https://github.com/supernovae/model-lab/pull/414).
+Arc Pro B70 (32 GiB), bf16, this model with a 32,768-entry tokenizer, Python
+source as text, Lab at `475b76d7`, PyTorch 2.15.0+xpu. One row per microbatch,
+updates of 131,072 targets except where noted, 10 updates per run; targets/s is
+the median of updates 4 to 10. Every run set `ZE_AFFINITY_MASK` so the process
+saw only its own card, except the one marked (see below).
 
-| Row length | Attention | Device peak | Targets/s | Updates |
-| --- | --- | --- | --- | --- |
-| 8,192 | this recipe | 15.4 GiB | 1,437 (median of updates 4 to 10) | 10 |
-| 8,192 | dense `sdpa`, same model | 15.8 GiB | 3,087 | 10 |
-| 32,768 | this recipe, before #414 | out of memory at the output head | | 0 |
-| 32,768 | this recipe, with #414 | 26.9 GiB | 1,401 | 1, then stalled |
+| Rows | Attention and settings | Targets/s | Device peak |
+| --- | --- | --- | --- |
+| 4,096 | dense, compiled blocks and loss, no recomputation | **8,076** | 23.1 GiB |
+| 4,096 | same, process sees both cards | 7,865 | 23.1 GiB |
+| 4,096 | same, two processes at once, one per card | 7,781 + 8,203 = 15,984 | 23.1 GiB each |
+| 8,192 | dense, compiled, no recomputation | 5,493 | 28.6 GiB |
+| 16,384 | dense, recomputation (compile is refused with it), 4-row updates | 2,348 | 21.2 GiB |
+| 32,768 | dense, recomputation, 4-row updates | out of memory | |
+| 32,768 | same plus `optimizer.state_offload: true` | 1,285 | 22.1 GiB |
+
+The earlier version of this recipe used `local_selected` sparse attention with
+recomputation on 8,192-token rows. It ran at 1,437 targets/s, and dense
+attention with recomputation (which turns compile off) at 3,087. Sparse
+attention pays at long contexts and at inference, not when pretraining a model
+this size at short rows; DeepSeek added its sparse attention to an already
+trained dense model.
 
 What that means for the plan:
 
-- **8,192-token rows train.** That is the pretraining row.
-- **32,768-token rows do not train on a 32 GiB card yet.** After its first
-  update the run stopped making progress and host memory fell by about 40 GiB,
-  so it was stopped. Until that is fixed
-  ([Lab #417](https://github.com/supernovae/model-lab/issues/417)), the model can
-  read 32,768 tokens but has only been trained on rows up to the long-context
-  stage's length. Treat anything beyond that length as untested.
-- **It is slow.** At 1,437 targets/s per device, and if four devices scale as
-  well as two did for the earlier model (1.69 times for two), 12 billion tokens
-  is on the order of four to five weeks. Four-device throughput has not been
-  measured. Sparse attention costs about half the speed of dense at this row
-  length; it pays back at longer rows and at inference, where a user's cache
-  holds 384-wide latents and each new token reads about 1,600 positions.
+- **Pretrain on 4,096-token rows.** They are 47% faster than 8,192-token rows
+  and leave 9 GiB of the card free; 8,192 fits with 3 GiB to spare. At 8,076
+  targets/s, 12 billion tokens take about 17 days on one card.
+- **Lengthen the context afterwards.** The long-context stage trains 500
+  million tokens on 16,384-token rows (about 2.5 days on one card). It should
+  also raise the RoPE base or apply YaRN, as Code Llama and Qwen2.5 did; Lab
+  cannot change RoPE in a child stage yet
+  ([Lab #427](https://github.com/supernovae/model-lab/issues/427)).
+- **One card per process.** A process that can see both cards also holds its
+  device memory in host RAM: the run that saw both cards took about 37 GiB of
+  host RAM and stalled the desktop at its final checkpoint, against about
+  8 GiB with one card visible. Lab's `secondary_device_indices` run every
+  device in one process, so they are left out until Lab runs one process per
+  card ([Lab #428](https://github.com/supernovae/model-lab/issues/428)). Two
+  masked processes ran side by side at 1.98 times one card's throughput, so
+  two cards should bring pretraining to about 9 days once that lands; gradient
+  exchange is not included in that figure.
 - **A larger model is not recommended on this hardware.** Doubling the
-  parameters roughly halves the speed and leaves less room for long rows.
+  parameters roughly halves the speed, and the card has little room left at
+  4,096-token rows without recomputation.
 
-Do not set `runtime.memory.estimate_policy: observe` to get past a refusal on
-XPU. A run that outgrows the card does not fail; it fills host memory.
+Lab's memory planner estimates 31.9 GiB for the pretraining config, against
+the 23.1 GiB measured, and would refuse it, so `pretrain.yaml` sets
+`runtime.memory.estimate_policy: observe`. Keep the spill guard on (the
+default): a run that outgrows the card on XPU slows to a stop instead of
+failing, and the guard stops it.
 
 ## Run it
 
@@ -131,6 +151,7 @@ klab corpus verify-mixture "$WORK/mixture.yaml" --output "$WORK/mixture"
 ### 3. Pretrain
 
 ```sh
+export ZE_AFFINITY_MASK=0   # this process sees only the first card
 klab config compose "$R/pretrain.yaml" model="$R/model.yaml" \
   attention="$R/attention.yaml" optimizer="$R/optimizer.yaml" \
   "$WORK/paths.yaml" --output "$WORK/pretrain.yaml"
@@ -142,10 +163,9 @@ klab train "$WORK/pretrain.yaml" --runtime b70-xpu --run-id devmind-pretrain \
   --require-prepared --stage-bundle "$WORK/stages/pretrain"
 ```
 
-`pretrain.yaml` names four devices. With fewer, shorten
-`runtime.secondary_device_indices`; an update is still 16 rows. Read the warmup's
-measured device peak and targets/s before committing weeks of compute, and
-record them here.
+`pretrain.yaml` uses one device; see above for why. Read the warmup's measured
+device peak and targets/s before committing weeks of compute, and record them
+here.
 
 ### 4. After pretraining
 
@@ -154,23 +174,23 @@ tuning, preference tuning, checking the result and what can be published.
 
 ## Known gaps
 
-These are open in Lab and limit what this recipe can do today.
+Open in Lab:
 
 | Gap | Effect here | Lab |
 | --- | --- | --- |
-| Output head held every logit of a row | 32k rows failed immediately | [#414](https://github.com/supernovae/model-lab/pull/414) (open; `pretrain.yaml` uses its setting) |
-| 32k rows spill on a 32 GiB card; no spill guard; `local_selected` speed | Long-context stage uses 12,288-token rows | [#417](https://github.com/supernovae/model-lab/issues/417) |
-| Export covers Llama-shaped models only | The trained model cannot be published to Hugging Face | [#415](https://github.com/supernovae/model-lab/issues/415) |
-| No converter for chat or multi-field datasets | Chat data must be converted by hand; commits and instruction pairs are left out of pretraining | [#416](https://github.com/supernovae/model-lab/issues/416) |
-| Mixtures cut long documents across rows; one repeat count for all strata | Long rows hold mostly short documents | [#418](https://github.com/supernovae/model-lab/issues/418) |
-| No archive or PDF sources | No RFCs, NIST, NASA or accident reports yet | [#419](https://github.com/supernovae/model-lab/issues/419) |
-| No executed code benchmarks; no quantized inference | No HumanEval or MBPP score; no int8 serving | [#420](https://github.com/supernovae/model-lab/issues/420) |
+| A child stage cannot change RoPE; no YaRN or NTK scaling | The long-context stage trains longer rows on the pretraining RoPE base | [#427](https://github.com/supernovae/model-lab/issues/427) |
+| Several devices share one process, which holds device memory in host RAM on Arc | Pretraining uses one card | [#428](https://github.com/supernovae/model-lab/issues/428) |
+| Grouped-query attention is refused with SDPA | Full-width keys and values: about 5.3 GiB of generation cache per 32,768-token sequence | |
+| The leakage screen covers probe items only | Nothing checks the corpus against HumanEval or MBPP | |
+
+Now in Lab and not yet used by this recipe: remote-code Hugging Face export
+(#415), chat and multi-field converters (#416), `document_start` packing and
+per-stratum `max_exposures` (#418), archive, PDF and MediaWiki sources (#419),
+and executed code benchmarks and weight quantization (#420).
 
 ## Changing it
 
 Change one setting with `klab try DELTA.yaml --vs "$WORK/pretrain.yaml"` on a
-small budget and read the record. Three comparisons this recipe has not made
-and should: `selector: mean_key` against `learned`; dense attention against
-`local_selected` at a matched budget; `model.memory: none` against the n-gram
-tables. A change to the declarations after a result is recorded is a new recipe
+small budget and read the record. One comparison this recipe has not made and
+should: `model.memory: none` against the n-gram tables. A change to the declarations after a result is recorded is a new recipe
 beside this one.

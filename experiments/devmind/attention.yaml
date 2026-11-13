@@ -1,11 +1,6 @@
-# Sparse attention with latent keys and values (MLA). Each token reads its own
-# block, the 512 tokens before it and 16 earlier 64-token blocks chosen per head,
-# plus one learned summary of every earlier block. Cost per token does not grow
-# with context, and a generation cache holds 384-wide latents instead of
-# 1,536-wide keys and values.
-kind: local_selected
-block_size: 64
-window_size: 512
-selected_blocks: 16
-latent_dim: 384
-selector: learned
+# Dense causal attention through the backend's fused kernel (flash SDPA on the
+# B70), with the standard RoPE base. Pretraining uses 4,096-token rows; the
+# long-context stage lengthens the context by raising the RoPE base (or YaRN)
+# on longer rows, the way Code Llama and Qwen2.5 did. See the README.
+kind: dense
+implementation: sdpa

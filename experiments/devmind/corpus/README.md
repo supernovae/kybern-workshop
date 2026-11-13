@@ -63,13 +63,12 @@ have seen their issues.
 ## Not here yet
 
 - **RFCs, NIST and NASA handbooks, accident investigation reports, the Cynefin
-  wiki.** They are openly licensed and wanted, and Lab has no source kind for
-  archives, PDFs or other wikis
-  ([Lab #419](https://github.com/supernovae/model-lab/issues/419)). Safety and
+  wiki.** They are openly licensed and wanted. Lab now reads archives, PDFs
+  and MediaWiki dumps (#419); their sources are not declared here yet. Safety and
   resilience engineering, Cynefin and SDLC material reaches the model today
   only through Wikipedia and the small `practice` stratum.
 - **Commits and diffs, instruction pairs.** Their rows spread text over several
-  fields ([Lab #416](https://github.com/supernovae/model-lab/issues/416)).
+  fields; Lab can now convert them (#416), and no source here does yet.
 - **Whole repositories as single documents.** Each file is its own document.
 
 ## Unchecked
