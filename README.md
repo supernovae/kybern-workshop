@@ -22,7 +22,7 @@
 
 **Kybern Workshop** holds the experiment recipes we run with **[Kybern Model Lab](https://github.com/supernovae/model-lab)**: dataset locks, tokenizer configs, model `RunConfig` files, `try` changes, and the recorded outputs of each run. Use them to see exactly what we ran, repeat a run on your own hardware, or copy a recipe and test your own idea.
 
-We publish everything we record, including negative results and models whose validation loss improved while their stories still failed our rubric. Small models are easier to understand when you can see where they go wrong.
+We publish everything we record, including negative and inconclusive results: an experiment's predictions are written before it runs, and its results are filled in afterwards whichever way they go. Small models are easier to understand when you can see where they go wrong.
 
 A few things to know before you start:
 
@@ -35,8 +35,8 @@ A few things to know before you start:
 
 | Experiment | What it tests | Status & Evidence | Links |
 | --- | --- | --- | --- |
-| **TinyStories Base (58.9M)** | A from-scratch story model shaped like llama2.c's 42M (width 512, 8 layers, 32,768-token tokenizer, V/D = 64), trained for four passes over every unique TinyStories story on two Arc Pro B70s. | **Recipe measured, not trained yet.** Data cleaning, tokenizer, throughput and the learning rate were measured; the README records each. | [Recipe](experiments/tinystories/README.md) |
-| **Is the LM Head a Gradient Bottleneck?** | A preregistered test of [arXiv 2603.10145](https://arxiv.org/abs/2603.10145) on the TinyStories base: head rank, vocabulary size and SpamLang sweeps over three seeds, with the share of the logit gradient lost in the head measured on every arm. | **Preregistered, not run.** | [Experiment](experiments/tinystories/lm-head-bottleneck/README.md) |
+| **TinyStories Base (58.9M)** | A from-scratch story model shaped like llama2.c's 42M (width 512, 8 layers, 32,768-token tokenizer, V/D = 64), trained for four passes over every unique TinyStories story on two Arc Pro B70s. | **Trained.** Held-out loss 1.329, 0.438 bits per byte, in 93 minutes on two B70s (one run, Lab `827a4ef8`). The README records the data cleaning, tokenizer, learning-rate sweep, loss curve and a sample story. | [Recipe](experiments/tinystories/README.md) · [Results](experiments/tinystories/README.md#6-check-the-model) |
+| **Is the LM Head a Gradient Bottleneck?** | A preregistered test of [arXiv 2603.10145](https://arxiv.org/abs/2603.10145) on the TinyStories base: head rank, vocabulary size and SpamLang sweeps over three seeds, with the share of the logit gradient lost in the head measured on every arm. | **Running.** Prediction P1 is measured on the base model: 97.8% of the gradient norm is lost in the head, inside the paper's 95–99%. The rank, vocabulary and SpamLang sweeps started 2026-11-13. | [Experiment](experiments/tinystories/lm-head-bottleneck/README.md) |
 | **TinyStories Microlab** | The same experiment on CPU: a 1.5M-parameter model on 20,000 stories, heads of rank 8 to 128 against the full head, three seeds. | **Ready to run.** One recipe check recorded (seed 1); no sweep result yet. | [Microlab Guide](examples/tinystories-microlab/README.md) |
 | **Basic Synthetic CPU** | An offline end-to-end check: synthetic text, BPE tokenizer, one training step, evaluation and a run report. | **Ready to run.** Offline on CPU, no downloads. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
 | **Devmind (730M)** | A from-scratch, development-leaning decoder with dense attention, pretrained at 4,096 tokens and extended to 32,768, with n-gram memory from the first update: pinned sources, a 12B-token mixture, pretraining, long-context, chat and preference stages. | **Defined, not trained.** Declarations load with Lab; the model shape was measured for a few updates on one Arc Pro B70. The README lists the measured numbers and the open Lab gaps. | [Recipe](experiments/devmind/README.md) · [Corpus](experiments/devmind/corpus/README.md) · [Post-training](experiments/devmind/post-training/README.md) |
@@ -96,6 +96,17 @@ $KLAB report TRY_ID
 $KLAB explore TRY_ID
 $KLAB dashboard
 ```
+
+### 3. Train the TinyStories Base Model on a GPU
+
+The [base recipe](experiments/tinystories/README.md) walks through every step on a
+registered accelerator runtime: pinning and cleaning the data, fitting the
+32,768-token tokenizer, the learning-rate sweep and the four-pass training run.
+It needs about 24 GB of disk and took 93 minutes on two Intel Arc Pro B70s; on
+other hardware, register your own runtime with Lab's
+[runtime guide](https://github.com/supernovae/model-lab/blob/main/docs/runtime.md).
+The [LM-head experiment](experiments/tinystories/lm-head-bottleneck/README.md)
+then runs three sweeps from the same workspace.
 
 ### The Everyday Experiment Loop
 
