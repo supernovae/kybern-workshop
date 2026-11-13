@@ -4,12 +4,13 @@ schema_version: 2
 name: devmind-pretrain
 seed: 42
 training:
-  # One 8,192-token row per microbatch is the largest row measured to train
-  # steadily on a 32 GiB B70 (15.4 GiB peak). Sixteen rows make one update,
-  # four per device on four devices.
-  seq_len: 8192
+  # One 4,096-token row per microbatch, 32 per update (131,072 targets).
+  # Measured on one B70 with compiled blocks and no recomputation: 8,076
+  # targets/s at a 23.1 GiB peak. 8,192-token rows fit too (28.6 GiB, 89% of
+  # the card) but run at 5,493 targets/s.
+  seq_len: 4096
   micro_batch_size: 1
-  gradient_accumulation: 16
+  gradient_accumulation: 32
   max_steps: 91553
   max_tokens: 12000000000
   grad_clip_norm: 1.0
@@ -30,13 +31,19 @@ runtime:
   engine: pytorch
   backend: xpu
   device_index: 0
-  secondary_device_indices: [1, 2, 3]
+  # One device, and run with ZE_AFFINITY_MASK set so the process sees only
+  # that card. A process that can see several Arc cards also holds its device
+  # memory in host RAM: 37 GiB of host RAM for a 23 GiB device peak, against
+  # 8 GiB with one card visible. Lab's secondary devices share one process,
+  # so they are left out until that is fixed (see the README).
   precision: bf16
-  output_head_chunk_tokens: 2048
+  compile_transformer_blocks: true
+  compile_output_head_loss: true
   memory:
-    activation_checkpointing:
-      enabled: true
-      strategy: transformer_block
+    # Lab's planner estimates 31.9 GiB for this config, above its ceiling;
+    # the measured peak is 23.1 GiB. Observe the estimate instead of refusing;
+    # the spill guard (on by default) stops the run if the card really fills.
+    estimate_policy: observe
 staging:
   smoke_steps: 2
   warmup_steps: 5

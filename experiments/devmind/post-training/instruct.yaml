@@ -39,7 +39,6 @@ runtime:
   engine: pytorch
   backend: xpu
   device_index: 0
-  secondary_device_indices: [1, 2, 3]
   precision: bf16
   output_head_chunk_tokens: 2048
   memory:

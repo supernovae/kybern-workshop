@@ -1,23 +1,23 @@
-# Stage 2: long-context training on 12,288-token rows of long documents,
-# starting from the pretrained checkpoint.
+# Stage 2: long-context training on 16,384-token rows of long documents,
+# starting from the pretrained checkpoint. Pretraining stays at 4,096-token
+# rows; this short stage teaches the model the longer context.
 #
-# 12,288 tokens is the longest row Lab's memory planner accepts on a 32 GiB
-# B70 with room to spare (26.4 GiB estimated; the same planner estimated
-# 22.5 GiB for the 8,192-token row that measured 15.4 GiB). It has not been
-# run. Use `klab stage ... --through warmup` and read the measured peak, then
-# lengthen the row if there is room.
+# Measured on one B70, dense attention with recomputation: 16,384-token rows
+# at 2,348 targets/s (21.2 GiB peak). 32,768-token rows need
+# optimizer.state_offload: true and run at 1,285 targets/s (22.1 GiB peak).
 #
-# Whole 32,768-token rows do not train on a 32 GiB card today: one such row
-# peaked at 26.9 GiB and then spilled into host memory. See the README.
+# This stage should also raise the RoPE base (or apply YaRN) for the longer
+# context. Lab refuses any change to the attention section in a child stage
+# today, so it waits on that; see the README.
 schema_version: 2
 name: devmind-long-context
 seed: 42
 training:
-  seq_len: 12288
+  seq_len: 16384
   micro_batch_size: 1
   gradient_accumulation: 8
-  max_steps: 10173
-  max_tokens: 1000000000
+  max_steps: 3815
+  max_tokens: 500000000
   grad_clip_norm: 1.0
   deterministic: false
   parent_checkpoint: REPLACE_WITH_PRETRAIN_RUN_DIRECTORY
@@ -26,7 +26,7 @@ optimizer:
   peak: 0.0001
   floor: 0.00001
   warmup_steps: 200
-  decay_steps: 10173
+  decay_steps: 3815
   weight_decay: 0.1
   betas: [0.9, 0.95]
   eps: 1.0e-08
@@ -48,7 +48,6 @@ runtime:
   engine: pytorch
   backend: xpu
   device_index: 0
-  secondary_device_indices: [1, 2, 3]
   precision: bf16
   output_head_chunk_tokens: 2048
   memory:

@@ -24,16 +24,12 @@ dataset:
   train_max_tokens: 1048576
   validation_max_tokens: 65536
 attention:
-  kind: local_selected
-  block_size: 64
-  window_size: 512
-  selected_blocks: 16
-  latent_dim: 384
-  selector: learned
+  kind: dense
+  implementation: sdpa
 training:
-  seq_len: 8192
+  seq_len: 4096
   micro_batch_size: 1
-  gradient_accumulation: 16
+  gradient_accumulation: 32
   max_steps: 8
   max_tokens: 1048576
 optimizer:

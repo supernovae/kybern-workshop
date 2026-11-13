@@ -18,21 +18,22 @@ klab train "$WORK/long-context.yaml" --runtime b70-xpu --run-id devmind-long-con
   --require-prepared --stage-bundle "$WORK/stages/long"
 ```
 
-One billion tokens on 12,288-token rows of the same mixture. This stage has not
-been run. The row length is what Lab's memory planner accepts on a 32 GiB card;
-see the main README for why it is not 32,768.
+500 million tokens on 16,384-token rows of the same mixture, about 2.5 days on
+one card at the measured 2,348 targets/s. This stage has not been run. It should
+also raise the RoPE base or apply YaRN for the longer context; Lab cannot change
+RoPE in a child stage yet
+([Lab #427](https://github.com/supernovae/model-lab/issues/427)). 32,768-token
+rows also train, with `optimizer.state_offload: true`, at 1,285 targets/s.
 
 ## Chat
 
 `instruct.yaml` tunes on conversations rendered with the ChatML template, with
 only the assistant's replies as targets. Lab reads conversations as JSONL
 (`local_chat`, [format](https://github.com/supernovae/model-lab/blob/main/docs/post-training.md#conversation-data))
-and has no command that converts a public dataset into it
-([Lab #416](https://github.com/supernovae/model-lab/issues/416)), so this stage
-has no data yet.
+and [converts](https://github.com/supernovae/model-lab/blob/main/docs/datasets.md#convert-chat-instruction-and-multi-field-rows)
+chat, instruction and multi-field datasets into it. This stage has no data yet.
 
-Recommended sources once a converter exists, all checked on the Hub on
-2026-11-12:
+Recommended sources, all checked on the Hub on 2026-11-12:
 
 | Dataset | Revision | License | Use |
 | --- | --- | --- | --- |
@@ -80,15 +81,13 @@ klab eval devmind-instruct
 ```
 
 Probes cover held-out loss, calibration, recall and four multiple-choice tasks.
-There is no executed code benchmark in Lab
-([#420](https://github.com/supernovae/model-lab/issues/420)), so this recipe
-cannot yet report HumanEval or MBPP.
+[`klab bench`](https://github.com/supernovae/model-lab/blob/main/docs/probes.md#code-benchmarks-klab-bench) runs HumanEval and
+MBPP in a sandbox. Nothing yet checks this corpus for copies of their problems.
 
 ## Publish
 
-`klab weights export` writes a Hugging Face directory for Llama-shaped models
-only. This model's attention and memory are refused
-([Lab #415](https://github.com/supernovae/model-lab/issues/415)), so it cannot
-be published until that is built. Quantized (int8) inference is not in Lab
-either (#420); it matters for serving, not for training, where the weights and
-optimizer stay in FP32 and activations already run in bf16.
+[`klab weights export`](https://github.com/supernovae/model-lab/blob/main/docs/post-training.md#export-for-hugging-face) writes a
+Hugging Face directory; a model with n-gram memory is exported with Lab's
+modeling code. [`klab weights quantize`](https://github.com/supernovae/model-lab/blob/main/docs/post-training.md#quantize-weights)
+writes int8 or int4 weights for serving; training keeps FP32 weights and
+optimizer state.
