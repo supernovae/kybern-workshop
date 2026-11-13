@@ -1,0 +1,25 @@
+schema_version: 2
+id: ref_kubernetes_docs
+kind: git
+canonical_uri: https://github.com/kubernetes/website
+revision: 2674d5095a50d781d2f884c83973921f48c5cf28
+license: CC-BY-4.0
+license_url: https://github.com/kubernetes/website/blob/2674d5095a50d781d2f884c83973921f48c5cf28/LICENSE
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-4.0
+  license_references:
+  - https://github.com/kubernetes/website/blob/2674d5095a50d781d2f884c83973921f48c5cf28/LICENSE
+  notices:
+  - Attribute in the model card.
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_kubernetes_docs
+acquisition:
+  include:
+  - content/en/docs/*.md
+  max_bytes: 2147483648

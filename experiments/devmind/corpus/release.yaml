@@ -1,0 +1,23 @@
+schema_version: 2
+publication_mode: metadata_reconstruction_only
+mixture:
+  web: 0.3295
+  wiki: 0.06
+  python: 0.18
+  web_code: 0.12
+  systems_code: 0.06
+  collaboration: 0.12
+  notebooks: 0.03
+  math: 0.08
+  reference: 0.02
+  practice: 0.0005
+lm:
+  selected: true
+  training_splits:
+  - train
+  - validation
+chat:
+  selected: false
+  training_splits: []
+keep_nonredistributable_local: true
+normalizer: normalizer-structure-v3

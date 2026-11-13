@@ -1,0 +1,53 @@
+schema_version: 2
+id: code_web_heldout
+kind: huggingface_dataset
+canonical_uri: https://huggingface.co/datasets/common-pile/stackv2_edu_filtered
+revision: c354dbe88469a1153e97c6a63ac50591849654de
+license: Per-file permissive licenses (Blue Oak approved); no dataset-level license
+license_url: https://huggingface.co/datasets/common-pile/stackv2_edu_filtered/blob/c354dbe88469a1153e97c6a63ac50591849654de/README.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  license_references:
+  - https://huggingface.co/datasets/common-pile/stackv2_edu_filtered/blob/c354dbe88469a1153e97c6a63ac50591849654de/README.md
+  notices:
+  - Per-file licenses are recorded in metadata.license; keep attribution for every repository used.
+  - License detection upstream can be wrong; rows with unmapped or combined labels are quarantined.
+domains:
+- code
+document_kinds:
+- code
+source_family: code_web_heldout
+acquisition:
+  config: default
+  split: train
+  text_field: text
+  max_rows: 100000000
+  max_bytes: 549755813888
+  bounded_shards:
+  - path: stack-edu-0064.json.gz
+    expected_sha256: 13f2e20da0b77fe9c4c0549d2f82d9bf1b0abee25ad70d5b94d8394f9429a09a
+    max_shard_bytes: 988710672
+    max_scanned_rows: 50000000
+    hash_modulus: 200
+    hash_remainders:
+    - 0
+    declared_config: default
+    declared_split: train
+  qualification:
+    profile: code
+    family_fields:
+    - metadata.repo_name
+    language_field: metadata.language
+    allowed_languages:
+    - JavaScript
+    license_field: metadata.license
+    license_labels:
+      MIT: MIT
+      Apache-2.0: Apache-2.0
+      BSD-2-Clause: BSD-2-Clause
+      BSD-3-Clause: BSD-3-Clause
+      ISC: ISC
+    repository_field: metadata.repo_name
+    path_field: metadata.path

@@ -14,7 +14,7 @@
   <a href="https://kybern.dev/models/tinystories-training/">TinyStories Guide</a> ·
   <a href="examples/synthetic-cpu/README.md">Basic CPU Smoke</a> ·
   <a href="components/README.md">Custom Components</a> ·
-  <a href="experiments/devmind/README.md">DevMind 340M</a> ·
+  <a href="experiments/devmind/README.md">Devmind</a> ·
   <a href="#community-experiments--forks">Community Experiments</a> ·
   <a href="https://kybern.dev/experiments/">Kybern Research</a>
 </p>
@@ -38,7 +38,7 @@ A few things to know before you start:
 | **TinyStories Baseline (4.46M)** | An 8,192-update (33.5M-token) training run on CPU of a 4-layer dense transformer, with a 12-prompt story continuation panel. | **Completed.** Validation loss reached `1.7043` (perplexity `5.4976`), but 22 of 24 scored continuations failed the quality rubric. A good baseline to try to beat. | [Walkthrough](examples/tinystories-useful/README.md) · [27 Recorded Outputs](results/2026-10-19-tinystories-cpu/README.md) · [Interactive Guide](https://kybern.dev/models/tinystories-training/) |
 | **TinyStories Microlab** | A starter comparison of FFN width 256 and 384 on 2,000 stories, using `klab try`. | **Ready to run.** A 40-update (10,240-target) exercise for learning the `klab` workflow. | [Microlab Guide](examples/tinystories-microlab/README.md) |
 | **Basic Synthetic CPU** | An offline end-to-end check: generate synthetic text, fit a BPE tokenizer, train one step, evaluate, and write a report. | **Recorded.** Runs offline on CPU and downloads nothing. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Recorded Result](results/2026-10-14-synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
-| **DevMind 340M Base / Engram continuation** | A 341.9M-parameter backbone, then continued training with a learned memory (Engram) on fresh data mixtures, keeping the checkpoint lineage. | **In progress (snapshot from 2026-11-10).** Segment 16 finished at 6.766B additional Engram targets and Segment 17 was running. The campaign record lists both the nominal and packed token counts for the dense backbone. No weights published. | [Current campaign record](experiments/devmind/engram-campaign-20261106.md) · [Original dense protocol](experiments/devmind/protocol.md) · [Run and revise](experiments/devmind/run.md) |
+| **Devmind (730M)** | A from-scratch, development-leaning decoder with a 32,768-token context, sparse latent attention and n-gram memory from the first update: pinned sources, a 12B-token mixture, pretraining, long-context, chat and preference stages. | **Defined, not trained.** Declarations load with Lab; the model shape was measured for a few updates on one Arc Pro B70. The README lists the measured numbers and the open Lab gaps. | [Recipe](experiments/devmind/README.md) · [Corpus](experiments/devmind/corpus/README.md) · [Post-training](experiments/devmind/post-training/README.md) |
 
 ---
 
@@ -135,7 +135,6 @@ The website walks through these recipes in more detail:
 
 - **[TinyStories: Build, Read, and Improve a Small Story Model](https://kybern.dev/models/tinystories-training/)** — A step-by-step walkthrough, with a browser viewer for all 27 recorded story outputs.
 - **[Offline CPU Installation Check](https://kybern.dev/models/cpu-smoke/)** — A quick way to check a new Kybern Model Lab install.
-- **[DevMind Pilot Status](https://kybern.dev/models/devmind/)** — Where the DevMind 340M Base pilot stands.
 - **[Experiments & Research Roadmap](https://kybern.dev/experiments/)** — Planned studies on conditional memory, fact swaps, and context overrides, plus ideas you can test on your own hardware.
 - **[Matched Comparisons](https://kybern.dev/learn/lab/matched-comparisons/) & [Inspecting Runs](https://kybern.dev/learn/lab/inspect-runs/)** — How to set up a fair comparison with paired seeds and read probe verdicts.
 - **[Free 18-Lesson Curriculum](https://kybern.dev/learn/)** — Hands-on lessons, from tensors and autograd to building a causal decoder and running your own comparisons.
@@ -167,8 +166,7 @@ kybern-workshop/
 │   ├── tinystories-worker/    # Paired CPU worker campaign recipe
 │   └── tinystories-rocm/      # Containerized AMD ROCm campaign recipe
 ├── experiments/
-│   ├── devmind/               # DevMind 340M Base protocol, model/optimizer configs & 25-leaf corpus prep
-│   ├── devmind-v2/            # DevMind v2 proposal: fresh backbone with Engram memory
+│   ├── devmind/               # Devmind: model, corpus, training stages and post-training
 │   └── tinystories/           # TinyStories 5M / 50M recipes, context and learning-rate studies
 ├── results/
 │   ├── 2026-10-14-synthetic-cpu/     # Recorded synthetic CPU smoke metrics & report

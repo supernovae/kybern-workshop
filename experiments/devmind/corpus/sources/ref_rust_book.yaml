@@ -1,0 +1,25 @@
+schema_version: 2
+id: ref_rust_book
+kind: git
+canonical_uri: https://github.com/rust-lang/book
+revision: 2771df165f092a4fbb9f46b5b2e7450f19010adb
+license: MIT OR Apache-2.0
+license_url: https://github.com/rust-lang/book/blob/2771df165f092a4fbb9f46b5b2e7450f19010adb/LICENSE-APACHE
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: MIT OR Apache-2.0
+  license_references:
+  - https://github.com/rust-lang/book/blob/2771df165f092a4fbb9f46b5b2e7450f19010adb/LICENSE-APACHE
+  notices:
+  - Attribute in the model card.
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_rust_book
+acquisition:
+  include:
+  - src/*.md
+  max_bytes: 1073741824

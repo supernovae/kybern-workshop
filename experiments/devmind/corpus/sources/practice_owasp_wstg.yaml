@@ -1,0 +1,25 @@
+schema_version: 2
+id: practice_owasp_wstg
+kind: git
+canonical_uri: https://github.com/OWASP/wstg
+revision: e252ede35074d18fbd74a96e709db5664b61b55a
+license: CC-BY-SA-4.0
+license_url: https://github.com/OWASP/wstg/blob/e252ede35074d18fbd74a96e709db5664b61b55a/LICENSE
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-SA-4.0
+  license_references:
+  - https://github.com/OWASP/wstg/blob/e252ede35074d18fbd74a96e709db5664b61b55a/LICENSE
+  notices:
+  - 'Share-alike: attribute and keep separable.'
+domains:
+- practice
+document_kinds:
+- markdown
+source_family: practice_owasp_wstg
+acquisition:
+  include:
+  - document/*.md
+  max_bytes: 1073741824

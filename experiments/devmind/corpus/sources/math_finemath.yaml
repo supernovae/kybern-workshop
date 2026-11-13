@@ -1,0 +1,122 @@
+schema_version: 2
+id: math_finemath
+kind: huggingface_dataset
+canonical_uri: https://huggingface.co/datasets/HuggingFaceTB/finemath
+revision: e92b25a616738fe95dc186b64dfb19f9c8525594
+license: ODC-By-1.0
+license_url: https://huggingface.co/datasets/HuggingFaceTB/finemath/blob/e92b25a616738fe95dc186b64dfb19f9c8525594/README.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: ODC-By-1.0
+  license_references:
+  - https://huggingface.co/datasets/HuggingFaceTB/finemath/blob/e92b25a616738fe95dc186b64dfb19f9c8525594/README.md
+  notices:
+  - Attribute the dataset and its upstream sources in the model card.
+domains:
+- math
+document_kinds:
+- prose
+source_family: math_finemath
+acquisition:
+  config: finemath-4plus
+  split: train
+  text_field: text
+  max_rows: 100000000
+  max_bytes: 549755813888
+  bounded_shards:
+  - path: finemath-4plus/train-00000-of-00064.parquet
+    expected_sha256: 5d0b26114b4cf309c82a4ba8f6f45857480b27812e23a46b61b45e8bbed61fe5
+    max_shard_bytes: 286267316
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00001-of-00064.parquet
+    expected_sha256: 4f38efdb251638c1a71be4ed380119bdd9966b1d6f200f6ff637e4768cc3930c
+    max_shard_bytes: 288474354
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00002-of-00064.parquet
+    expected_sha256: aed5a2aed72e2683c6c967f669b12214c3a2370738a75b83fb92f6194217ab04
+    max_shard_bytes: 287634720
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00003-of-00064.parquet
+    expected_sha256: b20b6da635493e3c7e151880db612bdf1bab2e6bc2fe87ed5cd21910f590aada
+    max_shard_bytes: 284689405
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00004-of-00064.parquet
+    expected_sha256: 9644be6589159f9ab85a147f71a48b4ea40ed712cb7c7b5b42bf91b1bb844973
+    max_shard_bytes: 284684820
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00005-of-00064.parquet
+    expected_sha256: bc0e109357245f5bf91c956ec98e7d8f88e6356c08b25196e8760fe5839b2f99
+    max_shard_bytes: 284773965
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00006-of-00064.parquet
+    expected_sha256: 7afa1e173e27a492e0527fc82eb8859ff0040b79eae9aa39851c9b57aad0c95d
+    max_shard_bytes: 286407909
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00007-of-00064.parquet
+    expected_sha256: b63045b1d32f7b10664e5e8cea9a4dfcd972cbc92e3d6eb9aa56c677ea9863b7
+    max_shard_bytes: 286615349
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00008-of-00064.parquet
+    expected_sha256: 39224cfcc751afbc04671bc9491266a90d58c30c27fd58f93551db8766ca96c6
+    max_shard_bytes: 287847133
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  - path: finemath-4plus/train-00009-of-00064.parquet
+    expected_sha256: 5e2b8db60462621ac0e45dd9865103f685915b09eee577f505b35f95ff601ea5
+    max_shard_bytes: 288931475
+    max_scanned_rows: 50000000
+    hash_modulus: 1
+    hash_remainders:
+    - 0
+    declared_config: finemath-4plus
+    declared_split: train
+  qualification:
+    profile: web_text
+    family_fields:
+    - url

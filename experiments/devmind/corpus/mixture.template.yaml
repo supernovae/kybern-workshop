@@ -1,0 +1,52 @@
+schema_version: 1
+release_path: ${RELEASE_PATH}
+tokenizer_config: ${TOKENIZER_CONFIG}
+family_inventory: ${FAMILY_INVENTORY}
+source_strata:
+  web_fineweb_edu: web
+  web_fineweb_edu_heldout: web
+  wiki_finewiki_en: wiki
+  wiki_finewiki_en_heldout: wiki
+  code_python: python
+  code_python_heldout: python
+  code_javascript: web_code
+  code_typescript: web_code
+  code_web_heldout: web_code
+  code_go: systems_code
+  code_rust: systems_code
+  code_shell: systems_code
+  code_markdown: systems_code
+  collab_github_threads: collaboration
+  collab_github_threads_heldout: collaboration
+  notebooks_kaggle: notebooks
+  math_finemath: math
+  math_finemath_heldout: math
+  ref_python_docs: reference
+  ref_python_peps: reference
+  ref_node_api: reference
+  ref_mdn: reference
+  ref_typescript_handbook: reference
+  ref_react_docs: reference
+  ref_express_docs: reference
+  ref_kubernetes_docs: reference
+  ref_github_docs: reference
+  ref_rust_book: reference
+  ref_tldr_pages: reference
+  practice_owasp_cheatsheets: practice
+  practice_owasp_wstg: practice
+  practice_engineering_playbook: practice
+  practice_code_review: practice
+target_quotas:
+  web: 3954000000
+  wiki: 720000000
+  python: 2160000000
+  web_code: 1440000000
+  systems_code: 720000000
+  collaboration: 1440000000
+  notebooks: 360000000
+  math: 960000000
+  reference: 240000000
+  practice: 6000000
+seed: 42
+max_exposures: 2
+tokenizer_origin_release_id: ${RELEASE_ID}

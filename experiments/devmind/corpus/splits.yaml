@@ -1,0 +1,37 @@
+schema_version: 1
+unit: source_document_family
+family_key: source_family
+assignments:
+  web_fineweb_edu: train
+  web_fineweb_edu_heldout: validation
+  wiki_finewiki_en: train
+  wiki_finewiki_en_heldout: validation
+  code_python: train
+  code_python_heldout: validation
+  code_javascript: train
+  code_typescript: train
+  code_web_heldout: validation
+  code_go: train
+  code_rust: train
+  code_shell: train
+  code_markdown: train
+  collab_github_threads: train
+  collab_github_threads_heldout: validation
+  notebooks_kaggle: train
+  math_finemath: train
+  math_finemath_heldout: validation
+  ref_python_docs: train
+  ref_python_peps: train
+  ref_node_api: train
+  ref_mdn: train
+  ref_typescript_handbook: train
+  ref_react_docs: train
+  ref_express_docs: train
+  ref_kubernetes_docs: train
+  ref_github_docs: train
+  ref_rust_book: train
+  ref_tldr_pages: train
+  practice_owasp_cheatsheets: train
+  practice_owasp_wstg: train
+  practice_engineering_playbook: train
+  practice_code_review: train

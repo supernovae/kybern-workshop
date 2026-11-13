@@ -1,0 +1,20 @@
+# Copy outside Git, fill in, and pass to `klab config compose` last.
+# Every value here is local to your machine or measured by Lab.
+tokenizer:
+  path: /data/devmind/tokenizer/tokenizer.json
+dataset:
+  source: local_token_mixture
+  license: Mixed; see corpus/sources and the release license report
+  mixture_declaration_path: /data/devmind/recipe/corpus/mixture.yaml
+  mixture_output_path: /data/devmind/mixture
+  train_path: /data/devmind/mixture/train.tokens.ids
+  validation_path: /data/devmind/release/lm/validation.jsonl
+  cache_dir: /data/devmind/prepared
+  # From the mixture receipt and `klab corpus describe RELEASE --tokenizer`:
+  # the mixture's record and token counts, and the whole validation split.
+  train_max_documents: REPLACE_WITH_MIXTURE_RECORDS
+  train_max_tokens: REPLACE_WITH_MIXTURE_TOKENS
+  validation_max_documents: REPLACE_WITH_VALIDATION_RECORDS
+  validation_max_tokens: REPLACE_WITH_VALIDATION_TOKENS
+logging:
+  root_dir: /data/devmind/runs

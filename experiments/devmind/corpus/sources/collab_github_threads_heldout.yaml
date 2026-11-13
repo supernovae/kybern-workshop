@@ -1,0 +1,42 @@
+schema_version: 2
+id: collab_github_threads_heldout
+kind: huggingface_dataset
+canonical_uri: https://huggingface.co/datasets/common-pile/github_archive_filtered
+revision: 52282fe96670254bdc0d44dd718ee7a27210ee85
+license: Per-thread permissive licenses (Blue Oak approved); no dataset-level license
+license_url: https://huggingface.co/datasets/common-pile/github_archive_filtered/blob/52282fe96670254bdc0d44dd718ee7a27210ee85/README.md
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  license_references:
+  - https://huggingface.co/datasets/common-pile/github_archive_filtered/blob/52282fe96670254bdc0d44dd718ee7a27210ee85/README.md
+  notices:
+  - Threads carry per-repository licenses in metadata.license.
+  - 'Exclude SWE-bench repositories at admission: astropy, django, matplotlib, seaborn, flask, requests,
+    xarray, pylint, pytest, scikit-learn, sphinx, sympy.'
+domains:
+- collaboration
+document_kinds:
+- prose
+source_family: collab_github_threads_heldout
+acquisition:
+  config: default
+  split: train
+  text_field: text
+  max_rows: 100000000
+  max_bytes: 549755813888
+  bounded_shards:
+  - path: gharchive-dolma-0018.json.gz
+    expected_sha256: 832147ff749d5f2ed221f32fdccbd269d5cc9f02fa15547612d959106fb78d5a
+    max_shard_bytes: 621028522
+    max_scanned_rows: 50000000
+    hash_modulus: 200
+    hash_remainders:
+    - 0
+    declared_config: default
+    declared_split: train
+  qualification:
+    profile: web_text
+    family_fields:
+    - metadata.repo

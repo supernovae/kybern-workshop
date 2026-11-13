@@ -1,0 +1,48 @@
+source_strata:
+  web_fineweb_edu: web
+  web_fineweb_edu_heldout: web
+  wiki_finewiki_en: wiki
+  wiki_finewiki_en_heldout: wiki
+  code_python: python
+  code_python_heldout: python
+  code_javascript: web_code
+  code_typescript: web_code
+  code_web_heldout: web_code
+  code_go: systems_code
+  code_rust: systems_code
+  code_shell: systems_code
+  code_markdown: systems_code
+  collab_github_threads: collaboration
+  collab_github_threads_heldout: collaboration
+  notebooks_kaggle: notebooks
+  math_finemath: math
+  math_finemath_heldout: math
+  ref_python_docs: reference
+  ref_python_peps: reference
+  ref_node_api: reference
+  ref_mdn: reference
+  ref_typescript_handbook: reference
+  ref_react_docs: reference
+  ref_express_docs: reference
+  ref_kubernetes_docs: reference
+  ref_github_docs: reference
+  ref_rust_book: reference
+  ref_tldr_pages: reference
+  practice_owasp_cheatsheets: practice
+  practice_owasp_wstg: practice
+  practice_engineering_playbook: practice
+  practice_code_review: practice
+byte_weights:
+  web: 30
+  wiki: 6
+  python: 20
+  web_code: 14
+  systems_code: 6
+  collaboration: 12
+  notebooks: 3
+  math: 6
+  reference: 2
+  practice: 1
+max_fit_bytes: 536870912
+audit_documents_per_stratum: 1000
+max_audit_bytes: 67108864

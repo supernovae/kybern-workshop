@@ -1,0 +1,25 @@
+schema_version: 2
+id: practice_code_review
+kind: git
+canonical_uri: https://github.com/google/eng-practices
+revision: 3bb3ec25b3b0199f4940b1aa75f0ac5c5753301c
+license: CC-BY-3.0
+license_url: https://github.com/google/eng-practices/blob/3bb3ec25b3b0199f4940b1aa75f0ac5c5753301c/LICENSE
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-3.0
+  license_references:
+  - https://github.com/google/eng-practices/blob/3bb3ec25b3b0199f4940b1aa75f0ac5c5753301c/LICENSE
+  notices:
+  - Attribute in the model card.
+domains:
+- practice
+document_kinds:
+- markdown
+source_family: practice_code_review
+acquisition:
+  include:
+  - review/*.md
+  max_bytes: 1073741824

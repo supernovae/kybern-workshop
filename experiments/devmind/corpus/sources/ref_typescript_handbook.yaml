@@ -1,0 +1,25 @@
+schema_version: 2
+id: ref_typescript_handbook
+kind: git
+canonical_uri: https://github.com/microsoft/TypeScript-Website
+revision: a93dd416c393cbc7570b829a9e0c753b2678249f
+license: CC-BY-4.0
+license_url: https://github.com/microsoft/TypeScript-Website/blob/a93dd416c393cbc7570b829a9e0c753b2678249f/LICENSE
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  spdx_expression: CC-BY-4.0
+  license_references:
+  - https://github.com/microsoft/TypeScript-Website/blob/a93dd416c393cbc7570b829a9e0c753b2678249f/LICENSE
+  notices:
+  - Attribute in the model card.
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_typescript_handbook
+acquisition:
+  include:
+  - packages/documentation/copy/en/*.md
+  max_bytes: 1073741824

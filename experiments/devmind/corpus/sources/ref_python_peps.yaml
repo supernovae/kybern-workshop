@@ -1,0 +1,23 @@
+schema_version: 2
+id: ref_python_peps
+kind: git
+canonical_uri: https://github.com/python/peps
+revision: 155e5bee7d985ef30555b496eb994d24a591f70b
+license: Public domain or CC0-1.0 per PEP
+license_url: https://github.com/python/peps/blob/155e5bee7d985ef30555b496eb994d24a591f70b/peps/pep-0001.rst
+rights:
+  training_eligibility: eligible_with_obligations
+  redistribution_mode: metadata_reconstruction_only
+  weight_license_status: separate_analysis_required
+  license_references:
+  - https://github.com/python/peps/blob/155e5bee7d985ef30555b496eb994d24a591f70b/peps/pep-0001.rst
+  notices: []
+domains:
+- reference
+document_kinds:
+- markdown
+source_family: ref_python_peps
+acquisition:
+  include:
+  - peps/*.rst
+  max_bytes: 1073741824

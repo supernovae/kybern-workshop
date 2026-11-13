@@ -1,5 +1,0 @@
-id: devmind_lm_text
-version: '1'
-kind: lm_text
-parameters: {}
-inputs: []

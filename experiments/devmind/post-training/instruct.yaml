@@ -1,0 +1,48 @@
+# Stage 3: instruction and chat tuning with the ChatML template, starting from
+# the long-context (or pretrained) checkpoint. Replies are the supervised
+# targets (records use loss_mode: assistant_only).
+schema_version: 2
+name: devmind-instruct
+seed: 42
+training:
+  seq_len: 8192
+  micro_batch_size: 1
+  gradient_accumulation: 16
+  # Placeholders: rewrite both with `klab data budget --passes 2` once the
+  # conversations are prepared.
+  max_steps: 4000
+  max_tokens: 524288000
+  grad_clip_norm: 1.0
+  deterministic: false
+  parent_checkpoint: REPLACE_WITH_PARENT_RUN_DIRECTORY
+optimizer:
+  name: adamw
+  peak: 0.00005
+  floor: 0.000005
+  warmup_steps: 200
+  decay_steps: 4000
+  weight_decay: 0.0
+  betas: [0.9, 0.95]
+  eps: 1.0e-08
+  memory_table_lr_multiplier: 1.0
+  memory_table_weight_decay: 0.0
+evaluation:
+  every_steps: 250
+  max_batches: 16
+checkpoint:
+  every_steps: 500
+  save_on_new_best: false
+  keep_periodic: false
+logging:
+  every_steps: 10
+runtime:
+  engine: pytorch
+  backend: xpu
+  device_index: 0
+  secondary_device_indices: [1, 2, 3]
+  precision: bf16
+  output_head_chunk_tokens: 2048
+  memory:
+    activation_checkpointing:
+      enabled: true
+      strategy: transformer_block
