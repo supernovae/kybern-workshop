@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/supernovae/kybern-workshop/actions/workflows/tinystories-rocm.yml"><img src="https://github.com/supernovae/kybern-workshop/actions/workflows/tinystories-rocm.yml/badge.svg" alt="Recipe Fixtures CI"></a>
+  <a href="https://github.com/supernovae/kybern-workshop/actions/workflows/declarations.yml"><img src="https://github.com/supernovae/kybern-workshop/actions/workflows/declarations.yml/badge.svg" alt="Declarations CI"></a>
   <a href="https://github.com/supernovae/model-lab"><img src="https://img.shields.io/badge/Workbench-Kybern%20Model%20Lab-7ceac4" alt="Kybern Model Lab"></a>
   <a href="https://github.com/supernovae/model-lab"><img src="https://img.shields.io/badge/Python-3.14-3776AB?logo=python&amp;logoColor=white" alt="Python 3.14"></a>
   <a href="docs/native-workflow.md"><img src="https://img.shields.io/badge/Recipes-YAML%20%26%20JSON-a7a2ff" alt="Declarative Recipes"></a>
@@ -35,9 +35,9 @@ A few things to know before you start:
 
 | Experiment | What it tests | Status & Evidence | Links |
 | --- | --- | --- | --- |
-| **TinyStories Baseline (4.46M)** | An 8,192-update (33.5M-token) training run on CPU of a 4-layer dense transformer, with a 12-prompt story continuation panel. | **Completed.** Validation loss reached `1.7043` (perplexity `5.4976`), but 22 of 24 scored continuations failed the quality rubric. A good baseline to try to beat. | [Walkthrough](examples/tinystories-useful/README.md) · [27 Recorded Outputs](results/2026-10-19-tinystories-cpu/README.md) · [Interactive Guide](https://kybern.dev/models/tinystories-training/) |
-| **TinyStories Microlab** | A starter comparison of FFN width 256 and 384 on 2,000 stories, using `klab try`. | **Ready to run.** A 40-update (10,240-target) exercise for learning the `klab` workflow. | [Microlab Guide](examples/tinystories-microlab/README.md) |
-| **Basic Synthetic CPU** | An offline end-to-end check: generate synthetic text, fit a BPE tokenizer, train one step, evaluate, and write a report. | **Recorded.** Runs offline on CPU and downloads nothing. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Recorded Result](results/2026-10-14-synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
+| **TinyStories Baseline (4.46M)** | An 8,192-update (33.5M-token) CPU training run of a 4-layer dense transformer, with a 12-prompt story continuation panel. | **Being re-recorded on current Lab.** The earlier run reached validation loss `1.7043` (perplexity `5.4976`) but 22 of 24 continuations failed the quality rubric; its records stay for reference. | [Walkthrough](examples/tinystories-useful/README.md) · [Earlier outputs](results/2026-10-19-tinystories-cpu/README.md) · [Interactive Guide](https://kybern.dev/models/tinystories-training/) |
+| **TinyStories Microlab** | FFN width 256 vs. 384 and 512 on 2,000 stories: one `klab try`, then a `klab sweep` over three seeds. | **Ready to run.** A 40-update (10,240-target) exercise; no recorded result yet. | [Microlab Guide](examples/tinystories-microlab/README.md) |
+| **Basic Synthetic CPU** | An offline end-to-end check: synthetic text, BPE tokenizer, one training step, evaluation and a run report. | **Ready to run.** Offline on CPU, no downloads. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
 | **Devmind (730M)** | A from-scratch, development-leaning decoder with a 32,768-token context, sparse latent attention and n-gram memory from the first update: pinned sources, a 12B-token mixture, pretraining, long-context, chat and preference stages. | **Defined, not trained.** Declarations load with Lab; the model shape was measured for a few updates on one Arc Pro B70. The README lists the measured numbers and the open Lab gaps. | [Recipe](experiments/devmind/README.md) · [Corpus](experiments/devmind/corpus/README.md) · [Post-training](experiments/devmind/post-training/README.md) |
 
 ---
@@ -66,7 +66,7 @@ uv run --locked --extra cpu klab readiness smoke --family dense \
 uv run --locked --extra cpu klab dashboard --runs-dir "$KLAB_WORK_DIR/first-run/runs"
 ```
 
-To see or repeat the full multi-stage synthetic recipe, follow [`examples/synthetic-cpu/README.md`](examples/synthetic-cpu/README.md).
+To run the same stages from declarations, follow [`examples/synthetic-cpu/README.md`](examples/synthetic-cpu/README.md).
 
 ### 2. Run Your First Controlled Comparison (`TinyStories Microlab`)
 
@@ -110,6 +110,7 @@ uv run --locked --extra cpu klab dashboard
 | --- | --- | --- |
 | **Validate a config** | `klab config validate run.yaml --kind run` | Checks YAML or JSON configs before you spend time on data or training. |
 | **Test one change** | `klab try DELTA.yaml --vs BASELINE.yaml` | Trains the baseline and the candidate (or reuses a baseline it already checked), scores held-out loss, and runs quick probes. |
+| **Confirm across seeds** | `klab sweep SWEEP.yaml` | Trains the baseline once per seed, compares every value of a setting at each seed, and reports the mean change with its standard error. |
 | **Read the verdict** | `klab report TRY_ID` | Prints the comparison report, the change in metrics, and a probe summary. |
 | **Inspect weights & loss** | `klab explore TRY_ID` | Computes per-token loss, attention maps, and weight statistics. |
 | **Generate text** | `klab generate RUN_ID --checkpoint CHECKPOINT --prompt "..."` | Writes greedy or sampled continuations from a checkpoint. |
@@ -161,20 +162,16 @@ kybern-workshop/
 │   ├── custom-attention/      # Train with an attention kind from components/
 │   ├── synthetic-cpu/         # Offline synthetic CPU smoke recipe
 │   ├── tinystories/           # Index of the TinyStories recipes
-│   ├── tinystories-microlab/  # 40-update FFN width comparison (256 vs. 384)
-│   ├── tinystories-useful/    # 8,192-update CPU baseline recipe & improvement exercises
-│   ├── tinystories-worker/    # Paired CPU worker campaign recipe
-│   └── tinystories-rocm/      # Containerized AMD ROCm campaign recipe
+│   ├── tinystories-microlab/  # 40-update FFN width comparison: try, then sweep
+│   └── tinystories-useful/    # 8,192-update CPU baseline recipe & improvement exercises
 ├── experiments/
 │   ├── devmind/               # Devmind: model, corpus, training stages and post-training
 │   └── tinystories/           # TinyStories 5M / 50M recipes, context and learning-rate studies
 ├── results/
-│   ├── 2026-10-14-synthetic-cpu/     # Recorded synthetic CPU smoke metrics & report
-│   ├── 2026-10-15-tinystories-smoke/ # Recorded paired CPU container smoke summary
 │   ├── 2026-10-19-tinystories-cpu/   # Recorded 8,192-update baseline metrics & 27 story outputs
 │   └── 2026-10-31-tinystories-rocm/  # Recorded ROCm 5M and 50M runs
 └── docs/
-    └── native-workflow.md     # Guide to packaging, inspecting & running recipes with klab
+    └── native-workflow.md     # Which klab command to use for each job
 ```
 
 ## Contributing

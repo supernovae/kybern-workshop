@@ -1,62 +1,33 @@
 # Running Workshop Recipes with Kybern Model Lab
 
 Every experiment in this repository runs with [Kybern Model Lab](https://github.com/supernovae/model-lab) (`klab`).
-This repository holds the configs, dataset pins, and result records. Lab does the data preparation, training, evaluation, probes, and reporting.
+This repository holds the configs, dataset pins and result records. Lab does the data preparation, training, evaluation,
+probes and reporting. Run a recipe from a clone of this repository, or copy its directory into your own project.
+For a guided introduction, see [Run the Lab on kybern.dev](https://kybern.dev/learn/lab/).
 
-Run a recipe from a clone of this repository, or copy its directory into your own project. For a guided introduction to Lab, see [Run the Lab on kybern.dev](https://kybern.dev/learn/lab/).
+## Choosing a workflow
 
-## Choosing a Workflow
-
-| Goal | `klab` workflow | Notes |
+| Goal | `klab` commands | Used by |
 | --- | --- | --- |
-| **Check every config** | `config validate DIR` | Checks each run, tokenizer, model, and optimizer config under a directory against your installed Lab, and exits non-zero if any fail. CI runs it on this repository. |
-| **Bind sections and local paths** | `config compose` | Merges a run section, model and optimizer sections, and a file of local paths into one checked run config. Used by [Devmind](../experiments/devmind/README.md). |
-| **Compare a single change** | `config validate`, `config derive`, then `try` and `report` | Trains a baseline and a candidate on the same data, then scores held-out loss and probes. Used by [TinyStories microlab](../examples/tinystories-microlab/README.md). |
-| **Train & inspect a full baseline** | `data lock`, `experiment recipe preparation apply`, `stage`, `train`, `eval`, `generate` | Runs each step yourself, including continuing from a checkpoint and generating from a prompt panel. Used by [TinyStories CPU baseline](../examples/tinystories-useful/README.md). |
-| **Package a shareable recipe** | `experiment recipe create` and `experiment recipe export` | Bundles configs and metadata with content hashes, so someone else can inspect them and fill in their own local paths. |
-| **Prepare a corpus & tokenizer** | `experiment recipe preparation inspect` and `apply` | Checks output paths, then takes the dataset snapshot, trains the tokenizer, and packs tokens. Used by [Synthetic CPU](../examples/synthetic-cpu/README.md). |
-| **Run a staged campaign** | `experiment recipe workflow inspect`, `resolve`, `apply`, `approve`, and `report` | Runs a campaign end to end, stopping at each approval gate until you approve, and writes a report. |
+| **Check every config** | `config validate DIR` | CI runs it on this repository against Lab `main`. |
+| **Check a model fits** | `inspect CONFIG` | Reports parameters and a memory estimate without training. |
+| **Compare one change** | `config derive`, `try`, `report` | [TinyStories microlab](../examples/tinystories-microlab/README.md) |
+| **Confirm it across seeds or values** | `sweep`, `report` | [TinyStories microlab](../examples/tinystories-microlab/README.md) |
+| **Build a model end to end** | `data lock`, `data snapshot`, `tokenizer train`, `data prepare`, `stage`, `train`, `eval`, `probe`, `generate`, `chat` | [Synthetic CPU](../examples/synthetic-cpu/README.md), [TinyStories baseline](../examples/tinystories-useful/README.md) |
+| **Continue or extend a run** | `train --resume`, `--extend-budget`, `--promote` | [Checkpointing](https://github.com/supernovae/model-lab/blob/main/docs/checkpointing.md) |
+| **Bind sections and local paths** | `config compose` | [Devmind](../experiments/devmind/README.md) |
+| **Queue independent runs** | `experiment submit`, `list`, `cancel`, `resume`, `collect`, plus `worker` | [Workers](https://github.com/supernovae/model-lab/blob/main/docs/workers.md) |
 
-## Packaging and Inspecting a Recipe
+Lab no longer has campaigns, experiment plans, training programs or recipe workflows
+(`klab campaign`, `klab experiment recipe`). Recipes here are plain declarations plus the commands in their READMEs.
 
-Package a recipe directory and check its paths before you train anything.
+## Making a run repeatable
 
-For example, with the files in [`examples/synthetic-cpu`](../examples/synthetic-cpu/README.md):
-
-```sh
-INPUT="/path/to/kybern-workshop/examples/synthetic-cpu"
-DEST="/path/to/work/synthetic-cpu-recipe"
-
-klab experiment recipe create "$INPUT" --profile preparation \
-  --id workshop-synthetic-cpu-preparation --entrypoint preparation-campaign.json \
-  --file campaign:preparation-campaign.json --file run_config:run.json \
-  --file tokenizer_config:tokenizer-config.json --file metadata:monitor.json \
-  --output "$DEST"
-
-klab experiment recipe preparation inspect "$DEST/recipe.json" \
-  --bindings /path/to/work/local-bindings.json --json
-```
-
-`local-bindings.json` points the recipe's outputs at a workspace directory outside Git:
-
-```json
-{
-  "artifacts": {},
-  "config_paths": {
-    "tokenizer-config.json": {
-      "output_dir": "/path/to/work/tokenizer",
-      "dataset.cache_dir": "/path/to/work/cache"
-    },
-    "run.json": {
-      "tokenizer.path": "/path/to/work/tokenizer/tokenizer.json",
-      "dataset.cache_dir": "/path/to/work/cache",
-      "logging.root_dir": "/path/to/work/runs"
-    }
-  }
-}
-```
-
-`inspect` checks every config and path binding. It doesn't create output directories or start a run. The [validation record](native-acceptance-2026-10-18.md) shows example checks across the current recipes.
+- Pin the dataset revision and keep the lock file with your records.
+- Put the seed in the declaration. For a comparison, use `sweep` with `seeds: [1, 2, 3]` rather than a single seed.
+- Use `repeat_baseline: true` in a `try` policy to see run-to-run drift next to the candidate's effect.
+- Run `klab probe` so held-out items are screened for leakage into the training data.
+- Record the Lab commit, backend, precision, and the `TRY_ID`, `SWEEP_ID` or run ID with anything you publish.
 
 ## Records Pinned Before the Rename
 

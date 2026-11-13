@@ -6,7 +6,7 @@ We trained a 4.46M-parameter dense transformer on CPU with [Kybern Model Lab](ht
 
 **Why it's worth a look:** validation loss fell smoothly from `8.369` to `1.704` (perplexity `5.498`), and 17 of 24 full-length outputs reach a recognizable story ending. Yet only 2 of 24 pass our story-quality rubric. The model often repeats itself in loops, swaps character names, or drifts away from the prompt. We publish the full config and all 27 unedited outputs so you can read them and try to do better.
 
-The 24 scored outputs come from 12 prompts, each decoded greedily and with sampling. An AI assistant scored them against the rubric; no independent human review has been done yet. The [per-output assessment](../../results/2026-10-19-tinystories-cpu/quality-assessment.json) includes the rubric and its limitations. We kept the held-out prompts out of model selection, but haven't checked whether they overlap the training stories. The run history includes some failed setup steps and one host interruption.
+The 24 scored outputs come from 12 prompts, each decoded greedily and with sampling. An AI assistant scored them against the rubric; no independent human review has been done yet. The [per-output assessment](../../results/2026-10-19-tinystories-cpu/quality-assessment.json) includes the rubric and its limitations. We kept the held-out prompts out of model selection, but haven't checked whether they overlap the training stories. The run history includes some failed setup steps and one host interruption. Those results were recorded with an earlier Lab; you will re-record them with the steps below.
 
 We kept the weights locally and don't distribute them; the checkpoint hashes in the records describe those local files. If you reproduce the run, you train your own model and get your own run and checkpoint IDs.
 
@@ -35,117 +35,70 @@ For a fast 40-update starter comparison, see the [TinyStories microlab](../tinys
 
 ## How to Replicate This Run with `klab`
 
-Before you start:
+You need [Kybern Model Lab](https://github.com/supernovae/model-lab) installed for your backend (see the [setup steps](../../README.md#running-workshop-experiments-with-kybern-model-lab)).
+The table above describes the environment of our original run. With current Lab you train a new model of your own and get your own run and checkpoint IDs, not our checkpoint bytes.
 
-- Create a fresh workspace directory outside Git and set `WORK` to its absolute path.
-- Set `SOURCE` to the absolute path of this directory (`examples/tinystories-useful`).
-- Pick two unique run IDs, `FIRST_RUN_ID` and `CONTINUED_RUN_ID`.
-- Install Lab for your backend, following the [setup steps](../../README.md#running-workshop-experiments-with-kybern-model-lab).
+### 1. Set up a workspace
 
-The table above describes the environment of our original run. With current Lab you train a new model of your own; you won't get our checkpoint bytes back.
-
-### 1. Lock the Dataset and Package the Preparation Recipe
+Work outside Git. The declarations use relative paths, so everything lands beside them.
 
 ```sh
-klab data lock "$SOURCE/source.json" \
-  --output "$WORK/source.lock.json" --cache-dir "$WORK/lock-cache" --json
+SOURCE=examples/tinystories-useful
+WORK="$HOME/klab-experiments/tinystories-useful-001"
+mkdir -p "$WORK" && cp "$SOURCE"/{source,tokenizer,run}.json "$SOURCE/prompts.txt" "$WORK/" && cd "$WORK"
+export KLAB_WORK_DIR="$WORK/klab-state"
+klab config validate run.json --kind run
+klab config validate tokenizer.json --kind tokenizer
 ```
 
-Copy `preparation-campaign.json`, `run.json`, `tokenizer.json`, and the new `source.lock.json` into a fresh `$INPUT` directory. Then create and inspect the preparation recipe:
+### 2. Prepare the data
 
 ```sh
-klab experiment recipe create "$INPUT" --profile preparation \
-  --id tinystories-useful-preparation-v1 --entrypoint preparation-campaign.json \
-  --file campaign:preparation-campaign.json --file run_config:run.json \
-  --file tokenizer_config:tokenizer.json --file source_lock:source.lock.json \
-  --output "$WORK/recipe"
-
-# Fill local output paths in $WORK/bindings.json using bindings.template.json
-klab experiment recipe preparation inspect "$WORK/recipe/recipe.json" \
-  --bindings "$WORK/bindings.json" --json
+klab data lock source.json --output source.lock.json
+klab data snapshot source.lock.json --output snapshot
+klab tokenizer train tokenizer.json
+klab tokenizer verify run.json
+klab inspect run.json
+klab data prepare run.json --cold-verify
 ```
 
-Fill in `$WORK/admission.json` from [`admission.template.json`](admission.template.json), using the hashes that `inspect` printed and your `source.lock.json`.
+`klab inspect` reports the parameter count (4,458,752) and a memory estimate before you spend any time training.
 
-### 2. Prepare Data, Stage, and Train
-
-Snapshot the dataset, train the tokenizer, and pack the tokens:
+### 3. Train
 
 ```sh
-klab experiment recipe preparation apply "$WORK/recipe/recipe.json" \
-  --bindings "$WORK/bindings.json" --admission "$WORK/admission.json" \
-  --work-dir "$WORK" --json
+klab stage run.json --through warmup --output stages
+klab train run.json --backend cpu --runs-dir runs --run-id tinystories-useful-001 --stage-bundle stages
 ```
 
-Write the prepared paths into your training config, check the inputs, run the smoke and warmup stages, and train through step 1,024:
+`stage` runs the 2-update smoke and 5-update warmup gates first. `train` then goes to step 8,192, saving a full-state
+checkpoint every 1,024 updates. If the run stops, continue it with the same command plus
+`--resume runs/tinystories-useful-001/checkpoints/latest.json`. On 8 CPU cores the original run took about 3.3 hours.
+
+### 4. Verify, evaluate, probe and generate
 
 ```sh
-klab config derive "$SOURCE/run.json" \
-  --set "tokenizer.path=\"$WORK/tokenizer/tokenizer.json\"" \
-  --set "dataset.cache_dir=\"$WORK/data\"" \
-  --set "dataset.train_path=\"$WORK/snapshot/train.jsonl\"" \
-  --set "dataset.validation_path=\"$WORK/snapshot/validation.jsonl\"" \
-  --set "dataset.source_manifest_path=\"$WORK/snapshot/manifest.json\"" \
-  --set "logging.root_dir=\"$WORK/runs\"" --output "$WORK/train.yaml" --json
-
-klab config validate "$WORK/train.yaml" --kind run --json
-klab tokenizer verify "$WORK/train.yaml" --json
-klab data prepared-inputs publish "$WORK/train.yaml" --output "$WORK/prepared"
-klab data prepared-inputs verify "$WORK/train.yaml" "$WORK/prepared"
-klab stage "$WORK/train.yaml" --through warmup --prepared-inputs "$WORK/prepared" --cold-verify --output "$WORK/stages"
-klab train "$WORK/train.yaml" --backend cpu --runs-dir "$WORK/runs" --run-id "$FIRST_RUN_ID" --stage-bundle "$WORK/stages" --stop-after-step 1024
+RUN=tinystories-useful-001
+klab checkpoint verify "runs/$RUN/checkpoints/latest.json"
+klab eval "$RUN" --runs-dir runs --backend cpu
+klab report "$RUN" --kind run --runs-dir runs
+klab probe "runs/$RUN" --config standard
 ```
 
-Inspect and verify the step-1,024 checkpoint (`FIRST_GENERATION`) before you continue to step 8,192:
+`probe` screens the held-out probe items for leakage into the training stories. The original run never checked this, so run it before you trust a comparison between prompts and checkpoints. Then generate from each prompt in [`prompts.txt`](prompts.txt), once greedy and once sampled:
 
 ```sh
-klab checkpoint inspect "$WORK/runs/$FIRST_RUN_ID/checkpoints/latest.json" --json
-klab checkpoint inspect "$FIRST_GENERATION" --json
-klab checkpoint verify "$FIRST_GENERATION" --json
-klab report "$FIRST_RUN_ID" --kind run --runs-dir "$WORK/runs" --json
+klab generate "$RUN" --runs-dir runs --checkpoint latest.json --backend cpu \
+  --prompt "$PREFIX" --max-new-tokens 192 --temperature 0 --top-k 0 --seed 42 --strict-context
+klab generate "$RUN" --runs-dir runs --checkpoint latest.json --backend cpu \
+  --prompt "$PREFIX" --max-new-tokens 192 --temperature 0.7 --top-k 40 --seed 42 --strict-context
 ```
 
-Continue from `FIRST_GENERATION` to the full 8,192 updates, saving a checkpoint every 256 steps:
+To talk to the checkpoint, use `klab chat "$RUN" --runs-dir runs --checkpoint latest.json`, or browse everything with `klab dashboard --runs-dir runs`.
 
-```sh
-klab config derive "$WORK/runs/$FIRST_RUN_ID/resolved_config.yaml" \
-  --set checkpoint.every_steps=256 --set "logging.root_dir=\"$WORK/runs\"" \
-  --output "$WORK/continued.yaml" --json
-klab config validate "$WORK/continued.yaml" --kind run --json
-klab train "$WORK/continued.yaml" --backend cpu --runs-dir "$WORK/runs" \
-  --run-id "$CONTINUED_RUN_ID" --resume "$FIRST_GENERATION"
-```
+### Keep your run repeatable
 
-### 3. Verify, Evaluate, and Generate Stories
-
-When training reaches step 8,192:
-
-1. Set `RUN_ID="$CONTINUED_RUN_ID"` and inspect its `latest.json`.
-2. Set `CHECKPOINT` to the generation name that inspection reports, and `GENERATION="$WORK/runs/$RUN_ID/checkpoints/$CHECKPOINT"`. Use the name from your own run; ours won't exist in your workspace.
-3. Verify that checkpoint, run held-out evaluation, and generate continuations for the 12 prompts in [`prompts.txt`](prompts.txt):
-
-```sh
-klab checkpoint inspect "$WORK/runs/$RUN_ID/checkpoints/latest.json" --json
-klab checkpoint inspect "$GENERATION" --json
-klab checkpoint verify "$GENERATION" --json
-klab eval "$RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" --backend cpu
-klab report "$RUN_ID" --kind run --runs-dir "$WORK/runs" --json
-```
-
-Generate from each prompt in [`prompts.txt`](prompts.txt) twice: once greedy (`TEMPERATURE=0 TOP_K=0`) and once sampled (`TEMPERATURE=0.7 TOP_K=40`):
-
-```sh
-klab generate "$RUN_ID" --runs-dir "$WORK/runs" --checkpoint "$CHECKPOINT" \
-  --backend cpu --prompt "$PREFIX" --max-new-tokens 192 \
-  --temperature "$TEMPERATURE" --top-k "$TOP_K" --seed 42 \
-  --strict-context --show-prompt --json
-```
-
-You can also chat with your checkpoint locally:
-
-```sh
-klab surface chat --cell "candidate=$GENERATION" --backend cpu --seed 42 --port 8502
-```
+Record the Lab commit, backend and precision, seed, dataset revision and run ID with anything you publish. A single seed is one sample: to claim an architecture change helps, compare it with `klab try` or `klab sweep` over paired seeds, as in the [microlab](../tinystories-microlab/README.md).
 
 ---
 
