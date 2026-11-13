@@ -1,53 +1,35 @@
-# TinyStories Microlab: FFN Width, Tried Properly
+# TinyStories microlab: is the LM head a gradient bottleneck?
 
-[Back to Workshop README](../../README.md) · [Interactive guide on kybern.dev](https://kybern.dev/models/tinystories-training/)
+[Workshop](../../README.md) · [Full experiment](../../experiments/tinystories/lm-head-bottleneck/README.md)
 
-A small, fast recipe for the two comparison commands in [Kybern Model Lab](https://github.com/supernovae/model-lab):
-`klab try` for one change, and `klab sweep` to find out whether the answer holds across seeds.
-It takes 2,000 training and 100 validation stories from `roneneldan/TinyStories`, fits a 2,048-token BPE tokenizer on the
-training stories, and compares tiny dense decoders that differ only in **FFN width** (256 baseline vs. 384 and 512).
-Each arm trains 40 updates (10,240 targets). That is a teaching budget: it shows the workflow, not model quality.
+The [LM-head experiment](../../experiments/tinystories/lm-head-bottleneck/README.md)
+at laptop size. A 1.5M-parameter model trains on 20,000 TinyStories stories on
+CPU, and a sweep asks whether narrowing its output head to rank 8 to 128 makes
+it worse, and how much of the logit gradient each head passes back to the
+network. It teaches the whole Lab loop (snapshot, tokenizer, `try`, `sweep`,
+`report`) on a question a published paper ([arXiv 2603.10145](https://arxiv.org/abs/2603.10145))
+says matters.
 
-This recipe ships no recorded results. Run it yourself and keep the sealed records Lab writes.
+## The model
 
-## What is in this directory
-
-| File | Purpose |
+| | |
 | --- | --- |
-| [`declarations/source.yaml`](declarations/source.yaml) | Pinned dataset revision and the bounded, deduplicated selection |
-| [`declarations/tokenizer.yaml`](declarations/tokenizer.yaml) | Train-only BPE tokenizer |
-| [`declarations/run.yaml`](declarations/run.yaml) | Baseline run config (2 layers, hidden 128, FFN 256, ~590K parameters) |
-| [`declarations/continued.yaml`](declarations/continued.yaml) | Same model with an 80-update budget, for the continuation exercise |
-| [`wider-ffn.yaml`](wider-ffn.yaml) | The `try` delta: `model.ffn_dim: 384` |
-| [`try.yaml`](try.yaml) | `try` policy: fixed seed, fast probes, and a repeated baseline to show run-to-run drift |
-| [`sweep.yaml`](sweep.yaml) · [`sweep-policy.yaml`](sweep-policy.yaml) | FFN 384 and 512 against the baseline at seeds 1, 2 and 3 |
-| [`prompts.txt`](prompts.txt) | Twelve story prefixes for generating from a checkpoint |
+| Data | 20,000 training and 500 validation stories from `roneneldan/TinyStories` (pinned), exact duplicates removed |
+| Tokenizer | 4,096-token byte-level BPE fitted on the training stories |
+| Model | 2 layers, width 128, 4 heads, SwiGLU 352, 128-token context, untied embeddings: 1.5M parameters, V/D = 32 |
+| Training | 1,500 updates of 2,048 tokens (3.1M tokens), AdamW peak 2e-3 |
+| Scored | held-out loss, bits per byte on 200 whole stories, and the gradient bottleneck |
 
-## 1. Set up a workspace
-
-Work outside your Git checkout. Paths in the declarations are relative, so the snapshot, tokenizer, data and records land beside them.
+## 1. Workspace
 
 ```sh
-RECIPE=examples/tinystories-microlab
-WORK="$HOME/klab-experiments/tinystories-microlab-001"
-mkdir -p "$WORK"
-cp -R "$RECIPE/declarations" "$RECIPE"/{wider-ffn,try,sweep,sweep-policy}.yaml "$RECIPE/prompts.txt" "$WORK/"
-cd "$WORK"
-export KLAB_WORK_DIR="$WORK/klab-state"   # keeps this experiment's runs and records together
+RECIPE="$PWD/examples/tinystories-microlab"   # in your kybern-workshop checkout
+WORK="$HOME/klab-experiments/tinystories-microlab"
+mkdir -p "$WORK" && cp -R "$RECIPE"/declarations "$RECIPE"/*.yaml "$WORK"/ && cd "$WORK"
+export KLAB_WORK_DIR="$WORK/klab-state"
 ```
 
-## 2. Validate before you download anything
-
-```sh
-klab config validate declarations/run.yaml --kind run
-klab config validate declarations/tokenizer.yaml --kind tokenizer
-klab config derive declarations/run.yaml --set model.ffn_dim=384 --output candidate-preview.yaml
-klab inspect candidate-preview.yaml
-```
-
-Open `candidate-preview.yaml` and its `.derivation.json` sidecar and check that `model.ffn_dim` is the only change.
-
-## 3. Prepare the data
+## 2. Data and tokenizer (about 15 seconds after the first download)
 
 ```sh
 klab data lock declarations/source.yaml --output source.lock.json
@@ -55,56 +37,65 @@ klab data snapshot source.lock.json --output snapshot
 klab tokenizer train declarations/tokenizer.yaml
 ```
 
-> **Disk:** the snapshot keeps 2,100 stories (at most 16 MiB), but the first Hugging Face download caches a whole Parquet shard (about 250 MB).
+The first snapshot downloads one Parquet shard of about 250 MB into the
+Hugging Face cache.
 
-## 4. One change: `klab try`
+## 3. One change: a rank-32 head
 
 ```sh
-klab try wider-ffn.yaml --vs declarations/run.yaml --config try.yaml --backend cpu
+klab try rank-32.yaml --vs declarations/run.yaml --config policy.yaml --backend cpu
 klab report TRY_ID
 ```
 
-`try` trains both arms, scores them on the same held-out split, screens the training data for
-held-out probe items (leakage), runs the fast probe tier and seals one record. `repeat_baseline: true`
-trains the baseline a second time with identical inputs, so the record shows how much two identical
-runs differ next to the candidate's effect. Read that number before you read the verdict.
+[`rank-32.yaml`](rank-32.yaml) sets `model.output_head_rank: 32`: the head
+becomes two matrices, hidden → 32 → vocabulary, so the logits can have rank at
+most 32. `try` trains both models (about 4 minutes each on a 48-thread CPU),
+scores them on the same held-out stories and seals one record. Read it with
+`klab report TRY_ID --json`: `arms.*.heldout.gradient_bottleneck` holds the
+gradient measurement.
 
-A single-seed result is a direction to follow up, not a finding.
+What we saw once, as a check that the recipe runs (seed 1, not a result):
 
-## 5. Does it hold? `klab sweep`
+| Head | Held-out loss | Bits per byte | Gradient norm lost in the head | Cosine kept |
+| --- | --- | --- | --- | --- |
+| Full (rank 128) | 2.615 | 0.941 | 97.7% | 0.21 |
+| Rank 32 | 3.115 | 1.121 | 99.6% | 0.09 |
+
+The paper reports 95 to 99% lost and cosines of 0.1 to 0.3 in models a thousand
+times larger. One seed is a direction, not a finding.
+
+## 4. Does it hold? Three seeds, five ranks
 
 ```sh
-klab sweep sweep.yaml --backend cpu
+klab sweep rank-sweep.yaml --backend cpu    # about 75 minutes on 48 threads
 klab report SWEEP_ID
 ```
 
-The sweep trains the baseline once per seed, compares each width to it at the same seed, and reports the mean change in
-held-out loss with its standard error. A `LOWER_LOSS` or `HIGHER_LOSS` verdict needs two or more seeds and a mean more than
-two standard errors from zero; otherwise it says `WITHIN_SEED_NOISE`. The sealed record and a `series.csv` are under
+The sweep trains the baseline once per seed and every rank against it at the
+same seed. `report` shows the mean change in held-out loss with its standard
+error, and a verdict: `HIGHER_LOSS` needs the mean more than two standard
+errors above zero over the three seeds. Each point also has
+`kernel_norm_fraction_mean`, the average share of the gradient norm lost. The
+sealed record and a `series.csv` for plotting are in
 `$KLAB_WORK_DIR/lab/sweeps/SWEEP_ID`.
 
-## 6. Look inside and generate
+Compare what you get with the [preregistered predictions](../../experiments/tinystories/lm-head-bottleneck/README.md#predictions).
+At this size the whole vocabulary is only 4,096 tokens, so V/D is half the
+full experiment's; that is a reason the effects may differ, and worth saying
+when you report them.
+
+## 5. Look inside
 
 ```sh
 klab explore TRY_ID
+klab generate RUN_ID --runs-dir "$KLAB_WORK_DIR/lab/runs" --checkpoint latest.json \
+  --prompt "Once upon a time" --max-new-tokens 120 --seed 1
 klab dashboard --lab-dir "$KLAB_WORK_DIR/lab"
-klab generate RUN_ID --runs-dir "$KLAB_WORK_DIR/lab/runs" --checkpoint latest.json --prompt "$(head -1 prompts.txt)" \
-  --max-new-tokens 192 --seed 42 --strict-context
-klab chat RUN_ID --runs-dir "$KLAB_WORK_DIR/lab/runs" --checkpoint latest.json
 ```
-
-Candidate run IDs are in the `try` record (`klab report TRY_ID --json`). Forty updates will not produce good stories; use
-them to check that the commands work.
 
 ## Keeping your result repeatable
 
-Record these next to anything you publish: the Lab commit (`klab --version` and `git -C model-lab rev-parse HEAD`), the
-backend and precision, the seeds, the `TRY_ID` or `SWEEP_ID`, and the dataset revision. Do not edit probe items or thresholds
-to make an idea pass. Weights stay local; a reproduction trains its own model.
-
-## Next steps
-
-- **Longer budget:** `declarations/continued.yaml` doubles the budget. Continue a finished run with
-  `klab train CONFIG --extend-budget` (see [checkpointing](https://github.com/supernovae/model-lab/blob/main/docs/checkpointing.md)).
-- **Bigger baseline:** [`examples/tinystories-useful`](../tinystories-useful/README.md) trains a 4.46M-parameter model for 8,192 updates.
-- **Other axes:** change `vary` in `sweep.yaml` to `model.num_layers`, `optimizer.peak` or `training.seq_len`.
+Record next to anything you publish: the Lab commit (`klab --version`), the
+backend, the seeds, and the `TRY_ID` or `SWEEP_ID`; the sealed records hold
+the data, tokenizer and configuration digests. Do not edit probe items or
+thresholds to make an idea pass.

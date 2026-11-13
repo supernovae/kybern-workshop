@@ -7,7 +7,7 @@ We welcome pull requests from anyone running small language-model experiments wi
 1. **Link your fork or experiment in the README**  
    Running an experiment in your own repository or fork? Open a PR that adds it to the **Community Experiments & Forks** section of the [main README](README.md#community-experiments--forks). Include the repository link, the question you're testing, the model size and backend, and a short summary of what you found.
 2. **Repeat or improve a recipe**  
-   Run the [basic CPU smoke test](examples/synthetic-cpu/README.md), compare architectures in the [TinyStories microlab](examples/tinystories-microlab/README.md), or try to beat our [8,192-update TinyStories baseline](examples/tinystories-useful/README.md). Its validation loss dropped to `1.704`, but its free generation still loops and drifts.
+   Run the [basic CPU smoke test](examples/synthetic-cpu/README.md), run the [TinyStories microlab](examples/tinystories-microlab/README.md), or repeat the [TinyStories base model](experiments/tinystories/README.md) and its [LM-head experiment](experiments/tinystories/lm-head-bottleneck/README.md) on your hardware.
 3. **Share a new recipe**  
    Add a self-contained recipe under `examples/` or `experiments/`, written as Kybern Model Lab YAML or JSON configs.
 

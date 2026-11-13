@@ -11,7 +11,8 @@
 </p>
 
 <p align="center">
-  <a href="https://kybern.dev/models/tinystories-training/">TinyStories Guide</a> ·
+  <a href="experiments/tinystories/README.md">TinyStories Base</a> ·
+  <a href="experiments/tinystories/lm-head-bottleneck/README.md">LM-Head Experiment</a> ·
   <a href="examples/synthetic-cpu/README.md">Basic CPU Smoke</a> ·
   <a href="components/README.md">Custom Components</a> ·
   <a href="experiments/devmind/README.md">Devmind</a> ·
@@ -26,7 +27,6 @@ We publish everything we record, including negative results and models whose val
 A few things to know before you start:
 
 - You only need this repository and Lab to run the recipes.
-- The TinyStories quality scores come from an AI assistant applying a written rubric. No human panel reviewed them yet, so treat them as provisional.
 - We don't publish model weights. A reproduction trains its own model and gets its own run IDs.
 
 ---
@@ -35,10 +35,11 @@ A few things to know before you start:
 
 | Experiment | What it tests | Status & Evidence | Links |
 | --- | --- | --- | --- |
-| **TinyStories Baseline (4.46M)** | An 8,192-update (33.5M-token) CPU training run of a 4-layer dense transformer, with a 12-prompt story continuation panel. | **Being re-recorded on current Lab.** The earlier run reached validation loss `1.7043` (perplexity `5.4976`) but 22 of 24 continuations failed the quality rubric; its records stay for reference. | [Walkthrough](examples/tinystories-useful/README.md) · [Earlier outputs](results/2026-10-19-tinystories-cpu/README.md) · [Interactive Guide](https://kybern.dev/models/tinystories-training/) |
-| **TinyStories Microlab** | FFN width 256 vs. 384 and 512 on 2,000 stories: one `klab try`, then a `klab sweep` over three seeds. | **Ready to run.** A 40-update (10,240-target) exercise; no recorded result yet. | [Microlab Guide](examples/tinystories-microlab/README.md) |
+| **TinyStories Base (58.9M)** | A from-scratch story model shaped like llama2.c's 42M (width 512, 8 layers, 32,768-token tokenizer, V/D = 64), trained for four passes over every unique TinyStories story on two Arc Pro B70s. | **Recipe measured, not trained yet.** Data cleaning, tokenizer, throughput and the learning rate were measured; the README records each. | [Recipe](experiments/tinystories/README.md) |
+| **Is the LM Head a Gradient Bottleneck?** | A preregistered test of [arXiv 2603.10145](https://arxiv.org/abs/2603.10145) on the TinyStories base: head rank, vocabulary size and SpamLang sweeps over three seeds, with the share of the logit gradient lost in the head measured on every arm. | **Preregistered, not run.** | [Experiment](experiments/tinystories/lm-head-bottleneck/README.md) |
+| **TinyStories Microlab** | The same experiment on CPU: a 1.5M-parameter model on 20,000 stories, heads of rank 8 to 128 against the full head, three seeds. | **Ready to run.** One recipe check recorded (seed 1); no sweep result yet. | [Microlab Guide](examples/tinystories-microlab/README.md) |
 | **Basic Synthetic CPU** | An offline end-to-end check: synthetic text, BPE tokenizer, one training step, evaluation and a run report. | **Ready to run.** Offline on CPU, no downloads. | [Recipe Guide](examples/synthetic-cpu/README.md) · [Offline Check (kybern.dev)](https://kybern.dev/models/cpu-smoke/) |
-| **Devmind (730M)** | A from-scratch, development-leaning decoder with a 32,768-token context, sparse latent attention and n-gram memory from the first update: pinned sources, a 12B-token mixture, pretraining, long-context, chat and preference stages. | **Defined, not trained.** Declarations load with Lab; the model shape was measured for a few updates on one Arc Pro B70. The README lists the measured numbers and the open Lab gaps. | [Recipe](experiments/devmind/README.md) · [Corpus](experiments/devmind/corpus/README.md) · [Post-training](experiments/devmind/post-training/README.md) |
+| **Devmind (730M)** | A from-scratch, development-leaning decoder with dense attention, pretrained at 4,096 tokens and extended to 32,768, with n-gram memory from the first update: pinned sources, a 12B-token mixture, pretraining, long-context, chat and preference stages. | **Defined, not trained.** Declarations load with Lab; the model shape was measured for a few updates on one Arc Pro B70. The README lists the measured numbers and the open Lab gaps. | [Recipe](experiments/devmind/README.md) · [Corpus](experiments/devmind/corpus/README.md) · [Post-training](experiments/devmind/post-training/README.md) |
 
 ---
 
@@ -70,38 +71,30 @@ To run the same stages from declarations, follow [`examples/synthetic-cpu/README
 
 ### 2. Run Your First Controlled Comparison (`TinyStories Microlab`)
 
-Copy the [TinyStories microlab](examples/tinystories-microlab/README.md) config files into a fresh workspace, prepare the dataset and a 2,048-token BPE tokenizer once, then test whether a wider feed-forward layer (`ffn_dim: 384` instead of `256`) lowers held-out loss at the same token budget:
+The [TinyStories microlab](examples/tinystories-microlab/README.md) prepares
+20,000 stories and a 4,096-token tokenizer, then tests on CPU whether a rank-32
+output head trains a worse model than the full head, and how much of the logit
+gradient each passes back:
 
 ```sh
-EXPERIMENT="$KLAB_WORK_DIR/experiments/tinystories-microlab-001"
-SAMPLE="../kybern-workshop/examples/tinystories-microlab/declarations"
-mkdir -p "$EXPERIMENT/inputs"
-cp "$SAMPLE/source.yaml" "$SAMPLE/tokenizer.yaml" "$SAMPLE/run.yaml" "$EXPERIMENT/inputs/"
-
-# 1. Lock and snapshot the TinyStories subset, then fit the tokenizer
-uv run --locked --extra cpu klab data lock "$EXPERIMENT/inputs/source.yaml" \
-  --output "$EXPERIMENT/inputs/source.lock.json"
-uv run --locked --extra cpu klab data snapshot "$EXPERIMENT/inputs/source.lock.json" \
-  --output "$EXPERIMENT/snapshot"
-uv run --locked --extra cpu klab tokenizer train "$EXPERIMENT/inputs/tokenizer.yaml"
-
-# 2. Run a matched comparison: FFN width 384 vs. baseline 256
-cat > "$EXPERIMENT/wider-ffn.yaml" <<'YAML'
-question: Does a wider FFN lower held-out loss at the same token budget?
-set:
-  model.ffn_dim: 384
-YAML
-
-uv run --locked --extra cpu klab try "$EXPERIMENT/wider-ffn.yaml" \
-  --vs "$EXPERIMENT/inputs/run.yaml"
+# From the model-lab checkout:
+KLAB="uv run --project $PWD --locked --extra cpu klab"
+WORK="$KLAB_WORK_DIR/experiments/tinystories-microlab"
+mkdir -p "$WORK"
+cp -R ../kybern-workshop/examples/tinystories-microlab/{declarations,policy.yaml,rank-32.yaml,rank-sweep.yaml} "$WORK"/
+cd "$WORK"
+$KLAB data lock declarations/source.yaml --output source.lock.json
+$KLAB data snapshot source.lock.json --output snapshot
+$KLAB tokenizer train declarations/tokenizer.yaml
+$KLAB try rank-32.yaml --vs declarations/run.yaml --config policy.yaml --backend cpu
 ```
 
 When `try` finishes, it prints a `TRY_ID`. Use it to read the verdict, dig into the runs, or open the dashboard:
 
 ```sh
-uv run --locked --extra cpu klab report TRY_ID
-uv run --locked --extra cpu klab explore TRY_ID
-uv run --locked --extra cpu klab dashboard
+$KLAB report TRY_ID
+$KLAB explore TRY_ID
+$KLAB dashboard
 ```
 
 ### The Everyday Experiment Loop
@@ -124,9 +117,9 @@ This is where we list experiments people run in their own forks and repositories
 
 | Project / Fork | Author | Question / Experiment | Model & Backend | Summary / Findings |
 | --- | --- | --- | --- | --- |
-| *Nothing listed yet.* | — | Repeat a recipe, test an architecture change, or try to beat our [TinyStories baseline](examples/tinystories-useful/README.md). | CPU / GPU / MLX | [Open a PR](CONTRIBUTING.md) to add yours. |
+| *Nothing listed yet.* | — | Repeat a recipe, test an architecture change, or run the [LM-head experiment](experiments/tinystories/lm-head-bottleneck/README.md) on your hardware. | CPU / GPU / MLX | [Open a PR](CONTRIBUTING.md) to add yours. |
 
-If you've run something with these recipes, we'd like to hear about it. That could be a recipe repeated on different hardware (CUDA, ROCm, Intel XPU, or Apple Silicon with MLX), better story coherence on TinyStories, or a clean negative result. Open a pull request that adds a row to the table. [CONTRIBUTING.md](CONTRIBUTING.md) explains what to include.
+If you've run something with these recipes, we'd like to hear about it. That could be a recipe repeated on different hardware (CUDA, ROCm, Intel XPU, or Apple Silicon with MLX), a replication of the LM-head experiment, or a clean negative result. Open a pull request that adds a row to the table. [CONTRIBUTING.md](CONTRIBUTING.md) explains what to include.
 
 ---
 
@@ -134,24 +127,12 @@ If you've run something with these recipes, we'd like to hear about it. That cou
 
 The website walks through these recipes in more detail:
 
-- **[TinyStories: Build, Read, and Improve a Small Story Model](https://kybern.dev/models/tinystories-training/)** — A step-by-step walkthrough, with a browser viewer for all 27 recorded story outputs.
 - **[Offline CPU Installation Check](https://kybern.dev/models/cpu-smoke/)** — A quick way to check a new Kybern Model Lab install.
 - **[Experiments & Research Roadmap](https://kybern.dev/experiments/)** — Planned studies on conditional memory, fact swaps, and context overrides, plus ideas you can test on your own hardware.
 - **[Matched Comparisons](https://kybern.dev/learn/lab/matched-comparisons/) & [Inspecting Runs](https://kybern.dev/learn/lab/inspect-runs/)** — How to set up a fair comparison with paired seeds and read probe verdicts.
 - **[Free 18-Lesson Curriculum](https://kybern.dev/learn/)** — Hands-on lessons, from tensors and autograd to building a causal decoder and running your own comparisons.
 
 ---
-
-## TinyStories 5M and 50M recipes
-
-The [5M / 50M study](experiments/tinystories/README.md) covers shared data
-preparation, training budgets of 100M and 1B tokens, and runbooks for training
-and resuming. The [lifecycle guide](experiments/tinystories/lifecycle.md)
-covers storage, calibration, recovery, and moving runs between machines. The
-runtime configs use ROCm as the example backend. Recorded so far: completed
-5M and 50M runs on ROCm, context-length comparisons on Intel, and a matched
-learning-rate study. Handing a run off to a remote machine or Colab, and moving
-optimizer state from one device to another, are still untested.
 
 ## Repository Structure
 
@@ -161,15 +142,10 @@ kybern-workshop/
 ├── examples/
 │   ├── custom-attention/      # Train with an attention kind from components/
 │   ├── synthetic-cpu/         # Offline synthetic CPU smoke recipe
-│   ├── tinystories/           # Index of the TinyStories recipes
-│   ├── tinystories-microlab/  # 40-update FFN width comparison: try, then sweep
-│   └── tinystories-useful/    # 8,192-update CPU baseline recipe & improvement exercises
+│   └── tinystories-microlab/  # The LM-head experiment on CPU: try, then a rank sweep
 ├── experiments/
 │   ├── devmind/               # Devmind: model, corpus, training stages and post-training
-│   └── tinystories/           # TinyStories 5M / 50M recipes, context and learning-rate studies
-├── results/
-│   ├── 2026-10-19-tinystories-cpu/   # Recorded 8,192-update baseline metrics & 27 story outputs
-│   └── 2026-10-31-tinystories-rocm/  # Recorded ROCm 5M and 50M runs
+│   └── tinystories/           # TinyStories base model, calibration and the LM-head experiment
 └── docs/
     └── native-workflow.md     # Which klab command to use for each job
 ```

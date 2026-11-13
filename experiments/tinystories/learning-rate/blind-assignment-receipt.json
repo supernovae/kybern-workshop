@@ -1,8 +1,0 @@
-{
-  "created_at": "2026-11-01T23:46:41.490389+00:00",
-  "panel_sha256": "2fc535fa459eca6b5a9d36ed7c2c74a3ae0083ec5be8795a5472bc4714937511",
-  "rubric_sha256": "8bdc9b8dd87384ef3cc918a20bc1734487f9828182a1eb28618531c563e4e446",
-  "assignment_sha256": "6b9d2e1e7217f97a2fc0a5a311fb4bb51a40c66fa8c6f45fdae46ea563012055",
-  "pairs": 24,
-  "status": "frozen before candidate training; mapping withheld until scores are frozen"
-}

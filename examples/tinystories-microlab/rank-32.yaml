@@ -1,0 +1,3 @@
+question: Does a rank-32 LM head train a worse model than the full head?
+set:
+  model.output_head_rank: 32

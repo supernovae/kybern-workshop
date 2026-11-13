@@ -1,13 +1,16 @@
+# The microlab baseline: a 2-layer, width-128 decoder with a full, untied
+# output head over a 4,096-token vocabulary (V/D = 32), trained on CPU.
 schema_version: 2
 name: tinystories-microlab
-seed: 42
+seed: 1
 model:
-  vocab_size: 2048
+  vocab_size: 4096
   hidden_dim: 128
   num_layers: 2
   num_heads: 4
-  ffn_dim: 256
+  ffn_dim: 352
   max_seq_len: 128
+  tie_embeddings: false
 tokenizer:
   path: ../tokenizer/tokenizer.json
 dataset:
@@ -18,34 +21,36 @@ dataset:
   validation_path: ../snapshot/validation.jsonl
   source_manifest_path: ../snapshot/manifest.json
   license: CDLA-Sharing-1.0
-  train_max_documents: 2000
-  validation_max_documents: 100
-  train_max_tokens: 2000000
+  train_max_documents: 20000
+  validation_max_documents: 500
+  train_max_tokens: 8000000
   validation_max_tokens: 200000
 training:
-  seq_len: 64
-  micro_batch_size: 2
-  gradient_accumulation: 2
-  max_steps: 40
-  max_tokens: 10240
+  seq_len: 128
+  micro_batch_size: 16
+  gradient_accumulation: 1
+  max_steps: 1500
+  max_tokens: 3072000
+  grad_clip_norm: 1.0
 optimizer:
   name: adamw
-  peak: 0.0003
-  floor: 0.00003
-  warmup_steps: 4
+  peak: 0.002
+  floor: 0.0002
+  warmup_steps: 50
+evaluation:
+  every_steps: 500
+  max_batches: 16
+  text_documents: 200
+  gradient_bottleneck: true
 runtime:
   engine: pytorch
   backend: cpu
   precision: fp32
 checkpoint:
-  every_steps: 20
-  keep_periodic: true
-evaluation:
-  every_steps: 20
-  max_batches: 4
+  every_steps: 500
 logging:
   root_dir: ../runs
-  every_steps: 1
+  every_steps: 10
 staging:
   smoke_steps: 2
   warmup_steps: 5

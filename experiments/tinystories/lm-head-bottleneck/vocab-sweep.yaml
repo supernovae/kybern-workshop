@@ -1,0 +1,12 @@
+# P6: vocabularies of 4,096 to 16,384 tokens against the base 32,768, at the
+# same width, three seeds each. Tokenizers differ, so arms compare on bits per
+# byte over the same 2,000 held-out stories; each also measures the gradient
+# bottleneck. Fit the three tokenizers first (README).
+baseline: arm.yaml
+question: How do the vocabulary size and the share of the logit gradient the head loses move together?
+points:
+  - {tokenizer.path: ../tokenizer-4k/tokenizer.json, model.vocab_size: 4096}
+  - {tokenizer.path: ../tokenizer-8k/tokenizer.json, model.vocab_size: 8192}
+  - {tokenizer.path: ../tokenizer-16k/tokenizer.json, model.vocab_size: 16384}
+seeds: [1, 2, 3]
+config: policy.yaml
