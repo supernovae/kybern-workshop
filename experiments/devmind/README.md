@@ -124,14 +124,47 @@ duplicates are refused at build. Near-duplicates are not, and before any
 pretraining run you must complete
 [`corpus/near-duplicate-screen.md`](corpus/near-duplicate-screen.md).
 
-`klab corpus near-duplicates "$RELEASE"` holds every document and its shingles
-in memory and stops with no partial report when it passes a bound (by default
-100,000 documents and 128 MiB of text). A 12-billion-token release is several
-hundred times over that, so the default run will stop. Raise the bounds as far
-as the host allows (`--max-documents`, `--max-input-text-bytes`,
-`--max-total-shingles`, `--max-comparisons`) and record exactly what was and
-was not covered, or have the owner accept the gap in writing. Do not start
-pretraining on an empty or unfilled record.
+The screen indexes the validation documents and streams the training split
+past them, so the training side costs almost no memory and it covers the whole
+release. It screens every document or stops with no report. Only the
+validation index is bounded: `--max-heldout-documents` (default 1,000,000) and
+`--max-heldout-shingles` (default 200,000,000). The index takes about 8 bytes
+per validation shingle (roughly one per word) plus about 4 KB per validation
+document.
+
+This recipe's validation side is not small. The six held-out sources are whole
+shards, about 7.9 GB of Parquet together, which we estimate at several billion
+words: several times the default bounds, and tens of GB of RAM. Count the
+documents the screen will index (every non-training row of `documents.jsonl`,
+including dropped ones) before running:
+
+```sh
+jq -n 'reduce (inputs | select(.split != "train")) as $d
+  ([0, 0]; [.[0] + 1, .[1] + ($d.text | utf8bytelength)])' \
+  "$RELEASE/documents.jsonl"   # [documents, text bytes]
+```
+
+Shingles are about one per word, typically bytes / 6. Set
+`--max-heldout-documents` just above the document count and
+`--max-heldout-shingles` to bytes / 4 for headroom, then expect an index of
+about 8 bytes × bytes / 6 plus 4 KB per document:
+
+```sh
+klab --work-dir "$WORK" corpus near-duplicates "$RELEASE" \
+  --max-heldout-documents "$HELDOUT_DOCUMENTS" \
+  --max-heldout-shingles "$((HELDOUT_BYTES / 4))" > "$WORK/near-duplicates.json"
+```
+
+If the index would not fit in host RAM with headroom, take fewer or smaller
+held-out shards and rebuild the release, rather than screening part of it.
+Expect one to two hours per 12 billion training tokens on one core after the
+release is verified.
+
+Copy the report's `coverage`, `candidate_count` and `identical_text_count`
+into the record and decide every pair. If `candidates_truncated` is true, the
+report lists only the first `--max-candidates` pairs (default 20,000): rerun
+with that raised until every pair is listed. Do not start pretraining on an
+empty or unfilled record.
 
 ### 2. Tokenizer and mixture
 
@@ -197,7 +230,6 @@ Open in Lab:
 | Several devices share one process, which holds device memory in host RAM on Arc | Pretraining uses one card | [#428](https://github.com/supernovae/model-lab/issues/428) |
 | Grouped-query attention is refused with SDPA | Full-width keys and values: about 5.3 GiB of generation cache per 32,768-token sequence | |
 | The leakage screen covers probe items only | Nothing checks the corpus against HumanEval or MBPP | |
-| `corpus near-duplicates` is all-in-memory and all-or-nothing | It cannot cover the full corpus; coverage is recorded by hand in [`near-duplicate-screen.md`](corpus/near-duplicate-screen.md) | [#432](https://github.com/supernovae/model-lab/issues/432) |
 
 Now in Lab and not yet used by this recipe: remote-code Hugging Face export
 (#415), chat and multi-field converters (#416), `document_start` packing and

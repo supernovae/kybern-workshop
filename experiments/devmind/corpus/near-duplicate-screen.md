@@ -8,8 +8,13 @@ Why it exists: a validation document with a near-copy in training makes
 validation loss look better than the model deserves, and exact-match checks do
 not see it. `klab corpus near-duplicates` is a lexical screen (three-word
 shingles, Jaccard 0.65 or more). It can miss pairs and does not catch
-paraphrases, so a clean result means "no lexical near-copies found in the
-covered documents", nothing more.
+paraphrases, so a clean result means "no lexical near-copies found", nothing
+more. MinHash banding finds a pair at Jaccard 0.65 about 96% of the time, at
+0.7 about 99%, and above 0.8 almost always.
+
+The screen covers every document or stops with no report (Lab
+[#433](https://github.com/supernovae/model-lab/pull/433)). Run it as shown in
+the [recipe](../README.md#1-corpus) and fill this record from its JSON report.
 
 ## Release
 
@@ -25,16 +30,19 @@ covered documents", nothing more.
 
 | Field | Value |
 | --- | --- |
-| Command and every bound passed | |
-| Documents screened (train / validation) | |
-| Share of release covered | |
-| Strata or sources not covered | |
+| Command and every flag passed | |
+| Documents screened (train / validation), from `coverage` | |
+| Text bytes screened (train / validation), from `coverage` | |
+| Documents without words (matched by identical text only) | |
 | Outcome | `complete` · `stopped at a bound` · `not run` |
-| Cross-split pairs reported | |
-| Identical-text pairs reported | |
+| Cross-split pairs reported (`candidate_count`) | |
+| Identical-text pairs reported (`identical_text_count`) | |
+| `candidates_truncated` | must be `false` |
 
-If the command stopped at a bound, it wrote no report. Say which bound, then
-either rerun with it raised or record the gap under Acceptance.
+Screened counts must equal the release counts above. If the command stopped
+at a held-out bound, it wrote no report: say which bound and rerun with it
+raised. If `candidates_truncated` is `true`, rerun with `--max-candidates`
+raised until every pair is listed.
 
 ## Review of reported pairs
 
@@ -47,19 +55,7 @@ family and re-freezing the splits is the default.
 
 ## Acceptance
 
-Choose one and delete the other.
+Every document in the release was screened, `candidates_truncated` is `false`,
+and every reported pair is decided above.
 
-- **Full coverage:** every document in the release was screened and every
-  reported pair is decided above.
-- **Partial coverage, accepted by the owner:** the uncovered documents are
-  listed above, the reason they could not be screened is stated, and the
-  owner accepts that training proceeds without screening them.
-  Accepted by: ______ on ______.
-
-## Gap to close in Lab
-
-Full coverage needs a screen that does not hold the whole corpus in memory, for
-example one that indexes the (small) validation side and streams the training
-side past it, or one that shards by band. Until Lab has that, partial coverage
-with an owner's acceptance is the only way to proceed on a full-size release.
-Tracked in [model-lab#432](https://github.com/supernovae/model-lab/issues/432).
+Accepted by: ______ on ______.
