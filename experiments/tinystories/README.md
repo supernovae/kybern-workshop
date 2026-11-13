@@ -4,7 +4,7 @@
 
 A 58.9M-parameter story model trained from scratch with
 [Kybern Model Lab](https://github.com/supernovae/model-lab) on every unique
-TinyStories story, in about two hours on two Intel Arc Pro B70s. It is the
+TinyStories story, in 93 minutes on two Intel Arc Pro B70s. It is the
 starting point for experiments that need a model people actually build at this
 size, beginning with a test of whether the LM head is a gradient bottleneck.
 
@@ -47,12 +47,12 @@ Differences from llama2.c 42M, each on purpose:
 - Lab installed as described in [native workflow](../../docs/native-workflow.md),
   and a registered runtime for your accelerator. The commands below use
   `b70-xpu`; on one card, drop `runtime.secondary_device_indices`.
-- About 20 GB of free disk for the base model: 3.5 GB of snapshot, 1.6 GB of
-  prepared tokens, the run's own 1.6 GB copy of them, and twelve kept
-  checkpoints of 670 MB. The [LM-head experiment](lm-head-bottleneck/README.md)
+- About 24 GB of free disk for the base model: 3.5 GB of snapshot, 1.6 GB of
+  prepared tokens, the run's own 1.6 GB copy of them, and 17 GB of
+  checkpoints (25 of 674 MB, see below). The [LM-head experiment](lm-head-bottleneck/README.md)
   needs about 130 GB more. Put the workspace on a disk that has it.
-- About two hours of two B70s, or two and a half on one (estimated from the
-  speeds measured below).
+- About an hour and a half of two B70s (measured), or about two and a quarter
+  hours on one (estimated from the one-card speed below).
 
 ## 1. Workspace
 
@@ -154,13 +154,24 @@ Close GPU-heavy applications during the run. With more cards, list them in
 of the card count.
 
 Watch it with `klab dashboard`. Every 500 updates Lab scores held-out loss on
-64 batches; a checkpoint is kept every 1,000 updates.
+64 batches and saves a checkpoint when the loss is a new best, which here was
+every time; one is also kept every 1,000 updates. That made 25 checkpoints,
+17 GB. Delete the ones you do not need after the run.
+
+Our run (Lab `827a4ef8`, run `tinystories-base`) took 5,594 seconds, 93
+minutes, at 299,000 tokens a second on average. Held-out loss by update:
+
+| Update | 500 | 1,000 | 2,000 | 4,000 | 6,000 | 8,000 | 10,000 | 11,846 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Loss | 1.915 | 1.691 | 1.563 | 1.475 | 1.422 | 1.378 | 1.346 | 1.329 |
+
+It was still falling at the end, by 0.002 over the last 346 updates.
 
 ## 6. Check the model
 
 ```sh
 klab eval tinystories-base --runs-dir runs --runtime b70-xpu
-klab probe tinystories-base --runs-dir runs --runtime b70-xpu --config standard
+klab probe runs/tinystories-base --runtime b70-xpu --config standard
 klab generate tinystories-base --runs-dir runs --runtime b70-xpu --checkpoint latest.json \
   --prompt "Once upon a time, there was a little girl named Lily." \
   --max-new-tokens 200 --seed 1
@@ -173,10 +184,32 @@ and the data and tokenizer digests from the run manifest.
 
 | Measure | Value |
 | --- | --- |
-| Held-out loss (nats per token) | not run yet |
-| Bits per byte | not run yet |
-| Gradient norm lost in the head | not run yet |
-| Wall time, two B70s | not run yet |
+| Held-out loss (nats per token) | 1.329 |
+| Bits per byte, 2,000 held-out stories | 0.438 |
+| Gradient norm lost in the head | 97.8% (squared norm kept 4.4%, against 1.6% for a random 512-dimensional subspace) |
+| Wall time, two B70s | 93 minutes |
+| Probe calibration error (ECE), standard tier | 0.015 |
+| Probe degeneration (distinct-2) | 0.000 (0.85) |
+
+Run `tinystories-base`, final checkpoint `step_00011846_gen_000025` (sha256
+`a5c5cf77…`), Lab `827a4ef8`, tokenizer sha256 `2bd4d6d8…`, prepared
+training tokens `6be6cf37…` and validation tokens `6919226f…`. The share of
+gradient norm lost is within the 95–99% the paper reports for real models.
+
+The sample from the `generate` command above (seed 1):
+
+> Once upon a time, there was a little girl named Lily. She loved to play
+> outside in the sunshine. One day, she saw a big, scary dog. She was scared
+> and ran away.
+>
+> Lily's mom saw her running and asked, "What's wrong, Lily?"
+>
+> "I saw a big, scary dog," Lily said.
+>
+> "Don't worry, I'll protect you," her mom said.
+>
+> Lily felt safe with her mom. They went back to playing in the sunshine. From
+> that day on, Lily knew that her mom would always protect her.
 
 Loss per token cannot be compared with llama2.c's published numbers (0.847 for
 42M): their tokenizer and their copy of the data differ. Bits per byte on our
