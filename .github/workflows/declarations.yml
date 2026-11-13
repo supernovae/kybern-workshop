@@ -37,6 +37,8 @@ jobs:
       - name: Validate every declaration against Lab main
         working-directory: model-lab
         # Schema validation needs no accelerator framework, so none is installed.
+        # The components package registers kinds that examples name, so it is
+        # installed beside Lab for this command.
         run: |
           uv sync --locked --no-dev
-          uv run --locked --no-dev klab config validate ../workshop
+          uv run --locked --no-dev --with ../workshop/components klab config validate ../workshop
