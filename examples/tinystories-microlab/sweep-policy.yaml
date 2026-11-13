@@ -1,0 +1,3 @@
+try_config_version: 1
+probe_tier: fast
+lab_dir: lab

@@ -13,7 +13,7 @@ We welcome pull requests from anyone running small language-model experiments wi
 
 ## How Workshop and Kybern Model Lab Fit Together
 
-- **Workshop holds recipes and records:** configs (`RunConfig`, tokenizer configs, dataset locks, `try` changes, and campaign definitions), walkthroughs, and compact result records.
+- **Workshop holds recipes and records:** configs (`RunConfig`, tokenizer configs, dataset locks, `try` changes, and `sweep` declarations), walkthroughs, and compact result records.
 - **Kybern Model Lab does the work:** data preparation, training, probes, checkpoint verification, reporting, and the web dashboard all come from [supernovae/model-lab](https://github.com/supernovae/model-lab).
 - **Keep recipes to configs:** don't add helper scripts, launchers, validators, or per-recipe tests; CI rejects them. If an experiment needs something Lab can't do yet, add it to Kybern Model Lab. A new model part or training objective can go in a component package under `components/`.
 - **Check your configs:** `klab config validate .` checks every run, tokenizer, model, and optimizer config against the Lab you have installed. CI runs the same check against Lab `main`.

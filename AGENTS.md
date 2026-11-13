@@ -8,9 +8,9 @@ its rules on lab mode, resources, evidence and spending apply here too.
 
 - **Declarations:** run configs, tokenizer configs, model and optimizer
   sections, dataset sources, `try` deltas, probe and evaluation declarations,
-  campaign and plan documents. YAML or JSON.
+  sweep declarations. YAML or JSON.
 - **Documentation:** a README per recipe, protocols, and the commands to run.
-- **Records:** compact results under `results/` and dated campaign notes.
+- **Records:** compact results under `results/` and dated run notes.
   Never weights, token arrays, corpora or downloads.
 - **Component packages:** a model part or training objective Lab does not ship
   lives in a small Python package under `components/` that registers it
@@ -48,7 +48,8 @@ missing from it:
 | Test one change against a baseline | `klab try DELTA.yaml --vs BASELINE.yaml`, then `klab report TRY_ID` |
 | Probe, explore, generate, chat | `klab probe`, `klab explore`, `klab generate`, `klab chat` |
 | Distill, tune on preferences, export | Lab's `docs/post-training.md` |
-| Inventory and inspect a release recipe | `klab experiment recipe create`, `inspect`, `preparation inspect/apply`, `workflow inspect/resolve/apply/approve/report` |
+| Several values or seeds of one change | `klab sweep SWEEP.yaml`, then `klab report SWEEP_ID` |
+| Queue independent runs on workers | `klab experiment submit`, `list`, `cancel`, `resume`, `collect` |
 | Verify inputs and checkpoints | `klab tokenizer verify`, `klab data prepared-inputs verify`, `klab checkpoint verify` |
 
 ## 4. Writing a recipe
