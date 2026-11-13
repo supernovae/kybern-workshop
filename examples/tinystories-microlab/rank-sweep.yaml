@@ -1,0 +1,12 @@
+# The microlab version of the LM-head experiment: heads of rank 8 to 128
+# against the full head, three seeds each.
+baseline: declarations/run.yaml
+question: Does a lower-rank LM head train a worse model, and pass back less of the logit gradient?
+points:
+  - {model.output_head_rank: 8}
+  - {model.output_head_rank: 16}
+  - {model.output_head_rank: 32}
+  - {model.output_head_rank: 64}
+  - {model.output_head_rank: 128}
+seeds: [1, 2, 3]
+config: policy.yaml

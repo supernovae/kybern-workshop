@@ -13,15 +13,15 @@ license_url: https://huggingface.co/datasets/roneneldan/TinyStories
 selection:
   mode: bounded
   documents:
-    train: 2000
-    validation: 100
+    train: 20000
+    validation: 500
 dedup:
   within_split: exclude
   overlap: exclude
   priority: [validation, train]
 resources:
-  max_source_records: 20000
-  max_text_bytes: 16777216
+  max_source_records: 200000
+  max_text_bytes: 67108864
   max_record_bytes: 1048576
-  max_work_bytes: 268435456
+  max_work_bytes: 536870912
   min_free_bytes: 1073741824

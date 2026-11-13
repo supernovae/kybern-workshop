@@ -1,0 +1,13 @@
+# P2-P4: heads of rank D = 16 to 512 (W = A·B) against the full, unfactored
+# head, three seeds each. Every arm also measures the gradient bottleneck.
+baseline: arm.yaml
+question: Does a lower-rank LM head train a worse TinyStories model, and does it pass back less of the logit gradient?
+points:
+  - {model.output_head_rank: 16}
+  - {model.output_head_rank: 32}
+  - {model.output_head_rank: 64}
+  - {model.output_head_rank: 128}
+  - {model.output_head_rank: 256}
+  - {model.output_head_rank: 512}
+seeds: [1, 2, 3]
+config: policy.yaml

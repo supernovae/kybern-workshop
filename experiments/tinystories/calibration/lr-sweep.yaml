@@ -1,0 +1,9 @@
+# How the base model's peak learning rate was chosen: seven peaks (the baseline's
+# 1e-3 and six more) at a 200M-token budget, one seed, one card. Results are in
+# the README.
+baseline: lr-base.yaml
+question: Which AdamW peak learning rate trains the TinyStories base model best at a 200M-token budget?
+vary:
+  optimizer.peak: [0.0003, 0.0006, 0.002, 0.003, 0.004, 0.006]
+seeds: [1]
+config: policy.yaml

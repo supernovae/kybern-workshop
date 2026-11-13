@@ -1,6 +1,0 @@
-baseline: declarations/run.yaml
-question: Does a wider feed-forward layer lower held-out loss, and does the answer hold across seeds?
-vary:
-  model.ffn_dim: [384, 512]
-seeds: [1, 2, 3]
-config: sweep-policy.yaml

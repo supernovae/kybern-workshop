@@ -13,7 +13,7 @@ For a guided introduction, see [Run the Lab on kybern.dev](https://kybern.dev/le
 | **Check a model fits** | `inspect CONFIG` | Reports parameters and a memory estimate without training. |
 | **Compare one change** | `config derive`, `try`, `report` | [TinyStories microlab](../examples/tinystories-microlab/README.md) |
 | **Confirm it across seeds or values** | `sweep`, `report` | [TinyStories microlab](../examples/tinystories-microlab/README.md) |
-| **Build a model end to end** | `data lock`, `data snapshot`, `tokenizer train`, `data prepare`, `stage`, `train`, `eval`, `probe`, `generate`, `chat` | [Synthetic CPU](../examples/synthetic-cpu/README.md), [TinyStories baseline](../examples/tinystories-useful/README.md) |
+| **Build a model end to end** | `data lock`, `data snapshot`, `tokenizer train`, `data prepare`, `stage`, `train`, `eval`, `probe`, `generate`, `chat` | [Synthetic CPU](../examples/synthetic-cpu/README.md), [TinyStories base model](../experiments/tinystories/README.md) |
 | **Continue or extend a run** | `train --resume`, `--extend-budget`, `--promote` | [Checkpointing](https://github.com/supernovae/model-lab/blob/main/docs/checkpointing.md) |
 | **Bind sections and local paths** | `config compose` | [Devmind](../experiments/devmind/README.md) |
 | **Queue independent runs** | `experiment submit`, `list`, `cancel`, `resume`, `collect`, plus `worker` | [Workers](https://github.com/supernovae/model-lab/blob/main/docs/workers.md) |

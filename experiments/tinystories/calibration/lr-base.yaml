@@ -1,0 +1,80 @@
+# Baseline of the learning-rate sweep that chose the base model's peak: the
+# base model on one card for 200M tokens (1,526 updates), peak 1e-3. The sweep
+# varies only optimizer.peak.
+schema_version: 2
+name: tinystories-lr
+seed: 1
+model:
+  # Shaped like llama2.c's 42M TinyStories model: width 512, 8 layers, 8 heads,
+  # SwiGLU width 1376 (2/3 of 4 x 512, rounded up to a multiple of 32).
+  vocab_size: 32768
+  hidden_dim: 512
+  num_layers: 8
+  num_heads: 8
+  ffn_dim: 1376
+  max_seq_len: 512
+  # Untied, so the base model is the control arm of the LM-head experiment,
+  # whose rank-limited heads need untied embeddings.
+  tie_embeddings: false
+attention:
+  kind: dense
+  implementation: sdpa
+tokenizer:
+  path: ../tokenizer-32k/tokenizer.json
+dataset:
+  source: snapshot
+  revision: f54c09fd23315a6f9c86f9dc80f725de7d8f9c64
+  cache_dir: ../data
+  train_path: ../snapshot/train.jsonl
+  validation_path: ../snapshot/validation.jsonl
+  source_manifest_path: ../snapshot/manifest.json
+  license: CDLA-Sharing-1.0
+  train_max_documents: 1792647
+  validation_max_documents: 21990
+  # Upper bounds; preparation measured 388,198,157 and 4,647,305 tokens.
+  train_max_tokens: 1000000000
+  validation_max_tokens: 10000000
+training:
+  # 512-token rows, 32 per microbatch, 8 microbatches per update: 131,072
+  # tokens per update, on one card.
+  seq_len: 512
+  micro_batch_size: 32
+  gradient_accumulation: 8
+  # 200M tokens.
+  max_steps: 1526
+  max_tokens: 200015872
+  grad_clip_norm: 1.0
+  deterministic: false
+optimizer:
+  name: adamw
+  peak: 0.001
+  floor: 0.0001
+  warmup_steps: 150
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+evaluation:
+  every_steps: 500
+  max_batches: 64
+  # Bits per byte on 2,000 whole held-out stories, comparable across
+  # tokenizers, and the gradient bottleneck on the scored targets.
+  text_documents: 2000
+logging:
+  root_dir: ../runs
+  every_steps: 10
+runtime:
+  engine: pytorch
+  backend: xpu
+  device_index: 0
+  precision: bf16
+  compile_transformer_blocks: true
+  compile_output_head_loss: true
+  memory:
+    # The planner estimates 15.2 GiB for one 32-row microbatch; 4.6 GiB was
+    # measured. Observe the estimate; the spill guard still stops a run that
+    # really fills the card.
+    estimate_policy: observe
+checkpoint:
+  every_steps: 500
+staging:
+  smoke_steps: 2
+  warmup_steps: 5
