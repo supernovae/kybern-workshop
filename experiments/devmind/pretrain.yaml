@@ -4,9 +4,9 @@ schema_version: 2
 name: devmind-pretrain
 seed: 42
 training:
-  # One 4,096-token row per microbatch, 32 per update (131,072 targets).
-  # Measured on one B70 with compiled blocks and no recomputation: 8,076
-  # targets/s at a 23.1 GiB peak. 8,192-token rows fit too (28.6 GiB, 89% of
+  # One 4,096-token row per microbatch, 32 per update (131,072 targets), 16
+  # on each card. Measured on one B70 with compiled blocks and no
+  # recomputation: 8,076 targets/s at a 23.1 GiB peak. 8,192-token rows fit too (28.6 GiB, 89% of
   # the card) but run at 5,493 targets/s.
   seq_len: 4096
   micro_batch_size: 1
@@ -31,11 +31,13 @@ runtime:
   engine: pytorch
   backend: xpu
   device_index: 0
-  # One device, and run with ZE_AFFINITY_MASK set so the process sees only
-  # that card. A process that can see several Arc cards also holds its device
-  # memory in host RAM: 37 GiB of host RAM for a 23 GiB device peak, against
-  # 8 GiB with one card visible. Lab's secondary devices share one process,
-  # so they are left out until that is fixed (see the README).
+  # Two B70s. Lab runs the second card in its own process and confines each
+  # process to its card, so device memory is not also held in host RAM.
+  # Microbatches are split between the cards; gradients are summed on card 0
+  # in a fixed order, so an update is the same as on one card. Measured:
+  # 12,682 targets/s on both cards against 6,773 on card 0 alone, which also
+  # drives the desktop. With four cards, list [1, 2, 3].
+  secondary_device_indices: [1]
   precision: bf16
   compile_transformer_blocks: true
   compile_output_head_loss: true

@@ -1,0 +1,8 @@
+# A `klab try` delta for stage 2: lengthen the context by raising the RoPE
+# base (adjusted base frequency, as Code Llama did for 16,384 tokens) instead
+# of the YaRN scaling in context-16k.yaml. Run it against a composed long-context config on a shortened
+# budget; see post-training/README.md.
+question: Does a larger RoPE base extend the context better than YaRN?
+set:
+  attention.rope_base: 1000000.0
+  attention.rope_scaling: null

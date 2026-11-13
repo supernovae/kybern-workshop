@@ -1,0 +1,12 @@
+# Copy outside Git, fill in, and compose after paths.yaml for the long-context
+# stages: it replaces the pretraining mixture with the long-context one. The
+# validation split stays the same. Stage 3 needs its own copy pointing at the
+# 32,768-token mixture.
+dataset:
+  mixture_declaration_path: /data/devmind/recipe/corpus/long-context-mixture.yaml
+  mixture_output_path: /data/devmind/long-context-mixture
+  train_path: /data/devmind/long-context-mixture/train.tokens.ids
+  cache_dir: /data/devmind/prepared-long-context
+  # From the long-context mixture's receipt.
+  train_max_documents: REPLACE_WITH_MIXTURE_RECORDS
+  train_max_tokens: REPLACE_WITH_MIXTURE_TOKENS

@@ -1,0 +1,88 @@
+# The long-context stages' token mixture: the pretraining strata in the same
+# shares (Lab requires the release's requested mixture), 500 million tokens,
+# with every document of 4,096 tokens or more starting a row of its own.
+# Shorter documents pack contiguously around them, so each update mixes long
+# documents with ordinary short text. A different seed from pretraining picks
+# a different ranking of each stratum's documents.
+#
+# For stage 3 (long-context-32k.yaml), copy it again with row_tokens: 32768
+# and every quota halved, and materialize it to its own output.
+#
+# The receipt's row_layout says how many rows belong wholly to one long
+# document; read it before training. Lab cannot yet select or upweight long
+# documents, so that share is whatever the corpus holds (see the README).
+schema_version: 1
+release_path: ${RELEASE_PATH}
+tokenizer_config: ${TOKENIZER_CONFIG}
+family_inventory: ${FAMILY_INVENTORY}
+source_strata:
+  web_fineweb_edu: web
+  web_fineweb_edu_heldout: web
+  wiki_finewiki_en: wiki
+  wiki_finewiki_en_heldout: wiki
+  code_python: python
+  code_python_heldout: python
+  code_javascript: web_code
+  code_typescript: web_code
+  code_web_heldout: web_code
+  code_go: systems_code
+  code_rust: systems_code
+  code_shell: systems_code
+  code_markdown: systems_code
+  collab_github_threads: collaboration
+  collab_github_threads_heldout: collaboration
+  notebooks_kaggle: notebooks
+  math_finemath: math
+  math_finemath_heldout: math
+  ref_python_docs: reference
+  ref_python_peps: reference
+  ref_node_api: reference
+  ref_mdn: reference
+  ref_typescript_handbook: reference
+  ref_react_docs: reference
+  ref_express_docs: reference
+  ref_kubernetes_docs: reference
+  ref_github_docs: reference
+  ref_rust_book: reference
+  ref_tldr_pages: reference
+  practice_owasp_cheatsheets: practice
+  practice_owasp_wstg: practice
+  practice_engineering_playbook: practice
+  practice_code_review: practice
+target_quotas:
+  web: 164750000
+  wiki: 30000000
+  python: 90000000
+  web_code: 60000000
+  systems_code: 30000000
+  collaboration: 60000000
+  notebooks: 15000000
+  math: 40000000
+  reference: 10000000
+  practice: 250000
+seed: 4096
+max_exposures: 2
+tokenizer_origin_release_id: ${RELEASE_ID}
+packing: document_start
+row_tokens: 16384
+strata:
+  web:
+    min_document_tokens: 4096
+  wiki:
+    min_document_tokens: 4096
+  python:
+    min_document_tokens: 4096
+  web_code:
+    min_document_tokens: 4096
+  systems_code:
+    min_document_tokens: 4096
+  collaboration:
+    min_document_tokens: 4096
+  notebooks:
+    min_document_tokens: 4096
+  math:
+    min_document_tokens: 4096
+  reference:
+    min_document_tokens: 4096
+  practice:
+    min_document_tokens: 4096

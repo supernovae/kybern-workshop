@@ -1,29 +1,84 @@
 # After pretraining
 
 Each stage is an ordinary run that names the previous stage's run directory as
-`training.parent_checkpoint`. The model and attention sections and the tokenizer
-stay exactly the same; Lab refuses a parent with a different architecture or
-tokenizer.
+`training.parent_checkpoint`. The tokenizer and every weight stay the same. The
+only architecture change is the context: the long-context stages raise
+`model.max_seq_len` and add RoPE scaling (`context-16k.yaml`, then
+`context-32k.yaml`), and every later stage composes `context-32k.yaml` too,
+because Lab refuses a child whose architecture differs from its parent's in
+anything else, or whose context is shorter.
 
 ## Long context
 
+Pretraining stays at 4,096 tokens. Two short stages then lengthen the context,
+each from the one before: 500 million tokens at 16,384 (stage 2) and 250
+million at 32,768 (stage 3). Neither has been run.
+
+**Data.** Copy `corpus/long-context-mixture.template.yaml`, fill its four
+`${...}` values as for the pretraining mixture, and materialize it:
+
 ```sh
-klab config compose "$R/long-context.yaml" model="$R/model.yaml" \
-  attention="$R/attention.yaml" "$WORK/paths.yaml" --output "$WORK/long-context.yaml"
-klab inspect "$WORK/long-context.yaml"
-klab data prepare "$WORK/long-context.yaml"
-klab stage "$WORK/long-context.yaml" --runtime b70-xpu --through warmup \
+klab corpus materialize-mixture "$WORK/long-context-mixture.yaml" \
+  --output "$WORK/long-context-mixture"
+klab corpus verify-mixture "$WORK/long-context-mixture.yaml" \
+  --output "$WORK/long-context-mixture"
+```
+
+It keeps pretraining's stratum shares, which Lab requires, and starts every
+document of 4,096 tokens or more on a row of its own, so long documents fill
+whole rows in order while shorter text packs around them. The receipt's
+`row_layout` gives, per stratum, how many rows belong wholly to one long
+document. Lab cannot yet select or upweight long documents, so that share is
+whatever the corpus holds; if it is small, the stages mostly train long rows
+of packed short documents, and the long-context measurements below will show
+it. Copy `long-context.paths.example.yaml` to `$WORK/long-context-paths.yaml`
+and fill it in from the receipt.
+
+**Stage 2.** Set `training.parent_checkpoint` in a copy of `long-context.yaml`
+to the pretraining run directory, then:
+
+```sh
+klab config compose "$WORK/long-context.yaml" model="$R/model.yaml" \
+  attention="$R/attention.yaml" "$R/context-16k.yaml" "$WORK/paths.yaml" \
+  "$WORK/long-context-paths.yaml" --output "$WORK/stage2.yaml"
+klab inspect "$WORK/stage2.yaml"
+klab data prepare "$WORK/stage2.yaml"
+klab stage "$WORK/stage2.yaml" --runtime b70-xpu --through warmup \
   --output "$WORK/stages/long"
-klab train "$WORK/long-context.yaml" --runtime b70-xpu --run-id devmind-long-context \
+klab train "$WORK/stage2.yaml" --runtime b70-xpu --run-id devmind-long-context \
   --require-prepared --stage-bundle "$WORK/stages/long"
 ```
 
-500 million tokens on 16,384-token rows of the same mixture, about 2.5 days on
-one card at the measured 2,348 targets/s. This stage has not been run. It should
-also raise the RoPE base or apply YaRN for the longer context; Lab cannot change
-RoPE in a child stage yet
-([Lab #427](https://github.com/supernovae/model-lab/issues/427)). 32,768-token
-rows also train, with `optimizer.state_offload: true`, at 1,285 targets/s.
+About 2.5 days on one card at the measured 2,348 targets/s, less on two.
+
+**YaRN or a larger RoPE base.** Stage 2 uses YaRN. Before committing its full
+budget, compare it with a larger RoPE base (`long-context-abf.yaml`) as two
+`klab try` arms from the same pretrained parent on a shortened budget. 50
+million tokens is about 6 hours per arm on one card:
+
+```sh
+klab config derive "$WORK/stage2.yaml" --set training.max_tokens=50000000 \
+  --set training.max_steps=382 --set optimizer.decay_steps=382 \
+  --set optimizer.warmup_steps=20 --output "$WORK/stage2-short.yaml"
+klab try "$R/long-context-abf.yaml" --vs "$WORK/stage2-short.yaml"
+```
+
+Then compare the arms the way Lab's
+[context extension guide](https://github.com/supernovae/model-lab/blob/main/docs/evaluation.md#comparing-context-extensions)
+describes: held-out loss by position on a long-document panel, and
+`klab probe TRY_ID --vs BASELINE --config full` for `long_needle` retrieval at
+each length and the short-context probes that show what the extension costs.
+Train the full stage with whichever wins; it is one comparison on one seed, so
+record it as such.
+
+**Stage 3.** Copy the long-context mixture again with `row_tokens: 32768` and
+every quota halved (the shares stay the same), materialize it to its own
+output, and point a second copy of the paths file at it. Set
+`training.parent_checkpoint` in a copy of `long-context-32k.yaml` to the stage
+2 run, then compose and train as above with `"$R/context-32k.yaml"` in place of
+`context-16k.yaml` and `--run-id devmind-long-context-32k`. About 2.3 days on
+one card at the measured 1,285 targets/s; it needs optimizer state offload,
+which the stage sets.
 
 ## Chat
 
@@ -55,7 +110,8 @@ content reliably without this.
 
 ```sh
 klab config compose "$R/post-training/instruct.yaml" model="$R/model.yaml" \
-  attention="$R/attention.yaml" "$WORK/chat-paths.yaml" --output "$WORK/instruct.yaml"
+  attention="$R/attention.yaml" "$R/context-32k.yaml" "$WORK/chat-paths.yaml" \
+  --output "$WORK/instruct.yaml"
 klab data prepare "$WORK/instruct.yaml"
 klab data budget --prepared-root "$PREPARED" --config "$WORK/instruct.yaml" \
   --passes 2 --output "$WORK/instruct-budget.yaml"

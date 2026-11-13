@@ -1,0 +1,11 @@
+# The 32,768-token context: compose after model.yaml and attention.yaml for
+# stage 3 (long-context-32k.yaml) and every later stage. YaRN rescales the RoPE frequencies from the 4,096-token pretraining
+# context (factor 8 = max_seq_len / original_max_seq_len). RoPE has no
+# weights, so every tensor loads unchanged; Lab allows a child stage to change
+# only these settings and records the change as a rope_extension decision.
+model:
+  max_seq_len: 32768
+attention:
+  rope_scaling:
+    type: yarn
+    original_max_seq_len: 4096

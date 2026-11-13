@@ -1,10 +1,12 @@
-# Devmind: 729,709,856 parameters (klab inspect), 32,768-token context.
+# Devmind: 729,709,856 parameters (klab inspect). Pretrained with a
+# 4,096-token context; the long-context stages raise max_seq_len to 16,384 and
+# then 32,768 (RoPE has no weights, so the parameter count does not change).
 vocab_size: 32768
 hidden_dim: 1536
 num_layers: 28
 num_heads: 24
 ffn_dim: 4096
-max_seq_len: 32768
+max_seq_len: 4096
 rms_norm_eps: 1.0e-06
 tie_embeddings: true
 ffn: dense
