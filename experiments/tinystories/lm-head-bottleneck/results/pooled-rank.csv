@@ -1,0 +1,7 @@
+point,seeds,delta_mean,delta_se,delta_over_se,kernel_norm_fraction,kept_cosine
+"{""model.output_head_rank"": 16}",3,0.8416,0.1318,6.4,0.9993,0.037
+"{""model.output_head_rank"": 32}",3,0.3513,0.0513,6.9,0.9985,0.054
+"{""model.output_head_rank"": 64}",3,0.2289,0.0098,23.3,0.9968,0.080
+"{""model.output_head_rank"": 128}",3,0.1370,0.0087,15.8,0.9943,0.107
+"{""model.output_head_rank"": 256}",3,0.0893,0.0081,11.0,0.9914,0.131
+"{""model.output_head_rank"": 512}",3,0.0434,0.0032,13.5,0.9882,0.153

@@ -82,7 +82,6 @@ runtime:
   engine: pytorch
   backend: xpu
   device_index: 0
-  secondary_device_indices: [1]
   precision: bf16
   compile_transformer_blocks: true
   compile_output_head_loss: true

@@ -1,0 +1,4 @@
+point,label,comparable,metric,heldout_delta_mean,heldout_delta_se,verdict,parameters,tokens_seen,wall_seconds_mean,kernel_norm_fraction_mean
+0,"tokenizer.path=""../tokenizer-4k/tokenizer.json"", model.vocab_size=4096",1,bits_per_byte,0.007362267033593772,,SINGLE_SEED_HIGHER,29499904,388104192,4157.123,0.9378583051871895
+1,"tokenizer.path=""../tokenizer-8k/tokenizer.json"", model.vocab_size=8192",1,bits_per_byte,-0.0007813052081548921,,SINGLE_SEED_LOWER,33694208,388104192,1952.057,0.9675621162754673
+2,"tokenizer.path=""../tokenizer-16k/tokenizer.json"", model.vocab_size=16384",1,bits_per_byte,0.0005597262168080541,,SINGLE_SEED_HIGHER,42082816,388104192,2084.687,0.9797222776857352

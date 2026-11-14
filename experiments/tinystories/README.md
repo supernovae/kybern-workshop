@@ -218,7 +218,10 @@ held-out stories is the number to compare across tokenizers.
 ## Experiments on this model
 
 - [Is the LM head a gradient bottleneck?](lm-head-bottleneck/README.md):
-  a preregistered test of arXiv 2603.10145 at this scale.
+  a preregistered test of arXiv 2603.10145 at this scale. Done: lower-rank
+  heads train worse (a rank-16 head costs 0.84 nats, rank 256 still 0.089), as
+  does a 4,096-token vocabulary (+0.0075 bits per byte); 8k and 16k tokens match
+  32k.
 - [CPU microlab](../../examples/tinystories-microlab/README.md): the same
   experiment on CPU, about 75 minutes on 48 threads.
 
