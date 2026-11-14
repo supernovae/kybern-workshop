@@ -38,3 +38,15 @@ transforms:
 - transforms/lm.yaml
 splits: splits.yaml
 release: release.yaml
+# Acquisition runs under this durable ledger (`klab corpus budget-init`). The 44
+# Hugging Face shards cap at 42.5 GiB; 80 GiB of source bytes leaves room for
+# retries without leaving the transfer unbounded. The 15 Git sources select
+# files by pattern, so the ledger admits them without metering them.
+transport_budget:
+  attempt_id: devmind-acquire-1
+  max_source_body_bytes: 85899345920
+  max_metadata_body_bytes: 2147483648
+  max_transfers: 200
+  max_retries_per_shard: 3
+  max_wall_seconds: 604800
+  max_disk_bytes: 1099511627776

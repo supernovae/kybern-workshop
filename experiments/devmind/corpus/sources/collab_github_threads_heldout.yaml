@@ -25,7 +25,7 @@ acquisition:
   split: train
   text_field: text
   max_rows: 100000000
-  max_bytes: 549755813888
+  max_bytes: 5368709120
   bounded_shards:
   - path: gharchive-dolma-0018.json.gz
     expected_sha256: 832147ff749d5f2ed221f32fdccbd269d5cc9f02fa15547612d959106fb78d5a

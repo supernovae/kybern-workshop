@@ -24,7 +24,7 @@ acquisition:
   split: train
   text_field: text
   max_rows: 100000000
-  max_bytes: 549755813888
+  max_bytes: 23622320128
   bounded_shards:
   - path: finemath-4plus/train-00000-of-00064.parquet
     expected_sha256: 5d0b26114b4cf309c82a4ba8f6f45857480b27812e23a46b61b45e8bbed61fe5

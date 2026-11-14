@@ -118,7 +118,7 @@ Every command is a Lab command; see Lab's `AGENTS.md` and
 ### 1. Corpus
 
 ```sh
-klab --work-dir "$WORK" corpus acquire "$R/corpus/corpus.yaml" --plan
+klab --work-dir "$WORK" corpus budget-init "$R/corpus/corpus.yaml"
 klab --work-dir "$WORK" corpus acquire "$R/corpus/corpus.yaml"
 BUILD=$(klab --work-dir "$WORK" corpus build "$R/corpus/corpus.yaml" --offline)
 RELEASE=$(klab --work-dir "$WORK" corpus freeze "$BUILD")
@@ -127,9 +127,16 @@ klab corpus finalize-family-inventory "$RELEASE" \
   --splits "$R/corpus/splits.yaml" --output "$WORK/family-inventory.jsonl"
 ```
 
-`--plan` checks every declaration without the network. Acquisition downloads
-about 43 GiB of dataset shards plus fifteen git repositories, and can be run
-one source at a time with `--source-id`.
+`corpus.yaml` declares the transport budget `budget-init` starts (80 GiB of
+source bytes, 1 TiB of disk, seven days). Acquisition downloads about 43 GiB of
+dataset shards plus fifteen git repositories; the git sources select files by
+pattern, so the budget admits them without metering them. Each Hugging Face
+source's `max_bytes` is eight times its shards' compressed size, because the
+budget reserves disk for the sum of those caps. `--plan` and `--source-id`
+steps need a ledger and exact pinned transfers, so they do not apply to the
+git sources. Put `$WORK` for these steps on cold storage: the shards are read a
+few times. Run the later steps (`export`, `tokenizer`, `describe`,
+`materialize-mixture`, training) with a `--work-dir` on fast storage.
 
 **Gate: cross-split near-duplicates.** The validation sources come from shards
 no training source uses, but copied files, forked repositories and re-posted
