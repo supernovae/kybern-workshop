@@ -25,7 +25,7 @@ acquisition:
   split: train
   text_field: text
   max_rows: 100000000
-  max_bytes: 549755813888
+  max_bytes: 20401094656
   bounded_shards:
   - path: fineweb-edu-dedup/train-00233-of-00234.parquet
     expected_sha256: 224b049153c6bdb7ad02f8c2ac51999dd8512943b80526444ecf926f21f6cca9

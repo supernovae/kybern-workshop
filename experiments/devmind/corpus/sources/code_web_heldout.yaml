@@ -24,7 +24,7 @@ acquisition:
   split: train
   text_field: text
   max_rows: 100000000
-  max_bytes: 549755813888
+  max_bytes: 8589934592
   bounded_shards:
   - path: stack-edu-0064.json.gz
     expected_sha256: 13f2e20da0b77fe9c4c0549d2f82d9bf1b0abee25ad70d5b94d8394f9429a09a
