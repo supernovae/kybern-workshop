@@ -1,6 +1,6 @@
 # Devmind
 
-Devmind is a 730M-parameter decoder trained from scratch with
+Devmind is an 878M-parameter decoder (845M active per token) trained from scratch with
 [Kybern Model Lab](https://github.com/supernovae/model-lab), biased toward
 software development: Python first, then JavaScript and TypeScript, GitHub
 issues and pull requests, and reference documentation. It is meant to be a
@@ -16,7 +16,7 @@ numbers were measured and which are plans.
 
 | | |
 | --- | --- |
-| Parameters | 729,709,856 (`klab inspect`); 28 layers, width 1,536, 24 heads, feed-forward 4,096 |
+| Parameters | 878,301,824, of which 844,737,536 are active per token (`klab inspect`; the Engram tables are the difference from the 730M dense core); 28 layers, width 1,536, 24 heads, feed-forward 4,096 |
 | Context | Pretrained at 4,096 tokens, then lengthened to 16,384 and 32,768 tokens in two short stages with YaRN RoPE scaling |
 | Attention | Dense causal attention through flash SDPA, standard RoPE base during pretraining |
 | Memory | Engram n-gram tables (orders 2 and 3, two hash heads) after blocks 1 and 14, from the first update |
