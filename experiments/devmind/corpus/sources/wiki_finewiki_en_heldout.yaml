@@ -21,7 +21,7 @@ document_kinds:
 - prose
 source_family: wiki_finewiki_en_heldout
 acquisition:
-  config: enwiki
+  config: en
   split: train
   text_field: text
   max_rows: 100000000
@@ -34,7 +34,7 @@ acquisition:
     hash_modulus: 200
     hash_remainders:
     - 0
-    declared_config: enwiki
+    declared_config: en
     declared_split: train
   qualification:
     profile: web_text
