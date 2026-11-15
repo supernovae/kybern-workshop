@@ -4,6 +4,7 @@ canonical_uri: https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus
 revision: 3ba9d605774198c5868892d7a8deda78031a781f
 license: ODC-By-1.0
 license_url: https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus/blob/3ba9d605774198c5868892d7a8deda78031a781f/README.md
+explicit_training_restriction: none_found
 rights:
   training_eligibility: eligible_with_obligations
   redistribution_mode: metadata_reconstruction_only

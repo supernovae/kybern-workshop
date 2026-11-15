@@ -4,6 +4,7 @@ canonical_uri: https://huggingface.co/datasets/common-pile/stackv2_edu_filtered
 revision: c354dbe88469a1153e97c6a63ac50591849654de
 license: Per-file permissive licenses (Blue Oak approved); no dataset-level license
 license_url: https://huggingface.co/datasets/common-pile/stackv2_edu_filtered/blob/c354dbe88469a1153e97c6a63ac50591849654de/README.md
+explicit_training_restriction: none_found
 rights:
   training_eligibility: eligible_with_obligations
   redistribution_mode: metadata_reconstruction_only
@@ -12,9 +13,9 @@ rights:
   - https://huggingface.co/datasets/common-pile/stackv2_edu_filtered/blob/c354dbe88469a1153e97c6a63ac50591849654de/README.md
   notices:
   - Per-file licenses are recorded in metadata.license; keep attribution for every repository used.
-  - License detection upstream can be wrong; rows with unmapped or combined labels are quarantined.
+  - Rows keep the upstream license label as attribution; the build does not re-judge it.
 domains:
-- code
+- python
 document_kinds:
 - code
 source_family: code_python

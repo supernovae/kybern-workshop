@@ -4,6 +4,7 @@ canonical_uri: https://github.com/github/docs
 revision: 6d56af0c8b62bde11bb3d9df46244fab5f0a00f9
 license: CC-BY-4.0
 license_url: https://github.com/github/docs/blob/6d56af0c8b62bde11bb3d9df46244fab5f0a00f9/LICENSE
+explicit_training_restriction: none_found
 rights:
   training_eligibility: eligible_with_obligations
   redistribution_mode: metadata_reconstruction_only

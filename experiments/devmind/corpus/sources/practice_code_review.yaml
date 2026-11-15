@@ -4,6 +4,7 @@ canonical_uri: https://github.com/google/eng-practices
 revision: 3bb3ec25b3b0199f4940b1aa75f0ac5c5753301c
 license: CC-BY-3.0
 license_url: https://github.com/google/eng-practices/blob/3bb3ec25b3b0199f4940b1aa75f0ac5c5753301c/LICENSE
+explicit_training_restriction: none_found
 rights:
   training_eligibility: eligible_with_obligations
   redistribution_mode: metadata_reconstruction_only

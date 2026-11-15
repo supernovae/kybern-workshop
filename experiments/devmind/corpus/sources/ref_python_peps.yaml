@@ -4,6 +4,7 @@ canonical_uri: https://github.com/python/peps
 revision: 155e5bee7d985ef30555b496eb994d24a591f70b
 license: Public domain or CC0-1.0 per PEP
 license_url: https://github.com/python/peps/blob/155e5bee7d985ef30555b496eb994d24a591f70b/peps/pep-0001.rst
+explicit_training_restriction: none_found
 rights:
   training_eligibility: eligible_with_obligations
   redistribution_mode: metadata_reconstruction_only

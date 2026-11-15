@@ -11,7 +11,7 @@ policy:
     markdown_kind: first_declared
     row_files: buffered
   rights:
-    training_use: explicit_eligibility_required
+    training_use: allowed_unless_explicitly_prohibited
   build:
     strategy: disk
 mixture:
