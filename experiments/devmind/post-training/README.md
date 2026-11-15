@@ -15,7 +15,8 @@ each from the one before: 500 million tokens at 16,384 (stage 2) and 250
 million at 32,768 (stage 3). Neither has been run.
 
 **Data.** Copy `corpus/long-context-mixture.template.yaml`, fill its four
-`${...}` values as for the pretraining mixture, and materialize it:
+`${...}` values as for the pretraining mixture (the same family inventory file;
+`derive-family-inventory` has already written it), and materialize it:
 
 ```sh
 klab corpus materialize-mixture "$WORK/long-context-mixture.yaml" \
