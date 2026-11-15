@@ -137,9 +137,11 @@ klab --work-dir "$WORK" corpus acquire "$R/corpus/corpus.yaml"
 BUILD=$(klab --work-dir "$WORK" corpus build "$R/corpus/corpus.yaml" --offline)
 RELEASE=$(klab --work-dir "$WORK" corpus freeze "$BUILD")
 klab corpus audit "$RELEASE"
-klab corpus finalize-family-inventory "$RELEASE" \
-  --splits "$R/corpus/splits.yaml" --output "$WORK/family-inventory.jsonl"
 ```
+
+Read the per-source table in `$BUILD/report.md` before going on: every source
+should have retained documents, and any source that lost files to a rights
+decision shows why.
 
 `corpus.yaml` declares the transport budget `budget-init` starts (80 GiB of
 source bytes, 1 TiB of disk, seven days). Acquisition downloads about 43 GiB of
@@ -191,7 +193,11 @@ klab --work-dir "$WORK" corpus near-duplicates "$RELEASE" \
 ```
 
 Copy the report's `coverage`, `candidate_count` and `identical_text_count`
-into the record and decide every pair. If `candidates_truncated` is true, the
+into the record and decide every pair. `klab preflight` reads the same
+decisions as a machine-checkable file, `$WORK/near-duplicate-decisions.yaml`
+(format in Lab's [corpus preparation](https://github.com/supernovae/model-lab/blob/main/docs/corpus-preparation.md)):
+it names the report by the SHA-256 of `near-duplicates.json` and lists a
+decision for every reported pair. If `candidates_truncated` is true, the
 report lists only the first `--max-candidates` pairs (default 20,000): rerun
 with that raised until every pair is listed. Do not start pretraining on an
 empty or unfilled record.
@@ -233,12 +239,25 @@ klab config compose "$R/pretrain.yaml" model="$R/model.yaml" \
   attention="$R/attention.yaml" optimizer="$R/optimizer.yaml" \
   "$WORK/paths.yaml" --output "$WORK/pretrain.yaml"
 klab inspect "$WORK/pretrain.yaml"
-klab data prepare "$WORK/pretrain.yaml"
+PREPARED=$(klab data prepare "$WORK/pretrain.yaml")  # prints the published root
+klab data engram-sizing "$PREPARED" --config "$WORK/pretrain.yaml" \
+  --target-tokens 12000000000 --output "$WORK/engram-sizing.json"
 klab stage "$WORK/pretrain.yaml" --runtime b70-xpu --through warmup \
   --output "$WORK/stages/pretrain"
+klab preflight "$WORK/pretrain.yaml" --output "$WORK/preflight" \
+  --stage-bundle "$WORK/stages/pretrain" --recipe "$R" \
+  --near-duplicates "$WORK/near-duplicates.json" \
+  --near-duplicate-decisions "$WORK/near-duplicate-decisions.yaml" \
+  --engram-sizing "$WORK/engram-sizing.json"
 klab train "$WORK/pretrain.yaml" --runtime b70-xpu --run-id devmind-pretrain \
-  --require-prepared --stage-bundle "$WORK/stages/pretrain"
+  --require-prepared --stage-bundle "$WORK/stages/pretrain" \
+  --preflight "$WORK"/preflight/preflight-*.json
 ```
+
+`klab preflight` ([Lab's playbook](https://github.com/supernovae/model-lab/blob/main/docs/pretraining-preflight.md))
+exits non-zero on any FAIL and `klab train` refuses a pretraining run without
+its report. Read every WARN before starting; commit and merge the recipe and
+Lab first, since a dirty or unmerged tree is a WARN.
 
 `pretrain.yaml` trains on cards 0 and 1. Do not set `ZE_AFFINITY_MASK`
 yourself: Lab confines each of its processes to its own card, and a mask you
