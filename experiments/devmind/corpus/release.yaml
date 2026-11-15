@@ -6,7 +6,7 @@ policy:
     resolution: chain_smallest_id
     rights_conflict: error
   documents:
-    empty_text: error
+    empty_text: skip
     exclusions: none
     markdown_kind: first_declared
     row_files: buffered
