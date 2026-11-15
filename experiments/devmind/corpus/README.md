@@ -11,7 +11,7 @@ dataset cards and file sizes.
 | Stratum | Share | Tokens | Sources |
 | --- | --- | --- | --- |
 | `web` | 32.95% | 3.954B | FineWeb-Edu (deduplicated), 5 shards |
-| `python` | 18% | 2.16B | Stack-Edu, permissive licenses only, Python shards |
+| `python` | 18% | 2.16B | Stack-Edu (Common Pile, openly licensed), Python shards |
 | `web_code` | 12% | 1.44B | Stack-Edu JavaScript and TypeScript shards |
 | `collaboration` | 12% | 1.44B | GitHub issues and pull-request threads |
 | `math` | 8% | 0.96B | FineMath 4+ |
@@ -34,8 +34,9 @@ uses, and go to the validation split.
   Stack-Edu for openly licensed repositories, with a license, repository and
   path on every row. Its shards are sorted by language, which is how the Python
   (73 to 84), JavaScript (50 to 64) and TypeScript (91 to 94) shards are chosen.
-  Rows with a license outside MIT, Apache-2.0, BSD and ISC, or with several
-  licenses, are set aside by Lab's code qualification. Many rows have an
+  The Common Pile selected the openly licensed repositories upstream, and the
+  build keeps each row's license label as attribution without re-judging it.
+  Only an explicit AI-training prohibition would exclude a source. Many rows have an
   educational score of 2 (most of the first rows of one JavaScript shard);
   Lab cannot filter on that field yet.
 - **Issues and pull requests:** `common-pile/github_archive_filtered` has a

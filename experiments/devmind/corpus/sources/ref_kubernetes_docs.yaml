@@ -4,6 +4,7 @@ canonical_uri: https://github.com/kubernetes/website
 revision: 2674d5095a50d781d2f884c83973921f48c5cf28
 license: CC-BY-4.0
 license_url: https://github.com/kubernetes/website/blob/2674d5095a50d781d2f884c83973921f48c5cf28/LICENSE
+explicit_training_restriction: none_found
 rights:
   training_eligibility: eligible_with_obligations
   redistribution_mode: metadata_reconstruction_only

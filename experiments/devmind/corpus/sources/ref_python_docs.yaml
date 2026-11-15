@@ -4,6 +4,7 @@ canonical_uri: https://github.com/python/cpython
 revision: 78a70f862e3b7f28c62bd9352af83920678f399a
 license: PSF-2.0
 license_url: https://github.com/python/cpython/blob/78a70f862e3b7f28c62bd9352af83920678f399a/LICENSE
+explicit_training_restriction: none_found
 rights:
   training_eligibility: eligible_with_obligations
   redistribution_mode: metadata_reconstruction_only

@@ -4,6 +4,7 @@ canonical_uri: https://github.com/tldr-pages/tldr
 revision: d9e8a200ecf6621ac9b3941b031f0a1a675542e2
 license: CC-BY-4.0
 license_url: https://github.com/tldr-pages/tldr/blob/d9e8a200ecf6621ac9b3941b031f0a1a675542e2/LICENSE.md
+explicit_training_restriction: none_found
 rights:
   training_eligibility: eligible_with_obligations
   redistribution_mode: metadata_reconstruction_only

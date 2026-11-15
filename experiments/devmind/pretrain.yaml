@@ -32,13 +32,14 @@ runtime:
   engine: pytorch
   backend: xpu
   device_index: 0
-  # Two B70s. Lab runs the second card in its own process and confines each
-  # process to its card, so device memory is not also held in host RAM.
+  # Four B70s. Lab runs each secondary card in its own process and confines
+  # each process to its card, so device memory is not also held in host RAM.
   # Microbatches are split between the cards; gradients are summed on card 0
-  # in a fixed order, so an update is the same as on one card. Measured:
-  # 12,682 targets/s on both cards against 6,773 on card 0 alone, which also
-  # drives the desktop. With four cards, list [1, 2, 3].
-  secondary_device_indices: [1]
+  # in a fixed order, so an update is the same as on one card. Measured on two
+  # cards (earlier smaller Engram tables): 12,682 targets/s against 6,773 on
+  # card 0 alone, which also drives the desktop. The four-card rate is
+  # measured by the first warmup.
+  secondary_device_indices: [1, 2, 3]
   precision: bf16
   compile_transformer_blocks: true
   compile_output_head_loss: true
