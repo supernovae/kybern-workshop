@@ -1,4 +1,3 @@
-schema_version: 2
 id: practice_engineering_playbook
 kind: git
 canonical_uri: https://github.com/microsoft/code-with-engineering-playbook
