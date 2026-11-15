@@ -1,4 +1,3 @@
-schema_version: 2
 id: ref_rust_book
 kind: git
 canonical_uri: https://github.com/rust-lang/book

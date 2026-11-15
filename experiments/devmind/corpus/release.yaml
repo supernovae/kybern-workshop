@@ -1,5 +1,19 @@
-schema_version: 2
 publication_mode: metadata_reconstruction_only
+policy:
+  duplicates:
+    heldout_overlap: drop_train_copy
+    keys: [raw, normalized]
+    resolution: chain_smallest_id
+    rights_conflict: error
+  documents:
+    empty_text: error
+    exclusions: none
+    markdown_kind: first_declared
+    row_files: buffered
+  rights:
+    training_use: explicit_eligibility_required
+  build:
+    strategy: disk
 mixture:
   web: 0.3295
   wiki: 0.06

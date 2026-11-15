@@ -117,6 +117,17 @@ Every command is a Lab command; see Lab's `AGENTS.md` and
 
 ### 1. Corpus
 
+`corpus/release.yaml` declares the build behaviour as named options under
+`policy` (Lab `docs/corpus-preparation.md`, "Release policy"): held-out text that
+a train document duplicates keeps the held-out copy and drops the train copy
+(`heldout_overlap: drop_train_copy`); duplicates are found on raw and normalized
+text, chained to the smallest document id, and an incompatible-rights duplicate
+fails the build; the bounded-memory builder is always used
+(`build.strategy: disk`). `documents.exclusions` is `none`: the privacy screen
+(secrets and private identifiers, disallowed platform mirrors, unknown page
+provenance) is available as `research_privacy` but is not applied to this
+recipe yet.
+
 ```sh
 klab --work-dir "$WORK" corpus budget-init "$R/corpus/corpus.yaml"
 klab --work-dir "$WORK" corpus acquire "$R/corpus/corpus.yaml"

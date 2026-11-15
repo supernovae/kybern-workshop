@@ -1,4 +1,3 @@
-schema_version: 2
 id: ref_github_docs
 kind: git
 canonical_uri: https://github.com/github/docs

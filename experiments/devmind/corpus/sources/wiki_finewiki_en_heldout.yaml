@@ -1,4 +1,3 @@
-schema_version: 2
 id: wiki_finewiki_en_heldout
 kind: huggingface_dataset
 canonical_uri: https://huggingface.co/datasets/HuggingFaceFW/finewiki
