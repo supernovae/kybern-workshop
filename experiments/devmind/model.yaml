@@ -12,7 +12,6 @@ tie_embeddings: true
 ffn: dense
 # Engram n-gram memory, present from the first update, after blocks 1 and 14.
 memory: ngram
-memory_variant: context_key
 memory_injection: after_block
 memory_block_indices: [1, 14]
 memory_ngram_size: 3
