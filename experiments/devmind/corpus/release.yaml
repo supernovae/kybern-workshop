@@ -34,4 +34,7 @@ chat:
   selected: false
   training_splits: []
 keep_nonredistributable_local: true
-normalizer: normalizer-structure-v3
+normalizer:
+  structure_cleaning: true
+  front_matter_extra_keys: {}
+  gutenberg_boilerplate: []
