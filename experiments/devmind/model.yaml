@@ -1,4 +1,4 @@
-# Devmind: 878,301,824 parameters, 844,737,536 active per token (klab inspect). Pretrained with a
+# Devmind: 1,046,080,128 parameters (201,343,104 in the Engram tables), 844,737,536 active per token (klab inspect). Pretrained with a
 # 4,096-token context; the long-context stages raise max_seq_len to 16,384 and
 # then 32,768 (RoPE has no weights, so the parameter count does not change).
 vocab_size: 32768
@@ -11,6 +11,9 @@ rms_norm_eps: 1.0e-06
 tie_embeddings: true
 ffn: dense
 # Engram n-gram memory, present from the first update, after blocks 1 and 14.
+# Table sizes are distinct primes: order 2 at about 262k rows and order 3 at about 524k rows
+# per head (`klab data engram-sizing` measures collisions; rerun it on the real tokens
+# after tokenizer training and adjust before the first update).
 memory: ngram
 memory_variant: context_key
 memory_injection: after_block
@@ -21,7 +24,7 @@ memory_hash_heads: 2
 memory_dim: 64
 memory_conv_kernel_size: 4
 memory_hash_seed: 42
-memory_table_size: 65537
-memory_table_sizes: [65537, 65539, 65543, 65551, 65557, 65563, 65579, 65581]
+memory_table_size: 262147
+memory_table_sizes: [262147, 262151, 524309, 524341, 262153, 262187, 524347, 524351]
 memory_padding_token_id: 3
 memory_independent_init: true

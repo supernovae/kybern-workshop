@@ -1,6 +1,6 @@
 # Devmind
 
-Devmind is an 878M-parameter decoder (845M active per token) trained from scratch with
+Devmind is a 1.05B-parameter decoder (845M active per token; 201M of the parameters are Engram table rows) trained from scratch with
 [Kybern Model Lab](https://github.com/supernovae/model-lab), biased toward
 software development: Python first, then JavaScript and TypeScript, GitHub
 issues and pull requests, and reference documentation. It is meant to be a
@@ -16,7 +16,7 @@ numbers were measured and which are plans.
 
 | | |
 | --- | --- |
-| Parameters | 878,301,824, of which 844,737,536 are active per token (`klab inspect`; the Engram tables are the difference from the 730M dense core); 28 layers, width 1,536, 24 heads, feed-forward 4,096 |
+| Parameters | 1,046,080,128, of which 844,737,536 are active per token (`klab inspect`; the 201,343,104 Engram table parameters and the memory adapters are the difference from the 730M dense core); 28 layers, width 1,536, 24 heads, feed-forward 4,096 |
 | Context | Pretrained at 4,096 tokens, then lengthened to 16,384 and 32,768 tokens in two short stages with YaRN RoPE scaling |
 | Attention | Dense causal attention through flash SDPA, standard RoPE base during pretraining |
 | Memory | Engram n-gram tables (orders 2 and 3, two hash heads) after blocks 1 and 14, from the first update |
@@ -102,8 +102,11 @@ What that means for the plan:
   parameters roughly halves the speed, and the card has little room left at
   4,096-token rows without recomputation.
 
-Lab's memory planner estimates 31.9 GiB for the pretraining config, against
-the 23.1 GiB measured, and would refuse it, so `pretrain.yaml` sets
+The measurements above were taken with the earlier, smaller Engram tables
+(65,537 rows). The larger tables add about 2.7 GiB of weights, gradients and
+optimizer state (an estimate; the first warmup measures it). Lab's memory planner
+estimates 35.1 GiB for the pretraining config, against the 23.1 GiB measured
+before the enlargement, and would refuse it, so `pretrain.yaml` sets
 `runtime.memory.estimate_policy: observe`. Keep the spill guard on (the
 default): a run that outgrows the card on XPU slows to a stop instead of
 failing, and the guard stops it.
