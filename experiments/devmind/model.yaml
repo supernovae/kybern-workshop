@@ -15,7 +15,6 @@ ffn: dense
 # per head (`klab data engram-sizing` measures collisions; rerun it on the real tokens
 # after tokenizer training and adjust before the first update).
 memory: ngram
-memory_variant: context_key
 memory_injection: after_block
 memory_block_indices: [1, 14]
 memory_ngram_size: 3
