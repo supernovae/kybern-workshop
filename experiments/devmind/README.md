@@ -137,8 +137,6 @@ klab --work-dir "$WORK" corpus acquire "$R/corpus/corpus.yaml"
 BUILD=$(klab --work-dir "$WORK" corpus build "$R/corpus/corpus.yaml" --offline)
 RELEASE=$(klab --work-dir "$WORK" corpus freeze "$BUILD")
 klab corpus audit "$RELEASE"
-klab corpus finalize-family-inventory "$RELEASE" \
-  --splits "$R/corpus/splits.yaml" --output "$WORK/family-inventory.jsonl"
 ```
 
 `corpus.yaml` declares the transport budget `budget-init` starts (80 GiB of
@@ -219,12 +217,23 @@ klab corpus describe "$RELEASE" --tokenizer "$WORK/tokenizer/tokenizer.json"
 stratum is short, lower its quota and its weight in `corpus/release.yaml`
 together (they must agree), and give the difference to `web`.
 
-Fill the four `${...}` values in a copy of `corpus/mixture.template.yaml`, then:
+Fill the four `${...}` values in a copy of `corpus/mixture.template.yaml`
+(`FAMILY_INVENTORY` is where the next command writes the inventory, for example
+`$WORK/family-inventory.jsonl`), then:
 
 ```sh
+klab corpus derive-family-inventory "$WORK/mixture.yaml"
 klab corpus materialize-mixture "$WORK/mixture.yaml" --output "$WORK/mixture"
 klab corpus verify-mixture "$WORK/mixture.yaml" --output "$WORK/mixture"
 ```
+
+`splits.yaml` assigns whole sources to splits and no reviewed split freeze is
+run, so `finalize-family-inventory` does not apply; `derive-family-inventory`
+writes the inventory with each source as one family. The mixture still ranks
+documents, not families, so a stratum of several sources is drawn across all of
+them. It needs each source's `domains` to name its mixture stratum, which the
+`python`, `web_code` and `systems_code` sources now do. The long-context mixtures
+reuse the same inventory file.
 
 ### 3. Pretrain
 

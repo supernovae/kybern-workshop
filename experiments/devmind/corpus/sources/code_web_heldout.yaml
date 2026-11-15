@@ -14,7 +14,7 @@ rights:
   - Per-file licenses are recorded in metadata.license; keep attribution for every repository used.
   - License detection upstream can be wrong; rows with unmapped or combined labels are quarantined.
 domains:
-- code
+- web_code
 document_kinds:
 - code
 source_family: code_web_heldout
