@@ -6,8 +6,9 @@ seed: 42
 training:
   # One 4,096-token row per microbatch, 32 per update (131,072 targets), 16
   # on each card. Measured on one B70 with compiled blocks and no
-  # recomputation: 8,076 targets/s at a 23.1 GiB peak. 8,192-token rows fit too (28.6 GiB, 89% of
-  # the card) but run at 5,493 targets/s.
+  # recomputation: 8,076 targets/s at a 23.1 GiB peak, taken with the earlier 65k-row Engram tables;
+  # the larger tables add about 2.7 GiB and the first warmup re-measures both numbers. 8,192-token
+  # rows fit then too (28.6 GiB) but ran at 5,493 targets/s.
   seq_len: 4096
   micro_batch_size: 1
   gradient_accumulation: 32
@@ -42,8 +43,9 @@ runtime:
   compile_transformer_blocks: true
   compile_output_head_loss: true
   memory:
-    # Lab's planner estimates 31.9 GiB for this config, above its ceiling;
-    # the measured peak is 23.1 GiB. Observe the estimate instead of refusing;
+    # Lab's planner estimates 35.1 GiB for this config, above its ceiling;
+    # the measured peak was 23.1 GiB with the earlier, smaller Engram tables.
+    # Observe the estimate instead of refusing;
     # the spill guard (on by default) stops the run if the card really fills.
     estimate_policy: observe
 staging:
