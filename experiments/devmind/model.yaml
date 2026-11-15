@@ -20,7 +20,6 @@ memory_ngram_orders: [2, 3]
 memory_hash_heads: 2
 memory_dim: 64
 memory_conv_kernel_size: 4
-memory_addressing: prime_xor_v1
 memory_hash_seed: 42
 memory_table_size: 65537
 memory_table_sizes: [65537, 65539, 65543, 65551, 65557, 65563, 65579, 65581]
