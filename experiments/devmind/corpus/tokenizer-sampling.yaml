@@ -44,5 +44,8 @@ byte_weights:
   reference: 2
   practice: 1
 max_fit_bytes: 536870912
+# Documents are taken in order of a hash of (seed, content digest) within each
+# stratum. Changing the seed or the sampling means fitting the tokenizer again.
+seed: 20260101
 audit_documents_per_stratum: 1000
 max_audit_bytes: 67108864
