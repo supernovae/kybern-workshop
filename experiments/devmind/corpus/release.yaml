@@ -14,8 +14,11 @@ policy:
     training_use: allowed_unless_explicitly_prohibited
   build:
     strategy: disk
+  mixture:
+    total_tokens: 12000000000
+    max_exposures: 2
 mixture:
-  web: 0.3298
+  web: 0.3453
   wiki: 0.06
   python: 0.18
   web_code: 0.12
@@ -23,7 +26,7 @@ mixture:
   collaboration: 0.12
   notebooks: 0.03
   math: 0.08
-  reference: 0.02
+  reference: 0.0045
   practice: 0.0002
 lm:
   selected: true
