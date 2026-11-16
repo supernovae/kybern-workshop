@@ -226,14 +226,17 @@ the BPE fit itself.
 
 ```sh
 klab tokenizer train "$WORK/tokenizer.yaml"
-klab corpus describe "$RELEASE" --tokenizer "$WORK/tokenizer/tokenizer.json"
+klab corpus describe "$RELEASE" --tokenizer "$WORK/tokenizer/tokenizer.json" \
+  --mixture "$R/corpus/mixture.template.yaml"
 ```
 
-`describe` reports real token counts per source. Compare them with the quotas in
-`corpus/mixture.template.yaml` before going on: the quotas for `reference` and
-`practice` are guesses about how much text those repositories hold. If a
-stratum is short, lower its quota and its weight in `corpus/release.yaml`
-together (they must agree), and give the difference to `web`.
+`describe` reports real token counts per source and, with `--mixture`, refuses a
+stratum whose quota the release cannot supply (unique tokens times
+`max_exposures`). Treat it as the gate before going on. `freeze` already
+refuses a build whose bytes cannot reach a quota at a conservative 3 bytes per
+token, but only the tokenizer count is exact. If a stratum is short, lower its
+quota and its weight in `corpus/release.yaml` together (they must agree), give
+the difference to `web`, and rebuild the release.
 
 Fill the four `${...}` values in a copy of `corpus/mixture.template.yaml`
 (`FAMILY_INVENTORY` is where the next command writes the inventory, for example
