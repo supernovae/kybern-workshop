@@ -15,7 +15,7 @@ policy:
   build:
     strategy: disk
 mixture:
-  web: 0.3295
+  web: 0.3298
   wiki: 0.06
   python: 0.18
   web_code: 0.12
@@ -24,7 +24,7 @@ mixture:
   notebooks: 0.03
   math: 0.08
   reference: 0.02
-  practice: 0.0005
+  practice: 0.0002
 lm:
   selected: true
   training_splits:

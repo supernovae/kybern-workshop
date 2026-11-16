@@ -37,7 +37,7 @@ source_strata:
   practice_engineering_playbook: practice
   practice_code_review: practice
 target_quotas:
-  web: 3954000000
+  web: 3957600000
   wiki: 720000000
   python: 2160000000
   web_code: 1440000000
@@ -46,7 +46,7 @@ target_quotas:
   notebooks: 360000000
   math: 960000000
   reference: 240000000
-  practice: 6000000
+  practice: 2400000
 seed: 42
 max_exposures: 2
 tokenizer_origin_release_id: ${RELEASE_ID}

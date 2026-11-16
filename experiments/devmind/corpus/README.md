@@ -10,7 +10,7 @@ dataset cards and file sizes.
 
 | Stratum | Share | Tokens | Sources |
 | --- | --- | --- | --- |
-| `web` | 32.95% | 3.954B | FineWeb-Edu (deduplicated), 5 shards |
+| `web` | 32.98% | 3.958B | FineWeb-Edu (deduplicated), 5 shards |
 | `python` | 18% | 2.16B | Stack-Edu (Common Pile, openly licensed), Python shards |
 | `web_code` | 12% | 1.44B | Stack-Edu JavaScript and TypeScript shards |
 | `collaboration` | 12% | 1.44B | GitHub issues and pull-request threads |
@@ -19,7 +19,7 @@ dataset cards and file sizes.
 | `wiki` | 6% | 0.72B | FineWiki English |
 | `notebooks` | 3% | 0.36B | Kaggle notebooks |
 | `reference` | 2% | 0.24B | Python docs and PEPs, Node.js API, MDN, TypeScript handbook, React, Express, Kubernetes, GitHub docs, the Rust book, tldr pages |
-| `practice` | 0.05% | 6M | OWASP cheat sheets and testing guide, Microsoft's engineering playbook, Google's code review guide |
+| `practice` | 0.02% | 2.4M | OWASP cheat sheets and testing guide, Microsoft's engineering playbook, Google's code review guide |
 
 About 48% code and collaboration, 39% prose, 8% math, 2% reference. The mixture
 allows a document to be used twice (`max_exposures: 2`), which only the small
