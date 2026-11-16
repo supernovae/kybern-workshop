@@ -4,7 +4,7 @@ policy:
     heldout_overlap: drop_train_copy
     keys: [raw, normalized]
     resolution: chain_smallest_id
-    rights_conflict: error
+    rights_conflict: allow
   documents:
     empty_text: skip
     exclusions: none
