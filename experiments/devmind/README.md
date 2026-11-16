@@ -214,6 +214,16 @@ the copy: `chat_template: chatml`, and the contents of
 `corpus/tokenizer-sampling.yaml` under `sampling:`. The template makes
 `<|im_start|>` and `<|im_end|>` single tokens before any chat data exists.
 
+The sampling chooses each stratum's documents by a seeded hash (`seed`), not
+from the start of the release, so the vocabulary does not favour whichever
+sources come first. Any change to `corpus/tokenizer-sampling.yaml` (seed,
+weights, quota) or to the release means fitting the tokenizer again, and a
+tokenizer fitted before `seed` existed does not verify. Pass `--workers 12` and
+`--scratch-dir` to `klab tokenizer train`; the fit then reuses stored shards for
+its replay and audit. On a synthetic 12 GB release the selection took 52 s on
+one worker and 13 s on 12; the 188 GB release is projected at a few minutes plus
+the BPE fit itself.
+
 ```sh
 klab tokenizer train "$WORK/tokenizer.yaml"
 klab corpus describe "$RELEASE" --tokenizer "$WORK/tokenizer/tokenizer.json"
