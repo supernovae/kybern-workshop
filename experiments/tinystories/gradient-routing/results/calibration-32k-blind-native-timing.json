@@ -1,0 +1,1419 @@
+{
+  "arms": {
+    "c0": {
+      "clock_anchor": {
+        "boottime_minus_monotonic_s": -6.200280040502548e-07,
+        "owned_start_monotonic_s": 609095.97000062,
+        "owned_start_ticks": 60909597,
+        "resolution_s": 0.01,
+        "tick_hz": 100,
+        "train_start_monotonic_s": 609102.22000062,
+        "train_start_ticks": 60910222
+      },
+      "condition": "C0",
+      "monotonic_phase_marks": [
+        {
+          "committed_training_targets": 0,
+          "event": "started",
+          "monotonic_s": 609274.859334195,
+          "observed_utc": "2026-11-18T16:33:48.121+00:00",
+          "phase": "training",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 0
+        },
+        {
+          "committed_training_targets": 0,
+          "event": "started",
+          "monotonic_s": 609274.885851204,
+          "observed_utc": "2026-11-18T16:33:48.147+00:00",
+          "phase": "validation",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 0
+        },
+        {
+          "committed_training_targets": 0,
+          "event": "finished",
+          "monotonic_s": 609278.843514712,
+          "observed_utc": "2026-11-18T16:33:52.105+00:00",
+          "phase": "validation",
+          "phase_elapsed_s": 3.9576635078992695,
+          "state": "COMPLETE",
+          "step": 0,
+          "validation_batches": 64
+        },
+        {
+          "committed_training_targets": 0,
+          "event": "started",
+          "monotonic_s": 609278.870290033,
+          "observed_utc": "2026-11-18T16:33:52.132+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 0
+        },
+        {
+          "committed_training_targets": 0,
+          "event": "finished",
+          "monotonic_s": 609279.104455598,
+          "observed_utc": "2026-11-18T16:33:52.366+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.23416556499432772,
+          "state": "COMPLETE",
+          "step": 0
+        },
+        {
+          "committed_training_targets": 131072,
+          "event": "started",
+          "monotonic_s": 609282.330511598,
+          "observed_utc": "2026-11-18T16:33:55.592+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 1
+        },
+        {
+          "committed_training_targets": 131072,
+          "event": "finished",
+          "monotonic_s": 609283.062217081,
+          "observed_utc": "2026-11-18T16:33:56.324+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.731705482932739,
+          "state": "COMPLETE",
+          "step": 1
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "started",
+          "monotonic_s": 609342.463458,
+          "observed_utc": "2026-11-18T16:34:55.725+00:00",
+          "phase": "validation",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 40
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "finished",
+          "monotonic_s": 609345.539210486,
+          "observed_utc": "2026-11-18T16:34:58.801+00:00",
+          "phase": "validation",
+          "phase_elapsed_s": 3.0757524860091507,
+          "state": "COMPLETE",
+          "step": 40,
+          "validation_batches": 64
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "started",
+          "monotonic_s": 609345.570680942,
+          "observed_utc": "2026-11-18T16:34:58.832+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 40
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "finished",
+          "monotonic_s": 609348.781473056,
+          "observed_utc": "2026-11-18T16:35:02.043+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 3.210792113910429,
+          "state": "COMPLETE",
+          "step": 40
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "finished",
+          "monotonic_s": 609348.862373254,
+          "observed_utc": "2026-11-18T16:35:02.124+00:00",
+          "phase": "training",
+          "phase_elapsed_s": 74.00303905899636,
+          "state": "INTERRUPTED",
+          "step": 40
+        }
+      ],
+      "native_final_phases": {
+        "batch_assembly": {
+          "availability": "observed",
+          "observation_count": 40,
+          "seconds": 0.18132932169828564
+        },
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 3,
+          "seconds": 4.174419519025832
+        },
+        "checkpoint_background": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 3.771731585962698
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 40,
+          "seconds": 61.54382764000911
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.0005437540821731091
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 137.90956075291615
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 130,
+          "seconds": 0.8857368376338854
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "observation_count": null,
+          "seconds": 11.297541250823997
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 7.027453086921014
+        }
+      },
+      "native_operation_end_to_end_s": 223.02041216311045,
+      "native_timed_events": [
+        {
+          "batches": 64,
+          "committed_training_targets": 0,
+          "kind": "validation_completed",
+          "native_trainer_elapsed_s": 3.9843275259481743,
+          "step": 0,
+          "valid_development_targets": 1048576
+        },
+        {
+          "committed_training_targets": 0,
+          "kind": "checkpoint_saved",
+          "native_trainer_elapsed_s": 7.443687638035044,
+          "step": 0
+        },
+        {
+          "committed_training_targets": 131072,
+          "kind": "checkpoint_saved",
+          "native_trainer_elapsed_s": 11.366279579000548,
+          "step": 1
+        },
+        {
+          "batches": 64,
+          "committed_training_targets": 5242880,
+          "kind": "validation_completed",
+          "native_trainer_elapsed_s": 70.68002890003845,
+          "step": 40,
+          "valid_development_targets": 1048576
+        },
+        {
+          "committed_training_targets": 5242880,
+          "kind": "checkpoint_saved",
+          "native_trainer_elapsed_s": 73.94273691193666,
+          "step": 40
+        }
+      ],
+      "native_training_loop_elapsed_s": 73.98973092902452,
+      "owned_arm_monitor_elapsed_s": 256.23205144901294,
+      "quote_terms": {
+        "checkpoint_foreground_spans_s": {
+          "0": 0.23416556499432772,
+          "1": 0.731705482932739,
+          "40": 3.210792113910429
+        },
+        "checkpoint_wait_outside_reported_spans_s": 0,
+        "cold_before_initial_validation_s": 178.91585058404598,
+        "first_eight_plus_residual_s": 14.080798173090443,
+        "inter_update_9_through_40": {
+          "8_step_means_s": [
+            1.513929938126239,
+            1.5383155427407473,
+            1.5139337071304908,
+            1.5205522208707407
+          ],
+          "p90_nearest_rank_s": 1.533231109031476,
+          "selected_s": 1.5383155427407473,
+          "sum_s": 48.69385127094574
+        },
+        "monitor_boundary_and_cleanup_tail_s": 3.3396788149839267,
+        "non_optimizer_residual_9_through_40": {
+          "8_step_means_s": [
+            0.02540719322860241,
+            0.022745829861378297,
+            0.026195046535576694,
+            0.023575555853312835
+          ],
+          "p90_nearest_rank_s": 0.028971559018827975,
+          "selected_s": 0.028971559018827975,
+          "sum_s": 0.7833890038309619
+        },
+        "optimizer_only_9_through_40": {
+          "8_step_means_s": [
+            1.4885227448976366,
+            1.515569712879369,
+            1.487738660594914,
+            1.4969766650174279
+          ],
+          "p90_nearest_rank_s": 1.5125047100009397,
+          "selected_s": 1.515569712879369,
+          "sum_s": 47.91046226711478
+        },
+        "per_checkpoint_s": 3.210792113910429,
+        "per_inline_validation_s": 3.9576635078992695,
+        "setup_plus_first_eight_excess_s": 184.02980323019437,
+        "validation_foreground_spans_s": {
+          "0": 3.9576635078992695,
+          "40": 3.0757524860091507
+        }
+      },
+      "quotes": {
+        "2961": {
+          "extra_completion_or_diagnostic_time_measured_s": null,
+          "horizon": 2961,
+          "max_extra_unpadded_s_before_next_bucket": 8.598071179818362,
+          "padded_trainer_only_s": 5989.252411025227,
+          "planned_inline_eval_count": 10,
+          "planned_save_count": 4,
+          "planned_targets_per_arm": 388104192,
+          "rounded_trainer_only_s": 6000,
+          "unpadded_trainer_only_s": 4791.401928820182
+        },
+        "512": {
+          "extra_completion_or_diagnostic_time_measured_s": null,
+          "horizon": 512,
+          "max_extra_unpadded_s_before_next_bucket": 210.05806413502432,
+          "padded_trainer_only_s": 1237.4274198312196,
+          "planned_inline_eval_count": 3,
+          "planned_save_count": 2,
+          "planned_targets_per_arm": 67108864,
+          "rounded_trainer_only_s": 1500,
+          "unpadded_trainer_only_s": 989.9419358649757
+        }
+      },
+      "resources": {
+        "living_owned_descendants_at_end": 0,
+        "monitor_returncode": 0,
+        "monitor_samples": 248,
+        "monitor_status": "COMPLETE",
+        "peak_device_sample_bytes": 9351200768,
+        "peak_process_tree_rss_bytes": 3293601792,
+        "violations": 0
+      },
+      "run_id": "rocm32k-cal40-c0-s13",
+      "seed": 13,
+      "terminal": {
+        "run_id": "rocm32k-cal40-c0-s13",
+        "status": "interrupted",
+        "steps": 40,
+        "stop_reason": "stop_after_step",
+        "targets": 5242880
+      },
+      "terminal_evaluation_elapsed_from_owned_root_s": 249.5692098659929,
+      "terminal_evaluation_to_checkpoint_publication_s": 3.262708011898212,
+      "update_rows": [
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 131072,
+          "inter_update_gap_s": null,
+          "native_trainer_completion_s": 7.405490929959342,
+          "overflow_retries": 0,
+          "step": 1,
+          "synchronized_optimizer_time_s": 3.104609554982744
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 262144,
+          "inter_update_gap_s": 2.4735957990633324,
+          "native_trainer_completion_s": 9.879086729022674,
+          "overflow_retries": 0,
+          "step": 2,
+          "synchronized_optimizer_time_s": 1.660494762007147
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 393216,
+          "inter_update_gap_s": 1.48012443294283,
+          "native_trainer_completion_s": 11.359211161965504,
+          "overflow_retries": 0,
+          "step": 3,
+          "synchronized_optimizer_time_s": 1.4752554149599746
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 524288,
+          "inter_update_gap_s": 1.519475977984257,
+          "native_trainer_completion_s": 12.878687139949761,
+          "overflow_retries": 0,
+          "step": 4,
+          "synchronized_optimizer_time_s": 1.4761460489826277
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 655360,
+          "inter_update_gap_s": 1.5113962520845234,
+          "native_trainer_completion_s": 14.390083392034285,
+          "overflow_retries": 0,
+          "step": 5,
+          "synchronized_optimizer_time_s": 1.4884875180432573
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 786432,
+          "inter_update_gap_s": 1.5112398959463462,
+          "native_trainer_completion_s": 15.901323287980631,
+          "overflow_retries": 0,
+          "step": 6,
+          "synchronized_optimizer_time_s": 1.4913926200242713
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 917504,
+          "inter_update_gap_s": 1.4824374580057338,
+          "native_trainer_completion_s": 17.383760745986365,
+          "overflow_retries": 0,
+          "step": 7,
+          "synchronized_optimizer_time_s": 1.4623843629378825
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1048576,
+          "inter_update_gap_s": 1.5033747720299289,
+          "native_trainer_completion_s": 18.887135518016294,
+          "overflow_retries": 0,
+          "step": 8,
+          "synchronized_optimizer_time_s": 1.4745950909564272
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1179648,
+          "inter_update_gap_s": 1.5000525319483131,
+          "native_trainer_completion_s": 20.387188049964607,
+          "overflow_retries": 0,
+          "step": 9,
+          "synchronized_optimizer_time_s": 1.4717927110614255
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1310720,
+          "inter_update_gap_s": 1.5203765829792246,
+          "native_trainer_completion_s": 21.90756463294383,
+          "overflow_retries": 0,
+          "step": 10,
+          "synchronized_optimizer_time_s": 1.4915895770536736
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1441792,
+          "inter_update_gap_s": 1.5060203570174053,
+          "native_trainer_completion_s": 23.413584989961237,
+          "overflow_retries": 0,
+          "step": 11,
+          "synchronized_optimizer_time_s": 1.4760739050107077
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1572864,
+          "inter_update_gap_s": 1.5034185179974884,
+          "native_trainer_completion_s": 24.917003507958725,
+          "overflow_retries": 0,
+          "step": 12,
+          "synchronized_optimizer_time_s": 1.4755453510442749
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1703936,
+          "inter_update_gap_s": 1.5018895759712905,
+          "native_trainer_completion_s": 26.418893083930016,
+          "overflow_retries": 0,
+          "step": 13,
+          "synchronized_optimizer_time_s": 1.4816349339671433
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1835008,
+          "inter_update_gap_s": 1.533231109031476,
+          "native_trainer_completion_s": 27.95212419296149,
+          "overflow_retries": 0,
+          "step": 14,
+          "synchronized_optimizer_time_s": 1.5044148790184408
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1966080,
+          "inter_update_gap_s": 1.5144601790234447,
+          "native_trainer_completion_s": 29.466584371984936,
+          "overflow_retries": 0,
+          "step": 15,
+          "synchronized_optimizer_time_s": 1.4946258920244873
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2097152,
+          "inter_update_gap_s": 1.5319906510412693,
+          "native_trainer_completion_s": 30.998575023026206,
+          "overflow_retries": 0,
+          "step": 16,
+          "synchronized_optimizer_time_s": 1.5125047100009397
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2228224,
+          "inter_update_gap_s": 1.528032811009325,
+          "native_trainer_completion_s": 32.52660783403553,
+          "overflow_retries": 0,
+          "step": 17,
+          "synchronized_optimizer_time_s": 1.5004604600835592
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2359296,
+          "inter_update_gap_s": 1.5204904359998181,
+          "native_trainer_completion_s": 34.04709827003535,
+          "overflow_retries": 0,
+          "step": 18,
+          "synchronized_optimizer_time_s": 1.5009136239532381
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2490368,
+          "inter_update_gap_s": 1.6239353968994692,
+          "native_trainer_completion_s": 35.67103366693482,
+          "overflow_retries": 0,
+          "step": 19,
+          "synchronized_optimizer_time_s": 1.60480520199053
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2621440,
+          "inter_update_gap_s": 1.5204815530451015,
+          "native_trainer_completion_s": 37.19151521997992,
+          "overflow_retries": 0,
+          "step": 20,
+          "synchronized_optimizer_time_s": 1.5005975760286674
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2752512,
+          "inter_update_gap_s": 1.5469106000382453,
+          "native_trainer_completion_s": 38.738425820018165,
+          "overflow_retries": 0,
+          "step": 21,
+          "synchronized_optimizer_time_s": 1.5179390410194173
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2883584,
+          "inter_update_gap_s": 1.5314752269769087,
+          "native_trainer_completion_s": 40.269901046995074,
+          "overflow_retries": 0,
+          "step": 22,
+          "synchronized_optimizer_time_s": 1.5102883221115917
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3014656,
+          "inter_update_gap_s": 1.5220841219415888,
+          "native_trainer_completion_s": 41.79198516893666,
+          "overflow_retries": 0,
+          "step": 23,
+          "synchronized_optimizer_time_s": 1.4959641268942505
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3145728,
+          "inter_update_gap_s": 1.5131141960155219,
+          "native_trainer_completion_s": 43.305099364952184,
+          "overflow_retries": 0,
+          "step": 24,
+          "synchronized_optimizer_time_s": 1.4935893509536982
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3276800,
+          "inter_update_gap_s": 1.5168203910579905,
+          "native_trainer_completion_s": 44.821919756010175,
+          "overflow_retries": 0,
+          "step": 25,
+          "synchronized_optimizer_time_s": 1.488160967011936
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3407872,
+          "inter_update_gap_s": 1.5027765840059146,
+          "native_trainer_completion_s": 46.32469634001609,
+          "overflow_retries": 0,
+          "step": 26,
+          "synchronized_optimizer_time_s": 1.4832534230081365
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3538944,
+          "inter_update_gap_s": 1.5141347009921446,
+          "native_trainer_completion_s": 47.838831041008234,
+          "overflow_retries": 0,
+          "step": 27,
+          "synchronized_optimizer_time_s": 1.4857768359361216
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3670016,
+          "inter_update_gap_s": 1.5296959530096501,
+          "native_trainer_completion_s": 49.368526994017884,
+          "overflow_retries": 0,
+          "step": 28,
+          "synchronized_optimizer_time_s": 1.5108660518890247
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3801088,
+          "inter_update_gap_s": 1.5139521709643304,
+          "native_trainer_completion_s": 50.882479164982215,
+          "overflow_retries": 0,
+          "step": 29,
+          "synchronized_optimizer_time_s": 1.4857961689122021
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3932160,
+          "inter_update_gap_s": 1.510126685956493,
+          "native_trainer_completion_s": 52.39260585093871,
+          "overflow_retries": 0,
+          "step": 30,
+          "synchronized_optimizer_time_s": 1.4824051270261407
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4063232,
+          "inter_update_gap_s": 1.5149052630877122,
+          "native_trainer_completion_s": 53.90751111402642,
+          "overflow_retries": 0,
+          "step": 31,
+          "synchronized_optimizer_time_s": 1.486408879980445
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4194304,
+          "inter_update_gap_s": 1.5090579079696909,
+          "native_trainer_completion_s": 55.41656902199611,
+          "overflow_retries": 0,
+          "step": 32,
+          "synchronized_optimizer_time_s": 1.4792418309953064
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4325376,
+          "inter_update_gap_s": 1.4909274600213394,
+          "native_trainer_completion_s": 56.90749648201745,
+          "overflow_retries": 0,
+          "step": 33,
+          "synchronized_optimizer_time_s": 1.471734461025335
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4456448,
+          "inter_update_gap_s": 1.5110816159285605,
+          "native_trainer_completion_s": 58.41857809794601,
+          "overflow_retries": 0,
+          "step": 34,
+          "synchronized_optimizer_time_s": 1.4830914830090478
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4587520,
+          "inter_update_gap_s": 1.5101230760337785,
+          "native_trainer_completion_s": 59.92870117397979,
+          "overflow_retries": 0,
+          "step": 35,
+          "synchronized_optimizer_time_s": 1.4911274779587984
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4718592,
+          "inter_update_gap_s": 1.5285225400002673,
+          "native_trainer_completion_s": 61.457223713980056,
+          "overflow_retries": 0,
+          "step": 36,
+          "synchronized_optimizer_time_s": 1.499399914056994
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4849664,
+          "inter_update_gap_s": 1.531441438011825,
+          "native_trainer_completion_s": 62.98866515199188,
+          "overflow_retries": 0,
+          "step": 37,
+          "synchronized_optimizer_time_s": 1.5117951839929447
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4980736,
+          "inter_update_gap_s": 1.5329064689576626,
+          "native_trainer_completion_s": 64.52157162094954,
+          "overflow_retries": 0,
+          "step": 38,
+          "synchronized_optimizer_time_s": 1.505341373034753
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 5111808,
+          "inter_update_gap_s": 1.517851444077678,
+          "native_trainer_completion_s": 66.03942306502722,
+          "overflow_retries": 0,
+          "step": 39,
+          "synchronized_optimizer_time_s": 1.4994285060092807
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 5242880,
+          "inter_update_gap_s": 1.5415637239348143,
+          "native_trainer_completion_s": 67.58098678896204,
+          "overflow_retries": 0,
+          "step": 40,
+          "synchronized_optimizer_time_s": 1.5138949210522696
+        }
+      ]
+    },
+    "c4": {
+      "clock_anchor": {
+        "boottime_minus_monotonic_s": -4.67000063508749e-06,
+        "owned_start_monotonic_s": 609352.75000467,
+        "owned_start_ticks": 60935275,
+        "resolution_s": 0.01,
+        "tick_hz": 100,
+        "train_start_monotonic_s": 609357.89000467,
+        "train_start_ticks": 60935789
+      },
+      "condition": "C4",
+      "monotonic_phase_marks": [
+        {
+          "committed_training_targets": 0,
+          "event": "started",
+          "monotonic_s": 609526.887708844,
+          "observed_utc": "2026-11-18T16:38:00.149+00:00",
+          "phase": "training",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 0
+        },
+        {
+          "committed_training_targets": 0,
+          "event": "started",
+          "monotonic_s": 609526.920654791,
+          "observed_utc": "2026-11-18T16:38:00.182+00:00",
+          "phase": "validation",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 0
+        },
+        {
+          "committed_training_targets": 0,
+          "event": "finished",
+          "monotonic_s": 609530.446930451,
+          "observed_utc": "2026-11-18T16:38:03.708+00:00",
+          "phase": "validation",
+          "phase_elapsed_s": 3.5262756599113345,
+          "state": "COMPLETE",
+          "step": 0,
+          "validation_batches": 64
+        },
+        {
+          "committed_training_targets": 0,
+          "event": "started",
+          "monotonic_s": 609530.476074242,
+          "observed_utc": "2026-11-18T16:38:03.737+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 0
+        },
+        {
+          "committed_training_targets": 0,
+          "event": "finished",
+          "monotonic_s": 609530.730916577,
+          "observed_utc": "2026-11-18T16:38:03.992+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.2548423350090161,
+          "state": "COMPLETE",
+          "step": 0
+        },
+        {
+          "committed_training_targets": 131072,
+          "event": "started",
+          "monotonic_s": 609533.165527847,
+          "observed_utc": "2026-11-18T16:38:06.427+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 1
+        },
+        {
+          "committed_training_targets": 131072,
+          "event": "finished",
+          "monotonic_s": 609533.795453454,
+          "observed_utc": "2026-11-18T16:38:07.057+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.6299256070051342,
+          "state": "COMPLETE",
+          "step": 1
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "started",
+          "monotonic_s": 609593.138469491,
+          "observed_utc": "2026-11-18T16:39:06.400+00:00",
+          "phase": "validation",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 40
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "finished",
+          "monotonic_s": 609596.201822505,
+          "observed_utc": "2026-11-18T16:39:09.463+00:00",
+          "phase": "validation",
+          "phase_elapsed_s": 3.0633530139457434,
+          "state": "COMPLETE",
+          "step": 40,
+          "validation_batches": 64
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "started",
+          "monotonic_s": 609596.238551521,
+          "observed_utc": "2026-11-18T16:39:09.500+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 0.0,
+          "state": "RUNNING",
+          "step": 40
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "finished",
+          "monotonic_s": 609598.58466192,
+          "observed_utc": "2026-11-18T16:39:11.846+00:00",
+          "phase": "checkpoint",
+          "phase_elapsed_s": 2.3461103989975527,
+          "state": "COMPLETE",
+          "step": 40
+        },
+        {
+          "committed_training_targets": 5242880,
+          "event": "finished",
+          "monotonic_s": 609598.664580391,
+          "observed_utc": "2026-11-18T16:39:11.926+00:00",
+          "phase": "training",
+          "phase_elapsed_s": 71.77687154698651,
+          "state": "INTERRUPTED",
+          "step": 40
+        }
+      ],
+      "native_final_phases": {
+        "batch_assembly": {
+          "availability": "observed",
+          "observation_count": 40,
+          "seconds": 0.17422806366812438
+        },
+        "checkpoint": {
+          "availability": "observed",
+          "observation_count": 3,
+          "seconds": 3.228535119909793
+        },
+        "checkpoint_background": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 3.030710343969986
+        },
+        "optimizer_update": {
+          "availability": "observed",
+          "observation_count": 40,
+          "seconds": 60.71491656289436
+        },
+        "planning": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 0.0009688700083643198
+        },
+        "preparation": {
+          "availability": "observed",
+          "observation_count": 1,
+          "seconds": 137.09690482798032
+        },
+        "reporting": {
+          "availability": "observed",
+          "observation_count": 130,
+          "seconds": 0.9055131856584921
+        },
+        "unclassified_overhead": {
+          "availability": "derived_residual",
+          "observation_count": null,
+          "seconds": 11.48001360683702
+        },
+        "validation": {
+          "availability": "observed",
+          "observation_count": 2,
+          "seconds": 6.588349674013443
+        }
+      },
+      "native_operation_end_to_end_s": 220.18942991096992,
+      "native_timed_events": [
+        {
+          "batches": 64,
+          "committed_training_targets": 0,
+          "kind": "validation_completed",
+          "native_trainer_elapsed_s": 3.559442974976264,
+          "step": 0,
+          "valid_development_targets": 1048576
+        },
+        {
+          "committed_training_targets": 0,
+          "kind": "checkpoint_saved",
+          "native_trainer_elapsed_s": 6.251200867001899,
+          "step": 0
+        },
+        {
+          "committed_training_targets": 131072,
+          "kind": "checkpoint_saved",
+          "native_trainer_elapsed_s": 10.17850624897983,
+          "step": 1
+        },
+        {
+          "batches": 64,
+          "committed_training_targets": 5242880,
+          "kind": "validation_completed",
+          "native_trainer_elapsed_s": 69.31424352002796,
+          "step": 40,
+          "valid_development_targets": 1048576
+        },
+        {
+          "committed_training_targets": 5242880,
+          "kind": "checkpoint_saved",
+          "native_trainer_elapsed_s": 71.71876656101085,
+          "step": 40
+        }
+      ],
+      "native_training_loop_elapsed_s": 71.76355244906154,
+      "owned_arm_monitor_elapsed_s": 248.24625973694492,
+      "quote_terms": {
+        "checkpoint_foreground_spans_s": {
+          "0": 0.2548423350090161,
+          "1": 0.6299256070051342,
+          "40": 2.3461103989975527
+        },
+        "checkpoint_wait_outside_reported_spans_s": 0,
+        "cold_before_initial_validation_s": 174.1706501210574,
+        "first_eight_plus_residual_s": 13.428850090014748,
+        "inter_update_9_through_40": {
+          "8_step_means_s": [
+            1.5038755767454859,
+            1.531978688261006,
+            1.5092291519977152,
+            1.5171904224989703
+          ],
+          "p90_nearest_rank_s": 1.530990184051916,
+          "selected_s": 1.531978688261006,
+          "sum_s": 48.49819071602542
+        },
+        "monitor_boundary_and_cleanup_tail_s": 2.331684015924111,
+        "non_optimizer_residual_9_through_40": {
+          "8_step_means_s": [
+            0.024547373759560287,
+            0.026458333639311604,
+            0.02469825863954611,
+            0.021622575994115323
+          ],
+          "p90_nearest_rank_s": 0.02859450492542237,
+          "selected_s": 0.02859450492542237,
+          "sum_s": 0.7786123362602666
+        },
+        "optimizer_only_9_through_40": {
+          "8_step_means_s": [
+            1.4793282029859256,
+            1.5055203546216944,
+            1.4845308933581691,
+            1.495567846504855
+          ],
+          "p90_nearest_rank_s": 1.5093866989482194,
+          "selected_s": 1.5093866989482194,
+          "sum_s": 47.71957837976515
+        },
+        "per_checkpoint_s": 2.3461103989975527,
+        "per_inline_validation_s": 3.5262756599113345,
+        "setup_plus_first_eight_excess_s": 177.67535472090822,
+        "validation_foreground_spans_s": {
+          "0": 3.5262756599113345,
+          "40": 3.0633530139457434
+        }
+      },
+      "quotes": {
+        "2961": {
+          "extra_completion_or_diagnostic_time_measured_s": null,
+          "horizon": 2961,
+          "max_extra_unpadded_s_before_next_bucket": 41.48855114314938,
+          "padded_trainer_only_s": 5948.139311071063,
+          "planned_inline_eval_count": 10,
+          "planned_save_count": 4,
+          "planned_targets_per_arm": 388104192,
+          "rounded_trainer_only_s": 6000,
+          "unpadded_trainer_only_s": 4758.511448856851
+        },
+        "512": {
+          "extra_completion_or_diagnostic_time_measured_s": null,
+          "horizon": 512,
+          "max_extra_unpadded_s_before_next_bucket": 222.6805091117276,
+          "padded_trainer_only_s": 1221.6493636103405,
+          "planned_inline_eval_count": 3,
+          "planned_save_count": 2,
+          "planned_targets_per_arm": 67108864,
+          "rounded_trainer_only_s": 1500,
+          "unpadded_trainer_only_s": 977.3194908882724
+        }
+      },
+      "resources": {
+        "living_owned_descendants_at_end": 0,
+        "monitor_returncode": 0,
+        "monitor_samples": 240,
+        "monitor_status": "COMPLETE",
+        "peak_device_sample_bytes": 9241100288,
+        "peak_process_tree_rss_bytes": 3794747392,
+        "violations": 0
+      },
+      "run_id": "rocm32k-cal40-c4-s13",
+      "seed": 13,
+      "terminal": {
+        "run_id": "rocm32k-cal40-c4-s13",
+        "status": "interrupted",
+        "steps": 40,
+        "stop_reason": "stop_after_step",
+        "targets": 5242880
+      },
+      "terminal_evaluation_elapsed_from_owned_root_s": 243.45181783498265,
+      "terminal_evaluation_to_checkpoint_publication_s": 2.4045230409828946,
+      "update_rows": [
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 131072,
+          "inter_update_gap_s": null,
+          "native_trainer_completion_s": 6.222270644037053,
+          "overflow_retries": 0,
+          "step": 1,
+          "synchronized_optimizer_time_s": 2.348288938985206
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 262144,
+          "inter_update_gap_s": 2.458418658003211,
+          "native_trainer_completion_s": 8.680689302040264,
+          "overflow_retries": 0,
+          "step": 2,
+          "synchronized_optimizer_time_s": 1.7544559970265254
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 393216,
+          "inter_update_gap_s": 1.4839552249759436,
+          "native_trainer_completion_s": 10.164644527016208,
+          "overflow_retries": 0,
+          "step": 3,
+          "synchronized_optimizer_time_s": 1.4781433440512046
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 524288,
+          "inter_update_gap_s": 1.549599100020714,
+          "native_trainer_completion_s": 11.714243627036922,
+          "overflow_retries": 0,
+          "step": 4,
+          "synchronized_optimizer_time_s": 1.499647040036507
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 655360,
+          "inter_update_gap_s": 1.5116878650151193,
+          "native_trainer_completion_s": 13.225931492052041,
+          "overflow_retries": 0,
+          "step": 5,
+          "synchronized_optimizer_time_s": 1.4824249679222703
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 786432,
+          "inter_update_gap_s": 1.506210271967575,
+          "native_trainer_completion_s": 14.732141764019616,
+          "overflow_retries": 0,
+          "step": 6,
+          "synchronized_optimizer_time_s": 1.4861351170111448
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 917504,
+          "inter_update_gap_s": 1.5023107719607651,
+          "native_trainer_completion_s": 16.23445253598038,
+          "overflow_retries": 0,
+          "step": 7,
+          "synchronized_optimizer_time_s": 1.4804410350043327
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1048576,
+          "inter_update_gap_s": 1.4863171860342845,
+          "native_trainer_completion_s": 17.720769722014666,
+          "overflow_retries": 0,
+          "step": 8,
+          "synchronized_optimizer_time_s": 1.4658017430920154
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1179648,
+          "inter_update_gap_s": 1.4872088730335236,
+          "native_trainer_completion_s": 19.20797859504819,
+          "overflow_retries": 0,
+          "step": 9,
+          "synchronized_optimizer_time_s": 1.4680572969373316
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1310720,
+          "inter_update_gap_s": 1.50833750795573,
+          "native_trainer_completion_s": 20.71631610300392,
+          "overflow_retries": 0,
+          "step": 10,
+          "synchronized_optimizer_time_s": 1.4801512269768864
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1441792,
+          "inter_update_gap_s": 1.5023762210039422,
+          "native_trainer_completion_s": 22.21869232400786,
+          "overflow_retries": 0,
+          "step": 11,
+          "synchronized_optimizer_time_s": 1.4703195979818702
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1572864,
+          "inter_update_gap_s": 1.501998441061005,
+          "native_trainer_completion_s": 23.720690765068866,
+          "overflow_retries": 0,
+          "step": 12,
+          "synchronized_optimizer_time_s": 1.4736586529761553
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1703936,
+          "inter_update_gap_s": 1.512628667987883,
+          "native_trainer_completion_s": 25.23331943305675,
+          "overflow_retries": 0,
+          "step": 13,
+          "synchronized_optimizer_time_s": 1.4847085040528327
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1835008,
+          "inter_update_gap_s": 1.5061303479596972,
+          "native_trainer_completion_s": 26.739449781016447,
+          "overflow_retries": 0,
+          "step": 14,
+          "synchronized_optimizer_time_s": 1.4874683188972995
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 1966080,
+          "inter_update_gap_s": 1.494024388026446,
+          "native_trainer_completion_s": 28.233474169042893,
+          "overflow_retries": 0,
+          "step": 15,
+          "synchronized_optimizer_time_s": 1.4744378080358729
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2097152,
+          "inter_update_gap_s": 1.51830016693566,
+          "native_trainer_completion_s": 29.751774335978553,
+          "overflow_retries": 0,
+          "step": 16,
+          "synchronized_optimizer_time_s": 1.4958242180291563
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2228224,
+          "inter_update_gap_s": 1.530990184051916,
+          "native_trainer_completion_s": 31.28276452003047,
+          "overflow_retries": 0,
+          "step": 17,
+          "synchronized_optimizer_time_s": 1.5028305429732427
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2359296,
+          "inter_update_gap_s": 1.5197358450386673,
+          "native_trainer_completion_s": 32.802500365069136,
+          "overflow_retries": 0,
+          "step": 18,
+          "synchronized_optimizer_time_s": 1.5000870981020853
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2490368,
+          "inter_update_gap_s": 1.5495337889296934,
+          "native_trainer_completion_s": 34.35203415399883,
+          "overflow_retries": 0,
+          "step": 19,
+          "synchronized_optimizer_time_s": 1.5302831470035017
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2621440,
+          "inter_update_gap_s": 1.5147619360359386,
+          "native_trainer_completion_s": 35.86679609003477,
+          "overflow_retries": 0,
+          "step": 20,
+          "synchronized_optimizer_time_s": 1.4957075930433348
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2752512,
+          "inter_update_gap_s": 1.5528681790456176,
+          "native_trainer_completion_s": 37.419664269080386,
+          "overflow_retries": 0,
+          "step": 21,
+          "synchronized_optimizer_time_s": 1.4941053829388693
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 2883584,
+          "inter_update_gap_s": 1.5286850109696388,
+          "native_trainer_completion_s": 38.948349280050024,
+          "overflow_retries": 0,
+          "step": 22,
+          "synchronized_optimizer_time_s": 1.5093866989482194
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3014656,
+          "inter_update_gap_s": 1.5308000799268484,
+          "native_trainer_completion_s": 40.47914935997687,
+          "overflow_retries": 0,
+          "step": 23,
+          "synchronized_optimizer_time_s": 1.5023357250029221
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3145728,
+          "inter_update_gap_s": 1.5284544820897281,
+          "native_trainer_completion_s": 42.0076038420666,
+          "overflow_retries": 0,
+          "step": 24,
+          "synchronized_optimizer_time_s": 1.5094266489613801
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3276800,
+          "inter_update_gap_s": 1.5127187559846789,
+          "native_trainer_completion_s": 43.52032259805128,
+          "overflow_retries": 0,
+          "step": 25,
+          "synchronized_optimizer_time_s": 1.492251597926952
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3407872,
+          "inter_update_gap_s": 1.5131618559826165,
+          "native_trainer_completion_s": 45.033484454033896,
+          "overflow_retries": 0,
+          "step": 26,
+          "synchronized_optimizer_time_s": 1.4849508559564129
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3538944,
+          "inter_update_gap_s": 1.5076102879829705,
+          "native_trainer_completion_s": 46.54109474201687,
+          "overflow_retries": 0,
+          "step": 27,
+          "synchronized_optimizer_time_s": 1.4787258240394294
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3670016,
+          "inter_update_gap_s": 1.5121980250114575,
+          "native_trainer_completion_s": 48.053292767028324,
+          "overflow_retries": 0,
+          "step": 28,
+          "synchronized_optimizer_time_s": 1.4846188999945298
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3801088,
+          "inter_update_gap_s": 1.4984845919534564,
+          "native_trainer_completion_s": 49.55177735898178,
+          "overflow_retries": 0,
+          "step": 29,
+          "synchronized_optimizer_time_s": 1.4797919749980792
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 3932160,
+          "inter_update_gap_s": 1.5172529130941257,
+          "native_trainer_completion_s": 51.069030272075906,
+          "overflow_retries": 0,
+          "step": 30,
+          "synchronized_optimizer_time_s": 1.4889911829959601
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4063232,
+          "inter_update_gap_s": 1.5012964049819857,
+          "native_trainer_completion_s": 52.57032667705789,
+          "overflow_retries": 0,
+          "step": 31,
+          "synchronized_optimizer_time_s": 1.4827800339553505
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4194304,
+          "inter_update_gap_s": 1.5111103809904307,
+          "native_trainer_completion_s": 54.08143705804832,
+          "overflow_retries": 0,
+          "step": 32,
+          "synchronized_optimizer_time_s": 1.484136776998639
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4325376,
+          "inter_update_gap_s": 1.4933482949854806,
+          "native_trainer_completion_s": 55.5747853530338,
+          "overflow_retries": 0,
+          "step": 33,
+          "synchronized_optimizer_time_s": 1.4752369100460783
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4456448,
+          "inter_update_gap_s": 1.5132769979536533,
+          "native_trainer_completion_s": 57.08806235098746,
+          "overflow_retries": 0,
+          "step": 34,
+          "synchronized_optimizer_time_s": 1.4944147599162534
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4587520,
+          "inter_update_gap_s": 1.5172164679970592,
+          "native_trainer_completion_s": 58.605278818984516,
+          "overflow_retries": 0,
+          "step": 35,
+          "synchronized_optimizer_time_s": 1.489088775939308
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4718592,
+          "inter_update_gap_s": 1.5131756400223821,
+          "native_trainer_completion_s": 60.1184544590069,
+          "overflow_retries": 0,
+          "step": 36,
+          "synchronized_optimizer_time_s": 1.4936919290339574
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4849664,
+          "inter_update_gap_s": 1.5116676830220968,
+          "native_trainer_completion_s": 61.630122142028995,
+          "overflow_retries": 0,
+          "step": 37,
+          "synchronized_optimizer_time_s": 1.4931833749869838
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 4980736,
+          "inter_update_gap_s": 1.521553499973379,
+          "native_trainer_completion_s": 63.151675642002374,
+          "overflow_retries": 0,
+          "step": 38,
+          "synchronized_optimizer_time_s": 1.5003690830199048
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 5111808,
+          "inter_update_gap_s": 1.5227292440831661,
+          "native_trainer_completion_s": 64.67440488608554,
+          "overflow_retries": 0,
+          "step": 39,
+          "synchronized_optimizer_time_s": 1.5025968920672312
+        },
+        {
+          "accumulated_microbatches": 8,
+          "committed_training_targets": 5242880,
+          "inter_update_gap_s": 1.544555551954545,
+          "native_trainer_completion_s": 66.21896043804009,
+          "overflow_retries": 0,
+          "step": 40,
+          "synchronized_optimizer_time_s": 1.5159610470291227
+        }
+      ]
+    }
+  },
+  "budget": {
+    "2961": {
+      "all_trainer_arms_plus_actual_calibration_and_reserve_s": 63746,
+      "all_trainer_arms_s": 60000,
+      "c0_future_arms": 6,
+      "c4_future_arms": 4,
+      "headroom_s": 1054,
+      "overage_if_only_c0_quote_increases_one_300s_bucket": 746,
+      "overage_if_only_c4_quote_increases_one_300s_bucket": 146
+    },
+    "512": {
+      "all_trainer_arms_plus_actual_calibration_and_reserve_s": 18746,
+      "all_trainer_arms_s": 15000,
+      "c0_future_arms": 6,
+      "c4_future_arms": 4,
+      "headroom_s": 46054,
+      "overage_if_only_c0_quote_increases_one_300s_bucket": 0,
+      "overage_if_only_c4_quote_increases_one_300s_bucket": 0
+    }
+  },
+  "calibration_charge": {
+    "actual_charged_s": 506,
+    "campaign_device_cap_s": 64800,
+    "claim_acquired_utc": "2026-11-18T16:30:48Z",
+    "claim_clock": "Conservative whole-second UTC bracket, not exact paired claim monotonic.",
+    "claim_released_utc": "2026-11-18T16:39:14Z",
+    "committed_training_targets": 10485760,
+    "disposable_setup_updates": 4,
+    "overall_campaign_cap_s": 108000,
+    "per_efficacy_arm_hard_cap_s": 7200,
+    "recovery_and_shutdown_reserve_s": 3240,
+    "repeated_development_target_exposures": 4194304,
+    "scientific_updates": 80,
+    "sum_owned_arm_monitor_elapsed_s": 504.47831118595786
+  },
+  "limitations": [
+    "Calibrations and named pilot stop before configured completion; they do not measure automatic completion triage. Full trainer-only cost assumes native AttemptBudget train-phase suppression. If the native full path instead runs unmeasured triage, measure and charge its time or leave total completion quote unbound; never spoof suppression.",
+    "Standalone 2,000-story bits-per-byte, sparse projection, extra captures, and new resource checks are outside the numeric trainer-only table unless separately timed/charged. One 300-second bucket increase in either full arm is enough to exceed 18 hours across repetitions.",
+    "All calibration updates are in warmup and no efficacy/warm-vs-steady learning result is inferred. Fit also depends on physical claim, qualified storage and overall deadlines; sampled device observations are not a hard peak bound."
+  ],
+  "scope": "Blinded native ROCm 32k calibration timing, counters, resources and arithmetic. No quality observations.",
+  "verification": {
+    "allowlisted_update_names": [
+      "performance/step_seconds",
+      "optimizer/overflow_retries",
+      "batch/accumulation_steps"
+    ],
+    "arm_formula": "Q_i(T,extra_i)=300*ceil(1.25*(S_i+T*t_i+n_eval*e_i+n_save*s_i+extra_i)/300). Numeric trainer-only rows set extra_i=0 for the measured scope, not for a changed completion/diagnostic path.",
+    "campaign_formula": "506+6*Q_C0+4*Q_C4+3240; charge actual claim elapsed at phase transitions.",
+    "elapsed_scope": "Linux start ticks at 0.01-second resolution. Validation finished and checkpoint publication differ. These are calibration anchors; the practical cap is frozen later from eligible C0 repeat terminal evaluations.",
+    "eval_and_save_rule": "e=max(observed foreground eval spans); s=max(observed foreground checkpoint spans)+max(0,native foreground checkpoint seconds minus summed observed spans). Exclude overlapping background I/O. Full has 10 inline evals, initial/final and periodic 1000/2000 saves; pilot 3 evals, initial/final saves. Step-1 capture belongs to calibration only.",
+    "read_only_final_timing_query": "SELECT step,tokens_seen,json_extract(payload_json,'$.end_to_end_seconds'),json_extract(payload_json,'$.cumulative_run_wall_seconds'),json_extract(payload_json,'$.run_status'),json_extract(payload_json,'$.reason'),json_extract(payload_json,'$.phases') FROM events WHERE run_id=? AND kind='runtime_final_observation'",
+    "read_only_timed_event_query": "SELECT step,tokens_seen,wall_time,kind,json_extract(payload_json,'$.valid_targets'),json_extract(payload_json,'$.batches') FROM events WHERE run_id=? AND kind IN ('checkpoint_saved','validation_completed') ORDER BY id",
+    "read_only_update_query": "SELECT step,tokens_seen,wall_time,value FROM metrics WHERE run_id=? AND name=? AND step BETWEEN 1 AND 40 ORDER BY step",
+    "startup_rule": "Cold=initial validation start monotonic minus owned start anchor. Tail=owned monitor duration minus (trainer finished monotonic minus owned start anchor). First8=owned monitor duration minus cold, tail, summed 32 full gaps, native foreground validation and native foreground checkpoint. S=cold+tail+max(0,first8-8*t).",
+    "steady_rule": "On steps 9 through 40, dt_i=trainer completion(i)-completion(i-1). No eval or checkpoint publication in that window. t=max(sorted(dt)[28], four consecutive 8-step means); dt includes optimizer, assembly and overhead, which are not added again."
+  }
+}

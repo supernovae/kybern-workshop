@@ -1,7 +1,7 @@
 {
   "format": "gradient-routing-32k-milestone-v1",
-  "as_of_utc": "2026-11-18T16:43:00Z",
-  "state": "CALIBRATION_COMPLETE_FULL_OR_PILOT_COST_PENDING",
+  "as_of_utc": "2026-11-18T16:51:00Z",
+  "state": "FULL_2961_FROZEN_C0_REPEATS_DISPATCHED",
   "prior_allocation": "Complete: separate 4k tied ROCm engineering qualifier, 26/32 total optimizer updates. Do not add those to current counts or treat them as routing efficacy.",
   "campaign_clock": {
     "first_source_acquisition_utc": "2026-11-18T15:54:15Z",
@@ -63,7 +63,7 @@
     ],
     "full_horizon_updates_if_fits": 2961,
     "named_post_warmup_pilot_updates_if_full_does_not_fit": 512,
-    "selected_horizon": null,
+    "selected_horizon": 2961,
     "new_screen_pairs_completed": 0,
     "fresh_pairs_completed": 0,
     "heldout_c4_result": null,
@@ -85,7 +85,7 @@
     }
   },
   "pending": [
-    "Verify full-completion cost, select full versus named pilot before any treatment efficacy inspection",
-    "Run two C0 repeats to freeze variance-based practical margin and elapsed cap before reading C4 learning"
+    "Complete two independent seed-13 C0 baseline repeats; freeze practical margin and matched-time cap from those repeats alone",
+    "Execute seed-17 screen and three independent fresh pairs at the full scientific horizon"
   ]
 }
