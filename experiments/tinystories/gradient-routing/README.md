@@ -1,12 +1,12 @@
 # TinyStories gradient routing: the function-matched LM-head experiment
 
-## Live status · 2026-11-18 16:12 UTC
+## Live status · 2026-11-18 16:15 UTC
 **The 32k-vocabulary campaign is admitted and preparing data. No 32k model has been trained or scored in this experiment yet.** We are comparing an ordinary 58.86M-parameter untied model (C0) with the same starting function and full head rank represented by a trainable identity factor (C4, 59.12M). The main outcomes are held-out cross-entropy at equal valid training targets and at a predeclared elapsed-time cap.
 
 | Stage | What actually happened |
 | --- | --- |
 | Prior, different 4k model | ROCm continuous 8 vs resumed 4+4 reproduced all losses and final state exactly. Real archive and synthetic mechanism tests are reported below; none estimates 32k treatment efficacy. |
-| Original inputs | All five exact Hugging Face Parquet files were downloaded and reverified: 1,000,775,442 bytes, fixed upstream revision, 2,119,719 raw training and 21,990 raw validation rows. Native offline deduplication is in progress. The 32k tokenizer and packed data are not marked matched until their evidence is verified. |
+| Original inputs | All five exact Hugging Face Parquet files were downloaded and reverified: 1,000,775,442 bytes, fixed upstream revision, 2,119,719 raw training and 21,990 raw validation rows. Native cleaning exactly recovered **1,792,647 train / 21,990 validation stories** after removing 320,241 training duplicates, 6,601 train/validation overlaps and 230 empty records. The original BPE declaration is fitting now. The tokenizer and packed arrays remain unverified until their digests pass. |
 | Precision and cost gates | Frozen [BF16 numerical checks](NUMERICAL-GATE-32K.md). Next: native three-arm step-1 parity, then 40-update timing for each of C0/C4. Do not use warmup to judge learning. |
 | Cause and confirmation | **Not run.** Under 18 cumulative local GPU hours/30 elapsed hours, use 2,961 updates if all controls, one screen pair and three fresh pairs fit. Otherwise only the named 512-update post-warmup pilot is allowed; if that does not fit, stop. No invented results or shorter substitution. |
 

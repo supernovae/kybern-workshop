@@ -117,3 +117,5 @@ qualifier or Intel timings as AMD 32k estimates.
    Do not add it inside timed training updates or infer raw gradient retention
    from per-update scalar loss. Preserve native final checkpoints and receipts
    according to [retention policy](RETENTION.md).
+
+**Operational guard before any 32k GPU run (16:15 UTC):** All arms now explicitly set the native PyTorch allocator ceiling to 0.72 of device memory, in addition to the 20 GiB planner/whole-card cap and host monitor. The original declaration had only the planner budget; the default 0.90 allocator fraction alone would allow more than 20 GiB on this device. This amendment tightens every arm equally. It does not alter model, token, seed, precision, loss, LR, evaluation, or stopping schedule. Native allocator limits do not cover all device allocations or other users, so the whole-card preflight and live guard remain mandatory. No GPU run had started.

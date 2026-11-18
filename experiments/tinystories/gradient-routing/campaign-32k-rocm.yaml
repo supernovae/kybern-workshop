@@ -64,6 +64,7 @@ runtime:
   compile_output_head_loss: false
   output_head_chunk_tokens: 2048
   memory:
+    max_device_memory_fraction: 0.72  # identical PyTorch allocator guard; preserves non-allocator and display headroom
     budget_bytes: 21474836480  # 20 GiB planning ceiling; external monitoring is also required
     estimate_policy: enforce
 checkpoint:

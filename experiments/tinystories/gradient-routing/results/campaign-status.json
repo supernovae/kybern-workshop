@@ -1,7 +1,7 @@
 {
   "format": "gradient-routing-32k-milestone-v1",
-  "as_of_utc": "2026-11-18T16:12:00Z",
-  "state": "CPU_PREPARATION_IN_PROGRESS",
+  "as_of_utc": "2026-11-18T16:15:00Z",
+  "state": "CANONICAL_SNAPSHOT_VERIFIED_BPE_FIT_ACTIVE",
   "prior_allocation": "Complete: separate 4k tied ROCm engineering qualifier, 26/32 total optimizer updates. Do not add those to current counts or treat them as routing efficacy.",
   "campaign_clock": {
     "first_source_acquisition_utc": "2026-11-18T15:54:15Z",
@@ -28,7 +28,13 @@
       "train": 2119719,
       "validation": 21990
     },
-    "cleaned_actual_counts": null,
+    "cleaned_actual_counts": {
+      "train_retained": 1792647,
+      "validation_retained": 21990,
+      "training_duplicates_excluded": 320241,
+      "training_validation_overlaps_excluded": 6601,
+      "training_empty_excluded": 230
+    },
     "trained_tokenizer_sha256_verified": false,
     "prepared_packed_arrays": null
   },
@@ -51,9 +57,9 @@
     "heldout_c4_result": null
   },
   "pending": [
-    "Complete cleaned-split verification",
-    "Refit and verify published BPE identity; prepare and verify token arrays",
-    "Verify numerical parity on the real AMD BF16 chunked path",
-    "Time complete C0/C4 workloads before committing an efficacy horizon or screening"
+    "Verify fitted 32k tokenizer against original public SHA and origin",
+    "Prepare and verify token arrays",
+    "Verify real-device numerical parity",
+    "Time complete C0/C4 workloads and reserve the gate before any screen"
   ]
 }
