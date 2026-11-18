@@ -4,11 +4,12 @@ schema_version: 2
 name: devmind-pretrain
 seed: 42
 training:
-  # One 4,096-token row per microbatch, 32 per update (131,072 targets), 16
-  # on each card. Measured on one B70 with compiled blocks and no
-  # recomputation: 8,076 targets/s at a 23.1 GiB peak, taken with the earlier 65k-row Engram tables;
-  # the larger tables add about 2.7 GiB and the first warmup re-measures both numbers. 8,192-token
-  # rows fit then too (28.6 GiB) but ran at 5,493 targets/s.
+  # One 4,096-token row per microbatch, 32 per update (131,072 targets), 8
+  # on each of four cards. Measured on four B70s (synthetic tokens, flex
+  # attention, recomputation off, fused AdamW, zero1, 2x Engram tables): about
+  # 3.6 s per update, 36.4k targets/s, 21.5 GiB device peak, 33 GB host RAM.
+  # The first warmup on the real prepared data re-measures all three. 8,192-token
+  # rows are not recommended here.
   seq_len: 4096
   micro_batch_size: 1
   gradient_accumulation: 32
@@ -32,22 +33,30 @@ runtime:
   engine: pytorch
   backend: xpu
   device_index: 0
-  # Four B70s. Lab runs each secondary card in its own process and confines
-  # each process to its card, so device memory is not also held in host RAM.
-  # Microbatches are split between the cards; gradients are summed on card 0
-  # in a fixed order, so an update is the same as on one card. Measured on two
-  # cards (earlier smaller Engram tables): 12,682 targets/s against 6,773 on
-  # card 0 alone, which also drives the desktop. The four-card rate is
-  # measured by the first warmup.
+  # Four B70s under runtime.parallel.mode zero1: real xccl collectives, the
+  # optimizer state split four ways, the gradient reduced on the last
+  # microbatch of an update. It kept 93 percent of one card's rate (replicated
+  # mode with a host-staged merge kept 62 percent: 24.3k against 36.5k
+  # targets/s). Lab confines each rank to its own card, so device memory is not
+  # also held in host RAM. Stay at micro_batch_size 1: zero1 at 2 and any
+  # sharded mode with 4x Engram tables stalled in an xccl collective on this
+  # box (docs/intel-xpu.md in Lab). Watch the first hour of the run.
   secondary_device_indices: [1, 2, 3]
   precision: bf16
   compile_transformer_blocks: true
-  compile_output_head_loss: true
+  parallel:
+    mode: zero1
+  # The loss is computed in 2,048-token chunks of the output head, which keeps
+  # the full logits out of memory; compiling the whole head would use more.
+  compile_output_head_loss: false
+  output_head_chunk_tokens: 2048
   memory:
-    # Lab's planner estimates 35.1 GiB for this config, above its ceiling;
-    # the measured peak was 23.1 GiB with the earlier, smaller Engram tables.
-    # Observe the estimate instead of refusing;
-    # the spill guard (on by default) stops the run if the card really fills.
+    # Lab's planner estimates well above its ceiling for this config; the
+    # measured peak is 21.5 GiB of 32. Observe the estimate instead of
+    # refusing; the spill guard (on by default) stops the run if the card
+    # really fills.
+    activation_checkpointing:
+      enabled: false
     estimate_policy: observe
 staging:
   smoke_steps: 2

@@ -11,8 +11,8 @@ rms_norm_eps: 1.0e-06
 tie_embeddings: true
 ffn: dense
 # Engram n-gram memory, present from the first update, after blocks 1 and 14.
-# Table sizes are distinct primes: order 2 at about 262k rows and order 3 at about 524k rows
-# per head (`klab data engram-sizing` measures collisions; rerun it on the real tokens
+# Table sizes are distinct primes: order 2 at about 524k rows and order 3 at about 1.05M rows
+# per head (twice the first sizing; 402.7M table parameters, 21.5 GiB per card peak) (`klab data engram-sizing` measures collisions; rerun it on the real tokens
 # after tokenizer training and adjust before the first update).
 memory: ngram
 memory_injection: after_block
@@ -23,7 +23,7 @@ memory_hash_heads: 2
 memory_dim: 64
 memory_conv_kernel_size: 4
 memory_hash_seed: 42
-memory_table_size: 262147
-memory_table_sizes: [262147, 262151, 524309, 524341, 262153, 262187, 524347, 524351]
+memory_table_size: 524309
+memory_table_sizes: [524309, 524341, 1048583, 1048589, 524347, 524351, 1048601, 1048609]
 memory_padding_token_id: 3
 memory_independent_init: true
