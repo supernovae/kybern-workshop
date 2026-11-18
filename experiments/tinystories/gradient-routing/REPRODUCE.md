@@ -1,5 +1,5 @@
 # Reproduce
-Use the two local research branches and their recorded base revisions, not the unmodified public main. The files are being prepared locally; no remote branch is implied. Lockfile and environment pins belong to Model Lab. Archive source-revision and dirty patch identities with every measurement. See [prior studies](EVIDENCE.md), [historical paired analysis](historical-reanalysis.md) and [the synthetic fixture](mechanisms.md).
+Use the two local research branches and their recorded base revisions, not the unmodified public main. The Workshop record is shared through the experiment PR. Research-specific Model Lab changes are pinned below but not all are part of upstream main. Lockfile and environment pins belong to Model Lab. Archive source-revision and dirty patch identities with every measurement. See [prior studies](EVIDENCE.md), [historical paired analysis](historical-reanalysis.md) and [the synthetic fixture](mechanisms.md).
 
 **Offline checks already measured:** From the Lab root, with the existing staged CPU runtime selected via `UV_PROJECT_ENVIRONMENT`, `UV_OFFLINE=1 PYTHONPATH=src uv run --locked --no-sync pytest -n 0 -q tests/test_full_width_output_head.py tests/test_gradient_projection.py tests/test_routing_mechanisms.py`. These are small correctness checks, not a training reproduction.
 

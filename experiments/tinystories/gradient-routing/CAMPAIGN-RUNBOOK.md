@@ -1,6 +1,6 @@
 # Conditional 32k ROCm campaign
 
-**Proposed, not admitted.** The [campaign proposal](CAMPAIGN-PROPOSAL.json)
+**This was the prospective runbook. The bounded scope was subsequently admitted; [live execution status](README.md) distinguishes completed and pending gates.** The [campaign proposal](CAMPAIGN-PROPOSAL.json)
 sets the caps and admission gates. Schema validation neither verifies assets
 nor reserves the device. Do not launch without the admitted native physical
 claim, UTC deadline, watchdog, and verified input and ROCm gates below.

@@ -1,4 +1,17 @@
-# Gradient routing: results and decision
+# TinyStories gradient routing: the function-matched LM-head experiment
+
+## Live status · 2026-11-18 16:12 UTC
+**The 32k-vocabulary campaign is admitted and preparing data. No 32k model has been trained or scored in this experiment yet.** We are comparing an ordinary 58.86M-parameter untied model (C0) with the same starting function and full head rank represented by a trainable identity factor (C4, 59.12M). The main outcomes are held-out cross-entropy at equal valid training targets and at a predeclared elapsed-time cap.
+
+| Stage | What actually happened |
+| --- | --- |
+| Prior, different 4k model | ROCm continuous 8 vs resumed 4+4 reproduced all losses and final state exactly. Real archive and synthetic mechanism tests are reported below; none estimates 32k treatment efficacy. |
+| Original inputs | All five exact Hugging Face Parquet files were downloaded and reverified: 1,000,775,442 bytes, fixed upstream revision, 2,119,719 raw training and 21,990 raw validation rows. Native offline deduplication is in progress. The 32k tokenizer and packed data are not marked matched until their evidence is verified. |
+| Precision and cost gates | Frozen [BF16 numerical checks](NUMERICAL-GATE-32K.md). Next: native three-arm step-1 parity, then 40-update timing for each of C0/C4. Do not use warmup to judge learning. |
+| Cause and confirmation | **Not run.** Under 18 cumulative local GPU hours/30 elapsed hours, use 2,961 updates if all controls, one screen pair and three fresh pairs fit. Otherwise only the named 512-update post-warmup pilot is allowed; if that does not fit, stop. No invented results or shorter substitution. |
+
+**Follow the work:** [live machine-readable status](results/campaign-status.json) · [ordinary 32k declaration](campaign-32k-rocm.yaml) · [C4 treatment delta](reference-c4.yaml) · [campaign runbook](CAMPAIGN-RUNBOOK.md) · [frozen statistical amendment](STATISTICAL-AMENDMENT-32K.md) · [full protocol](PROTOCOL.md) · [initial-allocation attempt registry](results/run-registry-v1.json). This README and the status record will be updated when input verification, device admission, cost/horizon choice, screen and independent confirmation resolve. Treatment scores stay sealed before the baseline-only decision rule is frozen. Model checkpoints, source shards, machine-local paths and runtime credentials do not belong here.
+
 ## What we learned
 The size of a vocabulary residual is not a measure of lost learning. In the known-distribution experiment below, two tasks had precisely the same residual energy while differing substantially in reducible error. In a different test using **actual TinyStories checkpoints**, residuals initially invisible to the backbone later aligned with the evolved output head more than an isotropic drift null would predict. A predeclared follow-up found that a uniform predictor with the same target counts reproduces 99.95% of the excess over the drift null. For this early checkpoint, the observation mostly describes which vocabulary rows moved. At maturity, pairing mattered relative to a shuffle, but the contrast with a uniform predictor remained too uncertain to justify a training intervention. Neither result demonstrates useful recycling of error.
 
@@ -31,4 +44,4 @@ See [protocol](PROTOCOL.md), [paper/code/data audit](EVIDENCE.md), [bug audit](b
 
 **Evidence index:** [Frozen run registry](results/run-registry-v1.json), [two checkpoint ages: norm and retained energy](results/checkpoint-geometry.svg), [development CE at matched targets](results/qualification-ce-targets.svg), [development CE against measured elapsed time](results/qualification-ce-wall.svg), and [subsequent-learning table with explicit missingness](results/metric-subsequent-learning.json). The archived development NLL dropped 4.07680 nats/target from step 0 to 256. No bound development evaluation exists at 243,968, so the mature signed change and a cross-epoch association are unavailable. A neighboring step is not substituted.
 
-[Portable 32k campaign runbook](CAMPAIGN-RUNBOOK.md) and [ordinary AMD declaration](campaign-32k-rocm.yaml): schema-checked, not yet trained at this model shape. The native storage fix is merged; the private research branches are not published.
+[Portable 32k campaign runbook](CAMPAIGN-RUNBOOK.md) and [ordinary AMD declaration](campaign-32k-rocm.yaml): schema-checked, not yet trained at this model shape. The native storage fix is merged; the Workshop record is shared for review; the research-specific Model Lab branch is not published.
