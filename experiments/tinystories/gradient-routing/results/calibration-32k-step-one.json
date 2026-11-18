@@ -1,0 +1,91 @@
+{
+  "checkpoints": {
+    "c0_initial": "5a23071ca94ec774674c2ba570579be185316d0d9ea6cb25d9ee2ac06e2bded9",
+    "c0_step_one": "6894f83985f804bca2a41a2c6ba8f1bbcd0a1ef3af5ed47bece505509ebe683a",
+    "c4_initial": "b0594107b3901c373bbe94a2e20d16c41cbb378f3b5440a92925e91734f406b3",
+    "c4_step_one": "7e5ecb7f539159e1e8f9f401a660640db43a427bc8d616b3f8fe46cbf9a70cf7"
+  },
+  "classification": "native step-0/1 mechanism receipt; no efficacy scores read from metrics",
+  "config_sha256": {
+    "c0": "1b7692cb157c15a217667d4fcb874071b3778bc7843ed5a4d96aaaf4cc4217e7",
+    "c4": "0062d841c7c56bb11295ead014f5d2ff6c2ff1a6b50d0e43c93985e02cdfb8b4"
+  },
+  "cursor_step_one_equal": true,
+  "initial": {
+    "c4_b_exact_identity": true,
+    "effective_w_exact": true,
+    "head_a_and_dense_w_raw_sha256_shared": "816f422a31a9ce3724223f3781b1a4d8ee0e3f4b12fe052f5124619f70d949bd",
+    "native_initial_validation_equal": true,
+    "rng_state_exact": true,
+    "trunk_raw_sha256_shared": "e492d1bbb9107010af6299f3d806b3bc6e2920cc010d7b5a18df03bc50c39e19",
+    "trunk_tensor_count": 74
+  },
+  "limitations": [
+    "Checkpoint-derived moments are not raw BF16 gradients; m1/(1-beta1) approximates the postclip optimizer input only.",
+    "Norm ratios are global; equal initial model tensors do not directly verify native logits or derivatives.",
+    "The native grad norm is a recorded global preclip scalar, not a parameter-wise gradient or magnitude.",
+    "No post-step-1 checkpoint, held-out metric rows, or loss values are exported."
+  ],
+  "optimizer_first_moment_step_one": {
+    "c0_clipping_context": {
+      "approximately_expected_postclip_norm": 1.0,
+      "declared_global_clip_cap": 1.0,
+      "moment_implied_postclip_norm": 0.9999997816772322,
+      "native_global_preclip_norm": 4.157756805419922,
+      "postclip_norm_over_native_preclip": 0.24051425527670683,
+      "tensors_with_first_moments": 75
+    },
+    "c4_b_raw_exp_avg_norm": 0.013747592072696003,
+    "c4_clipping_context": {
+      "approximately_expected_postclip_norm": 1.0,
+      "declared_global_clip_cap": 1.0,
+      "moment_implied_postclip_norm": 0.9999997606295996,
+      "native_global_preclip_norm": 4.197612762451172,
+      "postclip_norm_over_native_preclip": 0.23823058896115407,
+      "tensors_with_first_moments": 76
+    },
+    "raw_exp_avg_common_trunk": {
+      "c0_norm": 0.09533720351369752,
+      "c4_norm": 0.09443198474806568,
+      "c4_to_c0_norm_ratio": 0.9905050837210493,
+      "cosine": 0.9999999999999967,
+      "difference_norm": 0.000905218765644365,
+      "elements": 42082816,
+      "max_abs_difference": 2.8963200747966766e-05
+    },
+    "raw_exp_avg_dense_w_vs_a": {
+      "c0_norm": 0.030179682896494333,
+      "c4_norm": 0.029893129333283534,
+      "c4_to_c0_norm_ratio": 0.9905050836950946,
+      "cosine": 0.9999999999999981,
+      "difference_norm": 0.00028655356321477277,
+      "elements": 16777216,
+      "max_abs_difference": 2.2453954443335533e-05
+    }
+  },
+  "prepared_artifacts_match": true,
+  "prepared_train_sha256": "6be6cf3717b2fdc2afd066c6b5039645c3e35351da46955c38fa652353e5c90d",
+  "realized_step_one": {
+    "c4_b_update_frobenius_norm": 0.015352610764260009,
+    "effective_head": {
+      "c0_norm": 0.12136354673882846,
+      "c4_norm": 0.134469892719356,
+      "c4_to_c0_norm_ratio": 1.107992443634925,
+      "cosine": 0.9094816641480143,
+      "difference_norm": 0.05591286328441306,
+      "elements": 16777216,
+      "max_abs_difference": 0.00020883180083318756
+    },
+    "trunk": {
+      "c0_norm": 0.15611718305908887,
+      "c4_norm": 0.1561059740710105,
+      "c4_to_c0_norm_ratio": 0.9999282014454866,
+      "cosine": 0.9999999643736363,
+      "difference_norm": 4.315239476374844e-05,
+      "elements": 42082816,
+      "max_abs_difference": 1.1920928955078125e-07
+    }
+  },
+  "source_identity_sha256": "ed10871c22c8d612228f38cc0f2ea5c101b5af74f22f8a6b2e870615fc289c18",
+  "valid_targets_step_one": 131072
+}

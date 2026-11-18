@@ -1,7 +1,7 @@
 {
   "format": "gradient-routing-32k-milestone-v1",
-  "as_of_utc": "2026-11-18T16:32:00Z",
-  "state": "NATIVE_C0_CALIBRATION_LAUNCHED",
+  "as_of_utc": "2026-11-18T16:43:00Z",
+  "state": "CALIBRATION_COMPLETE_FULL_OR_PILOT_COST_PENDING",
   "prior_allocation": "Complete: separate 4k tied ROCm engineering qualifier, 26/32 total optimizer updates. Do not add those to current counts or treat them as routing efficacy.",
   "campaign_clock": {
     "first_source_acquisition_utc": "2026-11-18T15:54:15Z",
@@ -12,10 +12,10 @@
     "device_gib_max": 20,
     "host_process_tree_gib_max": 16,
     "setup_optimizer_updates_max": 96,
-    "live_gpu_optimizer_updates_to_as_of": null,
-    "live_scientific_model_invocations_to_as_of": 1,
-    "live_gpu_seconds_to_as_of": null,
-    "clock_note": "Active device claim started 16:30:48Z; no terminal accounting yet."
+    "live_gpu_optimizer_updates_to_as_of": 84,
+    "live_scientific_model_invocations_to_as_of": 2,
+    "live_gpu_seconds_to_as_of": 506,
+    "clock_note": "Contiguous device claim charged to UTC-second resolution. 80 scientific optimizer updates; four separate disposable startup updates."
   },
   "source": {
     "repository": "roneneldan/TinyStories",
@@ -67,10 +67,25 @@
     "new_screen_pairs_completed": 0,
     "fresh_pairs_completed": 0,
     "heldout_c4_result": null,
-    "calibration_c0_invocation_utc": "2026-11-18T16:30:55.482Z"
+    "calibration_c0_invocation_utc": "2026-11-18T16:30:55.482Z",
+    "calibration_result": {
+      "seed": 13,
+      "updates_per_arm": 40,
+      "main_targets_per_arm": 5242880,
+      "valid_eval_targets_per_pass": 1048576,
+      "eval_passes_per_arm": 2,
+      "owned_duration_s": {
+        "C0": 256.232,
+        "C4": 248.246
+      },
+      "common_initial_tensor_equality": true,
+      "step1_effective_head_update_norm_ratio": 1.107992444,
+      "step1_effective_head_update_cosine": 0.909481664,
+      "step1_trunk_update_cosine": 0.999999964
+    }
   },
   "pending": [
-    "Run and time C0 and C4; use standard model checkpoints to compare initial state and first update",
-    "Select full versus pilot horizon with a quote covering all remaining arms"
+    "Verify full-completion cost, select full versus named pilot before any treatment efficacy inspection",
+    "Run two C0 repeats to freeze variance-based practical margin and elapsed cap before reading C4 learning"
   ]
 }
