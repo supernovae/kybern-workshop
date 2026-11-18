@@ -1,0 +1,230 @@
+{
+  "study": "TinyStories gradient routing",
+  "kind": "deterministic CPU correctness fixtures",
+  "code": "Model Lab local gradient-routing worktree based on 7e990c73, including uncommitted C1/C2/C4 changes",
+  "python": "3.14.4",
+  "torch": "2.14.1+cpu",
+  "threads": {
+    "omp": 2,
+    "mkl": 2
+  },
+  "c1": "Under full width or coefficient zero, exact forward/backward checks, clipped AdamW parameter and moment equality, plus biased affine finite-difference gradcheck passed in float64.",
+  "records": [
+    {
+      "control": "C4",
+      "arms": {
+        "dense": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 0.9999999999999996,
+          "effective_weight_delta_norm": 0.005673668644402918,
+          "effective_weight_delta_norm_over_dense": 1,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5445952210677882,
+          "trunk_update_diff_norm": 0,
+          "trunk_update_norm": 0.005107266163540766
+        },
+        "identity_frozen": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 0.9999999999999996,
+          "effective_weight_delta_norm": 0.005673668644402918,
+          "effective_weight_delta_norm_over_dense": 1,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5445952210677882,
+          "trunk_update_diff_norm": 0,
+          "trunk_update_norm": 0.005107266163540766
+        },
+        "identity_trainable": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 0.9995740098018812,
+          "effective_weight_delta_norm": 0.0057008382264342,
+          "effective_weight_delta_norm_over_dense": 1.0047887149804007,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5476570608436466,
+          "trunk_update_diff_norm": 0,
+          "trunk_update_norm": 0.005107266163540766
+        }
+      },
+      "device": "cpu",
+      "dtype": "float64",
+      "global_clip": null,
+      "hidden_width": 16,
+      "lr": 0.003,
+      "optimizer": "sgd",
+      "seed": 7,
+      "steps": 1,
+      "valid_targets": 7,
+      "vocab_size": 512,
+      "weight_decay": 0
+    },
+    {
+      "control": "C4",
+      "arms": {
+        "dense": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 0.9999999999999993,
+          "effective_weight_delta_norm": 0.2715355194579942,
+          "effective_weight_delta_norm_over_dense": 1,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5445952210677882,
+          "trunk_update_diff_norm": 0,
+          "trunk_update_norm": 0.15499937856802967
+        },
+        "identity_frozen": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 0.9999999999999993,
+          "effective_weight_delta_norm": 0.2715355194579942,
+          "effective_weight_delta_norm_over_dense": 1,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5445952210677882,
+          "trunk_update_diff_norm": 0,
+          "trunk_update_norm": 0.15499937856802967
+        },
+        "identity_trainable": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 0.996763102278486,
+          "effective_weight_delta_norm": 0.27539913020026374,
+          "effective_weight_delta_norm_over_dense": 1.014228748968023,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5476570608436466,
+          "trunk_update_diff_norm": 0,
+          "trunk_update_norm": 0.15499937856802967
+        }
+      },
+      "device": "cpu",
+      "dtype": "float64",
+      "global_clip": null,
+      "hidden_width": 16,
+      "lr": 0.003,
+      "optimizer": "adamw",
+      "seed": 7,
+      "steps": 1,
+      "valid_targets": 7,
+      "vocab_size": 512,
+      "weight_decay": 0.1
+    },
+    {
+      "control": "C4",
+      "arms": {
+        "dense": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 1,
+          "effective_weight_delta_norm": 0.27151396451365795,
+          "effective_weight_delta_norm_over_dense": 1,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5445952210677882,
+          "trunk_update_diff_norm": 0,
+          "trunk_update_norm": 0.15490330384068565
+        },
+        "identity_frozen": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 1,
+          "effective_weight_delta_norm": 0.27151396451365795,
+          "effective_weight_delta_norm_over_dense": 1,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5445952210677882,
+          "trunk_update_diff_norm": 0,
+          "trunk_update_norm": 0.15490330384068565
+        },
+        "identity_trainable": {
+          "ce": 6.232582811433695,
+          "effective_weight_delta_cosine_vs_dense": 0.9967626728366467,
+          "effective_weight_delta_norm": 0.27537740044766545,
+          "effective_weight_delta_norm_over_dense": 1.0142292347317303,
+          "max_abs_dh_diff": 0,
+          "max_abs_logits_diff": 0,
+          "preclip_gradient_norm": 2.5476570608436466,
+          "trunk_update_diff_norm": 0.000001477139939937839,
+          "trunk_update_norm": 0.15490312609220014
+        }
+      },
+      "device": "cpu",
+      "dtype": "float64",
+      "global_clip": 1,
+      "hidden_width": 16,
+      "lr": 0.003,
+      "optimizer": "adamw",
+      "seed": 7,
+      "steps": 1,
+      "valid_targets": 7,
+      "vocab_size": 512,
+      "weight_decay": 0.1
+    },
+    {
+      "control": "C2",
+      "device": "cpu",
+      "dtype": "float64",
+      "fixture": "rank_restricted_affine_vjp",
+      "hidden_gradient_cosine_vs_dense": 0.994105083155604,
+      "hidden_width": 4,
+      "max_abs_bias_gradient_difference": 0,
+      "max_abs_head_gradient_difference": 0,
+      "max_abs_hidden_vjp_reference_error": 8.881784197001252e-16,
+      "mode": "raw",
+      "original_hidden_gradient_norm": 2.1700060015187157,
+      "rank": 2,
+      "restricted_hidden_gradient_norm": 2.157213996587922,
+      "valid_targets": 2,
+      "vocab_size": 5
+    },
+    {
+      "control": "C2",
+      "device": "cpu",
+      "dtype": "float64",
+      "fixture": "rank_restricted_affine_vjp",
+      "hidden_gradient_cosine_vs_dense": 0.9941050831556038,
+      "hidden_width": 4,
+      "max_abs_bias_gradient_difference": 0,
+      "max_abs_head_gradient_difference": 0,
+      "max_abs_hidden_vjp_reference_error": 3.3306690738754696e-16,
+      "mode": "rms_matched",
+      "original_hidden_gradient_norm": 2.1700060015187157,
+      "rank": 2,
+      "restricted_hidden_gradient_norm": 2.170006001518716,
+      "valid_targets": 2,
+      "vocab_size": 5
+    },
+    {
+      "control": "C2",
+      "device": "cpu",
+      "dtype": "float64",
+      "fixture": "rank_restricted_affine_vjp",
+      "hidden_gradient_cosine_vs_dense": 1,
+      "hidden_width": 4,
+      "max_abs_bias_gradient_difference": 0,
+      "max_abs_head_gradient_difference": 0,
+      "max_abs_hidden_vjp_reference_error": 8.881784197001252e-16,
+      "mode": "scale_only",
+      "original_hidden_gradient_norm": 2.1700060015187157,
+      "rank": 2,
+      "restricted_hidden_gradient_norm": 2.157213996587922,
+      "valid_targets": 2,
+      "vocab_size": 5
+    },
+    {
+      "control": "C2",
+      "device": "cpu",
+      "dtype": "float32",
+      "embedding_post_step_difference_norm": 0.011999977752566338,
+      "fixture": "native_chunked_head_shared_clip",
+      "global_clip": 1,
+      "head_first_moment_difference_norm": 0.010454457253217697,
+      "head_post_step_difference_norm": 0.000018053691746899858,
+      "hidden_width": 16,
+      "loss_sum_dense": 43.628082275390625,
+      "loss_sum_routed": 43.628082275390625,
+      "mode": "raw",
+      "rank": 8,
+      "seed": 7,
+      "valid_targets": 7,
+      "vocab_size": 512
+    }
+  ]
+}

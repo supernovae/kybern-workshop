@@ -1,0 +1,75 @@
+# Proposed 32k ROCm C0. Reading or validating this file does not admit a run.
+# Scientific settings follow ../lm-head-bottleneck/arm.yaml. See the runbook
+# for the common backend/measurement adaptation and absolute operational stops.
+schema_version: 2
+name: tinystories-gradient-routing-32k-rocm
+seed: 1  # published reference; bind each campaign seed explicitly
+model:
+  vocab_size: 32768
+  hidden_dim: 512
+  num_layers: 8
+  num_heads: 8
+  ffn_dim: 1376
+  max_seq_len: 512
+  tie_embeddings: false
+attention:
+  kind: dense
+  implementation: sdpa
+tokenizer:
+  path: ../tokenizer-32k/tokenizer.json
+dataset:
+  source: snapshot
+  revision: f54c09fd23315a6f9c86f9dc80f725de7d8f9c64
+  cache_dir: ../data
+  train_path: ../snapshot/train.jsonl
+  validation_path: ../snapshot/validation.jsonl
+  source_manifest_path: ../snapshot/manifest.json
+  license: CDLA-Sharing-1.0
+  train_max_documents: 1792647
+  validation_max_documents: 21990
+  train_max_tokens: 1000000000
+  validation_max_tokens: 10000000
+training:
+  seq_len: 512
+  micro_batch_size: 32
+  gradient_accumulation: 8
+  max_steps: 2961
+  max_tokens: 388104192
+  grad_clip_norm: 1.0
+  deterministic: false
+optimizer:
+  name: adamw
+  peak: 0.003
+  floor: 0.0003
+  warmup_steps: 100
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+evaluation:
+  # Integer full-horizon protocol ticks at floor(T/8), floor(T/2), and T.
+  # The named 512-step pilot derives a common 256-step interval instead.
+  every_steps: 370
+  max_batches: 64
+  text_documents: 2000
+  gradient_bottleneck: false
+logging:
+  root_dir: ../runs/gradient-routing-32k
+  every_steps: 10
+runtime:
+  engine: pytorch
+  backend: rocm
+  device_index: 0
+  secondary_device_indices: []
+  precision: bf16
+  compile_transformer_blocks: false
+  compile_output_head_loss: false
+  output_head_chunk_tokens: 2048
+  memory:
+    budget_bytes: 21474836480  # 20 GiB planning ceiling; external monitoring is also required
+    estimate_policy: enforce
+checkpoint:
+  every_steps: 1000
+  keep_periodic: false
+  save_on_new_best: false
+staging:
+  smoke_steps: 2
+  warmup_steps: 5

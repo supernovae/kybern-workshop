@@ -1,0 +1,184 @@
+{
+  "schema": "study-campaign-proposal/v1",
+  "status": "PROPOSED_NOT_ADMITTED",
+  "purpose": "Proposed end-to-end bounded conditional envelope with separate locked calibration, screen and fresh confirmation gates; not authorized by this document.",
+  "dependencies": [
+    "Authoritative full TinyStories source receipt, revision and split content identities; published 32k tokenizer and prepared IDs or explicitly label exact reconstruction/adaptation",
+    "Native RX 7900 XTX registration; physical claim and private local lifecycle accepted by current host",
+    "AMD same-start precision and no-op checks; budget/device/disk can accommodate charged setup, evaluator and both paths"
+  ],
+  "quote": {
+    "warmup": "100 original schedule updates",
+    "seed": 13,
+    "conditions": [
+      "dense C0",
+      "identity_trainable C4"
+    ],
+    "updates_per_condition": 40,
+    "training_targets_per_update": 131072,
+    "training_targets_per_condition": 5242880,
+    "physical_training_targets_total": 10485760,
+    "max_gpu_optimizer_updates_including_all_preparatory_probes": 88,
+    "setup_margin_updates": 8,
+    "hard_wall_seconds": 2700,
+    "hard_per_arm_seconds": 1200,
+    "terminal_cleanup_seconds": 300,
+    "vram_gib": 20,
+    "process_tree_ram_gib": 16,
+    "new_workspace_gib": 32,
+    "paid_compute": false,
+    "retries": 0,
+    "gpu_concurrency": 1,
+    "hard_stop": "Any cap, nonfinite output or state, input/claim mismatch, or mandatory setup exceeding envelope; do not substitute reduced batch/horizon"
+  },
+  "hardware_reference_only": {
+    "rocm_qualifier": "4k/tied/4096 labels per update, not an estimate for this recipe",
+    "historical_old_factor_intel_b70_arm_wall_seconds": [
+      2201.763,
+      2220.991,
+      2207.81
+    ],
+    "comparable_method_on_amd": false
+  },
+  "measurement": {
+    "design": "Charge initial and terminal validation, checkpoint, auth/probes, warmup and preparation; first 8 startup, 4 timing blocks of 8 thereafter. Record full-phase wall and native update-only wall independently, effective W and backbone hashes and step-1 actual deltas. No treatment CE unblinding to select threshold or practical effect.",
+    "backend": "Uncompiled common supported BF16 AMD setting, SDPA if validated at shape. Existing XPU-only compiled head cannot be assumed compatible. Fix the same output chunking for both before timing; any required loss-path change is a disclosed backend adaptation.",
+    "checkpoint_retention": "Current recovery and final matched states; per-arm resource inventory + verified consumer checks. No pruning unique data without owner approval."
+  },
+  "future_research_separately_gated": {
+    "status": "REQUIRES_COMBINED_APPROVAL_AND_EXACT_CALIBRATION_GATE",
+    "screen_seed": 17,
+    "fresh_confirming_seeds": [
+      101,
+      211,
+      307
+    ],
+    "pilot_updates_per_arm": 512,
+    "pilot_targets_per_arm": 67108864,
+    "pilot_total_targets_for_eight_arms": 536870912,
+    "full_public_horizon_per_arm": 2961,
+    "full_public_targets_per_arm": 388104192,
+    "full_total_targets_for_eight_arms": 3104833536,
+    "condition_time_quote": "Q_i(T)=ceil_to_300s(1.25 * (setup/startup_i+T*t_i+n_eval*eval_i+n_save*save_i+charged_probes_i)), nonoverlapping phases. t_i=max(p90 post-startup update time, slowest post-startup block mean).",
+    "budget": "Reserve 3*(Q0+Q4) fresh confirmation plus 5% recovery before 1*(Q0+Q4) screen; add calibration and separate baseline-repeat cost to set practical effect before treatment inspection. Each permission must include a real numeric cumulative wall and deadline, not just formula; decline if no headroom.",
+    "calibration_limitations": "40 updates wholly in warmup. No trained effect, power or hit-time inference. Freeze T after calibration; 512 is only a pilot, 2961 needed for one-published-pass horizon."
+  },
+  "alternative": {
+    "status": "OPTIONAL_DISTINCT_ALTERNATIVE_NOT_A_REPLACEMENT",
+    "recipe": "Workshop examples/tinystories-microlab",
+    "conditions": [
+      "C0 dense",
+      "C4 identity_trainable"
+    ],
+    "seed": 17,
+    "training_updates_per_arm": 1500,
+    "training_targets_per_arm": 3072000,
+    "warmup_steps": 50,
+    "dimensions": "V4096, untied, width128, 2 layers, context128, batch16",
+    "resource_quote": "8 CPU threads, 8 GiB RAM, 4 GiB new run output, up to 20 minutes per arm + 5 cleanup; quote, not local measured completion guarantee. Prepare and validate the exact reference 20k/500 splits and tokenizer before running. Requote on failure. No inference about historical 32k AMD recipe."
+  },
+  "proposed_combined_authorization": {
+    "acquisition": {
+      "provider": "Hugging Face public dataset roneneldan/TinyStories revision f54c09fd23315a6f9c86f9dc80f725de7d8f9c64, four train and one validation parquet, license CDLA-Sharing-1.0",
+      "source_lfs_blobs": {
+        "train": [
+          {
+            "blob_id": "f457b8ee94363800f857dc473192b278c8450030",
+            "lfs_sha256": "77cf780cebe52b6e83e3a2ac84bc56d8059363113e41d17a023f1d8b2ed0fc0b",
+            "path": "data/train-00000-of-00004-2d5a1467fff1081b.parquet",
+            "size": 248731111
+          },
+          {
+            "blob_id": "8ba50cbe13620913427aa1b9523bea45cfee5e83",
+            "lfs_sha256": "e2f173a6dcc2b5895183e8ad376e115bd5c06764eb0cfc01ce1add156b2d017f",
+            "path": "data/train-00001-of-00004-5852b56a2bd28fd9.parquet",
+            "size": 248171980
+          },
+          {
+            "blob_id": "0cdd3d0f5a02c7908a6dd034a7617ac32d88a75b",
+            "lfs_sha256": "cac73cd1a0973a7fccde022a5a5c78f8ba58ea6849541835c58e7c5fc747f2ef",
+            "path": "data/train-00002-of-00004-a26307300439e943.parquet",
+            "size": 245894874
+          },
+          {
+            "blob_id": "081ccde441777b0b5fd7fc43a1bf481227c8d61a",
+            "lfs_sha256": "862514ae75723ddd339337f1ef7617b88f82290dcddd57445e1d38d257ca7891",
+            "path": "data/train-00003-of-00004-d243063613e5a057.parquet",
+            "size": 247988350
+          }
+        ],
+        "validation": [
+          {
+            "blob_id": "ad0d699ddffd61b500898860f73dcc889850bb29",
+            "lfs_sha256": "33406a6206554cfc279c29c11f4df51528af487aa1a602b075566fc83c49dcab",
+            "path": "data/validation-00000-of-00001-869c898b519ad725.parquet",
+            "size": 9989127
+          }
+        ]
+      },
+      "exact_payload_bytes": 1000775442,
+      "max_network_bytes_gib": 1.25,
+      "max_cpu_prep_minutes": 75,
+      "max_cpu_threads_prepare": 8,
+      "rebuild": "Use canonical current source.yaml to create a NEW source lock, verify file sizes and LFS hashes against same revision, exclude old 500k sampling declaration. Verify cleaned train=1792647 / validation=21990; tokenizer SHA256 2bd4d6d8a7039aa94ba8ef1508d8816beef0a121d902f8fd5e15cd9029b27de4 and origin manifest 9936c81483e203dc6e25448c09cf97b7391e61fc910f471ed8687d9c22d5a2b7; independently verify prepared train 388198157 / dev 4647305 token counts and pin resulting digests. Counts alone do not prove equality; seek original prepared digests if absent, label as an exact-settings authenticated reconstruction, not byte-for-byte replication."
+    },
+    "caps": {
+      "gpu_count": 1,
+      "gpu_hours_including_probes_calibration_eval_save_wait_under_claim": 18,
+      "overall_hours_from_initial_acquisition": 30,
+      "stage_specific_deadline": "Stamp real UTC start and hard deadline in native job before first launch. No presumed reservation. If an intervening claim is in use, no interference; overall deadline does not extend.",
+      "calibration_minutes_max": 45,
+      "efficacy_hours_per_arm_max": 2,
+      "device_gib": 20,
+      "process_tree_ram_gib": 16,
+      "additional_disk_gib_from_admission_start": 64,
+      "retain_qualifier_payloads": true,
+      "gpu_hrs_reserved_for_recovery_shutdown": 0.9,
+      "shutdown_minutes_inside_reserve": 15,
+      "max_native_model_training_invocations": 12,
+      "max_disposable_gpu_updates_all_phases": 96,
+      "retry_limit": "No additional efficacy training invocations or budget refresh; one pre-GPU mechanical retry only if under all original caps. No scientific retries because unfavorable."
+    },
+    "runs_at_selected_horizon": {
+      "baseline_only_precision": {
+        "condition": "C0 twice, seed 13, same inputs, no treatment inspection to set practical effect; for endpoint jitter, not cross-seed variance. Historical between-seed evidence separate.",
+        "n": 2
+      },
+      "screen": {
+        "conditions": [
+          "C0",
+          "C4"
+        ],
+        "seed": 17,
+        "n": 2
+      },
+      "fresh_confirmation": {
+        "conditions": [
+          "C0",
+          "C4"
+        ],
+        "seeds": [
+          101,
+          211,
+          307
+        ],
+        "n": 6
+      },
+      "resource_gate": "After 2x40 calibration actually measure Q0,Q4. Reserve 3(Q0+Q4) for 6 fresh confirmation arms, 2Q0 for precision, 1(Q0+Q4) for screen and 0.9h for recovery/cleanup before any treatment screen. Include 25% margin, phase costs, prior used time, and every run. All reservations together plus calibration must fit 18h; each efficacy arm <=2h and disk must fit finals and transient generations. Use 2961 if it fits, else only an explicitly accepted 512-update post-warmup pilot; otherwise report new quote/stop. No other horizon/update/batch changes.",
+      "training_totals_including_calibration": {
+        "512_update_named_pilot": {
+          "scientific_optimizer_updates": 5200,
+          "total_optimizer_updates_max_including/setup": 5296,
+          "main_task_targets": 681574400
+        },
+        "2961_update_published_horizon": {
+          "scientific_optimizer_updates": 29690,
+          "total_optimizer_updates_max_including/setup": 29786,
+          "main_task_targets": 3891527680
+        }
+      },
+      "budget_arithmetic": "18h - 45m - 54m = 58,860 s available. Ten 512-update arms require 671,088,640 labels; 11,401 end-to-end labels/s accrued across arms before extra time margin, 14,252/s before 25% quote padding even if overhead were nil. If exact-shape observations miss the budget, stop before screen. These are necessary throughput gates, not predicted speeds."
+    },
+    "storage_basis": "Measured local free space ~805.2 decimal GB on WSL root after qualifier; protected older runs and qualifying environment remain untouched. Public study reported ~1.6 GB prepared data per 32k arm plus two checkpoints. Keep at most two routine rolling generations and final states per declared comparison; native preflight must fit 64 GiB incremental allowance without reliance on permanently deleting unique state. No corpus/weights upload or purchase."
+  }
+}

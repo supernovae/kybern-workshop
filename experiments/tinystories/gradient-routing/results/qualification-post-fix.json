@@ -1,0 +1,242 @@
+{
+  "accounting": {
+    "absolute_cap": 32,
+    "cumulative_gpu_optimizer_updates": 26,
+    "new_disposable_bf16_optimizer_updates": 6,
+    "new_model_optimizer_updates": 16,
+    "new_total_gpu_optimizer_updates": 22,
+    "new_training_targets_counting_both_trajectories": 65536,
+    "prior_disposable_bf16_optimizer_updates": 4
+  },
+  "all_eight_training_loss_values_match_exactly": true,
+  "current_frozen_manifest_sha256": "892a00620d7fe4c6d5f28d231bd51b8c66409bf1181d5c400e4ed35d6f132315",
+  "data": {
+    "both_token_array_digests_match_historical_prepared_arrays": true,
+    "converted_document_counts": {
+      "excluded": 0,
+      "train": 500000,
+      "validation": 4096
+    },
+    "dataset": "TinyStories",
+    "native_refit_byte_identical": true,
+    "prepared_manifest_sha256": "49c3caa1a7cfea35373f27321ed568b752dc69132fec76d3d47f15f7aaaf61bf",
+    "source": "a new native local_text conversion of the historical bounded snapshot",
+    "supervision": "all_tokens",
+    "tokenizer_fit_documents": 50000,
+    "tokenizer_fit_utf8_bytes": 44631869,
+    "tokenizer_raw_sha256": "71707840b1c02e8a2c7cb72ecdf981a29dc96b2c332650349323d6ab3f96bf04",
+    "train_array_sha256": "5ee68aaa5db07a7c922f7134dc4ef397636a2a19d8edf6749bce674a652af65e",
+    "train_packed_tokens": 114864995,
+    "train_supervised_positions": 114864896,
+    "upstream_revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+    "validation_array_sha256": "34840d22a3070b77845f449661c3449151b621959041bbc1679efc397277e473",
+    "validation_packed_tokens": 859292,
+    "validation_supervised_positions": 859136
+  },
+  "device": {
+    "architecture": "gfx1100",
+    "framework": "PyTorch 2.15.0+rocm10.0",
+    "gpu": "AMD Radeon RX 7900 XTX",
+    "hip": "7.15.26333",
+    "host_environment": "Ubuntu WSL2",
+    "known_vendor_pin_drift": {
+      "networkx": [
+        "3.7",
+        "3.6.1"
+      ],
+      "setuptools": [
+        "84.0.0",
+        "81.0.0"
+      ]
+    },
+    "runtime_software": "identical staged vendor dependencies in a private clone plus editable Model Lab"
+  },
+  "eight_training_loss_values_nats": {
+    "1": 8.474130630493164,
+    "2": 8.459033966064453,
+    "3": 8.446870803833008,
+    "4": 8.448817253112793,
+    "5": 8.438619613647461,
+    "6": 8.416337966918945,
+    "7": 8.414045333862305,
+    "8": 8.390976905822754
+  },
+  "exact_state_at_step_4": {
+    "absolute_step": 4,
+    "continuous_checkpoint_manifest_sha256": "29f54a392f9e4da7e2676cb5157d170601d52ee50d897be7ac0c58947a109b8a",
+    "cursor_exact": true,
+    "optimizer_exact": true,
+    "processed_targets": 16384,
+    "rng_exact": true,
+    "scaler_exact": true,
+    "schedule_exact": true,
+    "split_checkpoint_manifest_sha256": "9da86e8fec13570c7944e424d5a75a591d3d42e7a42ea794abe867d7dbd8b07a",
+    "weights_exact": true
+  },
+  "exact_state_at_step_8": {
+    "data_cursor_exact": true,
+    "heldout_loss_exact": true,
+    "model_weights_exact": true,
+    "optimizer_state_exact": true,
+    "rng_exact": true,
+    "scaler_exact": true,
+    "schedule_exact": true
+  },
+  "format": "qualification-outcome-v1",
+  "heldout_loss_nats_each_step_8": 8.396094650030136,
+  "lab_git_commit": "760408a5c04c723a06a86c065f2764d604dc66c2",
+  "native_storage_regression_tests_passed": 10,
+  "preserved_recipe": {
+    "adamw_warmup_steps": 2048,
+    "attention": "dense reference",
+    "bf16": true,
+    "ffn": 1920,
+    "gradient_accumulation": 2,
+    "heads": 10,
+    "layers": 9,
+    "micro_batch": 8,
+    "operational_boundaries": [
+      8,
+      4,
+      8
+    ],
+    "parameters": 50556800,
+    "qualification_checkpoint_interval_steps": 4,
+    "scientific_max_steps": 244141,
+    "scientific_max_targets": 1000001536,
+    "seed": 42,
+    "sequence_length": 256,
+    "targets_per_update": 4096,
+    "tied_embeddings": true,
+    "vocab_size": 4096,
+    "width": 640
+  },
+  "prior_refusal_outcome": "qualification-public-outcome.json",
+  "prior_refusal_outcome_sha256": "96738d8c3f3bc03eeb3f7e3e241ed22bc967c500befed547a26c9e8a5a9d2ad4",
+  "receipt_checksums": {
+    "attempt_ledger": "af053181e3003c8b52a0f32c408e68af2815df9b0b3e14b6369e0468c74a6e77",
+    "fixed_storage_projection": "760d8ed6587764e6c341d452bfbbce7472cf5e3a6c506f93a6dd23c4fb4ebc52",
+    "midpoint_and_history": "dd5061b16ea6cb3a911e34f0bcecf1b79f6929095098232bc77bffead5664294",
+    "monitor_resource_samples": "5a275f91e39a6ee54a2b4af9fdd7921ff15f595e93e0df7c4228c2cb7b5fb68a",
+    "native_monitor": "f04a3d459a9f6236169437eaddc79dd5bb1f6f4cbd775e4a848840ec6142dcc8",
+    "owned_shutdown": "f09d85d7af5fd69c47fb1dbb677ab7c4cd5d458a21d4f7087a12ab7b5754a100",
+    "state_comparison": "43052203f0b34ff07f66b007ee1a83faff7c2fef7a74f65f0ba766cb69548def",
+    "storage_regression_tests": "0a0a896491599b319050e8f93257db27bc66a677e21478307d597a15606e110e"
+  },
+  "resource_observations": {
+    "all_checkpoints_retained": true,
+    "claim_released": true,
+    "guard_violations": [],
+    "host_available_ram_min_bytes": 28676038656,
+    "living_owned_descendants_after_completion": 0,
+    "model_allocator_peak_reserved_bytes": 2160066560,
+    "monitor_status": "COMPLETE",
+    "owned_tree_rss_peak_bytes": 3067224064,
+    "whole_card_and_workspace_samples": 93,
+    "whole_card_vram_sample_peak_bytes": 4790943744,
+    "workspace_sample_peak_bytes": 25682419712
+  },
+  "resume_parent_checkpoint_manifest_sha256": "9da86e8fec13570c7944e424d5a75a591d3d42e7a42ea794abe867d7dbd8b07a",
+  "reviewed_storage_fix_git_commit": "050d55639f3bb9dc23d6c54d26b615e87f2e6247",
+  "runs": [
+    {
+      "command_wall_time_approx_s": 39,
+      "full_state_checkpoint_verified": true,
+      "latest_checkpoint_manifest_sha256": "60e018d5a5b96083f9c10a784f3b0f5ee81f697ea713630fccfebf8c6a55caf4",
+      "max_device_reserved_bytes": 2160066560,
+      "native_end_to_end_s": 17.025944724911824,
+      "native_optimizer_s": 2.07516295905225,
+      "native_progress_status": "interrupted",
+      "native_run_report_sha256": "b3bc18407e49153af98e1a5c12e044fd2aa993afe7e8b0581a295a47aa1b5c61",
+      "native_verified_checkpoint_files": [
+        {
+          "name": "training_state.pt",
+          "sha256": "b8eb75143ecf738436fd10f722d176918a49aae2c1633f3e46777045190c84fe"
+        },
+        {
+          "name": "weights-00001.safetensors",
+          "sha256": "b1b13480205dfce797a9b88f7c7b871e4ebeec1144ce1197ca5f9a3c5d704412"
+        }
+      ],
+      "new_model_optimizer_updates": 8,
+      "phase_start_utc": "2026-11-18T15:14:54Z",
+      "processed_targets_including_parent": 32768,
+      "processed_targets_new": 32768,
+      "run_id": "gradient-routing-rocm-qualification-continuous-8",
+      "start_step": 0,
+      "step_target_positions": 4096,
+      "terminal_heldout_loss_nats": 8.396094650030136,
+      "terminal_step": 8,
+      "terminal_stop_reason": "stop_after_step"
+    },
+    {
+      "command_wall_time_approx_s": 37,
+      "full_state_checkpoint_verified": true,
+      "latest_checkpoint_manifest_sha256": "9da86e8fec13570c7944e424d5a75a591d3d42e7a42ea794abe867d7dbd8b07a",
+      "max_device_reserved_bytes": 2160066560,
+      "native_end_to_end_s": 15.452029571984895,
+      "native_optimizer_s": 1.0339118520496413,
+      "native_progress_status": "interrupted",
+      "native_run_report_sha256": "5995f995fefc9f1e813bd9130614939a1302dd84e9f79d5349c706fd0b49fd94",
+      "native_verified_checkpoint_files": [
+        {
+          "name": "training_state.pt",
+          "sha256": "8778ace57d110d0a6ccfba852848b6865ecc1ff4588d7dcab2987a67ec2c3a67"
+        },
+        {
+          "name": "weights-00001.safetensors",
+          "sha256": "e841977f67d7b5066c8b995468cfc0d8c0d651140ad089b2c7b87c69b175b59a"
+        }
+      ],
+      "new_model_optimizer_updates": 4,
+      "phase_start_utc": "2026-11-18T15:15:35Z",
+      "processed_targets_including_parent": 16384,
+      "processed_targets_new": 16384,
+      "run_id": "gradient-routing-rocm-qualification-split-4",
+      "start_step": 0,
+      "step_target_positions": 4096,
+      "terminal_heldout_loss_nats": 8.436078786849976,
+      "terminal_step": 4,
+      "terminal_stop_reason": "stop_after_step"
+    },
+    {
+      "command_wall_time_approx_s": 39,
+      "full_state_checkpoint_verified": true,
+      "latest_checkpoint_manifest_sha256": "2f30ed5cb87e8247530ce8de774e24dac2aa397e93a3c3db7f1f49771271d685",
+      "max_device_reserved_bytes": 2160066560,
+      "native_end_to_end_s": 17.624855158966966,
+      "native_optimizer_s": 0.9640589789487422,
+      "native_progress_status": "interrupted",
+      "native_run_report_sha256": "f482e35aa886ecbc4488786c8dd4674778f306c63ccbefb40da51cd761e81165",
+      "native_verified_checkpoint_files": [
+        {
+          "name": "training_state.pt",
+          "sha256": "e2e5b8c961a8d59d68dd49f334bd7264691df56faf3ff84afe105cce640e9bf3"
+        },
+        {
+          "name": "weights-00001.safetensors",
+          "sha256": "b1b13480205dfce797a9b88f7c7b871e4ebeec1144ce1197ca5f9a3c5d704412"
+        }
+      ],
+      "new_model_optimizer_updates": 4,
+      "phase_start_utc": "2026-11-18T15:16:14Z",
+      "processed_targets_including_parent": 32768,
+      "processed_targets_new": 16384,
+      "run_id": "gradient-routing-rocm-qualification-resumed-8",
+      "start_step": 4,
+      "step_target_positions": 4096,
+      "terminal_heldout_loss_nats": 8.396094650030136,
+      "terminal_step": 8,
+      "terminal_stop_reason": "stop_after_step"
+    }
+  ],
+  "runtime_registration_reused": true,
+  "scientific_inference": "None; tiny one-seed implementation/operations qualification.",
+  "scope": "Historical 4K/tied 50.56M TinyStories baseline continuation sanity check only; no efficacy inference, no published 32K recipe replay.",
+  "status": "PASS_BOUNDED_ROCM_FULL_STATE_RESUME",
+  "timing": {
+    "absolute_work_cutoff_utc": "2026-11-18T15:49:40Z",
+    "claim_utc": "2026-11-18T15:14:48Z",
+    "native_outer_elapsed_seconds": 130.76295095996466
+  }
+}

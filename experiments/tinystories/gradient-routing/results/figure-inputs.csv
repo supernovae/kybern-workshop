@@ -1,0 +1,11 @@
+observation,condition,metric,value,interpretation
+archived_4k_step0,raw,residual norm,0.918196194531489,pooled fraction; denominators in historical-m1.json
+archived_4k_step0,raw,retained energy,0.15691574834789201,pooled fraction; denominators in historical-m1.json
+archived_4k_step0,centered,residual norm,0.9181767867055175,pooled fraction; denominators in historical-m1.json
+archived_4k_step0,centered,retained energy,0.15695138835513056,pooled fraction; denominators in historical-m1.json
+cpu_fixture_seed7_step1,sgd/dense,effective head step magnitude difference (%),0,unclipped single update vs dense; not CE or speed
+cpu_fixture_seed7_step1,sgd/identity_frozen,effective head step magnitude difference (%),0,unclipped single update vs dense; not CE or speed
+cpu_fixture_seed7_step1,sgd/identity_trainable,effective head step magnitude difference (%),0.4788714980400677,unclipped single update vs dense; not CE or speed
+cpu_fixture_seed7_step1,adamw/dense,effective head step magnitude difference (%),0,unclipped single update vs dense; not CE or speed
+cpu_fixture_seed7_step1,adamw/identity_frozen,effective head step magnitude difference (%),0,unclipped single update vs dense; not CE or speed
+cpu_fixture_seed7_step1,adamw/identity_trainable,effective head step magnitude difference (%),1.4228748968023064,unclipped single update vs dense; not CE or speed

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 390" role="img" aria-labelledby="t d"><title id="t">Baseline restart check: development CE at matched targets</title><desc id="d">The two trajectories overlap at steps 0 and 8. The split and resumed runs also evaluate the same step-4 checkpoint state.</desc><rect width="880" height="390" fill="white"/><g font-family="Arial,sans-serif" fill="#182c40">
+<text x="24" y="38" font-size="22" font-weight="bold">Baseline restart check: development CE at matched targets</text><text x="24" y="65" font-size="14">4k tied baseline, one seed; scores on 65,536 development targets. No treatment model or uncertainty band.</text>
+<path d="M85 292.0H850" stroke="#dfe6e9"/><text x="72" y="296.0" text-anchor="end" font-size="13">8.39</text>
+<path d="M85 236.0H850" stroke="#dfe6e9"/><text x="72" y="240.0" text-anchor="end" font-size="13">8.41</text>
+<path d="M85 180.0H850" stroke="#dfe6e9"/><text x="72" y="184.0" text-anchor="end" font-size="13">8.43</text>
+<path d="M85 124.0H850" stroke="#dfe6e9"/><text x="72" y="128.0" text-anchor="end" font-size="13">8.45</text>
+<path d="M85.0 292v6" stroke="#637384"/><text x="85.0" y="313" text-anchor="middle" font-size="13">0</text>
+<path d="M272.1 292v6" stroke="#637384"/><text x="272.1" y="313" text-anchor="middle" font-size="13">8,192</text>
+<path d="M459.1 292v6" stroke="#637384"/><text x="459.1" y="313" text-anchor="middle" font-size="13">16,384</text>
+<path d="M646.2 292v6" stroke="#637384"/><text x="646.2" y="313" text-anchor="middle" font-size="13">24,576</text>
+<path d="M833.3 292v6" stroke="#637384"/><text x="833.3" y="313" text-anchor="middle" font-size="13">32,768</text>
+<path d="M85 292H850" stroke="#637384"/><text x="445" y="340" text-anchor="middle" font-size="14">Valid main-task training targets</text><text x="22" y="228" transform="rotate(-90 22 228)" font-size="13">Development CE (nats)</text>
+<circle cx="85.000" cy="120.177" r="7" stroke="#296e96" fill="none" stroke-width="2"/>
+<circle cx="833.284" cy="274.935" r="7" stroke="#296e96" fill="none" stroke-width="2"/>
+<circle cx="85.000" cy="120.177" r="3.5" stroke="#d2712d" fill="#d2712d" stroke-width="2"/>
+<circle cx="459.142" cy="162.979" r="3.5" stroke="#d2712d" fill="#d2712d" stroke-width="2"/>
+<circle cx="459.142" cy="162.979" r="3.5" stroke="#d2712d" fill="#d2712d" stroke-width="2"/>
+<circle cx="833.284" cy="274.935" r="3.5" stroke="#d2712d" fill="#d2712d" stroke-width="2"/>
+<circle cx="485" cy="86" r="6" fill="none" stroke="#296e96" stroke-width="2"/><text x="498" y="91" font-size="13">uninterrupted</text><circle cx="631" cy="86" r="4" fill="#d2712d"/><text x="641" y="91" font-size="13">split + resumed</text><text x="24" y="372" font-size="12">The two trajectories overlap at steps 0 and 8. The split and resumed runs also evaluate the same step-4 checkpoint state.</text></g></svg>
