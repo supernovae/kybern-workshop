@@ -1,6 +1,6 @@
 # Devmind
 
-Devmind is a 1.05B-parameter decoder (845M active per token; 201M of the parameters are Engram table rows) trained from scratch with
+Devmind is a 1.25B-parameter decoder (845M active per token; 403M of the parameters are Engram table rows) trained from scratch with
 [Kybern Model Lab](https://github.com/supernovae/model-lab), biased toward
 software development: Python first, then JavaScript and TypeScript, GitHub
 issues and pull requests, and reference documentation. It is meant to be a
@@ -8,20 +8,21 @@ complete demonstration of Lab, from pinned sources to a chat model, and a
 baseline to change one thing at a time.
 
 **Nothing has been trained from this recipe yet.** The declarations load with
-Lab, the model shape has been measured on Arc Pro B70s for a handful of
-updates, and the data has not been downloaded. The sections below say which
+Lab, the model shape has been measured on four Arc Pro B70s for a few hundred
+updates on synthetic tokens, and the corpus has been built but the first real
+warmup has not run. The sections below say which
 numbers were measured and which are plans.
 
 ## What it is
 
 | | |
 | --- | --- |
-| Parameters | 1,046,080,128, of which 844,737,536 are active per token (`klab inspect`; the 201,343,104 Engram table parameters and the memory adapters are the difference from the 730M dense core); 28 layers, width 1,536, 24 heads, feed-forward 4,096 |
+| Parameters | 1,247,407,744, of which 844,737,536 are active per token (the 402,670,720 Engram table parameters and the memory adapters are the difference from the 730M dense core; the tables are sparse, so they add memory but no compute; computed from the table rows, since `klab inspect` fails on the flex config, see Known gaps); 28 layers, width 1,536, 24 heads, feed-forward 4,096 |
 | Context | Pretrained at 4,096 tokens, then lengthened to 16,384 and 32,768 tokens in two short stages with YaRN RoPE scaling |
-| Attention | Dense causal attention through flash SDPA, standard RoPE base during pretraining |
-| Memory | Engram n-gram tables (orders 2 and 3, two hash heads) after blocks 1 and 14, from the first update |
+| Attention | Dense causal attention. Pretraining uses compiled flex attention (`attention-flex.yaml`); the long-context and chat stages recompute and keep flash SDPA (`attention.yaml`). Standard RoPE base during pretraining |
+| Memory | Engram n-gram tables (orders 2 and 3, two hash heads) after blocks 1 and 14, from the first update; order 2 at about 524k rows and order 3 at about 1.05M rows per head |
 | Tokenizer | 32,768-entry BPE fitted on the corpus, with the ChatML markers as single tokens |
-| Pretraining | 12 billion tokens in ten strata, see [corpus](corpus/README.md); two cards, compiled blocks and loss, no activation recomputation |
+| Pretraining | 12 billion tokens in ten strata, see [corpus](corpus/README.md); four cards with `zero1`, compiled blocks, flex attention, fused AdamW, no activation recomputation |
 | After pretraining | two long-context stages (750 million tokens), then chat tuning, then optional preference tuning, see [post-training](post-training/README.md) |
 
 The earlier 340M model and its later variants are gone from this directory.
@@ -29,8 +30,9 @@ Their files are in Git history before this recipe was added.
 
 ## Files
 
-- `model.yaml`, `attention.yaml`, `optimizer.yaml`: the model, its attention and
-  the pretraining optimizer.
+- `model.yaml`, `attention.yaml`, `attention-flex.yaml`, `optimizer.yaml`: the
+  model, its attention (flash SDPA for every stage that recomputes, compiled
+  flex for pretraining) and the pretraining optimizer.
 - `pretrain.yaml`, `long-context.yaml`, `long-context-32k.yaml`,
   `post-training/instruct.yaml`, `post-training/prefer.yaml`: one section per
   training stage. Each stage starts from the previous stage's run.
@@ -48,7 +50,64 @@ Their files are in Git history before this recipe was added.
 
 ## What was measured
 
-Arc Pro B70 (32 GiB), bf16, this model with a 32,768-entry tokenizer, Python
+### Four cards, tuned (the pretraining configuration)
+
+Four Arc Pro B70 (32 GiB), bf16, this model, 4,096-token rows, updates of
+131,072 targets, PyTorch 2.15.0+xpu, Lab PR #524 (`klab runtime tune`). These
+runs fed **synthetic tokens**, for 2 to 150 updates each; the first warmup on
+the real prepared data re-measures them. All use compiled blocks, micro-batch
+1, `training.deterministic: false` and one process per card confined with
+`ZE_AFFINITY_MASK` (Lab does it).
+
+| Parallel mode and settings | Targets/s | Device peak |
+| --- | --- | --- |
+| One card, flash SDPA, recomputation on, unfused AdamW (starting point) | 5,850 | 17.9 GiB |
+| One card, flex, recomputation off, fused AdamW | 9,840 | 24.3 GiB |
+| Four cards `replicated` (host-staged gradient merge) | 24,310 | 24.3 GiB |
+| Four cards `zero1` | **36,550** | 19.4 GiB |
+| Four cards `zero2`, micro-batch 2 | 36,750 | 22.7 GiB |
+| Four cards `zero2` | 32,160 | 16.5 GiB |
+| Four cards `fsdp` | 24,630 | 12.8 GiB |
+| Four cards `zero1`, 2x Engram tables (the recipe) | **36,190** | 21.5 GiB |
+
+The recipe's burn-in ran 150 updates in about 9 minutes at a steady 3.60 s per
+update (3.57 to 3.62), with host RAM peaking near 33 GB. At 36.4k targets/s,
+12 billion tokens take about **3.8 days**. What mattered, in order: compiled
+flex attention (about 1.6x: 44 against 21 TFLOPS at head_dim 64), recomputation
+off (about 1.2x), `zero1` over xccl in place of the host-staged merge (1.5x on
+four cards), and fused AdamW (2%). Larger micro-batches gave under 5%. GEMMs
+already ran near the card's peak (about 140 TFLOPS), and all 28 blocks compile
+with no graph breaks; what stays eager is the Engram lookup, the chunked head,
+gradient accumulation and clipping.
+
+Limits found on this box, all recorded in Lab's `docs/intel-xpu.md`:
+
+- `zero1` at micro-batch 2, and any sharded mode with 4x Engram tables (1M and
+  2M rows), stall in an xccl collective after one to three updates. The kernel
+  log shows copy-engine job timeouts and engine resets on the `xe` driver
+  and `VM worker error: -12`. oneCCL IPC-cache and temp-buffer switches and
+  `UR_L0_V2_FORCE_DISABLE_COPY_OFFLOAD` did not help. The recipe stays at
+  micro-batch 1 with 2x tables; watch the first hour of the run. A killed stall
+  can leave a card unusable for about a minute.
+- A process that sees several Arc cards mirrors device memory in host RAM.
+  Lab confines each rank to its card; never set `ZE_AFFINITY_MASK` to an
+  empty value, and never use `PYTORCH_ALLOC_CONF=expandable_segments:True`
+  (it removes the mirror but stalls xccl). Four-card host RAM is about 33 GB.
+- Flex attention cannot be recomputed (PyTorch issue 166926), so it needs
+  recomputation off; Lab refuses the combination. Rows of 16,384 and 32,768
+  tokens need recomputation and keep SDPA.
+- Engram table size does not change step time; each 4x costs about 9 GiB of
+  weights, gradients and Adam state per card in replicated mode.
+  `klab data engram-sizing` on 33.5M sampled tokens projected 3.6 billion
+  distinct trigrams at 12 billion tokens, so 2x tables are still well under the
+  25 percent collision target the sizing tool recommends (about 37.7M rows,
+  2.4B parameters). Take the 2x tables as a first run; if the first run shows
+  the memory is useful, a later run can go larger once the collective stall is
+  fixed or the tables are sharded.
+
+### Earlier measurements (two cards, SDPA, smaller tables)
+
+Arc Pro B70 (32 GiB), bf16, the same model with 65,537-row Engram tables and a 32,768-entry tokenizer, Python
 source as text, Lab at `475b76d7`, PyTorch 2.15.0+xpu. One row per microbatch,
 updates of 131,072 targets except where noted, 10 updates per run; targets/s is
 the median of updates 4 to 10. Every run set `ZE_AFFINITY_MASK` so the process
@@ -78,13 +137,12 @@ trained dense model.
 
 What that means for the plan:
 
-- **Pretrain on 4,096-token rows, on both cards.** They are 47% faster than
-  8,192-token rows and leave 9 GiB of the card free; 8,192 fits with 3 GiB to
-  spare. One run on both cards trained at 12,682 targets/s, so 12 billion
-  tokens take about 11 days (17 on one card). Card 0 also drives the desktop:
-  alone it ran at 6,773 targets/s against 8,124 on card 1, and every update
-  waits for the slower card, so close GPU-heavy desktop applications during
-  the run. Host RAM use for the two-card run was 20.9 GiB.
+- **Pretrain on 4,096-token rows, on all four cards.** They are 47% faster than
+  8,192-token rows. The earlier two-card SDPA run trained at 12,682 targets/s;
+  the tuned four-card configuration above is about 2.9 times that. Card 0 may
+  also drive the desktop: alone it ran at 6,773 targets/s against 8,124 on
+  card 1, and every update waits for the slower card, so close GPU-heavy
+  desktop applications during the run. Host RAM use for the two-card run was 20.9 GiB.
 - **Lengthen the context at the end, in two short stages.** Almost all
   training stays at 4,096 tokens, where it is cheapest. Then stage 2 trains
   500 million tokens on 16,384-token rows and stage 3 250 million on
@@ -102,12 +160,10 @@ What that means for the plan:
   parameters roughly halves the speed, and the card has little room left at
   4,096-token rows without recomputation.
 
-The measurements above were taken with the earlier, smaller Engram tables
-(65,537 rows). The larger tables add about 2.7 GiB of weights, gradients and
-optimizer state (an estimate; the first warmup measures it). Lab's memory planner
-estimates 35.1 GiB for the pretraining config, against the 23.1 GiB measured
-before the enlargement, and would refuse it, so `pretrain.yaml` sets
-`runtime.memory.estimate_policy: observe`. Keep the spill guard on (the
+The two-card measurements were taken with the earlier, smaller Engram tables
+(65,537 rows). Lab's memory planner estimates well above its ceiling for the
+pretraining config, against the 21.5 GiB measured, and would refuse it, so
+`pretrain.yaml` sets `runtime.memory.estimate_policy: observe`. Keep the spill guard on (the
 default): a run that outgrows the card on XPU slows to a stop instead of
 failing, and the guard stops it.
 
@@ -260,7 +316,7 @@ reuse the same inventory file.
 
 ```sh
 klab config compose "$R/pretrain.yaml" model="$R/model.yaml" \
-  attention="$R/attention.yaml" optimizer="$R/optimizer.yaml" \
+  attention="$R/attention-flex.yaml" optimizer="$R/optimizer.yaml" \
   "$WORK/paths.yaml" --output "$WORK/pretrain.yaml"
 klab inspect "$WORK/pretrain.yaml"
 PREPARED=$(klab data prepare "$WORK/pretrain.yaml")  # prints the published root
@@ -283,11 +339,11 @@ exits non-zero on any FAIL and `klab train` refuses a pretraining run without
 its report. Read every WARN before starting; commit and merge the recipe and
 Lab first, since a dirty or unmerged tree is a WARN.
 
-`pretrain.yaml` trains on cards 0 and 1. Do not set `ZE_AFFINITY_MASK`
+`pretrain.yaml` trains on cards 0 to 3 with `runtime.parallel.mode: zero1`. Do not set `ZE_AFFINITY_MASK`
 yourself: Lab confines each of its processes to its own card, and a mask you
-set is left alone, so `ZE_AFFINITY_MASK=0` would hide card 1 from the run. Read
-the warmup's measured device peak and targets/s before committing weeks of
-compute, and record them here.
+set is left alone, so `ZE_AFFINITY_MASK=0` would hide the other cards from the run. Read
+the warmup's measured device peak and targets/s before committing days of
+compute and compare them with the table above; record them here.
 
 ### 4. After pretraining
 
@@ -303,6 +359,8 @@ Open in Lab:
 | A mixture cannot select or upweight long documents, and its stratum shares must match the release | The long-context stages get only as many long documents as the corpus holds in pretraining's shares; read the share from the mixture receipt's `row_layout` | |
 | Grouped-query attention is refused with SDPA | Full-width keys and values: about 5.3 GiB of generation cache per 32,768-token sequence | |
 | The leakage screen covers probe items only | Nothing checks the corpus against HumanEval or MBPP | |
+| `klab inspect` fails on a flex-attention config | Read parameter counts from the table rows; `klab stage` is unaffected | [#525](https://github.com/supernovae/model-lab/issues/525) |
+| Sharded modes stall in an xccl collective at micro-batch 2 or with 4x Engram tables | The recipe stays at micro-batch 1 with 2x tables; larger tables wait for a fix or table sharding | [#526](https://github.com/supernovae/model-lab/issues/526) |
 
 Now in Lab and not yet used by this recipe: remote-code Hugging Face export
 (#415), chat and multi-field converters (#416), per-stratum `max_exposures`

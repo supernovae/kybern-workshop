@@ -9,3 +9,5 @@ eps: 1.0e-08
 memory_table_lr_multiplier: 5.0
 memory_table_weight_decay: 0.0
 state_offload: false
+# One fused AdamW kernel; about 2 percent faster.
+fused: true

@@ -1,0 +1,7 @@
+# Pretraining attention: compiled flex attention, about twice as fast as the
+# B70's flash SDPA kernel at head_dim 64 (44 against 21 TFLOPS). Compose it in
+# place of attention.yaml for stage 1 only. Flex cannot be recomputed (PyTorch
+# #166926), so it needs recomputation off, which only the 4,096-token rows fit.
+# The long-context and chat stages recompute and keep attention.yaml (SDPA).
+kind: dense
+implementation: flex
