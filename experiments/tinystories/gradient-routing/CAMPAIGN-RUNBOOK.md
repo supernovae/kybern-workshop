@@ -91,20 +91,7 @@ qualifier or Intel timings as AMD 32k estimates.
    The second derive applies the single setting declared by the C4 delta;
    check its native sidecar. Offline canonical validation and shape inventory
    do not open data, initialize ROCm, or qualify execution.
-2. Before a multi-update run, verify the actual same-start path at the chosen
-   AMD BF16 shape. On a fixed valid batch require equal initial backbone and
-   effective-head tensors and RNG/sampler order, dtype-tolerant logits/CE,
-   trunk and common-head derivatives, and a frozen-identity null with no
-   optimizer entry for B. Record pre/post-clip gradients separately from
-   realized step-1 effective-weight and trunk changes; trainable C4 need not
-   match C0's update. Verify initialized A=ordinary W and exact B=I; same
-   seed alone is not the receipt. The CPU fixture verifies construction but cannot qualify these
-   ROCm and chunked execution checks. Native training currently logs scalar
-   norms, not pre/post-clip gradient tensors or same-start proofs; standard
-   checkpoint records alone do not recover them. Use only a separately
-   approved, bounded capture that fits the proposal's disposable-update and
-   invocation accounting. If unavailable, mark missing and stop the launch;
-   do not add a hidden training invocation.
+2. Use the native calibration runs themselves for the device measurements below.
 3. Legacy inline gradient observation stays off for both arms: the chunked
    training evaluator rejects full-logits observers. An optional sparse
    standalone checkpoint projection on the final matched screen pair only
@@ -119,3 +106,16 @@ qualifier or Intel timings as AMD 32k estimates.
    according to [retention policy](RETENTION.md).
 
 **Operational guard before any 32k GPU run (16:15 UTC):** All arms now explicitly set the native PyTorch allocator ceiling to 0.72 of device memory, in addition to the 20 GiB planner/whole-card cap and host monitor. The original declaration had only the planner budget; the default 0.90 allocator fraction alone would allow more than 20 GiB on this device. This amendment tightens every arm equally. It does not alter model, token, seed, precision, loss, LR, evaluation, or stopping schedule. Native allocator limits do not cover all device allocations or other users, so the whole-card preflight and live guard remain mandatory. No GPU run had started.
+
+### Actual device measurements
+
+**16:22 UTC, before the first 32k model run.** Rather than add a separate
+parity launcher, use the ordinary C0 and C4 calibration runs. For both, record
+each update and request the native step-1 checkpoint. Compare initial tensors,
+initial validation CE, and the first realized effective-head and trunk update
+where native artifacts allow. Report what was directly recorded, what can
+be derived from optimizer state, and what remains unmeasured. The frozen
+identity raw-derivative comparison already has a CPU fixture; that does not
+establish device-level raw tensor parity. No third model run and no new build
+gate. This updates the execution method in the original numerical plan;
+it does not change treatment, seeds, thresholds or either efficacy endpoint.

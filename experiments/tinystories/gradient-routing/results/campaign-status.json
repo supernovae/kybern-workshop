@@ -1,7 +1,7 @@
 {
   "format": "gradient-routing-32k-milestone-v1",
-  "as_of_utc": "2026-11-18T16:15:00Z",
-  "state": "CANONICAL_SNAPSHOT_VERIFIED_BPE_FIT_ACTIVE",
+  "as_of_utc": "2026-11-18T16:22:00Z",
+  "state": "ORIGINAL_32K_BPE_VERIFIED_PACKING_ACTIVE",
   "prior_allocation": "Complete: separate 4k tied ROCm engineering qualifier, 26/32 total optimizer updates. Do not add those to current counts or treat them as routing efficacy.",
   "campaign_clock": {
     "first_source_acquisition_utc": "2026-11-18T15:54:15Z",
@@ -35,14 +35,18 @@
       "training_validation_overlaps_excluded": 6601,
       "training_empty_excluded": 230
     },
-    "trained_tokenizer_sha256_verified": false,
-    "prepared_packed_arrays": null
+    "trained_tokenizer_sha256_verified": true,
+    "prepared_packed_arrays": null,
+    "tokenizer_sha256": "2bd4d6d8a7039aa94ba8ef1508d8816beef0a121d902f8fd5e15cd9029b27de4",
+    "tokenizer_origin_sha256": "9936c81483e203dc6e25448c09cf97b7391e61fc910f471ed8687d9c22d5a2b7",
+    "tokenizer_fit_stories": 1115784,
+    "tokenizer_fit_utf8_bytes": 999999533
   },
   "science": {
     "condition": "ordinary untied C0 vs full-width trainable identity factor C4 from same function/rank",
     "reference_parameters": 58860032,
     "candidate_parameters": 59122176,
-    "calibration": "2 x 40 updates after actual BF16 parity; no learning conclusions in warmup",
+    "calibration": "2 x 40 ordinary native updates on real data; record fit/timing and same-start/step-1 observations from those runs; do not interpret warmup efficacy",
     "screen_seed": 17,
     "fresh_confirmation_seeds": [
       101,
@@ -57,9 +61,8 @@
     "heldout_c4_result": null
   },
   "pending": [
-    "Verify fitted 32k tokenizer against original public SHA and origin",
-    "Prepare and verify token arrays",
-    "Verify real-device numerical parity",
-    "Time complete C0/C4 workloads and reserve the gate before any screen"
+    "Finish packing the full training and development splits and record their identity",
+    "Run and time C0 and C4; use standard model checkpoints to compare initial state and first update",
+    "Select full versus pilot horizon with a quote covering all remaining arms"
   ]
 }
