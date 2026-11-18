@@ -1,7 +1,7 @@
 {
   "format": "gradient-routing-32k-milestone-v1",
-  "as_of_utc": "2026-11-18T16:22:00Z",
-  "state": "ORIGINAL_32K_BPE_VERIFIED_PACKING_ACTIVE",
+  "as_of_utc": "2026-11-18T16:32:00Z",
+  "state": "NATIVE_C0_CALIBRATION_LAUNCHED",
   "prior_allocation": "Complete: separate 4k tied ROCm engineering qualifier, 26/32 total optimizer updates. Do not add those to current counts or treat them as routing efficacy.",
   "campaign_clock": {
     "first_source_acquisition_utc": "2026-11-18T15:54:15Z",
@@ -12,9 +12,10 @@
     "device_gib_max": 20,
     "host_process_tree_gib_max": 16,
     "setup_optimizer_updates_max": 96,
-    "live_gpu_optimizer_updates_to_as_of": 0,
-    "live_scientific_model_invocations_to_as_of": 0,
-    "live_gpu_seconds_to_as_of": 0
+    "live_gpu_optimizer_updates_to_as_of": null,
+    "live_scientific_model_invocations_to_as_of": 1,
+    "live_gpu_seconds_to_as_of": null,
+    "clock_note": "Active device claim started 16:30:48Z; no terminal accounting yet."
   },
   "source": {
     "repository": "roneneldan/TinyStories",
@@ -36,7 +37,14 @@
       "training_empty_excluded": 230
     },
     "trained_tokenizer_sha256_verified": true,
-    "prepared_packed_arrays": null,
+    "prepared_packed_arrays": {
+      "train_tokens": 388198157,
+      "validation_tokens": 4647305,
+      "train_sha256": "6be6cf3717b2fdc2afd066c6b5039645c3e35351da46955c38fa652353e5c90d",
+      "validation_sha256": "6919226f74fc5784a9f7c0c790af3ef752e9ffa67174bbad6d731dfe82297ce8",
+      "prepared_manifest_sha256": "3ad86fe184eb5ec3bb5490438918b87e782df06db2dbed405a17a53ca4c7e3ac",
+      "original_hash_prefix_characters_verified": 8
+    },
     "tokenizer_sha256": "2bd4d6d8a7039aa94ba8ef1508d8816beef0a121d902f8fd5e15cd9029b27de4",
     "tokenizer_origin_sha256": "9936c81483e203dc6e25448c09cf97b7391e61fc910f471ed8687d9c22d5a2b7",
     "tokenizer_fit_stories": 1115784,
@@ -58,10 +66,10 @@
     "selected_horizon": null,
     "new_screen_pairs_completed": 0,
     "fresh_pairs_completed": 0,
-    "heldout_c4_result": null
+    "heldout_c4_result": null,
+    "calibration_c0_invocation_utc": "2026-11-18T16:30:55.482Z"
   },
   "pending": [
-    "Finish packing the full training and development splits and record their identity",
     "Run and time C0 and C4; use standard model checkpoints to compare initial state and first update",
     "Select full versus pilot horizon with a quote covering all remaining arms"
   ]
