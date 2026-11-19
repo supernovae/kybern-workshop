@@ -24,14 +24,17 @@ These are Frobenius norms of endpoint differences computed from the stored param
 
 C4's saved common-trunk and A first moments were both 0.990505084 times their C0 counterparts in norm, with cosines indistinguishable from 1 at the shown precision. The implied clip multipliers have the same ratio. C4's B first-moment norm was 0.013747592. With empty initial state, step 1 and AdamW beta1 = 0.9, the saved FP32 exp_avg divided by 0.1 approximates the postclip gradient seen by the optimizer. The proportional common moments are consistent with equal common derivatives followed by different global clipping; they do not independently recover the raw BF16 gradients. The logged preclip numbers are full-arm scalars, not per-parameter gradients.
 
-[Machine-readable receipt](results/calibration-32k-step-one.json) includes the four checkpoint digests, config/source hashes, and full numerical comparisons. It was computed on CPU using the Lab native checkpoint reader on only the explicit step-0 and step-1 generations; the two matching native `optimizer/grad_norm` rows were the only metric rows queried. Receipt SHA-256: `a9444527ac5a3e953bcedeb38338ffbcefd907590002ad217bc8188406740db4`. [Offline analysis source](compare_step_one.py), SHA-256: `750da252586ff682bbe0a6e097facdd0ac52ff443c39a4f8ade0f6c69d4c2816`.
+[Machine-readable receipt](results/calibration-32k-step-one.json) includes the four checkpoint digests, config/source hashes, and full numerical comparisons. It was computed on CPU using the Lab native checkpoint reader on only the explicit step-0 and step-1 generations; the two matching native `optimizer/grad_norm` rows were the only metric rows queried. Receipt SHA-256: `a9444527ac5a3e953bcedeb38338ffbcefd907590002ad217bc8188406740db4`. [Archived offline analysis source](https://github.com/supernovae/kybern-workshop/blob/51378f8b54cc4efac9157a7280a690b30ebb3f82/experiments/tinystories/gradient-routing/compare_step_one.py), SHA-256: `750da252586ff682bbe0a6e097facdd0ac52ff443c39a4f8ade0f6c69d4c2816`.
 
 This is a single-seed mechanism observation. It does not establish native logits or hidden-gradient equality, frozen-control parity, or better learning. The frozen arm and prespecified inline checks were not run here. No later checkpoint or efficacy metric was examined.
 
-Recompute with the same native checkpoint reader, not a training command:
+From the Workshop checkout, retrieve the archived comparator into scratch and verify its checksum. Use the Model Lab environment from the calibration (Lab commit above). The comparator reads existing checkpoints without training.
 
 ```sh
-python compare_step_one.py \
+scratch="$(mktemp -d)"
+git show 51378f8b54cc4efac9157a7280a690b30ebb3f82:experiments/tinystories/gradient-routing/compare_step_one.py > "$scratch/compare_step_one.py"
+printf '%s  %s\n' 750da252586ff682bbe0a6e097facdd0ac52ff443c39a4f8ade0f6c69d4c2816 "$scratch/compare_step_one.py" | sha256sum -c -
+python "$scratch/compare_step_one.py" \
   --c0-initial "$C0/checkpoints/step_00000000_gen_000001" \
   --c0-step-one "$C0/checkpoints/step_00000001_gen_000002" \
   --c4-initial "$C4/checkpoints/step_00000000_gen_000001" \
