@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" viewBox="0 0 870 364">
+<title id="t">One checkpoint, two different geometric quantities</title><desc id="d">Archived 4k tied TinyStories model at step 0; 128 training contexts. Pooled across all valid sampled targets. Norm and energy are not complements. Only squared residual norm subtracts from 1 to give retained energy.</desc>
+<rect width="870" height="364" fill="#fff"/><g font-family="Arial,sans-serif" fill="#172d40">
+<text x="24" y="37" font-weight="bold" font-size="23">One checkpoint, two different geometric quantities</text><text x="24" y="64" font-size="14">Archived 4k tied TinyStories model at step 0; 128 training contexts. Pooled across all valid sampled targets.</text>
+<path d="M222.0 92 v152" stroke="#e0e7ed"/><text x="222.0" y="264" text-anchor="middle" font-size="12">0.00</text>
+<path d="M349.0 92 v152" stroke="#e0e7ed"/><text x="349.0" y="264" text-anchor="middle" font-size="12">0.25</text>
+<path d="M476.0 92 v152" stroke="#e0e7ed"/><text x="476.0" y="264" text-anchor="middle" font-size="12">0.50</text>
+<path d="M603.0 92 v152" stroke="#e0e7ed"/><text x="603.0" y="264" text-anchor="middle" font-size="12">0.75</text>
+<path d="M730.0 92 v152" stroke="#e0e7ed"/><text x="730.0" y="264" text-anchor="middle" font-size="12">1.00</text>
+<text x="24" y="112" font-size="15">raw residual norm</text><circle cx="688.44" cy="107" r="6" fill="#26796c"/><text x="750" y="112" font-size="14">0.91820</text>
+<text x="24" y="150" font-size="15">raw retained energy</text><circle cx="301.71" cy="145" r="6" fill="#26796c"/><text x="750" y="150" font-size="14">0.15692</text>
+<text x="24" y="188" font-size="15">centered residual norm</text><circle cx="688.43" cy="183" r="6" fill="#435a96"/><text x="750" y="188" font-size="14">0.91818</text>
+<text x="24" y="226" font-size="15">centered retained energy</text><circle cx="301.73" cy="221" r="6" fill="#435a96"/><text x="750" y="226" font-size="14">0.15695</text>
+<text x="215" y="302" font-size="13">Pooled fraction on a common 0 to 1 scale</text><text x="24" y="337" font-size="13">Norm and energy are not complements. Only squared residual norm subtracts from 1 to give retained energy.</text></g></svg>

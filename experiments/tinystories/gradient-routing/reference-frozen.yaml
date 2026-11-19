@@ -1,0 +1,4 @@
+kind: delta
+question: Does an exactly frozen identity factor reproduce the ordinary dense head?
+set:
+  model.output_head_parameterization: identity_frozen

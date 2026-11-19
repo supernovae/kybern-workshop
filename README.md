@@ -13,6 +13,7 @@
 <p align="center">
   <a href="experiments/tinystories/README.md">TinyStories Base</a> ·
   <a href="experiments/tinystories/lm-head-bottleneck/README.md">LM-Head Experiment</a> ·
+  <a href="experiments/tinystories/gradient-routing/README.md">Live Gradient-Routing Study</a> ·
   <a href="examples/synthetic-cpu/README.md">Basic CPU Smoke</a> ·
   <a href="components/README.md">Custom Components</a> ·
   <a href="experiments/devmind/README.md">Devmind</a> ·

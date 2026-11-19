@@ -1,0 +1,101 @@
+{
+  "freeze_utc": "2026-11-18T16:51:00Z",
+  "decision": "FULL_2961",
+  "quality_blinding": "C4 learning curves and scores not read; initial equality and step-one tensor comparison only.",
+  "calibration": {
+    "source": "d605f003377173c4019e21c41a843bddeb7291cb",
+    "scientific_updates": 80,
+    "disposable_updates": 4,
+    "measured_claim_utc_seconds": 506,
+    "conservative_charge_s": 507
+  },
+  "efficacy": {
+    "source": "ac102d61aefa8be604514839e9aa85dcd0023d20",
+    "difference": "Only the externally reviewed native attempt plumbing from merged Model Lab #530; model, trainer loop, objective, optimizer, packing and runtime engine unchanged. Both conditions use the same source.",
+    "prepared_source_identity": "62fa94ed21b52061e1fba522b751e4c5d9fa1aaf2e7b434ea1b1802063a6ed5c",
+    "horizon": 2961,
+    "training_targets_per_arm": 388104192,
+    "arm_order": [
+      "13:C0:a",
+      "13:C0:b",
+      "17:C0",
+      "17:C4",
+      "101:C4",
+      "101:C0",
+      "211:C0",
+      "211:C4",
+      "307:C4",
+      "307:C0"
+    ],
+    "dev_ticks": [
+      0,
+      370,
+      740,
+      1110,
+      1480,
+      1850,
+      2220,
+      2590,
+      2960,
+      2961
+    ],
+    "predicted_native_saves": [
+      0,
+      1000,
+      2000,
+      2961
+    ],
+    "arm_source_parent": "d605f003377173c4019e21c41a843bddeb7291cb",
+    "model_lab_fix_head": "9eb0ce3f66c4778f999c2b2560d3b8a03ab8bbcd",
+    "model_lab_fix_merge": "cb3e6dedf11a21148a9cf8a266c6b01974aabce4"
+  },
+  "cost": {
+    "extra_service_observations_s": {
+      "maximum_paired_supervisor_differential_s": 1.863253101008013,
+      "cold_32k_c0_native_receipt_verify_s": 5.3793,
+      "cold_verify_additional_python_import_s": 0.2602,
+      "baseline_s": 0.033802558085881174,
+      "ledger_init_s": 0.031243006931617856,
+      "native_train_option_preflight_s": 0.006562308990396559,
+      "workspace_stat_s": 0.02745,
+      "incremental_estimate_larger_mature_checkpoint_s": 0.7903320937556207
+    },
+    "supervisor_timing_trials_s": [
+      0.7081288748886436,
+      1.863253101008013,
+      0.7510739950230345
+    ],
+    "same_receipt_repeat_s": 1.5971,
+    "mature_size_basis": "Across both calibration models, replace the small step-0 retained generation with a fully trained one (maximum extra 473,042,847 bytes). Scale by measured cold-read time per byte over C0's two arrays plus three verified native generations (3,219,709,040 bytes). This service growth is estimated, not measured on a 2,961-step model.",
+    "raw_extra_s_per_arm": 8.4,
+    "full": {
+      "raw_trainer_s": {
+        "C0": 4791.402,
+        "C4": 4758.511
+      },
+      "padded_s": {
+        "C0": 5999.7525,
+        "C4": 5958.63875
+      },
+      "Q_s": {
+        "C0": 6000,
+        "C4": 6000
+      }
+    },
+    "pilot_trainer_only_Q_s": {
+      "C0": 1500,
+      "C4": 1500
+    },
+    "reserve_s": 3240,
+    "campaign_s_limit": 64800,
+    "total_full_s": 63747,
+    "unassigned_s": 1053,
+    "storage_quote_decimal_gb_upper": 54,
+    "storage_limit_gib": 64,
+    "per_arm_wall_cap_s": 7200,
+    "scientific_arm_limit_including_calibration": 12
+  },
+  "clock": "Use a common pre-setup monotonic start and the native validation-completion event, not checkpoint publication. Actual time replaces quotes at each arm boundary without spending the outstanding arm/cleanup reserve.",
+  "excluded_work": "Stock completion generation triage is suppressed by an actual native attempt train contract; zero generation allocation. No standalone 2,000-story BPB or full-logit projection was included in the quote. Held-out development CE is the efficacy endpoint. No new GPU service or additional gate was introduced.",
+  "status": "Full baseline repeats dispatched; neither completed when frozen. Margin and fixed-time cap to be frozen from C0 only."
+}

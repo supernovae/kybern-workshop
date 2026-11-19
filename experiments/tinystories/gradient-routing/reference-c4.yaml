@@ -1,0 +1,4 @@
+kind: delta
+question: Does a full-width identity-initialized trainable factor change held-out NLL at matched targets?
+set:
+  model.output_head_parameterization: identity_trainable

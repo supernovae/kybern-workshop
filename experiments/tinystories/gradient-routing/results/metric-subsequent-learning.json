@@ -1,0 +1,34 @@
+{
+  "classification": "Descriptive archival cross-split association only; no correlation estimated. An incomplete epoch is missing and subgroup timing differs.",
+  "metric": "pooled centered residual norm and squared retained energy from 128 training stories",
+  "nll": "Archived development mean per valid training-vocabulary target, calculated on same 65536 fixed all-token development positions, not on geometry sample.",
+  "development_target_ids_le_i32_sha256": "7ee9a8811b4219d8d7eaf610a258f89bef16b8c363c6c21060517e0d7f81f9f8",
+  "development_npy_sha256": "34840d22a3070b77845f449661c3449151b621959041bbc1679efc397277e473",
+  "pairs": [
+    {
+      "t": 0,
+      "s": 256,
+      "metric_source": "results/historical-m1.json",
+      "start_residual_norm_fraction": 0.9181767867055175,
+      "start_retained_squared_energy_fraction": 0.15695138835513056,
+      "dev_ce_t": 8.451365411281586,
+      "dev_ce_s": 4.374564543366432,
+      "dev_ce_delta": -4.076800867915154,
+      "receipt_content_sha_t": "433e3a7a42643534e26814a9824dce3bcd7dbe525eb86e2f2793f3698065ca6b",
+      "receipt_content_sha_s": "74388c6a75e31f35b5b95a7cea92df28ba09a703fd596d319e5fe2dd6ad8d66d"
+    },
+    {
+      "t": 243968,
+      "s": 244141,
+      "metric_source": "results/historical-m1-a3.json",
+      "start_residual_norm_fraction": 0.8761652429401598,
+      "start_retained_squared_energy_fraction": 0.23233446706361072,
+      "dev_ce_t": null,
+      "dev_ce_s": 1.0752941630780697,
+      "dev_ce_delta": null,
+      "receipt_content_sha_t": null,
+      "receipt_content_sha_s": "7223dfc9793eded0882794aa2094b0c673540c508083265880a44b90637d5d74",
+      "reason": "No native evaluation receipt or metrics row at 243968; checkpoint validation_loss null. Prior nearby 243712 is not substituted."
+    }
+  ]
+}

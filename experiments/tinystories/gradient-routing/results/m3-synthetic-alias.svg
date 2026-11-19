@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 416" role="img" aria-labelledby="title desc">
+<title id="title">Synthetic alias test: equal discarded energy, different signal</title>
+<desc id="desc">Both arms have the same total null energy. Predictable alias energy includes conditional signal. Stochastic alias energy is all sampling variance. Paired dots are measured with one Monte Carlo standard error.</desc>
+<rect width="780" height="416" fill="white"/>
+<g font-family="Arial,sans-serif" fill="#15273d">
+<text x="48" y="37" font-size="23" font-weight="bold">Synthetic alias test: equal discarded energy, different signal</text>
+<text x="48" y="61" font-size="14">Fixed predictor, independent synthetic test generator, 8,192 trajectories</text>
+<text transform="translate(30 245) rotate(-90)" font-size="14">Squared residual units</text>
+<path d="M95 320.0H730" stroke="#8095a8"/>
+<text x="84" y="325.0" font-size="13" text-anchor="end">0.0</text>
+<path d="M95 278.0H730" stroke="#dfe8ef"/>
+<text x="84" y="283.0" font-size="13" text-anchor="end">0.1</text>
+<path d="M95 236.0H730" stroke="#dfe8ef"/>
+<text x="84" y="241.0" font-size="13" text-anchor="end">0.2</text>
+<path d="M95 194.0H730" stroke="#dfe8ef"/>
+<text x="84" y="199.0" font-size="13" text-anchor="end">0.3</text>
+<path d="M95 152.0H730" stroke="#dfe8ef"/>
+<text x="84" y="157.0" font-size="13" text-anchor="end">0.4</text>
+<path d="M95 110.0H730" stroke="#dfe8ef"/>
+<text x="84" y="115.0" font-size="13" text-anchor="end">0.5</text>
+<rect x="210" y="181.400" width="74" height="138.600" fill="#275782"/>
+<rect x="210" y="110.000" width="74" height="71.400" fill="#b5cde0"/>
+<path d="M306 180.772V181.872 M301 180.772h10 M301 181.872h10" stroke="#a23d22" stroke-width="2"/>
+<circle cx="306" cy="181.322" r="4" fill="#a23d22" stroke="white" stroke-width="0.6"/>
+<text x="259" y="352" font-size="16" text-anchor="middle">Predictable alias</text>
+<rect x="502" y="320.000" width="74" height="0.000" fill="#275782"/>
+<rect x="502" y="110.000" width="74" height="210.000" fill="#b5cde0"/>
+<path d="M598 318.805V320.695 M593 318.805h10 M593 320.695h10" stroke="#a23d22" stroke-width="2"/>
+<circle cx="598" cy="319.750" r="4" fill="#a23d22" stroke="white" stroke-width="0.6"/>
+<text x="551" y="352" font-size="16" text-anchor="middle">Stochastic alias</text>
+<rect x="78" y="377" width="12" height="12" fill="#275782"/><text x="97" y="388" font-size="13">Analytic signal</text>
+<rect x="223" y="377" width="12" height="12" fill="#b5cde0"/><text x="242" y="388" font-size="13">Analytic label variance</text>
+<circle cx="438" cy="383" r="4" fill="#a23d22"/><text x="451" y="388" font-size="13">Measured paired dot, ±1 MC SE</text>
+</g></svg>

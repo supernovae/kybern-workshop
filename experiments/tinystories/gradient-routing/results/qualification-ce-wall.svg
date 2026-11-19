@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 390" role="img" aria-labelledby="t d"><title id="t">Baseline restart check: development CE versus measured elapsed time</title><desc id="d">Includes the checkpoint handoff gap in the split trajectory. Excludes pre-CONFIGURED outer setup; full monitored job: 130.76 s.</desc><rect width="880" height="390" fill="white"/><g font-family="Arial,sans-serif" fill="#182c40">
+<text x="24" y="38" font-size="22" font-weight="bold">Baseline restart check: development CE versus measured elapsed time</text><text x="24" y="65" font-size="14">4k tied baseline, one seed; scores on 65,536 development targets. No treatment model or uncertainty band.</text>
+<path d="M85 292.0H850" stroke="#dfe6e9"/><text x="72" y="296.0" text-anchor="end" font-size="13">8.39</text>
+<path d="M85 236.0H850" stroke="#dfe6e9"/><text x="72" y="240.0" text-anchor="end" font-size="13">8.41</text>
+<path d="M85 180.0H850" stroke="#dfe6e9"/><text x="72" y="184.0" text-anchor="end" font-size="13">8.43</text>
+<path d="M85 124.0H850" stroke="#dfe6e9"/><text x="72" y="128.0" text-anchor="end" font-size="13">8.45</text>
+<path d="M85.0 292v6" stroke="#637384"/><text x="85.0" y="313" text-anchor="middle" font-size="13">0</text>
+<path d="M212.5 292v6" stroke="#637384"/><text x="212.5" y="313" text-anchor="middle" font-size="13">10</text>
+<path d="M340.0 292v6" stroke="#637384"/><text x="340.0" y="313" text-anchor="middle" font-size="13">20</text>
+<path d="M467.5 292v6" stroke="#637384"/><text x="467.5" y="313" text-anchor="middle" font-size="13">30</text>
+<path d="M595.0 292v6" stroke="#637384"/><text x="595.0" y="313" text-anchor="middle" font-size="13">40</text>
+<path d="M722.5 292v6" stroke="#637384"/><text x="722.5" y="313" text-anchor="middle" font-size="13">50</text>
+<path d="M850.0 292v6" stroke="#637384"/><text x="850.0" y="313" text-anchor="middle" font-size="13">60</text>
+<path d="M85 292H850" stroke="#637384"/><text x="445" y="340" text-anchor="middle" font-size="14">Seconds since first native CONFIGURED event of each trajectory</text><text x="22" y="228" transform="rotate(-90 22 228)" font-size="13">Development CE (nats)</text>
+<circle cx="229.170" cy="120.177" r="7" stroke="#296e96" fill="none" stroke-width="2"/>
+<circle cx="278.055" cy="274.935" r="7" stroke="#296e96" fill="none" stroke-width="2"/>
+<circle cx="224.925" cy="120.177" r="3.5" stroke="#d2712d" fill="#d2712d" stroke-width="2"/>
+<circle cx="248.566" cy="162.979" r="3.5" stroke="#d2712d" fill="#d2712d" stroke-width="2"/>
+<circle cx="753.012" cy="162.979" r="3.5" stroke="#d2712d" fill="#d2712d" stroke-width="2"/>
+<circle cx="783.682" cy="274.935" r="3.5" stroke="#d2712d" fill="#d2712d" stroke-width="2"/>
+<circle cx="485" cy="86" r="6" fill="none" stroke="#296e96" stroke-width="2"/><text x="498" y="91" font-size="13">uninterrupted</text><circle cx="631" cy="86" r="4" fill="#d2712d"/><text x="641" y="91" font-size="13">split + resumed</text><text x="24" y="372" font-size="12">Includes the checkpoint handoff gap in the split trajectory. Excludes pre-CONFIGURED outer setup; full monitored job: 130.76 s.</text></g></svg>

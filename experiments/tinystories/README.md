@@ -1,6 +1,6 @@
 # TinyStories base model
 
-[Workshop](../../README.md) · [LM-head experiment](lm-head-bottleneck/README.md) · [CPU microlab](../../examples/tinystories-microlab/README.md)
+[Workshop](../../README.md) · [LM-head experiment](lm-head-bottleneck/README.md) · [Live gradient-routing study](gradient-routing/README.md) · [CPU microlab](../../examples/tinystories-microlab/README.md)
 
 A 58.9M-parameter story model trained from scratch with
 [Kybern Model Lab](https://github.com/supernovae/model-lab) on every unique

@@ -1,0 +1,47 @@
+{
+  "observation_class": "historical_reanalysis_not_current_training",
+  "contrast": "rank512_old_factor_minus_dense",
+  "n": 3,
+  "mean": 0.04340055646995703,
+  "sample_sd": 0.005562102975541313,
+  "se": 0.0032112816501891957,
+  "t_critical_95_df2": 4.302652729911275,
+  "ci95_paired_t": [
+    0.029583526711256504,
+    0.05721758622865756
+  ],
+  "units": "nats_per_token",
+  "rows": [
+    {
+      "seed": 1,
+      "series": "../lm-head-bottleneck/results/sweep-20261113T230505Z-8c046567/series.csv",
+      "source_sha256": "2ed1f6021d43779653396be35f20ad494f21ef223f09afb71bb2af5c35609dc8",
+      "candidate_minus_dense_nats": 0.04189793020486832,
+      "nominal_tokens": 388104192,
+      "candidate_parameters": 59122176,
+      "source_recorded_wall_seconds": 2201.763,
+      "candidate_raw_residual_norm": 0.9882003068213363
+    },
+    {
+      "seed": 2,
+      "series": "../lm-head-bottleneck/results/sweep-20261113T230505Z-a2a5f28f/series.csv",
+      "source_sha256": "a5b3d53af02ef9efcdfc1321fe5fa587eddd7abe1e3db835321e0433a63eb4f9",
+      "candidate_minus_dense_nats": 0.04955960251390934,
+      "nominal_tokens": 388104192,
+      "candidate_parameters": 59122176,
+      "source_recorded_wall_seconds": 2220.991,
+      "candidate_raw_residual_norm": 0.9882444110530725
+    },
+    {
+      "seed": 3,
+      "series": "../lm-head-bottleneck/results/sweep-20261113T230505Z-be6c7739/series.csv",
+      "source_sha256": "e9127f84b87e411df172851ba835d6228723f3e2c137ed3503453ad4f3140e7c",
+      "candidate_minus_dense_nats": 0.038744136691093445,
+      "nominal_tokens": 388104192,
+      "candidate_parameters": 59122176,
+      "source_recorded_wall_seconds": 2207.81,
+      "candidate_raw_residual_norm": 0.9881812436108117
+    }
+  ],
+  "assumption": "independent approximately normal between-seed differences; conditional on published task/budget"
+}

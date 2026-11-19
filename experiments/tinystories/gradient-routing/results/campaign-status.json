@@ -1,0 +1,91 @@
+{
+  "format": "gradient-routing-32k-milestone-v1",
+  "as_of_utc": "2026-11-18T16:51:00Z",
+  "state": "FULL_2961_FROZEN_C0_REPEATS_DISPATCHED",
+  "prior_allocation": "Complete: separate 4k tied ROCm engineering qualifier, 26/32 total optimizer updates. Do not add those to current counts or treat them as routing efficacy.",
+  "campaign_clock": {
+    "first_source_acquisition_utc": "2026-11-18T15:54:15Z",
+    "hard_cutoff_utc": "2026-11-19T21:54:15Z",
+    "gpu_clock_hours_max": 18,
+    "wall_hours_max": 30,
+    "additional_disk_gib_max": 64,
+    "device_gib_max": 20,
+    "host_process_tree_gib_max": 16,
+    "setup_optimizer_updates_max": 96,
+    "live_gpu_optimizer_updates_to_as_of": 84,
+    "live_scientific_model_invocations_to_as_of": 2,
+    "live_gpu_seconds_to_as_of": 506,
+    "clock_note": "Contiguous device claim charged to UTC-second resolution. 80 scientific optimizer updates; four separate disposable startup updates."
+  },
+  "source": {
+    "repository": "roneneldan/TinyStories",
+    "revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+    "bounded_native_payload_bytes": 1000775442,
+    "bounded_native_metadata_bytes": 11749,
+    "metadata_lock_observed_received_bytes": 33348,
+    "verified_payload_objects": 5,
+    "source_lock_canonical_sha256": "05432d628a9eba8c12a1a6db7e97ee77f870885b17883cd13c2c7fed27a81afb",
+    "raw_inputs": {
+      "train": 2119719,
+      "validation": 21990
+    },
+    "cleaned_actual_counts": {
+      "train_retained": 1792647,
+      "validation_retained": 21990,
+      "training_duplicates_excluded": 320241,
+      "training_validation_overlaps_excluded": 6601,
+      "training_empty_excluded": 230
+    },
+    "trained_tokenizer_sha256_verified": true,
+    "prepared_packed_arrays": {
+      "train_tokens": 388198157,
+      "validation_tokens": 4647305,
+      "train_sha256": "6be6cf3717b2fdc2afd066c6b5039645c3e35351da46955c38fa652353e5c90d",
+      "validation_sha256": "6919226f74fc5784a9f7c0c790af3ef752e9ffa67174bbad6d731dfe82297ce8",
+      "prepared_manifest_sha256": "3ad86fe184eb5ec3bb5490438918b87e782df06db2dbed405a17a53ca4c7e3ac",
+      "original_hash_prefix_characters_verified": 8
+    },
+    "tokenizer_sha256": "2bd4d6d8a7039aa94ba8ef1508d8816beef0a121d902f8fd5e15cd9029b27de4",
+    "tokenizer_origin_sha256": "9936c81483e203dc6e25448c09cf97b7391e61fc910f471ed8687d9c22d5a2b7",
+    "tokenizer_fit_stories": 1115784,
+    "tokenizer_fit_utf8_bytes": 999999533
+  },
+  "science": {
+    "condition": "ordinary untied C0 vs full-width trainable identity factor C4 from same function/rank",
+    "reference_parameters": 58860032,
+    "candidate_parameters": 59122176,
+    "calibration": "2 x 40 ordinary native updates on real data; record fit/timing and same-start/step-1 observations from those runs; do not interpret warmup efficacy",
+    "screen_seed": 17,
+    "fresh_confirmation_seeds": [
+      101,
+      211,
+      307
+    ],
+    "full_horizon_updates_if_fits": 2961,
+    "named_post_warmup_pilot_updates_if_full_does_not_fit": 512,
+    "selected_horizon": 2961,
+    "new_screen_pairs_completed": 0,
+    "fresh_pairs_completed": 0,
+    "heldout_c4_result": null,
+    "calibration_c0_invocation_utc": "2026-11-18T16:30:55.482Z",
+    "calibration_result": {
+      "seed": 13,
+      "updates_per_arm": 40,
+      "main_targets_per_arm": 5242880,
+      "valid_eval_targets_per_pass": 1048576,
+      "eval_passes_per_arm": 2,
+      "owned_duration_s": {
+        "C0": 256.232,
+        "C4": 248.246
+      },
+      "common_initial_tensor_equality": true,
+      "step1_effective_head_update_norm_ratio": 1.107992444,
+      "step1_effective_head_update_cosine": 0.909481664,
+      "step1_trunk_update_cosine": 0.999999964
+    }
+  },
+  "pending": [
+    "Complete two independent seed-13 C0 baseline repeats; freeze practical margin and matched-time cap from those repeats alone",
+    "Execute seed-17 screen and three independent fresh pairs at the full scientific horizon"
+  ]
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" viewBox="0 0 870 440">
+<title id="t">Matched logits, different first updates</title><desc id="d">One CPU FP64 fixture; 7 supervised targets; no clipping; same initial head and trunk. Frozen identity and dense agree. Trainable factors change the update. These are optimizer diagnostics, not training outcomes.</desc>
+<rect width="870" height="440" fill="#fff"/><g font-family="Arial,sans-serif" fill="#172d40">
+<text x="24" y="37" font-weight="bold" font-size="23">Matched logits, different first updates</text><text x="24" y="64" font-size="14">One CPU FP64 fixture; 7 supervised targets; no clipping; same initial head and trunk.</text>
+<path d="M222.0 92 v228" stroke="#e0e7ed"/><text x="222.0" y="340" text-anchor="middle" font-size="12">0.00</text>
+<path d="M349.0 92 v228" stroke="#e0e7ed"/><text x="349.0" y="340" text-anchor="middle" font-size="12">0.40</text>
+<path d="M476.0 92 v228" stroke="#e0e7ed"/><text x="476.0" y="340" text-anchor="middle" font-size="12">0.80</text>
+<path d="M603.0 92 v228" stroke="#e0e7ed"/><text x="603.0" y="340" text-anchor="middle" font-size="12">1.20</text>
+<path d="M730.0 92 v228" stroke="#e0e7ed"/><text x="730.0" y="340" text-anchor="middle" font-size="12">1.60</text>
+<text x="24" y="112" font-size="15">SGD: dense</text><circle cx="222.00" cy="107" r="6" fill="#53626e"/><text x="750" y="112" font-size="14">0.00000</text>
+<text x="24" y="150" font-size="15">SGD: frozen identity</text><circle cx="222.00" cy="145" r="6" fill="#427d70"/><text x="750" y="150" font-size="14">0.00000</text>
+<text x="24" y="188" font-size="15">SGD: trainable identity</text><circle cx="374.04" cy="183" r="6" fill="#435a96"/><text x="750" y="188" font-size="14">0.47887</text>
+<text x="24" y="226" font-size="15">AdamW: dense</text><circle cx="222.00" cy="221" r="6" fill="#53626e"/><text x="750" y="226" font-size="14">0.00000</text>
+<text x="24" y="264" font-size="15">AdamW: frozen identity</text><circle cx="222.00" cy="259" r="6" fill="#427d70"/><text x="750" y="264" font-size="14">0.00000</text>
+<text x="24" y="302" font-size="15">AdamW: trainable identity</text><circle cx="673.76" cy="297" r="6" fill="#435a96"/><text x="750" y="302" font-size="14">1.42287</text>
+<text x="215" y="378" font-size="13">Effective head update norm: percent change from ordinary dense</text><text x="24" y="413" font-size="13">Frozen identity and dense agree. Trainable factors change the update. These are optimizer diagnostics, not training outcomes.</text></g></svg>

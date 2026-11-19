@@ -1,0 +1,282 @@
+{
+  "accounting": {
+    "absolute_total_gpu_optimizer_update_cap": 32,
+    "actual_disposable_gpu_optimizer_updates": 4,
+    "actual_model_updates": 0,
+    "actual_total_gpu_optimizer_updates": 4,
+    "completed_targets": 0,
+    "estimation_note": "Individual registration and training-phase elapsed times are approximate from phase timestamps, not separate monitor receipts. Native state and loss evidence require a published run.",
+    "planned_model_updates": 16,
+    "published_run_ids": [],
+    "remaining_gpu_optimizer_updates_under_absolute_cap": 28,
+    "remaining_update_budget_does_not_authorize_another_attempt": true
+  },
+  "attempt_clock": {
+    "first_claim_utc": "2026-11-18T14:54:40Z",
+    "planned_work_cutoff_utc": "2026-11-18T15:49:40Z",
+    "replacement_claim_utc": "2026-11-18T14:58:07Z"
+  },
+  "data": {
+    "both_token_array_digests_match_historical_prepared_arrays": true,
+    "converted_document_counts": {
+      "excluded": 0,
+      "train": 500000,
+      "validation": 4096
+    },
+    "dataset": "TinyStories",
+    "native_refit_byte_identical": true,
+    "prepared_manifest_sha256": "49c3caa1a7cfea35373f27321ed568b752dc69132fec76d3d47f15f7aaaf61bf",
+    "source": "a new native local_text conversion of the historical bounded snapshot",
+    "supervision": "all_tokens",
+    "tokenizer_fit_documents": 50000,
+    "tokenizer_fit_utf8_bytes": 44631869,
+    "tokenizer_raw_sha256": "71707840b1c02e8a2c7cb72ecdf981a29dc96b2c332650349323d6ab3f96bf04",
+    "train_array_sha256": "5ee68aaa5db07a7c922f7134dc4ef397636a2a19d8edf6749bce674a652af65e",
+    "train_packed_tokens": 114864995,
+    "train_supervised_positions": 114864896,
+    "upstream_revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+    "validation_array_sha256": "34840d22a3070b77845f449661c3449151b621959041bbc1679efc397277e473",
+    "validation_packed_tokens": 859292,
+    "validation_supervised_positions": 859136
+  },
+  "device": {
+    "architecture": "gfx1100",
+    "framework": "PyTorch 2.15.0+rocm10.0",
+    "gpu": "AMD Radeon RX 7900 XTX",
+    "hip": "7.15.26333",
+    "host_environment": "Ubuntu WSL2",
+    "known_vendor_pin_drift": {
+      "networkx": [
+        "3.7",
+        "3.6.1"
+      ],
+      "setuptools": [
+        "84.0.0",
+        "81.0.0"
+      ]
+    },
+    "runtime_software": "identical staged vendor dependencies in a private clone plus editable Model Lab"
+  },
+  "evidence": {
+    "exact_data_cursor": null,
+    "exact_model_weights": null,
+    "exact_optimizer_state": null,
+    "exact_rng": null,
+    "exact_scaler": null,
+    "exact_schedule": null,
+    "steady_state_loss": null,
+    "step8_heldout_loss_continuous": null,
+    "step8_heldout_loss_resumed": null
+  },
+  "format": "qualification-outcome-v1",
+  "frozen_manifests_sha256": [
+    "ae2a6f716d12e216275f38e28e873a27cf1adaf9aa2eadebe3f702868b90b85f",
+    "130d27215edd22d394146847dc9da1928fa2939ec39d8ae8bf4b858b0f1f5cf9"
+  ],
+  "lab_git_commit": "e02bfdb78b1553d81251d25e678c4a36ad47be84",
+  "native_failure": {
+    "available_bytes": 810147717120,
+    "available_inodes": 65987249,
+    "cause": "checkpoint-generation storage forecast uses the entire configured 244141-step schedule rather than the explicit operational stop at step 8",
+    "command": "klab train QUALIFICATION.yaml --runtime QUALIFICATION_RUNTIME --require-prepared --stop-after-step 8",
+    "error": "workspace storage preflight failed before publication",
+    "next": "Fix and regression-test the native warm and cold storage preflights; do not bypass planning or change the declared scientific schedule to admit this run.",
+    "projected_required_bytes": 46468927234711,
+    "projected_required_inodes": 980784
+  },
+  "phases": [
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 52.20902199903503,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 49795072,
+      "phase": "copy isolated staged runtime",
+      "status": "passed"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": null,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "official offline editable install and locked dependency consistency check",
+      "status": "passed"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 13.5,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "native conversion of historical JSONL and content count check",
+      "status": "passed"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 13.511596705997363,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 185524224,
+      "phase": "native cold replay of conversion",
+      "status": "passed"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": null,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "current schema validation and shape-only stage inspection",
+      "status": "passed; historical declaration with four removed fields refused current RunConfig"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": null,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "read-only tokenizer origin CLI check on local_text",
+      "status": "refused; not a frozen origin type"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": null,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "private installed runtime identity discovery in deny-network namespace",
+      "status": "passed; no BF16 optimizer authorization performed"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 2.28111161198467,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 315817984,
+      "phase": "native data prepare with original snapshot-bound tokenizer",
+      "status": "refused expected source-provenance mismatch, no packing"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 11.477247864939272,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 430104576,
+      "phase": "native tokenizer refit to authenticate local_text",
+      "status": "passed exact-byte match"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": null,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "native config derive before correcting CLI JSON value quoting",
+      "status": "refused before output"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 1.2459347159601748,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 61227008,
+      "phase": "after exact refit, data prepare with previously used observation path",
+      "status": "refused before packing"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 42.277008253964595,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 1006886912,
+      "phase": "native data prepare with byte-identical local_text refit",
+      "status": "passed"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 1.2441345810657367,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 38899712,
+      "phase": "first guarded launcher",
+      "status": "refused before GPU phase, wrong assumption about empty route-file representation"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": 2.29086137493141,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 42848256,
+      "phase": "non-training isolated namespace and resource guard diagnostic",
+      "status": "passed"
+    },
+    {
+      "aggregate_of_individual_phases": true,
+      "disposable_gpu_optimizer_updates": 4,
+      "elapsed_seconds": 56.861494481912814,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": 2579984384,
+      "phase": "one authorized replacement invocation",
+      "status": "completed supervised cleanup after native preflight refused"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 2,
+      "elapsed_seconds": 25,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "private native ROCm runtime registration",
+      "status": "READY"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 2,
+      "elapsed_seconds": 26,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "fresh uninterrupted baseline, planned 8 updates",
+      "status": "refused before run publication; configuration and staged data unchanged"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": null,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "fresh split baseline, planned 4 updates",
+      "status": "not run"
+    },
+    {
+      "disposable_gpu_optimizer_updates": 0,
+      "elapsed_seconds": null,
+      "model_optimizer_updates": 0,
+      "peak_owned_tree_rss_bytes": null,
+      "phase": "full-state resume from step 4 to 8",
+      "status": "not run"
+    }
+  ],
+  "preserved_recipe": {
+    "adamw_warmup_steps": 2048,
+    "attention": "dense reference",
+    "bf16": true,
+    "ffn": 1920,
+    "gradient_accumulation": 2,
+    "heads": 10,
+    "layers": 9,
+    "micro_batch": 8,
+    "operational_boundaries": [
+      8,
+      4,
+      8
+    ],
+    "parameters": 50556800,
+    "qualification_checkpoint_interval_steps": 4,
+    "scientific_max_steps": 244141,
+    "scientific_max_targets": 1000001536,
+    "seed": 42,
+    "sequence_length": 256,
+    "targets_per_update": 4096,
+    "tied_embeddings": true,
+    "vocab_size": 4096,
+    "width": 640
+  },
+  "recorded_at_utc": "2026-11-18T15:02:31.701591+00:00",
+  "resource_observations": {
+    "canonical_host_claim_released": true,
+    "cap_notes": "Whole-card VRAM includes unrelated interactive/display allocations; device-wide and disk maxima are sampled. Workspace bytes include the runtime copy and CPU data preparation.",
+    "native_monitor_guard_violations": [],
+    "owned_descendants_at_completion": 0,
+    "private_workspace_sampled_peak_bytes": 20799275008,
+    "qualified_model_memory_peak_bytes": null,
+    "replacement_min_host_available_ram_bytes": 29696675840,
+    "replacement_peak_owned_tree_rss_bytes": 2579984384,
+    "whole_card_sampled_vram_maximum_bytes": 2487222272,
+    "whole_card_vram_samples": 40
+  },
+  "scope": "Backend and exact resume qualification, not an efficacy test or a replay of the published 32K recipe",
+  "status": "BLOCKED_BEFORE_RUN_PUBLICATION"
+}
