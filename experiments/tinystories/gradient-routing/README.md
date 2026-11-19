@@ -1,6 +1,32 @@
 # TinyStories gradient routing: the function-matched LM-head experiment
 
-## Live status · 2026-11-19 02:18 UTC
+## Final 32k ROCm result · 2026-11-19
+
+All three fresh matched pairs completed cleanly. The identity-factorized full-rank head (C4) had higher held-out cross-entropy in every pair, both at the same training target count and at the common elapsed cutoff. The fixed-target mean difference was **+0.020679 nats/target** (about **2.09% higher perplexity**), but its **95% paired t interval [−0.003415, +0.044772]** spans zero. The frozen decision is **inconclusive**: no demonstrated material harm, benefit, or equivalence. We would keep the dense head for this recipe on present evidence rather than promote C4.
+
+| Fresh seed | Dense C0 CE | Factorized C4 CE | C4 − C0 at 388,104,192 committed targets |
+| --- | ---: | ---: | ---: |
+| 101 | 1.456136027 | 1.468114171 | +0.011978144 |
+| 211 | 1.455258587 | 1.486394415 | +0.031135827 |
+| 307 | 1.453711923 | 1.472634085 | +0.018922161 |
+
+Each run reached 2,961 updates and evaluated the same registered slice of 1,048,576 valid development targets. The two independent seed-13 baseline repeats matched at 1.4571204259991646 nats/target; the frozen practical margin was 0.011 nats/target. Neither those repeats nor the seed-17 screen enter the paired interval.
+
+### Common elapsed cutoff: 4,653.335318374 seconds
+
+| Fresh seed | Last eligible step C0 / C4 | Valid targets per arm | C0 CE | C4 CE | C4 − C0 | Score age C0 / C4 (s) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 101 | 2590 / 2590 | 339,476,480 | 1.471889205 | 1.484916750 | +0.013027545 | 433.471 / 552.320 |
+| 211 | 2961 / 2961 | 388,104,192 | 1.455258587 | 1.486394415 | +0.031135827 | 35.762 / 195.825 |
+| 307 | 2961 / 2961 | 388,104,192 | 1.453711923 | 1.472634085 | +0.018922161 | 197.997 / 206.972 |
+
+The elapsed-time mean was **+0.021029 nats/target** (95% paired t interval **[−0.001915, +0.043972]**). Both seed-101 terminal evaluations landed after the cutoff, so the comparison uses their last measured scheduled scores before it, not interpolated terminal scores. This separately labeled practical endpoint does not establish a time-to-quality advantage for either path.
+
+With only three pairs, the intervals remain wide; the matched initial function is not a matched optimizer trajectory. The old recipe’s roughly +0.0434 nats/target penalty is historical context, not a controlled comparison across initialization or backend. The [frozen analysis protocol](STATISTICAL-AMENDMENT-32K.md) specifies both endpoints and their limitations.
+
+The last arm completed at 09:33:46 UTC and the GPU claim was released. Conservative accounted GPU claim time was at most about 13 h 51 min, below the 18 h 10 min ceiling.
+
+## Earlier seed-17 screen · 2026-11-19 02:18 UTC
 
 The seed-17 screen is complete. The dense control (C0) resumed from checkpoint step 2,000 after a power outage; the identity-factorized head (C4) completed without that interruption. Both reached 2,961 updates and 388,104,192 committed training targets.
 
@@ -11,8 +37,6 @@ The seed-17 screen is complete. The dense control (C0) resumed from checkpoint s
 | C4 − C0 | +0.0056986175477505 |
 
 The screen is descriptive, not a confirmatory result. The uninterrupted equal-time comparison is censored because the C0 arm crossed a reboot. Neither the fixed-token result nor outage-affected times establish a learning or speed advantage.
-
-The two independent seed-13 C0 repeats matched at 1.45712 nats/target (rounded). The first fresh confirmation arm (seed 101 C4) is training. Its paired C0 and fresh pairs 211 and 307 remain in the original order; none of the screen or baseline runs count toward the fresh paired estimate.
 
 ## Calibration and launch record · 2026-11-18 16:51 UTC
 **Both 32k native calibrations finished. From the exact same start, C4’s first effective-head update was 10.8% larger than C0’s (cosine 0.9095), while the trunk updates were nearly identical. This is a one-update mechanism result, not evidence about learning. **The full 2,961-step horizon fits**; two ordinary-baseline repeats were dispatched. No post-warmup comparison is complete.** We are comparing an ordinary 58.86M-parameter untied model (C0) with the same starting function and full head rank represented by a trainable identity factor (C4, 59.12M). The main outcomes are held-out cross-entropy at equal valid training targets and at a predeclared elapsed-time cap.
@@ -40,10 +64,10 @@ The size of a vocabulary residual is not a measure of lost learning. In the know
 | H4, hidden-feedback mechanism | The disjoint synthetic A/B/C residual-transfer identity matched to 1.41e-18 max absolute error; the drift-null implementation matched independent Monte Carlo (0.104272 analytic vs 0.104431 +/-0.000863 SE). [Inputs and arms](mechanisms.md). | Consistency of a mathematical mechanism; finite losses from a single toy draw are not evidence about TinyStories training. |
 | Historical comparator, not a new run | Published full-width factorized minus dense paired deltas from three original series were +0.04190, +0.04956, +0.03874. Mean **+0.04340 nats/token**, sample SD .00556, SE .00321, 95% paired t interval [.02958,.05722]. [Plot](results/historical-full-width.svg) / [source and recomputation](historical-reanalysis.md). | Positive full-rank penalty for the old optimizer+initialization recipe on Intel, not for matched identity C4 on the current AMD host. |
 
-**Token, compute and inference efficiency:** No inferred gains from any of these results. No time-to-quality target observed, no measured joules and no trained TinyStories C4 effect size. A null-subspace projection is an immediate linear statement; ordinary head updates can still use the same residual. Multiple gradients are not independent information channels.
+**Token, compute and inference efficiency of the earlier mechanisms:** No inferred gains from these mechanistic results. The completed 32k paired comparisons are reported above; they do not measure joules or inference efficiency. A null-subspace projection is an immediate linear statement; ordinary head updates can still use the same residual. Multiple gradients are not independent information channels.
 
-## What to test next, ranked
-1. **Train the function-matched ordinary C0 and full-width identity C4.** This directly tests whether a full-rank parameterization changes held-out learning after an identical start, where the historical experiment found a gap without matching initialization. On the authentic 32k recipe, calibrate each arm on the actual AMD backend, budget a common horizon with post-warmup updates, and reserve three fresh pairs before the screen. Separate evaluation at matched targets from matched elapsed time. The [conditional full campaign budget](CAMPAIGN-PROPOSAL.json) includes acquisition, calibration, screen, fresh confirmation, and a stopping rule if the budget cannot carry all of them. The 512-update option is a labeled pilot, not a one-pass replication.
+## Pre-campaign follow-up ranking
+1. **Train the function-matched ordinary C0 and full-width identity C4.** Completed; see the outcome above. This directly tests whether a full-rank parameterization changes held-out learning after an identical start, where the historical experiment found a gap without matching initialization. On the authentic 32k recipe, calibrate each arm on the actual AMD backend, budget a common horizon with post-warmup updates, and reserve three fresh pairs before the screen. Separate evaluation at matched targets from matched elapsed time. The [conditional full campaign budget](CAMPAIGN-PROPOSAL.json) includes acquisition, calibration, screen, fresh confirmation, and a stopping rule if the budget cannot carry all of them. The 512-update option is a labeled pilot, not a one-pass replication.
 2. **Only if C4 exposes a material learning gap, test matched realized head updates with symmetric LR tuning.** The one-step controls establish a mechanism by which a gap could arise, not that it caused the long-run penalty. Compare the proposed norm calibration with an equally tuned ordinary head; report angles, clipping and trunk updates. This requires its own budget; no extra optimizer variant is hidden in the proposed C0/C4 screen.
 3. **Test temporal reuse on an independent mature checkpoint lineage only if already available cheaply.** The original early excess was explainable by target mix; at maturity two of three preregistered discrimination criteria passed. The paired-story interval still includes zero. Treat the observed permutation result as a reason to seek independent contexts or runs, not to train a new head-only/trunk-only/combined intervention. No M2 GPU priority on the present evidence.
 
