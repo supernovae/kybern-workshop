@@ -1,6 +1,20 @@
 # TinyStories gradient routing: the function-matched LM-head experiment
 
-## Live status · 2026-11-18 16:51 UTC
+## Live status · 2026-11-19 02:18 UTC
+
+The seed-17 screen is complete. The dense control (C0) resumed from checkpoint step 2,000 after a power outage; the identity-factorized head (C4) completed without that interruption. Both reached 2,961 updates and 388,104,192 committed training targets.
+
+| Seed 17 held-out cross-entropy | Nats per valid target |
+| --- | ---: |
+| C0, resumed dense control | 1.4607005678117275 |
+| C4, identity-factorized head | 1.466399185359478 |
+| C4 − C0 | +0.0056986175477505 |
+
+The screen is descriptive, not a confirmatory result. The uninterrupted equal-time comparison is censored because the C0 arm crossed a reboot. Neither the fixed-token result nor outage-affected times establish a learning or speed advantage.
+
+The two independent seed-13 C0 repeats matched at 1.45712 nats/target (rounded). The first fresh confirmation arm (seed 101 C4) is training. Its paired C0 and fresh pairs 211 and 307 remain in the original order; none of the screen or baseline runs count toward the fresh paired estimate.
+
+## Calibration and launch record · 2026-11-18 16:51 UTC
 **Both 32k native calibrations finished. From the exact same start, C4’s first effective-head update was 10.8% larger than C0’s (cosine 0.9095), while the trunk updates were nearly identical. This is a one-update mechanism result, not evidence about learning. **The full 2,961-step horizon fits**; two ordinary-baseline repeats were dispatched. No post-warmup comparison is complete.** We are comparing an ordinary 58.86M-parameter untied model (C0) with the same starting function and full head rank represented by a trainable identity factor (C4, 59.12M). The main outcomes are held-out cross-entropy at equal valid training targets and at a predeclared elapsed-time cap.
 
 | Stage | What actually happened |
@@ -10,7 +24,7 @@
 | Precision and cost gates | Native CPU inspection: 58,860,032 vs 59,122,176 parameters (one 512 × 512 factor); model memory estimates 11.77 GiB each, not measured ROCm fit. Both native runs reached 40 updates (5,242,880 training targets each), in 256.23 s C0 / 248.25 s C4 under the monitor. No resource violation. See [first-update result and reproduction](calibration-32k-step-one.md). Both timing runs ended during warmup; the [blinded timing rows](results/calibration-32k-blind-native-timing.json) include every update. A genuine native attempt suppresses stock completion generation; we timed its supervision and cold checkpoint verification instead. [Original numerical plan](NUMERICAL-GATE-32K.md); [pre-run measurement change](CAMPAIGN-RUNBOOK.md#actual-device-measurements). No learning conclusions from warmup. |
 | Cause and confirmation | **Full horizon selected, none completed.** The [pre-outcome quote](results/full-horizon-decision.json) reserves all ten 2,961-step runs at 6,000 s each, plus 507 s calibration and 3,240 s recovery: **63,747 / 64,800 s**. These are estimates with 25% padding, not measured full runs. Seed 13 ordinary repeats first, screen 17, then paired seeds 101, 211, 307. The 512-step pilot was not selected. |
 
-**Follow the work:** [live machine-readable status](results/campaign-status.json) · [ordinary 32k declaration](campaign-32k-rocm.yaml) · [C4 treatment delta](reference-c4.yaml) · [campaign runbook](CAMPAIGN-RUNBOOK.md) · [frozen statistical amendment](STATISTICAL-AMENDMENT-32K.md) · [full protocol](PROTOCOL.md) · [initial-allocation attempt registry](results/run-registry-v1.json). This README and the status record will be updated when input verification, device admission, cost/horizon choice, screen and independent confirmation resolve. Treatment scores stay sealed before the baseline-only decision rule is frozen. Model checkpoints, source shards, machine-local paths and runtime credentials do not belong here.
+**Follow the work:** [machine-readable calibration and launch snapshot](results/campaign-status.json) · [ordinary 32k declaration](campaign-32k-rocm.yaml) · [C4 treatment delta](reference-c4.yaml) · [campaign runbook](CAMPAIGN-RUNBOOK.md) · [frozen statistical amendment](STATISTICAL-AMENDMENT-32K.md) · [full protocol](PROTOCOL.md) · [initial-allocation attempt registry](results/run-registry-v1.json). This README and the status record will be updated when input verification, device admission, cost/horizon choice, screen and independent confirmation resolve. Treatment scores stay sealed before the baseline-only decision rule is frozen. Model checkpoints, source shards, machine-local paths and runtime credentials do not belong here.
 
 ## What we learned
 The size of a vocabulary residual is not a measure of lost learning. In the known-distribution experiment below, two tasks had precisely the same residual energy while differing substantially in reducible error. In a different test using **actual TinyStories checkpoints**, residuals initially invisible to the backbone later aligned with the evolved output head more than an isotropic drift null would predict. A predeclared follow-up found that a uniform predictor with the same target counts reproduces 99.95% of the excess over the drift null. For this early checkpoint, the observation mostly describes which vocabulary rows moved. At maturity, pairing mattered relative to a shuffle, but the contrast with a uniform predictor remained too uncertain to justify a training intervention. Neither result demonstrates useful recycling of error.
