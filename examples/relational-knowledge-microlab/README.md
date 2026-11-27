@@ -134,7 +134,8 @@ same host took 58–91 ms per arm with the files already warm. The measured
 cell sizes are for validating the workflow and do not estimate production
 preparation throughput.
 
-The matched random-versus-coherent prose comparison, separate
-source-information and measured-compute budgets, and bounded astronomy
-and software transfer studies remain in
+The [matched random-versus-coherent study](packing/README.md) holds the
+passages, tokenizer, token exposure and update shape fixed. Separate
+source-information and measured-compute budgets for representation
+comparisons, and bounded astronomy and software transfer studies, remain in
 [Workshop #118](https://github.com/supernovae/kybern-workshop/issues/118).

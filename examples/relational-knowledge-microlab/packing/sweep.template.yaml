@@ -1,0 +1,8 @@
+baseline: ${RANDOM_RUN}
+question: Does grouping the same basin passages improve the small decoder at identical whole-pass exposure and training shape?
+points:
+  - dataset.train_path: ${COHERENT_DIR}/train.schedule.bin
+    dataset.mixture_declaration_path: ${COHERENT_DECLARATION}
+    dataset.mixture_output_path: ${COHERENT_DIR}
+seeds: [11, 23, 37]
+config: try-policy.yaml

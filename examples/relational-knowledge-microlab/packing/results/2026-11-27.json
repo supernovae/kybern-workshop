@@ -1,0 +1,573 @@
+{
+  "backend": "cpu",
+  "development_ranking_sha256": "06fba4324a84d2f69933a48e9373d672a7d3d4cc016e419a297a3315523afbca",
+  "final_evaluation_run": false,
+  "followup_probes": [
+    {
+      "probe_id": "probe-20261127T184916Z-689fb25b",
+      "tier": "fast",
+      "try_id": "try-20261127T184749Z-8e3fb23b",
+      "verdict": {
+        "action": "rerun",
+        "missing": [
+          {
+            "id": "repetition",
+            "note": "no value",
+            "status": "error"
+          }
+        ],
+        "next_tier": null,
+        "reasons": [
+          "missing evidence: repetition (error)"
+        ],
+        "status": "incomplete",
+        "suggestion": "Not enough evidence for a verdict. Fix and re-run: repetition (error: no value)."
+      }
+    },
+    {
+      "probe_id": "probe-20261127T184958Z-9321cc4c",
+      "tier": "full",
+      "try_id": "try-20261127T184757Z-a33f3601",
+      "verdict": {
+        "action": "rerun",
+        "missing": [
+          {
+            "id": "lm_eval",
+            "note": "candidate: lm-evaluation-harness is not installed: uv sync --extra lmeval",
+            "status": "unavailable"
+          }
+        ],
+        "next_tier": null,
+        "reasons": [
+          "missing evidence: lm_eval (unavailable)"
+        ],
+        "status": "incomplete",
+        "suggestion": "Not enough evidence for a verdict. Fix and re-run: lm_eval (unavailable: candidate: lm-evaluation-harness is not installed: uv sync --extra lmeval)."
+      }
+    },
+    {
+      "probe_id": "probe-20261127T184921Z-3b9726ec",
+      "tier": "standard",
+      "try_id": "try-20261127T184757Z-a33f3601",
+      "verdict": {
+        "action": "escalate",
+        "missing": [],
+        "next_tier": "full",
+        "reasons": [
+          "held-out loss improved beyond within-run eval noise (one seed per arm)"
+        ],
+        "status": "pass",
+        "suggestion": "Promising: run `--config full` (long-context needle retrieval and standard lm-eval tasks (lm-eval needs `uv sync --extra lmeval`)) before a longer run. The \u00b1 on held-out loss is within-run eval noise from one seed per arm; seed-to-seed spread is typically 5-10x larger at small budgets. Before claiming a win, re-run both arms with the same 2-3 extra seeds (paired seeds) and check the gain holds on every pair."
+      }
+    },
+    {
+      "probe_id": "probe-20261127T184928Z-779c3ac1",
+      "tier": "fast",
+      "try_id": "try-20261127T184810Z-7bfa3cd0",
+      "verdict": {
+        "action": "rerun",
+        "missing": [
+          {
+            "id": "repetition",
+            "note": "no value",
+            "status": "error"
+          }
+        ],
+        "next_tier": null,
+        "reasons": [
+          "missing evidence: repetition (error)"
+        ],
+        "status": "incomplete",
+        "suggestion": "Not enough evidence for a verdict. Fix and re-run: repetition (error: no value)."
+      }
+    },
+    {
+      "probe_id": "probe-20261127T185004Z-a4252433",
+      "tier": "full",
+      "try_id": "try-20261127T184818Z-611aed7f",
+      "verdict": {
+        "action": "rerun",
+        "missing": [
+          {
+            "id": "lm_eval",
+            "note": "candidate: lm-evaluation-harness is not installed: uv sync --extra lmeval",
+            "status": "unavailable"
+          }
+        ],
+        "next_tier": null,
+        "reasons": [
+          "missing evidence: lm_eval (unavailable)"
+        ],
+        "status": "incomplete",
+        "suggestion": "Not enough evidence for a verdict. Fix and re-run: lm_eval (unavailable: candidate: lm-evaluation-harness is not installed: uv sync --extra lmeval)."
+      }
+    },
+    {
+      "probe_id": "probe-20261127T184933Z-5911e512",
+      "tier": "standard",
+      "try_id": "try-20261127T184818Z-611aed7f",
+      "verdict": {
+        "action": "escalate",
+        "missing": [],
+        "next_tier": "full",
+        "reasons": [
+          "warn: repetition",
+          "held-out loss improved beyond within-run eval noise (one seed per arm)"
+        ],
+        "status": "warn",
+        "suggestion": "Promising: run `--config full` (long-context needle retrieval and standard lm-eval tasks (lm-eval needs `uv sync --extra lmeval`)) before a longer run. The \u00b1 on held-out loss is within-run eval noise from one seed per arm; seed-to-seed spread is typically 5-10x larger at small budgets. Before claiming a win, re-run both arms with the same 2-3 extra seeds (paired seeds) and check the gain holds on every pair."
+      }
+    },
+    {
+      "probe_id": "probe-20261127T184941Z-4e98966e",
+      "tier": "fast",
+      "try_id": "try-20261127T184822Z-947e3374",
+      "verdict": {
+        "action": "rerun",
+        "missing": [
+          {
+            "id": "repetition",
+            "note": "no value",
+            "status": "error"
+          }
+        ],
+        "next_tier": null,
+        "reasons": [
+          "missing evidence: repetition (error)"
+        ],
+        "status": "incomplete",
+        "suggestion": "Not enough evidence for a verdict. Fix and re-run: repetition (error: no value)."
+      }
+    }
+  ],
+  "lab_commit": "ae5ee18d5b62242822a5690d176c6644fa29c20a",
+  "model": "coherent-prose-microlab",
+  "optimizer_updates_per_run": 108,
+  "orders": [
+    {
+      "mean_prose_loss_delta": -0.034874424789890966,
+      "membership_sha256": "973c2da259911981576bbb1ec765f50552a6296884f0fbc2cbd13ac610f13b55",
+      "packing_seed": 29,
+      "paired_seed_standard_error": 0.024750788907058917,
+      "pairs": [
+        {
+          "arms": {
+            "coherent": {
+              "bits_per_byte": 1.8233550121047046,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.25,
+                "counterfactual": 1.0,
+                "seen_direct": 0.3333333333333333,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.5
+              },
+              "checkpoint_sha256": "2099812f8b486050be85811cdbe285eb7d61117d59592edf581862d695d37e41",
+              "heldout_context_accuracy": 0.4375,
+              "prose_loss": 3.2538795471191406,
+              "ranking_result_sha256": "d533b94f738c815b07fde0822752ff8f7dbe39d2003c4f492ebfdc3dc0ba358e",
+              "run_id": "lab-try-20261127T184749Z-8e3fb23b",
+              "seen_relation_accuracy": 0.25,
+              "training_seconds": 2.012
+            },
+            "random": {
+              "bits_per_byte": 1.8159000998734685,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.25,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.0
+              },
+              "checkpoint_sha256": "06100a9fe4001b71770116bcb5425baa6c3f16ddd2d03dc6c848ea6fb3f3f3f6",
+              "heldout_context_accuracy": 0.3125,
+              "prose_loss": 3.2576112747192383,
+              "ranking_result_sha256": "c221925dffbaf1ea79917b825a64203fd7545020b058f05b3dbf18570e2bedba",
+              "run_id": "lab-base-f9a9bffc1ce60c68-try-20261127T184749Z-8e3fb23b",
+              "seen_relation_accuracy": 0.16666666666666666,
+              "training_seconds": 2.874
+            }
+          },
+          "fast_probe": {
+            "action": "rerun",
+            "missing": [
+              {
+                "id": "repetition",
+                "note": "no value",
+                "status": "error"
+              }
+            ],
+            "next_tier": null,
+            "reasons": [
+              "missing evidence: repetition (error)"
+            ],
+            "status": "incomplete",
+            "suggestion": "Not enough evidence for a verdict. Fix and re-run: repetition (error: no value)."
+          },
+          "heldout_prose_loss_delta": -0.0037317276000976562,
+          "model_seed": 11,
+          "try_id": "try-20261127T184749Z-8e3fb23b"
+        },
+        {
+          "arms": {
+            "coherent": {
+              "bits_per_byte": 1.847501376285843,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.0,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.5
+              },
+              "checkpoint_sha256": "586c125850654b856308fc5f90a949f7224363677b19d635ed561a9b061dd39d",
+              "heldout_context_accuracy": 0.375,
+              "prose_loss": 3.2856803373856978,
+              "ranking_result_sha256": "80942d782ff4d5b1668aa28f6938cea98a0fcebef3b8a7c644a4fdd0c7d0d20c",
+              "run_id": "lab-try-20261127T184757Z-a33f3601",
+              "seen_relation_accuracy": 0.16666666666666666,
+              "training_seconds": 2.019
+            },
+            "random": {
+              "bits_per_byte": 1.8785245879954025,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.25,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.25
+              },
+              "checkpoint_sha256": "156d72b96cd38bc297a35e22bda03cfb62aae97454dc076921d4a22e1147fd7f",
+              "heldout_context_accuracy": 0.375,
+              "prose_loss": 3.3694488351995293,
+              "ranking_result_sha256": "03e1944b36f5213da59256e589724b2d712af5c382c3866a5cfbad295deb3a51",
+              "run_id": "lab-base-d0d52fef2251c99c-try-20261127T184757Z-a33f3601",
+              "seen_relation_accuracy": 0.16666666666666666,
+              "training_seconds": 2.002
+            }
+          },
+          "fast_probe": {
+            "action": "escalate",
+            "missing": [],
+            "next_tier": "standard",
+            "reasons": [
+              "held-out loss improved beyond within-run eval noise (one seed per arm)"
+            ],
+            "status": "pass",
+            "suggestion": "Promising: run `--config standard` (reworded fact recall and needle retrieval) before a longer run. The \u00b1 on held-out loss is within-run eval noise from one seed per arm; seed-to-seed spread is typically 5-10x larger at small budgets. Before claiming a win, re-run both arms with the same 2-3 extra seeds (paired seeds) and check the gain holds on every pair."
+          },
+          "heldout_prose_loss_delta": -0.08376849781383156,
+          "model_seed": 23,
+          "try_id": "try-20261127T184757Z-a33f3601"
+        },
+        {
+          "arms": {
+            "coherent": {
+              "bits_per_byte": 1.8223316420279903,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.25,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.25
+              },
+              "checkpoint_sha256": "a1e54ff518e94ae613577b35538cb3096505a4beba349dccbdf09352a0babd22",
+              "heldout_context_accuracy": 0.375,
+              "prose_loss": 3.2815169421109287,
+              "ranking_result_sha256": "089218b264ca224e83caebaa7134e0d300dbd35b8cd357e704c147c9bd497f6a",
+              "run_id": "lab-try-20261127T184801Z-7938c256",
+              "seen_relation_accuracy": 0.16666666666666666,
+              "training_seconds": 2.009
+            },
+            "random": {
+              "bits_per_byte": 1.8403920758787604,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.25,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.0,
+                "unseen_two_hop": 0.0
+              },
+              "checkpoint_sha256": "0e794d2f923637d888dfb7dc79e7fffb64e328cc59e7e88d9aee43127f6e6905",
+              "heldout_context_accuracy": 0.3125,
+              "prose_loss": 3.2986399910666724,
+              "ranking_result_sha256": "04de93dc2ba77317202541902553ba0f03e06c95647bc3793ad6c228b48632af",
+              "run_id": "lab-base-8929b4b6a5805d88-try-20261127T184801Z-7938c256",
+              "seen_relation_accuracy": 0.08333333333333333,
+              "training_seconds": 1.99
+            }
+          },
+          "fast_probe": {
+            "action": "tweak",
+            "missing": [],
+            "next_tier": null,
+            "reasons": [
+              "warn: token_agreement",
+              "no held-out loss gain beyond noise"
+            ],
+            "status": "warn",
+            "suggestion": "No measurable gain at this budget: try a bolder change, or a longer run only if the idea needs more tokens to show."
+          },
+          "heldout_prose_loss_delta": -0.01712304895574368,
+          "model_seed": 37,
+          "try_id": "try-20261127T184801Z-7938c256"
+        }
+      ],
+      "schedules": {
+        "coherent": {
+          "complete_blocks": 27,
+          "materialize_seconds": 1.43,
+          "multiple_basin_blocks": 11,
+          "sha256": "fcd59e94bf47f691af5cd0d329919d6f59c453a69409aa31fac73dfaabbdd5de",
+          "train_array_sha256": "d7507bd8eadc8848fb4448d3b3c38eddf2020dd89f9eaf073919cfacf87f9694",
+          "train_loss_mask_sha256": "45e81dcaf3997b1b86da8f6a7894df7b87926ed2704d801916ca732bd1e6d35f",
+          "validation_array_sha256": "9afa918f5127cc37eafdb283da31651987b37612eee3e232d0bc080f44b99a44",
+          "validation_loss_mask_sha256": "5a59b927e04fe0bb1e840e0b836c52dfe65a037880e182c81d938f1988a93367"
+        },
+        "random": {
+          "complete_blocks": 27,
+          "materialize_seconds": 1.55,
+          "multiple_basin_blocks": 27,
+          "sha256": "adcd1f616601afdc18755afe4a248216e7bff8c26ec2ab7591290b28d9a3b4f1",
+          "train_array_sha256": "5d815227d1a6f51257538e3085928a72e36a3cbd49f32254913a6919bdd8409a",
+          "train_loss_mask_sha256": "45e81dcaf3997b1b86da8f6a7894df7b87926ed2704d801916ca732bd1e6d35f",
+          "validation_array_sha256": "9afa918f5127cc37eafdb283da31651987b37612eee3e232d0bc080f44b99a44",
+          "validation_loss_mask_sha256": "5a59b927e04fe0bb1e840e0b836c52dfe65a037880e182c81d938f1988a93367"
+        }
+      },
+      "sweep_id": "sweep-20261127T184748Z-c5845477",
+      "transitions_after": 11,
+      "transitions_before": 79,
+      "verdict": "WITHIN_SEED_NOISE"
+    },
+    {
+      "mean_prose_loss_delta": -0.0012215412024295287,
+      "membership_sha256": "973c2da259911981576bbb1ec765f50552a6296884f0fbc2cbd13ac610f13b55",
+      "packing_seed": 53,
+      "paired_seed_standard_error": 0.02722174664573975,
+      "pairs": [
+        {
+          "arms": {
+            "coherent": {
+              "bits_per_byte": 1.8057980983454571,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.25,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.25
+              },
+              "checkpoint_sha256": "eaa2b0f8602ac81e87564a0409e269fb35337da1f61c1e441e95e521f1aa4cf3",
+              "heldout_context_accuracy": 0.375,
+              "prose_loss": 3.2550471912730825,
+              "ranking_result_sha256": "136af9dacb91d557cc88b5984c74cf12bbfc3802fa16bc21c3e19386234cc43d",
+              "run_id": "lab-try-20261127T184810Z-7bfa3cd0",
+              "seen_relation_accuracy": 0.16666666666666666,
+              "training_seconds": 2.022
+            },
+            "random": {
+              "bits_per_byte": 1.8138464353038015,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.0,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.25
+              },
+              "checkpoint_sha256": "84508f74d8a2659704025a50142ff4e1d64805b2abf13c7e830a19f240ec1c1c",
+              "heldout_context_accuracy": 0.3125,
+              "prose_loss": 3.2584360296075996,
+              "ranking_result_sha256": "2346885b95b5c3faa2a4072d3eca2d8e53ed61988082d2bb9f936c4503fc544d",
+              "run_id": "lab-base-717aea6b7dd01e65-try-20261127T184810Z-7bfa3cd0",
+              "seen_relation_accuracy": 0.16666666666666666,
+              "training_seconds": 2.885
+            }
+          },
+          "fast_probe": {
+            "action": "rerun",
+            "missing": [
+              {
+                "id": "repetition",
+                "note": "no value",
+                "status": "error"
+              }
+            ],
+            "next_tier": null,
+            "reasons": [
+              "missing evidence: repetition (error)"
+            ],
+            "status": "incomplete",
+            "suggestion": "Not enough evidence for a verdict. Fix and re-run: repetition (error: no value)."
+          },
+          "heldout_prose_loss_delta": -0.003388838334517086,
+          "model_seed": 11,
+          "try_id": "try-20261127T184810Z-7bfa3cd0"
+        },
+        {
+          "arms": {
+            "coherent": {
+              "bits_per_byte": 1.8606144613427111,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.0,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.5
+              },
+              "checkpoint_sha256": "d4b41a1150ae26c97e7d27d1f128692dcca68c9f7223f0e6a1a6c94fbe8bd728",
+              "heldout_context_accuracy": 0.375,
+              "prose_loss": 3.2849239869551226,
+              "ranking_result_sha256": "3471093a8a0cebcedc9abbe03bfa907ba11568bfd37f59114d0da2f897c5ab99",
+              "run_id": "lab-try-20261127T184818Z-611aed7f",
+              "seen_relation_accuracy": 0.16666666666666666,
+              "training_seconds": 2.002
+            },
+            "random": {
+              "bits_per_byte": 1.8618473457596045,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.0,
+                "counterfactual": 1.0,
+                "seen_direct": 0.4166666666666667,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.25
+              },
+              "checkpoint_sha256": "9d43cb56f972793f4f2e4c71dbec01c8190c8aaaa421d0762c282ff3e59f5b5c",
+              "heldout_context_accuracy": 0.3125,
+              "prose_loss": 3.3321739543568003,
+              "ranking_result_sha256": "eb375d08567b9a67de259cd72a49394fc794a3b6163c3792f3076eb020991daa",
+              "run_id": "lab-base-e1e47f95fc49d36c-try-20261127T184818Z-611aed7f",
+              "seen_relation_accuracy": 0.2916666666666667,
+              "training_seconds": 2.004
+            }
+          },
+          "fast_probe": {
+            "action": "escalate",
+            "missing": [],
+            "next_tier": "standard",
+            "reasons": [
+              "warn: repetition",
+              "held-out loss improved beyond within-run eval noise (one seed per arm)"
+            ],
+            "status": "warn",
+            "suggestion": "Promising: run `--config standard` (reworded fact recall and needle retrieval) before a longer run. The \u00b1 on held-out loss is within-run eval noise from one seed per arm; seed-to-seed spread is typically 5-10x larger at small budgets. Before claiming a win, re-run both arms with the same 2-3 extra seeds (paired seeds) and check the gain holds on every pair."
+          },
+          "heldout_prose_loss_delta": -0.04724996740167775,
+          "model_seed": 23,
+          "try_id": "try-20261127T184818Z-611aed7f"
+        },
+        {
+          "arms": {
+            "coherent": {
+              "bits_per_byte": 1.8261621749586172,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.0,
+                "counterfactual": 1.0,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.0,
+                "unseen_two_hop": 0.25
+              },
+              "checkpoint_sha256": "828f92fda58c84e99f0682731ad0ae79fa14a8d841dec59ab53e468930caeedf",
+              "heldout_context_accuracy": 0.3125,
+              "prose_loss": 3.27776778828014,
+              "ranking_result_sha256": "ca84d2f1bb87efcc41438caf1fc987662e6dbbd1ee9e986621cb868d88d057b1",
+              "run_id": "lab-try-20261127T184822Z-947e3374",
+              "seen_relation_accuracy": 0.08333333333333333,
+              "training_seconds": 2.039
+            },
+            "random": {
+              "bits_per_byte": 1.7956302810305322,
+              "categories": {
+                "boundary": 0.0,
+                "context_override": 0.0,
+                "counterfactual": 0.75,
+                "seen_direct": 0.16666666666666666,
+                "seen_inverse": 0.16666666666666666,
+                "unseen_two_hop": 0.25
+              },
+              "checkpoint_sha256": "a7f7d86f6a53ec77df9c6a7c88609f541d05dd83d530cfdf413954515f123a8b",
+              "heldout_context_accuracy": 0.25,
+              "prose_loss": 3.230793606151234,
+              "ranking_result_sha256": "3a2171ab681b607530f3b751ded00dc09e9a55af35bc69646286908664c59290",
+              "run_id": "lab-base-1aa323891d773ee4-try-20261127T184822Z-947e3374",
+              "seen_relation_accuracy": 0.16666666666666666,
+              "training_seconds": 2.011
+            }
+          },
+          "fast_probe": {
+            "action": "rerun",
+            "missing": [
+              {
+                "id": "repetition",
+                "note": "no value",
+                "status": "error"
+              }
+            ],
+            "next_tier": null,
+            "reasons": [
+              "missing evidence: repetition (error)"
+            ],
+            "status": "incomplete",
+            "suggestion": "Not enough evidence for a verdict. Fix and re-run: repetition (error: no value)."
+          },
+          "heldout_prose_loss_delta": 0.04697418212890625,
+          "model_seed": 37,
+          "try_id": "try-20261127T184822Z-947e3374"
+        }
+      ],
+      "schedules": {
+        "coherent": {
+          "complete_blocks": 27,
+          "materialize_seconds": 1.62,
+          "multiple_basin_blocks": 11,
+          "sha256": "c2be48980d1a18248cc2f39ed767d47816b90bed6ae41106ce3fd055006e2934",
+          "train_array_sha256": "407659e28f67f700604d54add759f0454a3dfec591f258e5bb613326ead6487c",
+          "train_loss_mask_sha256": "45e81dcaf3997b1b86da8f6a7894df7b87926ed2704d801916ca732bd1e6d35f",
+          "validation_array_sha256": "9afa918f5127cc37eafdb283da31651987b37612eee3e232d0bc080f44b99a44",
+          "validation_loss_mask_sha256": "5a59b927e04fe0bb1e840e0b836c52dfe65a037880e182c81d938f1988a93367"
+        },
+        "random": {
+          "complete_blocks": 27,
+          "materialize_seconds": 1.54,
+          "multiple_basin_blocks": 25,
+          "sha256": "26545616ef8ec07f9e140f4adcadfe3e1b403b19a10c4a8e44e89774a63254d5",
+          "train_array_sha256": "aa577a887051d5f8f52da70985f52748b37c976dc5fee28274b7b1c46b3bd0a8",
+          "train_loss_mask_sha256": "45e81dcaf3997b1b86da8f6a7894df7b87926ed2704d801916ca732bd1e6d35f",
+          "validation_array_sha256": "9afa918f5127cc37eafdb283da31651987b37612eee3e232d0bc080f44b99a44",
+          "validation_loss_mask_sha256": "5a59b927e04fe0bb1e840e0b836c52dfe65a037880e182c81d938f1988a93367"
+        }
+      },
+      "sweep_id": "sweep-20261127T184807Z-55f802d3",
+      "transitions_after": 11,
+      "transitions_before": 75,
+      "verdict": "WITHIN_SEED_NOISE"
+    }
+  ],
+  "parameters": 106816,
+  "passes": 16,
+  "prior_attempts": [
+    {
+      "failure": "ValueError: pretraining needs a preflight: run `klab preflight CONFIG`, then `klab train --preflight REPORT` (or --preflight waive:REASON)",
+      "status": "failed",
+      "sweep_id": "sweep-20261127T184326Z-c238e0ca"
+    },
+    {
+      "failure": "ValueError: bits per byte needs plain text validation; this run's validation targets are masked (chat or preference data)",
+      "status": "failed",
+      "sweep_id": "sweep-20261127T184613Z-448a3810"
+    }
+  ],
+  "release_id": "99c226461b22b555180918bc0afa0075e48a6d0eeb046064f405e3bc1d0fc499",
+  "release_manifest_sha256": "f87f4f12ed227afbd84ccfe1608796fed48c0ff4a1932be25f2ad075a7c39ae7",
+  "source_revision": "basin-prose-passages-v1",
+  "supervised_targets_per_run": 27600,
+  "tokenizer_sha256": "67eb41de2f946b07676d6ce283870c695eff8e8bc9e2a83995df698a8f846894"
+}
