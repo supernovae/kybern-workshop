@@ -146,35 +146,6 @@ for domain in astronomy software; do
 done
 ```
 
-## Measured preparation
-
-The [record](results/2026-11-27.json) binds the capture to Lab
-`591ef2bc` and includes index, representation and tokenizer digests.
-Astronomy admitted 99 assertions from 60 items, and software admitted 283
-from 282 modules. Astronomy had 410 statements outside the scope. Software
-reported 845 out-of-scope import sites and 21 sites crossing split boundaries.
-
-| TRAIN representation | Astronomy serialized tokens | Software serialized tokens |
-| --- | ---: | ---: |
-| Triples | 1,043 | 5,027 |
-| Factorized | 779 | 3,272 |
-| Hierarchy | 815 | |
-| Seeded walks | 3,948 | 9,925 |
-
-Factorization saved 25% and 35% respectively. Its assertion IDs matched the
-triples with multiplicity for every split, as did the astronomy hierarchy.
-The seven prepared bundles retained every compiled TRAIN row and matched
-validation bytes within each domain. Complete blocks left different
-unsupervised target tails, which the record shows for each arm. The token
-savings measure serialization. Learning and cross-domain transfer require
-separate training and evaluation.
-
-On local NVMe, cold astronomy extraction took 0.49 s at 82 MiB peak RSS.
-Software took 0.81 s at 93 MiB. After a fault at the fourth software shard,
-the retry reused four of 13 shards and took 0.61 s with the same index bytes.
-Verified warm software open took 0.59 s. These are single bounded runs with
-warm OS caches, including CLI startup.
-
 Keep the test split out of training and development evaluation. The commands
 use one development file for all prepared arms in each domain. The comparison
 counts serialized tokens including one EOS per row, before sequence-block
@@ -206,3 +177,32 @@ for domain in astronomy software; do
   done
 done
 ```
+
+## Measured preparation
+
+The [record](results/2026-11-27.json) binds the capture to Lab
+`591ef2bc` and includes index, representation and tokenizer digests.
+Astronomy admitted 99 assertions from 60 items, and software admitted 283
+from 282 modules. Astronomy had 410 statements outside the scope. Software
+reported 845 out-of-scope import sites and 21 sites crossing split boundaries.
+
+| TRAIN representation | Astronomy serialized tokens | Software serialized tokens |
+| --- | ---: | ---: |
+| Triples | 1,043 | 5,027 |
+| Factorized | 779 | 3,272 |
+| Hierarchy | 815 | — |
+| Seeded walks | 3,948 | 9,925 |
+
+Factorization saved 25% and 35% respectively. Its assertion IDs matched the
+triples with multiplicity for every split, as did the astronomy hierarchy.
+The seven prepared bundles retained every compiled TRAIN row and matched
+validation bytes within each domain. Complete blocks left different
+unsupervised target tails, which the record shows for each arm. The token
+savings measure serialization. Learning and cross-domain transfer require
+separate training and evaluation.
+
+On local NVMe, cold astronomy extraction took 0.49 s at 82 MiB peak RSS.
+Software took 0.81 s at 93 MiB. After a fault at the fourth software shard,
+the retry reused four of 13 shards and took 0.61 s with the same index bytes.
+Verified warm software open took 0.59 s. These are single bounded runs with
+warm OS caches, including CLI startup.
