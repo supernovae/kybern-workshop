@@ -1,0 +1,22 @@
+run_id,started_local,layout,start_step,last_step,last_checkpoint_step,run_store_status,stopped_by
+devmind-pretrain-a0,2026-11-18 15:24,zero1,0,136,,running,power cut
+devmind-pretrain-r2-a0,2026-11-18 18:08,zero1,0,311,,running,power cut
+devmind-pretrain-r3-a0,2026-11-19 09:36,zero1,0,1823,1823,interrupted,stopped by hand
+devmind-pretrain-r3-a1,2026-11-19 12:47,replicated,1823,2157,1823,failed,host memory spill guard
+devmind-pretrain-r3-a2,2026-11-19 13:29,replicated,1823,7819,7818,failed,host memory spill guard
+devmind-pretrain-r3-a3,2026-11-19 23:38,replicated,7818,13796,13770,failed,host memory spill guard
+devmind-pretrain-r3-a4,2026-11-20 09:51,replicated,13770,18642,18597,failed,host memory spill guard
+devmind-pretrain-r3-a5,2026-11-20 18:06,replicated,18597,22234,22186,failed,host memory spill guard
+devmind-pretrain-r3-a6,2026-11-21 00:21,replicated,22186,25819,25775,failed,host memory spill guard
+devmind-pretrain-r3-a7,2026-11-21 06:36,replicated,25775,,,no run directory,disk space check before start
+devmind-pretrain-r3-a8,2026-11-21 06:43,replicated,25775,,,no run directory,disk space check before start
+devmind-pretrain-r3-a9,2026-11-21 06:51,replicated,25775,,,no run directory,disk space check before start
+devmind-pretrain-r3-a10,2026-11-21 15:48,replicated,25775,,,no run directory,code identity differed from the parent
+devmind-pretrain-r3-a11,2026-11-21 15:51,zero1,25775,25776,25775,running,stopped by hand (stalled)
+devmind-pretrain-r3-a12,2026-11-21 16:18,replicated,25775,,,no run directory,code identity differed from the parent
+devmind-pretrain-r3-a13,2026-11-21 16:21,replicated,25775,26984,26984,interrupted,stopped by hand
+devmind-pretrain-r3-a14,2026-11-21 18:31,zero1,26984,26984,26984,running,stopped by hand (stalled)
+devmind-pretrain-r3-a15,2026-11-21 18:40,replicated,26984,26985,26984,failed,non-finite loss from damaged optimizer state
+devmind-pretrain-r3-a16,2026-11-21 18:48,replicated,26984,28193,28184,failed,host memory spill guard
+devmind-pretrain-r3-a17,2026-11-21 20:58,replicated,28184,51828,51828,interrupted,stopped by hand to return to zero1
+devmind-pretrain-r3-a18,2026-11-23 20:08,zero1,51828,91553,91553,completed,

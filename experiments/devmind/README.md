@@ -350,6 +350,9 @@ compute and compare them with the table above; record them here.
 [Post-training](post-training/README.md) covers the long-context stages, chat
 tuning, preference tuning, checking the result and what can be published.
 
+The pretraining run itself, with every interruption and what was changed to
+finish it, is recorded in [results/pretraining](results/pretraining/README.md).
+
 ## Known gaps
 
 Open in Lab:
