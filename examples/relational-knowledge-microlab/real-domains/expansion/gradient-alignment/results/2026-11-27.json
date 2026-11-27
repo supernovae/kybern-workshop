@@ -1,0 +1,309 @@
+{
+  "gradient_lab_revision": "a60620b87970a1ff028d8efcd211819cc15ad13a",
+  "training_lab_revision": "b5c845bf3fa07fbb18f7515ae621d1cf62027b7e",
+  "model": "relational-expansion-microlab",
+  "decoder_parameters": 102720,
+  "backend": "PyTorch CPU FP32 with two math threads",
+  "panels": {
+    "software": {
+      "protocol_sha256": "ee27241d1fa49622fd77a0d0382b202c865b064ef317ab3f8542c4aeb34fb3b5",
+      "validation_sha256": "72f498bcfbd95344ac95dea99957905e31ef95050b733b296387f059d107bae5",
+      "supervised_targets": 4480
+    },
+    "astronomy": {
+      "protocol_sha256": "f4e7ff4b7934c77faf72d8e85b593d87337d3729c7b5b100761f7d2f16585df0",
+      "validation_sha256": "b37fa0df45ab7533ff93bbf936989082156fd42915d17fab7b7a8f1599b4c1d2",
+      "supervised_targets": 1344
+    }
+  },
+  "measurement": {
+    "gradient_storage_cap_bytes": 1048576,
+    "gradient_storage_bytes": 821760,
+    "elapsed_seconds_median": 0.41804851399501786,
+    "swapping_panels_reproduced_cosine_and_dot": true,
+    "previous_panel_losses_matched_within_nats": 1e-06
+  },
+  "summary": {
+    "parent": {
+      "mean_cosine": 0.20504480086499144,
+      "negative": 0
+    },
+    "triples": {
+      "mean_cosine": 0.27503199092098174,
+      "negative": 0
+    },
+    "factorized": {
+      "mean_cosine": 0.18887679323195225,
+      "negative": 0
+    },
+    "late": {
+      "mean_cosine": -0.016860109840343918,
+      "negative": 1
+    },
+    "interleaved": {
+      "mean_cosine": 0.1416518679790858,
+      "negative": 0
+    }
+  },
+  "interleaved_minus_late_cosine": {
+    "mean": 0.15851197781942972,
+    "paired_se": 0.06399391611279145
+  },
+  "runs": [
+    {
+      "seed": 11,
+      "stage": "parent",
+      "run_id": "software-parent-11",
+      "dataset_revision": "5c02c448c82fe30b6e2e7a2dffdd9f6475bfd43dd7676f59b914e06ab1355193",
+      "checkpoint": "checkpoints/step_00000035_gen_000002",
+      "checkpoint_sha256": "092c9be442b3917df886c19572bdb9f63ce3f36f7ec6f1b18669999529969079",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.1108178683689665,
+        "astronomy": 4.8805669375828336
+      },
+      "cosine": 0.21271767283917578,
+      "dot_product": 1.1947712667624464,
+      "software_gradient_norm": 1.664087868688833,
+      "astronomy_gradient_norm": 3.375242197305789
+    },
+    {
+      "seed": 11,
+      "stage": "triples",
+      "run_id": "lab-base-638ae4a134aa6602-try-20261127T195215Z-c4afdd81",
+      "dataset_revision": "software-then-bcbce334df1e935479016fb8b307f2278337dc9f73931c504d29f7bb972a6138",
+      "checkpoint": "checkpoints/step_00000050_gen_000002",
+      "checkpoint_sha256": "461b25f334cf00312d9746fa327757e0783d81f3c034f43bb370eec7e9211220",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.720435094833374,
+        "astronomy": 2.869681324277605
+      },
+      "cosine": 0.3647699955423217,
+      "dot_product": 8.498329384509196,
+      "software_gradient_norm": 8.370885209947941,
+      "astronomy_gradient_norm": 2.7831913464636684
+    },
+    {
+      "seed": 11,
+      "stage": "factorized",
+      "run_id": "lab-try-20261127T195215Z-c4afdd81",
+      "dataset_revision": "software-then-0aed53f42e23273af5454ac1cc468f27e7800795da69147336c3d80c9c8edc79",
+      "checkpoint": "checkpoints/step_00000046_gen_000002",
+      "checkpoint_sha256": "0a87baa5280fe2689f14421417fd3f26fbeab6b036208f33e707d67900312db4",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.200767980303083,
+        "astronomy": 3.2332994597298756
+      },
+      "cosine": 0.07957207449437656,
+      "dot_product": 0.44847280718003835,
+      "software_gradient_norm": 2.6571934112852897,
+      "astronomy_gradient_norm": 2.121056648189962
+    },
+    {
+      "seed": 11,
+      "stage": "late",
+      "run_id": "lab-base-66a402b288e447aa-try-20261127T200150Z-c2ef0fb3",
+      "dataset_revision": "astronomy-software-replay-late",
+      "checkpoint": "checkpoints/step_00000054_gen_000002",
+      "checkpoint_sha256": "ea41583d91ed67c2468b6674d0184f815ff3b064a33f46a194208b92073c222c",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.1029330253601075,
+        "astronomy": 2.696467774254935
+      },
+      "cosine": 0.09359737698172424,
+      "dot_product": 0.3867493083147095,
+      "software_gradient_norm": 2.0619279169026403,
+      "astronomy_gradient_norm": 2.0039754135822876
+    },
+    {
+      "seed": 11,
+      "stage": "interleaved",
+      "run_id": "lab-try-20261127T200150Z-c2ef0fb3",
+      "dataset_revision": "astronomy-software-replay-interleaved",
+      "checkpoint": "checkpoints/step_00000054_gen_000002",
+      "checkpoint_sha256": "9f099f3d37ee95f8150272145bb20c8aa9b8c86c74d687be6a1942a5ec41aa32",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.113465758732387,
+        "astronomy": 2.5151467323303223
+      },
+      "cosine": 0.25633595611201243,
+      "dot_product": 2.259952355505651,
+      "software_gradient_norm": 3.2309218346884934,
+      "astronomy_gradient_norm": 2.7287472018949686
+    },
+    {
+      "seed": 23,
+      "stage": "parent",
+      "run_id": "software-parent-23",
+      "dataset_revision": "5c02c448c82fe30b6e2e7a2dffdd9f6475bfd43dd7676f59b914e06ab1355193",
+      "checkpoint": "checkpoints/step_00000035_gen_000002",
+      "checkpoint_sha256": "471501cc9bdc650bd0169bc1a56bb5fd8a86dc46d295ab634c9cf1c8a0093853",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.223192262649536,
+        "astronomy": 4.8367364293053035
+      },
+      "cosine": 0.2133417202628765,
+      "dot_product": 2.2536240050938168,
+      "software_gradient_norm": 2.192275549531944,
+      "astronomy_gradient_norm": 4.818485175185443
+    },
+    {
+      "seed": 23,
+      "stage": "triples",
+      "run_id": "lab-base-79d564ce54ddc751-try-20261127T195233Z-d80216de",
+      "dataset_revision": "software-then-bcbce334df1e935479016fb8b307f2278337dc9f73931c504d29f7bb972a6138",
+      "checkpoint": "checkpoints/step_00000050_gen_000002",
+      "checkpoint_sha256": "35551bd443171de40a94902df738f9684a521a8b8b96e914225518626b6e196a",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.3603885173797607,
+        "astronomy": 2.889517829531715
+      },
+      "cosine": 0.14168460016363824,
+      "dot_product": 1.0022485852308447,
+      "software_gradient_norm": 3.283217239801259,
+      "astronomy_gradient_norm": 2.1545331639679963
+    },
+    {
+      "seed": 23,
+      "stage": "factorized",
+      "run_id": "lab-try-20261127T195233Z-d80216de",
+      "dataset_revision": "software-then-0aed53f42e23273af5454ac1cc468f27e7800795da69147336c3d80c9c8edc79",
+      "checkpoint": "checkpoints/step_00000046_gen_000002",
+      "checkpoint_sha256": "68eba31c98d9fd6a2febd62ff1677150ff7efd1e62e67282fd60d879797ef297",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.2884189060756137,
+        "astronomy": 3.3480492546444847
+      },
+      "cosine": 0.2069152499127405,
+      "dot_product": 1.7027865742509913,
+      "software_gradient_norm": 2.969206659447572,
+      "astronomy_gradient_norm": 2.771579187632431
+    },
+    {
+      "seed": 23,
+      "stage": "late",
+      "run_id": "lab-base-7e385d1b69f31121-try-20261127T200212Z-ed3c3708",
+      "dataset_revision": "astronomy-software-replay-late",
+      "checkpoint": "checkpoints/step_00000054_gen_000002",
+      "checkpoint_sha256": "dc34d4922652950f0302880b9103745acc047c4d39913d4895c86524c637bde3",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.06178137915475,
+        "astronomy": 2.797649769555955
+      },
+      "cosine": 0.10146696167041946,
+      "dot_product": 0.6565595150558268,
+      "software_gradient_norm": 2.178816695859896,
+      "astronomy_gradient_norm": 2.9698105729503714
+    },
+    {
+      "seed": 23,
+      "stage": "interleaved",
+      "run_id": "lab-try-20261127T200212Z-ed3c3708",
+      "dataset_revision": "astronomy-software-replay-interleaved",
+      "checkpoint": "checkpoints/step_00000054_gen_000002",
+      "checkpoint_sha256": "593e057dd5de780ff60a02929ceb5bca04e2df7a7a650147e58e935e7668e115",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.1155865260532924,
+        "astronomy": 2.532399200257801
+      },
+      "cosine": 0.1470853798557903,
+      "dot_product": 0.9501373851279706,
+      "software_gradient_norm": 2.7345890461749094,
+      "astronomy_gradient_norm": 2.362244412392154
+    },
+    {
+      "seed": 37,
+      "stage": "parent",
+      "run_id": "software-parent-37",
+      "dataset_revision": "5c02c448c82fe30b6e2e7a2dffdd9f6475bfd43dd7676f59b914e06ab1355193",
+      "checkpoint": "checkpoints/step_00000035_gen_000002",
+      "checkpoint_sha256": "97941165bdb8696abfe819a605fcf7b3daa01a7ec7ef28b40790f960995cfbd3",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.2476296152387345,
+        "astronomy": 4.748525574093773
+      },
+      "cosine": 0.189075009492922,
+      "dot_product": 4.689640967498656,
+      "software_gradient_norm": 5.423951241602731,
+      "astronomy_gradient_norm": 4.572878761751078
+    },
+    {
+      "seed": 37,
+      "stage": "triples",
+      "run_id": "lab-base-950fb9daaeef48ee-try-20261127T195246Z-c51fa58d",
+      "dataset_revision": "software-then-bcbce334df1e935479016fb8b307f2278337dc9f73931c504d29f7bb972a6138",
+      "checkpoint": "checkpoints/step_00000050_gen_000002",
+      "checkpoint_sha256": "ad04af8c47c01b6892e8d9dc739a1c903b926f27c83b1ad25e14c393097b043b",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 4.375325638907296,
+        "astronomy": 2.9195712066832042
+      },
+      "cosine": 0.3186413770569852,
+      "dot_product": 7.664548996820658,
+      "software_gradient_norm": 7.791816080997476,
+      "astronomy_gradient_norm": 3.087064771292925
+    },
+    {
+      "seed": 37,
+      "stage": "factorized",
+      "run_id": "lab-try-20261127T195246Z-c51fa58d",
+      "dataset_revision": "software-then-0aed53f42e23273af5454ac1cc468f27e7800795da69147336c3d80c9c8edc79",
+      "checkpoint": "checkpoints/step_00000046_gen_000002",
+      "checkpoint_sha256": "3c0f2388264231697a20eee9698374a8a3a836a1ca1f51865cc90632d1a17ad6",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 4.151147644860404,
+        "astronomy": 3.309919834136963
+      },
+      "cosine": 0.2801430552887397,
+      "dot_product": 10.354355490650148,
+      "software_gradient_norm": 8.842665764767556,
+      "astronomy_gradient_norm": 4.179843299982908
+    },
+    {
+      "seed": 37,
+      "stage": "late",
+      "run_id": "lab-base-3dd0639d8d7a611f-try-20261127T200231Z-380383ee",
+      "dataset_revision": "astronomy-software-replay-late",
+      "checkpoint": "checkpoints/step_00000054_gen_000002",
+      "checkpoint_sha256": "e1681107400e8e33b84beb491c497da6617dfbda6a0ca160cb9a7d4dfbf4ac74",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.187320743288313,
+        "astronomy": 2.9174584661211287
+      },
+      "cosine": -0.24564466817317546,
+      "dot_product": -3.3756060296993105,
+      "software_gradient_norm": 2.521246765136649,
+      "astronomy_gradient_norm": 5.4504085593895315
+    },
+    {
+      "seed": 37,
+      "stage": "interleaved",
+      "run_id": "lab-try-20261127T200231Z-380383ee",
+      "dataset_revision": "astronomy-software-replay-interleaved",
+      "checkpoint": "checkpoints/step_00000054_gen_000002",
+      "checkpoint_sha256": "fa02658421b785c2a64efb60d293370dc2c9ce3fa898f9de9517082d396a58ce",
+      "evaluation_status": "complete",
+      "loss": {
+        "software": 3.2986212526048933,
+        "astronomy": 2.5993994985307967
+      },
+      "cosine": 0.021534267969454655,
+      "dot_product": 0.24482203431350147,
+      "software_gradient_norm": 4.552859004918528,
+      "astronomy_gradient_norm": 2.497101457784173
+    }
+  ]
+}
