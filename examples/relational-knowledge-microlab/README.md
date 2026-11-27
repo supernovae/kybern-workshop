@@ -23,6 +23,10 @@ transfers. Uniform four-choice performance earns 25% credit. Leave the
 [final declaration](evaluation/final.json) for a representation chosen
 after development, with its own run and recorded protocol.
 
+The [paired counterfactual study](counterfactuals/README.md) reuses the
+21 fixed-token checkpoints on 24 new simulated families and measures whether
+answers follow a change in the request.
+
 ## Build the representations
 
 Use Lab with local tokenizer-origin verification and
