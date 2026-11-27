@@ -122,3 +122,69 @@ all seven views. This is evidence from small models on one simulated rule
 system, with the same 24 families reused across question types and formats.
 The [run record](results/2026-11-27.json) keeps the audited artifact keys,
 checkpoint digests, and scores by seed, presentation, question, and boundary.
+
+## Generate answers without choices
+
+Use Lab with `klab eval --answers` and the audited `receipts/panel.json` from
+above. Keep its 192 questions, contexts, IDs, and simulator answers. Append
+the expected answer form to each prompt. The evaluator keeps the keys outside
+the model input. It scores completed first lines as yes/no or exact integers
+and records form and correctness separately. The second pass expands
+the completion cap from 8 to 24 tokens on the same development prompts as a
+sensitivity check. All prompts fit the 192-token checkpoint context in both
+passes.
+
+```bash
+sha256sum receipts/panel.json
+jq -e '
+  {schema_version:1,name:"transfer-free-response-development",max_new_tokens:8,
+   items:[.items[] |
+     (if .category|contains("_approval_") then "yes_no" else "integer" end) as $kind |
+     {id,category,kind:$kind,accepted:[.answer],
+      prompt:(.prefix + (if $kind=="yes_no" then " yes or no:" else " with an integer:" end))}]}
+' receipts/panel.json > receipts/answers-8.json
+jq -e '.max_new_tokens=24' receipts/answers-8.json > receipts/answers-24.json
+sha256sum receipts/answers-{8,24}.json
+for budget in 8 24; do
+  mkdir -p "receipts/generated-$budget"
+  jq -r '.runs[] | [.run_id,.try_id,.checkpoint_sha256] | @tsv' "$RECIPE/../results/2026-11-27.json" |
+    while IFS=$'\t' read -r run trial digest; do
+      generation=$(klab report "$trial" --lab-dir "$(dirname "$RUNS")" --json |
+        jq -er --arg run "$run" --arg digest "$digest" '
+          .arms[] | select(.run_id==$run and .checkpoint_sha256==$digest) | .checkpoint')
+      /usr/bin/time -f '%e %M' -o "receipts/generated-$budget/$run.time" \
+        klab eval "$run" --runs-dir "$RUNS" --checkpoint "$generation" --backend cpu \
+          --answers "receipts/answers-$budget.json" > "receipts/generated-$budget/$run.json"
+      jq -e --arg digest "$digest" '.identity.checkpoint_sha256==$digest and .answers.overall.items==192' \
+        "receipts/generated-$budget/$run.json" >/dev/null
+    done
+done
+```
+
+To count correct pairs for a checkpoint, join the scored items by ID and
+count a pair only if both answers were correct.
+
+```bash
+jq --slurpfile ranking receipts/panel.json '
+  (.answers.items | INDEX(.id)) as $items |
+  [$ranking[0].pairs[] | select($items[.left].correct and $items[.right].correct)] | length
+' "receipts/generated-8/$RUN_ID.json"
+```
+
+### Free-response result
+
+The 21 retained checkpoints generated 4,032 responses per pass. All seven
+training views scored zero at both caps, including zero correct jointly across
+2,016 checkpoint-pair trials per pass. At each cap, 4,030 responses reached the
+limit and two completed with an empty line. Models often repeated byte fragments
+or punctuation. This measures whether the 106,816-parameter base models can
+generate a complete answer to these prompts from the simulator. Every arm hit
+the floor on this measure, which leaves no basis for ordering the training views.
+The final families stayed held back.
+
+On CPU with two threads, the median evaluation per checkpoint took 3.07 seconds
+at the 8-token cap and 3.96 seconds at the 24-token cap, including model load.
+Peak process RSS was about 520 MiB in both passes. The
+[free-response record](results/2026-11-27-free-response.json) keeps the prompts'
+declaration digests, checkpoint and result digests, counts by answer kind, and
+resource measurements for every run.
