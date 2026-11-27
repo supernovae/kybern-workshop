@@ -1,0 +1,141 @@
+{
+  "scope": {
+    "path": "software/scope.jsonl",
+    "sha256": "4cd2db85878aee8ba89610ed9d57915116f0089c59dc11602e2f0d7ccdcade2c",
+    "max_rows": 282
+  },
+  "sources": [
+    {
+      "path": "software/asyncio.jsonl",
+      "sha256": "784e41428e6e852cc9c95ce38904c782901c0225fd06d983cd3077c25bd7175d",
+      "max_rows": 35,
+      "id": "asyncio",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/asyncio",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/concurrent.jsonl",
+      "sha256": "75a400e4221c67fa3f4aab64fb5d0c50b78dc3465bc45b1f156f5bacbc3e1ffb",
+      "max_rows": 9,
+      "id": "concurrent",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/concurrent",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/email.jsonl",
+      "sha256": "c0dca97775af90df4b7c60a5642c13cf1491cb29f770fb0b84232e671614998e",
+      "max_rows": 29,
+      "id": "email",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/email",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/encodings.jsonl",
+      "sha256": "e33f42ebefc805d8e50dd25911052a5f4d4b403696534487cdfdf18a064cc672",
+      "max_rows": 123,
+      "id": "encodings",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/encodings",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/http.jsonl",
+      "sha256": "0f2c8f29e8c1ffcea85b855fc0252f6554c01ec62268b0b371ed6dddee7f7213",
+      "max_rows": 5,
+      "id": "http",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/http",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/json.jsonl",
+      "sha256": "ed2b0180f78b590b4d1498e81456b6ea6a8e64d36a2fea8cc8665a2e13e33d21",
+      "max_rows": 6,
+      "id": "json",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/json",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/logging.jsonl",
+      "sha256": "85925d48b3c032439c40c082aa3901be65eaa5ab3a3ba3323abae1cad798ef24",
+      "max_rows": 3,
+      "id": "logging",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/logging",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/multiprocessing.jsonl",
+      "sha256": "e0f154a7a9e80d8f2c377237f67d24dc0ba49bdcef44cea911d9660a5725760d",
+      "max_rows": 23,
+      "id": "multiprocessing",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/multiprocessing",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/tomllib.jsonl",
+      "sha256": "bc863b5387d79ca376f74759f3465397af5f91e625f2f8eeb40618e7d25c2844",
+      "max_rows": 4,
+      "id": "tomllib",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/tomllib",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/unittest.jsonl",
+      "sha256": "d31808a37a79a91bfce1894f4319a2d821ff072fe94540e0d59d15aa77b00f7b",
+      "max_rows": 13,
+      "id": "unittest",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/unittest",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/urllib.jsonl",
+      "sha256": "27f3d718b53c15e97deb1c7592caafaf83b64cc53456e747c39575585ed86ba6",
+      "max_rows": 6,
+      "id": "urllib",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/urllib",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/xml.jsonl",
+      "sha256": "25d0b5035f074043c460589d2e52fd1e817372c31a2f2228c79f5a331754a482",
+      "max_rows": 22,
+      "id": "xml",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/xml",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    },
+    {
+      "path": "software/zoneinfo.jsonl",
+      "sha256": "cda533d5b193fd55bc7219623a14318052b654c663012dd4ab95e3b8c787e013",
+      "max_rows": 4,
+      "id": "zoneinfo",
+      "uri": "https://github.com/python/cpython/tree/ebf955df7a89ed0c7968f79faec1de49f61ed7cb/Lib/zoneinfo",
+      "license": "PSF-2.0; retain the pinned LICENSE and package or module notices",
+      "origin": "unknown",
+      "format": "python-ast"
+    }
+  ],
+  "max_index_bytes": 4194304,
+  "max_shard_output_bytes": 1048576
+}

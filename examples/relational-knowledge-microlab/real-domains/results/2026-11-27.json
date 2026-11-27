@@ -1,0 +1,299 @@
+{
+  "lab_revision": "591ef2bce49dbae9aa3598d892e49dd1876d8853",
+  "python": "3.14.8",
+  "vocab_size": 320,
+  "scope": "Preparation and serialization only. No model training or final-panel scoring.",
+  "measurement": "GNU time on local NVMe, fresh or reused artifact store with warm OS caches. Includes CLI startup. Both inputs are below the parallel threshold.",
+  "preparation_attempts": [
+    {
+      "status": "refused",
+      "stage": "astronomy tokenizer fit",
+      "requested_vocab": 384,
+      "available_vocab": 348
+    },
+    {
+      "status": "refused",
+      "stage": "factorized preparation",
+      "reason": "shared tokenizer origin was absent"
+    },
+    {
+      "status": "refused",
+      "stage": "restart in the same output directory",
+      "reason": "run config derivation was already published"
+    }
+  ],
+  "domains": [
+    {
+      "domain": "astronomy",
+      "source_rows": 60,
+      "index": {
+        "key": "a5298d80b6cb2d70764d92eb6a80fc3a3be7915b5d097cbfa3c06221f2150b96",
+        "payload": {
+          "sha256": "0e3820e149d510b7961b8aaebf14d9857a3686fa76d146ada90a5ab816995440",
+          "size": 118784
+        },
+        "coverage": {
+          "test": {
+            "assertions": 28,
+            "edges": 28,
+            "entities": 16,
+            "families": 2,
+            "qualified_assertions": 2
+          },
+          "train": {
+            "assertions": 43,
+            "edges": 43,
+            "entities": 28,
+            "families": 6,
+            "qualified_assertions": 0
+          },
+          "validation": {
+            "assertions": 28,
+            "edges": 28,
+            "entities": 16,
+            "families": 2,
+            "qualified_assertions": 0
+          }
+        }
+      },
+      "unresolved": {
+        "entity_outside_scope": 410
+      },
+      "tokenizer_sha256": "e93f2336d47b28ddd40d61ec189dc9ced83c681c83749504a9d9d747870a9942",
+      "representations": [
+        {
+          "target": "triples",
+          "key": "bcbce334df1e935479016fb8b307f2278337dc9f73931c504d29f7bb972a6138",
+          "fidelity": "assertion_visits",
+          "scratch_bytes": 0,
+          "train": {
+            "sequences": 43,
+            "assertion_visits": 43,
+            "text_bytes": 4216,
+            "tokens": 1043
+          }
+        },
+        {
+          "target": "factorized",
+          "key": "0aed53f42e23273af5454ac1cc468f27e7800795da69147336c3d80c9c8edc79",
+          "fidelity": "assertion_round_trip",
+          "scratch_bytes": 20480,
+          "train": {
+            "sequences": 27,
+            "assertion_visits": 43,
+            "text_bytes": 2932,
+            "tokens": 779
+          }
+        },
+        {
+          "target": "walks",
+          "key": "31c1c94dac57d60fc4fcdec091787e844cac6d363e6c50d832b9b8fb66c05259",
+          "fidelity": "assertion_visits",
+          "scratch_bytes": 0,
+          "train": {
+            "sequences": 54,
+            "assertion_visits": 158,
+            "text_bytes": 14482,
+            "tokens": 3948
+          }
+        },
+        {
+          "target": "hierarchy",
+          "key": "b7745700e4e3108c1d46f1dee223ab6a1d11bbaf05f68eff29a1e789a83c7931",
+          "fidelity": "assertion_round_trip",
+          "scratch_bytes": 20480,
+          "train": {
+            "sequences": 27,
+            "assertion_visits": 43,
+            "text_bytes": 2902,
+            "tokens": 815
+          }
+        }
+      ],
+      "all_split_assertion_ids_match": [
+        "factorized",
+        "hierarchy"
+      ],
+      "prepared": {
+        "factorized": {
+          "train_tokens": 779,
+          "train_targets": 768,
+          "dropped_tail_targets": 10,
+          "skipped_train_documents": 0,
+          "truncated_train_documents": 0,
+          "validation_sha256": "5c3cae79b1849e281d90a81ae1e8c813f280211a88e8c240dc96bae605149c82"
+        },
+        "hierarchy": {
+          "train_tokens": 815,
+          "train_targets": 768,
+          "dropped_tail_targets": 46,
+          "skipped_train_documents": 0,
+          "truncated_train_documents": 0,
+          "validation_sha256": "5c3cae79b1849e281d90a81ae1e8c813f280211a88e8c240dc96bae605149c82"
+        },
+        "triples": {
+          "train_tokens": 1043,
+          "train_targets": 1024,
+          "dropped_tail_targets": 18,
+          "skipped_train_documents": 0,
+          "truncated_train_documents": 0,
+          "validation_sha256": "5c3cae79b1849e281d90a81ae1e8c813f280211a88e8c240dc96bae605149c82"
+        },
+        "walks": {
+          "train_tokens": 3948,
+          "train_targets": 3904,
+          "dropped_tail_targets": 43,
+          "skipped_train_documents": 0,
+          "truncated_train_documents": 0,
+          "validation_sha256": "5c3cae79b1849e281d90a81ae1e8c813f280211a88e8c240dc96bae605149c82"
+        }
+      },
+      "extraction": {
+        "cold": {
+          "wall_seconds": 0.49,
+          "user_seconds": 0.35,
+          "system_seconds": 0.03,
+          "peak_rss_kib": 84472
+        },
+        "warm": {
+          "wall_seconds": 0.60,
+          "user_seconds": 0.57,
+          "system_seconds": 0.02,
+          "peak_rss_kib": 100192
+        }
+      },
+      "resumed_shards": null
+    },
+    {
+      "domain": "software",
+      "source_rows": 282,
+      "index": {
+        "key": "d6712a1f4832f2c1391313d2e61c92b4c4374068e8be7dae0fddec76fad0c185",
+        "payload": {
+          "sha256": "9f9fb1020c9a958f756858e5fa8e94287d12b8e363eaf8fd47d1a9a116fea983",
+          "size": 208896
+        },
+        "coverage": {
+          "test": {
+            "assertions": 47,
+            "edges": 47,
+            "entities": 35,
+            "families": 3,
+            "qualified_assertions": 0
+          },
+          "train": {
+            "assertions": 151,
+            "edges": 151,
+            "entities": 207,
+            "families": 7,
+            "qualified_assertions": 0
+          },
+          "validation": {
+            "assertions": 85,
+            "edges": 85,
+            "entities": 40,
+            "families": 3,
+            "qualified_assertions": 0
+          }
+        }
+      },
+      "unresolved": {
+        "cross_split_assertion": 21,
+        "entity_outside_scope": 845
+      },
+      "tokenizer_sha256": "e5f81b1f77ccdccc3125eae05500f808c3641e2fbc835131b0b634431e6c95a4",
+      "representations": [
+        {
+          "target": "triples",
+          "key": "5c02c448c82fe30b6e2e7a2dffdd9f6475bfd43dd7676f59b914e06ab1355193",
+          "fidelity": "assertion_visits",
+          "scratch_bytes": 0,
+          "train": {
+            "sequences": 151,
+            "assertion_visits": 151,
+            "text_bytes": 17649,
+            "tokens": 5027
+          }
+        },
+        {
+          "target": "factorized",
+          "key": "1a7df628ffefee15677a17561312d85a4972135d8aa3129ffcda9537035d248b",
+          "fidelity": "assertion_round_trip",
+          "scratch_bytes": 20480,
+          "train": {
+            "sequences": 59,
+            "assertion_visits": 151,
+            "text_bytes": 9147,
+            "tokens": 3272
+          }
+        },
+        {
+          "target": "walks",
+          "key": "296b83fa0bc32bcdb3dcf46817744b8c7a3195f206238418cbd958815c48d4b3",
+          "fidelity": "assertion_visits",
+          "scratch_bytes": 0,
+          "train": {
+            "sequences": 124,
+            "assertion_visits": 304,
+            "text_bytes": 33381,
+            "tokens": 9925
+          }
+        }
+      ],
+      "all_split_assertion_ids_match": [
+        "factorized"
+      ],
+      "prepared": {
+        "factorized": {
+          "train_tokens": 3272,
+          "train_targets": 3264,
+          "dropped_tail_targets": 7,
+          "skipped_train_documents": 0,
+          "truncated_train_documents": 0,
+          "validation_sha256": "72f498bcfbd95344ac95dea99957905e31ef95050b733b296387f059d107bae5"
+        },
+        "triples": {
+          "train_tokens": 5027,
+          "train_targets": 4992,
+          "dropped_tail_targets": 34,
+          "skipped_train_documents": 0,
+          "truncated_train_documents": 0,
+          "validation_sha256": "72f498bcfbd95344ac95dea99957905e31ef95050b733b296387f059d107bae5"
+        },
+        "walks": {
+          "train_tokens": 9925,
+          "train_targets": 9920,
+          "dropped_tail_targets": 4,
+          "skipped_train_documents": 0,
+          "truncated_train_documents": 0,
+          "validation_sha256": "72f498bcfbd95344ac95dea99957905e31ef95050b733b296387f059d107bae5"
+        }
+      },
+      "extraction": {
+        "cold": {
+          "wall_seconds": 0.81,
+          "user_seconds": 0.61,
+          "system_seconds": 0.04,
+          "peak_rss_kib": 95292
+        },
+        "warm": {
+          "wall_seconds": 0.59,
+          "user_seconds": 0.56,
+          "system_seconds": 0.02,
+          "peak_rss_kib": 99216
+        },
+        "resumed": {
+          "wall_seconds": 0.61,
+          "user_seconds": 0.47,
+          "system_seconds": 0.03,
+          "peak_rss_kib": 93172
+        }
+      },
+      "resumed_shards": {
+        "reused": 4,
+        "total": 13,
+        "index_bytes_match": true
+      }
+    }
+  ]
+}

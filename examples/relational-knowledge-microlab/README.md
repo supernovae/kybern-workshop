@@ -135,7 +135,9 @@ cell sizes are for validating the workflow and do not estimate production
 preparation throughput.
 
 The [matched random-versus-coherent study](packing/README.md) holds the
-passages, tokenizer, token exposure and update shape fixed. Separate
-source-information and measured-compute budgets for representation
-comparisons, and bounded astronomy and software transfer studies, remain in
+passages, tokenizer, token exposure and update shape fixed. The
+[real-domain recipe](real-domains/README.md) prepares pinned astronomy and
+software data and checks assertion coverage across representations. Training
+with separate source-information and measured-compute budgets, and evaluating
+real-domain transfer, remain in
 [Workshop #118](https://github.com/supernovae/kybern-workshop/issues/118).
