@@ -19,6 +19,8 @@ degradation. The parent and both children leave the final families held back.
 
 The [replay follow-up](replay/README.md) revisits 16 software training records
 and compares late and interleaved replay at equal exposure and update counts.
+The [gradient follow-up](gradient-alignment/README.md) measures local loss
+gradient agreement on the same saved checkpoints and development panels.
 
 ## Prepare the shared prefix and both additions
 
