@@ -1,0 +1,111 @@
+{
+  "scope": {
+    "path": "astronomy/scope.jsonl",
+    "sha256": "525837ae830dc2e4870c7fa2103490e4044b130041bc33f53e70917fa49cb228",
+    "max_rows": 60
+  },
+  "sources": [
+    {
+      "path": "astronomy/earth.jsonl",
+      "sha256": "999a7bcb84d08f7116e6a31a1c1cce481d60187703a0c2b5ad9101b5a38f3e4a",
+      "max_rows": 2,
+      "id": "earth",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q2.json?revision=2575330088",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/eris.jsonl",
+      "sha256": "1fbc0199ae21f445a45944dc6ac44e41d5b033d94889a4a9930005e04cc42ba9",
+      "max_rows": 2,
+      "id": "eris",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q611.json?revision=2570872064",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/haumea.jsonl",
+      "sha256": "c54e7616773021c35507de25f1e861501c713a6695d702f6bfbe9aa10e1c8b3e",
+      "max_rows": 3,
+      "id": "haumea",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q601.json?revision=2568096354",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/jupiter.jsonl",
+      "sha256": "4e72a63c8c446f4e06f3224b41f8b23c7ad994ba0b34b372a157d5136b9748d4",
+      "max_rows": 8,
+      "id": "jupiter",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q319.json?revision=2574509926",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/makemake.jsonl",
+      "sha256": "f3224b54d2c3d81da8f4daea9a6f7ddce59b411b8c908ecbe76a177cd46ba922",
+      "max_rows": 2,
+      "id": "makemake",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q604.json?revision=2565043993",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/mars.jsonl",
+      "sha256": "682cf5f2f8262f653d8284220023a04f41ed02070962fb0c4787e5e8559c32ba",
+      "max_rows": 3,
+      "id": "mars",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q111.json?revision=2574510013",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/neptune.jsonl",
+      "sha256": "01a427c513e2caf19b88dcade5cd33e40618bf161e8a5a5be7fa56cb793c5754",
+      "max_rows": 13,
+      "id": "neptune",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q332.json?revision=2574509991",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/pluto.jsonl",
+      "sha256": "d226f464af076cf080477a3b8be9e2826c1fca35b80b8944b2c923a9d1225f28",
+      "max_rows": 6,
+      "id": "pluto",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q339.json?revision=2567839053",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/saturn.jsonl",
+      "sha256": "3c6f34026f29a5c7845201c236fa61a2974875cfe6ee148a5df90578c87a6266",
+      "max_rows": 13,
+      "id": "saturn",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q193.json?revision=2574510041",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    },
+    {
+      "path": "astronomy/uranus.jsonl",
+      "sha256": "862be6327c56823753ded163e05e94ecc526832a7ba0bc6c1d98145fb1004619",
+      "max_rows": 8,
+      "id": "uranus",
+      "uri": "https://www.wikidata.org/wiki/Special:EntityData/Q324.json?revision=2574509963",
+      "license": "CC0-1.0",
+      "origin": "structured",
+      "format": "wikidata"
+    }
+  ],
+  "max_index_bytes": 4194304,
+  "max_shard_output_bytes": 1048576
+}
