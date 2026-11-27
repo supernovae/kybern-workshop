@@ -201,6 +201,11 @@ unsupervised target tails, which the record shows for each arm. The token
 savings measure serialization. Learning and cross-domain transfer require
 separate training and evaluation.
 
+The [matched exposure study](exposure/README.md) trains triples and
+factorization with whole assertion passes and separately matched update
+time, then scores context questions over development families from both
+domains.
+
 On local NVMe, cold astronomy extraction took 0.49 s at 82 MiB peak RSS.
 Software took 0.81 s at 93 MiB. After a fault at the fourth software shard,
 the retry reused four of 13 shards and took 0.61 s with the same index bytes.

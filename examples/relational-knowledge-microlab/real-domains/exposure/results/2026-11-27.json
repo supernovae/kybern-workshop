@@ -1,0 +1,1024 @@
+{
+  "lab_revision": "51661949e9030555311c76d1dd09cf2d41541d5d",
+  "preparation": "Workshop #122",
+  "backend": "pytorch/cpu/fp32, two math threads",
+  "parameters": 102720,
+  "evaluation": "Common held-out triples and both development context panels. Generic probes disabled. Final held back.",
+  "attempts": [
+    {
+      "stage": "config derivation",
+      "status": "refused",
+      "reason": "inline settings must use JSON"
+    },
+    {
+      "stage": "first timing run receipt lookup",
+      "status": "refused",
+      "reason": "first checkpoint path lacked the checkpoints directory",
+      "retained_run": "astronomy-triples in the initial calibration store"
+    },
+    {
+      "stage": "first sweep setup",
+      "status": "failed",
+      "sweep_id": "sweep-20261127T192619Z-11596bfb",
+      "reason": "a whole dataset mapping hit a nested Path in sweep labeling; the sealed retry used dotted input fields"
+    }
+  ],
+  "studies": {
+    "astronomy": {
+      "sweep_id": "sweep-20261127T192651Z-99aa1f8c",
+      "sweep_sha256": "3c2d0634aa123aa70180415ad394fe71dcb693f0c8fa03261da961c9e0ab64fe",
+      "eval_protocol": {
+        "batch_size": 4,
+        "evaluator": "pytorch",
+        "max_batches": 16,
+        "objective": "all_tokens",
+        "packing_version": "contiguous-eos-v6",
+        "precision": "fp32",
+        "scored_blocks": 12,
+        "seq_len": 64,
+        "split": "validation",
+        "supervision_mask_sha256": null,
+        "tokenizer_sha256": "bc2f7c5e05b92fcdfc1415109107347877a90032bb1a3091e1f697ea1bab1921",
+        "validation_sha256": "5c3cae79b1849e281d90a81ae1e8c813f280211a88e8c240dc96bae605149c82"
+      },
+      "calibration_seed": 101,
+      "calibration": {
+        "triples": {
+          "name": "astronomy-triples",
+          "step": 64,
+          "tokens_seen": 16688,
+          "passes": 16,
+          "update_seconds": 0.34656242295750417,
+          "sha256": "e4424f337d0cb965099299ef43472e533f8098dbc2f6ff39e261258c3f51fdb0"
+        },
+        "factorized": {
+          "name": "astronomy-factorized",
+          "step": 48,
+          "tokens_seen": 12464,
+          "passes": 16,
+          "update_seconds": 0.2453131528745871,
+          "sha256": "c9b25d0f065fb04e377b76823a67cd5fefce3b8939dc202d615545d214515b22"
+        }
+      },
+      "summaries": {
+        "equal-exposure": {
+          "paired_loss_delta_nats": {
+            "mean": 0.30408860577477337,
+            "paired_se": 0.0965215679361006
+          },
+          "median_optimizer_update_time_ratio": 0.7271496578398112,
+          "context_accuracy": {
+            "astronomy": {
+              "triples": 0.25,
+              "factorized": 0.25
+            },
+            "software": {
+              "triples": 0.3055555555555556,
+              "factorized": 0.25
+            }
+          }
+        },
+        "matched-compute": {
+          "paired_loss_delta_nats": {
+            "mean": 0.29567531744639086,
+            "paired_se": 0.04143388599383545
+          },
+          "median_optimizer_update_time_ratio": 1.0465727386679793,
+          "matched_compute_within_15_percent": true,
+          "context_accuracy": {
+            "astronomy": {
+              "triples": 0.25,
+              "factorized": 0.25
+            },
+            "software": {
+              "triples": 0.3055555555555556,
+              "factorized": 0.25
+            }
+          }
+        }
+      },
+      "pairs": {
+        "equal-exposure": [
+          {
+            "seed": 11,
+            "try_id": "try-20261127T192652Z-598304fe",
+            "try_sha256": "81154fe2cb8a2edf4f1d5ecc8b94f884c86b9e3b44ebc9f83c60465aa5a9b599",
+            "loss_delta": 0.11852022012074759,
+            "bits_per_byte_delta": 0.0811640577262378,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-ef3a61f572a21e52-try-20261127T192652Z-598304fe",
+            "factorized": "lab-try-20261127T192652Z-598304fe",
+            "update_time_ratio": 0.7338928536808963
+          },
+          {
+            "seed": 23,
+            "try_id": "try-20261127T192702Z-2abd1f01",
+            "try_sha256": "d4ef71c79928c02f9e9551093ede93a61192c4c2ad0bf0606e63cb2036a0cb1a",
+            "loss_delta": 0.3508019844690957,
+            "bits_per_byte_delta": 0.20566441580558914,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-e2aebe3d9a13b26f-try-20261127T192702Z-2abd1f01",
+            "factorized": "lab-try-20261127T192702Z-2abd1f01",
+            "update_time_ratio": 0.7271496578398112
+          },
+          {
+            "seed": 37,
+            "try_id": "try-20261127T192710Z-c7c5b4c4",
+            "try_sha256": "8e0e6eb89f108907dc41246b1d680f27baa0841222828988a6bab789313fd40a",
+            "loss_delta": 0.4429436127344768,
+            "bits_per_byte_delta": 0.22024405438504902,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-2e14ace2343ed273-try-20261127T192710Z-c7c5b4c4",
+            "factorized": "lab-try-20261127T192710Z-c7c5b4c4",
+            "update_time_ratio": 0.7099681289697866
+          }
+        ],
+        "matched-compute": [
+          {
+            "seed": 11,
+            "try_id": "try-20261127T192659Z-03e57336",
+            "try_sha256": "b2c497802d4e79fdd800c15780fc2375329fd2e670f8f09ed698836d2a105361",
+            "loss_delta": 0.22233784198760986,
+            "bits_per_byte_delta": 0.10977535816354345,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-ef3a61f572a21e52-try-20261127T192652Z-598304fe",
+            "factorized": "lab-try-20261127T192659Z-03e57336",
+            "update_time_ratio": 1.0499893027271285
+          },
+          {
+            "seed": 23,
+            "try_id": "try-20261127T192706Z-be9336ef",
+            "try_sha256": "a950df18335588638b8072d1c9388f17c3e8e3bd198c90587f949de5009d68a6",
+            "loss_delta": 0.2989298105239868,
+            "bits_per_byte_delta": 0.15978981150960192,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-e2aebe3d9a13b26f-try-20261127T192702Z-2abd1f01",
+            "factorized": "lab-try-20261127T192706Z-be9336ef",
+            "update_time_ratio": 1.0465727386679793
+          },
+          {
+            "seed": 37,
+            "try_id": "try-20261127T192714Z-8cdace5d",
+            "try_sha256": "feb52026a09996067dccb6eb02f96ae49a7a3d025764dee58a469550cf71163f",
+            "loss_delta": 0.3657582998275759,
+            "bits_per_byte_delta": 0.16876485279876774,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-2e14ace2343ed273-try-20261127T192710Z-c7c5b4c4",
+            "factorized": "lab-try-20261127T192714Z-8cdace5d",
+            "update_time_ratio": 0.9978190700748645
+          }
+        ]
+      },
+      "runs": {
+        "lab-base-ef3a61f572a21e52-try-20261127T192652Z-598304fe": {
+          "arm": "triples",
+          "seed": 11,
+          "checkpoint": "checkpoints/step_00000064_gen_000002",
+          "checkpoint_sha256": "132a7a405ff194dd9eb30536d64dc8abb3b0e50f28c1f57b5c5f095654765ebe",
+          "passes": 16,
+          "steps": 64,
+          "targets": 16688,
+          "forward_rows": 304,
+          "heldout_loss": 2.087664087613424,
+          "bits_per_byte": 1.0885967026895522,
+          "optimizer_update_seconds": 0.3355015799461398,
+          "training_loop_seconds": 0.5854783609975129,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-1",
+                "astronomy-saturn-5"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-1",
+                "software-unittest-5",
+                "software-zoneinfo-9"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192652Z-598304fe": {
+          "arm": "factorized",
+          "seed": 11,
+          "checkpoint": "checkpoints/step_00000048_gen_000002",
+          "checkpoint_sha256": "50fdc0e01da5c6960c638ae3d94ff85c22e702bf0572ec21ca9c018714f8e153",
+          "passes": 16,
+          "steps": 48,
+          "targets": 12464,
+          "forward_rows": 224,
+          "heldout_loss": 2.2061843077341714,
+          "bits_per_byte": 1.16976076041579,
+          "optimizer_update_seconds": 0.24622221192112193,
+          "training_loop_seconds": 0.4949920089857187,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6",
+                "software-zoneinfo-10"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192659Z-03e57336": {
+          "arm": "factorized",
+          "seed": 11,
+          "checkpoint": "checkpoints/step_00000069_gen_000002",
+          "checkpoint_sha256": "efa5eb5ebcb768b42c8afed593196aa5e81f2a211fc2fc1f9797c2fe354f5be6",
+          "passes": 23,
+          "steps": 69,
+          "targets": 17917,
+          "forward_rows": 322,
+          "heldout_loss": 2.3100019296010337,
+          "bits_per_byte": 1.1983720608530957,
+          "optimizer_update_seconds": 0.3522730699914973,
+          "training_loop_seconds": 0.6330202750104945,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-1",
+                "astronomy-saturn-5"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6",
+                "software-zoneinfo-9"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-base-e2aebe3d9a13b26f-try-20261127T192702Z-2abd1f01": {
+          "arm": "triples",
+          "seed": 23,
+          "checkpoint": "checkpoints/step_00000064_gen_000002",
+          "checkpoint_sha256": "bdbcc6ad44ee6a355b4267b1c7c2221cf45b7a78e046f32482e2d9696a45aa7b",
+          "passes": 16,
+          "steps": 64,
+          "targets": 16688,
+          "forward_rows": 304,
+          "heldout_loss": 1.9705017805099487,
+          "bits_per_byte": 1.0392922683853907,
+          "optimizer_update_seconds": 0.3356780289032031,
+          "training_loop_seconds": 0.6029760990059003,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-4",
+                "astronomy-saturn-8"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-4",
+                "software-unittest-8",
+                "software-zoneinfo-12"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192702Z-2abd1f01": {
+          "arm": "factorized",
+          "seed": 23,
+          "checkpoint": "checkpoints/step_00000048_gen_000002",
+          "checkpoint_sha256": "7c6a953a019f0fc2414579d3ed1e8d0b79218a4d5723e1c2d378423d6617161f",
+          "passes": 16,
+          "steps": 48,
+          "targets": 12464,
+          "forward_rows": 224,
+          "heldout_loss": 2.3213037649790444,
+          "bits_per_byte": 1.2449566841909798,
+          "optimizer_update_seconds": 0.24408816386130638,
+          "training_loop_seconds": 0.4941678930190392,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-3",
+                "astronomy-saturn-7"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-3",
+                "software-unittest-7",
+                "software-zoneinfo-11"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192706Z-be9336ef": {
+          "arm": "factorized",
+          "seed": 23,
+          "checkpoint": "checkpoints/step_00000069_gen_000002",
+          "checkpoint_sha256": "bbdb8b991671e99626bb3126c2c1163c0137526c1690f6aa37206b3f25e8e755",
+          "passes": 23,
+          "steps": 69,
+          "targets": 17917,
+          "forward_rows": 322,
+          "heldout_loss": 2.2694315910339355,
+          "bits_per_byte": 1.1990820798949926,
+          "optimizer_update_seconds": 0.3513114740198944,
+          "training_loop_seconds": 2.315874399006134,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-3",
+                "astronomy-saturn-7"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-3",
+                "software-unittest-7",
+                "software-zoneinfo-11"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-base-2e14ace2343ed273-try-20261127T192710Z-c7c5b4c4": {
+          "arm": "triples",
+          "seed": 37,
+          "checkpoint": "checkpoints/step_00000064_gen_000002",
+          "checkpoint_sha256": "9d44163fbbfef65a0a3f43263428f93776fee4c33db22062efd15f6c3645db59",
+          "passes": 16,
+          "steps": 64,
+          "targets": 16688,
+          "forward_rows": 304,
+          "heldout_loss": 1.9540297587712605,
+          "bits_per_byte": 1.0498363460611444,
+          "optimizer_update_seconds": 0.3462008530041203,
+          "training_loop_seconds": 0.49752022299799137,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.4166666666666667,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-multiprocessing-4",
+                "software-unittest-6",
+                "software-zoneinfo-10",
+                "software-zoneinfo-12"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192710Z-c7c5b4c4": {
+          "arm": "factorized",
+          "seed": 37,
+          "checkpoint": "checkpoints/step_00000048_gen_000002",
+          "checkpoint_sha256": "748f5c12a3ea7a5d1920d87650888fea2731c7b44543d0bb2b54e5d73bf154e4",
+          "passes": 16,
+          "steps": 48,
+          "targets": 12464,
+          "forward_rows": 224,
+          "heldout_loss": 2.3969733715057373,
+          "bits_per_byte": 1.2700804004461934,
+          "optimizer_update_seconds": 0.24579157185507938,
+          "training_loop_seconds": 0.3869788259908091,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6",
+                "software-zoneinfo-10"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192714Z-8cdace5d": {
+          "arm": "factorized",
+          "seed": 37,
+          "checkpoint": "checkpoints/step_00000069_gen_000002",
+          "checkpoint_sha256": "dd7cd0d811b6ba882d5964773c264275199149878442680b1635fa761bfb6053",
+          "passes": 23,
+          "steps": 69,
+          "targets": 17917,
+          "forward_rows": 322,
+          "heldout_loss": 2.3197880585988364,
+          "bits_per_byte": 1.2186011988599121,
+          "optimizer_update_seconds": 0.34544581320369616,
+          "training_loop_seconds": 0.4933588890125975,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6",
+                "software-zoneinfo-10"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        }
+      }
+    },
+    "software": {
+      "sweep_id": "sweep-20261127T192720Z-7637d564",
+      "sweep_sha256": "80bff7f34cb25de0acb9939c4681958b08c3d98b02f0536964be3fbf8edad38a",
+      "eval_protocol": {
+        "batch_size": 4,
+        "evaluator": "pytorch",
+        "max_batches": 16,
+        "objective": "all_tokens",
+        "packing_version": "contiguous-eos-v6",
+        "precision": "fp32",
+        "scored_blocks": 64,
+        "seq_len": 64,
+        "split": "validation",
+        "supervision_mask_sha256": null,
+        "tokenizer_sha256": "970ba534f0a9d01671c0cb82355d24e34b062e89f14b3ec6b029cd088657782f",
+        "validation_sha256": "72f498bcfbd95344ac95dea99957905e31ef95050b733b296387f059d107bae5"
+      },
+      "calibration_seed": 101,
+      "calibration": {
+        "triples": {
+          "name": "software-triples",
+          "step": 304,
+          "tokens_seen": 80432,
+          "passes": 16,
+          "update_seconds": 1.6520033612614498,
+          "sha256": "f027f9413bd205ef743efbf6dd4ff0cc1dec3c1b40c00b9183b81b0c81b21f05"
+        },
+        "factorized": {
+          "name": "software-factorized",
+          "step": 176,
+          "tokens_seen": 52352,
+          "passes": 16,
+          "update_seconds": 0.9754512070503552,
+          "sha256": "e0a0836299c1e687a2eb1587e970838ae35b10e37535f40dbc2d32e44603d6be"
+        }
+      },
+      "summaries": {
+        "equal-exposure": {
+          "paired_loss_delta_nats": {
+            "mean": -0.010375315944353739,
+            "paired_se": 0.06847928057289338
+          },
+          "median_optimizer_update_time_ratio": 0.5856199656093283,
+          "context_accuracy": {
+            "astronomy": {
+              "triples": 0.16666666666666666,
+              "factorized": 0.25
+            },
+            "software": {
+              "triples": 0.25,
+              "factorized": 0.19444444444444445
+            }
+          }
+        },
+        "matched-compute": {
+          "paired_loss_delta_nats": {
+            "mean": 0.5908638114730517,
+            "paired_se": 0.05578840660984739
+          },
+          "median_optimizer_update_time_ratio": 0.9898662147289263,
+          "matched_compute_within_15_percent": true,
+          "context_accuracy": {
+            "astronomy": {
+              "triples": 0.16666666666666666,
+              "factorized": 0.25
+            },
+            "software": {
+              "triples": 0.25,
+              "factorized": 0.2777777777777778
+            }
+          }
+        }
+      },
+      "pairs": {
+        "equal-exposure": [
+          {
+            "seed": 11,
+            "try_id": "try-20261127T192721Z-fe1d4161",
+            "try_sha256": "66f5296403dbf5d32d7fabd047f7e3e0275ae2f606a53c0d8e3b00f09078fc96",
+            "loss_delta": -0.14285073429346085,
+            "bits_per_byte_delta": -0.0990284873528453,
+            "loss_verdict": "CANDIDATE_LOWER_LOSS",
+            "triples": "lab-base-dad6162164557158-try-20261127T192721Z-fe1d4161",
+            "factorized": "lab-try-20261127T192721Z-fe1d4161",
+            "update_time_ratio": 0.5992144329830327
+          },
+          {
+            "seed": 23,
+            "try_id": "try-20261127T192733Z-4204d566",
+            "try_sha256": "0e7d811cfdae972cd9dbfd246f2475dd347a43c917f915bb313b7aa9160dd713",
+            "loss_delta": 0.02576366811990738,
+            "bits_per_byte_delta": 0.0853797908675169,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-5b689e762be5a91e-try-20261127T192733Z-4204d566",
+            "factorized": "lab-try-20261127T192733Z-4204d566",
+            "update_time_ratio": 0.5856199656093283
+          },
+          {
+            "seed": 37,
+            "try_id": "try-20261127T192743Z-d1417806",
+            "try_sha256": "b9b79f6ac2053c79de275f98431ffc3897216debba054841e763d327e339680c",
+            "loss_delta": 0.08596111834049225,
+            "bits_per_byte_delta": 0.06796865331403623,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-eb278760876c0770-try-20261127T192743Z-d1417806",
+            "factorized": "lab-try-20261127T192743Z-d1417806",
+            "update_time_ratio": 0.5800845512634502
+          }
+        ],
+        "matched-compute": [
+          {
+            "seed": 11,
+            "try_id": "try-20261127T192729Z-53e1dc17",
+            "try_sha256": "5d24c9e37bda9cb40b54d93c2fb15e2aeeb379cd6c3870f3e2b67944204583ea",
+            "loss_delta": 0.5282889157533646,
+            "bits_per_byte_delta": 0.385214807058035,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-dad6162164557158-try-20261127T192721Z-fe1d4161",
+            "factorized": "lab-try-20261127T192729Z-53e1dc17",
+            "update_time_ratio": 0.9835181283892377
+          },
+          {
+            "seed": 23,
+            "try_id": "try-20261127T192739Z-eeffba9a",
+            "try_sha256": "5d87eb607f56487ee0d78512f33d6b3a26131933c47cb33c5510692711103c11",
+            "loss_delta": 0.5421492233872414,
+            "bits_per_byte_delta": 0.38554139021050493,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-5b689e762be5a91e-try-20261127T192733Z-4204d566",
+            "factorized": "lab-try-20261127T192739Z-eeffba9a",
+            "update_time_ratio": 1.0240959121224658
+          },
+          {
+            "seed": 37,
+            "try_id": "try-20261127T192749Z-a3674e12",
+            "try_sha256": "96ed004d671aeb755be63f8893dfacc04de448ed4634cd5e12e39cb1ee03b09e",
+            "loss_delta": 0.7021532952785492,
+            "bits_per_byte_delta": 0.4899532248867873,
+            "loss_verdict": "CANDIDATE_HIGHER_LOSS",
+            "triples": "lab-base-eb278760876c0770-try-20261127T192743Z-d1417806",
+            "factorized": "lab-try-20261127T192749Z-a3674e12",
+            "update_time_ratio": 0.9898662147289263
+          }
+        ]
+      },
+      "runs": {
+        "lab-base-dad6162164557158-try-20261127T192721Z-fe1d4161": {
+          "arm": "triples",
+          "seed": 11,
+          "checkpoint": "checkpoints/step_00000304_gen_000002",
+          "checkpoint_sha256": "2dc5d6a2060216bdec168f5d7fb27fcb0593146b73bf838a183ba19007e1123f",
+          "passes": 16,
+          "steps": 304,
+          "targets": 80432,
+          "forward_rows": 1488,
+          "heldout_loss": 2.5612659454345703,
+          "bits_per_byte": 1.8870602061649024,
+          "optimizer_update_seconds": 1.6625242517038714,
+          "training_loop_seconds": 1.9109242600097787,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.0,
+              "chance": 0.25,
+              "correct_items": [],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6",
+                "software-zoneinfo-10"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192721Z-fe1d4161": {
+          "arm": "factorized",
+          "seed": 11,
+          "checkpoint": "checkpoints/step_00000176_gen_000002",
+          "checkpoint_sha256": "fa8a7fc5ebc56666a934e57727222e01973b2e38972f3636b62d3b04ca2e1d51",
+          "passes": 16,
+          "steps": 176,
+          "targets": 52352,
+          "forward_rows": 896,
+          "heldout_loss": 2.4184152111411095,
+          "bits_per_byte": 1.7880317188120571,
+          "optimizer_update_seconds": 0.996208526805276,
+          "training_loop_seconds": 1.1940711670031305,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.16666666666666666,
+              "chance": 0.25,
+              "correct_items": [
+                "software-unittest-6",
+                "software-zoneinfo-10"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192729Z-53e1dc17": {
+          "arm": "factorized",
+          "seed": 11,
+          "checkpoint": "checkpoints/step_00000297_gen_000002",
+          "checkpoint_sha256": "fec693ddfff51e501f7ac3becfff093adf5c9c6b474fc2678a1861a64d35dfc1",
+          "passes": 27,
+          "steps": 297,
+          "targets": 88344,
+          "forward_rows": 1512,
+          "heldout_loss": 3.089554861187935,
+          "bits_per_byte": 2.2722750132229375,
+          "optimizer_update_seconds": 1.6351227404375095,
+          "training_loop_seconds": 1.8491474440088496,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6",
+                "software-zoneinfo-10"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-base-5b689e762be5a91e-try-20261127T192733Z-4204d566": {
+          "arm": "triples",
+          "seed": 23,
+          "checkpoint": "checkpoints/step_00000304_gen_000002",
+          "checkpoint_sha256": "9360b12399684d9556a0f5b16a8a92b7021a43a21c4e91bd5ff9aea206abe405",
+          "passes": 16,
+          "steps": 304,
+          "targets": 80432,
+          "forward_rows": 1488,
+          "heldout_loss": 2.5223710164427757,
+          "bits_per_byte": 1.8510278132162024,
+          "optimizer_update_seconds": 1.662950097292196,
+          "training_loop_seconds": 1.920371369982604,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-3",
+                "astronomy-saturn-7"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-3",
+                "software-unittest-7",
+                "software-zoneinfo-11"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192733Z-4204d566": {
+          "arm": "factorized",
+          "seed": 23,
+          "checkpoint": "checkpoints/step_00000176_gen_000002",
+          "checkpoint_sha256": "7e657eaccd0c9d51de027915b0649fa452f922cfdd4d5726f8df44f83068283d",
+          "passes": 16,
+          "steps": 176,
+          "targets": 52352,
+          "forward_rows": 896,
+          "heldout_loss": 2.548134684562683,
+          "bits_per_byte": 1.9364076040837193,
+          "optimizer_update_seconds": 0.9738567787862848,
+          "training_loop_seconds": 1.1712148239894304,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-3",
+                "astronomy-saturn-7"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-3",
+                "software-unittest-7",
+                "software-zoneinfo-11"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192739Z-eeffba9a": {
+          "arm": "factorized",
+          "seed": 23,
+          "checkpoint": "checkpoints/step_00000297_gen_000002",
+          "checkpoint_sha256": "65d5336df80cad4abfafcd2458c69c48db54ae826bded81afd6a52949ffddefb",
+          "passes": 27,
+          "steps": 297,
+          "targets": 88344,
+          "forward_rows": 1512,
+          "heldout_loss": 3.064520239830017,
+          "bits_per_byte": 2.2365692034267073,
+          "optimizer_update_seconds": 1.7030203967005946,
+          "training_loop_seconds": 1.922130079998169,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-3",
+                "astronomy-saturn-7"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.3333333333333333,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-3",
+                "software-unittest-7",
+                "software-unittest-8",
+                "software-zoneinfo-11"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-base-eb278760876c0770-try-20261127T192743Z-d1417806": {
+          "arm": "triples",
+          "seed": 37,
+          "checkpoint": "checkpoints/step_00000304_gen_000002",
+          "checkpoint_sha256": "e4ed45cf345062ac3289f2cc615ecb5f0efdef4211db11236821f6d699f87857",
+          "passes": 16,
+          "steps": 304,
+          "targets": 80432,
+          "forward_rows": 1488,
+          "heldout_loss": 2.803969070315361,
+          "bits_per_byte": 2.019054208791798,
+          "optimizer_update_seconds": 1.6685267397551797,
+          "training_loop_seconds": 1.9163710889988579,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6",
+                "software-zoneinfo-10"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192743Z-d1417806": {
+          "arm": "factorized",
+          "seed": 37,
+          "checkpoint": "checkpoints/step_00000176_gen_000002",
+          "checkpoint_sha256": "c745cf30ad7a6271ad2f98c437b7d4411ba688bf4008fa7aec14d2fda838b447",
+          "passes": 16,
+          "steps": 176,
+          "targets": 52352,
+          "forward_rows": 896,
+          "heldout_loss": 2.8899301886558533,
+          "bits_per_byte": 2.0870228621058344,
+          "optimizer_update_seconds": 0.9678865851019509,
+          "training_loop_seconds": 1.1709055249812081,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.16666666666666666,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        },
+        "lab-try-20261127T192749Z-a3674e12": {
+          "arm": "factorized",
+          "seed": 37,
+          "checkpoint": "checkpoints/step_00000297_gen_000002",
+          "checkpoint_sha256": "9e6edb6c020bc70cd8d86348b8bf5b2e0197c18dc85a487f31606313bae83567",
+          "passes": 27,
+          "steps": 297,
+          "targets": 88344,
+          "forward_rows": 1512,
+          "heldout_loss": 3.50612236559391,
+          "bits_per_byte": 2.5090074336785855,
+          "optimizer_update_seconds": 1.6516182480554562,
+          "training_loop_seconds": 1.8978594169893768,
+          "rankings": {
+            "astronomy": {
+              "sha256": "ba17701972dbaeed7e77f3cf4941ccfd6c3ffb334435b873124f4f0aeca96ae4",
+              "items": 8,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "astronomy-mars-2",
+                "astronomy-saturn-6"
+              ],
+              "fractional_credit": {}
+            },
+            "software": {
+              "sha256": "a3f128ea6d19e1a65ae3fd56413eb1a8c6dfcdc277a45f08e055c246c5412fd1",
+              "items": 12,
+              "accuracy": 0.25,
+              "chance": 0.25,
+              "correct_items": [
+                "software-multiprocessing-2",
+                "software-unittest-6",
+                "software-zoneinfo-10"
+              ],
+              "fractional_credit": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
