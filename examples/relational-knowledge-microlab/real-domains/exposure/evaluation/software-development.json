@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "name": "software-held-family-context",
+  "items": [
+    {
+      "id": "software-multiprocessing-1",
+      "category": "multiprocessing_direct",
+      "prefix": "Within multiprocessing. Import edges: dummy>pool; pool>connection. Import target of dummy? A:pool B:connection C:context D:util. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": "software-multiprocessing-2",
+      "category": "multiprocessing_inverse",
+      "prefix": "Within multiprocessing. Import edges: context>managers; queues>util. Which source imports util? A:context B:queues C:managers D:util. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "B"
+    },
+    {
+      "id": "software-multiprocessing-3",
+      "category": "multiprocessing_two_hop",
+      "prefix": "Within multiprocessing. Import edges: dummy>pool; pool>connection. Two edges from dummy? A:context B:pool C:connection D:dummy. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "C"
+    },
+    {
+      "id": "software-multiprocessing-4",
+      "category": "multiprocessing_two_hop",
+      "prefix": "Within multiprocessing. Import edges: reduction>resource_sharer; resource_sharer>context. Two edges from reduction? A:resource_sharer B:pool C:reduction D:context. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "D"
+    },
+    {
+      "id": "software-unittest-5",
+      "category": "unittest_direct",
+      "prefix": "Within unittest. Import edges: mock>util; runner>case. Import target of mock? A:util B:case C:main D:mock. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": "software-unittest-6",
+      "category": "unittest_inverse",
+      "prefix": "Within unittest. Import edges: async_case>case; main>signals. Which source imports case? A:main B:async_case C:case D:signals. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "B"
+    },
+    {
+      "id": "software-unittest-7",
+      "category": "unittest_two_hop",
+      "prefix": "Within unittest. Import edges: runner>case; case>util. Two edges from runner? A:case B:runner C:util D:result. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "C"
+    },
+    {
+      "id": "software-unittest-8",
+      "category": "unittest_inverse",
+      "prefix": "Within unittest. Import edges: __main__>main; mock>util. Which source imports main? A:main B:mock C:util D:__main__. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "D"
+    },
+    {
+      "id": "software-zoneinfo-9",
+      "category": "zoneinfo_direct",
+      "prefix": "Within zoneinfo. Import edges: zoneinfo>_common; _zoneinfo>zoneinfo. Import target of zoneinfo? A:_common B:_zoneinfo C:zoneinfo D:_tzpath. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": "software-zoneinfo-10",
+      "category": "zoneinfo_inverse",
+      "prefix": "Within zoneinfo. Import edges: zoneinfo>_common; _zoneinfo>zoneinfo. Which source imports zoneinfo? A:zoneinfo B:_zoneinfo C:_common D:_tzpath. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "B"
+    },
+    {
+      "id": "software-zoneinfo-11",
+      "category": "zoneinfo_two_hop",
+      "prefix": "Within zoneinfo. Import edges: _zoneinfo>zoneinfo; zoneinfo>_common. Two edges from _zoneinfo? A:zoneinfo B:_zoneinfo C:_common D:_tzpath. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "C"
+    },
+    {
+      "id": "software-zoneinfo-12",
+      "category": "zoneinfo_inverse",
+      "prefix": "Within zoneinfo. Import edges: zoneinfo>_zoneinfo; _zoneinfo>zoneinfo. Which source imports _zoneinfo? A:_zoneinfo B:_common C:_tzpath D:zoneinfo. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "D"
+    }
+  ]
+}

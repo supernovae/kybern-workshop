@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "name": "astronomy-held-family-context",
+  "items": [
+    {
+      "id": "astronomy-mars-1",
+      "category": "mars_direct",
+      "prefix": "P397=child>parent. P398=parent>child. Q7547 P397 Q111; Q7548 P397 Q111. Parent of Q7547? A:Q111 B:Q7548 C:Q7547 D:Q193. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": "astronomy-mars-2",
+      "category": "mars_inverse",
+      "prefix": "P397=child>parent. P398=parent>child. Q111 P398 Q7547; Q111 P398 Q7548. Which listed parent has Q7548 as a child? A:Q7547 B:Q111 C:Q7548 D:Q193. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "B"
+    },
+    {
+      "id": "astronomy-mars-3",
+      "category": "mars_shared_parent",
+      "prefix": "P397=child>parent. P398=parent>child. Q7547 P397 Q111; Q7548 P397 Q111; Q2565 P397 Q193. Which other recorded body shares a parent with Q7547? A:Q193 B:Q111 C:Q7548 D:Q2565. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "C"
+    },
+    {
+      "id": "astronomy-mars-4",
+      "category": "mars_inverse",
+      "prefix": "P397=child>parent. P398=parent>child. Q111 P398 Q7547; Q193 P398 Q2565. Which listed parent has Q7547 as a child? A:Q193 B:Q7547 C:Q2565 D:Q111. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "D"
+    },
+    {
+      "id": "astronomy-saturn-5",
+      "category": "saturn_direct",
+      "prefix": "P397=child>parent. P398=parent>child. Q2565 P397 Q193; Q111 P398 Q7547. Parent of Q2565? A:Q193 B:Q111 C:Q7547 D:Q2565. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": "astronomy-saturn-6",
+      "category": "saturn_inverse",
+      "prefix": "P397=child>parent. P398=parent>child. Q193 P398 Q3303; Q111 P398 Q7547. Which listed parent has Q3303 as a child? A:Q111 B:Q193 C:Q3303 D:Q7547. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "B"
+    },
+    {
+      "id": "astronomy-saturn-7",
+      "category": "saturn_shared_parent",
+      "prefix": "P397=child>parent. P398=parent>child. Q17705 P397 Q193; Q17746 P397 Q193; Q7548 P397 Q111. Which other recorded body shares a parent with Q17705? A:Q193 B:Q111 C:Q17746 D:Q7548. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "C"
+    },
+    {
+      "id": "astronomy-saturn-8",
+      "category": "saturn_shared_parent",
+      "prefix": "P397=child>parent. P398=parent>child. Q15047 P397 Q193; Q17751 P397 Q193; Q7547 P397 Q111. Which other recorded body shares a parent with Q15047? A:Q193 B:Q111 C:Q7547 D:Q17751. Answer:",
+      "candidates": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": "D"
+    }
+  ]
+}

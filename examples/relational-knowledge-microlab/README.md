@@ -137,7 +137,8 @@ preparation throughput.
 The [matched random-versus-coherent study](packing/README.md) holds the
 passages, tokenizer, token exposure and update shape fixed. The
 [real-domain recipe](real-domains/README.md) prepares pinned astronomy and
-software data and checks assertion coverage across representations. Training
-with separate source-information and measured-compute budgets, and evaluating
-real-domain transfer, remain in
+software data and checks assertion coverage across representations. The
+[exposure study](real-domains/exposure/README.md) compares factorization under
+equal assertion exposure and separately matched update time. Broader
+representation and transfer comparisons remain in
 [Workshop #118](https://github.com/supernovae/kybern-workshop/issues/118).
