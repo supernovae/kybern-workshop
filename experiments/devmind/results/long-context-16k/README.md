@@ -72,17 +72,75 @@ What this shows:
 Limits of this evidence:
 
 - Twelve items per cell and seed, six candidate answers, one haystack style.
-- The probe verdict is `rerun` for every pair because the `lm_eval` probe was
+- The probe verdict was `rerun` for every pair because the `lm_eval` probe was
   unavailable in the accelerator runtime. Every probe that ran passed or
   warned; repetition warned for both raised-base arms at seed 43 and moved the
-  other way at seed 42.
+  other way at seed 42. The seed 42 pair has since been probed with `lm_eval`
+  ([below](#general-language-check)); the other six pairs have not.
 - The held-out split has now been used to choose between arms twice. The
   held-back final split has not been read.
 - Whether the 0.7% loss gap narrows at the full budget is not measured.
 
 Decision, 27 November: run the full stage-2 budget at base 1,000,000
 (`devmind-lc16k-abf-500m`, seed 42, same config as `devmind-lc16k-yarn-500m`
-apart from the position encoding). Its result is not part of this record.
+apart from the position encoding, same Lab commit `e0bbbb0c`). It started on
+27 November and was training two hours later at 53.0 million of 500 million
+tokens. Its result is not part of this record.
+
+### General-language check
+
+After `lm-eval` 0.4.13 was installed next to the accelerator runtime, the seed
+42 pair was probed again: `devmind-lc16k-abf-50m` against
+`devmind-lc16k-yarn-50m-r2`, full tier, suite version 7, probe record
+`probe-20261127T181144Z-5f16ac1e`. Nothing was missing this time, so the
+verdict is a real one: `tweak`, for the held-out loss `warn` and no loss gain.
+Every other row matches the earlier probe of this pair.
+
+Accuracy on the first 50 items of each task, zero-shot
+([lm-eval.csv](lm-eval.csv)):
+
+| Task | YaRN | Base 1,000,000 |
+| --- | --- | --- |
+| arc_easy | 0.44 | 0.44 |
+| hellaswag | 0.38 | 0.40 |
+| lambada_openai | 0.38 | 0.34 |
+| piqa | 0.56 | 0.60 |
+| Mean | 0.440 | 0.445 |
+
+The mean differs by 0.005 with a standard error of 0.015, and no task differs
+by more than two items. Neither arm wins. The raised base did not measurably
+change general-language ability at this budget, which is the most this check
+can say: 200 items can only show a gap of about three points, and both
+checkpoints sit close to chance (0.25 for arc_easy and hellaswag, 0.50 for
+piqa).
+
+## Lessons
+
+- **Held-out loss alone picked the wrong arm.** YaRN's loss was 0.7% lower
+  and it could not use the first tokens of a long context. Choose a context
+  extension on retrieval across the window as well as on loss.
+- **A retrieval probe needs depth as well as length.** Six items with the fact
+  always at the start showed that something failed at 10,000 tokens. Only the
+  length by depth grid showed that the failure was confined to the start of
+  the context and that everything from 25% depth onward worked.
+- **More training did not repair the encoding.** The 500 million token YaRN
+  run finished with the same blind spot as the 39 million token arm. A short
+  arm was enough to see it, and the full budget had been committed on the
+  loss comparison alone.
+- **One seed would have misled twice.** At seed 42 base 80,000 scored 0.75 in
+  the 10,026-token start cell and looked like a cheap middle; seeds 43 and 44
+  scored 0.50 and chance.
+- **Check that the whole probe tier can run before training for it.** The
+  full tier ends with `lm_eval`, the runtime did not have it, and every
+  verdict came back `rerun` after the arms had trained. Lab now refuses a
+  full-tier probe, try or sweep up front when the harness or a task's dataset
+  cannot be loaded
+  ([model-lab#722](https://github.com/supernovae/model-lab/pull/722),
+  [#723](https://github.com/supernovae/model-lab/pull/723)).
+- **Score at the precision the run trained in.** The fp32 scorer needed 24 GiB
+  for one attention matrix at 16,384 tokens and the first probe numbers came
+  from a patched scorer. Fixed in
+  [model-lab#720](https://github.com/supernovae/model-lab/pull/720).
 
 ## What ran
 
@@ -166,12 +224,14 @@ scores chance on them, and they say nothing about these arms.
 
 ## Not run
 
-- The larger base at the full stage-2 budget (queued 27 November).
+- The larger base at the full stage-2 budget (in progress, see the decision
+  above).
 - Any base between 80,000 and 1,000,000. Gao et al. 2025 ("How to Train
   Long-Context Language Models (Effectively)", ACL) found the best base to be
   about twice the dynamic-NTK value for the new length; for a fourfold
   extension of this model that is on the order of 80,000, far below the
   1,000,000 used here.
+- `lm_eval` for the seed 43 and 44 pairs and for `devmind-lc16k-yarn-500m`.
 - Short-context checks after stage 2 (does the 4,096-token behaviour survive).
 - Stage 3.
 

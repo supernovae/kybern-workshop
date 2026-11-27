@@ -1,0 +1,17 @@
+run_id,arm,seed,probe_record,task,metric,value,items
+devmind-lc16k-yarn-50m-r2,yarn,42,probe-20261127T181144Z-5f16ac1e,arc_easy,acc,0.44,50
+devmind-lc16k-yarn-50m-r2,yarn,42,probe-20261127T181144Z-5f16ac1e,arc_easy,acc_norm,0.54,50
+devmind-lc16k-yarn-50m-r2,yarn,42,probe-20261127T181144Z-5f16ac1e,hellaswag,acc,0.38,50
+devmind-lc16k-yarn-50m-r2,yarn,42,probe-20261127T181144Z-5f16ac1e,hellaswag,acc_norm,0.46,50
+devmind-lc16k-yarn-50m-r2,yarn,42,probe-20261127T181144Z-5f16ac1e,lambada_openai,acc,0.38,50
+devmind-lc16k-yarn-50m-r2,yarn,42,probe-20261127T181144Z-5f16ac1e,lambada_openai,perplexity,33.3297331106989,50
+devmind-lc16k-yarn-50m-r2,yarn,42,probe-20261127T181144Z-5f16ac1e,piqa,acc,0.56,50
+devmind-lc16k-yarn-50m-r2,yarn,42,probe-20261127T181144Z-5f16ac1e,piqa,acc_norm,0.56,50
+devmind-lc16k-abf-50m,base-1000000,42,probe-20261127T181144Z-5f16ac1e,arc_easy,acc,0.44,50
+devmind-lc16k-abf-50m,base-1000000,42,probe-20261127T181144Z-5f16ac1e,arc_easy,acc_norm,0.54,50
+devmind-lc16k-abf-50m,base-1000000,42,probe-20261127T181144Z-5f16ac1e,hellaswag,acc,0.4,50
+devmind-lc16k-abf-50m,base-1000000,42,probe-20261127T181144Z-5f16ac1e,hellaswag,acc_norm,0.48,50
+devmind-lc16k-abf-50m,base-1000000,42,probe-20261127T181144Z-5f16ac1e,lambada_openai,acc,0.34,50
+devmind-lc16k-abf-50m,base-1000000,42,probe-20261127T181144Z-5f16ac1e,lambada_openai,perplexity,33.60862729592716,50
+devmind-lc16k-abf-50m,base-1000000,42,probe-20261127T181144Z-5f16ac1e,piqa,acc,0.6,50
+devmind-lc16k-abf-50m,base-1000000,42,probe-20261127T181144Z-5f16ac1e,piqa,acc_norm,0.6,50
