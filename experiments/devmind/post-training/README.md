@@ -72,6 +72,11 @@ each length and the short-context probes that show what the extension costs.
 Train the full stage with whichever wins; it is one comparison on one seed, so
 record it as such.
 
+The first comparison is recorded in
+[results/long-context-16k](../results/long-context-16k/README.md): YaRN had the
+lower loss, the larger base retrieved from about 10,000 tokens back where YaRN
+did not, and the choice is still open.
+
 **Stage 3.** Copy the long-context mixture again with `row_tokens: 32768` and
 every quota halved (the shares stay the same), materialize it to its own
 output, and point a second copy of the paths file at it. Set
