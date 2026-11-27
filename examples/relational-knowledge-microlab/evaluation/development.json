@@ -1,0 +1,486 @@
+{
+  "schema_version": 1,
+  "name": "basin-development",
+  "items": [
+    {
+      "id": "ash-direct",
+      "category": "seen_direct",
+      "prefix": "Water from ash-bank drains directly into",
+      "candidates": [
+        "ash-arch",
+        "ash-weir",
+        "ash-cove",
+        "ash-mill"
+      ],
+      "answer": "ash-arch"
+    },
+    {
+      "id": "ash-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into ash-mill? The station is",
+      "candidates": [
+        "ash-bank",
+        "ash-weir",
+        "ash-ford",
+        "ash-cove"
+      ],
+      "answer": "ash-weir"
+    },
+    {
+      "id": "birch-direct",
+      "category": "seen_direct",
+      "prefix": "Water from birch-dock drains directly into",
+      "candidates": [
+        "birch-arch",
+        "birch-ford",
+        "birch-cove",
+        "birch-bank"
+      ],
+      "answer": "birch-cove"
+    },
+    {
+      "id": "birch-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into birch-bank? The station is",
+      "candidates": [
+        "birch-dock",
+        "birch-weir",
+        "birch-ford",
+        "birch-arch"
+      ],
+      "answer": "birch-arch"
+    },
+    {
+      "id": "cedar-direct",
+      "category": "seen_direct",
+      "prefix": "Water from cedar-cove drains directly into",
+      "candidates": [
+        "cedar-bank",
+        "cedar-dock",
+        "cedar-arch",
+        "cedar-ford"
+      ],
+      "answer": "cedar-bank"
+    },
+    {
+      "id": "cedar-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into cedar-ford? The station is",
+      "candidates": [
+        "cedar-cove",
+        "cedar-dock",
+        "cedar-mill",
+        "cedar-arch"
+      ],
+      "answer": "cedar-dock"
+    },
+    {
+      "id": "dawn-direct",
+      "category": "seen_direct",
+      "prefix": "Water from dawn-weir drains directly into",
+      "candidates": [
+        "dawn-bank",
+        "dawn-mill",
+        "dawn-ford",
+        "dawn-dock"
+      ],
+      "answer": "dawn-ford"
+    },
+    {
+      "id": "dawn-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into dawn-dock? The station is",
+      "candidates": [
+        "dawn-weir",
+        "dawn-cove",
+        "dawn-mill",
+        "dawn-bank"
+      ],
+      "answer": "dawn-bank"
+    },
+    {
+      "id": "elm-direct",
+      "category": "seen_direct",
+      "prefix": "Water from elm-ford drains directly into",
+      "candidates": [
+        "elm-dock",
+        "elm-mill",
+        "elm-bank",
+        "elm-weir"
+      ],
+      "answer": "elm-dock"
+    },
+    {
+      "id": "elm-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into elm-weir? The station is",
+      "candidates": [
+        "elm-ford",
+        "elm-mill",
+        "elm-arch",
+        "elm-bank"
+      ],
+      "answer": "elm-mill"
+    },
+    {
+      "id": "fern-direct",
+      "category": "seen_direct",
+      "prefix": "Water from fern-bank drains directly into",
+      "candidates": [
+        "fern-weir",
+        "fern-cove",
+        "fern-arch",
+        "fern-mill"
+      ],
+      "answer": "fern-arch"
+    },
+    {
+      "id": "fern-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into fern-mill? The station is",
+      "candidates": [
+        "fern-bank",
+        "fern-ford",
+        "fern-cove",
+        "fern-weir"
+      ],
+      "answer": "fern-weir"
+    },
+    {
+      "id": "gale-direct",
+      "category": "seen_direct",
+      "prefix": "Water from gale-dock drains directly into",
+      "candidates": [
+        "gale-cove",
+        "gale-arch",
+        "gale-ford",
+        "gale-bank"
+      ],
+      "answer": "gale-cove"
+    },
+    {
+      "id": "gale-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into gale-bank? The station is",
+      "candidates": [
+        "gale-dock",
+        "gale-arch",
+        "gale-weir",
+        "gale-ford"
+      ],
+      "answer": "gale-arch"
+    },
+    {
+      "id": "heath-direct",
+      "category": "seen_direct",
+      "prefix": "Water from heath-cove drains directly into",
+      "candidates": [
+        "heath-dock",
+        "heath-arch",
+        "heath-bank",
+        "heath-ford"
+      ],
+      "answer": "heath-bank"
+    },
+    {
+      "id": "heath-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into heath-ford? The station is",
+      "candidates": [
+        "heath-cove",
+        "heath-mill",
+        "heath-arch",
+        "heath-dock"
+      ],
+      "answer": "heath-dock"
+    },
+    {
+      "id": "iris-direct",
+      "category": "seen_direct",
+      "prefix": "Water from iris-weir drains directly into",
+      "candidates": [
+        "iris-ford",
+        "iris-bank",
+        "iris-mill",
+        "iris-dock"
+      ],
+      "answer": "iris-ford"
+    },
+    {
+      "id": "iris-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into iris-dock? The station is",
+      "candidates": [
+        "iris-weir",
+        "iris-bank",
+        "iris-cove",
+        "iris-mill"
+      ],
+      "answer": "iris-bank"
+    },
+    {
+      "id": "jade-direct",
+      "category": "seen_direct",
+      "prefix": "Water from jade-ford drains directly into",
+      "candidates": [
+        "jade-mill",
+        "jade-bank",
+        "jade-dock",
+        "jade-weir"
+      ],
+      "answer": "jade-dock"
+    },
+    {
+      "id": "jade-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into jade-weir? The station is",
+      "candidates": [
+        "jade-ford",
+        "jade-arch",
+        "jade-bank",
+        "jade-mill"
+      ],
+      "answer": "jade-mill"
+    },
+    {
+      "id": "kelp-direct",
+      "category": "seen_direct",
+      "prefix": "Water from kelp-bank drains directly into",
+      "candidates": [
+        "kelp-arch",
+        "kelp-weir",
+        "kelp-cove",
+        "kelp-mill"
+      ],
+      "answer": "kelp-arch"
+    },
+    {
+      "id": "kelp-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into kelp-mill? The station is",
+      "candidates": [
+        "kelp-bank",
+        "kelp-weir",
+        "kelp-ford",
+        "kelp-cove"
+      ],
+      "answer": "kelp-weir"
+    },
+    {
+      "id": "lark-direct",
+      "category": "seen_direct",
+      "prefix": "Water from lark-dock drains directly into",
+      "candidates": [
+        "lark-arch",
+        "lark-ford",
+        "lark-cove",
+        "lark-bank"
+      ],
+      "answer": "lark-cove"
+    },
+    {
+      "id": "lark-inverse",
+      "category": "seen_inverse",
+      "prefix": "Which station feeds directly into lark-bank? The station is",
+      "candidates": [
+        "lark-dock",
+        "lark-weir",
+        "lark-ford",
+        "lark-arch"
+      ],
+      "answer": "lark-arch"
+    },
+    {
+      "id": "moss-two-hop",
+      "category": "unseen_two_hop",
+      "prefix": "Water from moss-cove drains into moss-bank. Water from moss-bank drains into moss-arch. Water from moss-dock drains into moss-ford. Starting at moss-cove, where is the water after two links? Answer:",
+      "candidates": [
+        "moss-arch",
+        "moss-mill",
+        "moss-weir",
+        "moss-ford"
+      ],
+      "answer": "moss-arch"
+    },
+    {
+      "id": "moss-override",
+      "category": "context_override",
+      "prefix": "Water normally drains from moss-cove into moss-bank. Today the outlet at moss-cove is diverted directly to moss-ford. Where does water from moss-cove flow first today? Answer:",
+      "candidates": [
+        "moss-mill",
+        "moss-ford",
+        "moss-bank",
+        "moss-arch"
+      ],
+      "answer": "moss-ford"
+    },
+    {
+      "id": "moss-legal",
+      "category": "boundary",
+      "prefix": "The moss basin has two tanks. They can hold 12 and 11 units and must keep at least 1 and 2 units. They currently hold 6 and 5 units. A transfer may move at most 4 units. What is the largest legal transfer from tank 1 to tank 2? Answer:",
+      "candidates": [
+        "3",
+        "5",
+        "4",
+        "6"
+      ],
+      "answer": "4"
+    },
+    {
+      "id": "moss-counterfactual",
+      "category": "counterfactual",
+      "prefix": "The moss basin has two tanks. They can hold 12 and 11 units and must keep at least 1 and 2 units. They currently hold 6 and 5 units. A transfer may move at most 4 units. A request moves 5 units from tank 1 to tank 2. An illegal transfer leaves both tanks unchanged. How many units remain in tank 1? Answer:",
+      "candidates": [
+        "2",
+        "1",
+        "10",
+        "6"
+      ],
+      "answer": "6"
+    },
+    {
+      "id": "north-two-hop",
+      "category": "unseen_two_hop",
+      "prefix": "Water from north-weir drains into north-ford. Water from north-ford drains into north-mill. Water from north-bank drains into north-dock. Starting at north-weir, where is the water after two links? Answer:",
+      "candidates": [
+        "north-mill",
+        "north-cove",
+        "north-arch",
+        "north-dock"
+      ],
+      "answer": "north-mill"
+    },
+    {
+      "id": "north-override",
+      "category": "context_override",
+      "prefix": "Water normally drains from north-weir into north-ford. Today the outlet at north-weir is diverted directly to north-dock. Where does water from north-weir flow first today? Answer:",
+      "candidates": [
+        "north-cove",
+        "north-dock",
+        "north-ford",
+        "north-mill"
+      ],
+      "answer": "north-dock"
+    },
+    {
+      "id": "north-legal",
+      "category": "boundary",
+      "prefix": "The north basin has two tanks. They can hold 13 and 12 units and must keep at least 2 and 2 units. They currently hold 9 and 6 units. A transfer may move at most 5 units. What is the largest legal transfer from tank 2 to tank 1? Answer:",
+      "candidates": [
+        "3",
+        "5",
+        "4",
+        "6"
+      ],
+      "answer": "4"
+    },
+    {
+      "id": "north-counterfactual",
+      "category": "counterfactual",
+      "prefix": "The north basin has two tanks. They can hold 13 and 12 units and must keep at least 2 and 2 units. They currently hold 9 and 6 units. A transfer may move at most 5 units. A request moves 5 units from tank 2 to tank 1. An illegal transfer leaves both tanks unchanged. How many units remain in tank 2? Answer:",
+      "candidates": [
+        "2",
+        "1",
+        "10",
+        "6"
+      ],
+      "answer": "6"
+    },
+    {
+      "id": "oak-two-hop",
+      "category": "unseen_two_hop",
+      "prefix": "Water from oak-ford drains into oak-dock. Water from oak-dock drains into oak-bank. Water from oak-mill drains into oak-weir. Starting at oak-ford, where is the water after two links? Answer:",
+      "candidates": [
+        "oak-bank",
+        "oak-arch",
+        "oak-cove",
+        "oak-weir"
+      ],
+      "answer": "oak-bank"
+    },
+    {
+      "id": "oak-override",
+      "category": "context_override",
+      "prefix": "Water normally drains from oak-ford into oak-dock. Today the outlet at oak-ford is diverted directly to oak-weir. Where does water from oak-ford flow first today? Answer:",
+      "candidates": [
+        "oak-arch",
+        "oak-weir",
+        "oak-dock",
+        "oak-bank"
+      ],
+      "answer": "oak-weir"
+    },
+    {
+      "id": "oak-legal",
+      "category": "boundary",
+      "prefix": "The oak basin has two tanks. They can hold 14 and 13 units and must keep at least 1 and 2 units. They currently hold 6 and 7 units. A transfer may move at most 6 units. What is the largest legal transfer from tank 1 to tank 2? Answer:",
+      "candidates": [
+        "4",
+        "6",
+        "5",
+        "7"
+      ],
+      "answer": "5"
+    },
+    {
+      "id": "oak-counterfactual",
+      "category": "counterfactual",
+      "prefix": "The oak basin has two tanks. They can hold 14 and 13 units and must keep at least 1 and 2 units. They currently hold 6 and 7 units. A transfer may move at most 6 units. A request moves 6 units from tank 1 to tank 2. An illegal transfer leaves both tanks unchanged. How many units remain in tank 1? Answer:",
+      "candidates": [
+        "1",
+        "0",
+        "11",
+        "6"
+      ],
+      "answer": "6"
+    },
+    {
+      "id": "pine-two-hop",
+      "category": "unseen_two_hop",
+      "prefix": "Water from pine-bank drains into pine-arch. Water from pine-arch drains into pine-cove. Water from pine-weir drains into pine-mill. Starting at pine-bank, where is the water after two links? Answer:",
+      "candidates": [
+        "pine-cove",
+        "pine-ford",
+        "pine-dock",
+        "pine-mill"
+      ],
+      "answer": "pine-cove"
+    },
+    {
+      "id": "pine-override",
+      "category": "context_override",
+      "prefix": "Water normally drains from pine-bank into pine-arch. Today the outlet at pine-bank is diverted directly to pine-mill. Where does water from pine-bank flow first today? Answer:",
+      "candidates": [
+        "pine-ford",
+        "pine-mill",
+        "pine-arch",
+        "pine-cove"
+      ],
+      "answer": "pine-mill"
+    },
+    {
+      "id": "pine-legal",
+      "category": "boundary",
+      "prefix": "The pine basin has two tanks. They can hold 12 and 14 units and must keep at least 2 and 2 units. They currently hold 9 and 3 units. A transfer may move at most 2 units. What is the largest legal transfer from tank 2 to tank 1? Answer:",
+      "candidates": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "answer": "1"
+    },
+    {
+      "id": "pine-counterfactual",
+      "category": "counterfactual",
+      "prefix": "The pine basin has two tanks. They can hold 12 and 14 units and must keep at least 2 and 2 units. They currently hold 9 and 3 units. A transfer may move at most 2 units. A request moves 2 units from tank 2 to tank 1. An illegal transfer leaves both tanks unchanged. How many units remain in tank 2? Answer:",
+      "candidates": [
+        "2",
+        "1",
+        "4",
+        "3"
+      ],
+      "answer": "3"
+    }
+  ]
+}

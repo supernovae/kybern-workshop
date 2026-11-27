@@ -1,0 +1,21 @@
+{
+  "scope": {
+    "path": "scope.jsonl",
+    "sha256": "2f15d5d5ffaef076550ad5c154945bdc0e74c306f27a4e5301b09b2793a5af7d",
+    "max_rows": 160
+  },
+  "sources": [
+    {
+      "id": "basin-assertions",
+      "path": "assertions.jsonl",
+      "sha256": "d5b88d1be88cc6c0ee2652ad0a8bf348b2662ceb225efef2e49ab96ef70bccde",
+      "max_rows": 260,
+      "format": "records",
+      "uri": "urn:kybern:workshop:basin-microlab:assertions",
+      "license": "Apache-2.0",
+      "origin": "procedural"
+    }
+  ],
+  "max_index_bytes": 2097152,
+  "max_shard_output_bytes": 2097152
+}

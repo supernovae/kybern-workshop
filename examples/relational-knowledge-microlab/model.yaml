@@ -1,0 +1,39 @@
+schema_version: 2
+name: relational-knowledge-microlab
+seed: 11
+model:
+  vocab_size: 384
+  hidden_dim: 64
+  num_layers: 2
+  num_heads: 4
+  ffn_dim: 128
+  max_seq_len: 192
+attention:
+  implementation: sdpa
+tokenizer:
+  path: tokenizer/tokenizer.json
+training:
+  seq_len: 64
+  micro_batch_size: 4
+  gradient_accumulation: 1
+  max_steps: 128
+  max_tokens: 32768
+  grad_clip_norm: 1.0
+optimizer:
+  name: adamw
+  peak: 0.002
+  floor: 0.0002
+  warmup_steps: 8
+evaluation:
+  every_steps: 128
+  max_batches: 16
+  text_documents: 4
+runtime:
+  engine: pytorch
+  backend: cpu
+  precision: fp32
+checkpoint:
+  every_steps: 128
+logging:
+  root_dir: runs
+  every_steps: 16

@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "vocab_size": 384,
+  "min_frequency": 1,
+  "max_documents": 1000,
+  "output_dir": "tokenizer"
+}

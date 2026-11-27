@@ -1,0 +1,8 @@
+{
+  "target": "walks",
+  "seed": 29,
+  "hops": 3,
+  "walks_per_entity": 2,
+  "max_sequences": 2000,
+  "max_bytes": 8388608
+}

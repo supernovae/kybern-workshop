@@ -1,0 +1,7 @@
+{
+  "target": "factorized",
+  "group_size": 16,
+  "max_scratch_bytes": 2097152,
+  "max_sequences": 2000,
+  "max_bytes": 8388608
+}

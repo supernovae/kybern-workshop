@@ -1,0 +1,11 @@
+baseline: run.yaml
+question: How do basin representations change held-out prose loss at fixed training tokens?
+points:
+  - {dataset.train_path: views/triples/train.jsonl, dataset.train_max_documents: 156}
+  - {dataset.train_path: views/walks/train.jsonl, dataset.train_max_documents: 119}
+  - {dataset.train_path: views/hierarchy/train.jsonl, dataset.train_max_documents: 120}
+  - {dataset.train_path: views/factorized/train.jsonl, dataset.train_max_documents: 48}
+  - {dataset.train_path: views/procedural/train.jsonl, dataset.train_max_documents: 60}
+  - {dataset.train_path: views/mixed/train.jsonl, dataset.train_max_documents: 228}
+seeds: [11, 23, 37]
+config: fast
