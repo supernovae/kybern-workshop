@@ -17,6 +17,9 @@ on the software panel measures retention. Both panels use triples, which
 aligns with the triples arm’s representation. Report either improvement or
 degradation. The parent and both children leave the final families held back.
 
+The [replay follow-up](replay/README.md) revisits 16 software training records
+and compares late and interleaved replay at equal exposure and update counts.
+
 ## Prepare the shared prefix and both additions
 
 Set `PREP` to the output of the [real-domain preparation](../README.md). Set
