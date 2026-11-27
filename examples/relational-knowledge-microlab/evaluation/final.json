@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "name": "basin-final",
+  "items": [
+    {
+      "id": "quartz-two-hop",
+      "category": "unseen_two_hop",
+      "prefix": "Water from quartz-dock drains into quartz-cove. Water from quartz-cove drains into quartz-ford. Water from quartz-arch drains into quartz-bank. Starting at quartz-dock, where is the water after two links? Answer:",
+      "candidates": [
+        "quartz-ford",
+        "quartz-weir",
+        "quartz-mill",
+        "quartz-bank"
+      ],
+      "answer": "quartz-ford"
+    },
+    {
+      "id": "quartz-override",
+      "category": "context_override",
+      "prefix": "Water normally drains from quartz-dock into quartz-cove. Today the outlet at quartz-dock is diverted directly to quartz-bank. Where does water from quartz-dock flow first today? Answer:",
+      "candidates": [
+        "quartz-weir",
+        "quartz-bank",
+        "quartz-cove",
+        "quartz-ford"
+      ],
+      "answer": "quartz-bank"
+    },
+    {
+      "id": "quartz-legal",
+      "category": "boundary",
+      "prefix": "The quartz basin has two tanks. They can hold 13 and 11 units and must keep at least 1 and 2 units. They currently hold 6 and 4 units. A transfer may move at most 3 units. What is the largest legal transfer from tank 1 to tank 2? Answer:",
+      "candidates": [
+        "2",
+        "4",
+        "3",
+        "5"
+      ],
+      "answer": "3"
+    },
+    {
+      "id": "quartz-counterfactual",
+      "category": "counterfactual",
+      "prefix": "The quartz basin has two tanks. They can hold 13 and 11 units and must keep at least 1 and 2 units. They currently hold 6 and 4 units. A transfer may move at most 3 units. A request moves 4 units from tank 1 to tank 2. An illegal transfer leaves both tanks unchanged. How many units remain in tank 1? Answer:",
+      "candidates": [
+        "3",
+        "2",
+        "9",
+        "6"
+      ],
+      "answer": "6"
+    },
+    {
+      "id": "reed-two-hop",
+      "category": "unseen_two_hop",
+      "prefix": "Water from reed-cove drains into reed-bank. Water from reed-bank drains into reed-arch. Water from reed-dock drains into reed-ford. Starting at reed-cove, where is the water after two links? Answer:",
+      "candidates": [
+        "reed-arch",
+        "reed-mill",
+        "reed-weir",
+        "reed-ford"
+      ],
+      "answer": "reed-arch"
+    },
+    {
+      "id": "reed-override",
+      "category": "context_override",
+      "prefix": "Water normally drains from reed-cove into reed-bank. Today the outlet at reed-cove is diverted directly to reed-ford. Where does water from reed-cove flow first today? Answer:",
+      "candidates": [
+        "reed-mill",
+        "reed-ford",
+        "reed-bank",
+        "reed-arch"
+      ],
+      "answer": "reed-ford"
+    },
+    {
+      "id": "reed-legal",
+      "category": "boundary",
+      "prefix": "The reed basin has two tanks. They can hold 14 and 12 units and must keep at least 2 and 2 units. They currently hold 9 and 5 units. A transfer may move at most 4 units. What is the largest legal transfer from tank 2 to tank 1? Answer:",
+      "candidates": [
+        "2",
+        "4",
+        "3",
+        "5"
+      ],
+      "answer": "3"
+    },
+    {
+      "id": "reed-counterfactual",
+      "category": "counterfactual",
+      "prefix": "The reed basin has two tanks. They can hold 14 and 12 units and must keep at least 2 and 2 units. They currently hold 9 and 5 units. A transfer may move at most 4 units. A request moves 4 units from tank 2 to tank 1. An illegal transfer leaves both tanks unchanged. How many units remain in tank 2? Answer:",
+      "candidates": [
+        "2",
+        "1",
+        "8",
+        "5"
+      ],
+      "answer": "5"
+    },
+    {
+      "id": "sage-two-hop",
+      "category": "unseen_two_hop",
+      "prefix": "Water from sage-weir drains into sage-ford. Water from sage-ford drains into sage-mill. Water from sage-bank drains into sage-dock. Starting at sage-weir, where is the water after two links? Answer:",
+      "candidates": [
+        "sage-mill",
+        "sage-cove",
+        "sage-arch",
+        "sage-dock"
+      ],
+      "answer": "sage-mill"
+    },
+    {
+      "id": "sage-override",
+      "category": "context_override",
+      "prefix": "Water normally drains from sage-weir into sage-ford. Today the outlet at sage-weir is diverted directly to sage-dock. Where does water from sage-weir flow first today? Answer:",
+      "candidates": [
+        "sage-cove",
+        "sage-dock",
+        "sage-ford",
+        "sage-mill"
+      ],
+      "answer": "sage-dock"
+    },
+    {
+      "id": "sage-legal",
+      "category": "boundary",
+      "prefix": "The sage basin has two tanks. They can hold 12 and 13 units and must keep at least 1 and 2 units. They currently hold 6 and 6 units. A transfer may move at most 5 units. What is the largest legal transfer from tank 1 to tank 2? Answer:",
+      "candidates": [
+        "4",
+        "6",
+        "5",
+        "7"
+      ],
+      "answer": "5"
+    },
+    {
+      "id": "sage-counterfactual",
+      "category": "counterfactual",
+      "prefix": "The sage basin has two tanks. They can hold 12 and 13 units and must keep at least 1 and 2 units. They currently hold 6 and 6 units. A transfer may move at most 5 units. A request moves 6 units from tank 1 to tank 2. An illegal transfer leaves both tanks unchanged. How many units remain in tank 1? Answer:",
+      "candidates": [
+        "1",
+        "0",
+        "11",
+        "6"
+      ],
+      "answer": "6"
+    },
+    {
+      "id": "thorn-two-hop",
+      "category": "unseen_two_hop",
+      "prefix": "Water from thorn-ford drains into thorn-dock. Water from thorn-dock drains into thorn-bank. Water from thorn-mill drains into thorn-weir. Starting at thorn-ford, where is the water after two links? Answer:",
+      "candidates": [
+        "thorn-bank",
+        "thorn-arch",
+        "thorn-cove",
+        "thorn-weir"
+      ],
+      "answer": "thorn-bank"
+    },
+    {
+      "id": "thorn-override",
+      "category": "context_override",
+      "prefix": "Water normally drains from thorn-ford into thorn-dock. Today the outlet at thorn-ford is diverted directly to thorn-weir. Where does water from thorn-ford flow first today? Answer:",
+      "candidates": [
+        "thorn-arch",
+        "thorn-weir",
+        "thorn-dock",
+        "thorn-bank"
+      ],
+      "answer": "thorn-weir"
+    },
+    {
+      "id": "thorn-legal",
+      "category": "boundary",
+      "prefix": "The thorn basin has two tanks. They can hold 13 and 14 units and must keep at least 2 and 2 units. They currently hold 9 and 7 units. A transfer may move at most 6 units. What is the largest legal transfer from tank 2 to tank 1? Answer:",
+      "candidates": [
+        "3",
+        "5",
+        "4",
+        "6"
+      ],
+      "answer": "4"
+    },
+    {
+      "id": "thorn-counterfactual",
+      "category": "counterfactual",
+      "prefix": "The thorn basin has two tanks. They can hold 13 and 14 units and must keep at least 2 and 2 units. They currently hold 9 and 7 units. A transfer may move at most 6 units. A request moves 5 units from tank 2 to tank 1. An illegal transfer leaves both tanks unchanged. How many units remain in tank 2? Answer:",
+      "candidates": [
+        "3",
+        "2",
+        "11",
+        "7"
+      ],
+      "answer": "7"
+    }
+  ]
+}

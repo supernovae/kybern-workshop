@@ -1,0 +1,7 @@
+{
+  "targets": [
+    "prose"
+  ],
+  "max_sequences": 2000,
+  "max_bytes": 8388608
+}

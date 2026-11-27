@@ -1,0 +1,14 @@
+{
+  "dataset": {
+    "source": "local_text",
+    "revision": "basin-microlab-v1",
+    "license": "Apache-2.0",
+    "cache_dir": "prepared",
+    "train_path": "views/prose/train.jsonl",
+    "validation_path": "views/prose/validation.jsonl",
+    "train_max_documents": 12,
+    "validation_max_documents": 4,
+    "train_max_tokens": 100000,
+    "validation_max_tokens": 10000
+  }
+}

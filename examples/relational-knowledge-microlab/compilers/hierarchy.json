@@ -1,0 +1,9 @@
+{
+  "target": "hierarchy",
+  "group_size": 16,
+  "max_scratch_bytes": 2097152,
+  "hierarchy_predicate": "drains_to",
+  "max_depth": 4,
+  "max_sequences": 2000,
+  "max_bytes": 8388608
+}
