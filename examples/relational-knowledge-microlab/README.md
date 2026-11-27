@@ -25,7 +25,8 @@ after development, with its own run and recorded protocol.
 
 The [paired counterfactual study](counterfactuals/README.md) reuses the
 21 fixed-token checkpoints on 24 new simulated families and measures whether
-answers follow a change in the request.
+answers follow a change in the request. It tests both ranking and
+[free-response generation](counterfactuals/README.md#generate-answers-without-choices).
 
 ## Build the representations
 
