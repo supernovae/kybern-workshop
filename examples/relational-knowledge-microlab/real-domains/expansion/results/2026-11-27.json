@@ -1,0 +1,270 @@
+{
+  "lab_revision": "b5c845bf3fa07fbb18f7515ae621d1cf62027b7e",
+  "backend": "pytorch cpu fp32; two math threads",
+  "model": "relational-expansion-microlab",
+  "decoder_parameters": 102720,
+  "tokenizer_sha256": "e5f81b1f77ccdccc3125eae05500f808c3641e2fbc835131b0b634431e6c95a4",
+  "source_artifacts": {
+    "software-triples": {
+      "key": "5c02c448c82fe30b6e2e7a2dffdd9f6475bfd43dd7676f59b914e06ab1355193",
+      "train_sha256": "4819f7f9c6e0756167e2540e59130bb862905f05ff2e951e6aae6cc24746a739",
+      "validation_sha256": "451084a7c351de870b1805c1e375953e0ba979b0176dcb03f8a220e685883540",
+      "train_assertions": 151
+    },
+    "astronomy-triples": {
+      "key": "bcbce334df1e935479016fb8b307f2278337dc9f73931c504d29f7bb972a6138",
+      "train_sha256": "3609c8aaf5c32250f93f666361558d80acaad429aeccd1a2b4f31f64ac75ddc6",
+      "validation_sha256": "f6b17081fbc395ee436484a969392b044c309cc07a948439c87a6e2c45a150bf",
+      "train_assertions": 43
+    },
+    "astronomy-factorized": {
+      "key": "0aed53f42e23273af5454ac1cc468f27e7800795da69147336c3d80c9c8edc79",
+      "train_sha256": "267715fdc56de71751c0f6cd5d9eedba2a33b612ef4ca182a708ff5a8a99acdd",
+      "validation_sha256": "73236ba642b374727d5610ac3a421b6a395452b9d5b6eb1d06fbb22fb617e5e6",
+      "train_assertions": 43
+    }
+  },
+  "panels": {
+    "software": {
+      "comparison_group": "e0b54f60653b84de581bfc7f458fb2c0b1ab085ea9338512cbc86512e28fbe85",
+      "scored_targets": 4480,
+      "protocol_sha256": "ee27241d1fa49622fd77a0d0382b202c865b064ef317ab3f8542c4aeb34fb3b5",
+      "validation_sha256": "72f498bcfbd95344ac95dea99957905e31ef95050b733b296387f059d107bae5"
+    },
+    "astronomy": {
+      "comparison_group": "d2fa4687984c55e537c7a3ea0b6cab486243c61564f1490a49d436b0ce4c169e",
+      "scored_targets": 1344,
+      "protocol_sha256": "f4e7ff4b7934c77faf72d8e85b593d87337d3729c7b5b100761f7d2f16585df0",
+      "validation_sha256": "b37fa0df45ab7533ff93bbf936989082156fd42915d17fab7b7a8f1599b4c1d2"
+    }
+  },
+  "comparison": "One complete source pass each. Full software state is shared within each seed. Fixed development loss in triples for both domains. Final split was held back.",
+  "expanded_data_license": "Software: PSF-2.0 with the pinned license and module notices. Astronomy: CC0-1.0.",
+  "summary": {
+    "software": {
+      "mean_loss": {
+        "initial": 5.732915832882836,
+        "parent": 3.1938798722766695,
+        "triples": 3.8187164510999407,
+        "factorized": 3.5467781521025157
+      },
+      "software_training_change": {
+        "mean": -2.5390359606061663,
+        "paired_se": 0.03750164259659818
+      },
+      "triples_append_change": {
+        "mean": 0.6248365788232714,
+        "paired_se": 0.28603389114870587
+      },
+      "factorized_append_change": {
+        "mean": 0.3528982798258464,
+        "paired_se": 0.27540233875888465
+      },
+      "factorized_minus_triples": {
+        "mean": -0.27193829899742505,
+        "paired_se": 0.1314268169144196
+      }
+    },
+    "astronomy": {
+      "mean_loss": {
+        "initial": 5.7675400007338755,
+        "parent": 4.821942881932334,
+        "triples": 2.892923495126149,
+        "factorized": 3.2970895729367693
+      },
+      "software_training_change": {
+        "mean": -0.9455971188015407,
+        "paired_se": 0.052122094828774425
+      },
+      "triples_append_change": {
+        "mean": -1.9290193868061853,
+        "paired_se": 0.053301556060080184
+      },
+      "factorized_append_change": {
+        "mean": -1.5248533089955651,
+        "paired_se": 0.06289139142885401
+      },
+      "factorized_minus_triples": {
+        "mean": 0.40416607781062036,
+        "paired_se": 0.028256760773216694
+      }
+    }
+  },
+  "runs": [
+    {
+      "seed": 11,
+      "try_id": "try-20261127T195215Z-c4afdd81",
+      "try_sha256": "4f97beb05c388a5cf02ce3390fd93f51c8d1cc14d4e57e00bed25c52bb7f6107",
+      "stages": {
+        "initial": {
+          "run_id": "software-parent-11",
+          "checkpoint_sha256": "45abb2e49a2ed7525897c00d7a59103d9450757bdf5e671293d847321d0ae399",
+          "checkpoint": "checkpoints/step_00000000_gen_000001",
+          "step": 0,
+          "tokens_seen": 0,
+          "panel_loss": {
+            "software": 5.707798549107143,
+            "astronomy": 5.756027040027437
+          }
+        },
+        "parent": {
+          "run_id": "software-parent-11",
+          "checkpoint_sha256": "092c9be442b3917df886c19572bdb9f63ce3f36f7ec6f1b18669999529969079",
+          "checkpoint": "checkpoints/step_00000035_gen_000002",
+          "step": 35,
+          "tokens_seen": 5027,
+          "panel_loss": {
+            "software": 3.110817759377616,
+            "astronomy": 4.8805669375828336
+          }
+        },
+        "triples": {
+          "run_id": "lab-base-638ae4a134aa6602-try-20261127T195215Z-c4afdd81",
+          "checkpoint_sha256": "461b25f334cf00312d9746fa327757e0783d81f3c034f43bb370eec7e9211220",
+          "checkpoint": "checkpoints/step_00000050_gen_000002",
+          "step": 50,
+          "tokens_seen": 7136,
+          "panel_loss": {
+            "software": 3.7204350812094553,
+            "astronomy": 2.869681505929856
+          },
+          "added_tokens": 2109,
+          "added_updates": 15,
+          "train_sha256": "f86b39b013fa0abaea61bb4bfe506c488711f6043368c5851b3b64586a3a2cfc"
+        },
+        "factorized": {
+          "run_id": "lab-try-20261127T195215Z-c4afdd81",
+          "checkpoint_sha256": "0a87baa5280fe2689f14421417fd3f26fbeab6b036208f33e707d67900312db4",
+          "checkpoint": "checkpoints/step_00000046_gen_000002",
+          "step": 46,
+          "tokens_seen": 6613,
+          "panel_loss": {
+            "software": 3.2007679734911236,
+            "astronomy": 3.233299414316813
+          },
+          "added_tokens": 1586,
+          "added_updates": 11,
+          "train_sha256": "36fe09e31765431b2dc7a6a0f5e164b463f3b1dda70701843d539222e9e659e7"
+        }
+      }
+    },
+    {
+      "seed": 23,
+      "try_id": "try-20261127T195233Z-d80216de",
+      "try_sha256": "95e060269b805f14e83780918cf3ef3473241c523bdcb38dedb822863b75088b",
+      "stages": {
+        "initial": {
+          "run_id": "software-parent-23",
+          "checkpoint_sha256": "af9e814171d37ece5f613abfaf2c8d0c12a249c0f33151b87596adac801f792d",
+          "checkpoint": "checkpoints/step_00000000_gen_000001",
+          "step": 0,
+          "tokens_seen": 0,
+          "panel_loss": {
+            "software": 5.774497931344168,
+            "astronomy": 5.750613371531169
+          }
+        },
+        "parent": {
+          "run_id": "software-parent-23",
+          "checkpoint_sha256": "471501cc9bdc650bd0169bc1a56bb5fd8a86dc46d295ab634c9cf1c8a0093853",
+          "checkpoint": "checkpoints/step_00000035_gen_000002",
+          "step": 35,
+          "tokens_seen": 5027,
+          "panel_loss": {
+            "software": 3.223192208153861,
+            "astronomy": 4.836736497424898
+          }
+        },
+        "triples": {
+          "run_id": "lab-base-79d564ce54ddc751-try-20261127T195233Z-d80216de",
+          "checkpoint_sha256": "35551bd443171de40a94902df738f9684a521a8b8b96e914225518626b6e196a",
+          "checkpoint": "checkpoints/step_00000050_gen_000002",
+          "step": 50,
+          "tokens_seen": 7136,
+          "panel_loss": {
+            "software": 3.360388537815639,
+            "astronomy": 2.8895178181784495
+          },
+          "added_tokens": 2109,
+          "added_updates": 15,
+          "train_sha256": "f86b39b013fa0abaea61bb4bfe506c488711f6043368c5851b3b64586a3a2cfc"
+        },
+        "factorized": {
+          "run_id": "lab-try-20261127T195233Z-d80216de",
+          "checkpoint_sha256": "68eba31c98d9fd6a2febd62ff1677150ff7efd1e62e67282fd60d879797ef297",
+          "checkpoint": "checkpoints/step_00000046_gen_000002",
+          "step": 46,
+          "tokens_seen": 6613,
+          "panel_loss": {
+            "software": 3.2884188652038575,
+            "astronomy": 3.3480493000575473
+          },
+          "added_tokens": 1586,
+          "added_updates": 11,
+          "train_sha256": "36fe09e31765431b2dc7a6a0f5e164b463f3b1dda70701843d539222e9e659e7"
+        }
+      }
+    },
+    {
+      "seed": 37,
+      "try_id": "try-20261127T195246Z-c51fa58d",
+      "try_sha256": "c138517ec1d637887474a0df9d19af0a73a61e9d7d785c1c7a5d0b5f05267e44",
+      "stages": {
+        "initial": {
+          "run_id": "software-parent-37",
+          "checkpoint_sha256": "0f08d2d52ac440de9e25cf1e1879cb941dbc1f550cbbbd023166ec36f7613a71",
+          "checkpoint": "checkpoints/step_00000000_gen_000001",
+          "step": 0,
+          "tokens_seen": 0,
+          "panel_loss": {
+            "software": 5.716451018197196,
+            "astronomy": 5.79597959064302
+          }
+        },
+        "parent": {
+          "run_id": "software-parent-37",
+          "checkpoint_sha256": "97941165bdb8696abfe819a605fcf7b3daa01a7ec7ef28b40790f960995cfbd3",
+          "checkpoint": "checkpoints/step_00000035_gen_000002",
+          "step": 35,
+          "tokens_seen": 5027,
+          "panel_loss": {
+            "software": 3.2476296492985317,
+            "astronomy": 4.748525210789272
+          }
+        },
+        "triples": {
+          "run_id": "lab-base-950fb9daaeef48ee-try-20261127T195246Z-c51fa58d",
+          "checkpoint_sha256": "ad04af8c47c01b6892e8d9dc739a1c903b926f27c83b1ad25e14c393097b043b",
+          "checkpoint": "checkpoints/step_00000050_gen_000002",
+          "step": 50,
+          "tokens_seen": 7136,
+          "panel_loss": {
+            "software": 4.375325734274728,
+            "astronomy": 2.9195711612701416
+          },
+          "added_tokens": 2109,
+          "added_updates": 15,
+          "train_sha256": "f86b39b013fa0abaea61bb4bfe506c488711f6043368c5851b3b64586a3a2cfc"
+        },
+        "factorized": {
+          "run_id": "lab-try-20261127T195246Z-c51fa58d",
+          "checkpoint_sha256": "3c0f2388264231697a20eee9698374a8a3a836a1ca1f51865cc90632d1a17ad6",
+          "checkpoint": "checkpoints/step_00000046_gen_000002",
+          "step": 46,
+          "tokens_seen": 6613,
+          "panel_loss": {
+            "software": 4.151147617612566,
+            "astronomy": 3.309920004435948
+          },
+          "added_tokens": 1586,
+          "added_updates": 11,
+          "train_sha256": "36fe09e31765431b2dc7a6a0f5e164b463f3b1dda70701843d539222e9e659e7"
+        }
+      }
+    }
+  ],
+  "replay": {
+    "identical_panel_losses": 24,
+    "note": "The first execution carried the software license in its expanded config. The archived execution records both source licenses and reproduced every loss."
+  }
+}

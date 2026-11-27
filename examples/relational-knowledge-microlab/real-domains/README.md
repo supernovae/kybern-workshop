@@ -206,6 +206,10 @@ factorization with whole assertion passes and separately matched update
 time, then scores context questions over development families from both
 domains.
 
+The [expansion study](expansion/README.md) forks software checkpoints into
+two astronomy additions and measures what each branch learns and retains on
+fixed development panels.
+
 On local NVMe, cold astronomy extraction took 0.49 s at 82 MiB peak RSS.
 Software took 0.81 s at 93 MiB. After a fault at the fourth software shard,
 the retry reused four of 13 shards and took 0.61 s with the same index bytes.
