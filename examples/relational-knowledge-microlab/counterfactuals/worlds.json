@@ -1,0 +1,16 @@
+{
+  "seed": 53,
+  "max_catalog_bytes": 1048576,
+  "max_shard_bytes": 1048576,
+  "sources": [
+    {
+      "id": "counterfactual-worlds",
+      "path": "worlds.jsonl",
+      "sha256": "0bd49045699426249b35805526dc77a20aba675f2d614685150fcc27ec942aba",
+      "max_rows": 24,
+      "uri": "urn:kybern:workshop:counterfactual-microlab:worlds",
+      "license": "Apache-2.0",
+      "origin": "procedural"
+    }
+  ]
+}

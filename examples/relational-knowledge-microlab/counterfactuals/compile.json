@@ -1,0 +1,7 @@
+{
+  "targets": [
+    "counterfactuals"
+  ],
+  "max_sequences": 24,
+  "max_bytes": 1048576
+}
