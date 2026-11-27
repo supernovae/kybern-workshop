@@ -1,0 +1,30 @@
+publication_mode: redistributable_under_source_terms
+mixture: {basins: 1.0}
+lm:
+  selected: true
+  training_splits: [train, validation]
+chat:
+  selected: false
+  training_splits: []
+normalizer:
+  structure_cleaning: false
+  front_matter_extra_keys: {}
+  gutenberg_boilerplate: []
+policy:
+  duplicates:
+    heldout_overlap: error
+    keys: [raw, normalized]
+    resolution: chain_smallest_id
+    rights_conflict: error
+  documents:
+    empty_text: error
+    exclusions: none
+    markdown_kind: first_declared
+    row_files: buffered
+  rights:
+    training_use: explicit_eligibility_required
+  build:
+    strategy: memory
+  mixture:
+    total_tokens: 1
+    max_exposures: 1

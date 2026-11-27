@@ -1,0 +1,2 @@
+probe_tier: fast
+preflight_waiver: Fixed 108-step CPU microlab with independently audited schedules, exact packed exposure and held-out validation checked before training.

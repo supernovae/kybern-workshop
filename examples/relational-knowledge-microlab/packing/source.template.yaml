@@ -1,0 +1,23 @@
+id: basin-${BASIN}
+kind: local
+origin: primary_source
+canonical_uri: urn:kybern:workshop:basin-microlab:${BASIN}
+revision: basin-prose-passages-v1
+license: Apache-2.0
+rights:
+  training_eligibility: eligible
+  redistribution_mode: redistributable_under_source_terms
+  spdx_expression: Apache-2.0
+domains: [basins]
+document_kinds: [plain_text]
+source_family: basin-${BASIN}
+acquisition:
+  files:
+    - {path: "text/${BASIN}/0.txt", name: "0.txt"}
+    - {path: "text/${BASIN}/1.txt", name: "1.txt"}
+    - {path: "text/${BASIN}/2.txt", name: "2.txt"}
+    - {path: "text/${BASIN}/3.txt", name: "3.txt"}
+    - {path: "text/${BASIN}/4.txt", name: "4.txt"}
+    - {path: "text/${BASIN}/5.txt", name: "5.txt"}
+    - {path: "text/${BASIN}/6.txt", name: "6.txt"}
+  max_bytes: 8192
