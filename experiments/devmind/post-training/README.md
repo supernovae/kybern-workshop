@@ -72,10 +72,12 @@ each length and the short-context probes that show what the extension costs.
 Train the full stage with whichever wins; it is one comparison on one seed, so
 record it as such.
 
-The first comparison is recorded in
-[results/long-context-16k](../results/long-context-16k/README.md): YaRN had the
-lower loss, the larger base retrieved from about 10,000 tokens back where YaRN
-did not, and the choice is still open.
+The comparison is recorded in
+[results/long-context-16k](../results/long-context-16k/README.md). Over three
+paired seeds YaRN had 0.7% lower held-out loss and could not retrieve a fact
+from the start of a context of 10,000 tokens or more; base 1,000,000 retrieved
+at every length and depth. The full stage 2 is being rerun at base 1,000,000,
+and the declarations here stay on YaRN until that run is probed.
 
 **Stage 3.** Copy the long-context mixture again with `row_tokens: 32768` and
 every quota halved (the shares stay the same), materialize it to its own
