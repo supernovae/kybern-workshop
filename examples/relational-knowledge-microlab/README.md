@@ -113,6 +113,22 @@ applied 32,768 targets with a 106,816-parameter decoder. The
 [run record](results/2026-11-27.json) lists the artifact and checkpoint
 digests, run IDs and per-seed scores.
 
+The [study declaration](study.json) pins the sweep recipe, the development
+ranking record below, and the counterfactual free-response record. Set `LAB`
+to the pilot's retained Lab directory, the parent of `RUNS`, to browse the
+original evaluation receipts and open their runs.
+
+```bash
+klab corpus study "$RECIPE/study.json" --lab-dir "$LAB" --result miniature-ranking
+klab corpus study "$RECIPE/study.json" --lab-dir "$LAB" --result transfer-answers --budget 24
+klab dashboard --lab-dir "$LAB" --study "$RECIPE/study.json"
+```
+
+Open **Corpus → Studies** in the dashboard. Each result keeps its own panel,
+tokenizer and checkpoint bindings. A checkout without the saved Lab
+evaluations can still open the pinned published records. The final families
+stay held back.
+
 | Training view | Prose loss (nats) | Seen relationship choices | Held-out context choices | Median training wall time |
 | --- | ---: | ---: | ---: | ---: |
 | Prose | 3.604 | 16.7% | 33.3% | 1.98 s |
