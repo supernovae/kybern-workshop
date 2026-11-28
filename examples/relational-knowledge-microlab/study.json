@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "name": "Relational Knowledge Microlab",
+  "repository": "https://github.com/supernovae/kybern-workshop",
+  "revision": "d5514b98a42cc40c624c395451ce18727bfe8371",
+  "directory": "examples/relational-knowledge-microlab",
+  "recipe": {
+    "path": "sweep.yaml",
+    "sha256": "f001aaef44d04910d4d19a0b83267d2439a0ddc67d0cb7f14a8dfcadc31c1abf"
+  },
+  "results": [
+    {
+      "id": "miniature-ranking",
+      "title": "Miniature-world answer ranking",
+      "path": "results/2026-11-27.json",
+      "sha256": "c8018fcfb64db3b1a57f5fe31ca026348ab34d1c68a27061136203c2c2ef728d",
+      "evaluation": "ranking",
+      "split": "development",
+      "store": "lab"
+    },
+    {
+      "id": "transfer-answers",
+      "title": "Simulated transfer free responses",
+      "path": "counterfactuals/results/2026-11-27-free-response.json",
+      "sha256": "d820865cbb22421586da954006258c605cb4cb320cd40c64b67d8044a91fffb0",
+      "evaluation": "answers",
+      "split": "development",
+      "store": "lab"
+    }
+  ]
+}
