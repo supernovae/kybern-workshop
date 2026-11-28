@@ -76,8 +76,9 @@ The comparison is recorded in
 [results/long-context-16k](../results/long-context-16k/README.md). Over three
 paired seeds YaRN had 0.7% lower held-out loss and could not retrieve a fact
 from the start of a context of 10,000 tokens or more; base 1,000,000 retrieved
-at every length and depth. The full stage 2 is being rerun at base 1,000,000,
-and the declarations here stay on YaRN until that run is probed.
+at every length and depth. The full stage 2 was rerun at base 1,000,000 and
+finished with 0.25% higher held-out loss than the YaRN full run and retrieval
+across the window. The declarations here still describe YaRN.
 
 **Stage 3.** Copy the long-context mixture again with `row_tokens: 32768` and
 every quota halved (the shares stay the same), materialize it to its own

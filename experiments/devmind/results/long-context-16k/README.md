@@ -13,6 +13,9 @@ retrieval probe that varies where the fact sits, and a third arm at base 80,000
 was added. That settled the choice: base 1,000,000 retrieves everywhere on
 every seed for 0.7% more held-out loss. See
 [Paired seeds and the retrieval surface](#paired-seeds-and-the-retrieval-surface).
+The full stage 2 was then rerun at base 1,000,000 and finished on 28 November:
+it retrieves across the window and its held-out loss is 0.25% above the YaRN
+full run. See [Full run at base 1,000,000](#full-run-at-base-1000000).
 The sections after it are the 26 November record, kept as written.
 
 ## Paired seeds and the retrieval surface
@@ -83,9 +86,8 @@ Limits of this evidence:
 
 Decision, 27 November: run the full stage-2 budget at base 1,000,000
 (`devmind-lc16k-abf-500m`, seed 42, same config as `devmind-lc16k-yarn-500m`
-apart from the position encoding, same Lab commit `e0bbbb0c`). It started on
-27 November and was training two hours later at 53.0 million of 500 million
-tokens. Its result is not part of this record.
+apart from the position encoding, same Lab commit `e0bbbb0c`). Its result is in
+[Full run at base 1,000,000](#full-run-at-base-1000000).
 
 ### General-language check
 
@@ -113,6 +115,62 @@ change general-language ability at this budget, which is the most this check
 can say: 200 items can only show a gap of about three points, and both
 checkpoints sit close to chance (0.25 for arc_easy and hellaswag, 0.50 for
 piqa).
+
+## Full run at base 1,000,000
+
+`devmind-lc16k-abf-500m` started from `devmind-pretrain-r3-a18` on
+27 November and completed on 28 November: step 3,815, 392,953,439 tokens
+seen, 13.1 hours, no interruptions, final checkpoint verified. It used the
+same config, seed 42 and Lab commit `e0bbbb0c` as `devmind-lc16k-yarn-500m`,
+with `attention.rope_base=1000000.0` and no RoPE scaling.
+
+It was probed against the YaRN full run with the standard full tier, suite
+version 7, `lm_eval` included (probe record
+`probe-20261128T082047Z-0816534e`, [full-run.csv](full-run.csv), cells in
+[retrieval-surface.csv](retrieval-surface.csv)). Nothing was missing. Every
+probe passed and the verdict is `tweak`, because the held-out loss did not
+improve.
+
+| Probe | YaRN full | Base 1,000,000 full |
+| --- | --- | --- |
+| Held-out loss | 1.9920 | 1.9970 |
+| Long needle, all cells | 0.908 | 0.996 |
+| Needle at the start, 10,026 tokens | 0.17 | 0.92 |
+| Needle at the start, 15,037 tokens | 0.17 | 1.00 |
+| KV recall, all cells | 0.267 | 0.321 |
+| Short needle, 31 to 120 tokens | 18 of 18 | 16 of 18 |
+| Fact recall | 0.875 | 0.9375 |
+| Repetition (seq-rep-4) | 0.466 | 0.509 |
+| Calibration error | 0.0115 | 0.0120 |
+| lm-eval, mean of four tasks | 0.430 | 0.440 |
+
+What this shows:
+
+- **The loss gap shrank with the full budget.** It is 0.0050 (standard error
+  0.0011), or 0.25%, against 0.71% in the short arms. That is under the
+  probe's 0.5% warning line, so held-out loss passes where the short arm
+  warned.
+- **Retrieval held.** 19 of 20 long-needle cells score 1.00. The one miss is
+  a single item of twelve in the 10,026-token start cell, where YaRN is at
+  chance and picks one answer throughout.
+- **KV recall moved a little** (0.054, standard error 0.020), mostly at about
+  10,000 tokens. Both models are still near chance at 15,000 tokens away from
+  the end of the context.
+- **General-language tasks are level.** lm-eval differs by 0.010 with a
+  standard error of 0.014: arc_easy 0.48 against 0.44, the other three tasks
+  identical.
+- **Two short-needle items were missed**, both at the shortest length (about
+  31 tokens), where the YaRN run and all three short base-1,000,000 arms
+  scored 18 of 18. The difference is 1.5 standard errors and the probe passes
+  it. It is the one sign of a short-context cost and has not been followed up.
+- Repetition rose by 0.043, under the probe's warning line of 0.05.
+
+Limits: one seed at this budget, twelve items per cell, 50 items per lm-eval
+task, and the held-out split has now been read three times for this choice.
+The held-back final split has not been read.
+
+Outcome: `devmind-lc16k-abf-500m` is the stage 2 checkpoint to carry forward.
+The stage 2 declarations in this recipe still describe YaRN.
 
 ## Lessons
 
@@ -224,14 +282,13 @@ scores chance on them, and they say nothing about these arms.
 
 ## Not run
 
-- The larger base at the full stage-2 budget (in progress, see the decision
-  above).
 - Any base between 80,000 and 1,000,000. Gao et al. 2025 ("How to Train
   Long-Context Language Models (Effectively)", ACL) found the best base to be
   about twice the dynamic-NTK value for the new length; for a fourfold
   extension of this model that is on the order of 80,000, far below the
   1,000,000 used here.
-- `lm_eval` for the seed 43 and 44 pairs and for `devmind-lc16k-yarn-500m`.
+- `lm_eval` for the seed 43 and 44 pairs.
+- A second seed of the full run, and a closer look at the short-needle misses.
 - Short-context checks after stage 2 (does the 4,096-token behaviour survive).
 - Stage 3.
 
